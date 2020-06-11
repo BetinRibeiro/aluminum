@@ -1,0 +1,141 @@
+{{extend 'layout.html'}}
+{{a=0}}
+{{valor=0}}
+<div class="row">
+    <div class="col-md-6">
+        <a  class="btn btn-outline-light" href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
+        {{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
+            <a  class="btn btn-outline-light" href="{{=URL('inserir_registro', args=[projeto.id,tipo])}}"><i class="fa text-success fa-plus fa-2x"></i></a>
+        {{pass}}
+    </div>
+</div>
+{{if len(rows)>0:}}
+    Registros de {{=tipo}} - {{=projeto.descricao}}
+{{else:}}
+    Insira algum registro de {{=tipo}}
+{{pass}}7 
+{{total=0.0}}
+{{totalp=0}}
+{{lista=[]}}
+{{listadata=[]}}
+{{tfichas=0}}
+{{a=1}}
+{{totald=0}}
+  {{totaldesp=0}}
+{{dia=0}}
+{{dataanterior=(2008, 1, 1)}}
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-striped">
+        <thead>
+					  <tr>
+                          <th>#</th>
+						<th>CIDADE</th>
+						<th>DATA</th>
+                          <th>Á VISTA</th>
+                           <th>À PRAZO</th>
+                          <th>FICHAS</th>
+                          <th>DEVOLUÇÃO</th>
+                          <th>DESPESA</th>
+					  </tr>
+					</thead>
+					<tbody>
+                      
+                         {{vendapraso=0}}
+                          {{despesa=0}}
+                             {{devolucao=0}}
+                        {{for row in rows:}}
+                         {{despesa=0}}
+                        
+                        {{for row7 in listdesp:}}
+                        {{if row7.data_inicio == row.data_inicio:}}
+                        {{despesa+=row7.valor}}
+                        {{row7.valor=0}}
+                        {{pass}}
+                        {{pass}}
+						
+					  <tr>
+                            {{if row.data_inicio!=dataanterior:}}
+                          {{dataanterior=row.data_inicio}}
+                            {{dia+=1}}
+                          
+                          {{pass}}
+                          {{if row.valor!=0:}}
+                          
+                          <td>{{=dia}}</td>
+                          {{else:}}
+                          {{dia-=1}}
+                          <td>Nada</td>
+                        {{pass}}
+                          {{if row.descricao=="":}}
+                          {{row.descricao="SÓ DESPESA!!"}}
+                          
+                          <td><a class="text-danger" href="{{=URL('alterar_registro', args=[row.id,tipo])}}"># {{=row.descricao}}</a></td>
+                          {{else:}}
+                          <td><a href="{{=URL('alterar_registro', args=[row.id,tipo])}}"># {{=row.descricao}}</a></td>
+                          {{pass}}
+                          {{vendapraso=0}}
+                          {{fichas=0}}
+                          {{v=0}}
+                             {{devolucao=0}}
+                          {{for row1 in rowsv:}}
+                          {{if row1.data_venda == row.data_inicio:}}
+                          {{vendapraso+=row1.venda_praso-row1.valor_devolvido}}
+                          {{v+=row1.venda_praso}}
+                           {{fichas+=row1.quant_fichas-row1.quant_fichas_devolvidas}}
+                          {{row1.quant_fichas=0}}
+                           {{row1.quant_fichas_devolvidas=0}}
+                          {{devolucao+=row1.valor_devolvido}}
+                           {{row1.venda_praso=0}}
+                           {{row1.valor_devolvido=0}}
+                          {{pass}}
+                          {{pass}}
+                         
+						<td> {{=("{}/{}/{}".format(row.data_inicio.day,row.data_inicio.month,row.data_inicio.year))}}</td>
+                        
+                          {{listadata+=[a]}}
+                          {{a+=1}}
+                      <td>R$ {{="{:,}".format(round(row.valor,2)).replace(",",".")}}0</td>
+                           <td>R$ {{="{:,}".format(round(vendapraso,2)).replace(",",".")}}0</td>
+                          <td> {{=fichas}}</td>
+                          {{tfichas+=fichas}}
+                           {{lista+=[vendapraso]}}
+                           <td>R$ {{="{:,}".format(round(devolucao,2)).replace(",",".")}}0</td>
+                          <td>R$ {{="{:,}".format(round(despesa,2)).replace(",",".")}}0</td>
+					  </tr>
+                        {{totaldesp+=despesa}}
+                        {{total+=row.valor}}
+                        {{totalp+=vendapraso}}
+                        {{totald+=devolucao}}
+					  {{pass}}
+                         <tr>
+                             <th></th>
+						<th>#</th>
+						<th>#</th>
+                          <th>R$ {{="{:,}".format(round(total,2)).replace(",",".")}}0</th>
+                             <th>R$ {{="{:,}".format(round(totalp,2)).replace(",",".")}}0</th><th>#</th>
+                             <th>R$ {{="{:,}".format(round(totald,2)).replace(",",".")}}0</th>
+                             <th>#</th>
+					  </tr>
+					</tbody>
+				  </table>
+</div>
+
+        <div class="row">
+          <div class="col-md-6">
+ <ul class="list-group">
+     {{if dia>0:}}
+              <li class="list-group-item active">MÉDIAS&nbsp; </li>
+              <li class="list-group-item">MÉDIA DE <b> R$ {{="{:,}".format(round(total/dia)).replace(",",".")}}0</b> DE VENDA À VISTA POR DIA</li>
+              <li class="list-group-item">MÉDIA DE <b> R$ {{="{:,}".format(round(totalp/dia)).replace(",",".")}}0</b> DE VENDA A PRAZO POR DIA</li>
+              <li class="list-group-item">MÉDIA DE <b>{{=tfichas/dia}}</b> FICHAS POR DIA</li>
+              <li class="list-group-item">MÉDIA DE <b> R$ {{="{:,}".format(round(totald/dia)).replace(",",".")}}0</b> DEVOLVIDO POR DIA</li>
+              <li class="list-group-item">MÉDIA GASTOS DE <b> R$ {{="{:,}".format(round(projeto.total_despesa_venda/dia)).replace(",",".")}}0</b> POR DIA</li>
+     {{pass}}
+            </ul><br>
+</div>
+          <div class="col-md-6"></div>
+        </div>
+
+{{projeto.total_venda_vista=total}}
+{{projeto.quant_dias_venda_vista=a}}
+{{projeto.update_record()}}

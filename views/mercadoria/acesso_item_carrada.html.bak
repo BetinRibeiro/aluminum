@@ -1,0 +1,119 @@
+{{extend 'layout.html'}}
+{{pcas=0}}
+{{total=0}}
+{{custo=0}}
+<div class="row">
+    <div class="col-md-6">
+<a  class="btn btn-outline-light" href="{{=URL('mercadoria','acesso_carradas', args=carrada.projeto)}}"> <i class="fa text-danger fa-arrow-left fa-2x"></i></a>
+{{if not projeto.venda_finalizada:}}
+        {{if not carrada.finalizada:}}
+<a class="btn btn-outline-light" href="{{=URL('criar_item_carrada', args=carrada.id)}}"><i class="fa text-success fa-plus fa-2x"></i></a>
+{{pass}}{{pass}}
+    </div></div>
+
+{{if len(rows)>0:}}
+    {{=carrada.descricao}}
+{{else:}}
+    Cadastre Itens
+{{pass}}
+<div class="table-responsive">
+    <table class="table thead-light table-sm table-striped">
+        <thead class="">
+            
+                   
+            <tr>
+                <th>Quant</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+                <th>Total</th>
+                {{if desbloqueado:}}
+                <th>Custo</th>
+                <th>%</th>
+                {{pass}}
+                
+                {{if not carrada.finalizada:}}
+                {{if not projeto.venda_finalizada:}}
+                <th>Alterar</th>
+                {{pass}}{{pass}}
+            </tr>
+        </thead>
+            <tbody>
+                {{for row in rows:}}
+                 {{total_custo=row.custo_unitario*row.q_pcs}}
+                    {{total_preco=row.preco_unitario*row.q_pcs}}
+                <tr>
+                    <td>
+                            {{=row.q_pcs}}
+                    </td>
+                    <td>
+                            {{=row.descricao}}
+                    </td>
+                    <td>
+                            R$ {{="{:,}".format(round(row.preco_unitario,1)).replace(",",".")}}0
+                    </td>
+                    <td>
+                            R$ {{="{:,}".format(round(row.preco_unitario*row.q_pcs,1)).replace(",",".")}}0
+                    </td>
+                    {{if desbloqueado:}}
+                        <td>
+                                R$ {{="{:,}".format(round(row.custo_unitario*row.q_pcs,1)).replace(",",".")}}0
+                        </td>
+                        {{if (total_preco>0)and(total_custo>0):}}
+                    {{margem=total_preco/total_custo*100}}
+                    {{if margem>100:}}
+                        <td>
+                                {{="{:,}".format(round(margem)).replace(".0","")}}%
+                        </td>
+                      {{else:}}
+                        <td class="bg-danger">
+                                {{="{:,}".format(round(margem)).replace(".0","")}}%
+                        </td>
+                        {{pass}}
+                        {{else:}}
+                        <td>%</td>
+                        {{pass}}
+                    {{pass}}
+                    {{if not carrada.finalizada:}}
+                      {{if not projeto.venda_finalizada:}}
+                    <td><a href="{{=URL('alterar_item_carrada', args=row.id)}}"><i class="fa text-warning fa-exchange" ></i></a></td>
+                    {{pass}}{{pass}}
+                </tr>
+                        {{pcas+=row.q_pcs}}
+                        {{total+=row.preco_unitario*row.q_pcs}}
+                        {{custo+=row.custo_unitario*row.q_pcs}}
+                    {{pass}}
+                <tr>
+                    <th>
+                        {{=pcas}}
+                    </th>
+                    <th>
+                        <i class="fa text-dark fa-bars"></i>
+                    </th>
+                    <th>
+                        <i class="fa text-dark fa-bars"></i>
+                    </th>
+                    <th>
+                        R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0
+                    </th>
+                    
+                {{if desbloqueado:}}
+                    <th
+                        >R$ {{="{:,}".format(round(custo,1)).replace(",",".")}}0
+                    </th>
+                    {{pass}}
+                    
+                    {{if not carrada.finalizada:}}
+                    {{if not projeto.venda_finalizada:}}
+                    <th></th>
+                    {{pass}}
+                    {{pass}}
+                </tr>
+        </tbody>
+    </table>
+</div>
+{{if not projeto.venda_finalizada:}}
+{{carrada.total_preco=total}}
+{{carrada.total_custo=custo}}
+{{carrada.total_pecas=pcas}}
+{{carrada.update_record()}}
+{{pass}}

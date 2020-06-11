@@ -1,0 +1,4 @@
+{{extend 'layout.html'}}
+<h1>Este é o template default/captura_empresa.html</h1>
+{{=b5}}
+{{=BEAUTIFY(response._vars)}}

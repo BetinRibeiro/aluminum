@@ -1,0 +1,35 @@
+{{extend 'layout.html'}}
+<div class="py-1" >
+    <div class="container">
+        <a  class="btn btn-outline-light" href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> 
+            <i class="fa text-danger fa-arrow-left  fa-2x"></i>
+        </a>
+    </div>
+</div>
+
+<div class="py-1">
+    <div class="container">
+        <h4>Relatorio de Cobrança</h4>
+      <div class="row">
+          {{for row in rows:}}
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header"> {{=row.primeira_cidade}}<br></div>
+            <div class="card-body">
+                {{perc=0}}
+                {{if (row.total_recebido>0) and (row.total_venda_praso>0):}}
+                {{perc=row.total_recebido/row.total_venda_praso*100}}
+                {{pass}}
+              <h4>{{="{:,}".format(round(perc,1)).replace(",",".")}}%</h4>
+              <p >{{=("{}/{}/{}".format(row.data_inicio_cobranca.day,row.data_inicio_cobranca.month,row.data_inicio_cobranca.year))}} à {{=("{}/{}/{}".format(row.data_final_cobranca.day,row.data_final_cobranca.month,row.data_final_cobranca.year))}}</p>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><i class="fa text-primary mr-2 fa-align-justify"></i>R$ {{="{:,}".format(round(row.total_venda_praso,1)).replace(",",".")}}0</li>
+                <li class="list-group-item"><i class="fa text-primary mr-2 fa-hand-o-right"></i>&nbsp;R$ {{="{:,}".format(round(row.total_recebido,1)).replace(",",".")}}0</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+          {{pass}}
+      </div>
+    </div>
+  </div>

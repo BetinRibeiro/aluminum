@@ -1,0 +1,223 @@
+(dp1
+S'output'
+p2
+S'Unable to open included view file: /home/rogoberto/web2py/applications/aluminum/views/layout_chefe.html'
+p3
+sS'layer'
+p4
+S'ParserContainer'
+p5
+sS'code'
+p6
+S'{{extend \'layout_chefe.html\'}}\n<nav class="navbar navbar-expand-md navbar-dark bg-dark" >\n    <div class="container"> <a class="navbar-brand" href="{{=URL(\'default\',\'alterar_projeto\', args=projeto.id)}}">\n        <i class="fa d-inline fa-lg fa-hashtag"></i>\n        <b> {{=projeto.descricao}}</b>\n      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar10">\n        <span class="navbar-toggler-icon"></span>\n      </button>\n      <div class="collapse navbar-collapse" id="navbar10">\n        <ul class="navbar-nav ml-auto">\n          <li class="nav-item"> <a class="nav-link" href="{{=URL(\'default\',\'acesso_inicial\')}}">Projetos</a> </li>\n            <li class="nav-item"> <a class="nav-link" href="{{=URL(\'chefe\',\'relatorio\', args=projeto.id)}}">Relat\xc3\xb3tio</a></li>\n        </ul>\n      </div>\n    </div>\n  </nav>\n<div class="py-3" >\n    <div class="container">\n      <div class="row">\n        <div class="col-md-3">\n          <div class="card">\n            <div class="card-header"> Mercadoria</div>\n            <div class="card-body">\n              <ul class="list-group list-group-flush">\n                  <li class="list-group-item"><i class="fa fa-window-restore text-primary mr-2"></i><a href="{{=URL(\'venda\',\'acesso_particao\', args=projeto.id)}}">&nbsp;Parti\xc3\xa7\xc3\xb5es</a></li>\n                <li class="list-group-item"><i class="fa fa-truck  text-primary mr-2"></i><a href="{{=URL(\'mercadoria\',\'acesso_carradas\', args=projeto.id)}}">Carradas</a></li>\n                <li class="list-group-item"><i class="fa fa-sort-amount-desc text-primary mr-2"></i><a href="{{=URL(\'mercadoria\',\'acesso_item\', args=projeto.id)}}">Retorno</a></li>\n              </ul>\n            </div>\n          </div>\n            <br>\n        </div>\n        <div class="col-md-3">\n          <div class="card">\n            <div class="card-header" style="">Equipe</div>\n            <div class="card-body">\n              <ul class="list-group list-group-flush">\n                   <li class="list-group-item"><i class="fa fa-bars text-primary mr-2"></i><a href="{{=URL(\'registro\',\'acesso_registro_venda\', args=[projeto.id,\'venda_vista\'])}}">&nbsp;Venda \xc3\xa0 Vista</a></li>\n                  <li class="list-group-item"><i class="fa fa-users text-primary mr-2"></i><a href="{{=URL(\'funcionario\',\'acesso_funcionario\', args=projeto.id)}}">&nbsp;Funcionario</a></li>\n                  <li class="list-group-item"><i class="fa fa-sitemap text-primary mr-2"></i><a href="{{=URL(\'equipe_venda\',\'acesso_equipe\', args=projeto.id)}}">&nbsp;Equipe Vendas</a></li>\n              </ul>\n            </div>\n          </div>\n            <br>\n        </div>\n        <div class="col-md-3">\n          <div class="card">\n            <div class="card-header"> Despesa</div>\n            <div class="card-body">\n              <ul class="list-group list-group-flush">\n                   <li class="list-group-item"><i class="fa fa-book text-primary mr-2"></i><a href="{{=URL(\'despesa\',\'acessar_despesa\', args=[projeto.id,\'Despesa_Venda\'])}}">&nbsp;Despesa na Venda</a></li>\n                   <li class="list-group-item"><i class="fa fa-bars text-primary mr-2"></i><a href="{{=URL(\'registro\',\'acesso_registro_venda\', args=[projeto.id,\'caderno_chefe\'])}}">&nbsp;Caderno Chefe</a></li>\n                  <li class="list-group-item"><i class="fa fa-file-text text-primary mr-2"></i><a href="{{=URL(\'chefe\',\'relatorio\', args=projeto.id)}}">&nbsp;Relat\xc3\xb3rio Chefe</a></li>\n              </ul>\n            </div>\n          </div>\n            <br>\n        </div>\n        <div class="col-md-3">\n          <div class="card">\n            <div class="card-header"> Cobran\xc3\xa7a</div>\n            <div class="card-body">\n              <ul class="list-group list-group-flush">\n                <li class="list-group-item"><i class="fa fa-life-ring text-primary mr-2"></i>&nbsp;Cobran\xc3\xa7a</li>\n                <li class="list-group-item"><i class="fa fa-bookmark text-primary mr-2"></i> Quita\xc3\xa7\xc3\xa3o</li>\n                <li class="list-group-item"><i class="fa fa-bell text-primary mr-2"></i>&nbsp;Avalia\xc3\xa7\xc3\xa3o</li>\n              </ul>\n            </div>\n          </div>\n        </div>\n      </div>\n        <br>\n    </div>\n  </div>\n'
+p7
+sS'snapshot'
+p8
+(dp9
+S'exception'
+p10
+(dp11
+S'__getslice__'
+p12
+S"<method-wrapper '__getslice__' of exceptions.IOError object>"
+p13
+sS'__str__'
+p14
+S"<method-wrapper '__str__' of exceptions.IOError object>"
+p15
+sS'__reduce__'
+p16
+S'<built-in method __reduce__ of exceptions.IOError object>'
+p17
+sS'__dict__'
+p18
+S'{}'
+p19
+sS'__sizeof__'
+p20
+S'<built-in method __sizeof__ of exceptions.IOError object>'
+p21
+sS'message'
+p22
+S"''"
+p23
+sS'__init__'
+p24
+S"<method-wrapper '__init__' of exceptions.IOError object>"
+p25
+sS'__setattr__'
+p26
+S"<method-wrapper '__setattr__' of exceptions.IOError object>"
+p27
+sS'__reduce_ex__'
+p28
+S'<built-in method __reduce_ex__ of exceptions.IOError object>'
+p29
+sS'__new__'
+p30
+S'<built-in method __new__ of type object>'
+p31
+sS'errno'
+p32
+S'2'
+sS'__format__'
+p33
+S'<built-in method __format__ of exceptions.IOError object>'
+p34
+sS'__class__'
+p35
+S"<type 'exceptions.IOError'>"
+p36
+sS'filename'
+p37
+S"'/home/rogoberto/web2py/applications/aluminum/views/layout_chefe.html'"
+p38
+sS'__doc__'
+p39
+S"'I/O operation failed.'"
+p40
+sS'__getitem__'
+p41
+S"<method-wrapper '__getitem__' of exceptions.IOError object>"
+p42
+sS'__setstate__'
+p43
+S'<built-in method __setstate__ of exceptions.IOError object>'
+p44
+sS'__getattribute__'
+p45
+S"<method-wrapper '__getattribute__' of exceptions.IOError object>"
+p46
+sS'args'
+p47
+S"(2, 'No such file or directory')"
+p48
+sS'__subclasshook__'
+p49
+S'<built-in method __subclasshook__ of type object>'
+p50
+sS'__unicode__'
+p51
+S'<built-in method __unicode__ of exceptions.IOError object>'
+p52
+sS'strerror'
+p53
+S"'No such file or directory'"
+p54
+sS'__delattr__'
+p55
+S"<method-wrapper '__delattr__' of exceptions.IOError object>"
+p56
+sS'__repr__'
+p57
+S"<method-wrapper '__repr__' of exceptions.IOError object>"
+p58
+sS'__hash__'
+p59
+S"<method-wrapper '__hash__' of exceptions.IOError object>"
+p60
+ssS'evalue'
+p61
+S"[Errno 2] No such file or directory: '/home/rogoberto/web2py/applications/aluminum/views/layout_chefe.html'"
+p62
+sS'frames'
+p63
+(lp64
+(dp65
+S'file'
+p66
+S'/home/rogoberto/web2py/gluon/template.py'
+p67
+sS'dump'
+p68
+(dp69
+S'builtinopen'
+p70
+S'<built-in function open>'
+p71
+sS'fileobj'
+p72
+S'undefined'
+p73
+sS'filepath'
+p74
+S"'/home/rogoberto/web2py/applications/aluminum/views/layout_chefe.html'"
+p75
+ssS'lnum'
+p76
+I445
+sS'lines'
+p77
+(dp78
+I448
+S'        except IOError:'
+p79
+sI449
+S"            self._raise_error('Unable to open included view file: ' + filepath)"
+p80
+sI440
+S'        # Get the path of the file on the system.'
+p81
+sI441
+S'        filepath = self.path and os.path.join(self.path, filename) or filename'
+p82
+sI442
+S''
+sI443
+S'        # try to read the text.'
+p83
+sI444
+S'        try:'
+p84
+sI445
+S"            fileobj = open(filepath, 'rb')"
+p85
+sI446
+S'            text = fileobj.read()'
+p86
+sI447
+S'            fileobj.close()'
+p87
+ssS'call'
+p88
+S"(self=<gluon.template.TemplateParser object>, filename='layout_chefe.html')"
+p89
+sS'func'
+p90
+S'_get_file_text'
+p91
+sasS'pyver'
+p92
+S'Python 2.7.12: /usr/local/bin/uwsgi (prefix: /usr)'
+p93
+sS'etype'
+p94
+S"<type 'exceptions.IOError'>"
+p95
+sS'date'
+p96
+S'Wed Mar  4 13:26:37 2020'
+p97
+sS'locals'
+p98
+(dp99
+S'self'
+p100
+S'<gluon.template.TemplateParser object>'
+p101
+sg37
+S"'layout_chefe.html'"
+p102
+sS'context'
+p103
+S"{'A': <class 'gluon.html.A'>, 'ANY_OF': <class 'gluon.validators.ANY_OF'>, 'ASSIGNJS': <function ASSIGNJS>, 'AppConfig': <function AppConfig>, 'Auth': <class 'gluon.tools.Auth'>, 'B': <class 'gluon.html.B'>, 'BEAUTIFY': <class 'gluon.html.BEAUTIFY'>, 'BODY': <class 'gluon.html.BODY'>, 'BR': <class 'gluon.html.BR'>, 'BUTTON': <class 'gluon.html.BUTTON'>, ...}"
+p104
+sS'filepath'
+p105
+S"'/home/rogoberto/web2py/applications/aluminum/views/layout_chefe.html'"
+p106
+sssS'traceback'
+p107
+S'Traceback (most recent call last):\n  File "/home/rogoberto/web2py/gluon/template.py", line 445, in _get_file_text\n    fileobj = open(filepath, \'rb\')\nIOError: [Errno 2] No such file or directory: \'/home/rogoberto/web2py/applications/aluminum/views/layout_chefe.html\'\n'
+p108
+s.

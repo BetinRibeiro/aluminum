@@ -1,0 +1,85 @@
+{{extend 'layout.html'}}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" >
+    <div class="container"> <a class="navbar-brand" href="{{=URL('default','acesso_inicial', args=projeto.id)}}">
+        <h6># {{=projeto.descricao}}</h6>
+      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar10">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+        <div class="container">
+         {{if usuario.id!=24:}}
+<font color="white">
+    <marquee direction="left">
+        {{if usuario.id==9:}}
+        <a class="navbar-brand text-danger"> <h6>Os itens da segunda carrada foram inseridos, coloque somente as quantidades!</h6></a>
+        {{else:}}
+        <a class="navbar-brand"> <h6>“As pessoas podem duvidar do que você diz, mas elas acreditarão no que você faz.” – Lewis Cass</h6></a>
+        {{pass}}
+    </marquee>
+</font>
+          {{pass}}
+        </div>
+      <div class="collapse navbar-collapse" id="navbar10">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"> <a class="nav-link" href="{{=URL('default','acesso_inicial')}}">Projetos</a> </li>
+            <li class="nav-item"> <a class="nav-link" href="{{=URL('chefe','relatorio', args=projeto.id)}}">Relatório</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+<div class="py-3" >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header"> Definições</div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><i class="fa fa-window-restore text-primary mr-2"></i><a href="{{=URL('venda','acesso_particao', args=projeto.id)}}">&nbsp;Partições</a></li>
+                <li class="list-group-item"><i class="fa fa-truck  text-primary mr-2"></i><a href="{{=URL('mercadoria','acesso_carradas', args=projeto.id)}}">Carradas</a></li>
+                <li class="list-group-item">
+                        <i class="fa fa-bar-chart text-primary mr-2"></i>
+                        <a href="{{=URL('registro','acesso_registro_venda', args=[projeto.id,'venda_vista'])}}">&nbsp;Vendas à Vista</a>
+                    </li>
+              </ul>
+            </div>
+          </div>
+            <br>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header" style="">Equipe</div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                   
+                  <li class="list-group-item"><i class="fa fa-users text-primary mr-2"></i><a href="{{=URL('funcionario','acesso_funcionario', args=projeto.id)}}">&nbsp;Funcionario</a></li>
+                  <li class="list-group-item"><i class="fa fa-sitemap text-primary mr-2"></i><a href="{{=URL('equipe_venda','acesso_equipe', args=projeto.id)}}">&nbsp;Equipe Vendas</a></li>
+                  <li class="list-group-item"><i class="fa fa-book text-primary mr-2"></i><a href="{{=URL('despesa','acessar_despesa', args=[projeto.id,'Despesa_Venda'])}}">&nbsp;Despesa na Venda</a></li>
+              </ul>
+            </div>
+          </div>
+            <br>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header"> Relatório</div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                   <li class="list-group-item"><i class="fa fa-bars text-primary mr-2"></i><a href="{{=URL('registro','acesso_registro_venda', args=[projeto.id,'caderno_chefe'])}}">&nbsp;Caderno Chefe</a></li>
+                  <li class="list-group-item"><i class="fa fa-file-text text-primary mr-2"></i><a href="{{=URL('chefe','relatorio', args=projeto.id)}}">&nbsp;Relatório Chefe</a></li>
+                  <li class="list-group-item">
+                                <i class="fa fa-life-ring text-primary mr-2"></i><a href="{{=URL('projeto','prestacao_individual', args=projeto.id)}}">&nbsp;Vendedores Individual</a></li>
+              </ul>
+            </div>
+          </div>
+            <br>
+            
+        </div>
+          {{if usuario.id==24:}}
+<font color="red">
+    <marquee direction="left">
+        <h5>Acesso Limitado, Login de Teste - Para liberar todas as funções do sistema entre em contato com (88) 98112-6816</h5>
+    </marquee>
+</font>
+          {{pass}}
+    </div>
+  </div>

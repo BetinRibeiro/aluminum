@@ -1,0 +1,108 @@
+{{extend 'layout.html'}}
+
+{{pcs=0}}
+{{cst=0}}
+{{pco=0}}
+        <div class="row">
+    <div class="col-md-6">
+<a  class="btn btn-outline-light" href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
+
+    </div></div>
+
+            Relatório Mercadoria -- {{=projeto.descricao}}
+<div class="table-responsive">
+            <table class="table table-striped table-borderless table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Quant</th>
+                  <th scope="col">Total pço</th>
+                  <th scope="col">Total cst</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Enviada</th>
+                  <td>{{=projeto.total_pecas_mercadoria}}</td>
+                  <td>R$ {{="{:,}".format(round(projeto.total_preco_mercadoria)).replace(",",".")}}0</td>
+                  <td>R$ {{="{:,}".format(round(projeto.total_custo_mercadoria)).replace(",",".")}}0</td>
+                </tr>
+{{pcs+=projeto.total_pecas_mercadoria}}
+{{cst+=projeto.total_custo_mercadoria}}
+{{pco+=projeto.total_preco_mercadoria}}
+                <tr>
+                  <th scope="row">Estragada</th>
+                  <td>{{=projeto.total_pecas_refugo}}</td>
+                  <td>R$ {{="{:,}".format(round(projeto.total_preco_refugo)).replace(",",".")}}0</td>
+                  <td>R$ {{="{:,}".format(round(projeto.total_custo_refugo)).replace(",",".")}}0</td>
+                </tr>
+{{pcs-=projeto.total_pecas_refugo}}
+{{cst-=projeto.total_custo_refugo}}
+{{pco-=projeto.total_preco_refugo}}
+                <tr>
+                  <th scope="row">Gratificada</th>
+                  <td>{{=projeto.total_pecas_gratificacao}}</td>
+                  <td>R$ {{="{:,}".format(round(projeto.total_preco_gratificacao)).replace(",",".")}}0</td>
+                  <td>R$ {{="{:,}".format(round(projeto.total_custo_gratificacao)).replace(",",".")}}0</td>
+                </tr>
+{{pcs-=projeto.total_pecas_gratificacao}}
+{{cst-=projeto.total_custo_gratificacao}}
+{{pco-=projeto.total_preco_gratificacao}}
+                <tr>
+                  <th scope="row">Retornada</th>
+                  <td>{{=projeto.total_pecas_retorno}}</td>
+                  <td>R$ {{="{:,}".format(round(projeto.total_preco_retorno)).replace(",",".")}}0</td>
+                  <td>R$ {{="{:,}".format(round(projeto.total_custo_retorno)).replace(",",".")}}0</td>
+                </tr>
+{{pcs-=projeto.total_pecas_retorno}}
+{{cst-=projeto.total_custo_retorno}}
+{{pco-=projeto.total_preco_retorno}}
+                <tr>
+                  <th scope="row">Saldo =</th>
+                  <td>{{=pcs}}</td>
+                  <td>R$ {{="{:,}".format(round(pco)).replace(",",".")}}0</td>
+                  <td>R$ {{="{:,}".format(round(cst)).replace(",",".")}}0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+            {{saldo=pco}}
+          <div class="table-responsive">
+            <table class="table table-striped table-borderless table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Pço Desconto</th>
+                  <th scope="col">Pço Total </th>
+                  <th scope="col">Méd Cst</th>
+                </tr>
+              </thead>
+                {{fator=0}}
+                {{if cst>0 and pco>0:}}
+                {{fator=cst/pco}}
+                {{pass}}
+                {{saldo-=projeto.total_venda_prazo}}
+              <tbody>
+                <tr>
+                  <th scope="row">Venda Prazo</th>
+                  <td>#</td>
+                  <td>R$ {{="{:,}".format(round(projeto.total_venda_prazo)).replace(",",".")}}0</td>
+                  <td>R$ {{="{:,}".format(round(projeto.total_venda_prazo*fator)).replace(",",".")}}0</td>
+                </tr>
+                {{saldo-=projeto.total_venda_vista*2}}
+                <tr>
+                  <th scope="row">Venda à Vista</th>
+                  <td class="text-info" >R$ {{="{:,}".format(round(projeto.total_venda_vista)).replace(",",".")}}0</td>
+                  <td>R$ {{="{:,}".format(round(projeto.total_venda_vista*2)).replace(",",".")}}0</td>
+                  <td>R$ {{="{:,}".format(round(projeto.total_venda_vista*fator)).replace(",",".")}}0</td>
+                </tr>
+                    <tr>
+                  <th scope="row">Estoque</th>
+                  <td class="text-danger">R$ {{="{:,}".format(round(saldo/2)).replace(",",".")}}0</td>
+                  <td>R$ {{="{:,}".format(round(saldo)).replace(",",".")}}0</td>
+                  <td>R$ {{="{:,}".format(round(saldo*fator)).replace(",",".")}}0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>

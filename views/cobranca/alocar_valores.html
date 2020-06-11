@@ -1,0 +1,102 @@
+{{extend 'layout.html'}}
+{{venda=0}}
+{{fichas=0}}
+{{recebido=0}}
+{{devolvido=0}}
+{{prego=0}}
+{{a=0}}
+<div class="row">
+    <div class="col-md-6">
+        <a  class="btn btn-outline-light" href="{{=URL('acesso_particao_cobranca', args=sub_venda.id)}}">
+            <i class="fa text-danger fa-arrow-left  fa-2x"></i>
+        </a>
+    </div>
+</div>
+Vendas e Cobranças
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Venda</th>
+                <th>Recebido</th>
+                <th>Devolvido</th>
+                <th>Prego</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{for row in rows:}}
+
+            <tr>
+                {{a+=1}}
+                <td>{{=a}}º</td>
+
+                <td><a href="{{=URL('cobranca','cobranca_individual', args=[row.id,sub_venda.id])}}">{{=row.nome}}</a></td>
+                {{total_venda=0}}
+                {{total_fichas=0}}
+                {{for row1 in rowscob:}}
+                    {{if row1.vendedor==row.id:}}
+                        {{total_venda+=row1.venda_praso}}
+                {{total_fichas+=row1.quant_fichas}}
+                    {{pass}}
+                {{pass}}
+                {{total_recebido=0}}
+                {{total_devolvido=0}}
+                {{total_prego=0}}
+                {{for row2 in rowsrec:}}
+                    {{if row2.vendedor==row.id:}}
+                        {{total_recebido+=row2.recebido}}
+                        {{total_devolvido+=row2.devolvido}}
+                        {{total_prego+=row2.prego}}
+                    {{pass}}
+
+                {{pass}}
+
+
+
+                {{saldo=total_venda}}
+                <td>R$ {{="{:,}".format(round(total_venda,1)).replace(",",".")}}0</td>
+                <td>R$ {{="{:,}".format(round(total_recebido,1)).replace(",",".")}}0</td>
+                <td>R$ {{="{:,}".format(round(total_devolvido,1)).replace(",",".")}}0</td>
+                <td>R$ {{="{:,}".format(round(total_prego,1)).replace(",",".")}}0</td>
+                {{saldo-=total_recebido+total_devolvido+total_prego}}
+                {{if saldo>0:}}
+                <td class="text-danger">R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</td>
+                {{elif saldo==0:}}
+                <td>OK</td>
+                {{else:}}
+                <td class="text-sucess">Sobrando</td>
+                {{pass}}
+
+{{venda+=total_venda}}
+{{recebido+=total_recebido}}
+{{fichas+=total_fichas}}
+{{devolvido+=total_devolvido}}
+{{prego+=total_prego}}
+            </tr>
+            {{pass}}
+            <tr>
+                <th>#</th>
+                <th></th>
+                <th>R$ {{="{:,}".format(round(venda,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(recebido,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(devolvido,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(prego,1)).replace(",",".")}}0</th>
+                {{perc=0}}
+                {{if recebido>0:}}
+                {{perc=recebido/venda*100}}
+                {{pass}}
+                <th>{{="{:,}".format(round(perc,1)).replace(",",".")}}%</th>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<hr>
+<br>
+
+
+{{projeto.quant_vendedores=a}}
+{{projeto.update_record()}}

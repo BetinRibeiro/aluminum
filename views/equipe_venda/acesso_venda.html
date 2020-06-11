@@ -1,0 +1,153 @@
+{{extend 'layout.html'}}
+
+{{totalcaderno=0}}
+{{totalprazo=0}}
+{{totalfichas=0}}
+{{totalentrada=0}}
+{{totaldevolucao=0}}
+{{fichas_devolvidas=0}}
+
+{{caderno=0}}
+{{prazo=0}}
+{{fichas=0}}
+{{entrada=0}}
+{{devolucao=0}}
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-outline-light" href="{{=URL('acesso_equipe', args=vendedor.projeto)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
+       
+    </div>
+</div>
+        
+
+            Acesso a venda de {{=vendedor.nome}}
+            {{for row1 in rows_sub:}}
+            <hr class="border bg-danger" >
+ {{if (not projeto.venda_finalizada):}}
+{{if (not row1.cobranca_iniciada):}}
+<div class="row">
+    <div class="col-md-6">
+            <a class="btn btn-outline-light" href="{{=URL('inserir_venda', args=[vendedor.id,row1.id])}}"><i class="fa text-success fa-plus-square fa-2x"></i></a>
+    </div>
+</div>
+{{pass}}{{pass}}
+VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
+            <div class="table-responsive">
+            {{a=0}}
+                <table class="table table-bordered table-sm table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Data</th>
+                            <th>V.Prazo</th>
+                            <th>Fichas</th>
+                            <th>Caderno</th>
+                            <th>Entrada</th>
+                            <th>Ficha.D</th>
+                            <th>V. Devolvido</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                            {{acaderno=0}}
+                            {{aprazo=0}}
+                            {{afichas=0}}
+                            {{afichas_devolvidas=0}}
+                            {{aentrada=0}}
+                            {{adevolucao=0}}
+                        {{for row in rows_vend:}}
+                            
+                        {{if row.sub_venda == row1.id:}}
+                            <tr>
+                                {{a+=1}}
+                                {{row.venda_praso=row.venda_praso-row.valor_devolvido}}
+                                {{row.quant_fichas=row.quant_fichas-row.quant_fichas_devolvidas}}
+                                {{caderno+=row.vale_caderno}}
+                                {{prazo+=row.venda_praso}}
+                                {{fichas+=row.quant_fichas}}
+                                {{fichas_devolvidas+=row.quant_fichas_devolvidas}}
+                                {{entrada+=row.entradas_venda}}
+                                {{devolucao+=row.valor_devolvido}}
+                                
+                                {{acaderno+=row.vale_caderno}}
+                                {{aprazo+=row.venda_praso}}
+                                {{afichas+=row.quant_fichas}}
+                                {{afichas_devolvidas+=row.quant_fichas_devolvidas}}
+                                {{aentrada+=row.entradas_venda}}
+                                {{adevolucao+=row.valor_devolvido}}
+                                <td>{{=a}}</td>
+                                <td>
+                                    {{if not projeto.venda_finalizada:}}
+                                    
+{{if (not row1.cobranca_iniciada):}}
+                                    <a href="{{=URL('alterar_venda', args=row.id)}}">{{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}</a>
+                                    {{else:}}
+                                    {{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}
+                                    {{pass}}
+                                    {{else:}}
+                                    {{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}
+                                    {{pass}}
+                                
+                                </td>
+                                <td>R$ {{="{:,}".format(round(row.venda_praso,1)).replace(",",".")}}0</td>
+                                <td>{{=row.quant_fichas}}</td>
+                                <td>R$ {{="{:,}".format(round(row.vale_caderno,1)).replace(",",".")}}0</td>
+                                <td>R$ {{="{:,}".format(round(row.entradas_venda,1)).replace(",",".")}}0</td>
+                                <td>{{=row.quant_fichas_devolvidas}}</td>
+                                <td>R$ {{="{:,}".format(round(row.valor_devolvido,1)).replace(",",".")}}0</td>
+                            </tr>
+                            {{pass}}
+                            {{pass}}
+                            <th>#</th>
+                                        <th>Total</th>
+                                        <th>R$ {{="{:,}".format(round(aprazo,1)).replace(",",".")}}0</th>
+                                        <th>{{=afichas}}</th>
+                                        <th>R$ {{="{:,}".format(round(acaderno,1)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,}".format(round(aentrada,1)).replace(",",".")}}0</th>
+                                        <th>  {{=afichas_devolvidas}}</th>
+                                        <th>R$ {{="{:,}".format(round(adevolucao,1)).replace(",",".")}}0</th>
+                            </tbody>
+
+                    </table>
+                            
+                        
+                {{totalcaderno+=caderno}}
+                {{totalprazo+=prazo}}
+                {{totalfichas+=fichas}}
+                {{totalentrada+=entrada}}
+                {{totaldevolucao+=devolucao}}
+                </div>
+            {{pass}}
+                <hr>
+                <div class="table-responsive">
+                    
+                 <table class="table table-bordered table-sm table-striped">
+                    
+                                <thead>
+                                     <tr>
+                            <th>V.Prazo</th>
+                            <th>Fichas</th>
+                            <th>Caderno</th>
+                            <th>Entrada</th>
+                            <th>Ficha.D</th>
+                            <th>V. Devolvido</th>
+                        </tr>
+                                     </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>R$ {{="{:,}".format(round(prazo,1)).replace(",",".")}}0</th>
+                                        <th>{{=fichas}}</th>
+                                        <th>R$ {{="{:,}".format(round(caderno,1)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,}".format(round(entrada,1)).replace(",",".")}}0</th>
+                                        <th>  {{=fichas_devolvidas}}</th>
+                                        <th>R$ {{="{:,}".format(round(devolucao,1)).replace(",",".")}}0</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                </div>
+
+
+{{vendedor.total_entradas=entrada}}
+{{vendedor.total_fichas=fichas}}
+{{vendedor.total_vale_caderno=caderno}}
+{{vendedor.total_vendas=prazo}}
+{{vendedor.update_record()}}

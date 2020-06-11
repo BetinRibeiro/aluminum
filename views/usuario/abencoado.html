@@ -1,0 +1,111 @@
+{{extend 'layout.html'}}
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <center style="background-color:white; color:black; padding:5px">
+                    <img src="https://i.ibb.co/ZSFRgmM/abc.jpg" class="img-fluid">
+                    <h4>{{=projeto.descricao}}</h4>
+                </center>
+            </div>
+            <div class="col-md-6">
+                <div class="blockquote">
+                    <p class="mb-0">Funções Operacionais</p>
+                    <div class="blockquote-footer">Chefe de Equipe</div>
+                </div>
+                <ul class="nav navbar-nav navbar-left">
+
+                    <li>
+                        <i class="fa fa-bar-chart text-primary mr-2"></i>
+                        <a href="{{=URL('registro','acesso_registro_venda', args=[projeto.id,'venda_vista'])}}">&nbsp;VENDA À VISTA</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-bars text-primary mr-2"></i>
+                        <a href="{{=URL('mercadoria','acesso_carradas', args=projeto.id)}}">MERCADORIA</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-users  text-primary mr-2"></i>
+                        <a href="{{=URL('equipe_venda','acesso_equipe', args=projeto.id)}}">&nbsp;EQUIPE DE VENDAS</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-user-circle-o text-primary mr-2"></i>
+                        <a href="{{=URL('funcionario','acesso_funcionario', args=projeto.id)}}">&nbsp;FUNCIONARIOS</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-sticky-note-o text-primary mr-2"></i>
+                        <a href="{{=URL('despesa','acessar_despesa', args=[projeto.id,'Despesa_Venda'])}}">&nbsp;DESPESAS</a>
+                    </li>
+                    <hr>
+                    <li><i class="fa fa-list-ol  text-primary mr-2"></i>
+                        <a href="{{=URL('registro','acesso_registro_venda', args=[projeto.id,'caderno_chefe'])}}">&nbsp;CADERNO DO CHEFE</a>
+                    </li>
+                     <hr>
+                    <li>
+                        <i class="fa fa-list-ol  text-primary mr-2"></i>
+                        <a href="{{=URL('chefe','relatorio', args=projeto.id)}}">&nbsp;RELATÓRIO</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-list-ol  text-primary mr-2"></i>
+                            <a href="{{=URL('chefe','relatoriomeme', args=projeto.id)}}">&nbsp;RELATÓRIO ESPECIAL</a>
+                    </li>
+                    <hr>
+                </ul>
+             </div>
+         <div class="col-md-6">
+             <div class="blockquote">
+                 <p class="mb-0">Funções Estrategicas</p>
+                 <div class="blockquote-footer">Administrativas</div>
+             </div>
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <i class="fa fa-cogs  text-success mr-2"></i>
+                        <a class="text-primary" href="{{=URL('default','alterar_projeto', args=projeto.id)}}">ALTERAR DADOS</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-window-restore text-success mr-2"></i>
+                        <a class="text-primary" href="{{=URL('venda','acesso_particao', args=projeto.id)}}">PARTIÇÕES</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-life-ring text-success mr-2"></i>
+                        <a class="text-primary" href="{{=URL('projeto','prestacao_individual', args=projeto.id)}}">PRESTAÇÃO</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-bar-chart text-success mr-2"></i>
+                        <a class="text-primary" href="{{=URL('projeto','investimento', args=[projeto.id])}}">INVESTIMENTOS</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-window-restore text-success mr-2"></i>
+                        <a class="text-primary" href="{{=URL('cobranca','acessar_cobrancas', args=projeto.id)}}">COBRANÇA</a>
+                    </li>
+                    <br>
+                    <li>
+                        <i class="fa fa-book text-success mr-2"></i>
+                        <a class="text-primary" href="{{=URL('despesa','acessar_despesa', args=[projeto.id,'Despesa_Local'])}}">DESP. LOCAL</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-list-ol text-success mr-2"></i>
+                        <a class="text-primary" href="{{=URL('cobranca','saldo_quitacao', args=projeto.id)}}">SALDO E QUITAÇÃO</a>
+                    </li>
+                    <hr>
+                </ul>
+            </div>
+            {{if empresa.id==4:}}
+<font color="blue">
+    <marquee direction="left">
+        <h5>Comece onde você está. Use o que você tem. Faça o que você pode.Arthur Ashe</h5>
+    </marquee>
+</font>
+          {{pass}}
+        </div>
+    </div>
+</div>

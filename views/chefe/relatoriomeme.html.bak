@@ -1,0 +1,115 @@
+{{extend 'layout.html'}}
+<a class="btn btn-secondary btn-success" href="{{=URL('default','acesso_geral_projeto', args=projeto.id)}}">VOLTAR</a>
+
+{{estoque=0}}
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card" >
+            <div class="card-header"> <div class="blockquote">
+    <p class="mb-0">RELATÓRIO</p>
+    <div class="blockquote-footer">DESCRIÇÃO PARA CONTROLE <cite title="Source Title">{{=projeto.nome_chefe}}</cite></div>
+</div>  </div>
+            <div class="card-body">
+                
+<p>MERCADORIA E VENDAS</p>
+<ol>
+    <li>MERCADORIA <b>- R$ {{="{:,}".format(round(projeto.total_preco_mercadoria,2)).replace(",",".")}}0</b></li>
+        <ol class="list-unstyled">
+            <li>Q. DE PEÇAS - <b>{{=projeto.total_pecas_mercadoria}}</b></li>
+        </ol>
+    <hr>{{estoque=projeto.total_preco_mercadoria}}
+    <li>(-) VENDA TOTAL<b>- R$ {{="{:,}".format(round(projeto.total_venda_prazo,2)).replace(",",".")}}0</b></li>
+        <ol class="list-unstyled">
+            <li>Q. DE FICHAS TOTAL - <b>{{=projeto.quant_fichas_venda}}</b></li>
+        </ol>
+    <hr>
+    <ol class="list-unstyled">
+    {{for row in subvenda:}}
+        <li>{{=row.primeira_cidade}}<b>- R$ {{="{:,}".format(round(row.venda_praso,2)).replace(",",".")}}0</b><br>
+        Q. DE FICHAS - <b>{{=row.quant_fichas}}</b> </li><hr>
+    {{pass}}
+    </ol>{{estoque-=projeto.total_venda_prazo+(projeto.total_venda_vista*2)}}
+    
+    
+            
+              <li>(-) À VISTA x2- <b>R$ {{="{:,}".format(round(projeto.total_venda_vista*2,2)).replace(",",".")}}0</b></li>
+                <hr>
+                
+              <li>(=) ESTOQUE <b>- R$ {{="{:,}".format(round(estoque)).replace(",",".")}}0</b></li>
+                </ol>
+
+
+
+
+
+
+</div></div></div><br><br><br>
+                <div class="col-md-6">
+
+<br>
+{{total=0}}
+ <ul class="list-group">
+              <li class="list-group-item active">ENTRADA DE DINHEIRO</li>
+              <li class="list-group-item">ADIANTAMENTO - R$ {{="{:,}".format(round(projeto.adiantamento,2)).replace(",",".")}}0</li>
+     <li class="list-group-item">À VISTA- R$ {{="{:,}".format(round(projeto.total_venda_vista,2)).replace(",",".")}}0</li>
+     {{total=projeto.adiantamento+projeto.total_venda_vista}}
+     <li class="list-group-item  list-group-item-success">TOTAL DINHEIRO <b>- R$ {{="{:,}".format(round(total,2)).replace(",",".")}}0</b></li>
+            </ul>
+<br>
+
+ <ul class="list-group">
+              <li class="list-group-item active">SAIDA DE DINHEIRO</li>
+     {{perc=0}}
+     {{if projeto.total_despesa_venda>0 and projeto.total_venda_prazo>0:}}
+     {{perc=projeto.total_despesa_venda/projeto.total_venda_prazo*100}}
+     {{pass}}
+     <li class="list-group-item">DESPESAS - R$ {{="{:,}".format(round(projeto.total_despesa_venda,2)).replace(",",".")}}0 <b>({{="{:,}".format(round(perc,2)).replace(",",".")}}%)</b></li>
+              <li class="list-group-item">CAD. VENDEDOR - R$ {{="{:,}".format(round(projeto.total_caderno_vendedor,2)).replace(",",".")}}0</li>
+              <li class="list-group-item">CAD. FUNCIONARIO - R$ {{="{:,}".format(round(projeto.total_caderno_funcionario,2)).replace(",",".")}}0</li>
+      <li class="list-group-item">CAD. CHEFE - R$ {{="{:,}".format(round(projeto.total_caderno_chefe,2)).replace(",",".")}}0</li>
+     {{totald=projeto.total_despesa_venda+projeto.total_caderno_vendedor+projeto.total_caderno_funcionario+projeto.total_caderno_chefe}}
+     <li class="list-group-item list-group-item-danger">TOTAL DESPESAS <b>- R$ {{="{:,}".format(round(totald,2)).replace(",",".")}}0</b></li>
+            </ul>
+              <br>
+              <ul class="list-group">
+              <li class="list-group-item active">DINHEIRO EM CAIXA</li>
+                  {{caixa=total-totald}}
+                  {{if caixa>=0:}}
+     <li class="list-group-item">CAIXA - R$ {{="{:,}".format(round(caixa,2)).replace(",",".")}}0</li>
+                  {{else:}}
+                  
+     <li class="list-group-item  list-group-item-danger">CAIXA NEGATIVO - R$ {{="{:,}".format(round(caixa,2)).replace(",",".")}}0</li>
+                  {{pass}}
+            </ul>
+              <br>
+
+</div>
+          <div class="col-md-6">
+              
+               <ul class="list-group">
+                   
+              <li class="list-group-item active">INFORMAÇÕES COMISSÃO</li>
+                   
+                   {{comissao=projeto.comissao_praso*projeto.total_venda_prazo/100}}
+              <li class="list-group-item">COMISSÃO VENDA PRAZO - R$ {{="{:,}".format(round(comissao)).replace(",",".")}}0</li>
+                    {{comissaov=(projeto.comissao_praso*2)*projeto.total_venda_vista/100}}
+              <li class="list-group-item">COMISSÃO VENDA À VISTA - R$ {{="{:,}".format(round(comissaov)).replace(",",".")}}0</li>
+                   {{saldoc=projeto.vale_saida}}
+                   <li class="list-group-item">VALE DO CHEFE - R$ {{="{:,}".format(round(saldoc)).replace(",",".")}}0</li>
+                   
+                    <li class="list-group-item">CADERNO DO CHEFE - R$ {{="{:,}".format(round(projeto.total_caderno_chefe)).replace(",",".")}}0</li>
+                   {{saldoc+=projeto.total_caderno_chefe}}
+  {{saldoc=comissao+comissaov-saldoc}}
+                   {{if saldoc>=0:}}
+     <li class="list-group-item  list-group-item-success">SALDO <b>- R$ {{="{:,}".format(round(saldoc)).replace(",",".")}}0</b></li>
+                   {{else:}}
+                   <li class="list-group-item  list-group-item-danger">SALDO ESTA NEGATIVO <b>- R$ {{="{:,}".format(round(saldoc)).replace(",",".")}}0</b></li>
+                   {{pass}}
+            </ul>
+<br>
+          </div>
+        </div>
+      </div>
+    </div>

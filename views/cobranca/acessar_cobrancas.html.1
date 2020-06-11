@@ -1,0 +1,101 @@
+{{extend 'layout.html'}}
+ {{a=1}}
+ {{valor=0}}
+{{recebido=0}}
+{{despesa=0}}
+{{deposito=0}}
+{{caderno=0}}
+{{fichas=0}}
+{{total_adiantamento=0}}
+{{total_vale_cobrador=0}}
+{{saldo=0}}
+{{debito=0}}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" >
+    <div class="container"> <a class="navbar-brand" href="{{=URL('default','alterar_projeto', args=projeto.id)}}">
+        <i class="fa d-inline fa-lg fa-hashtag"></i>
+        <b> {{=projeto.descricao}}</b>
+      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar10">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar10">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"> <a class="nav-link" href="{{=URL('default','acesso_inicial')}}">Projetos</a> </li>
+            <li class="nav-item  text-muted"> <a class="btn btn-outline-primary" href="{{=URL('projeto','investimento', args=projeto.id)}}">Investimento</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+        <a  href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
+          <h4>Cobranças em Andamento</h4>
+
+          <div class="table-responsive">
+            <table class="table table-bordered  table-sm">
+              <thead class="thead-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Data</th>
+                  <th>Cidade</th>
+                  <th>Valor</th>
+                  <th>Recebido</th>
+                  <th>Despesa</th>
+                  <th>Deposito</th>
+                  <th>Alterar</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {{for row in rows:}}
+                <tr>
+                  <th>{{=a}}</th>
+                    {{a+=1}}
+                    <td><a href="{{=URL('acesso_particao_cobranca', args=[row.id])}}">{{=("{}/{}/{}".format(row.data_inicio_cobranca.day,row.data_inicio_cobranca.month,row.data_inicio_cobranca.year))}}</a></td>
+                  <td>{{=row.primeira_cidade}}</td>
+                    {{if row.total_venda_praso>0:}}
+                  <td>R$ {{="{:,}".format(round(row.total_venda_praso,1)).replace(",",".")}}0</td>
+                    {{pass}}
+                  <td>R$ {{="{:,}".format(round(row.total_recebido,1)).replace(",",".")}}0</td>
+                  <td>R$ {{="{:,}".format(round(row.total_despesa,1)).replace(",",".")}}0</td>
+                  <td>R$ {{="{:,}".format(round(row.total_deposito,1)).replace(",",".")}}0</td>
+                    <td><a href="{{=URL('alterar_particao', args=[row.id])}}"><i class="fa text-warning fa-exchange" ></i></a></td>
+                </tr>
+                  {{if row.total_saldo_cobrador>0:}}
+                  {{saldo+=row.total_saldo_cobrador}}
+                  {{else:}}
+                  {{debito+=row.total_saldo_cobrador}}
+                  {{pass}}
+                  {{if row.total_venda_praso>0:}}
+                {{valor+=row.total_venda_praso}}
+                  {{pass}}
+              {{total_vale_cobrador+=row.total_vale_saida_cobrador}}
+{{total_adiantamento+=row.adiantamento_cobranca}}
+{{recebido+=row.total_recebido}}
+                  {{despesa+=row.total_despesa}}
+{{deposito+=row.total_deposito}}
+{{caderno+=row.total_caderno_cobrador}}
+                  {{fichas+=row.total_fichas}}
+                  {{pass}}
+                  <tr>
+                    <th>#</a></th>
+                  <th></th>
+                  <th>Total</th>
+                    <th>R$ {{="{:,}".format(round(valor,1)).replace(",",".")}}0</th>
+              <th>R$ {{="{:,}".format(round(recebido,1)).replace(",",".")}}0</th>
+              <th>R$ {{="{:,}".format(round(despesa,1)).replace(",",".")}}0</th>
+              <th>R$ {{="{:,}".format(round(deposito,1)).replace(",",".")}}0</th>
+<th></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+{{projeto.total_saldo_cobradores=saldo}}
+{{projeto.total_debito_cobradores=debito}}
+
+
+{{projeto.total_fichas=fichas}}
+{{projeto.total_vale_caderno_cobrador=caderno}}
+{{projeto.total_deposito_cobranca=deposito}}
+{{projeto.total_despesa_cobranca=despesa}}
+{{projeto.total_cobrado=recebido}}
+{{projeto.total_adiantamento_cobranca=total_adiantamento}}
+{{projeto.total_vale_cobrador=total_vale_cobrador}}
+{{projeto.update_record()}}

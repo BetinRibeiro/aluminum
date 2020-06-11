@@ -1,0 +1,871 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.TypeError'> a float is required"
+p3
+sS'layer'
+p4
+S'/home/rogoberto/web2py/applications/aluminum/views/cobranca/acessar_cobrancas.html'
+p5
+sS'code'
+p6
+S'response.write(\'<!DOCTYPE html>\\n<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="\', escape=False)\nresponse.write(T.accepted_language or \'en\')\nresponse.write(\'"> <!--<![endif]-->\\n  <head>\\n    <meta charset="utf-8">\\n    <!-- www.phpied.com/conditional-comments-block-downloads/ -->\\n    <!-- Always force latest IE rendering engine\\n         (even in intranet) & Chrome Frame\\n         Remove this if you use the .htaccess -->\\n    <meta http-equiv="X-UA-Compatible" content="IE=edge\', escape=False)\nresponse.write(not request.is_local and \',chrome=1\' or \'\')\nresponse.write(\'">\\n    <!--  Mobile Viewport Fix\\n          j.mp/mobileviewport & davidbcalhoun.com/2010/viewport-metatag\\n          device-width: Occupy full width of the screen in its current orientation\\n          initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height\\n          user-scalable = yes allows the user to zoom in -->\\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\\n    <title>\', escape=False)\nresponse.write(response.title or request.application)\nresponse.write(\'</title>\\n    <!-- http://dev.w3.org/html5/markup/meta.name.html -->\\n    <meta name="application-name" content="\', escape=False)\nresponse.write(request.application)\nresponse.write(\'">\\n    <!-- Speaking of Google, don\\\'t forget to set your site up:\\n         http://google.com/webmasters -->\\n    <meta name="google-site-verification" content="">\\n    <!-- include stylesheets -->\\n    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>\\n    <link rel="stylesheet" href="\', escape=False)\nresponse.write(URL(\'static\',\'css/bootstrap.min.css\'))\nresponse.write(\'"/>\\n    <link rel="stylesheet" href="\', escape=False)\nresponse.write(URL(\'static\',\'css/web2py-bootstrap4.css\'))\nresponse.write(\'"/>\\n    <link rel="stylesheet" href="\', escape=False)\nresponse.write(URL(\'static\',\'css/now_ui_kit.css\'))\nresponse.write(\'"/>\\n    <link rel="shortcut icon" href="\', escape=False)\nresponse.write(URL(\'static\',\'images/favicon.ico\'))\nresponse.write(\'" type="image/x-icon">\\n    <link rel="apple-touch-icon" href="\', escape=False)\nresponse.write(URL(\'static\',\'images/favicon.png\'))\nresponse.write(\'">\\n    <!-- All JavaScript at the bottom, except for Modernizr which enables\\n         HTML5 elements & feature detects -->\\n    <script src="\', escape=False)\nresponse.write(URL(\'static\',\'js/modernizr-2.8.3.min.js\'))\nresponse.write(\'"></script>\\n    <!-- Favicons -->\\n    \', escape=False)\nresponse.write(\'<script type="text/javascript"><!--\\n    // These variables are used by the web2py_ajax_init function in web2py_ajax.js (which is loaded below).\\n    \', escape=False)\nresponse.write(ASSIGNJS(\nw2p_ajax_confirm_message = T(\'Are you sure you want to delete this object?\'),\nw2p_ajax_disable_with_message = T(\'Working...\'),\nw2p_ajax_date_format = T(\'%Y-%m-%d\'),\nw2p_ajax_datetime_format = T(\'%Y-%m-%d %H:%M:%S\'),\najax_error_500 = T.M(\'An error occured, please [[reload %s]] the page\') % URL(args=request.args, vars=request.get_vars)\n))\nresponse.write(\'\\n    //--></script>\\n\', escape=False)\nresponse.files.insert(0,URL(\'static\',\'js/jquery.js\'))\nresponse.files.insert(1,URL(\'static\',\'css/calendar.css\'))\nresponse.files.insert(2,URL(\'static\',\'js/calendar.js\'))\nresponse.files.insert(3,URL(\'static\',\'js/web2py.js\'))\nresponse.include_meta()\nresponse.include_files()\nresponse.write(\'\\n\', escape=False)\nresponse.write(\' <!-- this includes jquery.js, calendar.js/.css and web2py.js -->\\n    \', escape=False)\nresponse.write(\'\\n  </head>\\n  <body>\\n    <div class="w2p_flash alert alert-dismissable">\', escape=False)\nresponse.write(response.flash or \'\')\nresponse.write(\'</div>\\n    <!-- Navbar ======================================= -->\\n    <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">\\n        <a class="navbar-brand" href="https://rogoberto.pythonanywhere.com/aluminum/#acesso">Aluminum</a>\\n       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">\\n         <span class="navbar-toggler-icon"></span>\\n       </button>\\n       <div class="navbar-collapse collapse w-100" id="navbarNavDropdown">\\n         <ul class="navbar-nav w-100 justify-content-center">\\n          \', escape=False)\nfor _item in response.menu or []:\n    response.write(\'\\n          \', escape=False)\n    if len(_item)<4 or not _item[3]:\n        response.write(\'\\n          <li class="nav-item \', escape=False)\n        if _item[1]:\n            response.write(\'active\', escape=False)\n            pass\n        response.write(\'">\\n            <a class="nav-link" href="\', escape=False)\n        response.write(_item[2])\n        response.write(\'">\', escape=False)\n        response.write(_item[0])\n        response.write(\'</a>\\n          </li>\\n          \', escape=False)\n    else:\n        response.write(\'\\n          <li class="nav-item dropdown">\\n            <a class="nav-link dropdown-toggle" href="\', escape=False)\n        response.write(_item[2])\n        response.write(\'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\', escape=False)\n        response.write(_item[0])\n        response.write(\'</a>\\n            <div class="dropdown-menu">\\n              \', escape=False)\n        for _subitem in _item[3]:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(_subitem[2])\n            response.write(\'">\', escape=False)\n            response.write(_subitem[0])\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n            </div>\\n          </li>\\n          \', escape=False)\n        pass\n    response.write(\'\\n          \', escape=False)\n    pass\nresponse.write(\'\\n        </ul>\\n\\n        \', escape=False)\nif \'auth\' in globals():\n    response.write(\'\\n        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">\\n          <li class="nav-item dropdown">\\n            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\\n              \', escape=False)\n    if auth.user:\n        response.write(auth.user.first_name)\n    else:\n        response.write(\'LOGIN\', escape=False)\n        pass\n    response.write(\'\\n            </a>\\n            <div class="dropdown-menu dropdown-menu-right">\\n              \', escape=False)\n    if auth.user:\n        response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n        response.write(URL(\'default\',\'user/profile\'))\n        response.write(\'">\', escape=False)\n        response.write(T(\'Profile\'))\n        response.write(\'</a>\\n              \', escape=False)\n        if \'change_password\' not in auth.settings.actions_disabled:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(URL(\'default\',\'user/change_password\'))\n            response.write(\'">\', escape=False)\n            response.write(T(\'Change Password\'))\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n        response.write(URL(\'default\',\'user/logout\'))\n        response.write(\'">\', escape=False)\n        response.write(T(\'Logout\'))\n        response.write(\'</a>\\n              \', escape=False)\n    else:\n        response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n        response.write(URL(\'default\',\'user/login\'))\n        response.write(\'">\', escape=False)\n        response.write(T(\'Login\'))\n        response.write(\'</a>\\n              \', escape=False)\n        if \'register\' not in auth.settings.actions_disabled:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(URL(\'default\',\'user/register\'))\n            response.write(\'">\', escape=False)\n            response.write(T(\'Sign up\'))\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n              \', escape=False)\n        if \'retrieve_password\' not in auth.settings.actions_disabled:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(URL(\'default\',\'user/retrieve_password\'))\n            response.write(\'">\', escape=False)\n            response.write(T(\'Lost Password\'))\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n              \', escape=False)\n        pass\n    response.write(\'\\n            </div>\\n          </li>\\n        </ul>\\n        \', escape=False)\n    pass\nresponse.write(\'\\n      </div>\\n    </nav>\\n\\n    <!-- Masthead ===================================== -->\\n    \', escape=False)\nresponse.write(\'\\n    \', escape=False)\nresponse.write(\'\\n    <!-- Main ========================================= -->\\n    <!-- Begin page content -->\\n    <div class="container-fluid main-container">\\n      \', escape=False)\nresponse.write(\'\\n \', escape=False)\na=1\nresponse.write(\'\\n \', escape=False)\nvalor=0\nresponse.write(\'\\n\', escape=False)\nrecebido=0\nresponse.write(\'\\n\', escape=False)\ndespesa=0\nresponse.write(\'\\n\', escape=False)\ndeposito=0\nresponse.write(\'\\n\', escape=False)\ncaderno=0\nresponse.write(\'\\n\', escape=False)\nfichas=0\nresponse.write(\'\\n\', escape=False)\ntotal_adiantamento=0\nresponse.write(\'\\n\', escape=False)\ntotal_vale_cobrador=0\nresponse.write(\'\\n\', escape=False)\nsaldo=0\nresponse.write(\'\\n\', escape=False)\ndebito=0\nresponse.write(\'\\n<nav class="navbar navbar-expand-md navbar-dark bg-dark" >\\n    <div class="container"> <a class="navbar-brand" href="\', escape=False)\nresponse.write(URL(\'default\',\'alterar_projeto\', args=projeto.id))\nresponse.write(\'">\\n        <i class="fa d-inline fa-lg fa-hashtag"></i>\\n        <b> \', escape=False)\nresponse.write(projeto.descricao)\nresponse.write(\'</b>\\n      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar10">\\n        <span class="navbar-toggler-icon"></span>\\n      </button>\\n      <div class="collapse navbar-collapse" id="navbar10">\\n        <ul class="navbar-nav ml-auto">\\n          <li class="nav-item"> <a class="nav-link" href="\', escape=False)\nresponse.write(URL(\'default\',\'acesso_inicial\'))\nresponse.write(\'">Projetos</a> </li>\\n            <li class="nav-item  text-muted"> <a class="btn btn-outline-primary" href="\', escape=False)\nresponse.write(URL(\'projeto\',\'investimento\', args=projeto.id))\nresponse.write(\'">Investimento</a></li>\\n        </ul>\\n      </div>\\n    </div>\\n  </nav>\\n        <a  href="\', escape=False)\nresponse.write(URL(\'projeto\',\'acesso_projeto\', args=projeto.id))\nresponse.write(\'"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>\\n          <h4>Cobran\\xc3\\xa7as em Andamento</h4>\\n\\n          <div class="table-responsive">\\n            <table class="table table-bordered  table-sm">\\n              <thead class="thead-dark">\\n                <tr>\\n                  <th>#</th>\\n                  <th>Data</th>\\n                  <th>Cidade</th>\\n                  <th>Valor</th>\\n                  <th>Recebido</th>\\n                  <th>Despesa</th>\\n                  <th>Deposito</th>\\n                  <th>Alterar</th>\\n                </tr>\\n              </thead>\\n              <tbody>\\n                  \', escape=False)\nfor row in rows:\n    response.write(\'\\n                <tr>\\n                  <th>\', escape=False)\n    response.write(a)\n    response.write(\'</th>\\n                    \', escape=False)\n    a+=1\n    response.write(\'\\n                    <td><a href="\', escape=False)\n    response.write(URL(\'acesso_particao_cobranca\', args=[row.id]))\n    response.write(\'">\', escape=False)\n    response.write(("{}/{}/{}".format(row.data_inicio_cobranca.day,row.data_inicio_cobranca.month,row.data_inicio_cobranca.year)))\n    response.write(\'</a></td>\\n                  <td>\', escape=False)\n    response.write(row.primeira_cidade)\n    response.write(\'</td>\\n                  <td>R$ \', escape=False)\n    response.write("{:,}".format(round(row.total_venda_praso,1)).replace(",","."))\n    response.write(\'0</td>\\n                  <td>R$ \', escape=False)\n    response.write("{:,}".format(round(row.total_recebido,1)).replace(",","."))\n    response.write(\'0</td>\\n                  <td>R$ \', escape=False)\n    response.write("{:,}".format(round(row.total_despesa,1)).replace(",","."))\n    response.write(\'0</td>\\n                  <td>R$ \', escape=False)\n    response.write("{:,}".format(round(row.total_deposito,1)).replace(",","."))\n    response.write(\'0</td>\\n                    <td><a href="\', escape=False)\n    response.write(URL(\'alterar_particao\', args=[row.id]))\n    response.write(\'"><i class="fa text-warning fa-exchange" ></i></a></td>\\n                </tr>\\n                  \', escape=False)\n    if row.total_saldo_cobrador>0:\n        response.write(\'\\n                  \', escape=False)\n        saldo+=row.total_saldo_cobrador\n        response.write(\'\\n                  \', escape=False)\n    else:\n        response.write(\'\\n                  \', escape=False)\n        debito+=row.total_saldo_cobrador\n        response.write(\'\\n                  \', escape=False)\n        pass\n    response.write(\'\\n                \', escape=False)\n    valor+=row.total_venda_praso\n    response.write(\'\\n              \', escape=False)\n    total_vale_cobrador+=row.total_vale_saida_cobrador\n    response.write(\'\\n\', escape=False)\n    total_adiantamento+=row.adiantamento_cobranca\n    response.write(\'\\n\', escape=False)\n    recebido+=row.total_recebido\n    response.write(\'\\n                  \', escape=False)\n    despesa+=row.total_despesa\n    response.write(\'\\n\', escape=False)\n    deposito+=row.total_deposito\n    response.write(\'\\n\', escape=False)\n    caderno+=row.total_caderno_cobrador\n    response.write(\'\\n                  \', escape=False)\n    fichas+=row.total_fichas\n    response.write(\'\\n                  \', escape=False)\n    pass\nresponse.write(\'\\n                  <tr>\\n                    <th>#</a></th>\\n                  <th></th>\\n                  <th>Total</th>\\n                    <th>R$ \', escape=False)\nresponse.write("{:,}".format(round(valor,1)).replace(",","."))\nresponse.write(\'0</th>\\n              <th>R$ \', escape=False)\nresponse.write("{:,}".format(round(recebido,1)).replace(",","."))\nresponse.write(\'0</th>\\n              <th>R$ \', escape=False)\nresponse.write("{:,}".format(round(despesa,1)).replace(",","."))\nresponse.write(\'0</th>\\n              <th>R$ \', escape=False)\nresponse.write("{:,}".format(round(deposito,1)).replace(",","."))\nresponse.write(\'0</th>\\n<th></th>\\n                </tr>\\n              </tbody>\\n            </table>\\n          </div>\\n\\n\', escape=False)\nprojeto.total_saldo_cobradores=saldo\nresponse.write(\'\\n\', escape=False)\nprojeto.total_debito_cobradores=debito\nresponse.write(\'\\n\\n\\n\', escape=False)\nprojeto.total_fichas=fichas\nresponse.write(\'\\n\', escape=False)\nprojeto.total_vale_caderno_cobrador=caderno\nresponse.write(\'\\n\', escape=False)\nprojeto.total_deposito_cobranca=deposito\nresponse.write(\'\\n\', escape=False)\nprojeto.total_despesa_cobranca=despesa\nresponse.write(\'\\n\', escape=False)\nprojeto.total_cobrado=recebido\nresponse.write(\'\\n\', escape=False)\nprojeto.total_adiantamento_cobranca=total_adiantamento\nresponse.write(\'\\n\', escape=False)\nprojeto.total_vale_cobrador=total_vale_cobrador\nresponse.write(\'\\n\', escape=False)\nprojeto.update_record()\nresponse.write(\'\\n\', escape=False)\nresponse.write(\'\\n      \', escape=False)\nresponse.write(response.toolbar() if response.show_toolbar else \'\')\nresponse.write(\'\\n    </div>\\n<br><br><br>\\n    \', escape=False)\nresponse.write(\' <!-- this is default footer -->\\n    <footer class="footer container-fluid">\\n      <div class="row">\\n        <div class="col-md-12">\\n          <div class="copyright pull-left">\', escape=False)\nresponse.write(T(\'Copyright\'))\nresponse.write(\' &#169; \', escape=False)\nresponse.write(request.now.year)\nresponse.write(\'</div>\\n          <div id="poweredBy" class="pull-right">\\n            Suporte\\n            <a href="https://api.whatsapp.com/send?phone=5588981126816">(88)98112-6816</a>\\n          </div>\\n        </div>\\n      </div>\\n    </footer>\\n    \', escape=False)\nresponse.write(\'\\n    <!-- The javascript =============================== -->\\n    <script src="\', escape=False)\nresponse.write(URL(\'static\',\'js/bootstrap.bundle.min.js\'))\nresponse.write(\'"></script>\\n    <script src="\', escape=False)\nresponse.write(URL(\'static\',\'js/web2py-bootstrap4.js\'))\nresponse.write(\'"></script>\\n    \', escape=False)\nresponse.write(\'\\n    \', escape=False)\nif response.google_analytics_id:\n    response.write(\'\\n    <!-- Analytics ==================================== -->\\n    <script src="\', escape=False)\n    response.write(URL(\'static\',\'js/analytics.min.js\'))\n    response.write(\'"></script>\\n    <script type="text/javascript">\\n      analytics.initialize({\\n      \\\'Google Analytics\\\':{trackingId:\\\'\', escape=False)\n    response.write(response.google_analytics_id)\n    response.write("\'}\\n      });\\n    </script>\\n    ", escape=False)\n    pass\nresponse.write(\'\\n  </body>\\n</html>\\n\', escape=False)'
+p7
+sS'snapshot'
+p8
+(dp9
+S'exception'
+p10
+(dp11
+S'__getslice__'
+p12
+S"<method-wrapper '__getslice__' of exceptions.TypeError object>"
+p13
+sS'__str__'
+p14
+S"<method-wrapper '__str__' of exceptions.TypeError object>"
+p15
+sS'__reduce__'
+p16
+S'<built-in method __reduce__ of exceptions.TypeError object>'
+p17
+sS'__dict__'
+p18
+S'{}'
+p19
+sS'message'
+p20
+S"'a float is required'"
+p21
+sS'__sizeof__'
+p22
+S'<built-in method __sizeof__ of exceptions.TypeError object>'
+p23
+sS'__init__'
+p24
+S"<method-wrapper '__init__' of exceptions.TypeError object>"
+p25
+sS'__setattr__'
+p26
+S"<method-wrapper '__setattr__' of exceptions.TypeError object>"
+p27
+sS'__reduce_ex__'
+p28
+S'<built-in method __reduce_ex__ of exceptions.TypeError object>'
+p29
+sS'__new__'
+p30
+S'<built-in method __new__ of type object>'
+p31
+sS'__format__'
+p32
+S'<built-in method __format__ of exceptions.TypeError object>'
+p33
+sS'__class__'
+p34
+S"<type 'exceptions.TypeError'>"
+p35
+sS'__doc__'
+p36
+S"'Inappropriate argument type.'"
+p37
+sS'__getitem__'
+p38
+S"<method-wrapper '__getitem__' of exceptions.TypeError object>"
+p39
+sS'__setstate__'
+p40
+S'<built-in method __setstate__ of exceptions.TypeError object>'
+p41
+sS'__getattribute__'
+p42
+S"<method-wrapper '__getattribute__' of exceptions.TypeError object>"
+p43
+sS'args'
+p44
+S"('a float is required',)"
+p45
+sS'__subclasshook__'
+p46
+S'<built-in method __subclasshook__ of type object>'
+p47
+sS'__unicode__'
+p48
+S'<built-in method __unicode__ of exceptions.TypeError object>'
+p49
+sS'__delattr__'
+p50
+S"<method-wrapper '__delattr__' of exceptions.TypeError object>"
+p51
+sS'__repr__'
+p52
+S"<method-wrapper '__repr__' of exceptions.TypeError object>"
+p53
+sS'__hash__'
+p54
+S"<method-wrapper '__hash__' of exceptions.TypeError object>"
+p55
+ssS'evalue'
+p56
+S'a float is required'
+p57
+sS'request'
+p58
+cgluon.html
+XML_unpickle
+p59
+(S's\xfbZ\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">ajax</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">application</td><td style="vertical-align:top;">:</td><td><div>aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">args</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>8</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cid</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">client</td><td style="vertical-align:top;">:</td><td><div>177.37.193.173</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">controller</td><td style="vertical-align:top;">:</td><td><div>cobranca</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_admin</td><td style="vertical-align:top;">:</td><td><div>177.37.193.173-c74d9790-8661-4a95-8fc5-f09710f376a3<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_aluminum</td><td style="vertical-align:top;">:</td><td><div>177.37.193.173-f1e59389-bef6-4258-a13c-0d96afdb7b12<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">env</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">CONTENT_LENGTH</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">CONTENT_TYPE</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">DOCUMENT_ROOT</td><td style="vertical-align:top;">:</td><td><div>/usr/local/openresty/nginx/html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTPS</td><td style="vertical-align:top;">:</td><td><div>on</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_ENCODING</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate, br</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_LANGUAGE</td><td style="vertical-align:top;">:</td><td><div>pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CONNECTION</td><td style="vertical-align:top;">:</td><td><div>close</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_COOKIE</td><td style="vertical-align:top;">:</td><td><div>session_id_admin=177.37.193.173-c74d9790-8661-4a95-8fc5-f09710f376a3; session_id_aluminum=177.37.193.173-f1e59389-bef6-4258-a13c-0d96afdb7b12</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_HOST</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_REFERER</td><td style="vertical-align:top;">:</td><td><div>https://rogoberto.pythonanywhere.com/aluminum/projeto/acesso_projeto/8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_SEC_FETCH_DEST</td><td style="vertical-align:top;">:</td><td><div>document</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_SEC_FETCH_MODE</td><td style="vertical-align:top;">:</td><td><div>navigate</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_SEC_FETCH_SITE</td><td style="vertical-align:top;">:</td><td><div>same-origin</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_SEC_FETCH_USER</td><td style="vertical-align:top;">:</td><td><div>?1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_UPGRADE_INSECURE_REQUESTS</td><td style="vertical-align:top;">:</td><td><div>1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_USER_AGENT</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_X_FORWARDED_FOR</td><td style="vertical-align:top;">:</td><td><div>177.37.193.173</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_X_REAL_IP</td><td style="vertical-align:top;">:</td><td><div>177.37.193.173</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">PATH_INFO</td><td style="vertical-align:top;">:</td><td><div>/aluminum/cobranca/acessar_cobrancas/8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">QUERY_STRING</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_ADDR</td><td style="vertical-align:top;">:</td><td><div>10.0.0.121</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_PORT</td><td style="vertical-align:top;">:</td><td><div>48530</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_METHOD</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_URI</td><td style="vertical-align:top;">:</td><td><div>/aluminum/cobranca/acessar_cobrancas/8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SCRIPT_NAME</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_NAME</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PORT</td><td style="vertical-align:top;">:</td><td><div>443</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PROTOCOL</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;/home/rogoberto/web2py/applications/examples/&#x27;, &#x27;/home/rogoberto/web2py/applications/aluminum/&#x27;, &#x27;/home/rogoberto/web2py/applications/abencoado/&#x27;, &#x27;/home/rogoberto/web2py/applications/welcome/&#x27;, &#x27;/home/rogoberto/web2py/applications/meugas/&#x27;, &#x27;/home/rogoberto/web2py/applications/admin/&#x27;, &#x27;/home/rogoberto/web2py/applications/exemplo/&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">content_length</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">content_type</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">document_root</td><td style="vertical-align:top;">:</td><td><div>/usr/local/openresty/nginx/html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_encoding</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate, br</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_language</td><td style="vertical-align:top;">:</td><td><div>pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_connection</td><td style="vertical-align:top;">:</td><td><div>close</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cookie</td><td style="vertical-align:top;">:</td><td><div>session_id_admin=177.37.193.173-c74d9790-8661-4a95-8fc5-f09710f376a3; session_id_aluminum=177.37.193.173-f1e59389-bef6-4258-a13c-0d96afdb7b12</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_host</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_referer</td><td style="vertical-align:top;">:</td><td><div>https://rogoberto.pythonanywhere.com/aluminum/projeto/acesso_projeto/8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_sec_fetch_dest</td><td style="vertical-align:top;">:</td><td><div>document</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_sec_fetch_mode</td><td style="vertical-align:top;">:</td><td><div>navigate</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_sec_fetch_site</td><td style="vertical-align:top;">:</td><td><div>same-origin</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_sec_fetch_user</td><td style="vertical-align:top;">:</td><td><div>?1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_upgrade_insecure_requests</td><td style="vertical-align:top;">:</td><td><div>1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_user_agent</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_x_forwarded_for</td><td style="vertical-align:top;">:</td><td><div>177.37.193.173</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_x_real_ip</td><td style="vertical-align:top;">:</td><td><div>177.37.193.173</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">https</td><td style="vertical-align:top;">:</td><td><div>on</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_py2</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>35.173.69.207</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td><div>blue-liveweb22</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>localhost</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path_info</td><td style="vertical-align:top;">:</td><td><div>/aluminum/cobranca/acessar_cobrancas/8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">query_string</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_addr</td><td style="vertical-align:top;">:</td><td><div>10.0.0.121</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_port</td><td style="vertical-align:top;">:</td><td><div>48530</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_method</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_uri</td><td style="vertical-align:top;">:</td><td><div>/aluminum/cobranca/acessar_cobrancas/8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">script_name</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_name</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_port</td><td style="vertical-align:top;">:</td><td><div>443</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_protocol</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi.node</td><td style="vertical-align:top;">:</td><td><div>blue-liveweb22</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi.version</td><td style="vertical-align:top;">:</td><td><div>2.0.17.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi_node</td><td style="vertical-align:top;">:</td><td><div>blue-liveweb22</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi_version</td><td style="vertical-align:top;">:</td><td><div>2.0.17.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_path</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.17.1-stable+timestamp.2018.08.06.01.02.56</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.errors</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi_file__bin_user_wsgi_wrapper.ErrorLogFile object at 0x7fbabebdbd10&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;built-in function uwsgi_sendfile&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.input</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi._Input object at 0x7fbabffebf78&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multiprocess</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multithread</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.url_scheme</td><td style="vertical-align:top;">:</td><td><div>https</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_errors</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi_file__bin_user_wsgi_wrapper.ErrorLogFile object at 0x7fbabebdbd10&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;built-in function uwsgi_sendfile&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_input</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi._Input object at 0x7fbabffebf78&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multiprocess</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multithread</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_url_scheme</td><td style="vertical-align:top;">:</td><td><div>https</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">extension</td><td style="vertical-align:top;">:</td><td><div>html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">folder</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py/applications/aluminum/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">function</td><td style="vertical-align:top;">:</td><td><div>acessar_cobrancas</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">global_settings</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;/home/rogoberto/web2py/applications/examples/&#x27;, &#x27;/home/rogoberto/web2py/applications/aluminum/&#x27;, &#x27;/home/rogoberto/web2py/applications/abencoado/&#x27;, &#x27;/home/rogoberto/web2py/applications/welcome/&#x27;, &#x27;/home/rogoberto/web2py/applications/meugas/&#x27;, &#x27;/home/rogoberto/web2py/applications/admin/&#x27;, &#x27;/home/rogoberto/web2py/applications/exemplo/&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_py2</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>35.173.69.207</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td><div>blue-liveweb22</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>localhost</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.17.1-stable+timestamp.2018.08.06.01.02.56</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_https</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_local</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_restful</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_scheduler</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_shell</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">method</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">now</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2020, 3, 19, 19, 41, 16, 948273)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_args</td><td style="vertical-align:top;">:</td><td><div>8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_extension</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">url</td><td style="vertical-align:top;">:</td><td><div>/aluminum/cobranca/acessar_cobrancas/8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">utcnow</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2020, 3, 19, 19, 41, 16, 948304)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi</td><td style="vertical-align:top;">:</td><td><div>&lt;gluon.main.LazyWSGI object at 0x7fbab78d6750&gt;</div></td></tr></table></div>'
+tRp60
+sS'frames'
+p61
+(lp62
+(dp63
+S'file'
+p64
+S'/home/rogoberto/web2py/gluon/restricted.py'
+p65
+sS'dump'
+p66
+(dp67
+S'environment'
+p68
+S"{'A': <class 'gluon.html.A'>, 'ANY_OF': <class 'gluon.validators.ANY_OF'>, 'ASSIGNJS': <function ASSIGNJS>, 'AppConfig': <function AppConfig>, 'Auth': <class 'gluon.tools.Auth'>, 'B': <class 'gluon.html.B'>, 'BEAUTIFY': <class 'gluon.html.BEAUTIFY'>, 'BODY': <class 'gluon.html.BODY'>, 'BR': <class 'gluon.html.BR'>, 'BUTTON': <class 'gluon.html.BUTTON'>, ...}"
+p69
+sS'ccode'
+p70
+S'<code object <module> at 0x7fbab7a7f2b0, file "/...m/views/cobranca/acessar_cobrancas.html", line 1>'
+p71
+ssS'lnum'
+p72
+I219
+sS'lines'
+p73
+(dp74
+I214
+S'    if environment is None:'
+p75
+sI215
+S'        environment = {}'
+p76
+sI216
+S"    environment['__file__'] = layer"
+p77
+sI217
+S"    environment['__name__'] = '__restricted__'"
+p78
+sI218
+S'    try:'
+p79
+sI219
+S'        exec(ccode, environment)'
+p80
+sI220
+S'    except HTTP:'
+p81
+sI221
+S'        raise'
+p82
+sI222
+S'    except RestrictedError:'
+p83
+sI223
+S'        # do not encapsulate (obfuscate) the original RestrictedError'
+p84
+ssS'call'
+p85
+S'(ccode=<code object <module> at 0x7fbab7a7f2b0, file "/...m/views/cobranca/acessar_cobrancas.html", line 1>, environment={\'A\': <class \'gluon.html.A\'>, \'ANY_OF\': <class \'gluon.validators.ANY_OF\'>, \'ASSIGNJS\': <function ASSIGNJS>, \'AppConfig\': <function AppConfig>, \'Auth\': <class \'gluon.tools.Auth\'>, \'B\': <class \'gluon.html.B\'>, \'BEAUTIFY\': <class \'gluon.html.BEAUTIFY\'>, \'BODY\': <class \'gluon.html.BODY\'>, \'BR\': <class \'gluon.html.BR\'>, \'BUTTON\': <class \'gluon.html.BUTTON\'>, ...}, layer=\'/home/rogoberto/web2py/applications/aluminum/views/cobranca/acessar_cobrancas.html\', scode=r"response.write(\'<!DOCTYPE html>\\n<!--[if (gt IE ...nse.write(\'\\n  </body>\\n</html>\\n\', escape=False)")'
+p86
+sS'func'
+p87
+S'restricted'
+p88
+sa(dp89
+g64
+S'/home/rogoberto/web2py/applications/aluminum/views/cobranca/acessar_cobrancas.html'
+p90
+sg66
+(dp91
+sg72
+I171
+sg73
+(dp92
+I162
+S"    response.write('</th>\\n                    ', escape=False)"
+p93
+sI163
+S'    a+=1'
+p94
+sI164
+S'    response.write(\'\\n                    <td><a href="\', escape=False)'
+p95
+sI165
+S"    response.write(URL('acesso_particao_cobranca', args=[row.id]))"
+p96
+sI166
+S'    response.write(\'">\', escape=False)'
+p97
+sI167
+S'    response.write(("{}/{}/{}".format(row.data_inicio_cobranca.day,row.data_inicio_cobranca.month,row.data_inicio_cobranca.year)))'
+p98
+sI168
+S"    response.write('</a></td>\\n                  <td>', escape=False)"
+p99
+sI169
+S'    response.write(row.primeira_cidade)'
+p100
+sI170
+S"    response.write('</td>\\n                  <td>R$ ', escape=False)"
+p101
+sI171
+S'    response.write("{:,}".format(round(row.total_venda_praso,1)).replace(",","."))'
+p102
+sI172
+S"    response.write('0</td>\\n                  <td>R$ ', escape=False)"
+p103
+sI173
+S'    response.write("{:,}".format(round(row.total_recebido,1)).replace(",","."))'
+p104
+sI174
+S"    response.write('0</td>\\n                  <td>R$ ', escape=False)"
+p105
+sI175
+S'    response.write("{:,}".format(round(row.total_despesa,1)).replace(",","."))'
+p106
+sI176
+S"    response.write('0</td>\\n                  <td>R$ ', escape=False)"
+p107
+sI177
+S'    response.write("{:,}".format(round(row.total_deposito,1)).replace(",","."))'
+p108
+sI178
+S'    response.write(\'0</td>\\n                    <td><a href="\', escape=False)'
+p109
+sI179
+S"    response.write(URL('alterar_particao', args=[row.id]))"
+p110
+sI180
+S'    response.write(\'"><i class="fa text-warning fa-exchange" ></i></a></td>\\n                </tr>\\n                  \', escape=False)'
+p111
+sI181
+S'    if row.total_saldo_cobrador>0:'
+p112
+ssg85
+S'()'
+p113
+sg87
+S'<module>'
+p114
+sasS'pyver'
+p115
+S'Python 2.7.12: /usr/local/bin/uwsgi (prefix: /usr)'
+p116
+sS'session'
+p117
+g59
+(S's\xe9\x08\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">auth</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">expiration</td><td style="vertical-align:top;">:</td><td><div>3600</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">hmac_key</td><td style="vertical-align:top;">:</td><td><div>6f199289-d658-43d7-a5ec-e8bfe43708a1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">last_visit</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2020, 3, 19, 19, 41, 4, 372471)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remember_me</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">user</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">email</td><td style="vertical-align:top;">:</td><td><div>meme@gmail.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">first_name</td><td style="vertical-align:top;">:</td><td><div>Meme</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">id</td><td style="vertical-align:top;">:</td><td><div>6L</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">last_name</td><td style="vertical-align:top;">:</td><td><div>Aben\xc3\xa7oado </div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">registration_id</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">registration_key</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">reset_password_key</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">user_groups</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">5</td><td style="vertical-align:top;">:</td><td><div>user_6</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr></table></div>'
+tRp118
+sS'etype'
+p119
+S"<type 'exceptions.TypeError'>"
+p120
+sS'date'
+p121
+S'Thu Mar 19 19:41:17 2020'
+p122
+sS'response'
+p123
+g59
+(S's&\x1d\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">body</td><td style="vertical-align:top;">:</td><td><div>&lt;cStringIO.StringO object at 0x7fbab7bb63e8&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_aluminum</td><td style="vertical-align:top;">:</td><td><div>177.37.193.173-f1e59389-bef6-4258-a13c-0d96afdb7b12<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div>/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">delimiters</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>{{</div></td></tr><tr><td><div>}}</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">files</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>/aluminum/static/js/jquery.js</div></td></tr><tr><td><div>/aluminum/static/css/calendar.css</div></td></tr><tr><td><div>/aluminum/static/js/calendar.js</div></td></tr><tr><td><div>/aluminum/static/js/web2py.js</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">form_label_separator</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">formstyle</td><td style="vertical-align:top;">:</td><td><div>bootstrap4_inline</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generic_patterns</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">google_analytics_id</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">headers</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">X-Powered-By</td><td style="vertical-align:top;">:</td><td><div>web2py</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">menu</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div><table><tr><td><div>Principal</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/aluminum/default/index</div></td></tr><tr><td><div><table></table></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">meta</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">author</td><td style="vertical-align:top;">:</td><td><div>Your Name &lt;you@example.com&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">description</td><td style="vertical-align:top;">:</td><td><div>a cool new app</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generator</td><td style="vertical-align:top;">:</td><td><div>Web2py Web Framework</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">keywords</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>web2py</div></td></tr><tr><td><div>python</div></td></tr><tr><td><div>framework</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">models_to_run</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>^\\w+\\.py$</div></td></tr><tr><td><div>^cobranca/\\w+\\.py$</div></td></tr><tr><td><div>^cobranca/acessar_cobrancas/\\w+\\.py$</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">postprocessing</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_client</td><td style="vertical-align:top;">:</td><td><div>177.37.193.173</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_compression_level</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_expires</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_data_name</td><td style="vertical-align:top;">:</td><td><div>session_data_aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_file</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;/home/rogoberto/web2py/applications/aluminum/sessions/0b5/15e/177.37.193.173-f1e59389-bef6-4258-a13c-0d96afdb7b12&#x27;, mode &#x27;rb+&#x27; at 0x7fbab7a521e0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_filename</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py/applications/aluminum/sessions/177.37.193.173-f1e59389-bef6-4258-a13c-0d96afdb7b12</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_hash</td><td style="vertical-align:top;">:</td><td><div>802f740160502476d8f485cecd5a1d10</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id</td><td style="vertical-align:top;">:</td><td><div>177.37.193.173-f1e59389-bef6-4258-a13c-0d96afdb7b12</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_name</td><td style="vertical-align:top;">:</td><td><div>session_id_aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_locked</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_masterapp</td><td style="vertical-align:top;">:</td><td><div>aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_new</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_storage_type</td><td style="vertical-align:top;">:</td><td><div>file</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">show_toolbar</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">status</td><td style="vertical-align:top;">:</td><td><div>200</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">view</td><td style="vertical-align:top;">:</td><td><div>cobranca/acessar_cobrancas.html</div></td></tr></table></div>'
+tRp124
+sS'locals'
+p125
+(dp126
+S'PY2'
+p127
+S'True'
+p128
+sS'OBJECT'
+p129
+S"<class 'gluon.html.OBJECT'>"
+p130
+sS'SQLDB'
+p131
+S"<class 'pydal.base.DAL'>"
+p132
+sg117
+S"<Storage {'_auth_next': None, 'flash': None, 'au...gin]': ['b6eea31b-8264-41a7-b93e-6f6802a714c8']}>"
+p133
+sS'LINK'
+p134
+S"<class 'gluon.html.LINK'>"
+p135
+sS'BR'
+p136
+S"<class 'gluon.html.BR'>"
+p137
+sS'local_import'
+p138
+S'<function <lambda>>'
+p139
+sS'OPTGROUP'
+p140
+S"<class 'gluon.html.OPTGROUP'>"
+p141
+sS'__package__'
+p142
+S'None'
+p143
+sS'total_adiantamento'
+p144
+S'0.0'
+p145
+sS'row'
+p146
+S"<Row {'total_saldo_cobrador': 0.0, 'nome_cobrado...ata_final_cobranca': datetime.date(2020, 3, 15)}>"
+p147
+sS'PRE'
+p148
+S"<class 'gluon.html.PRE'>"
+p149
+sS'IS_INT_IN_RANGE'
+p150
+S"<class 'gluon.validators.IS_INT_IN_RANGE'>"
+p151
+sS'to_bytes'
+p152
+S'<function to_bytes>'
+p153
+sS'IS_LOWER'
+p154
+S"<class 'gluon.validators.IS_LOWER'>"
+p155
+sS'IS_STRONG'
+p156
+S"<class 'gluon.validators.IS_STRONG'>"
+p157
+sS'cache'
+p158
+S'<gluon.cache.Cache object>'
+p159
+sS'IS_IN_DB'
+p160
+S"<class 'gluon.validators.IS_IN_DB'>"
+p161
+sS'deposito'
+p162
+S'0.0'
+p163
+sS'TAG'
+p164
+S'<gluon.html.__TAG__ object>'
+p165
+sS'valor'
+p166
+S'18000.0'
+p167
+sS'SQLField'
+p168
+S"<class 'pydal.objects.Field'>"
+p169
+sS'mail'
+p170
+S'<gluon.tools.Mail object>'
+p171
+sS'BODY'
+p172
+S"<class 'gluon.html.BODY'>"
+p173
+sS'IS_DATE_IN_RANGE'
+p174
+S"<class 'gluon.validators.IS_DATE_IN_RANGE'>"
+p175
+sS'IFRAME'
+p176
+S"<class 'gluon.html.IFRAME'>"
+p177
+sS'URL'
+p178
+S'<function URL>'
+p179
+sS'__file__'
+p180
+S"'/home/rogoberto/web2py/applications/aluminum/views/cobranca/acessar_cobrancas.html'"
+p181
+sS'db'
+p182
+S'<DAL uri="sqlite://storage.sqlite">'
+p183
+sS'auth'
+p184
+S'<gluon.tools.Auth object>'
+p185
+sS'P'
+S"<class 'gluon.html.P'>"
+p186
+sS'TFOOT'
+p187
+S"<class 'gluon.html.TFOOT'>"
+p188
+sS'iteritems'
+p189
+S'<function <lambda>>'
+p190
+sS'XHTML'
+p191
+S"<class 'gluon.html.XHTML'>"
+p192
+sS'ON'
+p193
+g128
+sS'OL'
+p194
+S"<class 'gluon.html.OL'>"
+p195
+sS'TEXTAREA'
+p196
+S"<class 'gluon.html.TEXTAREA'>"
+p197
+sS'MENU'
+p198
+S"<class 'gluon.html.MENU'>"
+p199
+sS'despesa'
+p200
+S'0.0'
+p201
+sS'IS_IMAGE'
+p202
+S"<class 'gluon.validators.IS_IMAGE'>"
+p203
+sS'_item'
+p204
+S"(<lazyT 'Home'>, False, '/aluminum/default/index', [])"
+p205
+sS'EM'
+p206
+S"<class 'gluon.html.EM'>"
+p207
+sS'CODE'
+p208
+S"<class 'gluon.html.CODE'>"
+p209
+sS'HTTP'
+p210
+S"<class 'gluon.http.HTTP'>"
+p211
+sS'HR'
+p212
+S"<class 'gluon.html.HR'>"
+p213
+sS'IS_DATETIME'
+p214
+S"<class 'gluon.validators.IS_DATETIME'>"
+p215
+sS'reduce'
+p216
+S'<built-in function reduce>'
+p217
+sS'STYLE'
+p218
+S"<class 'gluon.html.STYLE'>"
+p219
+sS'LABEL'
+p220
+S"<class 'gluon.html.LABEL'>"
+p221
+sS'CLEANUP'
+p222
+S"<class 'gluon.validators.CLEANUP'>"
+p223
+sS'BUTTON'
+p224
+S"<class 'gluon.html.BUTTON'>"
+p225
+sS'SELECT'
+p226
+S"<class 'gluon.html.SELECT'>"
+p227
+sS'CENTER'
+p228
+S"<class 'gluon.html.CENTER'>"
+p229
+sS'sum'
+p230
+S'<pydal.objects.Expression object>'
+p231
+sS'Auth'
+p232
+S"<class 'gluon.tools.Auth'>"
+p233
+sS'caderno'
+p234
+S'0.0'
+p235
+sS'__builtins__'
+p236
+S"{'ArithmeticError': <type 'exceptions.ArithmeticError'>, 'AssertionError': <type 'exceptions.AssertionError'>, 'AttributeError': <type 'exceptions.AttributeError'>, 'BaseException': <type 'exceptions.BaseException'>, 'BufferError': <type 'exceptions.BufferError'>, 'BytesWarning': <type 'exceptions.BytesWarning'>, 'DeprecationWarning': <type 'exceptions.DeprecationWarning'>, 'EOFError': <type 'exceptions.EOFError'>, 'Ellipsis': Ellipsis, 'EnvironmentError': <type 'exceptions.EnvironmentError'>, ...}"
+p237
+sS'HTML'
+p238
+S"<class 'gluon.html.HTML'>"
+p239
+sS'SQLFORM'
+p240
+S"<class 'gluon.sqlhtml.SQLFORM'>"
+p241
+sS'total_vale_cobrador'
+p242
+S'0.0'
+p243
+sS'LOAD'
+p244
+S'<function LOAD>'
+p245
+sS'redirect'
+p246
+S'<function redirect>'
+p247
+sS'FIELDSET'
+p248
+S"<class 'gluon.html.FIELDSET'>"
+p249
+sS'IS_EQUAL_TO'
+p250
+S"<class 'gluon.validators.IS_EQUAL_TO'>"
+p251
+sS'embed64'
+p252
+S'<function embed64>'
+p253
+sS'IS_LIST_OF'
+p254
+S"<class 'gluon.validators.IS_LIST_OF'>"
+p255
+sS'__name__'
+p256
+S"'__restricted__'"
+p257
+sS'EMBED'
+p258
+S"<class 'gluon.html.EMBED'>"
+p259
+sS'configuration'
+p260
+S"{'host': {'names': 'localhost:*, 127.0.0.1:*, *:...': 'sqlite://storage.sqlite', 'pool_size': '10'}}"
+p261
+sS'H2'
+p262
+S"<class 'gluon.html.H2'>"
+p263
+sS'H3'
+p264
+S"<class 'gluon.html.H3'>"
+p265
+sS'AppConfig'
+p266
+S'<function AppConfig>'
+p267
+sS'H1'
+p268
+S"<class 'gluon.html.H1'>"
+p269
+sS'H6'
+p270
+S"<class 'gluon.html.H6'>"
+p271
+sS'H4'
+p272
+S"<class 'gluon.html.H4'>"
+p273
+sS'H5'
+p274
+S"<class 'gluon.html.H5'>"
+p275
+sS'UL'
+p276
+S"<class 'gluon.html.UL'>"
+p277
+sS'IS_UPPER'
+p278
+S"<class 'gluon.validators.IS_UPPER'>"
+p279
+sS'xmlescape'
+p280
+S'<function xmlescape>'
+p281
+sS'IS_TIME'
+p282
+S"<class 'gluon.validators.IS_TIME'>"
+p283
+sS'debito'
+p284
+S'0.0'
+p285
+sS'OPTION'
+p286
+S"<class 'gluon.html.OPTION'>"
+p287
+sS'TITLE'
+p288
+S"<class 'gluon.html.TITLE'>"
+p289
+sS'CRYPT'
+p290
+S"<class 'gluon.validators.CRYPT'>"
+p291
+sS'IS_EMPTY_OR'
+p292
+S"<class 'gluon.validators.IS_EMPTY_OR'>"
+p293
+sS'MARKMIN'
+p294
+S"<class 'gluon.html.MARKMIN'>"
+p295
+sS'INPUT'
+p296
+S"<class 'gluon.html.INPUT'>"
+p297
+sS'STRONG'
+p298
+S"<class 'gluon.html.STRONG'>"
+p299
+sS'COL'
+p300
+S"<class 'gluon.html.COL'>"
+p301
+sS'rows'
+p302
+S'<Rows (2)>'
+p303
+sS'SCRIPT'
+p304
+S"<class 'gluon.html.SCRIPT'>"
+p305
+sS'recebido'
+p306
+S'0.0'
+p307
+sS'TABLE'
+p308
+S"<class 'gluon.html.TABLE'>"
+p309
+sS'IS_IPV4'
+p310
+S"<class 'gluon.validators.IS_IPV4'>"
+p311
+sS'IS_LENGTH'
+p312
+S"<class 'gluon.validators.IS_LENGTH'>"
+p313
+sS'IS_IPV6'
+p314
+S"<class 'gluon.validators.IS_IPV6'>"
+p315
+sS'XML'
+p316
+S"<class 'gluon.html.XML'>"
+p317
+sS'ANY_OF'
+p318
+S"<class 'gluon.validators.ANY_OF'>"
+p319
+sS'B'
+S"<class 'gluon.html.B'>"
+p320
+sS'IMG'
+p321
+S"<class 'gluon.html.IMG'>"
+p322
+sS'SQLTABLE'
+p323
+S"<class 'gluon.sqlhtml.SQLTABLE'>"
+p324
+sS'IS_MATCH'
+p325
+S"<class 'gluon.validators.IS_MATCH'>"
+p326
+sS'IS_ALPHANUMERIC'
+p327
+S"<class 'gluon.validators.IS_ALPHANUMERIC'>"
+p328
+sS'SPAN'
+p329
+S"<class 'gluon.html.SPAN'>"
+p330
+sS'IS_JSON'
+p331
+S"<class 'gluon.validators.IS_JSON'>"
+p332
+sS'IS_IPADDRESS'
+p333
+S"<class 'gluon.validators.IS_IPADDRESS'>"
+p334
+sS'IS_SLUG'
+p335
+S"<class 'gluon.validators.IS_SLUG'>"
+p336
+sS'BEAUTIFY'
+p337
+S"<class 'gluon.html.BEAUTIFY'>"
+p338
+sS'META'
+p339
+S"<class 'gluon.html.META'>"
+p340
+sS'projeto'
+p341
+S"<Row {'empresa': 4L, 'total_salario_funcionario'...al_cobrado': 0.0, 'total_custo_mercadoria': 0.0}>"
+p342
+sS'IS_DATE'
+p343
+S"<class 'gluon.validators.IS_DATE'>"
+p344
+sS'IS_EMAIL'
+p345
+S"<class 'gluon.validators.IS_EMAIL'>"
+p346
+sS'IS_NOT_EMPTY'
+p347
+S"<class 'gluon.validators.IS_NOT_EMPTY'>"
+p348
+sS'xrange'
+p349
+S"<type 'xrange'>"
+p350
+sS'TBODY'
+p351
+S"<class 'gluon.html.TBODY'>"
+p352
+sS'CAT'
+p353
+S"<class 'gluon.html.CAT'>"
+p354
+sS'Field'
+p355
+S"<class 'pydal.objects.Field'>"
+p356
+sS'IS_LIST_OF_EMAILS'
+p357
+S"<class 'gluon.validators.IS_LIST_OF_EMAILS'>"
+p358
+sg58
+S"<Storage {'function': 'acessar_cobrancas', 'cook...e, 'is_https': True, 'client': '177.37.193.173'}>"
+p359
+sS'DIV'
+p360
+S"<class 'gluon.html.DIV'>"
+p361
+sS'LEGEND'
+p362
+S"<class 'gluon.html.LEGEND'>"
+p363
+sS'to_native'
+p364
+S'<function to_native>'
+p365
+sS'COLGROUP'
+p366
+S"<class 'gluon.html.COLGROUP'>"
+p367
+sS'DAL'
+p368
+S"<class 'pydal.base.DAL'>"
+p369
+sS'ASSIGNJS'
+p370
+S'<function ASSIGNJS>'
+p371
+sS'TR'
+p372
+S"<class 'gluon.html.TR'>"
+p373
+sS'LI'
+p374
+S"<class 'gluon.html.LI'>"
+p375
+sS'TH'
+p376
+S"<class 'gluon.html.TH'>"
+p377
+sS'TD'
+p378
+S"<class 'gluon.html.TD'>"
+p379
+sS'IS_URL'
+p380
+S"<class 'gluon.validators.IS_URL'>"
+p381
+sS'A'
+S"<class 'gluon.html.A'>"
+p382
+sS'HEAD'
+p383
+S"<class 'gluon.html.HEAD'>"
+p384
+sS'IS_DATETIME_IN_RANGE'
+p385
+S"<class 'gluon.validators.IS_DATETIME_IN_RANGE'>"
+p386
+sS'FORM'
+p387
+S"<class 'gluon.html.FORM'>"
+p388
+sS'I'
+S"<class 'gluon.html.I'>"
+p389
+sS'IS_NOT_IN_DB'
+p390
+S"<class 'gluon.validators.IS_NOT_IN_DB'>"
+p391
+sS'saldo'
+p392
+S'0'
+sg123
+S"<Storage {'body': <cStringIO.StringO object at 0...aa0>, 'view': 'cobranca/acessar_cobrancas.html'}>"
+p393
+sS'THEAD'
+p394
+S"<class 'gluon.html.THEAD'>"
+p395
+sS'a'
+S'3'
+sS'IS_NULL_OR'
+p396
+S"<class 'gluon.validators.IS_EMPTY_OR'>"
+p397
+sS'fichas'
+p398
+S'98L'
+p399
+sS'IS_FLOAT_IN_RANGE'
+p400
+S"<class 'gluon.validators.IS_FLOAT_IN_RANGE'>"
+p401
+sS'IS_EXPR'
+p402
+S"<class 'gluon.validators.IS_EXPR'>"
+p403
+sS'T'
+S'<gluon.languages.translator object>'
+p404
+sS'IS_IN_SET'
+p405
+S"<class 'gluon.validators.IS_IN_SET'>"
+p406
+sS'IS_UPLOAD_FILENAME'
+p407
+S"<class 'gluon.validators.IS_UPLOAD_FILENAME'>"
+p408
+sS'TT'
+p409
+S"<class 'gluon.html.TT'>"
+p410
+sS'IS_DECIMAL_IN_RANGE'
+p411
+S"<class 'gluon.validators.IS_DECIMAL_IN_RANGE'>"
+p412
+sssS'traceback'
+p413
+S'Traceback (most recent call last):\n  File "/home/rogoberto/web2py/gluon/restricted.py", line 219, in restricted\n    exec(ccode, environment)\n  File "/home/rogoberto/web2py/applications/aluminum/views/cobranca/acessar_cobrancas.html", line 171, in <module>\nTypeError: a float is required\n'
+p414
+s.

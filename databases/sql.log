@@ -1,0 +1,420 @@
+timestamp: 2020-03-01T20:09:39.381646
+CREATE TABLE "auth_user"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "first_name" CHAR(128),
+    "last_name" CHAR(128),
+    "email" CHAR(512),
+    "password" CHAR(512),
+    "registration_key" CHAR(512),
+    "reset_password_key" CHAR(512),
+    "registration_id" CHAR(512)
+);
+success!
+timestamp: 2020-03-01T20:09:39.462542
+CREATE TABLE "auth_group"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "role" CHAR(512),
+    "description" TEXT
+);
+success!
+timestamp: 2020-03-01T20:09:39.515350
+CREATE TABLE "auth_membership"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "group_id" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE  
+);
+success!
+timestamp: 2020-03-01T20:09:39.574070
+CREATE TABLE "auth_permission"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "group_id" INTEGER REFERENCES "auth_group" ("id") ON DELETE CASCADE  ,
+    "name" CHAR(512),
+    "table_name" CHAR(512),
+    "record_id" INTEGER
+);
+success!
+timestamp: 2020-03-01T20:09:39.644748
+CREATE TABLE "auth_event"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "time_stamp" TIMESTAMP,
+    "client_ip" CHAR(512),
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "origin" CHAR(512),
+    "description" TEXT
+);
+success!
+timestamp: 2020-03-01T20:09:39.709539
+CREATE TABLE "auth_cas"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "user_id" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "created_on" TIMESTAMP,
+    "service" CHAR(512),
+    "ticket" CHAR(512),
+    "renew" CHAR(1)
+);
+success!
+timestamp: 2020-03-01T20:41:34.964302
+CREATE TABLE "wiki_page"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "slug" CHAR(512),
+    "title" CHAR(255) UNIQUE,
+    "body" TEXT NOT NULL,
+    "tags" TEXT,
+    "can_read" TEXT,
+    "can_edit" TEXT,
+    "changelog" CHAR(512),
+    "html" TEXT,
+    "render" CHAR(512),
+    "is_active" CHAR(1),
+    "created_on" TIMESTAMP,
+    "created_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "modified_on" TIMESTAMP,
+    "modified_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  
+);
+success!
+timestamp: 2020-03-01T20:41:35.051094
+CREATE TABLE "wiki_tag"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "name" CHAR(512),
+    "wiki_page" INTEGER REFERENCES "wiki_page" ("id") ON DELETE CASCADE  ,
+    "is_active" CHAR(1),
+    "created_on" TIMESTAMP,
+    "created_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "modified_on" TIMESTAMP,
+    "modified_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  
+);
+success!
+timestamp: 2020-03-01T20:41:35.102217
+CREATE TABLE "wiki_media"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "wiki_page" INTEGER REFERENCES "wiki_page" ("id") ON DELETE CASCADE  ,
+    "title" CHAR(512),
+    "filename" CHAR(512),
+    "is_active" CHAR(1),
+    "created_on" TIMESTAMP,
+    "created_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "modified_on" TIMESTAMP,
+    "modified_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  
+);
+success!
+timestamp: 2020-03-01T21:02:04.841707
+CREATE TABLE "empresa"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "auth_user" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "nome" CHAR(512),
+    "descricao" TEXT
+);
+success!
+timestamp: 2020-03-01T21:02:04.926267
+CREATE TABLE "usuario_empresa"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "auth_user" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "empresa" INTEGER REFERENCES "empresa" ("id") ON DELETE CASCADE  ,
+    "nome" CHAR(512),
+    "telefone" CHAR(512)
+);
+success!
+timestamp: 2020-03-01T21:02:05.137399
+CREATE TABLE "projeto"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "empresa" INTEGER REFERENCES "empresa" ("id") ON DELETE CASCADE  ,
+    "descricao" CHAR(512),
+    "adiantamento" DOUBLE,
+    "auth_user" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "nome_chefe" CHAR(512),
+    "vale_saida" DOUBLE,
+    "comissao_vista" DOUBLE,
+    "comissao_praso" DOUBLE,
+    "comissao_cobranca" DOUBLE,
+    "total_pecas_mercadoria" INTEGER,
+    "total_preco_mercadoria" DOUBLE,
+    "total_custo_mercadoria" DOUBLE,
+    "total_pecas_gratificacao" INTEGER,
+    "total_preco_gratificacao" DOUBLE,
+    "total_custo_gratificacao" DOUBLE,
+    "total_pecas_refugo" INTEGER,
+    "total_preco_refugo" DOUBLE,
+    "total_custo_refugo" DOUBLE,
+    "total_pecas_retorno" INTEGER,
+    "total_preco_retorno" DOUBLE,
+    "total_custo_retorno" DOUBLE,
+    "total_venda_vista" DOUBLE,
+    "quant_dias_venda_vista" INTEGER,
+    "quant_fichas_venda" INTEGER,
+    "total_entradas_venda" DOUBLE,
+    "total_venda_prazo" DOUBLE,
+    "total_comissao_venda" DOUBLE,
+    "total_vales_vendedor" DOUBLE,
+    "total_caderno_vendedor" DOUBLE,
+    "quant_vendedores" INTEGER,
+    "total_saldo_vendedor" DOUBLE,
+    "total_debito_vendedor" DOUBLE,
+    "total_salario_funcionario" DOUBLE,
+    "total_vale_funcionario" DOUBLE,
+    "total_caderno_funcionario" DOUBLE,
+    "quant_funcionario" INTEGER,
+    "total_saldo_funcionario" DOUBLE,
+    "total_debito_funcionario" DOUBLE,
+    "total_despesa_local" DOUBLE,
+    "total_despesa_venda" DOUBLE,
+    "total_despesa_cobranca" DOUBLE,
+    "total_gratificacao" DOUBLE,
+    "total_caderno_chefe" DOUBLE,
+    "total_saldo_chefe" DOUBLE,
+    "total_acrescentado_dinheiro" DOUBLE,
+    "total_devolucao_dinheiro" DOUBLE,
+    "total_adiantamento_cobranca" DOUBLE,
+    "total_vale_cobrador" DOUBLE,
+    "total_vale_caderno_cobrador" DOUBLE,
+    "total_cobrado" DOUBLE,
+    "total_deposito_cobranca" DOUBLE,
+    "dias_cobrando" INTEGER,
+    "venda_finalizada" CHAR(1)
+);
+success!
+timestamp: 2020-03-01T21:02:05.494282
+CREATE TABLE "carrada"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "projeto" INTEGER REFERENCES "projeto" ("id") ON DELETE CASCADE  ,
+    "data_envio" DATE,
+    "descricao" CHAR(512),
+    "total_pecas" INTEGER,
+    "total_preco" DOUBLE,
+    "total_custo" DOUBLE,
+    "finalizada" CHAR(1)
+);
+success!
+timestamp: 2020-03-01T21:02:05.571116
+CREATE TABLE "item_carrada"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "projeto" INTEGER REFERENCES "projeto" ("id") ON DELETE CASCADE  ,
+    "carrada" INTEGER REFERENCES "carrada" ("id") ON DELETE CASCADE  ,
+    "q_pcs" INTEGER,
+    "descricao" CHAR(512),
+    "preco_unitario" DOUBLE,
+    "custo_unitario" DOUBLE,
+    "quant_pcs_grt" INTEGER,
+    "quant_pcs_rtr" INTEGER,
+    "quant_pcs_rfg" INTEGER
+);
+success!
+timestamp: 2020-03-01T21:02:05.657014
+CREATE TABLE "funcionario"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "projeto" INTEGER REFERENCES "projeto" ("id") ON DELETE CASCADE  ,
+    "nome" CHAR(512),
+    "funcao" CHAR(512),
+    "salario" DOUBLE,
+    "vale_saida" DOUBLE,
+    "descricao_vale" TEXT,
+    "total_vale_caderno" DOUBLE
+);
+success!
+timestamp: 2020-03-01T21:02:05.734092
+CREATE TABLE "vale_funcionario"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "funcionario" INTEGER REFERENCES "funcionario" ("id") ON DELETE CASCADE  ,
+    "data_vale" DATE,
+    "valor" DOUBLE,
+    "descricao" CHAR(512)
+);
+success!
+timestamp: 2020-03-01T21:02:05.797806
+CREATE TABLE "vendedor"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "projeto" INTEGER REFERENCES "projeto" ("id") ON DELETE CASCADE  ,
+    "nome" CHAR(512),
+    "vale_saida" DOUBLE,
+    "comissao_venda" DOUBLE,
+    "descricao" TEXT,
+    "total_vale_caderno" DOUBLE,
+    "total_vendas" DOUBLE,
+    "total_entradas" DOUBLE,
+    "total_fichas" INTEGER,
+    "comissao_cobranca" DOUBLE,
+    "total_recebido" DOUBLE,
+    "total_devolvido" DOUBLE,
+    "total_prego" DOUBLE,
+    "total_fichas_retorno" INTEGER
+);
+success!
+timestamp: 2020-03-01T21:02:05.900849
+CREATE TABLE "sub_venda"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "projeto" INTEGER REFERENCES "projeto" ("id") ON DELETE CASCADE  ,
+    "auth_user" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "data_inicio_cobranca" DATE NOT NULL DEFAULT '2020-03-01',
+    "data_final_cobranca" DATE NOT NULL DEFAULT '2020-03-01',
+    "primeira_cidade" CHAR(512),
+    "ultima_cidade" CHAR(512),
+    "venda_finalizada" CHAR(1),
+    "total_fichas" INTEGER,
+    "total_venda_praso" DOUBLE,
+    "total_entradas" DOUBLE,
+    "adiantamento_cobranca" DOUBLE,
+    "comissao_cobranca" DOUBLE,
+    "total_vale_saida_cobrador" DOUBLE,
+    "total_vale_caderno_cobrador" DOUBLE,
+    "total_recebido" DOUBLE,
+    "total_despesa" DOUBLE,
+    "total_deposito" DOUBLE,
+    "total_caderno_cobrador" DOUBLE,
+    "cobranca_iniciada" CHAR(1),
+    "cobranca_finalizada" CHAR(1)
+);
+success!
+timestamp: 2020-03-01T21:02:05.988184
+CREATE TABLE "venda"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "sub_venda" INTEGER REFERENCES "sub_venda" ("id") ON DELETE CASCADE  ,
+    "vendedor" INTEGER REFERENCES "vendedor" ("id") ON DELETE CASCADE  ,
+    "data_venda" DATE,
+    "vale_caderno" DOUBLE,
+    "quant_fichas" INTEGER,
+    "venda_praso" DOUBLE,
+    "entradas_venda" DOUBLE,
+    "venda_vista" DOUBLE,
+    "quant_fichas_devolvidas" INTEGER,
+    "valor_devolvido" DOUBLE,
+    "descricao_devolucao" CHAR(512)
+);
+success!
+timestamp: 2020-03-01T21:02:06.069716
+CREATE TABLE "cobranca_venda"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "sub_venda" INTEGER REFERENCES "sub_venda" ("id") ON DELETE CASCADE  ,
+    "vendedor" INTEGER REFERENCES "vendedor" ("id") ON DELETE CASCADE  ,
+    "recebido" DOUBLE,
+    "devolvido" DOUBLE,
+    "prego" DOUBLE,
+    "quant_fichas_devolvidas" INTEGER
+);
+success!
+timestamp: 2020-03-01T21:02:06.135799
+CREATE TABLE "classe_despesa"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "projeto" INTEGER REFERENCES "projeto" ("id") ON DELETE CASCADE  ,
+    "tipo" CHAR(512),
+    "descricao" CHAR(512),
+    "total_classe" DOUBLE,
+    "is_active" CHAR(1),
+    "created_on" TIMESTAMP,
+    "created_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "modified_on" TIMESTAMP,
+    "modified_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  
+);
+success!
+timestamp: 2020-03-01T21:02:06.213340
+CREATE TABLE "despesa"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "classe_despesa" INTEGER REFERENCES "classe_despesa" ("id") ON DELETE CASCADE  ,
+    "data_inicio" DATE,
+    "descricao" CHAR(512),
+    "valor" DOUBLE
+);
+success!
+timestamp: 2020-03-01T21:02:06.259844
+CREATE TABLE "classe_despesa_cobranca"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "sub_venda" INTEGER REFERENCES "sub_venda" ("id") ON DELETE CASCADE  ,
+    "descricao" CHAR(512),
+    "total_despesa" DOUBLE
+);
+success!
+timestamp: 2020-03-01T21:02:06.321211
+CREATE TABLE "despesa_cobranca"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "classe_despesa_cobranca" INTEGER REFERENCES "classe_despesa_cobranca" ("id") ON DELETE CASCADE  ,
+    "data_inicio" DATE,
+    "descricao" CHAR(512),
+    "valor" DOUBLE
+);
+success!
+timestamp: 2020-03-01T21:02:06.373650
+CREATE TABLE "registro_venda"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "projeto" INTEGER REFERENCES "projeto" ("id") ON DELETE CASCADE  ,
+    "tipo" CHAR(512),
+    "data_inicio" DATE,
+    "descricao" CHAR(512),
+    "valor" DOUBLE
+);
+success!
+timestamp: 2020-03-01T21:02:06.428284
+CREATE TABLE "registro_cobranca"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "sub_venda" INTEGER REFERENCES "sub_venda" ("id") ON DELETE CASCADE  ,
+    "projeto" INTEGER REFERENCES "projeto" ("id") ON DELETE CASCADE  ,
+    "tipo" CHAR(512),
+    "data_inicio" DATE,
+    "descricao" CHAR(512),
+    "valor" DOUBLE
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2020-03-01T23:46:18.402368
+ALTER TABLE "sub_venda" ADD "total_saldo_cobrador" DOUBLE NOT NULL DEFAULT 0.0;
+success!
+timestamp: 2020-03-01T23:53:18.455980
+ALTER TABLE "projeto" ADD "total_debito_cobradores" DOUBLE NOT NULL DEFAULT 0.0;
+timestamp: 2020-03-01T23:53:19.533269
+ALTER TABLE "projeto" ADD "total_saldo_cobradores" DOUBLE NOT NULL DEFAULT 0.0;
+success!
+timestamp: 2020-03-02T00:01:43.195055
+ALTER TABLE "projeto" ADD "total_saldo_quitacao_chefe" DOUBLE NOT NULL DEFAULT 0.0;
+success!
+timestamp: 2020-03-02T02:16:09.901297
+ALTER TABLE "sub_venda" ADD "nome_cobrador" CHAR(512);
+success!
+timestamp: 2020-03-02T02:32:45.696928
+ALTER TABLE "projeto" ADD "total_saldo_quitacao_vendedores" DOUBLE NOT NULL DEFAULT 0.0;
+success!
+timestamp: 2020-03-02T02:38:12.854829
+ALTER TABLE "projeto" ADD "total_debito_quitacao_vendedores" DOUBLE NOT NULL DEFAULT 0.0;
+success!
+success!
+success!
+timestamp: 2020-04-28T01:37:58.782325
+ALTER TABLE "projeto" ADD "descricao_vale" TEXT;
+timestamp: 2020-04-28T01:38:06.067954
+ALTER TABLE "projeto" ADD "descricao_adiantamento" TEXT;
+success!
+timestamp: 2020-04-28T20:29:40.873162
+CREATE TABLE "classe_despesa_local"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "empresa" INTEGER REFERENCES "empresa" ("id") ON DELETE CASCADE  ,
+    "descricao" CHAR(512),
+    "total_classe" DOUBLE NOT NULL DEFAULT 0.0,
+    "is_active" CHAR(1),
+    "created_on" TIMESTAMP,
+    "created_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  ,
+    "modified_on" TIMESTAMP,
+    "modified_by" INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  
+);
+success!
+timestamp: 2020-04-28T20:35:36.743001
+CREATE TABLE "despesa_local"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "classe_despesa_local" INTEGER REFERENCES "classe_despesa_local" ("id") ON DELETE CASCADE  ,
+    "data_inicio" DATE,
+    "descricao" CHAR(512) NOT NULL DEFAULT 'DESPESA',
+    "valor" DOUBLE NOT NULL DEFAULT 0.0
+);
+success!
+timestamp: 2020-04-29T01:24:10.237925
+ALTER TABLE "projeto" ADD "total_debito_chefe" DOUBLE NOT NULL DEFAULT 0.0;
+success!

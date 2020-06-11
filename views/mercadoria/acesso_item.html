@@ -1,0 +1,128 @@
+{{extend 'layout.html'}}
+{{total_pecas=0}}
+{{total_pecas_gratificacao=0}}
+{{total_preco_gratificacao=0}}
+{{total_custo_gratificacao=0}}
+{{total_pecas_refugo=0}}
+{{total_preco_refugo=0}}
+{{total_custo_refugo=0}}
+{{total_pecas_retorno=0}}
+{{total_preco_retorno=0}}
+{{total_custo_retorno=0}}
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-outline-light" href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
+    </div></div>
+            {{if len(rows)>0:}}
+            ITENS DE {{=projeto.descricao}}
+            {{else:}}
+            NEM UMA CARRADA NEM LOTE DE MARCADORIA FOI INSERIDO
+            {{pass}}
+          <div class="table-responsive">
+            <table class="table table-bordered table-sm table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Peças</th>
+                  <th >Descrição</th>
+                  <th>Gratificação</th>
+                    <th>Total</th>
+                  <th>Refugo</th>
+                    <th>Total</th>
+                  <th>Retorno</th>
+                    <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {{for row in rows:}}
+                  
+                  {{if (row.quant_pcs_grt>0) or (row.quant_pcs_rfg>0) or (row.quant_pcs_rtr>0):}}
+                <tr>
+                    {{else:}}
+                    <tr id="noprint">
+                        {{pass}}
+                    <td>{{=row.q_pcs}}</td>
+                    <td>{{=row.descricao}}</td>
+                    
+                    {{if not projeto.venda_finalizada:}}
+                    <td>
+                        <a id="noprint" href="{{=URL('alterar_item_carrada_gratificacao', args=row.id)}}">
+                            <i class="fa mr-2 text-warning fa-plus-square"></i>
+                        </a>{{=row.quant_pcs_grt}}
+                    </td>
+                    {{else:}}
+                     <td>
+                        {{=row.quant_pcs_grt}}
+                    </td>
+                    {{pass}}
+
+                    <td>R$ {{="{:,}".format(round(row.quant_pcs_grt*row.preco_unitario,1)).replace(",",".")}}0</td>
+
+                    {{if not projeto.venda_finalizada:}}
+                    <td>
+                        <a id="noprint" href="{{=URL('alterar_item_carrada_refugo', args=row.id)}}">
+                            <i class="fa mr-2 text-danger fa-plus-square"></i>
+                        </a>{{=row.quant_pcs_rfg}} 
+                    </td>
+                    {{else:}}
+                     <td>
+                        {{=row.quant_pcs_rfg}}
+                    </td>
+                    {{pass}}
+                    <td>R$ {{="{:,}".format(round(row.quant_pcs_rfg*row.preco_unitario,1)).replace(",",".")}}0</td>
+                    
+                    {{if not projeto.venda_finalizada:}}
+                    <td>
+                        <a id="noprint" href="{{=URL('alterar_item_carrada_retorno', args=row.id)}}">
+                            <i class="fa mr-2 fa-plus-square text-info"></i>
+                        </a>{{=row.quant_pcs_rtr}}
+                    </td>
+                    {{else:}}
+                     <td>
+                        {{=row.quant_pcs_rtr}}
+                    </td>
+                    {{pass}}
+                    <td>R$ {{="{:,}".format(round(row.quant_pcs_rtr*row.preco_unitario,1)).replace(",",".")}}0</td>
+                   
+                </tr>
+{{total_pecas+=row.q_pcs}}
+
+{{total_pecas_gratificacao+=row.quant_pcs_grt}}
+{{total_preco_gratificacao+=row.quant_pcs_grt*row.preco_unitario}}
+{{total_custo_gratificacao+=row.quant_pcs_grt*row.custo_unitario}}
+
+{{total_pecas_refugo+=row.quant_pcs_rfg}}
+{{total_preco_refugo+=row.quant_pcs_rfg*row.preco_unitario}}
+{{total_custo_refugo+=row.quant_pcs_rfg*row.custo_unitario}}
+
+{{total_pecas_retorno+=row.quant_pcs_rtr}}
+{{total_preco_retorno+=row.quant_pcs_rtr*row.preco_unitario}}
+{{total_custo_retorno+=row.quant_pcs_rtr*row.custo_unitario}}
+                  {{pass}}
+                  <tr>
+                    <td>#</td>
+                    <td>#</td>
+                       <td>{{=total_pecas_gratificacao}}</td>
+                    <td>R$ {{="{:,}".format(round(total_preco_gratificacao,1)).replace(",",".")}}0</td>
+                       <td>{{=total_pecas_refugo}}</td>
+                    <td>R$ {{="{:,}".format(round(total_preco_refugo,1)).replace(",",".")}}0</td>
+                       <td>{{=total_pecas_retorno}}</td>
+                    <td>R$ {{="{:,}".format(round(total_preco_retorno,1)).replace(",",".")}}0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+{{if not projeto.venda_finalizada:}}
+{{projeto.total_pecas_gratificacao=total_pecas_gratificacao}}
+{{projeto.total_preco_gratificacao=total_preco_gratificacao}}
+{{projeto.total_custo_gratificacao=total_custo_gratificacao}}
+
+{{projeto.total_pecas_refugo=total_pecas_refugo}}
+{{projeto.total_preco_refugo=total_preco_refugo}}
+{{projeto.total_custo_refugo=total_custo_refugo}}
+
+{{projeto.total_pecas_retorno=total_pecas_retorno}}
+{{projeto.total_preco_retorno=total_preco_retorno}}
+{{projeto.total_custo_retorno=total_custo_retorno}}
+{{projeto.update_record()}}
+{{pass}}

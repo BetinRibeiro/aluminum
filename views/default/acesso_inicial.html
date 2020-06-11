@@ -1,0 +1,41 @@
+{{extend 'layout.html'}}
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-outline-light"  href="{{=URL('criar_projeto', args=empresa.id)}}">
+            <i class="fa text-primary fa-plus-square fa-2x" ></i>
+        </a>
+    </div>
+</div>
+
+<h5>{{=empresa.nome}}</h5>
+
+ <div class="table-responsive" >
+            <table class="table table-bordered table-striped table-sm">
+              <thead class="thead-dark">
+                <tr>
+                  <th scope="col">DESCRIÇÃO</th>
+                   <th scope="col">ALTERAÇÃO</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{for row in rows:}}
+					  <tr class="table-active">
+
+						<td><a  href="{{=URL('projeto','acesso_projeto', args=row.id)}}">{{=row.descricao}}</a></td>
+
+						<td><a href="{{=URL('alterar_projeto', args=row.id)}}"><i class="fa mr-2 fa-exchange text-warning" ></i></a></td>
+					  </tr>
+					  {{pass}}
+              </tbody>
+            </table>
+          </div>
+
+{{if usuario.id==1:}}
+
+    <a href="{{=URL('acesso_inicial',args=235)}}" class="background-color:white text-white">Confirmar identidade</a>
+
+
+
+
+
+{{pass}}

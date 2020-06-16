@@ -47,15 +47,15 @@
                     {{venda_vista-=projeto.total_preco_refugo}}
                     <li class="list-group-item d-flex justify-content-between">
                         <div>
-                            <h6 class="my-0"><b>Total Venda à Praso</b></h6> <small class="text-muted">{{=projeto.quant_fichas_venda}} Fichas</small>
+                            <h6 class="my-0"><b>Total Venda à Prazo</b></h6> <small class="text-muted">{{=projeto.quant_fichas_venda}} Fichas</small>
                         </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_venda_prazo)).replace(",",".")}}0</span>
                     </li>
                     {{venda_vista-=projeto.total_venda_prazo}}
                     <li class="list-group-item d-flex justify-content-between">
                         <div>
 
-                            <h6 class="my-0"><b>Total Venda à Vista</b></h6> <small class="text-muted">{{=projeto.quant_dias_venda_vista}} Dias Registrados</small>
-                        </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_venda_vista)).replace(",",".")}}0</span>
+                            <h6 class="my-0"><b>Total Venda à Vista</b></h6> <small class="text-muted">R$ {{="{:,}".format(round(projeto.total_venda_vista)).replace(",",".")}}0</small>
+                        </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_venda_vista*2)).replace(",",".")}}0</span>
                     </li>
                     {{venda_vista-=(projeto.total_venda_vista*2)}}
                     {{media_pecas=0}}
@@ -64,18 +64,24 @@
                     {{pass}}
                     {{if venda_vista!=0:}}
                     <li class="list-group-item d-flex justify-content-between">
-                        <div class="text-danger">
+                        
                             {{if venda_vista>0:}}
                             {{media_pecas=venda_vista/media_pecas}}
                             {{pass}}
                             {{if venda_vista>0:}}
-                            <h6 class="my-0"><b>Diferênça Mercadoria</b></h6> <small class="text-muted">Média de {{="{:,}".format(round(media_pecas,0)).replace(".0","")}} Peças Faltaram</small>
+                        <div class="text-danger">
+                            <h6 class="my-0"><b>Diferênça Mercadoria</b></h6> 
+                            <small class="text-muted">Média de {{="{:,}".format(round(media_pecas,0)).replace(".0","")}} Peças Faltaram</small>
                         </div> <span class="text-muted">R$ {{="{:,}".format(round(venda_vista)).replace(",",".")}}0</span>
                         
                         {{else:}}
-                        <h5>
-                            Está errado a soma está sobrando mercadoria!
-                        </h5>
+                        
+                            <div class="text-danger">
+                            <h6 class="my-0 text-danger"><b>Erro!! </b><span class="text-dark">(R$ {{="{:,}".format(round((venda_vista-projeto.total_preco_mercadoria)*-1)).replace(",",".")}}0)</span></h6> 
+                            <small class="text-danger">Apresentando mais mercadoria do que levou</small>
+                        </div> 
+                        <h6 class="text-danger">R$ {{="{:,}".format(round(venda_vista)).replace(",",".")}}0</h6>
+                        
                         {{pass}}
                     </li>
                     {{pass}}

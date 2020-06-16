@@ -176,7 +176,7 @@
                                         #</small>
                                     </div>
                                     <span class="text-muted">
-                                        R$ {{="{:,}".format(round(caixa,1)).replace(",",".")}}0</span>
+                                        <b>R$ {{="{:,}".format(round(caixa,1)).replace(",",".")}}0</b></span>
                                 </li>
                             </ul>
                     </div>

@@ -12,7 +12,7 @@
     </div>
 </div>
 {{investimento=0}}
-<div class="py-2" >
+<div class="py-1" >
     <div class="container">
       <div class="row">
         <div class="col-md-6">
@@ -122,7 +122,6 @@
 {{complemento=0}}
 {{if projeto.total_saldo_chefe>0:}}
     {{complemento+=projeto.total_saldo_chefe}}
-{{pass}}
               <li class="list-group-item d-flex justify-content-between">
                 <div>
                     <h6 class="my-0">Saldo Chefe</h6>
@@ -131,6 +130,8 @@
                     R$ {{="{:,}".format(round(projeto.total_saldo_chefe,1)).replace(",",".")}}0
                 </span>
             </li>
+              
+{{pass}}
 {{if projeto.total_saldo_funcionario>0:}}
     {{complemento+=projeto.total_saldo_funcionario}}
 {{pass}}
@@ -284,7 +285,7 @@
                         <b>Valor Cobrado</b>
                     </h6>
                     {{if projeto.total_cobrado>0:}}
-                    {{percent=projeto.total_cobrado/projeto.total_venda_prazo*100}}
+                    {{percent=1/projeto.total_venda_prazo*100}}
                     <small class="text-muted">
                         {{="{:,}".format(round(percent,1)).replace(",",".")}}%
                     </small>
@@ -301,8 +302,8 @@
 <h6 class="my-0">
     <i class="fa text-primary fa-arrow-right"></i>
     <b>Despesa da Cobrança</b>
-</h6>
-    {{if projeto.total_despesa_cobranca>0:}}
+</h6>{{percent=0}}
+    {{if projeto.total_despesa_cobranca>0 and projeto.total_cobrado>0:}}
     {{percent=projeto.total_despesa_cobranca/projeto.total_cobrado*100}}
     <small class="text-muted">
         {{="{:,}".format(round(percent,1)).replace(",",".")}}%

@@ -9,6 +9,10 @@
         {{if not carrada.finalizada:}}
 <a class="btn btn-outline-light" href="{{=URL('criar_item_carrada', args=carrada.id)}}"><i class="fa text-success fa-plus fa-2x"></i></a>
 {{pass}}{{pass}}
+        {{if (usuario.id==1) and (len(rows)==0):}}
+<a class="btn btn-outline-light" href="{{=URL('gerar_mercadorias', args=carrada.id)}}"><i class="fa text-info fa-plus fa-2x"></i></a>
+        
+        {{pass}}
     </div></div>
 
 {{if len(rows)>0:}}
@@ -27,8 +31,9 @@
                 <th>Preço</th>
                 <th>Total</th>
                 {{if desbloqueado:}}
-                <th>Custo</th>
-                <th>%</th>
+                <th id="noprint">Custo</th>
+                <th id="noprint">Total</th>
+                <th id="noprint">%</th>
                 {{pass}}
                 
                 {{if not carrada.finalizada:}}
@@ -39,6 +44,11 @@
         </thead>
             <tbody>
                 {{for row in rows:}}
+                
+                {{if row.projeto==None:}}
+                {{row.projeto=projeto.id}}
+                {{row.update_record()}}
+                {{pass}}
                  {{total_custo=row.custo_unitario*row.q_pcs}}
                     {{total_preco=row.preco_unitario*row.q_pcs}}
                 <tr>
@@ -55,18 +65,28 @@
                             R$ {{="{:,}".format(round(row.preco_unitario*row.q_pcs,1)).replace(",",".")}}0
                     </td>
                     {{if desbloqueado:}}
-                        <td>
+                    <td id="noprint">
+                                R$ {{="{:,}".format(round(row.custo_unitario,1)).replace(",",".")}}0
+                        </td>
+                        <td id="noprint">
                                 R$ {{="{:,}".format(round(row.custo_unitario*row.q_pcs,1)).replace(",",".")}}0
                         </td>
                         {{if (total_preco>0)and(total_custo>0):}}
                     {{margem=total_preco/total_custo*100}}
-                    {{if margem>100:}}
-                        <td>
-                                {{="{:,}".format(round(margem)).replace(".0","")}}%
+                    {{if not (margem>=350) and (margem>250):}}
+                        <td id="noprint">
+                            <i class="fa text-warning fa-circle"></i>
+                                {{="{:,}".format(round(margem,0)).replace(".0","")}}%
+                        </td>
+                     {{elif margem>=350:}}
+                        <td id="noprint">
+                                <i class="fa text-success fa-circle"></i>
+                            {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
                       {{else:}}
-                        <td class="bg-danger">
-                                {{="{:,}".format(round(margem)).replace(".0","")}}%
+                        <td id="noprint">
+                            <i class="fa text-danger fa-circle"></i>
+                                {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
                         {{pass}}
                         {{else:}}
@@ -97,7 +117,10 @@
                     </th>
                     
                 {{if desbloqueado:}}
-                    <th
+                    <th id="noprint"
+                        >R$ {{="{:,}".format(round(0,1)).replace(",",".")}}0
+                    </th>
+                    <th id="noprint"
                         >R$ {{="{:,}".format(round(custo,1)).replace(",",".")}}0
                     </th>
                     {{pass}}

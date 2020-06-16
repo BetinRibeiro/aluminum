@@ -9,14 +9,15 @@ def acesso_projeto():
     usuario=auth.user
     #if (usuario.id==1):
         #redirect(URL('usuario','betinho_acesso',args=projeto.id))
-    if (usuario.id==6)or(usuario.id==1):
+    if (usuario.id==6)or(usuario.id==1686734):
         redirect(URL('usuario','abencoado',args=projeto.id))
-        projeto.auth_user=None
     if (usuario.id==10)or(usuario.id==1456789):
         redirect(URL('usuario','fscontador',args=projeto.id))
         #flavio é o ligin 11
     if (usuario.id==11)or(usuario.id==1123456):
-        redirect(URL('usuario','fs',args=projeto.id))
+        redirect(URL('usuario','fscontador',args=projeto.id))
+    if (usuario.id==1):
+        projeto.auth_user=None
     if projeto.auth_user==auth.user.id:
         redirect(URL('usuario','acesso_projeto',args=projeto.id))
     return locals()

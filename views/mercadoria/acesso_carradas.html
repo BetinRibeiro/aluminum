@@ -25,8 +25,8 @@ FAÇA SEU PRIMEIRO CADASTRO DE CARRADA
                   <th>Q. Peças</th>
                   <th>Preço</th>
                     {{if desbloqueado:}}
-                  <th>Custo</th>
-                    <th>%</th>
+                  <th id="noprint">Custo</th>
+                    <th id="noprint">%</th>
                     {{pass}}
                     {{if not projeto.venda_finalizada:}}
                   <th id="noprint">Alterar</th>
@@ -41,11 +41,11 @@ FAÇA SEU PRIMEIRO CADASTRO DE CARRADA
                   <td >{{=row.total_pecas}}</td>
                   <td>R$ {{="{:,}".format(round(row.total_preco,1)).replace(",",".")}}0</td>
                     {{if desbloqueado:}}
-                  <td>R$ {{="{:,}".format(round(row.total_custo,1)).replace(",",".")}}0</td>
+                  <td  id="noprint">R$ {{="{:,}".format(round(row.total_custo,1)).replace(",",".")}}0</td>
                      {{if (row.total_preco>0)and(row.total_custo>0):}}
-                  <td>{{="{:,}".format(round(row.total_preco/row.total_custo*100)).replace(".0","")}}%</td>
+                  <td  id="noprint">{{="{:,}".format(round(row.total_preco/row.total_custo*100)).replace(".0","")}}%</td>
                     {{else:}}
-                    <td>%</td>
+                    <td  id="noprint">%</td>
                     {{pass}}
                     {{pass}}
                     {{if not projeto.venda_finalizada:}}
@@ -63,11 +63,11 @@ FAÇA SEU PRIMEIRO CADASTRO DE CARRADA
                   <th>{{=pcs}}</th>
                   <th>R$ {{="{:,}".format(round(pco,1)).replace(",",".")}}0</th>
                    {{if desbloqueado:}}
-                  <th>R$ {{="{:,}".format(round(cst,1)).replace(",",".")}}0</th>
+                  <th  id="noprint">R$ {{="{:,}".format(round(cst,1)).replace(",",".")}}0</th>
                      {{if (cst>0)and(pco>0):}}
-                  <td>{{="{:,}".format(round(pco/cst*100)).replace(".0","")}}%</td>
+                  <td  id="noprint">{{="{:,}".format(round(pco/cst*100)).replace(".0","")}}%</td>
                     {{else:}}
-                    <td>%</td>
+                    <td  id="noprint">%</td>
                     {{pass}}
                     {{pass}}
                     {{if not projeto.venda_finalizada:}}

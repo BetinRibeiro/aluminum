@@ -22,7 +22,7 @@
             <table class="table table-bordered table-sm table-striped">
               <thead class="thead-dark">
                 <tr>
-                  <th>Peças</th>
+                  
                   <th >Descrição</th>
                   <th>Gratificação</th>
                     <th>Total</th>
@@ -33,15 +33,23 @@
                 </tr>
               </thead>
               <tbody>
+                  {{nome=""}}
                   {{for row in rows:}}
-                  
+                  {{if row.q_pcs>0:}}
+                  {{if nome==row.descricao:}}
+                        {{row.descricao="-----"}}
+                  {{else:}}
                   {{if (row.quant_pcs_grt>0) or (row.quant_pcs_rfg>0) or (row.quant_pcs_rtr>0):}}
                 <tr>
                     {{else:}}
                     <tr id="noprint">
                         {{pass}}
-                    <td>{{=row.q_pcs}}</td>
-                    <td>{{=row.descricao}}</td>
+                   
+                        
+                        
+                       
+                        <td><a href="{{=URL('alterar_descricao', args=row.id)}}" class="text-dark">{{=row.descricao}}</a></td>
+                        
                     
                     {{if not projeto.venda_finalizada:}}
                     <td>
@@ -84,6 +92,9 @@
                     <td>R$ {{="{:,}".format(round(row.quant_pcs_rtr*row.preco_unitario,1)).replace(",",".")}}0</td>
                    
                 </tr>
+                   {{nome=row.descricao}}
+                        {{pass}}
+                        {{pass}}
 {{total_pecas+=row.q_pcs}}
 
 {{total_pecas_gratificacao+=row.quant_pcs_grt}}
@@ -99,7 +110,7 @@
 {{total_custo_retorno+=row.quant_pcs_rtr*row.custo_unitario}}
                   {{pass}}
                   <tr>
-                    <td>#</td>
+                    
                     <td>#</td>
                        <td>{{=total_pecas_gratificacao}}</td>
                     <td>R$ {{="{:,}".format(round(total_preco_gratificacao,1)).replace(",",".")}}0</td>

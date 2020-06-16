@@ -33,6 +33,7 @@
     {{block head}}{{end}}
   </head>
   <body>
+      
         <style  type="text/css">
     @media print{
         .btn{
@@ -102,6 +103,17 @@ a:hover{font:20px "verdana"; color:black; text-decoration:underline;}
 
     <!-- Masthead ===================================== -->
     {{block header}}
+<header class="header container-fluid d-none d-print-block">
+     <div class="row">
+        <div class="col-md-12">
+          <div class="copyright pull-left">Aluminum System</div>
+          <div id="poweredBy" class="pull-right">
+            Gestão de vendas e cobranças artefatos de aluminio
+            
+          </div>
+        </div>
+      </div>
+</header>
     {{end}}
     <!-- Main ========================================= -->
     <!-- Begin page content -->
@@ -109,15 +121,23 @@ a:hover{font:20px "verdana"; color:black; text-decoration:underline;}
       {{include}}
       {{=response.toolbar() if response.show_toolbar else ''}}
     </div>
-<br><br><br>
     {{block footer}} <!-- this is default footer -->
-    <footer class="footer container-fluid">
+    <footer id="noprint" class="footer container-fluid ">
       <div class="row">
         <div class="col-md-12">
           <div class="copyright pull-left">{{=T('Copyright')}} &#169; {{=request.now.year}}</div>
           <div id="poweredBy" class="pull-right">
-            Suporte
-            <a href="https://api.whatsapp.com/send?phone=5588981126816">(88)98112-6816</a>
+              Suporte <a href="https://api.whatsapp.com/send?phone=5588981126816">(88)98112-6816</a>
+            </div>
+        </div>
+      </div>
+    </footer>
+ <footer class="footer container-fluid d-none d-print-block">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright pull-left">Suporte - (88)98112-6816</div>
+          <div id="poweredBy" class="pull-right">
+            {{=auth.user.first_name}} {{=auth.user.last_name}}
           </div>
         </div>
       </div>

@@ -8,15 +8,25 @@
         <div class="row">
             <div class="col-md-12">
                 <center style="background-color:white; color:black; padding:1px">
-                    <h3>Daniel Hiago</h3>
+                    <h3>Artefatos de alumínio
+                    
+                    
+                    
+                  </h3>
                 </center>
             </div>
             <div class="col-md-4">
                 <div class="blockquote">
                     <p class="mb-0">{{=projeto.descricao}}</p>
-                    <div class="blockquote-footer">Flavio Alumínio</div>
+                    <div class="blockquote-footer">artefatos de alumínio</div>
                 </div>
                 <ol>
+                    <li>
+                         <i class="fa fa-id-card-o  text-danger mr-2"></i>
+                         <a class="text-danger" class="nav-link" href="{{=URL('projeto','prestacao_venda', args=projeto.id)}}">PRESTAÇÃO DE CONTAS</a>
+                     </li>
+                    <hr>
+                    
                      <li>
                          <i class="fa fa-id-card-o  text-primary mr-2"></i>
                          <a href="{{=URL('chefe','acesso_chefe', args=projeto.id)}}">&nbsp;DEFINIR CHEFE</a>
@@ -71,7 +81,7 @@
     <div class="border border-dark col-md-8">
         <ol>
             <hr>
-            <li>Definir Chefe</li>
+            <li><b>Definir Chefe</b></li>
             <ol>
                 <li>Listagem dos login's (Para liberar para o chefe)</li>
                 <ol>
@@ -81,25 +91,25 @@
                     </ol>
                 </ol>
             </ol><hr>
-            <li>Venda à vista</li>
+            <li><b>Venda à vista</b></li>
             <ol>
                 <li>Lista todas as vendas à vista</li>
                 <li>Cadastra e altera registro de venda à vista</li>
             </ol>
             <hr>
-            <li>Mercadoria (Conjunto de Todas as Carradas Quantidade, Preço e Custo)</li>
+            <li><b>Mercadoria (Conjunto de Todas as Carradas Quantidade, Preço e Custo)</b></li>
             <ol>
                 <li>Cadastrar Carradas (Descrição e Data)</li>
                 <ol>
                 <li>Cadastrar Itens (Quantidade, Descrição, Preço e Custo)</li>
             </ol>
             </ol><hr>
-            <li>Partições da Venda para Cobrança</li>
+            <li><b>Partições da Venda para Cobrança</b></li>
             <ol>
                 <li>Lista todas as Partes da Cobrança</li>
                 <li>Cadastra e altera dados da partição da cobrança</li>
             </ol><hr>
-            <li>Equipe de Vendas</li>
+            <li><b>Equipe de Vendas</b></li>
             <ol>
                 <li>Lista todos Vendedores, vendas, comissões e saldo</li>
                 <li>Cadastra e altera Vendedor e inserção de venda e vales</li>
@@ -107,17 +117,17 @@
                     <li>Aloca venda em cada partição, uma a um ou agrupado</li>
                 </ol>
             </ol><hr>
-            <li>Funcionarios</li>
+            <li><b>Funcionarios</b></li>
             <ol>
                 <li>Lista todos funcionarios com salario fixo</li>
                 <li>Cadastra e altera funcionario e inserção de salario e vales</li>
             </ol><hr>
-            <li>Despesa da Venda</li>
+            <li><b>Despesa da Venda</b></li>
             <ol>
                 <li>Todos os gastos da venda</li>
                 <li>Dividido por categoria, dinheiro do adiantamento e venda é vista</li>
             </ol><hr>
-            <li>Relatorio do Chefe</li>
+            <li><b>Relatorio do Chefe</b></li>
             <ol>
                 <li>Mercadoria (estoque, vendas e retorno)</li>
                 <li>Dinheiro (valores á prestar conta)</li>

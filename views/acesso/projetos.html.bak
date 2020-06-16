@@ -1,0 +1,62 @@
+{{extend 'layout.html'}}
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h4 class="" contenteditable="true">Lista de Projetos&nbsp;</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <h5 class="">Lista de Projetos de Vendas</h5>
+              <div class="table-responsive">
+                <table class="table table-bordered table-striped ">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>#</th>
+                      <th>Descrição</th>
+                      <th>#</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {{a=1}}
+                      {{for row in rows:}}
+                    <tr>
+                      <th>{{=a}}</th>
+                      <td>{{=row.descricao}}</td>
+                      <td id="noprint"><a href="{{=URL('acesso_projeto', args=row.id)}}" class="btn"><i class="fa text-warning fa-exchange" ></i></a></td>
+                    </tr>
+                      {{a+=1}}
+                      {{pass}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <h5 class="">Despesa Local</h5>
+              <div class="table-responsive">
+                <table class="table table-bordered ">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>#</th>
+                      <th>Descrição</th>
+                      <th>Valor</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {{a=1}}
+                      {{for row2 in rowsd:}}
+                    <tr>
+                        <td id="noprint"><a href="{{=URL('acesso_despesa_local', args=row.id)}}" class="btn"><i class="fa text-warning fa-exchange" ></i></a></td>
+                      <td>{{=row2.descricao}}</td>
+                      <td>{{=row2.total_classe}}</td>
+                    </tr>
+                      {{a+=1}}
+                      {{pass}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

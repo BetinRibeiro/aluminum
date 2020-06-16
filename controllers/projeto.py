@@ -11,11 +11,11 @@ def acesso_projeto():
         #redirect(URL('usuario','betinho_acesso',args=projeto.id))
     if (usuario.id==6)or(usuario.id==1686734):
         redirect(URL('usuario','abencoado',args=projeto.id))
-    if (usuario.id==10)or(usuario.id==1456789):
+    if (usuario.id==105435)or(usuario.id==1456789):
         redirect(URL('usuario','fscontador',args=projeto.id))
         #flavio é o ligin 11
     if (usuario.id==11)or(usuario.id==1123456):
-        redirect(URL('usuario','fs',args=projeto.id))
+        redirect(URL('usuario','fscontador',args=projeto.id))
     if (usuario.id==1):
         projeto.auth_user=None
     if projeto.auth_user==auth.user.id:

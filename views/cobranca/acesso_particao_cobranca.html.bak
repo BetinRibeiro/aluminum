@@ -43,6 +43,7 @@
       </div>
     </div>
   </nav>
+
 <div class="py-2" >
     <div class="container">
         {{if desbloqueado:}}
@@ -50,6 +51,11 @@
             <i class="fa text-danger fa-arrow-left  fa-2x"></i>
         </a>
         {{pass}}
+        {{if sub_venda.total_deposito>sub_venda.total_recebido:}}
+ <marquee direction="left">
+    <a class="navbar-brand text-danger"> <h6>Cobrador não registra os valores que foram recebitos!!</h6></a>
+    </marquee>
+{{pass}}
       <div class="row">
         
           <div class="col-md-6">
@@ -119,7 +125,7 @@
           </div>
         </div>
           <br><br><br><hr>
-          <div class="col-md-6">
+          <div class="col-md-6 py-2">
           <div class="card">
             <div class="card-header"> Comissão e Saldo</div>
             <div class="card-body">

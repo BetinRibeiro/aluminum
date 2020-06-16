@@ -29,7 +29,7 @@ FAÇA SEU PRIMEIRO CADASTRO DE CARRADA
                     <th>%</th>
                     {{pass}}
                     {{if not projeto.venda_finalizada:}}
-                  <th id="noprint">ALTERAR</th>
+                  <th id="noprint">Alterar</th>
                     {{pass}}
                 </tr>
               </thead>

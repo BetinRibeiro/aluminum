@@ -1,0 +1,29 @@
+{{extend 'layout.html'}}
+<div class="col-md-3">
+                  <div class="card">
+                    <div class="card-header"> Relatorio</div>
+                    <div class="card-body" >
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="fa fa-cogs  text-primary mr-2"></i>
+                          <a href="{{=URL('mercadoria', args=projeto.id)}}">Mercadoria</a>
+                        </li>
+                        <li class="list-group-item"><i class="fa fa-truck  text-primary mr-2"></i>
+                          <a href="{{=URL('vendas', args=projeto.id)}}">Vendas Geral</a>
+                        </li>
+                        <li class="list-group-item"><i class="fa fa-sort-amount-desc text-primary mr-2"></i>
+                          <a href="#">Salarios/Comissão</a>
+                        </li>
+                        <li class="list-group-item"><i class="fa fa-id-card-o  text-primary mr-2"></i>
+                          <a href="">Despesas/Venda</a>
+                        </li>
+                        <li class="list-group-item"><i class="fa fa-file-text-o text-primary mr-2"></i>
+                          <a href="#">Relatorio/Venda</a>
+                        </li>
+                        <li class="list-group-item"><i class="fa fa-file-text-o text-primary mr-2"></i>
+                          <a href="">Cobrança</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <br>
+                </div>

@@ -8,15 +8,22 @@
         <div class="row">
             <div class="col-md-12">
                 <center style="background-color:white; color:black; padding:1px">
-                    <h3>Daniel Hiago</h3>
+                    <h3>Artefatos de alumínio
+                  </h3>
                 </center>
             </div>
             <div class="col-md-4">
                 <div class="blockquote">
                     <p class="mb-0">{{=projeto.descricao}}</p>
-                    <div class="blockquote-footer">Flavio Alumínio</div>
+                    <div class="blockquote-footer">artefatos de alumínio</div>
                 </div>
                 <ol>
+                    <li>
+                         <i class="fa fa-id-card-o  text-danger mr-2"></i>
+                         <a class="text-danger" class="nav-link" href="{{=URL('projeto','prestacao_venda', args=projeto.id)}}">PRESTAÇÃO DE CONTAS</a>
+                     </li>
+                    <hr>
+                    
                      <li>
                          <i class="fa fa-id-card-o  text-primary mr-2"></i>
                          <a href="{{=URL('chefe','acesso_chefe', args=projeto.id)}}">&nbsp;DEFINIR CHEFE</a>

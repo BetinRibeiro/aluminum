@@ -69,7 +69,7 @@ def alterar_carrada():
     db.carrada.finalizada.readable = True
     db.carrada.finalizada.writable = True
     deletable=True
-    if empresa.auth_user!=auth.user.id:
+    if empresa.auth_user=auth.user.id:
         db.carrada.finalizada.readable = False
         db.carrada.finalizada.writable = False
         if carrada.finalizada:
@@ -82,8 +82,7 @@ def alterar_carrada():
     deletar =True
     if carrada.total_pecas>0:
         deletar =False
-        
-    form = SQLFORM(db.carrada, request.args(0, cast=int), deletable)
+    form = SQLFORM(db.carrada, request.args(0, cast=int), deletable=deletar)
     if form.process().accepted:
         session.flash = 'Atualizado'
         redirect(URL('acesso_carradas', args=projeto.id))
@@ -92,6 +91,7 @@ def alterar_carrada():
     return dict(form=form)
 @auth.requires_login()
 def acesso_item_carrada():
+    usuario=auth.user
     carrada = db.carrada(request.args(0, cast=int))
     rows = db(db.item_carrada.carrada == request.args(0, cast=int)).select(orderby=~db.item_carrada.q_pcs)
     projeto = db.projeto(carrada.projeto)
@@ -108,6 +108,15 @@ def acesso_item_carrada():
     if (auth.user.id==6)or(auth.user.id==1):
         desbloqueado=True
     return locals()
+
+@auth.requires_login()
+def gerar_mercadorias():
+    carrada = db.carrada(request.args(0, cast=int))
+    projeto = db.projeto(projeto.carrada==carrada.id)
+    lista=['JG PANELA TAMPA DE VIDRO','MANTIMENTO','JG DE PANELÃO','PANELA PRESSÃO 10L','PANELA PRESSÃO 7L','PANELA PRESSÃO 4.5L','FRIGIDEIRAS 3 PC']
+    for nome in lista:
+        db.item_carrada.insert(equipe=projeto.id,carrada=carrada.id,descricao=nome)
+    return redirect(URL('acesso_item_carrada', args=request.args(0, auth.user)))
 @auth.requires_login()
 def criar_item_carrada():
     response.view = 'generic.html' # use a generic view
@@ -117,6 +126,8 @@ def criar_item_carrada():
     if projeto.venda_finalizada:
         session.flash = 'A venda já foi finalizada'
         redirect(URL('projeto','acesso_projeto', args=projeto.id))
+    db.item_carrada.projeto.default = projeto.id
+    
     db.item_carrada.carrada.default = carrada.id
     db.item_carrada.carrada.writable = False
 
@@ -155,6 +166,8 @@ def alterar_item_carrada():
         redirect(URL('projeto','acesso_projeto', args=projeto.id))
     db.item_carrada.id.readable = False
     db.item_carrada.id.writable = False
+    
+    db.item_carrada.projeto.default = projeto.id
 
     db.item_carrada.carrada.readable = False
     db.item_carrada.carrada.writable = False
@@ -189,7 +202,7 @@ def alterar_item_carrada():
 def acesso_item():
     projeto = db.projeto(request.args(0, cast=int))
     rowscarrada = db(db.carrada.projeto == request.args(0, cast=int)).select(orderby=db.carrada.data_envio)
-    rows = db(db.item_carrada.projeto==projeto.id).select(orderby=db.item_carrada.carrada)
+    rows = db(db.item_carrada.projeto==projeto.id).select(orderby=db.item_carrada.descricao)
     return locals()
 
 @auth.requires_login()
@@ -203,6 +216,7 @@ def alterar_item_carrada_gratificacao():
         redirect(URL('projeto','acesso_projeto', args=projeto.id))
     db.item_carrada.id.readable = False
     db.item_carrada.id.writable = False
+    db.item_carrada.projeto.default = projeto.id
 
     db.item_carrada.carrada.readable = False
     db.item_carrada.carrada.writable = False
@@ -216,7 +230,7 @@ def alterar_item_carrada_gratificacao():
     db.item_carrada.descricao.readable = True
     db.item_carrada.descricao.writable = False
 
-    db.item_carrada.preco_unitario.readable = False
+    db.item_carrada.preco_unitario.readable = True
     db.item_carrada.preco_unitario.writable = False
 
     db.item_carrada.custo_unitario.readable = False
@@ -253,11 +267,12 @@ def alterar_item_carrada_retorno():
 
     db.item_carrada.q_pcs.readable = False
     db.item_carrada.q_pcs.writable = False
+    db.item_carrada.projeto.default = projeto.id
 
     db.item_carrada.descricao.readable = True
     db.item_carrada.descricao.writable = False
 
-    db.item_carrada.preco_unitario.readable = False
+    db.item_carrada.preco_unitario.readable = True
     db.item_carrada.preco_unitario.writable = False
 
     db.item_carrada.custo_unitario.readable = False
@@ -298,7 +313,7 @@ def alterar_item_carrada_refugo():
     db.item_carrada.descricao.readable = True
     db.item_carrada.descricao.writable = False
 
-    db.item_carrada.preco_unitario.readable = False
+    db.item_carrada.preco_unitario.readable = True
     db.item_carrada.preco_unitario.writable = False
 
     db.item_carrada.custo_unitario.readable = False
@@ -315,6 +330,41 @@ def alterar_item_carrada_refugo():
         response.flash = 'Erros no formulário!'
     return dict(form=form)
 
+
+@auth.requires_login()
+def alterar_descricao():
+    response.view = 'generic.html' # use a generic view
+    item_carrada = db.item_carrada(request.args(0, cast=int))
+    carrada = db.carrada(item_carrada.carrada)
+    projeto = db.projeto(carrada.projeto)
+    if projeto.venda_finalizada:
+        session.flash = 'A venda já foi finalizada'
+        redirect(URL('projeto','acesso_projeto', args=projeto.id))
+    db.item_carrada.id.readable = False
+    db.item_carrada.id.writable = False
+
+    db.item_carrada.carrada.readable = False
+    db.item_carrada.carrada.writable = False
+
+    db.item_carrada.projeto.readable = False
+    db.item_carrada.projeto.writable = False
+
+    db.item_carrada.q_pcs.readable = False
+    db.item_carrada.q_pcs.writable = False
+
+    db.item_carrada.preco_unitario.readable = True
+    db.item_carrada.preco_unitario.writable = False
+
+    db.item_carrada.custo_unitario.readable = False
+    db.item_carrada.custo_unitario.writable = False
+
+    form = SQLFORM(db.item_carrada, request.args(0, cast=int), deletable=False)
+    if form.process().accepted:
+        session.flash = 'Atualizado'
+        redirect(URL('acesso_item', args=carrada.projeto))
+    elif form.errors:
+        response.flash = 'Erros no formulário!'
+    return dict(form=form)
 @auth.requires_login()
 def relatorio_item_carrada():
     projeto = db.projeto(request.args(0, cast=int))

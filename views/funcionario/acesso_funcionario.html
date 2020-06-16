@@ -5,8 +5,9 @@
 <div class="row">
     <div class="col-md-6">
         <a  class="btn btn-outline-light" href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
-        
+        {{if not projeto.venda_finalizada:}}
             <a  class="btn btn-outline-light" href="{{=URL('criar_funcionario', args=projeto.id)}}"><i class="fa text-success fa-plus fa-2x"></i></a>
+        {{pass}}
     </div>
 </div>
        
@@ -29,7 +30,9 @@
                                 <th>Vale</th>
                                 <th>Caderno</th>
                                 <th>Saldo</th>
-                                <th>Alterar</th>
+                                {{if not projeto.venda_finalizada:}}
+                                <th id="noprint">Alterar</th>
+                                {{pass}}
                             </tr>
                         </thead>
                         <tbody>
@@ -44,16 +47,22 @@
                                 {{saldo=row.salario}}
 
                                 <td>R$ {{="{:,}".format(round(row.vale_saida,1)).replace(",",".")}}0</td>
+                                {{if not projeto.venda_finalizada:}}
                                 <td>
                                         <a href="{{=URL('acesso_vales', args=row.id)}}">R$ {{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0</a>
                                 </td>
+                                {{else:}}
+                                <td>R$ {{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0</td>
+                                {{pass}}
                                 {{saldo=saldo-row.vale_saida-row.total_vale_caderno}}
                                 {{if saldo > 0:}}
                                 <td>R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</td>
                                 {{else:}}
                                 <th class="text-danger"><a>R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</a></th>
                                 {{pass}}
-                                <th><a href="{{=URL('alterar_funcionario', args=row.id)}}"><i class="fa text-warning fa-exchange" ></i></a></th>
+                                {{if not projeto.venda_finalizada:}}
+                                <th id="noprint"><a href="{{=URL('alterar_funcionario', args=row.id)}}"><i class="fa text-warning fa-exchange" ></i></a></th>
+                                {{pass}}
                                 
                             </tr>
                             {{if saldo>0:}}
@@ -73,8 +82,9 @@
                                 <th>R$ {{="{:,}".format(round(totalvale,1)).replace(",",".")}}0</th>
                                 <th>R$ {{="{:,}".format(round(totalcaderno,1)).replace(",",".")}}0</th>
                                 <th>R$ {{="{:,}".format(round(saldof,1)).replace(",",".")}}0</th>
-                               
+                               {{if not projeto.venda_finalizada:}}
                                 <th></th>
+                                {{pass}}
                             </tr>
                         </tbody>
                     </table>

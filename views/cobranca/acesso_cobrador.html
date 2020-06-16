@@ -125,10 +125,22 @@
                                 <li class="list-group-item d-flex justify-content-between">
                                     <div>
                                     <h6 class="my-0">Valor Recebido</h6>
+                                        {{if sub_venda.total_recebido>=sub_venda.total_deposito}}
                                     <small class="text-muted" contenteditable="true">{{="{:,}".format(round(perc_cob,1)).replace(",",".")}}%</small>
+                                        
+                                        {{else:}}
+                                        <small class="text-danger" contenteditable="true">Cobrador não está registrando recebimentos</small>
+                                        <small class="text-danger" contenteditable="true">Valor Aproximado--</small>
+                                        {{pass}}
                                     </div>
-                                    <span class="text-muted">
-                                        R$ {{="{:,}".format(round(sub_venda.total_recebido,1)).replace(",",".")}}0</span>
+                                    
+                                        
+                                        {{if sub_venda.total_recebido>=sub_venda.total_deposito}}
+                                        {{a=sub_venda.total_deposito+sub_venda.total_despesa+sub_venda.total_caderno_cobrador}}
+                                        <span class="text-muted"> R$ {{="{:,}".format(round(a,1)).replace(",",".")}}0</span>
+                                        {{else:}}
+                                        <span class="text-muted">R$ {{="{:,}".format(round(sub_venda.total_recebido,1)).replace(",",".")}}0</span>
+                                    {{pass}}
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between">
                                     <div>

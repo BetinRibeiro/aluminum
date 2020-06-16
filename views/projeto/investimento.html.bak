@@ -12,7 +12,7 @@
     </div>
 </div>
 {{investimento=0}}
-<div class="py-2" >
+<div class="py-1" >
     <div class="container">
       <div class="row">
         <div class="col-md-6">
@@ -217,7 +217,7 @@
                     <h6 class="my-0">Debito do Chefe</h6>
                 </div>
                 <span class="text-muted">
-                    R$ {{="{:,}".format(round(projeto.total_debito_chefe,1)).replace(",",".")}}0
+                    R$ {{="{:,}".format(round(projeto.total_debito_chefe*-1,1)).replace(",",".")}}0
                 </span>
             </li>
 {{if projeto.total_debito_funcionario>=0:}}
@@ -284,7 +284,7 @@
                         <b>Valor Cobrado</b>
                     </h6>
                     {{if projeto.total_cobrado>0:}}
-                    {{percent=projeto.total_cobrado/projeto.total_venda_prazo*100}}
+                    {{percent=1/projeto.total_venda_prazo*100}}
                     <small class="text-muted">
                         {{="{:,}".format(round(percent,1)).replace(",",".")}}%
                     </small>
@@ -301,8 +301,8 @@
 <h6 class="my-0">
     <i class="fa text-primary fa-arrow-right"></i>
     <b>Despesa da Cobrança</b>
-</h6>
-    {{if projeto.total_despesa_cobranca>0:}}
+</h6>{{percent=0}}
+    {{if projeto.total_despesa_cobranca>0 and projeto.total_cobrado>0:}}
     {{percent=projeto.total_despesa_cobranca/projeto.total_cobrado*100}}
     <small class="text-muted">
         {{="{:,}".format(round(percent,1)).replace(",",".")}}%

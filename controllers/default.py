@@ -83,7 +83,7 @@ def criar_projeto():
     db.projeto.empresa.writable = False
     #deixa o usuario que esta logado como usuario padrão
     #deixa o id bloqueado para visualização
-    if auth.user.id!=empresa.auth_user:
+    if (auth.user.id!=empresa.auth_user)or(auth.user.id!=11):
         db.projeto.auth_user.default = auth.user.id
         db.projeto.auth_user.writable = False
     #deixa o nome padrão e bloqueia para visualização

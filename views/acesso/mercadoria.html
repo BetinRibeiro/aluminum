@@ -14,9 +14,9 @@
                 <th>Descrição</th>
                 <th>Preço</th>
                 <th>Total</th>
-                <th id="noprint">Custo</th>
-                <th id="noprint">Total</th>
-                <th id="noprint">%</th>
+                <th>Custo</th>
+                <th>Total</th>
+                <th>%</th>
             </tr>
         </thead>
             <tbody>
@@ -45,11 +45,9 @@
                         
                     </th>
                     
-                    <th id="noprint"
-                        >R$ {{="{:,}".format(round(0,1)).replace(",",".")}}0
+                    <th >R$ {{="{:,}".format(round(0,1)).replace(",",".")}}0
                     </th>
-                    <th id="noprint"
-                        >R$ {{="{:,}".format(round(custo,1)).replace(",",".")}}0
+                    <th >R$ {{="{:,}".format(round(custo,1)).replace(",",".")}}0
                     </th>
                     {{if (custo>0) and (total>0):}}
                     {{margem=total/custo*100}}
@@ -57,17 +55,17 @@
                     {{margem=0}}
                     {{pass}}
                          {{if not (margem>=350) and (margem>250):}}
-                        <td id="noprint">
+                        <td >
                             <i class="fa text-warning fa-circle"></i>
                                 {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
                      {{elif margem>=350:}}
-                        <td id="noprint">
+                        <td >
                                 <i class="fa text-success fa-circle"></i>
                             {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
                       {{else:}}
-                        <td id="noprint">
+                        <td >
                             <i class="fa text-danger fa-circle"></i>
                                 {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
@@ -87,9 +85,9 @@
                 <th>Descrição</th>
                 <th>Preço</th>
                 <th>Total</th>
-                <th id="noprint">Custo</th>
-                <th id="noprint">Total</th>
-                <th id="noprint">%</th>
+                <th>Custo</th>
+                <th >Total</th>
+                <th>%</th>
             </tr>
         </thead>
             <tbody>
@@ -111,10 +109,10 @@
                             R$ {{="{:,}".format(round(row.preco_unitario*row.q_pcs,1)).replace(",",".")}}0
                     </td>
                     
-                    <td id="noprint">
+                    <td >
                                 R$ {{="{:,}".format(round(row.custo_unitario,1)).replace(",",".")}}0
                         </td>
-                        <td id="noprint">
+                        <td >
                                 R$ {{="{:,}".format(round(row.custo_unitario*row.q_pcs,1)).replace(",",".")}}0
                         </td>
                     {{if (total_preco>0) and (total_custo>0):}}
@@ -123,17 +121,17 @@
                     {{margem=0}}
                     {{pass}}
                          {{if not (margem>=350) and (margem>250):}}
-                        <td id="noprint">
+                        <td>
                             <i class="fa text-warning fa-circle"></i>
                                 {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
                      {{elif margem>=350:}}
-                        <td id="noprint">
+                        <td>
                                 <i class="fa text-success fa-circle"></i>
                             {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
                       {{else:}}
-                        <td id="noprint">
+                        <td>
                             <i class="fa text-danger fa-circle"></i>
                                 {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
@@ -157,10 +155,10 @@
                         R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0
                     </th>
                     
-                    <th id="noprint"
+                    <th
                         >R$ {{="{:,}".format(round(0,1)).replace(",",".")}}0
                     </th>
-                    <th id="noprint"
+                    <th
                         >R$ {{="{:,}".format(round(custo,1)).replace(",",".")}}0
                     </th>
                    
@@ -171,17 +169,17 @@
                     {{margem=0}}
                     {{pass}}
                          {{if not (margem>=350) and (margem>250):}}
-                        <td id="noprint">
+                        <td>
                             <i class="fa text-warning fa-circle"></i>
                                 {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
                      {{elif margem>=350:}}
-                        <td id="noprint">
+                        <td >
                                 <i class="fa text-success fa-circle"></i>
                             {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
                       {{else:}}
-                        <td id="noprint">
+                        <td>
                             <i class="fa text-danger fa-circle"></i>
                                 {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
@@ -199,8 +197,8 @@
                 <th>Total Geral</th>
                 <th>Preço de Venda</th>
                 <th>R$ {{="{:,}".format(round(projeto.total_preco_mercadoria,1)).replace(",",".")}}0</th>
-                <th id="noprint">#</th>
-                <th id="noprint">R$ {{="{:,}".format(round(projeto.total_custo_mercadoria,1)).replace(",",".")}}0</th>
+                <th>#</th>
+                <th>R$ {{="{:,}".format(round(projeto.total_custo_mercadoria,1)).replace(",",".")}}0</th>
                 
                      {{if (projeto.total_custo_mercadoria>0) and (projeto.total_preco_mercadoria>0):}}
                     {{margem=projeto.total_preco_mercadoria/projeto.total_custo_mercadoria*100}}
@@ -208,17 +206,17 @@
                     {{margem=0}}
                     {{pass}}
                          {{if not (margem>=350) and (margem>250):}}
-                        <th id="noprint">
+                        <th>
                             <i class="fa text-warning fa-circle"></i>
                                 {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </th>
                      {{elif margem>=350:}}
-                        <th id="noprint">
+                        <th>
                                 <i class="fa text-success fa-circle"></i>
                             {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </th>
                       {{else:}}
-                        <th id="noprint">
+                        <th>
                             <i class="fa text-danger fa-circle"></i>
                                 {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </th>

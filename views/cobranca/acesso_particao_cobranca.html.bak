@@ -17,6 +17,7 @@
 {{caixa=sub_venda.total_recebido+sub_venda.adiantamento_cobranca}}
 {{caixa-=sub_venda.total_deposito+sub_venda.total_despesa+sub_venda.total_caderno_cobrador}}
 
+
 {{comissao=0}}
 {{if sub_venda.comissao_cobranca>0 and sub_venda.total_recebido>0:}}
 {{comissao=sub_venda.comissao_cobranca*sub_venda.total_recebido/100}}
@@ -53,7 +54,7 @@
         {{pass}}
         {{if sub_venda.total_deposito>sub_venda.total_recebido:}}
  <marquee direction="left">
-    <a class="navbar-brand text-danger"> <h6>Cobrador não registra os valores que foram recebitos!!</h6></a>
+    <a class="navbar-brand text-danger"> <h6>Cobrador não registra os valores que foram recebidos!! </h6></a>
     </marquee>
 {{pass}}
       <div class="row">
@@ -83,14 +84,24 @@
                     <small class="text-muted" contenteditable="true">{{="{:,}".format(round(perc_cob,1)).replace(",",".")}}% da venda</small>
                   </div>
                   <span class="text-muted">R$ {{="{:,}".format(round(sub_venda.total_recebido,1)).replace(",",".")}}0</span>
-                </li>
+                </li>{{dinheiro_total=sub_venda.total_recebido+sub_venda.adiantamento_cobranca}}
+                    {{if not dinheiro_total>(sub_venda.total_venda_praso+sub_venda.adiantamento_cobranca):}}
                 <li class="list-group-item d-flex justify-content-between">
                   <div>
                     <h6 class="my-0">Dinheiro Total</h6>
                     <small class="text-muted" contenteditable="true">#</small>
                   </div>
-                  <span class="text-muted">R$ {{="{:,}".format(round(sub_venda.total_recebido+sub_venda.adiantamento_cobranca,1)).replace(",",".")}}0</span>
+                  <span class="text-muted">R$ {{="{:,}".format(round(dinheiro_total,1)).replace(",",".")}}0</span>
                 </li>
+                  {{else:}}
+                   <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0 text-danger">Erro</h6>
+                    <small class="text-danger" contenteditable="true">Foi registrado um valor maior que o da cobrança</small>
+                  </div>
+                  <span class="text-danger">Verifique o valor cobrado e o valor da cobrança</span>
+                </li>
+                  {{pass}}
                 <br>
                 <li class="list-group-item d-flex justify-content-between">
                   <div>
@@ -113,6 +124,8 @@
                   </div>
                   <span class="text-muted">R$ {{="{:,}".format(round(sub_venda.total_caderno_cobrador,1)).replace(",",".")}}0</span>
                 </li>
+                  
+                  {{if  caixa>=0:}}
                 <li class="list-group-item d-flex justify-content-between ">
                   <div>
                     <h6 class="my-0">Caixa</h6>
@@ -120,6 +133,15 @@
                   </div>
                   <span class="text-muted">R$ {{="{:,}".format(round(caixa,1)).replace(",",".")}}0</span>
                 </li>
+                  {{else:}}
+                   <li class="list-group-item d-flex justify-content-between ">
+                  <div>
+                    <h6 class="my-0 text-danger">ERRO</h6>
+                    <small class="text-danger" contenteditable="true">Não foram registrados todos os recebimentos</small>
+                  </div>
+                  <span class="text-danger">Registre todos os recebimentos</span>
+                </li>
+                  {{pass}}
               </ul>
             </div>
           </div>
@@ -151,24 +173,67 @@
                   </div>
                   <span class="text-muted">R$ {{="{:,}".format(round(sub_venda.total_caderno_cobrador,1)).replace(",",".")}}0</span>
                 </li>
+                  {{saldo_sem_caixa=comissao-sub_venda.total_vale_saida_cobrador-sub_venda.total_caderno_cobrador}}
+                  {{if saldo_sem_caixa>=0:}}
+                  <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                      <h6 class="my-0">Saldo Parcial</h6>
+                    <small class="text-success" contenteditable="true">Comissão, descontando os vales</small>
+                      </div>
+                    <span class="text-muted">R$ {{="{:,}".format(round(saldo_sem_caixa,1)).replace(",",".")}}0</span>
+                  
+  </li>
+                  {{else:}}
+                   <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                      <h6 class="my-0 text-danger">Debito Parcial</h6>
+                    <small class="text-danger" contenteditable="true">Comissão descontando os vales</small>
+                      </div>
+                    <span class="text-danger">R$ {{="{:,}".format(round(saldo_sem_caixa,1)).replace(",",".")}}0</span>
+                  
+  </li>
+                  {{pass}}
+                  <br>
+                  {{if  caixa>=0:}}
                 <li class="list-group-item d-flex justify-content-between">
                   <div>
-                    <h6 class="my-0">Caixa</h6>
-                    <small class="text-muted" contenteditable="true">Será descontado da comissão</small>
+                    <h6 class="my-0">Caixa atual</h6>
+                    <small class="text-muted" contenteditable="true">Será descontado da comissão, faça o deposito</small>
                   </div>
                   <span class="text-muted">R$ {{="{:,}".format(round(caixa,1)).replace(",",".")}}0</span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between">
-                  <div>
-                    <h6 class="my-0">Saldo Geral</h6>
+                  
+                
+                    
                       {{if saldofinal>=0:}}
-                    <small class="text-success" contenteditable="true">Positivo</small>
+                  <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                      <h6 class="my-0 text-success">Saldo Descontando o caixa</h6>
+                    <small class="text-success" contenteditable="true">Positivo, já cobriu o vale</small>
+                      </div>
+                    <span class="text-success">R$ {{="{:,}".format(round(saldofinal,1)).replace(",",".")}}0</span>
+                  
+  </li>
                       {{else:}}
-                    <small class="text-danger" contenteditable="true">Negativo</small>
+                      <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                      <h6 class="my-0 text-danger">Saldo Descontando o caixa</h6>
+                    <small class="text-danger" contenteditable="true">Negativo, ainda não cobriu o seu vale</small>
+                      </div>
+                    <span class="text-danger">R$ {{="{:,}".format(round(saldofinal,1)).replace(",",".")}}0</span>
+                  
+  </li>
                       {{pass}}
+              
+                  {{else:}}
+                   <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0">Caixa</h6>
+                    <small class="text-danger" contenteditable="true">Não foram registrados todos os recebimentos</small>
                   </div>
-                  <span class="text-muted">R$ {{="{:,}".format(round(saldofinal,1)).replace(",",".")}}0</span>
+                  <span class="text-danger">Registre todos os recebimentos</span>
                 </li>
+                  {{pass}}
               </ul>
             </div>
           </div>

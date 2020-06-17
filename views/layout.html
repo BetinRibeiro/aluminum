@@ -137,7 +137,7 @@ a:hover{font:20px "verdana"; color:black; text-decoration:underline;}
         <div class="col-md-12">
           <div class="copyright pull-left">Suporte - (88)98112-6816</div>
           <div id="poweredBy" class="pull-right">
-            {{=auth.user.first_name}} {{=auth.user.last_name}}
+             {{if auth.user:}}{{=auth.user.first_name}} {{=auth.user.last_name}}{{else:}}Aluminum System{{pass}}
           </div>
         </div>
       </div>

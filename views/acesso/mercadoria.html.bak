@@ -200,7 +200,7 @@
                 <th>Preço de Venda</th>
                 <th>R$ {{="{:,}".format(round(projeto.total_preco_mercadoria,1)).replace(",",".")}}0</th>
                 <th id="noprint">#</th>
-                <th>R$ {{="{:,}".format(round(projeto.total_custo_mercadoria,1)).replace(",",".")}}0</th>
+                <th id="noprint">R$ {{="{:,}".format(round(projeto.total_custo_mercadoria,1)).replace(",",".")}}0</th>
                 
                      {{if (projeto.total_custo_mercadoria>0) and (projeto.total_preco_mercadoria>0):}}
                     {{margem=projeto.total_preco_mercadoria/projeto.total_custo_mercadoria*100}}

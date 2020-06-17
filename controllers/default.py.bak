@@ -55,7 +55,7 @@ def acesso_inicial():
     empresa = db.empresa(db.empresa.auth_user==auth.user.id)
     usuario=auth.user
     #caso seja hiago vai listar todos os projetos da empresa fs
-    if (auth.user.id==11)or(auth.user.id==1):
+    if (auth.user.id==11)or(auth.user.id==10):
         empresa = db.empresa(8)
         #empresa.id
         redirect(URL('usuario','fsprojetos',args=empresa.id))
@@ -83,7 +83,7 @@ def criar_projeto():
     db.projeto.empresa.writable = False
     #deixa o usuario que esta logado como usuario padrão
     #deixa o id bloqueado para visualização
-    if auth.user.id!=empresa.auth_user:
+    if auth.user.id!=empresa.auth_user || auth.user.id=11:
         db.projeto.auth_user.default = auth.user.id
         db.projeto.auth_user.writable = False
     #deixa o nome padrão e bloqueia para visualização

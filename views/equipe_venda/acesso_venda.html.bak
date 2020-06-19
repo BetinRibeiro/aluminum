@@ -56,8 +56,11 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
                             {{aentrada=0}}
                             {{adevolucao=0}}
                         {{for row in rows_vend:}}
-                           
-                            
+                            {{if (vendedor.id==224) and (row.sub_venda==63):}}
+                                {{row.sub_venda=64}}
+                                {{row.vendedor=107}}
+                                {{row.update_record()}}
+                            {{pass}}
                         {{if row.sub_venda == row1.id:}}
                             <tr>
                                 {{a+=1}}

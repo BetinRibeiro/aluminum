@@ -292,7 +292,7 @@
             </h6>
                 <small class="text-muted"></small>
             </div>
-                <span class="text-muted">
+                <span class="text-primary">
                     R$ {{="{:,}".format(round(projeto.total_venda_prazo,1)).replace(",",".")}}0
                 </span>
             </li>

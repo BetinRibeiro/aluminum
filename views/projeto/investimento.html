@@ -305,7 +305,7 @@
                         <b>Valor Cobrado</b>
                     </h6>
                     {{if projeto.total_cobrado>0:}}
-                    {{percent=1/projeto.total_venda_prazo*100}}
+                    {{percent=projeto.total_cobrado/projeto.total_venda_prazo*100}}
                     <small class="text-muted">
                         {{="{:,}".format(round(percent,1)).replace(",",".")}}%
                     </small>

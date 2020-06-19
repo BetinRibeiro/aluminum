@@ -12,7 +12,7 @@
 <div class="input-group">
     <input class="form-control" type="search" placeholder="Pesquisar" aria-label="Search" style="border-right: none;">
     <div class="input-group-append">
-      <div class="btn" href="{{=URL('lista_registros', args=[sub_venda.id,tipo,type])}}><i class="fa fa-search"></i></div>
+      <div class="btn" href="{{=URL('lista_registros', args=[sub_venda.id,tipo,type])}}"><i class="fa fa-search"></i></div>
     </div>
   </div>
         {{=tipo}} da cobrança de {{=sub_venda.primeira_cidade}}

@@ -55,7 +55,7 @@ def acesso_venda():
     vendedor = db.vendedor(request.args(0, cast=int))
     projeto = db.projeto(vendedor.projeto)
     rows_sub = db(db.sub_venda.projeto == vendedor.projeto).select(orderby=~db.sub_venda.data_inicio_cobranca)
-    rows_vend = db(db.venda.vendedor == request.args(0, cast=int)).select(orderby=db.venda.data_venda)
+    rows_vend = db(db.venda.vendedor == request.args(0, cast=int)).select(orderby=db.venda.sub_venda|db.venda.data_venda)
     return locals()
 @auth.requires_login()
 def inserir_venda():
@@ -69,7 +69,8 @@ def inserir_venda():
     
     db.venda.vendedor.default = vendedor.id
     db.venda.vendedor.writable = False
-
+    
+    
     form = SQLFORM(db.venda).process()
     if form.accepted:
         response.flash = 'Formulario aceito'
@@ -94,6 +95,7 @@ def alterar_venda():
 
     db.venda.vendedor.readable = False
     db.venda.vendedor.writable = False
+    
 
     form = SQLFORM(db.venda, request.args(0, cast=int), deletable=True)
     if form.process().accepted:

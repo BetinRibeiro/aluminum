@@ -23,6 +23,7 @@
             Acesso a venda de {{=vendedor.nome}}
             {{for row1 in rows_sub:}}
             <hr class="border bg-danger" >
+
  {{if (not projeto.venda_finalizada):}}
 {{if (not row1.cobranca_iniciada):}}
 <div class="row">
@@ -55,6 +56,7 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
                             {{aentrada=0}}
                             {{adevolucao=0}}
                         {{for row in rows_vend:}}
+                           
                             
                         {{if row.sub_venda == row1.id:}}
                             <tr>
@@ -88,23 +90,23 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
                                     {{pass}}
                                 
                                 </td>
-                                <td>R$ {{="{:,}".format(round(row.venda_praso,2)).replace(",",".")}}0</td>
+                                <td>R$ {{="{:,}".format(round(row.venda_praso,1)).replace(",",".")}}0</td>
                                 <td>{{=row.quant_fichas}}</td>
-                                <td>R$ {{="{:,}".format(round(row.vale_caderno,2)).replace(",",".")}}0</td>
-                                <td>R$ {{="{:,}".format(round(row.entradas_venda,2)).replace(",",".")}}0</td>
+                                <td>R$ {{="{:,}".format(round(row.vale_caderno,1)).replace(",",".")}}0</td>
+                                <td>R$ {{="{:,}".format(round(row.entradas_venda,1)).replace(",",".")}}0</td>
                                 <td>{{=row.quant_fichas_devolvidas}}</td>
-                                <td>R$ {{="{:,}".format(round(row.valor_devolvido,2)).replace(",",".")}}0</td>
+                                <td>R$ {{="{:,}".format(round(row.valor_devolvido,1)).replace(",",".")}}0</td>
                             </tr>
                             {{pass}}
                             {{pass}}
                             <th>#</th>
                                         <th>Total</th>
-                                        <th>R$ {{="{:,}".format(round(aprazo,2)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,}".format(round(aprazo,1)).replace(",",".")}}0</th>
                                         <th>{{=afichas}}</th>
-                                        <th>R$ {{="{:,}".format(round(acaderno,2)).replace(",",".")}}0</th>
-                                        <th>R$ {{="{:,}".format(round(aentrada,2)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,}".format(round(acaderno,1)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,}".format(round(aentrada,1)).replace(",",".")}}0</th>
                                         <th>  {{=afichas_devolvidas}}</th>
-                                        <th>R$ {{="{:,}".format(round(adevolucao,2)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,}".format(round(adevolucao,1)).replace(",",".")}}0</th>
                             </tbody>
 
                     </table>
@@ -134,12 +136,12 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
                                      </thead>
                                 <tbody>
                                     <tr>
-                                        <th>R$ {{="{:,}".format(round(prazo,2)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,}".format(round(prazo,1)).replace(",",".")}}0</th>
                                         <th>{{=fichas}}</th>
-                                        <th>R$ {{="{:,}".format(round(caderno,2)).replace(",",".")}}0</th>
-                                        <th>R$ {{="{:,}".format(round(entrada,2)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,}".format(round(caderno,1)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,}".format(round(entrada,1)).replace(",",".")}}0</th>
                                         <th>  {{=fichas_devolvidas}}</th>
-                                        <th>R$ {{="{:,}".format(round(devolucao,2)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,}".format(round(devolucao,1)).replace(",",".")}}0</th>
                                     </tr>
                                 </tbody>
                             </table>

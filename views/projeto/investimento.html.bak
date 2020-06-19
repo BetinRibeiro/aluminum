@@ -82,8 +82,8 @@
                         <b>Total Investimento Inicial</b>
                     </h6>
                 </div>
-                <span class="text-muted">
-                    R$ {{="{:,}".format(round(investimento,1)).replace(",",".")}}0
+                <span class="text-muted"><b>
+                    R$ {{="{:,}".format(round(investimento,1)).replace(",",".")}}0</b>
                 </span>
             </li>
             <br>
@@ -122,7 +122,6 @@
 {{complemento=0}}
 {{if projeto.total_saldo_chefe>0:}}
     {{complemento+=projeto.total_saldo_chefe}}
-{{pass}}
               <li class="list-group-item d-flex justify-content-between">
                 <div>
                     <h6 class="my-0">Saldo Chefe</h6>
@@ -131,6 +130,8 @@
                     R$ {{="{:,}".format(round(projeto.total_saldo_chefe,1)).replace(",",".")}}0
                 </span>
             </li>
+              
+{{pass}}
 {{if projeto.total_saldo_funcionario>0:}}
     {{complemento+=projeto.total_saldo_funcionario}}
 {{pass}}
@@ -194,6 +195,11 @@
                 <span><b>Total Investimento Complementar</b></span>
                 <b>R$ {{="{:,}".format(round(investimento_complementar,1)).replace(",",".")}}0</b>
             </li>
+              <br>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+                <span><b>Investimento sem Descontar</b></span>
+                <b>R$ {{="{:,}".format(round(investimento,1)).replace(",",".")}}0</b>
+            </li>
             <br>
             <h5> <span><b>-Valores Abatido do Investimento</b></span></h5>
 {{abatimento=0}}
@@ -224,6 +230,7 @@
 {{else:}}
 {{abatimento+=projeto.total_debito_funcionario*-1}}
 {{pass}}
+              {{if not projeto.total_debito_funcionario>=0:}}
             <li class="list-group-item d-flex justify-content-between">
                 <div>
                     <h6 class="my-0">Debito dos Funcionarios</h6>
@@ -232,6 +239,7 @@
                     R$ {{="{:,}".format(round(projeto.total_debito_funcionario*-1,1)).replace(",",".")}}0
                 </span>
             </li>
+              {{pass}}
 {{if projeto.total_debito_vendedor>=0:}}
 {{else:}}
 {{abatimento+=projeto.total_debito_vendedor*-1}}
@@ -244,6 +252,19 @@
                     R$ {{="{:,}".format(round(projeto.total_debito_vendedor*-1,1)).replace(",",".")}}0
                 </span>
             </li>
+              
+              {{if projeto.total_devolucao_dinheiro>0:}}
+               <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">Devolução em Dinheiro</h6>
+                </div>
+                <span class="text-muted">
+                    R$ {{="{:,}".format(round(projeto.total_devolucao_dinheiro,1)).replace(",",".")}}0
+                </span>
+            </li>
+              
+{{abatimento+=projeto.total_devolucao_dinheiro}}
+              {{pass}}
 {{investimento-=abatimento}}
             <li class="list-group-item d-flex justify-content-between bg-light">
                 <span><b>Total Valor Abatido Investimento</b></span>
@@ -252,7 +273,7 @@
 
             <br>
             <li class="list-group-item d-flex justify-content-between bg-light">
-                <span><b>Investimento Total</b></span>
+                <span><b>Investimento Real</b></span>
                 <b>R$ {{="{:,}".format(round(investimento,1)).replace(",",".")}}0</b>
             </li>
         </ul>
@@ -340,7 +361,9 @@
                 <h6 class="my-0">Investimento Total</h6>
               </div> <span class="text-muted">R$ {{="{:,}".format(round(investimento,1)).replace(",",".")}}0</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Saldo Investimento</b></span> <b>R$ {{="{:,}".format(round(saldo_investimento)).replace(",",".")}}0</b> </li><br>
+            <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Saldo Investimento</b></span> <b>R$ {{="{:,}".format(round(saldo_investimento)).replace(",",".")}}0</b> </li>
+              {{if saldo_investimento>0:}}
+              <br>
             <h5> <span><b>-Saldo e Quitação</b></span></h5>
 
               {{saldoquitacao=0}}
@@ -361,11 +384,20 @@
               {{if projeto.total_saldo_quitacao_chefe>0:}}
                {{saldoquitacao+=projeto.total_saldo_quitacao_chefe}}
               {{pass}}
+              
+              {{if projeto.total_saldo_quitacao_chefe>0:}}
             <li class="list-group-item d-flex justify-content-between">
               <div>
                 <h6 class="my-0">Saldo Quitação Chefe</h6>
               </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_saldo_quitacao_chefe,1)).replace(",",".")}}0</span>
             </li>
+              {{else:}}
+              <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">Saldo Quitação Chefe</h6>
+              </div> <span class="text-muted">R$ 0.00</span>
+            </li>
+              {{pass}}
               {{if projeto.total_saldo_quitacao_vendedores>0:}}
                {{saldoquitacao+=projeto.total_saldo_quitacao_vendedores}}
               {{pass}}
@@ -374,7 +406,13 @@
                 <h6 class="my-0">Saldo Quitação Vendedores</h6>
               </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_saldo_quitacao_vendedores,1)).replace(",",".")}}0</span>
             </li>
+            
             <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Total Saldos</b></span> <b>R$ {{="{:,}".format(round(saldoquitacao,1)).replace(",",".")}}0</b> </li>
+                <br>
+               <h5><span><b>-Resultado Parcial</b></span></h5>
+            <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Saldo Parcial do Projeto</b></span> <b>R$ {{="{:,}".format(round(saldo_investimento,1)).replace(",",".")}}0</b> </li>
+              
+              
             <br>{{saldo_investimento-=saldoquitacao}}
               <h5><span><b>-Debitos Descontado Investimento</b></span></h5>
                {{debito_quitacao=0}}
@@ -388,14 +426,23 @@
             </li>
               
               
+              {{if not projeto.total_saldo_quitacao_chefe>0:}}
+               {{debito_quitacao+=projeto.total_saldo_quitacao_chefe*-1}}
              
             <li class="list-group-item d-flex justify-content-between">
               <div>
                 <h6 class="my-0">Debito Quitação Chefe</h6>
+              </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_saldo_quitacao_chefe*-1,1)).replace(",",".")}}0</span>
+            </li>
+              {{else:}}
+              <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">Debito Quitação Chefe</h6>
               </div> <span class="text-muted">R$ {{="{:,}".format(round(0,1)).replace(",",".")}}0</span>
             </li>
+               {{pass}}
                {{if not projeto.total_debito_quitacao_vendedores>0:}}
-              {{else:}}
+              
                {{debito_quitacao+=projeto.total_debito_quitacao_vendedores*-1}}
                {{pass}}
             <li class="list-group-item d-flex justify-content-between">
@@ -409,6 +456,11 @@
 {{saldo_investimento+=debito_quitacao}}
               <h5><span><b>-Resultado Final</b></span></h5>
             <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Saldo Final do Projeto</b></span> <b>R$ {{="{:,}".format(round(saldo_investimento,1)).replace(",",".")}}0</b> </li>
+              {{else:}}
+              <br>
+              <h5><span><b>-Ainda não bateu o ponto de equilibrio</b></span></h5>
+            <li class="list-group-item d-flex justify-content-between bg-light text-danger"> <span><b>Saldo Final está negativo ainda</b></span> <b>R$ {{="{:,}".format(round(saldo_investimento,1)).replace(",",".")}}0</b> </li>
+              {{pass}}
           </ul>
         </div>
       </div>

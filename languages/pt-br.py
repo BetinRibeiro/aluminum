@@ -336,6 +336,7 @@
 'Valor': 'Valor',
 'Valor Devolvido': 'Valor Devolvido',
 'Venda Praso': 'Venda Praso',
+'Venda Prazo': 'Venda Prazo',
 'Vendas': 'Vendas',
 'Vendedor': 'Vendedor',
 'Vendedors': 'Vendedors',

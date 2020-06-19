@@ -9,7 +9,7 @@
 {{if projeto.total_despesa_venda>0 and projeto.total_venda_prazo:}}
 {{perc_desp=projeto.total_despesa_venda/projeto.total_venda_prazo*100}}
 {{pass}}
-{{dinh_apresentado=projeto.total_caderno_chefe+projeto.total_caderno_funcionario+	projeto.total_caderno_vendedor+projeto.total_despesa_venda}}
+{{dinh_apresentado=projeto.total_caderno_chefe+projeto.total_caderno_funcionario+	projeto.total_caderno_vendedor+projeto.total_despesa_venda+projeto.total_devolucao_dinheiro}}
 {{diferencav=dinheiro_viagem-dinh_apresentado}}
 {{comissaov=0.0}}
 {{if projeto.total_venda_vista>0 and projeto.comissao_vista>0:}}
@@ -118,6 +118,13 @@
                 <div>
                   <h6 class="my-0">Vale da Viagem Chefe</h6>
                 </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_caderno_chefe,1)).replace(",",".")}}0</span>
+              </li>
+                {{pass}}
+                 {{if projeto.total_devolucao_dinheiro>0:}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class="my-0">Dinheiro Devolvido</h6>
+                </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_devolucao_dinheiro,1)).replace(",",".")}}0</span>
               </li>
                 {{pass}}
               <li class="list-group-item d-flex justify-content-between"> <span><b>Dinheiro Apresentado</b></span> <b>R$ {{="{:,}".format(round(dinh_apresentado,1)).replace(",",".")}}0</b> </li>

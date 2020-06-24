@@ -374,6 +374,7 @@ db.define_table('registro_cobranca',
                 Field('data_inicio', 'date', label="Data", default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),
 				Field('descricao', 'string',label='Descrição', default="#", notnull=True,requires = IS_UPPER()),
 				Field('valor', 'double',label='Valor', notnull=True, default=0),
+                Field('bloqueado', 'boolean', writable=False, readable=False, default=False),
 				)
 db.define_table('classe_despesa_local',
                 Field('empresa','reference empresa', label='Empresa'),

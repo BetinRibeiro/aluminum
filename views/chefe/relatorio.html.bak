@@ -123,7 +123,7 @@
                  {{if projeto.total_devolucao_dinheiro>0:}}
               <li class="list-group-item d-flex justify-content-between">
                 <div>
-                  <h6 class="my-0">Vale da Viagem Chefe</h6>
+                  <h6 class="my-0">Dinheiro Devolvido</h6>
                 </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_devolucao_dinheiro,1)).replace(",",".")}}0</span>
               </li>
                 {{pass}}

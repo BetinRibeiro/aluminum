@@ -39,13 +39,14 @@
             <li class="nav-item"> <a class="nav-link" href="{{=URL('lista_registros', args=[sub_venda.id,'Caderno'])}}">Caderno</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{=URL('despesa_cobranca','acessar_despesa', args=sub_venda.id)}}">Despesas</a></li>
         {{if desbloqueado:}}
+            <li class="nav-item  text-muted"> <a class="btn btn-outline-primary" href="{{=URL('lista_registros', args=[sub_venda.id,'Deposito_extra'])}}">Depositos Extra</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{=URL('alocar_valores', args=[sub_venda.id])}}">Alocar Valores</a></li>{{pass}}
         </ul>
       </div>
     </div>
   </nav>
 
-<div class="py-2" >
+<div class="py-1" >
     <div class="container">
         {{if desbloqueado:}}
         <a class="btn btn-outline-light" href="{{=URL('acessar_cobrancas', args=sub_venda.projeto)}}"> 
@@ -147,7 +148,7 @@
           </div>
         </div>
           <br><br><br><hr>
-          <div class="col-md-6 py-2">
+          <div class="col-md-6 py-1">
           <div class="card">
             <div class="card-header"> Comissão e Saldo</div>
             <div class="card-body">

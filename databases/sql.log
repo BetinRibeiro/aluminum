@@ -418,3 +418,6 @@ success!
 timestamp: 2020-04-29T01:24:10.237925
 ALTER TABLE "projeto" ADD "total_debito_chefe" DOUBLE NOT NULL DEFAULT 0.0;
 success!
+timestamp: 2020-06-22T16:35:06.185940
+ALTER TABLE "registro_cobranca" ADD "bloqueado" CHAR(1);
+success!

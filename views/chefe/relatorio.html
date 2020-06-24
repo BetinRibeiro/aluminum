@@ -129,7 +129,7 @@
                 {{pass}}
               <li class="list-group-item d-flex justify-content-between"> <span><b>Dinheiro Apresentado</b></span> <b>R$ {{="{:,}".format(round(dinh_apresentado,1)).replace(",",".")}}0</b> </li>
               <br>
-                {{if diferencav>0:}}
+                {{if diferencav>=0:}}
               <li class="list-group-item d-flex justify-content-between bg-light">
                 <div class="text-success">
                   <h6 class="my-0">

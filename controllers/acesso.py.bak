@@ -17,5 +17,12 @@ def acesso_projeto():
 @auth.requires_login()
 def mercadoria():
     projeto = db.projeto(request.args(0, cast=int))
-    rows = db(db.item_carrada.projeto == request.args(0, cast=int)).select(orderby=db.item_carrada.carrada|db.item_carrada.q_pcs)
+    rows = db(db.item_carrada.projeto == request.args(0, cast=int)).select(orderby=db.item_carrada.carrada|~db.item_carrada.q_pcs)
+    return locals()
+
+
+@auth.requires_login()
+def vendas():
+    projeto = db.projeto(request.args(0, cast=int))
+    rows = db(db.item_carrada.projeto == request.args(0, cast=int)).select(orderby=db.item_carrada.carrada|~db.item_carrada.q_pcs)
     return locals()

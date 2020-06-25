@@ -5,6 +5,9 @@
     <div class="col-md-6">
         <a class="btn btn-outline-light" href="{{=URL('acessar_despesa', args=[classe_despesa_cobranca.sub_venda])}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
         <a class="btn btn-outline-light" href="{{=URL('criar_desp', args=[classe_despesa_cobranca.id])}}"><i class="fa text-success fa-plus fa-2x"></i></a>
+        {{if classe_despesa_cobranca.descricao=="DIÁRIAS" and len(rows)>0:}}
+        <a class="btn btn-primary" href="{{=URL('criar_desp', args=[classe_despesa_cobranca.id,1])}}">Repitir Valor</a>
+        {{pass}}
     </div>
 </div>
 

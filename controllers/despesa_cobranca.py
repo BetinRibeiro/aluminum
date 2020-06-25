@@ -55,6 +55,13 @@ def acesso_despesa():
 def criar_desp():
     response.view = 'generic.html' # use a generic view
     classe_despesa_cobranca = db.classe_despesa_cobranca(request.args(0, auth.user))
+    variavel=0
+    variavel=request.args(1, auth.user)
+    if variavel>=1:
+        response.flash = 'Entrou no if'
+        newdespesa = db(db.despesa_cobranca.classe_despesa_cobranca == classe_despesa_cobranca.id).select().last()
+        db.despesa_cobranca.insert(classe_despesa_cobranca=classe_despesa_cobranca.id, data_inicio=request.now , descricao=newdespesa.descricao , valor=newdespesa.valor)
+        return redirect(URL('acesso_despesa', args=[classe_despesa_cobranca.id]))
     
     db.despesa_cobranca.classe_despesa_cobranca.default = classe_despesa_cobranca.id
     db.despesa_cobranca.classe_despesa_cobranca.writable = False

@@ -421,3 +421,6 @@ success!
 timestamp: 2020-06-22T16:35:06.185940
 ALTER TABLE "registro_cobranca" ADD "bloqueado" CHAR(1);
 success!
+timestamp: 2020-06-24T17:49:26.607916
+ALTER TABLE "registro_cobranca" ADD "observacao" CHAR(512) NOT NULL DEFAULT '#';
+success!

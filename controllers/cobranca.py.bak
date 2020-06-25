@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-# tente algo como
+
+import datetime
 @auth.requires_login()
 def acessar_cobrancas():
     projeto = db.projeto(request.args(0, cast=int))
@@ -118,14 +119,19 @@ def alterar_particao():
     return dict(form=form)
 @auth.requires_login()
 def lista_registros():
+    usuario=auth.user
     sub_venda = db.sub_venda(request.args(0, auth.user))
     tipo = request.args(1, auth.user)
+    dataontem=datetime.date(request.now.year, request.now.month, request.now.day)
+    if (dataontem.day>2):
+        dataontem=datetime.date(dataontem.year, dataontem.month, dataontem.day-2)
+    else:dataontem=datetime.date(dataontem.year, dataontem.month-1, 27)
     rows = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo==tipo)).select(orderby=db.registro_cobranca.data_inicio)
     consul=(request.args(2))
     if consul:
         consul= "entrou no if"
         #consulta = request.args(2, auth.user)
-        #rows = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo==tipo)&(db.registro_cobranca.descricao.contains(request.args(2, auth.user)))).select(orderby=db.registro_cobranca.data_inicio)
+        rows = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo==tipo)&(db.registro_cobranca.descricao.contains(request.args(2)))).select(orderby=db.registro_cobranca.data_inicio)
     return locals()
 
 @auth.requires_login()
@@ -157,6 +163,7 @@ def inserir_registro():
 
 @auth.requires_login()
 def alterar_registro():
+    usuario=auth.user
     response.view = 'generic.html' # use a generic view
     registro_cobranca = db.registro_cobranca(request.args(0, cast=int))
     tipo = request.args(1)
@@ -173,6 +180,12 @@ def alterar_registro():
 
     db.registro_cobranca.tipo.readable = False
     db.registro_cobranca.tipo.writable = False
+    
+    if (registro_cobranca.tipo=="Deposito") and (usuario.id!=sub_venda.auth_user):
+
+        db.registro_cobranca.observacao.readable = True
+        db.registro_cobranca.observacao.writable = True
+        
 
     form = SQLFORM(db.registro_cobranca, request.args(0, cast=int), deletable=True)
     if form.process().accepted:

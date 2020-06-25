@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
+@auth.requires_login()
 def acessar_despesa():
     sub_venda = db.sub_venda(request.args(0, cast=int))
     rows = db((db.classe_despesa_cobranca.sub_venda == sub_venda.id)).select()
     return locals()
+@auth.requires_login()
 def criar_class_desp():
     response.view = 'generic.html' # use a generic view
     sub_venda = db.sub_venda(request.args(0, cast=int))
@@ -20,6 +22,7 @@ def criar_class_desp():
     else:
         response.flash = 'Preencha o formulario'
     return dict(form=form)
+@auth.requires_login()
 def alterar_class_desp():
     response.view = 'generic.html' # use a generic view
     classe_despesa_cobranca = db.classe_despesa_cobranca(request.args(0, cast=int))
@@ -42,14 +45,23 @@ def alterar_class_desp():
             response.flash = 'Preencha o formulário!'
     return dict(form=form)
 
+@auth.requires_login()
 def acesso_despesa():
     classe_despesa_cobranca = db.classe_despesa_cobranca(request.args(0, cast=int))
     rows = db(db.despesa_cobranca.classe_despesa_cobranca == classe_despesa_cobranca.id).select(orderby=db.despesa_cobranca.data_inicio)
     return locals()
 
+@auth.requires_login()
 def criar_desp():
     response.view = 'generic.html' # use a generic view
     classe_despesa_cobranca = db.classe_despesa_cobranca(request.args(0, auth.user))
+    variavel=0
+    variavel=request.args(1, auth.user)
+    if variavel>=1:
+        response.flash = 'Entrou no if'
+        newdespesa = db(db.despesa_cobranca.classe_despesa_cobranca == classe_despesa_cobranca.id).select().last()
+        #db.despesa_cobranca.insert(classe_despesa_cobranca=classe_despesa_cobranca.id, data_inicio=request.now , descricao=newdespesa.descricao , valor=newdespesa.valor)
+        #return redirect(URL('acesso_despesa', args=[classe_despesa_cobranca.id]))
     
     db.despesa_cobranca.classe_despesa_cobranca.default = classe_despesa_cobranca.id
     db.despesa_cobranca.classe_despesa_cobranca.writable = False
@@ -63,6 +75,7 @@ def criar_desp():
     else:
         response.flash = 'Preencha o formulario'
     return dict(form=form)
+@auth.requires_login()
 def alterar_desp():
     response.view = 'generic.html' # use a generic view
     despesa_cobranca = db.despesa_cobranca(request.args(0, cast=int))

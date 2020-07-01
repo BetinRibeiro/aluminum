@@ -1,0 +1,100 @@
+{{extend 'layout.html'}}
+{{a=0}}
+{{valor=0}}
+<div class="row">
+    <div class="col-md-6">
+        <a  class="btn btn-outline-light" href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
+        {{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
+            <a  class="btn btn-outline-light" href="{{=URL('inserir_registro', args=[projeto.id,tipo])}}"><i class="fa text-success fa-plus fa-2x"></i></a>
+        {{pass}}
+    </div>
+</div>
+{{if len(rows)>0:}}
+    Registros de {{=tipo}} - {{=projeto.descricao}}
+{{else:}}
+    Insira algum registro de {{=tipo}}
+{{pass}}
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                {{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
+                <th>Alterar</th>
+                {{pass}}
+            </tr>
+        </thead>
+        <tbody>
+            
+            {{from random import randint}}
+            {{if len(rows)>0:}}
+            {{else:}}
+            é
+            {{contador=30}}
+            {{while contador > 0:}}
+            {{db.registro_venda.insert(projeto == projeto.id,
+                           tipo='venda_vista',
+                           data_inicio=request.now,
+                           valor=randint(1150,1780))}}
+            
+            {{contador-=1}}
+            {{pass}}
+            {{pass}}
+            {{for row in rows:}}
+            <tr>
+                {{a+=1}}
+                <th>
+                    {{=a}}
+                </th>
+                <td>
+                    {{=("{}/{}/{}".format(row.data_inicio.day,row.data_inicio.month,row.data_inicio.year))}}
+                </td>
+                <td>
+                    {{=row.descricao}}
+                </td>
+                <td>
+                    R$ {{="{:,}".format(round(row.valor,2)).replace(",",".")}}0
+                </td>
+                {{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
+                <td>
+                    <a href="{{=URL('alterar_registro', args=[row.id,tipo])}}"><i class="fa text-warning fa-exchange" ></i></a>
+                </td>
+                 {{pass}} 
+            </tr>
+            {{valor+=row.valor}}
+            {{pass}}
+            <tr>
+                <th>
+                    #
+                </th>
+                <th></th>
+                <th>
+                    Total
+                </th>
+                <th>
+                    R$ {{="{:,}".format(round(valor,2)).replace(",",".")}}0
+                </th>
+                 {{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
+                <th></th>
+                {{pass}} 
+            </tr>
+        </tbody>
+    </table>
+</div>
+{{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
+{{if tipo=="venda_vista":}}
+{{projeto.total_venda_vista=valor}}
+{{projeto.quant_dias_venda_vista=a}}
+{{projeto.update_record()}}
+{{elif tipo=="caderno_chefe":}}
+{{projeto.total_caderno_chefe=valor}}
+{{projeto.update_record()}}
+
+{{elif tipo=="Gratificacao":}}
+{{projeto.total_gratificacao=valor}}
+{{projeto.update_record()}}
+{{pass}}
+{{pass}}

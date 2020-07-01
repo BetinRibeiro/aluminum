@@ -1,0 +1,62 @@
+{{extend 'layout.html'}}
+<a  href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
+<div class="py-1">
+    <div class="container">
+      <div class="row">
+{{for row in rows_vendedor:}}
+            <div class="col-md-4">
+
+<div class="card">
+    <div class="card">
+        <div class="card-header">{{=row.nome}}</div>
+            <div class="card-body">
+            {{for row1 in rows_sub:}}
+                {{venda_part=0}}
+                {{for row2 in rows_vendas:}}
+                    {{if row2.sub_venda==row1.id:}}
+                        {{if row2.vendedor==row.id:}}
+        
+                            {{venda_part+=row2.venda_praso-row2.valor_devolvido}}
+                        {{pass}}
+                    {{pass}}
+                {{pass}}
+                <p>{{=row1.primeira_cidade}} - R$ {{="{:,}".format(round(venda_part,1)).replace(",",".")}}0</p>
+                     {{venda_part=0}}
+       
+            {{pass}}
+                <hr>
+         <p>
+            Total Venda - R$ {{="{:,}".format(round(row.total_vendas,1)).replace(",",".")}}0
+        </p>
+        <P>
+            {{="{:,}".format(round(row.comissao_venda,1)).replace(",",".")}}%
+        </P>
+                <hr>
+        {{totalcomiss=row.comissao_venda*row.total_vendas/100}}
+        <P>
+            Comissão - R${{="{:,}".format(round(totalcomiss,1)).replace(",",".")}}0
+        </P>
+        <p>
+            Vale - R${{="{:,}".format(round(row.vale_saida,1)).replace(",",".")}}0
+        </p>
+        <P>
+            Caderno - R${{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0
+        </P>
+                <hr>
+            {{saldo=totalcomiss-row.vale_saida-row.total_vale_caderno}}
+        {{if saldo>0:}}
+        <P>
+            <font color="blue">Saldo Positivo - R${{="{:,}".format(round(saldo,1)).replace(",",".")}}0</font>
+        </P>
+        {{else:}}
+         <P>
+            <font color="red">Saldo Negativo  R${{="{:,}".format(round(saldo,1)).replace(",",".")}}0</font>
+        </P>
+        {{pass}}
+
+  </div>
+</div>
+</div>
+<br><br>
+
+            </div>{{pass}} </div> </div> </div>

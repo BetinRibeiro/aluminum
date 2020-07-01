@@ -1,0 +1,105 @@
+{{extend 'layout.html'}}
+{{venda=0}}
+{{comissao=0}}
+{{comissaot=0}}
+{{vale=0}}
+{{caderno=0}}
+{{a=0}}
+{{total_fichas=0}}
+{{total_entradas=0}}
+{{saldof=0}}
+{{debitof=0}}
+<div class="row">
+    <div class="col-md-6">
+        <a  class="btn btn-outline-light" href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
+         {{if not projeto.venda_finalizada:}}
+            <a  class="btn btn-outline-light" href="{{=URL('criar_vendedor', args=projeto.id)}}"><i class="fa text-primary fa-user-plus  fa-2x"></i></a>
+        {{pass}}
+    </div>
+</div>
+                {{if len(rows)>0:}}
+              Equipe de Vendas {{=projeto.descricao}}
+                {{else:}}
+                Você precisa cadastrar um Vendedor
+                {{pass}}
+          <div class="table-responsive">
+           <table class="table table-bordered table-sm table-striped">
+					<thead>
+					  <tr>
+                          <th>#</th>
+						<th>NOME</th>
+						<th>VENDA</th>
+						<th>COMISSÃO</th>
+						<th>VALE</th>
+                          <th>CADERNO</th>
+                          <th>SALDO</th>
+                            {{if not projeto.venda_finalizada:}}
+                            <th id="noprint">ALTERAR</th>
+                          {{pass}}
+					  </tr>
+					</thead>
+					<tbody>
+						{{for row in rows:}}
+                       
+					  <tr>{{a+=1}}
+                          <td>{{=a}}º</td>
+                          
+                        <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">{{=row.nome}}</a></td>
+                          <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,}".format(round(row.total_vendas,1)).replace(",",".")}}0 - <span><b>{{="{:,}".format(round(row.comissao_venda)).replace(".0","")}}% </b></span></a></td>
+                           {{comissao=row.total_vendas}}
+                          {{if comissao > 0:}}
+                          {{comissao=row.total_vendas*row.comissao_venda/100}}
+{{comissaot+=comissao}}
+                          {{pass}}
+						<td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,}".format(round(comissao,1)).replace(",",".")}}0</a></td>
+                        <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,}".format(round(row.vale_saida,1)).replace(",",".")}}0</a></td>
+                        <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0</a></td>
+                          {{saldo=comissao-row.vale_saida-row.total_vale_caderno}}
+                          {{if saldo > 0:}}
+						<td>R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</td>
+                          {{else:}}
+                          <td class="text-danger">R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</td>
+                          {{pass}}
+                           {{if not projeto.venda_finalizada:}}
+                          <td id="noprint"><a href="{{=URL('alterar_vendedor', args=row.id)}}" class="btn"><i class="fa text-warning fa-exchange" ></i></a></td>
+                          {{pass}}
+					  </tr>
+                         {{if saldo>0:}}
+                        {{saldof+=saldo}}
+                        {{else:}}
+                        {{debitof+=saldo}}
+                        {{pass}}
+                        {{total_entradas+=row.total_entradas}}
+                        {{venda+=row.total_vendas}}
+                        {{comissao+=comissao}}
+                        {{vale+=row.vale_saida}}
+                        {{caderno+=row.total_vale_caderno}}
+                        {{total_fichas+=row.total_fichas}}
+					  {{pass}}
+                         <tr>
+						<th>#</th>
+                             <th></th>
+						<th>R$ {{="{:,}".format(round(venda,1)).replace(",",".")}}0</th>
+						<th>R$ {{="{:,}".format(round(comissaot,1)).replace(",",".")}}0</th>
+						<th>R$ {{="{:,}".format(round(vale,1)).replace(",",".")}}0</th>
+                          <th>R$ {{="{:,}".format(round(caderno,1)).replace(",",".")}}0</th>
+                          <th>R$ {{="{:,}".format(round(saldof,1)).replace(",",".")}}0</th>
+                               {{if not projeto.venda_finalizada:}}
+                             <th id="noprint">#</th>
+                             {{pass}}
+					  </tr>
+					</tbody>
+				  </table>
+</div>
+ {{if not projeto.venda_finalizada:}}
+{{projeto.total_debito_vendedor=debitof}}
+{{projeto.total_saldo_vendedor=saldof}}
+{{projeto.total_entradas_venda=total_entradas}}
+{{projeto.quant_fichas_venda=total_fichas}}
+{{projeto.total_venda_prazo=venda}}
+{{projeto.total_comissao_venda=comissaot}}
+{{projeto.total_vales_vendedor=vale}}
+{{projeto.total_caderno_vendedor=caderno}}
+{{projeto.quant_vendedores=a}}
+{{projeto.update_record()}}
+{{pass}}

@@ -1,0 +1,99 @@
+{{extend 'layout.html'}}
+{{total=0}}
+{{a=1}}
+<div class="py-1">
+      <div class="row">
+        <div class="col-md-6" >
+            <a class="btn btn-outline-light" href="{{=URL('acesso_particao_cobranca', args=[sub_venda.id])}}"> 
+                <i class="fa text-danger fa-arrow-left  fa-2x"></i>
+            </a>
+        <a class="btn btn-outline-light" href="{{=URL('inserir_registro', args=[sub_venda.id,tipo])}}">
+            <i class="fa text-success fa-plus fa-2x"></i>
+            </a>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group row">
+                <input type="text" class="form-control col-10 col-form-label" name="busca" placeholder="Faça uma pesquisa" />
+              <div class="col-2">
+                  <a class="btn btn-outline-light col-2 botao">
+                      <i class="fa text-success fa-search  fa-2x"></i>
+                  </a>
+                </div>
+            </div>
+      </div>
+  </div>
+<marquee direction="left">
+    <a class="navbar-brand text-info"> <h6>Após inserir o registro você só poderá alterar o mesmo até 72hrs depois do cadastro! Caso necessite fazer alguma alteração entre em contato com o Administrador</h6></a>
+</marquee>
+
+        {{=tipo}} da cobrança de {{=sub_venda.primeira_cidade}}
+        
+            <table class="table table-bordered table-sm table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Data</th>
+                  <th>Descrição</th>
+                  <th>Valor</th>
+                  <th>Alterar</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {{for row in rows:}}
+                <tr>
+                  <th>{{=a}}</th>
+                    {{a+=1}}
+                  <td>{{=("{}/{}/{}".format(row.data_inicio.day,row.data_inicio.month,row.data_inicio.year))}}</td>
+                  <td>{{=row.descricao}}</td>
+                  <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
+                    {{if not (dataontem>=row.data_inicio) or(usuario.id!=sub_venda.auth_user):}}
+                  <td><a href="{{=URL('alterar_registro', args=[row.id,tipo])}}"><i class="fa text-warning fa-exchange" ></i></a></td>
+                    {{else:}}
+                    <td><i class="fa text-dark fa-exchange" ></i></td>
+                    {{pass}}
+                    {{total+=row.valor}}
+                    {{if (usuario.id!=sub_venda.auth_user) and(row.tipo=="Deposito"):}}
+                    <tr>
+                        <th>OBS:</th>
+                        <td colspan="4">{{=row.observacao}}</td>
+                </tr>
+                  {{pass}}
+                  {{pass}}
+                <tr>
+                  <th>#</th>
+                  <th></th>
+                  <th>Total</th>
+                  <th>R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0</th>
+                  <td>#</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+{{if not consul:}}
+{{if tipo=="Recebimento":}}
+{{sub_venda.total_recebido=total}}
+{{sub_venda.update_record()}}
+{{pass}}
+
+{{if tipo=="Deposito":}}
+{{sub_venda.total_deposito=total}}
+{{sub_venda.update_record()}}
+{{pass}}
+
+{{if tipo=="Caderno":}}
+{{sub_venda.total_caderno_cobrador=total}}
+{{sub_venda.update_record()}}
+{{pass}}
+
+{{pass}}
+<script>
+    var inputElement = document.querySelector('input[name=busca]');
+    var btnElement = document.querySelector('a.botao');
+
+    btnElement.onclick = function(){
+     var busca= inputElement.value;
+        window.location.href = "{{=URL('lista_registros', args=[sub_venda.id,tipo])}}"+"/"+busca
+
+    }
+
+</script>

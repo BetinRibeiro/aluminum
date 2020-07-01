@@ -1,0 +1,138 @@
+{{extend 'layout.html'}}
+{{investimento=0}}
+<a class="btn btn-outline-light" href="{{=URL('fsprojetos', args=[projeto.empresa])}}">
+                <i class="fa text-danger fa-arrow-left  fa-2x"></i>
+                </a>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <center style="background-color:white; color:black; padding:1px">
+                    <h3>Artefatos de alumínio
+                  </h3>
+                </center>
+            </div>
+            <div class="col-md-4">
+                <div class="blockquote">
+                    <p class="mb-0">{{=projeto.descricao}}</p>
+                    <div class="blockquote-footer">artefatos de alumínio</div>
+                </div>
+                <ol>
+                    <li>
+                         <i class="fa fa-id-card-o  text-danger mr-2"></i>
+                         <a class="text-danger" class="nav-link" href="{{=URL('projeto','prestacao_venda', args=projeto.id)}}">PRESTAÇÃO DE CONTAS</a>
+                     </li>
+                    <hr>
+                    
+                     <li>
+                         <i class="fa fa-id-card-o  text-primary mr-2"></i>
+                         <a href="{{=URL('chefe','acesso_chefe', args=projeto.id)}}">&nbsp;DEFINIR CHEFE</a>
+                     </li>
+                    <hr>
+                    
+                    <li>
+                        <i class="fa fa-bar-chart text-primary mr-2"></i>
+                        <a href="{{=URL('registro','acesso_registro_venda', args=[projeto.id,'venda_vista'])}}">&nbsp;VENDA À VISTA</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-bars text-primary mr-2"></i>
+                        <a href="{{=URL('mercadoria','acesso_carradas', args=projeto.id)}}">MERCADORIA</a>
+                    </li>
+                    <hr>
+                     <li>
+                         <i class="fa fa-window-restore text-primary mr-2"></i>
+                                <a href="{{=URL('venda','acesso_particao', args=projeto.id)}}">&nbsp;PARTIÇÕES</a>
+                            </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-users  text-primary mr-2"></i>
+                        <a href="{{=URL('equipe_venda','acesso_equipe', args=projeto.id)}}">&nbsp;EQUIPE DE VENDAS</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-user-circle-o text-primary mr-2"></i>
+                        <a href="{{=URL('funcionario','acesso_funcionario', args=projeto.id)}}">&nbsp;FUNCIONARIOS</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-sticky-note-o text-primary mr-2"></i>
+                        <a href="{{=URL('despesa','acessar_despesa', args=[projeto.id,'Despesa_Venda'])}}">&nbsp;DESPESAS (VENDA)</a>
+                    </li>
+                   
+                   
+                     <hr>
+                    <li>
+                        <i class="fa fa-list-ol  text-primary mr-2"></i>
+                        <a href="{{=URL('chefe','relatorio', args=projeto.id)}}">&nbsp;RELATORIO</a>
+                    </li>
+                     {{if projeto.total_venda_prazo>0:}}
+                    <hr>
+                            <li>
+                                <i class="fa fa-life-ring text-primary mr-2"></i><a href="{{=URL('cobranca','acessar_cobrancas', args=projeto.id)}}">&nbsp;COBRANÇA</a></li>
+                            {{pass}}
+                </ol>
+                    <hr>
+                    <br>
+               </div>
+    <div class="border border-dark col-md-8">
+        <ol>
+            <hr>
+            <li><b>Definir Chefe</b></li>
+            <ol>
+                <li>Listagem dos login's (Para liberar para o chefe)</li>
+                <ol>
+                    <li>Alterar Inserindo o Chefe </li>
+                    <ol>
+                        <li>(Descrição, Vale do Chefe, Adiantamento e Comissão)</li>
+                    </ol>
+                </ol>
+            </ol><hr>
+            <li><b>Venda à vista</b></li>
+            <ol>
+                <li>Lista todas as vendas à vista</li>
+                <li>Cadastra e altera registro de venda à vista</li>
+            </ol>
+            <hr>
+            <li><b>Mercadoria (Conjunto de Todas as Carradas Quantidade, Preço e Custo)</b></li>
+            <ol>
+                <li>Cadastrar Carradas (Descrição e Data)</li>
+                <ol>
+                <li>Cadastrar Itens (Quantidade, Descrição, Preço e Custo)</li>
+            </ol>
+            </ol><hr>
+            <li><b>Partições da Venda para Cobrança</b></li>
+            <ol>
+                <li>Lista todas as Partes da Cobrança</li>
+                <li>Cadastra e altera dados da partição da cobrança</li>
+            </ol><hr>
+            <li><b>Equipe de Vendas</b></li>
+            <ol>
+                <li>Lista todos Vendedores, vendas, comissões e saldo</li>
+                <li>Cadastra e altera Vendedor e inserção de venda e vales</li>
+                <ol>
+                    <li>Aloca venda em cada partição, uma a um ou agrupado</li>
+                </ol>
+            </ol><hr>
+            <li><b>Funcionarios</b></li>
+            <ol>
+                <li>Lista todos funcionarios com salario fixo</li>
+                <li>Cadastra e altera funcionario e inserção de salario e vales</li>
+            </ol><hr>
+            <li><b>Despesa da Venda</b></li>
+            <ol>
+                <li>Todos os gastos da venda</li>
+                <li>Dividido por categoria, dinheiro do adiantamento e venda é vista</li>
+            </ol><hr>
+            <li><b>Relatorio do Chefe</b></li>
+            <ol>
+                <li>Mercadoria (estoque, vendas e retorno)</li>
+                <li>Dinheiro (valores á prestar conta)</li>
+                <li>Comissão e vales (chefe de equipe)</li>
+            </ol>
+        </ol>
+
+        </div>
+        </div>
+    </div>
+</div>

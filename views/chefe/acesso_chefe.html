@@ -1,0 +1,100 @@
+{{extend 'layout.html'}}
+
+<div class="row">
+    <div class="col-md-6">
+        <a  class="btn btn-outline-light" href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> 
+            <i class="fa text-danger fa-arrow-left  fa-2x"></i>
+        </a>
+    </div>
+</div>
+<div class="row">
+    {{if len(rows)>0:}}
+    <div class="col-md-6">
+    Lista de Operadores da Empresa
+        <div class="table-responsive">
+            <table class="table table-striped table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Senha Padrão</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{a=1}}
+                    {{for row in rows:}}
+                    <tr>
+                        <th scope="row">{{=a}}</th>
+                        {{if not projeto.venda_finalizada:}}
+                        <td><a href="{{=URL('alterar_dados_chefe', args=[projeto.id,row.auth_user])}}">{{=row.nome}}</a></td>
+                        {{else:}}
+                        <td>{{=row.nome}}</td>
+                        {{pass}}
+                        <td>{{=row.telefone}}</td>
+                    </tr>
+                    {{a+=1}}
+                    {{pass}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {{pass}}
+    <div class="col-md-6">
+        {{if not projeto.venda_finalizada:}}
+            <a class="btn btn-primary btn-lg btn-block" href="{{=URL('alterar_dados_chefe', args=[projeto.id,0])}}"> Alterar Dados do Chefe</a>
+          <br>
+            {{pass}}
+        <ul class="list-group">
+            
+            <h5><span><b>-Informações Chefe de Equipe</b></span></h5>
+             <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">
+                        <i class="fa text-primary fa-arrow-right"></i>
+                        <b>Nome do chefe </b>
+                    </h6>
+                </div>
+                <span class="text-muted">{{=projeto.nome_chefe}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">
+                        <i class="fa text-primary fa-arrow-right"></i>
+                        <b>Vale Chefe Equipe</b>
+                    </h6>
+                </div>
+                <span class="text-muted">R$ {{="{:,}".format(round(projeto.vale_saida,1)).replace(",",".")}}0</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">
+                        <i class="fa text-primary fa-arrow-right"></i>
+                        <b>Vale Caderno Chefe</b>
+                    </h6>
+                </div>
+                <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_caderno_chefe,1)).replace(",",".")}}0</span>
+            </li>
+            {{if projeto.comissao_vista>0:}}
+            <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">
+                        <i class="fa text-primary fa-arrow-right"></i>
+                        <b>Comissão Venda à Vista</b>
+                    </h6>
+                </div>
+                <span class="text-muted">{{="{:,}".format(round(projeto.comissao_vista)).replace(".0","")}}%</span>
+            </li>
+            {{pass}}
+             <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">
+                        <i class="fa text-primary fa-arrow-right"></i>
+                        <b>Comissão Venda Prazo</b>
+                    </h6>
+                </div>
+                <span class="text-muted">{{="{:,}".format(round(projeto.comissao_praso)).replace(".0","")}}%</span>
+            </li>
+        </ul>
+       
+    </div>
+</div>

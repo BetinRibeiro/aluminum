@@ -1,0 +1,58 @@
+{{extend 'layout.html'}}
+
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-outline-light" href="{{=URL('acesso_particao_cobranca', args=[sub_venda.id])}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
+    </div>
+</div>
+<div class="row">
+    {{if len(rows)>0:}}
+    <div class="col-md-6">
+    Lista de Operadores da Empresa
+        <div class="table-responsive">
+            <table class="table table-striped table-borderless">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Telefone</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{a=1}}
+                    {{for row in rows:}}
+                    <tr>
+                        <th scope="row">{{=a}}</th>
+                        {{if not sub_venda.cobranca_finalizada:}}
+                        <td><a href="{{=URL('alterar_dados_cobrador', args=[sub_venda.id,row.auth_user])}}">{{=row.nome}}</a></td>
+                        {{else:}}
+                        <td>{{=row.nome}}</td>
+                        {{pass}}
+                        <td>{{=row.telefone}}</td>
+                    </tr>
+                    {{a+=1}}
+                    {{pass}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {{pass}}
+    <div class="col-md-6">
+        <div class="card">
+            {{if not sub_venda.cobranca_finalizada:}}
+            <div class="card-header"><a href="{{=URL('alterar_dados_cobrador', args=[projeto.id,0])}}"> Alterar Dados do Cobrador</a></div>
+            {{else:}}
+            <div class="card-header">Dados do Cobrador</div>
+            {{pass}}
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>Cobrador - {{=sub_venda.nome_cobrador}}</p>
+                    <p>Adiantamento - R$ {{="{:,}".format(round(sub_venda.adiantamento_cobranca,1)).replace(",",".")}}0</p>
+                    <p>Vale Saida - R$ {{="{:,}".format(round(sub_venda.total_vale_saida_cobrador,1)).replace(",",".")}}0</p>
+                    <p>Vale de Caderno - R$ {{="{:,}".format(round(sub_venda.total_vale_caderno_cobrador,1)).replace(",",".")}}0</p>
+                    <p>Comissão - {{=sub_venda.comissao_cobranca}}%</p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+{{extend 'layout.html'}}
+<h5>{{=empresa.nome}}</h5>
+{{if len(rows)>0:}}
+<div class="table-responsive" >
+        <table class="table table-bordered table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">DESCRIÇÃO</th>
+                <th scope="col">VENDA</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{for row in rows:}}
+                  <tr>
+                    <td><a  href="{{=URL('projeto','acesso_projeto', args=row.id)}}">{{=row.descricao}}</a></td>
+                      <td>R$ {{="{:,}".format(round(row.total_venda_prazo,1)).replace(",",".")}}0</td>
+                  </tr>
+                  {{pass}}
+          </tbody>
+        </table>
+      </div>
+{{pass}}
+<hr>
+{{if len(rowscob)>0:}}
+<div class="table-responsive" >
+        <table class="table table-bordered table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">DATA</th>
+               <th scope="col">CIDADE</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{for row1 in rowscob:}}
+                  <tr>
+                    <td><a  href="{{=URL('cobranca','acesso_cobranca', args=row1.id)}}">{{=("{}/{}/{}".format(row1.data_inicio_cobranca.day,row1.data_inicio_cobranca.month,row1.data_inicio_cobranca.year))}}</a></td>
+                      <td>{{=row1.primeira_cidade}}</td>
+                  </tr>
+            {{pass}}
+          </tbody>
+        </table>
+      </div>
+{{pass}}

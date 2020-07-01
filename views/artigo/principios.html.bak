@@ -1,0 +1,120 @@
+{{extend 'layout.html'}}
+ <div class="container">
+
+    <div class="row">
+
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <!-- Title -->
+        <h1 class="mt-4">Quais são nossas crenças</h1>
+        <blockquote>Por que não fazemos negocio com todo mundo?.</blockquote>
+
+
+        <!-- Preview Image -->
+        <img class="img-fluid rounded" src="https://cdn.pixabay.com/photo/2018/04/24/14/07/purchase-3347053_960_720.jpg" alt="">
+
+        <hr>
+
+        <p>
+Trabalhar duro dá muita sorte, pois pessoas podem ser maiores que organizações, acreditamos que nossa reputação é maior que negócios, relacionamento são mais importantes que nossos negócios.
+<p></p>
+Quanto mais você consegue controlar seu negocio, mais você pode tomar decisões mais acertadas. Aprender e compreender sistemas e processos que faram sua organização crescer. O maior desafio de todas organizações é o próprio sucesso. A medida que as organizações crescem o nível de dificuldade de controlar cresce também, pois mais pessoas passam a ser envolvidas.
+<p></p>
+Tudo que pode ser mensurável pode ser feito, cada pessoa tem seu próprio meio de desenvolver alguma coisa se conseguirmos organizar tudo isso de maneira harmônica nada é impossível, quando as pessoas colocam seus próprios motivos dentro de algo, elas passam a desenvolver a suas atividades de maneira mais consistente.
+<p></p>
+Imagina um meio que você possa medir a produtividade de alguma pessoa, saber medir o valor de uma atividade pode fazer com que a gestores foquem mais onde tem que ser focado, pessoas fazem a marca ficar mais forte.
+<p></p>
+O plano deve ser sempre deixar a companhia nas mãos de outras pessoas, uma corporação tem que se tornar autossustentável, se entregar as pessoas as ferramentas certas e torná-las mais produtivas então cada uma independente da sua situação, terá capacidade de atingir o seu maior potencial.
+<p></p>
+Quando pequenas empresas passam a se parecerem com empresas grandes, acontece algo muito obvio, essa tal empresa passa a ser grande. 
+<p></p>
+Saber o que fazer e como fazer é a chave, mudanças sutis, altera comportamentos, altera decisões e impacta o modo como uma companhia se estrutura para o futuro. Infelizmente poucos dão a oportunidade de pessoas boas atingirem seu potencial máximo.
+<p></p>
+Conduzir companhias para as próximas gerações, não são os currículos que vão garantir isso, são pessoas que estão alinhadas com bom nível de produtividade e envolvimento emocional com a empresa.
+<p></p>
+Cuide das pessoas e as pessoas cuidarão de você. Quando as pessoas sentem a sensação de pertencimento é o que todos grandes lideres buscam, pois quando conseguem isso simplesmente conseguem manter alinhados uma legião de pessoas.
+<p></p>
+Dinheiro nunca pode ser a causa e sim o resultado, todo resultado advêm de neveis de produtividade alta, mas a produtividade não necessariamente está ligada a quantidade de horas de atividade.
+<p></p>
+Clareza , disciplina e consistência, nossas tomadas de decisões tem mais haver com quem somos, o sucesso é uma consequência natural de ter as pessoas certas nos lugares certos.
+<p></p>
+Qualquer empresa com o mesmo poder aquisitivo tem acesso aos mesmos fornecedores, estruturas e mão de obra qualificada, então por que algumas empresas prosperam e outras não? Em condições mais ou menos iguais equipes podem dar resultados absurdamente diferentes? A única diferença é a compreensão do por que as pessoas fazem o que fazem, o nível de entendimento do projeto e do comprometimento fazem as pessoas realizarem projetos com resultados concretos.
+<p></p>
+Há uma diferença entre correr com o coração a toda e com os olhos fechados e correr a toda com os olhos bem abertos. A lei da difusão da informação fazem as pessoas serem realmente autenticas.
+</p>
+
+        <hr>
+
+        <!-- Author -->
+        <p class="lead">
+          Autor
+          <a href="#">Rogoberto Ribeiro</a>
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>Postagem dia 25 Mar, 2020 as 7:45 PM</p>
+
+        <hr>
+
+
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+       
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Categories</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="https://rogoberto.pythonanywhere.com/aluminum/artigo/quebrei">Deu errado?</a>
+                  </li>
+                  <li>
+                    <a href="https://rogoberto.pythonanywhere.com/aluminum/artigo/motivos">Seu motivo</a>
+                  </li>
+                  <li>
+                    <a href="https://rogoberto.pythonanywhere.com/aluminum/artigo/principios">Nossos principios</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="https://go.hotmart.com/S24500447A">Curso Gestão</a>
+                  </li>
+                  <li>
+                    <a>Outro</a>
+                  </li>
+                  <li>
+                    <a>Outro</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Side Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Todas as coisas cooperam para aqueles que temem ao senhor</h5>
+          <div class="card-body">
+            Pessoas que vivem presas no passado ou no futuro não conseguem construir nada, foque no que você pode fazer agora
+          </div>
+           
+        </div>
+             <h4>Precisa ter noções básicas?</h4>
+            <a href="https://go.hotmart.com/S24500447A" rel="nofollow"><img src="https://c1.staticflickr.com/9/8242/27842259494_3f19960641_o.png" border="0" width="336" height="280" /></a>
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>

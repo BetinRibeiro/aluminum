@@ -1,0 +1,65 @@
+{{extend 'layout.html'}}
+{{if len(rows)>0:}}
+<div class="section">
+    <div class="container">
+<h5>{{=empresa.nome}}</h5>
+        <div class="row">
+            <div class="col-md-6">
+                 <H3>
+                    Projetos de Venda
+                </H3>
+                 <a class="btn btn-outline-light"  href="{{=URL('default','criar_projeto', args=empresa.id)}}">
+            <i class="fa text-primary fa-plus-square fa-2x" ></i>
+        </a>
+               
+<div class="table-responsive" >
+        <table class="table table-bordered table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">DESCRIÇÃO</th>
+                <th scope="col">VENDA</th>
+               <th scope="col">ALTERAR</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{for row in rows:}}
+                  <tr>
+                    <td><a  href="{{=URL('projeto','acesso_projeto', args=row.id)}}">{{=row.descricao}}</a></td>
+                      <td>R$ {{="{:,}".format(round(row.total_venda_prazo,1)).replace(",",".")}}0</td>
+                    <td><a href="{{=URL('default','alterar_projeto', args=row.id)}}"><i class="fa mr-2 fa-exchange text-warning" ></i></a></td>
+                  </tr>
+                  {{pass}}
+          </tbody>
+        </table>
+      </div>
+{{pass}}
+<hr>
+      </div>
+            <div class="border border-danger col-md-6">
+                <h3>
+                    Despesas Locais
+                </h3>
+                <a  class="btn btn-outline-light" href="{{=URL('despesa','criar_classe_despesa_local', args=[empresa.id])}}"><i class="fa text-success fa-plus fa-2x"></i></a>
+                <div class="table-responsive" >
+        <table class="table table-bordered table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">DESCRIÇÃO</th>
+                <th scope="col">VALOR</th>
+               <th scope="col">ALTERAR</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{for row in rowsd:}}
+                  <tr>
+                    <td><a  href="{{=URL('despesa','acessar_despesa_local', args=row.id)}}">{{=row.descricao}}</a></td>
+                      <td>R$ {{="{:,}".format(round(row.total_classe,1)).replace(",",".")}}0</td>
+                    <td><a href="{{=URL('despesa','alterar_classe_despesa_local', args=row.id)}}"><i class="fa mr-2 fa-exchange text-warning" ></i></a></td>
+                  </tr>
+                  {{pass}}
+          </tbody>
+        </table>
+            </div>
+      </div>
+      </div>
+      </div>

@@ -1,0 +1,76 @@
+{{extend 'layout.html'}}
+
+{{listadata=[]}}
+{{lista=[]}}
+{{total=0.0}}
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-outline-light" href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
+        {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
+            <a  class="btn btn-outline-light" href="{{=URL('criar_classe_despesa', args=[projeto.id,tipodesp])}}"><i class="fa text-success fa-plus fa-2x"></i></a>
+        {{pass}}
+    </div>
+</div>
+        
+                {{if len(rows)>0:}}
+                {{=tipodesp}} {{=projeto.descricao}}
+                {{else:}}
+                Você precisa cadastrar um tipo de despesa
+                {{pass}}
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-borderless table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>DESCRIÇÃO</th>
+                                <th>TOTAL</th>
+                                {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
+                                <th>ALTERAR</th>
+                                {{pass}}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{a=1}}
+                            {{for row in rows:}}
+                            <tr>
+                                <td>{{=a}}</td>
+                                <td>
+                                    
+                                    <a href="{{=URL('acesso_despesa', args=[row.id,tipodesp])}}">{{=row.descricao}}</a>
+                                </td>
+                                <td>R$ {{="{:,}".format(round(row.total_classe,2)).replace(",",".")}}0</td>
+                                {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
+                                <td>
+                                    <a href="{{=URL('alterar_classe_despesa', args=[row.id,tipodesp])}}"><i class="fa text-warning fa-exchange" ></i></a>
+                                </td>
+                                {{pass}}
+                                {{listadata+=[a]}}
+                                {{lista+=[row.total_classe]}}
+                                {{a+=1}}
+                            </tr>
+                            {{total+=row.total_classe}}
+                            {{pass}}
+                            <tr>
+                                <th>#</th>
+                                <th>#</th>
+                                <th>R$ {{="{:,}".format(round(total,2)).replace(",",".")}}0</th>
+                                {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
+                                <th></th>
+                                {{pass}}
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+{{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
+{{if tipodesp=="Despesa_Local":}}
+{{projeto.total_despesa_local=total}}
+{{projeto.update_record()}}
+
+{{elif tipodesp=="Despesa_Venda":}}
+{{projeto.total_despesa_venda=total}}
+{{projeto.update_record()}}
+
+
+{{pass}}
+{{pass}}

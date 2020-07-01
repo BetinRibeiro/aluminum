@@ -1,0 +1,45 @@
+{{extend 'layout.html'}}
+<a class="btn btn-outline-light" href="{{=URL('default','acesso_inicial')}}">
+                <i class="fa text-danger fa-arrow-left  fa-2x"></i>
+                </a>
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <center style="background-color:white; color:black; padding:1px">
+                    <h3>Betinho Acesso Admin</h3>
+                </center>
+            </div>
+            <div class="col-md-4">
+              
+                <ol>
+                    <li>
+                        <i class="fa fa-bar-chart text-success mr-2"></i>
+                        <a class="text-info" href="{{=URL('usuario','fs', args=[projeto.id])}}">&nbsp;VER COMO FLAVIO</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-bar-chart text-primary mr-2"></i>
+                        <a href="{{=URL('usuario','abencoado', args=[projeto.id])}}">&nbsp;VER COMO MEME</a>
+                    </li>
+                    <hr>
+                     <li>
+                        <i class="fa fa-bar-chart text-primary mr-2"></i>
+                        <a href="{{=URL('usuario','fscontador', args=[projeto.id])}}">&nbsp;VER COMO HIAGO</a>
+                    </li>
+                    <hr>
+                      <li>
+                        <i class="fa fa-bar-chart text-primary mr-2"></i>
+                        <a href="{{=URL('usuario','chefefs', args=[projeto.id])}}">&nbsp;VER COMO CHEFE FS</a>
+                    </li>
+                    <hr>
+                    <li>
+                        <i class="fa fa-bars text-primary mr-2"></i>
+                        <a href="{{=URL('usuario','acesso_completo', args=projeto.id)}}">VER COMPLETO</a>
+                    </li>
+                    <hr>
+                    
+                </ol>
+                    <hr>
+                    <br>
+               </div>

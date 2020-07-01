@@ -1,0 +1,84 @@
+{{extend 'layout.html'}}
+{{pcs=0}}
+{{pco=0}}
+{{cst=0}}
+<div class="row">
+    <div class="col-md-6">
+        <a  class="btn btn-outline-light" href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
+        {{if not projeto.venda_finalizada:}}
+            <a  class="btn btn-outline-light" href="{{=URL('mercadoria','criar_carrada', args=projeto.id)}}"><i class="fa text-success fa-plus fa-2x"></i></a>
+        {{pass}}
+    </div>
+</div>
+
+            {{if len(rows)>0:}}
+CARRADAS ENVIADAS PARA {{=projeto.descricao}}
+            {{else:}}
+FAÇA SEU PRIMEIRO CADASTRO DE CARRADA
+            {{pass}}
+ <div class="table-responsive">
+            <table class="table table-sm table-striped">
+              <thead class="thead-dark">
+                <tr>
+                  <th>Descrição</th>
+                  <th>Data</th>
+                  <th>Q. Peças</th>
+                  <th>Preço</th>
+                    {{if desbloqueado:}}
+                  <th id="noprint">Custo</th>
+                    <th id="noprint">%</th>
+                    {{pass}}
+                    {{if not projeto.venda_finalizada:}}
+                  <th id="noprint">Alterar</th>
+                    {{pass}}
+                </tr>
+              </thead>
+              <tbody>
+{{for row in rows:}}
+                <tr>
+                  <th>{{=row.descricao}}</th>
+                  <th><a href="{{=URL('mercadoria','acesso_item_carrada', args=row.id)}}" >{{=("{}/{}/{}".format(row.data_envio.day,row.data_envio.month,row.data_envio.year))}}</a></th>
+                  <td >{{=row.total_pecas}}</td>
+                  <td>R$ {{="{:,}".format(round(row.total_preco,1)).replace(",",".")}}0</td>
+                    {{if desbloqueado:}}
+                  <td  id="noprint">R$ {{="{:,}".format(round(row.total_custo,1)).replace(",",".")}}0</td>
+                     {{if (row.total_preco>0)and(row.total_custo>0):}}
+                  <td  id="noprint">{{="{:,}".format(round(row.total_preco/row.total_custo*100)).replace(".0","")}}%</td>
+                    {{else:}}
+                    <td  id="noprint">%</td>
+                    {{pass}}
+                    {{pass}}
+                    {{if not projeto.venda_finalizada:}}
+                    <td id="noprint"><a href="{{=URL('mercadoria','alterar_carrada', args=row.id)}}"><i class="fa text-warning fa-exchange" ></i></a></td>
+                    {{pass}}
+                </tr>
+
+{{pcs+=row.total_pecas}}
+{{pco+=row.total_preco}}
+{{cst+=row.total_custo}}
+{{pass}}
+                <tr>
+                  <th><i class="fa text-dark fa-bars"></i></th>
+                  <th><i class="fa text-dark fa-bars"></i></th>
+                  <th>{{=pcs}}</th>
+                  <th>R$ {{="{:,}".format(round(pco,1)).replace(",",".")}}0</th>
+                   {{if desbloqueado:}}
+                  <th  id="noprint">R$ {{="{:,}".format(round(cst,1)).replace(",",".")}}0</th>
+                     {{if (cst>0)and(pco>0):}}
+                  <td  id="noprint">{{="{:,}".format(round(pco/cst*100)).replace(".0","")}}%</td>
+                    {{else:}}
+                    <td  id="noprint">%</td>
+                    {{pass}}
+                    {{pass}}
+                    {{if not projeto.venda_finalizada:}}
+                  <th id="noprint"><i class="fa text-dark fa-bars"></i></i></th>
+     {{pass}}
+                </tr>
+              </tbody>
+            </table>
+{{if not projeto.venda_finalizada:}}
+{{projeto.total_pecas_mercadoria=pcs}}
+{{projeto.total_preco_mercadoria=pco}}
+{{projeto.total_custo_mercadoria=cst}}
+{{projeto.update_record()}}
+{{pass}}

@@ -1,0 +1,136 @@
+{{extend 'layout.html'}}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" >
+    <div class="container">
+        <a class="navbar-brand" href="{{=URL('default','alterar_projeto', args=projeto.id)}}">
+            <i class="fa d-inline fa-lg fa-hashtag"></i>
+            <b> {{=projeto.descricao}}</b>
+        </a>
+        <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar10">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar10">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{=URL('default','acesso_inicial')}}">Projetos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{=URL('projeto','prestacao_venda', args=projeto.id)}}">Prestação Venda</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="py-3" >
+    <div class="container">
+        <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header"> Mercadoria</div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="fa fa-cogs  text-primary mr-2"></i>
+                                <a href="{{=URL('default','alterar_projeto', args=projeto.id)}}">Alterar Dados</a>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-truck  text-primary mr-2"></i>
+                                <a href="{{=URL('mercadoria','acesso_carradas', args=projeto.id)}}">Carradas</a>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-sort-amount-desc text-primary mr-2"></i>
+                                <a href="{{=URL('mercadoria','acesso_item', args=projeto.id)}}">Retorno</a>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-id-card-o  text-primary mr-2"></i>
+                                <a href="{{=URL('chefe','acesso_chefe', args=projeto.id)}}">&nbsp;Chefe Equipe</a>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-file-text-o text-primary mr-2"></i>
+                                <a href="{{=URL('mercadoria','relatorio_item_carrada', args=projeto.id)}}">&nbsp;Relatório(Merc)</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <br>
+            </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header" style="">Equipe</div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><i class="fa fa-bars text-primary mr-2"></i>
+                                <a href="{{=URL('registro','acesso_registro_venda', args=[projeto.id,'venda_vista'])}}">&nbsp;Venda à Vista</a>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-window-restore text-primary mr-2"></i>
+                                <a href="{{=URL('venda','acesso_particao', args=projeto.id)}}">&nbsp;Partições</a>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-users text-primary mr-2"></i>
+                                <a href="{{=URL('funcionario','acesso_funcionario', args=projeto.id)}}">&nbsp;Funcionario</a>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-sitemap text-primary mr-2"></i>
+                                <a href="{{=URL('equipe_venda','acesso_equipe', args=projeto.id)}}">&nbsp;Equipe Vendas</a>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-file-text text-primary mr-2"></i>
+                                <a href="{{=URL('chefe','relatorio', args=projeto.id)}}">&nbsp;Relatório Chefe</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <br>
+            </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header"> Despesa</div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <i class="fa fa-book text-primary mr-2"></i>
+                                <a>&nbsp;Despesa Local</a>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fa fa-book text-primary mr-2"></i>
+                                <a href="{{=URL('despesa','acessar_despesa', args=[projeto.id,'Despesa_Venda'])}}">&nbsp;Despesa na Venda</a>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-bars text-primary mr-2"></i>
+                                <a href="{{=URL('registro','acesso_registro_venda', args=[projeto.id,'caderno_chefe'])}}">&nbsp;Caderno Chefe</a>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-book text-primary mr-2"></i>
+                                <a href="{{=URL('registro','acesso_registro_venda', args=[projeto.id,'Gratificacao'])}}">&nbsp;Gratificação</a>
+                            </li>
+                            <li class="list-group-item"><i class="fa fa-book text-primary mr-2"></i>
+                                <a href="{{=URL('despesa','relatorio_despesa', args=projeto.id)}}">&nbsp;Relatório(Despesa)</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <br>
+            </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header"> Cobrança</div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            {{if projeto.total_venda_prazo>0:}}
+                            <li class="list-group-item">
+                                <i class="fa fa-life-ring text-primary mr-2"></i><a href="{{=URL('cobranca','acessar_cobrancas', args=projeto.id)}}">&nbsp;Cobrança</a></li>
+                            {{else:}}
+                            <li class="list-group-item">
+                                <i class="fa fa-life-ring text-primary mr-2"></i>&nbsp;Cobrança</li>
+                            {{pass}}
+                            {{if projeto.venda_finalizada:}}
+                            <li class="list-group-item">
+                                <i class="fa fa-life-ring text-primary mr-2"></i><a href="{{=URL('cobranca','saldo_quitacao', args=projeto.id)}}">&nbsp;Saldo Quitação</a></li>
+                            {{else:}}
+                            <li class="list-group-item">
+                                <i class="fa fa-life-ring text-primary mr-2"></i>&nbsp;Saldo Quitação</li>
+                            {{pass}}
+                            <li class="list-group-item">
+                                <i class="fa fa-life-ring text-primary mr-2"></i><a href="{{=URL('projeto','prestacao_individual', args=projeto.id)}}">&nbsp;Prestação Vendedor</a></li>
+                            <li class="list-group-item">
+                                <i class="fa fa-bell text-primary mr-2"></i>&nbsp;Relatorio Retorno</li>
+                            <li class="list-group-item">
+                                <i class="fa fa-paper-plane text-primary mr-2"></i>&nbsp;Projeção Ideal</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+</div>

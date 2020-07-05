@@ -33,13 +33,15 @@
       <div class="collapse navbar-collapse" id="navbar10">
         <ul class="navbar-nav ml-auto">
         {{if desbloqueado:}}
-            <li class="nav-item"> <a class="nav-link" href="{{=URL('dados_cobrador', args=sub_venda.id)}}">Cobrador</a> </li>{{pass}}
+            <li class="nav-item"> <a class="nav-link" href="{{=URL('dados_cobrador', args=sub_venda.id)}}">Cobrador</a> </li>
+            <li class="nav-item  text-muted"> <a class="btn btn-outline-primary" href="{{=URL('lista_registros', args=[sub_venda.id,'Deposito_extra'])}}">Depositos Extra</a></li>
+            {{pass}}
             <li class="nav-item"> <a class="nav-link" href="{{=URL('lista_registros', args=[sub_venda.id,'Recebimento'])}}">Recebimento</a> </li>
             <li class="nav-item"> <a class="nav-link" href="{{=URL('lista_registros', args=[sub_venda.id,'Deposito'])}}">Depositos</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{=URL('lista_registros', args=[sub_venda.id,'Caderno'])}}">Caderno</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{=URL('despesa_cobranca','acessar_despesa', args=sub_venda.id)}}">Despesas</a></li>
         {{if desbloqueado:}}
-            <li class="nav-item  text-muted"> <a class="btn btn-outline-primary" href="{{=URL('lista_registros', args=[sub_venda.id,'Deposito_extra'])}}">Depositos Extra</a></li>
+            
             <li class="nav-item"> <a class="nav-link" href="{{=URL('alocar_valores', args=[sub_venda.id])}}">Alocar Valores</a></li>{{pass}}
         </ul>
       </div>

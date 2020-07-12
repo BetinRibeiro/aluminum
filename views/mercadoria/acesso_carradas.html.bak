@@ -25,11 +25,11 @@ FAÇA SEU PRIMEIRO CADASTRO DE CARRADA
                   <th>Q. Peças</th>
                   <th>Preço</th>
                     {{if desbloqueado:}}
-                  <th>Custo</th>
+                  <th >Custo</th>
                     <th>%</th>
                     {{pass}}
                     {{if not projeto.venda_finalizada:}}
-                  <th id="noprint">Alterar</th>
+                  <th>Alterar</th>
                     {{pass}}
                 </tr>
               </thead>

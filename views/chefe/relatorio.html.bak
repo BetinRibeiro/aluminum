@@ -123,13 +123,17 @@
                  {{if projeto.total_devolucao_dinheiro>0:}}
               <li class="list-group-item d-flex justify-content-between">
                 <div>
+                    {{if projeto.empresa==3:}}
+                  <h6 class="my-0">Depositos</h6>
+                    {{else:}}
                   <h6 class="my-0">Dinheiro Devolvido</h6>
+                    {{pass}}
                 </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_devolucao_dinheiro,1)).replace(",",".")}}0</span>
               </li>
                 {{pass}}
               <li class="list-group-item d-flex justify-content-between"> <span><b>Dinheiro Apresentado</b></span> <b>R$ {{="{:,}".format(round(dinh_apresentado,1)).replace(",",".")}}0</b> </li>
               <br>
-                {{if diferencav>0:}}
+                {{if diferencav>=0:}}
               <li class="list-group-item d-flex justify-content-between bg-light">
                 <div class="text-success">
                   <h6 class="my-0">

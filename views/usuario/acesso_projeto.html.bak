@@ -18,9 +18,9 @@
 <font color="white">
     <marquee direction="left">
         {{if usuario.id==9:}}
-        <a class="navbar-brand text-danger"> <h6>Os itens da segunda carrada foram inseridos, coloque somente as quantidades!</h6></a>
+        <a class="navbar-brand text-danger"> <h6>Você está com {{=dias}} dias desde a primeira carrada</h6></a>
         {{else:}}
-        <a class="navbar-brand"> <h6>“As pessoas podem duvidar do que você diz, mas elas acreditarão no que você faz.” – Lewis Cass</h6></a>
+        <a class="navbar-brand"> <h6>Você está com {{=dias}} dias desde a primeira carrada</h6></a>
         {{pass}}
     </marquee>
 </font>
@@ -82,12 +82,6 @@
             <br>
             
         </div>
-          {{if usuario.id==24:}}
-<font color="red">
-    <marquee direction="left">
-        <h5>Acesso Limitado, Login de Teste - Para liberar todas as funções do sistema entre em contato com (88) 98112-6816</h5>
-    </marquee>
-</font>
-          {{pass}}
+          
     </div>
   </div>

@@ -6,7 +6,7 @@ def acesso_projeto():
     if len(db(db.carrada.projeto == projeto.id).select())>0:
         data= db(db.carrada.projeto == projeto.id).select(orderby=db.carrada.data_envio).first().data_envio
     else:
-        data= request.now
+        data= None
     #caso o usuario da empresa for diferênte do usuario logado
     #redireciona pois será um usuario do projeto (chefe) ou 
     #usuario da sub_venda(Cobrador)

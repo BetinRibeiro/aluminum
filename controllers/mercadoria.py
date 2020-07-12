@@ -69,9 +69,11 @@ def alterar_carrada():
     db.carrada.finalizada.readable = True
     db.carrada.finalizada.writable = True
     deletable=True
+    #caso o usuario seja diferênte do chefe ele pode finalizar a carrada
+    #ou liberar só o chefe que não pode alterar
     if empresa.auth_user!=auth.user.id:
-        db.carrada.finalizada.readable = False
-        db.carrada.finalizada.writable = False
+        db.carrada.finalizada.readable = True
+        db.carrada.finalizada.writable = True
         if carrada.finalizada:
             deletable=False
             db.carrada.data_envio.readable = True

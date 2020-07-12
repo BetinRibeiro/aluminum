@@ -69,9 +69,9 @@ def alterar_carrada():
     db.carrada.finalizada.readable = True
     db.carrada.finalizada.writable = True
     deletable=True
-    if empresa.auth_user=auth.user.id:
-        db.carrada.finalizada.readable = False
-        db.carrada.finalizada.writable = False
+    if empresa.auth_user!=auth.user.id:
+        db.carrada.finalizada.readable = True
+        db.carrada.finalizada.writable = True
         if carrada.finalizada:
             deletable=False
             db.carrada.data_envio.readable = True
@@ -82,6 +82,7 @@ def alterar_carrada():
     deletar =True
     if carrada.total_pecas>0:
         deletar =False
+        
     form = SQLFORM(db.carrada, request.args(0, cast=int), deletable=deletar)
     if form.process().accepted:
         session.flash = 'Atualizado'

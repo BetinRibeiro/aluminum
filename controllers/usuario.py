@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 @auth.requires_login()
 def acesso_projeto():
-    
-    usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
     empresa = db.empresa(projeto.empresa)
-    data= db(db.carrada.projeto == projeto.id).select(orderby=db.carrada.data_envio).first().data_envio
+    if len(db(db.carrada.projeto == projeto.id).select())>0:
+        data= db(db.carrada.projeto == projeto.id).select(orderby=db.carrada.data_envio).first().data_envio
+    else:
+        data= None
+    usuario=auth.user
     return locals()
 
 @auth.requires_login()

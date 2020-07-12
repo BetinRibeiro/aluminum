@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 @auth.requires_login()
 def acesso_projeto():
-    
+    projeto = db.projeto(request.args(0, cast=int))
+    empresa = db.empresa(projeto.empresa)
+    if len(db(db.carrada.projeto == projeto.id).select())>0:
+        data= db(db.carrada.projeto == projeto.id).select(orderby=db.carrada.data_envio).first().data_envio
+    else:
+        data= None
     usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
     empresa = db.empresa(projeto.empresa)
@@ -21,7 +26,7 @@ def betinho_acesso():
 def abencoado():
     projeto = db.projeto(request.args(0, cast=int))
     empresa = db.empresa(projeto.empresa)
-    data=rows = db(db.carrada.projeto == projeto.id).select(orderby=db.carrada.data_envio).first().data_envio
+    data=db(db.carrada.projeto == projeto.id).select(orderby=db.carrada.data_envio).first().data_envio
     return locals()
 @auth.requires_login()
 def fsprojetos():

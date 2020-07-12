@@ -31,9 +31,9 @@
                 <th>Preço</th>
                 <th>Total</th>
                 {{if desbloqueado:}}
-                <th id="noprint">Custo</th>
-                <th id="noprint">Total</th>
-                <th id="noprint">%</th>
+                <th >Custo</th>
+                <th >Total</th>
+                <th >%</th>
                 {{pass}}
                 
                 {{if not carrada.finalizada:}}
@@ -65,26 +65,26 @@
                             R$ {{="{:,}".format(round(row.preco_unitario*row.q_pcs,1)).replace(",",".")}}0
                     </td>
                     {{if desbloqueado:}}
-                    <td id="noprint">
+                    <td>
                                 R$ {{="{:,}".format(round(row.custo_unitario,1)).replace(",",".")}}0
                         </td>
-                        <td id="noprint">
+                        <td>
                                 R$ {{="{:,}".format(round(row.custo_unitario*row.q_pcs,1)).replace(",",".")}}0
                         </td>
                         {{if (total_preco>0)and(total_custo>0):}}
                     {{margem=total_preco/total_custo*100}}
                     {{if not (margem>=350) and (margem>250):}}
-                        <td id="noprint">
+                        <td>
                             <i class="fa text-warning fa-circle"></i>
                                 {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
                      {{elif margem>=350:}}
-                        <td id="noprint">
+                        <td>
                                 <i class="fa text-success fa-circle"></i>
                             {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
                       {{else:}}
-                        <td id="noprint">
+                        <td>
                             <i class="fa text-danger fa-circle"></i>
                                 {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
@@ -117,10 +117,10 @@
                     </th>
                     
                 {{if desbloqueado:}}
-                    <th id="noprint"
+                    <th
                         >R$ {{="{:,}".format(round(0,1)).replace(",",".")}}0
                     </th>
-                    <th id="noprint"
+                    <th
                         >R$ {{="{:,}".format(round(custo,1)).replace(",",".")}}0
                     </th>
                     {{pass}}

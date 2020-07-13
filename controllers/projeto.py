@@ -50,11 +50,11 @@ def alterar_ent_said():
     db.projeto.descricao.readable = False
     db.projeto.descricao.writable = False
 
-    db.projeto.adiantamento.readable = False
-    db.projeto.adiantamento.writable = False
+    db.projeto.adiantamento.readable = True
+    db.projeto.adiantamento.writable = True
 
-    db.projeto.total_acrescentado_dinheiro.readable = True
-    db.projeto.total_acrescentado_dinheiro.writable = True
+    db.projeto.total_acrescentado_dinheiro.readable = False
+    db.projeto.total_acrescentado_dinheiro.writable = False
 
     db.projeto.total_devolucao_dinheiro.readable = True
     db.projeto.total_devolucao_dinheiro.writable = True

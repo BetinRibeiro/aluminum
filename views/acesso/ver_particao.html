@@ -1,0 +1,100 @@
+{{extend 'layout.html'}}
+
+{{venda=0}}
+{{fichas_venda=0}}
+{{caderno=0}}
+{{entrada=0}}
+{{fichas_devolvidas=0}}
+{{valor_devolvido=0}}
+{{a=0}}
+
+{{tvenda=0}}
+{{tfichas_venda=0}}
+{{tcaderno=0}}
+{{tentrada=0}}
+{{tfichas_devolvidas=0}}
+{{tvalor_devolvido=0}}
+
+{{venda_atual=rows.first().id}}
+
+<div class="py-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <h5>Relatório de vendas da repartição - {{=sub_venda.primeira_cidade}} do projeto {{=sub_venda.projeto.descricao}}</h5>
+          <div class="table-responsive">
+             <table class="table thead-light table-sm table-striped">
+        <thead class="thead-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Data</th>
+                  <th>Venda</th>
+                  <th>Fichas</th>
+                </tr>
+              </thead>
+              <tbody>
+                   {{data=request.now}}
+            {{if len(rows)>0:}}
+                {{data=rows.last().data_venda}}
+            {{pass}}
+                  {{for row in rows:}}
+            <tr>
+                {{if row.data_venda==data:}}
+                    {{venda+=row.venda_praso-row.valor_devolvido}}
+                    {{fichas_venda+=row.quant_fichas-row.quant_fichas_devolvidas}}
+                    {{caderno+=row.vale_caderno}}
+                    {{entrada+=row.entradas_venda}}
+                    {{fichas_devolvidas+=row.quant_fichas_devolvidas}}
+                    {{valor_devolvido+=row.valor_devolvido}}
+                    {{data=row.data_venda}}
+                    {{venda_atual=row.id}}
+                {{else:}}
+                    {{if venda!=0:}}
+                        {{a+=1}}
+                        <th nowrap="true">{{=a}}</th>
+                        <td nowrap="true"><a href="{{=URL('ver_data_venda', args=venda_atual)}}">{{=("{}/{}/{}".format(data.day,data.month,data.year))}}</a></td>
+                        <td nowrap="true">R$ {{="{:,}".format(round(venda,2)).replace(",",".")}}0</td>
+                        <td nowrap="true">{{=fichas_venda}}</td>
+                    {{pass}}
+                
+                    {{data=row.data_venda}}
+                    {{venda=row.venda_praso-row.valor_devolvido}}
+                    {{fichas_venda=row.quant_fichas-row.quant_fichas_devolvidas}}
+                    {{caderno=row.vale_caderno}}
+                    {{entrada=row.entradas_venda}}
+                    {{fichas_devolvidas=row.quant_fichas_devolvidas}}
+                    {{valor_devolvido=row.valor_devolvido}}
+
+                    
+                {{pass}}
+                {{tvenda+=row.venda_praso-row.valor_devolvido}}
+                {{tfichas_venda+=row.quant_fichas-row.quant_fichas_devolvidas}}
+                {{tcaderno+=row.vale_caderno}}
+                {{tentrada+=row.entradas_venda}}
+                {{tfichas_devolvidas+=row.quant_fichas_devolvidas}}
+                {{tvalor_devolvido+=row.valor_devolvido}}
+            </tr>
+            {{pass}}
+            {{if  len(rows)>1:}}
+            <tr>
+                {{a+=1}}
+                <th nowrap="true">{{=a}}</th>
+                        <td nowrap="true"><a href="{{=URL('ver_data_venda', args=venda_atual)}}">{{=("{}/{}/{}".format(data.day,data.month,data.year))}}</a></td>
+                <td nowrap="true">R$ {{="{:,}".format(round(venda,2)).replace(",",".")}}0</td>
+                <td nowrap="true">{{=fichas_venda}}</td>
+            </tr>
+            {{pass}}
+            <tr>
+                <th>#</th>
+                <th></th>
+                <th nowrap="true">R$ {{="{:,}".format(round(tvenda,2)).replace(",",".")}}0</th>
+                <th nowrap="true">{{=tfichas_venda}}</th>
+            </tr>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

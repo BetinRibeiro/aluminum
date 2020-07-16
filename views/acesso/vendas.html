@@ -1,62 +1,149 @@
 {{extend 'layout.html'}}
-<a  href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
+
+{{venda=0}}
+{{comissao=0}}
+{{comissaot=0}}
+{{vale=0}}
+{{caderno=0}}
+{{a=0}}
+{{total_fichas=0}}
+{{total_entradas=0}}
+{{saldof=0}}
+{{debitof=0}}
 <div class="py-1">
     <div class="container">
       <div class="row">
-{{for row in rows_vendedor:}}
-            <div class="col-md-4">
-
-<div class="card">
-    <div class="card">
-        <div class="card-header">{{=row.nome}}</div>
-            <div class="card-body">
-            {{for row1 in rows_sub:}}
-                {{venda_part=0}}
-                {{for row2 in rows_vendas:}}
-                    {{if row2.sub_venda==row1.id:}}
-                        {{if row2.vendedor==row.id:}}
-        
-                            {{venda_part+=row2.venda_praso-row2.valor_devolvido}}
+        <div class="col-md-12">
+<h5>
+    Equipe e relação de Vendas - {{=projeto.descricao}}
+</h5>
+<div class="table-responsive">
+            <table class="table thead-light table-sm table-striped">
+        <thead class="thead-dark">
+					  <tr>
+                          <th>#</th>
+						<th>NOME</th>
+						<th>VENDA</th>
+						<th>COMISSÃO</th>
+						<th>VALE</th>
+                          <th>CADERNO</th>
+                          <th>SALDO</th>
+					  </tr>
+					</thead>
+					<tbody>
+						{{for row in rows:}}
+					  <tr nowrap="true">{{a+=1}}
+                          <td nowrap="true">{{=a}}º</td>
+                        <td nowrap="true">{{=row.nome}}</td>
+                          <td nowrap="true">R$ {{="{:,}".format(round(row.total_vendas,1)).replace(",",".")}}0 {{if row.total_vendas>0:}}- <span><b>{{="{:,}".format(round(row.comissao_venda)).replace(".0","")}}% </b></span>{{pass}}</td>
+                           {{comissao=row.total_vendas}}
+                          {{if comissao > 0:}}
+                          {{comissao=row.total_vendas*row.comissao_venda/100}}
+{{comissaot+=comissao}}
+                          {{pass}}
+						<td nowrap="true">R$ {{="{:,}".format(round(comissao,1)).replace(",",".")}}0</td>
+                        <td nowrap="true">R$ {{="{:,}".format(round(row.vale_saida,1)).replace(",",".")}}0</td>
+                        <td nowrap="true">R$ {{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0</td>
+                          {{saldo=comissao-row.vale_saida-row.total_vale_caderno}}
+                          {{if saldo > 0:}}
+						<td nowrap="true">R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</td>
+                          {{else:}}
+                          <td  nowrap="true" class="text-danger">R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</td>
+                          {{pass}}
+					  </tr>
+                         {{if saldo>0:}}
+                        {{saldof+=saldo}}
+                        {{else:}}
+                        {{debitof+=saldo}}
                         {{pass}}
-                    {{pass}}
-                {{pass}}
-                <p>{{=row1.primeira_cidade}} - R$ {{="{:,}".format(round(venda_part,1)).replace(",",".")}}0</p>
-                     {{venda_part=0}}
-       
-            {{pass}}
-                <hr>
-         <p>
-            Total Venda - R$ {{="{:,}".format(round(row.total_vendas,1)).replace(",",".")}}0
-        </p>
-        <P>
-            {{="{:,}".format(round(row.comissao_venda,1)).replace(",",".")}}%
-        </P>
-                <hr>
-        {{totalcomiss=row.comissao_venda*row.total_vendas/100}}
-        <P>
-            Comissão - R${{="{:,}".format(round(totalcomiss,1)).replace(",",".")}}0
-        </P>
-        <p>
-            Vale - R${{="{:,}".format(round(row.vale_saida,1)).replace(",",".")}}0
-        </p>
-        <P>
-            Caderno - R${{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0
-        </P>
-                <hr>
-            {{saldo=totalcomiss-row.vale_saida-row.total_vale_caderno}}
-        {{if saldo>0:}}
-        <P>
-            <font color="blue">Saldo Positivo - R${{="{:,}".format(round(saldo,1)).replace(",",".")}}0</font>
-        </P>
-        {{else:}}
-         <P>
-            <font color="red">Saldo Negativo  R${{="{:,}".format(round(saldo,1)).replace(",",".")}}0</font>
-        </P>
-        {{pass}}
-
-  </div>
+                        {{total_entradas+=row.total_entradas}}
+                        {{venda+=row.total_vendas}}
+                        {{comissao+=comissao}}
+                        {{vale+=row.vale_saida}}
+                        {{caderno+=row.total_vale_caderno}}
+                        {{total_fichas+=row.total_fichas}}
+					  {{pass}}
+                         <tr>
+						<th>#</th>
+                             <th></th>
+						<th>R$ {{="{:,}".format(round(venda,1)).replace(",",".")}}0</th>
+						<th>R$ {{="{:,}".format(round(comissaot,1)).replace(",",".")}}0</th>
+						<th>R$ {{="{:,}".format(round(vale,1)).replace(",",".")}}0</th>
+                          <th>R$ {{="{:,}".format(round(caderno,1)).replace(",",".")}}0</th>
+                          <th>R$ {{="{:,}".format(round(saldof,1)).replace(",",".")}}0</th>
+					  </tr>
+					</tbody>
+				  </table>
 </div>
-</div>
-<br><br>
 
-            </div>{{pass}} </div> </div> </div>
+
+<h5>
+    Equipe de apoio e fiscalização  - {{=projeto.descricao}}
+</h5>
+ {{totalvale=0}}
+                {{totalcaderno=0}}
+                {{totalsalario=0}}
+                <div class="table-responsive">
+                     <table class="table thead-light table-sm table-striped">
+        <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Nome</th>
+                                <th>Função</th>
+                                <th>Salário</th>
+                                <th>Vale</th>
+                                <th>Caderno</th>
+                                <th>Saldo</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{for row in rows_fun:}}
+                            <tr>
+                                {{a+=1}}
+                                <td>{{=a}}</td>
+
+                                <td nowrap="true">{{=row.nome}}</td>
+                                <td nowrap="true">{{=row.funcao}}</td>
+                                <td nowrap="true">R$ {{="{:,}".format(round(row.salario,1)).replace(",",".")}}0</td>
+                                {{saldo=row.salario}}
+
+                                <td nowrap="true">R$ {{="{:,}".format(round(row.vale_saida,1)).replace(",",".")}}0</td>
+                                {{if not projeto.venda_finalizada:}}
+                                <td nowrap="true">
+                                        R$ {{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0
+                                </td>
+                                {{else:}}
+                                <td nowrap="true">R$ {{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0</td>
+                                {{pass}}
+                                {{saldo=saldo-row.vale_saida-row.total_vale_caderno}}
+                                {{if saldo > 0:}}
+                                <td nowrap="true">R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</td>
+                                {{else:}}
+                                <th nowrap="true" class="text-danger"><a>R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</a></th>
+                                {{pass}}
+                               
+                                
+                            </tr>
+                            {{if saldo>0:}}
+                            {{saldof+=saldo}}
+                            {{else:}}
+                            {{debitof=saldo}}
+                            {{pass}}
+                            {{totalvale+=row.vale_saida}}
+                            {{totalcaderno+=row.total_vale_caderno}}
+                            {{totalsalario+=row.salario}}
+                            {{pass}}
+                            <tr>
+                                <th>#</th>
+                                <th></th>
+                                <th>#</th>
+                                <th>R$ {{="{:,}".format(round(totalsalario,1)).replace(",",".")}}0</th>
+                                <th>R$ {{="{:,}".format(round(totalvale,1)).replace(",",".")}}0</th>
+                                <th>R$ {{="{:,}".format(round(totalcaderno,1)).replace(",",".")}}0</th>
+                                <th>R$ {{="{:,}".format(round(saldof,1)).replace(",",".")}}0</th>
+                              
+                            </tr>
+                        </tbody>
+                    </table>
+                </div></div></div></div></div>

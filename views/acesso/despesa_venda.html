@@ -1,0 +1,38 @@
+{{extend 'layout.html'}}
+{{total=0}}
+<div class="py-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+           <table class="table thead-light table-sm table-striped">
+        <thead class="thead-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Descrição</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {{a=1}}
+                  {{for row in rows:}}
+                <tr>
+                  <th>{{=a}}</th>
+                    {{a+=1}}
+                  <td nowrap="true">{{=row.descricao}}</td>
+                  <td nowrap="true">R$ {{="{:,}".format(round(row.total_classe,1)).replace(",",".")}}0</td>
+{{total+=row.total_classe}}
+                </tr>
+                {{pass}}
+                   <tr>
+                  <th>#</th>
+                  <td>#</td>
+                  <td nowrap="true"><b>R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>

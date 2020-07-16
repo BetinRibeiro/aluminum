@@ -1,0 +1,47 @@
+{{extend 'layout.html'}}
+{{totalf=0}}
+{{total=0}}
+ <div class="py-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            {{if len(rows)>0:}}
+            
+          <h5>Relatório de vendas - {{=projeto.descricao}}</h5>
+            {{else:}}
+            Sem Vendas
+            {{pass}}
+            <div class="table-responsive">
+             <table class="table thead-light table-sm table-striped">
+        <thead class="thead-dark">
+                <tr>
+                  <th nowrap="true" scope="col">Cidade</th>
+                  <th nowrap="true" scope="col">Q. Fichas</th>
+                  <th nowrap="true" scope="col">Total Venda</th>
+                  <th nowrap="true" scope="col" >Data Cobrança</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {{for row in rows:}}
+                <tr>
+                    <th scope="row"><a href="{{=URL('ver_particao', args=row.id)}}">#{{=row.primeira_cidade}}</a></th>
+                  <td nowrap="true">{{=row.venda_praso}}</td>
+                  <td nowrap="true">R$ {{="{:,}".format(round(row.venda_praso,2)).replace(",",".")}}0</td>
+                  <td nowrap="true">{{=("{}/{}/{}".format(row.data_inicio_cobranca.day,row.data_inicio_cobranca.month,row.data_inicio_cobranca.year))}}</td>
+{{totalf+=row.venda_praso}}
+{{total+=row.venda_praso}}
+                </tr>
+                  {{pass}}
+                   <tr>
+                    <th scope="row">#</th>
+                  <td nowrap="true"><b>{{=totalf}}</b></td>
+                  <td nowrap="true"><b>R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0</b></td>
+                  <td nowrap="true">#</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+          </div>
+          </div>
+          </div>

@@ -4,17 +4,17 @@
                     <div class="card-header"> Relatorio</div>
                     <div class="card-body" >
                       <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><i class="fa fa-cogs  text-primary mr-2"></i>
+                        <li class="list-group-item "><i class="fa fa-database  text-primary mr-2"></i>
                           <a href="{{=URL('mercadoria', args=projeto.id)}}">Mercadoria</a>
                         </li>
-                        <li class="list-group-item"><i class="fa fa-truck  text-primary mr-2"></i>
-                          <a href="#">Vendas Geral</a>
+                        <li class="list-group-item"><i class="fa fa-users   text-primary mr-2"></i>
+                          <a href="{{=URL('vendas', args=projeto.id)}}">Equipe - Comissão </a>
                         </li>
                         <li class="list-group-item"><i class="fa fa-sort-amount-desc text-primary mr-2"></i>
-                          <a href="#">Salarios/Comissão</a>
+                          <a href="{{=URL('vendas_dia_dia', args=projeto.id)}}">Vendas</a>
                         </li>
                         <li class="list-group-item"><i class="fa fa-id-card-o  text-primary mr-2"></i>
-                          <a href="">Despesas/Venda</a>
+                          <a href="{{=URL('despesa_venda', args=projeto.id)}}">Despesas/Venda</a>
                         </li>
                         <li class="list-group-item"><i class="fa fa-file-text-o text-primary mr-2"></i>
                           <a href="#">Relatorio/Venda</a>

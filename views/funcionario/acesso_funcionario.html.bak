@@ -47,10 +47,13 @@
                                 {{saldo=row.salario}}
 
                                 <td>R$ {{="{:,}".format(round(row.vale_saida,1)).replace(",",".")}}0</td>
-                                {{if 
+                                {{if not projeto.venda_finalizada:}}
                                 <td>
                                         <a href="{{=URL('acesso_vales', args=row.id)}}">R$ {{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0</a>
                                 </td>
+                                {{else:}}
+                                <td>R$ {{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0</td>
+                                {{pass}}
                                 {{saldo=saldo-row.vale_saida-row.total_vale_caderno}}
                                 {{if saldo > 0:}}
                                 <td>R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</td>
@@ -81,11 +84,12 @@
                                 <th>R$ {{="{:,}".format(round(saldof,1)).replace(",",".")}}0</th>
                                {{if not projeto.venda_finalizada:}}
                                 <th></th>
-                                {{pass}}
+                                
                             </tr>
                         </tbody>
                     </table>
                 </div>
+{{pass}}
            
 {{projeto.total_debito_funcionario=debitof}}
 {{projeto.total_saldo_funcionario=saldof}}

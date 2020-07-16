@@ -1,0 +1,46 @@
+{{extend 'layout.html'}}
+{{total=0}}
+{{totalf=0}}
+<div class="py-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            <h5>Relatório de vendas do dia - {{=("{}/{}/{}".format(data_venda.day,data_venda.month,data_venda.year))}} do projeto {{=sub_venda.projeto.descricao}}</h5>
+          <div class="table-responsive">
+            <table class="table thead-light table-sm table-striped">
+        <thead class="thead-dark">
+                <tr>
+                  <th>#</th>
+                  <th>Vendedor</th>
+                  <th>Venda</th>
+                  <th>Q.Fichas</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {{a=1}}
+                  {{for row in rows:}}
+                <tr>
+                  <th nowrap="true">{{=a}}</th>
+                    {{a+=1}}
+                  <td nowrap="true">{{=row.vendedor.nome}}</td>
+                  <td nowrap="true">R$ {{="{:,}".format(round(row.venda_praso-row.valor_devolvido,1)).replace(",",".")}}0</td>
+{{total+=row.venda_praso-row.valor_devolvido}}
+                  <td nowrap="true">{{=row.quant_fichas-row.quant_fichas_devolvidas}}</td>
+{{totalf+=row.quant_fichas-row.quant_fichas_devolvidas}}  
+                </tr>
+                {{pass}}
+                  <tr>
+                  <th>#</th>
+                  <td>#</td>
+                  <td nowrap="true"><b>R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0</b></td>
+                  <td nowrap="true"><b>{{=totalf}}</b></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{{=total}}

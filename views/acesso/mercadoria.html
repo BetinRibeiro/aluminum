@@ -5,7 +5,12 @@
 {{custo=0}}
 {{carrada=1}}
 
-          <h4 class="" contenteditable="true" >Relatório de Mercadoria {{=projeto.descricao}}&nbsp;</h4>
+ <div class="py-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+          <h5>Relatório de Mercadoria - {{=projeto.descricao}}&nbsp;</h5>
 <div class="table-responsive">
     <table class="table thead-light table-sm table-striped">
         <thead class="thead-dark">
@@ -31,23 +36,23 @@
                     {{carrada=row.carrada}}
                     {{cont+=1}}
                 <thead>
-                     <th>
+                     <th nowrap="true">
                         {{=pcas}}
                     </th>
-                    <th>
+                    <th nowrap="true">
                         <i class="fa text-dark fa-bars"></i>
                     </th>
-                    <th>
+                    <th nowrap="true">
                         <i class="fa text-dark fa-bars"></i>
                     </th>
-                    <th>
+                    <th nowrap="true">
                         R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0
                         
                     </th>
                     
-                    <th >R$ {{="{:,}".format(round(0,1)).replace(",",".")}}0
+                    <th nowrap="true">R$ {{="{:,}".format(round(0,1)).replace(",",".")}}0
                     </th>
-                    <th >R$ {{="{:,}".format(round(custo,1)).replace(",",".")}}0
+                    <th nowrap="true">R$ {{="{:,}".format(round(custo,1)).replace(",",".")}}0
                     </th>
                     {{if (custo>0) and (total>0):}}
                     {{margem=total/custo*100}}
@@ -55,17 +60,17 @@
                     {{margem=0}}
                     {{pass}}
                          {{if not (margem>=350) and (margem>250):}}
-                        <td >
+                        <td nowrap="true" >
                             <i class="fa text-warning fa-circle"></i>
                                 {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
                      {{elif margem>=350:}}
-                        <td >
+                        <td  nowrap="true">
                                 <i class="fa text-success fa-circle"></i>
                             {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
                       {{else:}}
-                        <td >
+                        <td nowrap="true" >
                             <i class="fa text-danger fa-circle"></i>
                                 {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
@@ -96,23 +101,23 @@
                     
                 <tr>
                     
-                    <td>
+                    <td nowrap="true">
                             {{=row.q_pcs}}
                     </td>
-                    <td>
+                    <td nowrap="true">
                             {{=row.descricao}}
                     </td>
-                    <td>
+                    <td nowrap="true">
                             R$ {{="{:,}".format(round(row.preco_unitario,1)).replace(",",".")}}0
                     </td>
-                    <td>
+                    <td nowrap="true">
                             R$ {{="{:,}".format(round(row.preco_unitario*row.q_pcs,1)).replace(",",".")}}0
                     </td>
                     
-                    <td >
+                    <td  nowrap="true">
                                 R$ {{="{:,}".format(round(row.custo_unitario,1)).replace(",",".")}}0
                         </td>
-                        <td >
+                        <td  nowrap="true">
                                 R$ {{="{:,}".format(round(row.custo_unitario*row.q_pcs,1)).replace(",",".")}}0
                         </td>
                     {{if (total_preco>0) and (total_custo>0):}}
@@ -121,17 +126,17 @@
                     {{margem=0}}
                     {{pass}}
                          {{if not (margem>=350) and (margem>250):}}
-                        <td>
+                        <td nowrap="true">
                             <i class="fa text-warning fa-circle"></i>
                                 {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
                      {{elif margem>=350:}}
-                        <td>
+                        <td nowrap="true">
                                 <i class="fa text-success fa-circle"></i>
                             {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
                       {{else:}}
-                        <td>
+                        <td nowrap="true">
                             <i class="fa text-danger fa-circle"></i>
                                 {{="{:,}".format(round(margem,0)).replace(".0","")}}%
                         </td>
@@ -224,4 +229,8 @@
             </tr>
         </thead>
     </table>
+</div>
+</div>
+</div>
+</div>
 </div>

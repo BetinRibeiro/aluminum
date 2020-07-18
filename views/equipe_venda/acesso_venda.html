@@ -26,12 +26,14 @@
 
  {{if (not projeto.venda_finalizada):}}
 {{if (not row1.cobranca_iniciada):}}
+
+                {{if (usuario.id!=24):}}
 <div class="row">
     <div class="col-md-6">
             <a class="btn btn-outline-light" href="{{=URL('inserir_venda', args=[vendedor.id,row1.id])}}"><i class="fa text-success fa-plus-square fa-2x"></i></a>
     </div>
 </div>
-{{pass}}{{pass}}
+{{pass}}{{pass}}{{pass}}
 VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
             <div class="table-responsive">
             {{a=0}}
@@ -84,12 +86,14 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
                                     {{if not projeto.venda_finalizada:}}
                                     
 {{if (not row1.cobranca_iniciada):}}
+                {{if (usuario.id!=24):}}
                                     <a href="{{=URL('alterar_venda', args=row.id)}}">{{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}</a>
                                     {{else:}}
                                     {{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}
                                     {{pass}}
                                     {{else:}}
                                     {{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}
+                                    {{pass}}
                                     {{pass}}
                                 
                                 </td>

@@ -2,6 +2,7 @@
 # tente algo como
 @auth.requires_login()
 def acesso_equipe():
+    usuario = auth.user
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.vendedor.projeto == projeto.id).select(orderby=~db.vendedor.total_vendas)
     return locals()
@@ -39,6 +40,10 @@ def alterar_vendedor():
         deletar=False
         
 
+    usuario = auth.user
+    if usuario.id==24:
+        session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
+        redirect(URL('acesso_equipe', args=projeto.id))
     form = SQLFORM(db.vendedor, request.args(0, cast=int), deletable=deletar)
     if form.process().accepted:
         session.flash = 'Atualizado'
@@ -52,6 +57,7 @@ def alterar_vendedor():
 
 @auth.requires_login()
 def acesso_venda():
+    usuario = auth.user
     vendedor = db.vendedor(request.args(0, cast=int))
     projeto = db.projeto(vendedor.projeto)
     rows_sub = db(db.sub_venda.projeto == vendedor.projeto).select(orderby=~db.sub_venda.data_inicio_cobranca)
@@ -71,6 +77,10 @@ def inserir_venda():
     db.venda.vendedor.writable = False
     
     
+    usuario = auth.user
+    if usuario.id==24:
+        session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
+        redirect(URL('acesso_venda', args=vendedor.id))
     form = SQLFORM(db.venda).process()
     if form.accepted:
         response.flash = 'Formulario aceito'
@@ -96,6 +106,10 @@ def alterar_venda():
     db.venda.vendedor.readable = False
     db.venda.vendedor.writable = False
     
+    usuario = auth.user
+    if usuario.id==24:
+        session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
+        redirect(URL('acesso_venda', args=vendedor.id))
 
     form = SQLFORM(db.venda, request.args(0, cast=int), deletable=True)
     if form.process().accepted:

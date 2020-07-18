@@ -32,6 +32,10 @@ def alterar_funcionario():
     db.funcionario.projeto.readable = False
     db.funcionario.projeto.writable = False
 
+    usuario = auth.user
+    if usuario.id==24:
+        session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
+        redirect(URL('acesso_funcionario', args=projeto.id))
     form = SQLFORM(db.funcionario, request.args(0, cast=int), deletable=True)
     if form.process().accepted:
         session.flash = 'Atualizado'
@@ -56,6 +60,10 @@ def inserir_vale():
     db.vale_funcionario.funcionario.default = funcionario.id
     db.vale_funcionario.funcionario.writable = False
 
+    usuario = auth.user
+    if usuario.id==24:
+        session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
+        redirect(URL('acesso_vales', args=funcionario.id))
     form = SQLFORM(db.vale_funcionario).process()
     if form.accepted:
         response.flash = 'Formulario aceito'
@@ -77,6 +85,10 @@ def alterar_vale():
     db.vale_funcionario.funcionario.readable = False
     db.vale_funcionario.funcionario.writable = False
 
+    usuario = auth.user
+    if usuario.id==24:
+        session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
+        redirect(URL('acesso_vales', args=funcionario.id))
     form = SQLFORM(db.vale_funcionario, request.args(0, cast=int))
     if form.process().accepted:
         session.flash = 'Atualizado'

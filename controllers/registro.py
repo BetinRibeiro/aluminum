@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 @auth.requires_login()
 def acesso_registro_venda():
+    usuario = auth.user
     projeto = db.projeto(request.args(0, cast=int))
     tipo = (request.args(1))
     empresa = db.empresa(projeto.empresa)
@@ -24,6 +25,12 @@ def inserir_registro():
 
     db.registro_venda.tipo.default = tipo
 
+    if tipo!="Gratificacao":
+        usuario = auth.user
+        if usuario.id==24:
+            session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
+            redirect(URL('acesso_registro_venda', args=[projeto.id,tipo]))
+    
     form = SQLFORM(db.registro_venda).process()
     if form.accepted:
         response.flash = 'Formulario aceito'
@@ -40,6 +47,11 @@ def alterar_registro():
     registro_venda = db.registro_venda(request.args(0, cast=int))
     tipo = (request.args(1))
     projeto = db.projeto(registro_venda.projeto)
+    if tipo!="Gratificacao":
+        usuario = auth.user
+        if usuario.id==24:
+            session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
+            redirect(URL('acesso_registro_venda', args=[projeto.id,tipo]))
     
     db.registro_venda.id.readable = False
     db.registro_venda.id.writable = False

@@ -18,6 +18,10 @@ def criar_classe_despesa():
     db.classe_despesa.tipo.default  = tipodesp
     
     db.classe_despesa.tipo.writable = False
+    usuario = auth.user
+    if usuario.id==24:
+        session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
+        redirect(URL('acessar_despesa', args=[projeto.id,tipodesp]))
 
     form = SQLFORM(db.classe_despesa).process()
     if form.accepted:
@@ -42,6 +46,11 @@ def alterar_classe_despesa():
     
     db.classe_despesa.tipo.readable = False
     db.classe_despesa.tipo.writable = False
+
+    usuario = auth.user
+    if usuario.id==24:
+        session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
+        redirect(URL('acessar_despesa', args=[projeto.id,tipodesp]))
 
     form = SQLFORM(db.classe_despesa, request.args(0, cast=int), deletable=True)
     if form.process().accepted:
@@ -75,6 +84,11 @@ def criar_desp():
         db.despesa.insert(classe_despesa=classe_despesa.id, data_inicio=request.now , descricao=newdespesa.descricao , valor=newdespesa.valor)
         return redirect(URL('acesso_despesa', args=[classe_despesa.id,tipodesp]))
     
+    usuario = auth.user
+    if usuario.id==24:
+        session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
+        redirect(URL('acesso_despesa', args=[classe_despesa.id,tipodesp]))
+
     db.despesa.classe_despesa.default = classe_despesa.id
     db.despesa.classe_despesa.writable = False
 
@@ -99,7 +113,11 @@ def alterar_desp():
     
     db.despesa.classe_despesa.readable = False
     db.despesa.classe_despesa.writable = False
-
+    
+    usuario = auth.user
+    if usuario.id==24:
+        session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
+        redirect(URL('acesso_despesa', args=[classe_despesa.id,tipodesp]))
     form = SQLFORM(db.despesa, request.args(0, cast=int), deletable=True)
     if form.process().accepted:
         session.flash = 'Atualizado'

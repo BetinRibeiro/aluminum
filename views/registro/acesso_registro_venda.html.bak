@@ -5,7 +5,11 @@
     <div class="col-md-6">
         <a  class="btn btn-outline-light" href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
         {{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
+        {{if (usuario.id!=24) or (tipo=="Gratificacao"):}}
             <a  class="btn btn-outline-light" href="{{=URL('inserir_registro', args=[projeto.id,tipo])}}"><i class="fa text-success fa-plus fa-2x"></i></a>
+      
+            
+        {{pass}}
         {{pass}}
     </div>
 </div>
@@ -23,26 +27,14 @@
                 <th>Descrição</th>
                 <th>Valor</th>
                 {{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
+                {{if (usuario.id!=24) or (tipo=="Gratificacao"):}}
                 <th>Alterar</th>
                 {{pass}}
+                {{pass}} 
             </tr>
         </thead>
         <tbody>
             
-            {{from random import randint}}
-            {{if len(rows)>0:}}
-            {{else:}}
-            é
-            {{contador=30}}
-            {{while contador > 0:}}
-            {{db.registro_venda.insert(projeto == projeto.id,
-                           tipo='venda_vista',
-                           data_inicio=request.now,
-                           valor=randint(1150,1780))}}
-            
-            {{contador-=1}}
-            {{pass}}
-            {{pass}}
             {{for row in rows:}}
             <tr>
                 {{a+=1}}
@@ -59,10 +51,12 @@
                     R$ {{="{:,}".format(round(row.valor,2)).replace(",",".")}}0
                 </td>
                 {{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
+                {{if (usuario.id!=1) or (tipo=="Gratificacao"):}}
                 <td>
                     <a href="{{=URL('alterar_registro', args=[row.id,tipo])}}"><i class="fa text-warning fa-exchange" ></i></a>
                 </td>
                  {{pass}} 
+                {{pass}} 
             </tr>
             {{valor+=row.valor}}
             {{pass}}
@@ -78,7 +72,9 @@
                     R$ {{="{:,}".format(round(valor,2)).replace(",",".")}}0
                 </th>
                  {{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
+                {{if (usuario.id!=24) or (tipo=="Gratificacao"):}}
                 <th></th>
+                {{pass}} 
                 {{pass}} 
             </tr>
         </tbody>

@@ -108,12 +108,15 @@ def criar_projeto():
 def alterar_projeto():
     response.view = 'generic.html' # use a generic view
     #recebe id do projeto e busca projeto no banco
+    usuario = auth.user
     projeto = db.projeto(request.args(0, cast=int))
     #caso o projeto não esteja ativo redireciona
     #pois não pode ser alterado
     if projeto.venda_finalizada:
         session.flash = 'A venda já foi finalizada'
         redirect(URL('projeto','acesso_projeto', args=projeto.id))
+    
+        
     #bloqueia id para visualização e alteração
     db.projeto.id.readable = False
     db.projeto.id.writable = False

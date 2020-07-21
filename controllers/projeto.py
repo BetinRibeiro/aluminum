@@ -18,7 +18,7 @@ def acesso_projeto():
     if (usuario.id==105435)or(usuario.id==1456789):
         redirect(URL('usuario','fscontador',args=projeto.id))
         #flavio é o ligin 11
-    if (usuario.id==11)or(usuario.id==1123456):
+    if (usuario.id==156745631)or(usuario.id==1123456):
         redirect(URL('usuario','fscontador',args=projeto.id))
     if (usuario.id==1):
         projeto.auth_user=None

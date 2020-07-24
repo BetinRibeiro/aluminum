@@ -27,6 +27,9 @@ def acesso_particao_cobranca():
 def alterar_dados():
     response.view = 'generic.html' # use a generic view
     sub_venda = db.sub_venda(request.args(0, cast=int))
+    
+    if auth.user.id!=sub_venda.auth_user:
+        redirect(URL('acesso_particao_cobranca',args=sub_venda.id))
     projeto = db.projeto(sub_venda.projeto)
     db.sub_venda.id.readable = False
     db.sub_venda.id.writable = False

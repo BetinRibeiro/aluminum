@@ -33,7 +33,20 @@
         </table>
       </div>
 {{pass}}
-<hr>
+<hr>{{a=1}}
+                <div class="hidden-xs">
+                    
+                {{if empresa.id==8:}}
+                Usuarios e Login's
+              <ul class="list-group list-group-flush">
+                  {{for ro in rowsuser:}}
+                  <li class="list-group-item">{{=a}} - {{=ro.nome}}</li>
+                  {{a+=1}}
+                  {{pass}}
+                </ul>  
+                {{pass}}
+                    
+                </div>
       </div>
             <div class="border border-danger col-md-6">
                 <h3>
@@ -60,6 +73,77 @@
           </tbody>
         </table>
             </div>
+        {{if empresa.id==8:}}
+        <h5>Pagamentos Sistema</h5>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Mês</th>
+                  <th>Descrição</th>
+                  <th>Valor</th>
+                  <th>Descrição</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="">
+                  <td>15/04/2020</td>
+                  <td>Inicio</td>
+                  <td>R$ 0,00</td>
+                  <td>Mês 0</td>
+                </tr>
+                <tr>
+                  <td>15/05/2020</td>
+                  <td>Dispensado</td>
+                  <td>R$ 0,00</td>
+                  <td>Dispensado</td>
+                </tr>
+                <tr>
+                  <td>15/06/2020</td>
+                  <td>Deposito caixa 29/06/2020</td>
+                  <td>R$ 500,00</td>
+                  <td>Quitado</td>
+                </tr>
+                <tr>
+                  <td style=""><a href="https://bit.ly/ALFS-15072020">15/07/2020</a></td>
+                  <td><a href="https://bit.ly/ALFS-15072020">Fazer Pagamento</a></td>
+                  <td><a href="https://bit.ly/ALFS-15072020">R$ 500,00</a></td>
+                  <td><a href="https://bit.ly/ALFS-15072020">Pendente</a></td>
+                </tr>
+                <tr>
+                  <td><a href="https://bit.ly/ALFS-15082020">15/08/2020</a></td>
+              <td><a href="https://bit.ly/ALFS-15082020">à Vencer</a></td>
+                  <td><a href="https://bit.ly/ALFS-15082020">R$ 500,00</a></td>
+                  <td><a href="https://bit.ly/ALFS-15082020">...</a></td>
+                </tr>
+                <tr>
+                  <td>15/09/2020</td>
+                  <td>##</td>
+                  <td>R$ 500,00</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td>15/10/2020</td>
+                  <td>##</td>
+                  <td>R$ 500,00</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td>15/11/2020</td>
+                  <td>##</td>
+                  <td>R$ 500,00</td>
+                  <td>...</td>
+                </tr>
+                <tr>
+                  <td>15/12/2020</td>
+                  <td>##</td>
+                  <td>R$ 500,00</td>
+                  <td>...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+            {{pass}}
       </div>
-      </div>
+  </div>
       </div>

@@ -115,9 +115,7 @@ def alterar_projeto():
     if projeto.venda_finalizada:
         session.flash = 'A venda já foi finalizada'
         redirect(URL('projeto','acesso_projeto', args=projeto.id))
-    if usuario.id==24:
-        session.flash = 'Chefe de Equipe restringiu acesso'
-        redirect(URL('projeto','acesso_projeto', args=projeto.id))
+    
         
     #bloqueia id para visualização e alteração
     db.projeto.id.readable = False

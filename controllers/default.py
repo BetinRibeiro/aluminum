@@ -132,6 +132,7 @@ def alterar_projeto():
     if auth.user.id==1:
         db.projeto.empresa.readable = True
         db.projeto.empresa.writable = True
+        a=True
     #buzca um sqlforma para ser alterado
     form = SQLFORM(db.projeto, request.args(0, cast=int), deletable=a)
     if form.process().accepted:

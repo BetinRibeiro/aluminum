@@ -239,6 +239,7 @@
                 <h6 class="my-0"><b class="text-success">Saldo Chefe</b></h6>
             </div> <span class="text-success">R$ {{="{:,}".format(round(saldoq)).replace(",",".")}}0</span>
             {{projeto.total_saldo_chefe=saldoq}}
+            {{projeto.total_debito_chefe=0}}
 
             
             {{else:}}
@@ -246,6 +247,7 @@
                 <h6 class="my-0"><b class="text-danger">Saldo Negativo</b></h6>
             </div> <span class="text-danger">R$ {{="{:,}".format(round(saldoq)).replace(",",".")}}0</span>
             {{projeto.total_debito_chefe=saldoq}}
+            {{projeto.total_saldo_chefe=0}}
             {{pass}}
 {{projeto.update_record()}}
         </li>

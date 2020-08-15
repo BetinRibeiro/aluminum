@@ -41,6 +41,7 @@
 'Ajax Recipes': 'Receitas de Ajax',
 'Alerta de pegamento! pendente à 12 dias': 'Alerta de pegamento! pendente à 12 dias',
 'Alerta de pegamento! pendente à 13 dias': 'Alerta de pegamento! pendente à 13 dias',
+'Alerta de pegamento! pendente à 18 dias': 'Alerta de pegamento! pendente à 18 dias',
 'An error occured, please [[reload %s]] the page': 'An error occured, please [[reload %s]] the page',
 'API Example': 'API Example',
 'appadmin is disabled because insecure channel': 'Administração desativada porque o canal não é seguro',

@@ -98,6 +98,9 @@ def alterar_particao():
     db.sub_venda.adiantamento_cobranca.readable = True
     db.sub_venda.adiantamento_cobranca.writable = True
 
+    db.sub_venda.descricao.readable = True
+    db.sub_venda.descricao.writable = True
+
     db.sub_venda.total_vale_saida_cobrador.readable = True
     db.sub_venda.total_vale_saida_cobrador.writable = True
 

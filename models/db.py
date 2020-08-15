@@ -297,6 +297,7 @@ db.define_table('sub_venda',
 				Field('adiantamento_cobranca', 'double',label='Adiantamento', writable=False, readable=False, notnull=True, default=0),
                 Field('comissao_cobranca', 'double',label='% Comissão Cobrança', writable=False, readable=False, notnull=True, default=5),
                 Field('total_vale_saida_cobrador', 'double',label='Vale Saida', writable=False, readable=False, notnull=True, default=0),
+                Field('descricao', 'text', label='Descrição do vale', writable=False, readable=False,requires = IS_UPPER()),
 
                 Field('total_vale_caderno_cobrador', 'double', writable=False, readable=False, notnull=True, default=0),
 

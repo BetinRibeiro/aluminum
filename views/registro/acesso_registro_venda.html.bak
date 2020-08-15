@@ -27,7 +27,7 @@
                 <th>Descrição</th>
                 <th>Valor</th>
                 {{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
-                {{if (usuario.id!=24) or (tipo=="Gratificacao"):}}
+                {{if (usuario.id!=2544) or (tipo=="Gratificacao"):}}
                 <th>Alterar</th>
                 {{pass}}
                 {{pass}} 
@@ -51,7 +51,7 @@
                     R$ {{="{:,}".format(round(row.valor,2)).replace(",",".")}}0
                 </td>
                 {{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
-                {{if (usuario.id!=1) or (tipo=="Gratificacao"):}}
+                {{if (usuario.id!=2544) or (tipo=="Gratificacao"):}}
                 <td>
                     <a href="{{=URL('alterar_registro', args=[row.id,tipo])}}"><i class="fa text-warning fa-exchange" ></i></a>
                 </td>
@@ -72,7 +72,7 @@
                     R$ {{="{:,}".format(round(valor,2)).replace(",",".")}}0
                 </th>
                  {{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
-                {{if (usuario.id!=24) or (tipo=="Gratificacao"):}}
+                {{if (usuario.id!=25344) or (tipo=="Gratificacao"):}}
                 <th></th>
                 {{pass}} 
                 {{pass}} 

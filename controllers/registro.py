@@ -27,7 +27,7 @@ def inserir_registro():
 
     if tipo!="Gratificacao":
         usuario = auth.user
-        if usuario.id==24:
+        if usuario.id==24324:
             session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
             redirect(URL('acesso_registro_venda', args=[projeto.id,tipo]))
     
@@ -49,7 +49,7 @@ def alterar_registro():
     projeto = db.projeto(registro_venda.projeto)
     if tipo!="Gratificacao":
         usuario = auth.user
-        if usuario.id==24:
+        if usuario.id==2434:
             session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
             redirect(URL('acesso_registro_venda', args=[projeto.id,tipo]))
     

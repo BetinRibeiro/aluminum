@@ -1,0 +1,4 @@
+# -*- coding: utf-8 -*-
+@auth.requires_membership('admin')
+def index():
+    return dict(message="hello from acs_principal.py")

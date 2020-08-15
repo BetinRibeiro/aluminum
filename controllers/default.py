@@ -54,6 +54,10 @@ def acesso_inicial():
     #busca empresa que tenha o usuario iguela ao logado
     empresa = db.empresa(db.empresa.auth_user==auth.user.id)
     usuario=auth.user
+    if (auth.user.id==6):
+        empresa = db.empresa(4)
+        #empresa.id
+        redirect(URL('usuario','fsprojetos',args=empresa.id))
     #caso seja hiago vai listar todos os projetos da empresa fs
     if (auth.user.id==11)or(auth.user.id==10):
         empresa = db.empresa(8)

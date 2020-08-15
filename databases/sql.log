@@ -424,3 +424,6 @@ success!
 timestamp: 2020-06-24T17:49:26.607916
 ALTER TABLE "registro_cobranca" ADD "observacao" CHAR(512) NOT NULL DEFAULT '#';
 success!
+timestamp: 2020-08-07T16:11:51.151432
+ALTER TABLE "sub_venda" ADD "descricao" TEXT;
+success!

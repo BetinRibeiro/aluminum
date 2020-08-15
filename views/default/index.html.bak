@@ -86,7 +86,7 @@ ga('send', 'pageview');
     <div class="container mt-5 pt-5">
       <div class="row">
         <div class="col-md-6 my-5 text-lg-left text-center align-self-center">
-            <a class="btn btn-primary btn-lg btn-block" href="{{=URL('acesso_inicial')}}">Acessar</a>
+            <a class="btn btn-danger btn-lg btn-block" href="{{=URL('acesso_inicial')}}">Acessar</a>
           <h1 class="display-4">Aluminum</h1>
           <p class="lead">Sistema Multiplataforma</p>
           <div class="row mt-5">

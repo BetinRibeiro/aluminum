@@ -41,7 +41,7 @@ def alterar_vendedor():
         
 
     usuario = auth.user
-    if usuario.id==1:
+    if usuario.id==2234:
         session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
         redirect(URL('acesso_equipe', args=projeto.id))
     form = SQLFORM(db.vendedor, request.args(0, cast=int), deletable=deletar)
@@ -78,7 +78,7 @@ def inserir_venda():
     
     
     usuario = auth.user
-    if usuario.id==1:
+    if usuario.id==243344:
         session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
         redirect(URL('acesso_venda', args=vendedor.id))
     form = SQLFORM(db.venda).process()
@@ -107,7 +107,7 @@ def alterar_venda():
     db.venda.vendedor.writable = False
     
     usuario = auth.user
-    if usuario.id==1:
+    if usuario.id==24:
         session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
         redirect(URL('acesso_venda', args=vendedor.id))
 

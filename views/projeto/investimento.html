@@ -217,8 +217,7 @@
               {{if projeto.total_debito_chefe>=0:}}
 {{else:}}
 {{abatimento+=projeto.total_debito_chefe*-1}}
-{{pass}}
-            <li class="list-group-item d-flex justify-content-between">
+              <li class="list-group-item d-flex justify-content-between">
                 <div>
                     <h6 class="my-0">Debito do Chefe</h6>
                 </div>
@@ -226,6 +225,8 @@
                     R$ {{="{:,}".format(round(projeto.total_debito_chefe*-1,1)).replace(",",".")}}0
                 </span>
             </li>
+{{pass}}
+            
 {{if projeto.total_debito_funcionario>=0:}}
 {{else:}}
 {{abatimento+=projeto.total_debito_funcionario*-1}}
@@ -410,7 +411,7 @@
             <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Total Saldos</b></span> <b>R$ {{="{:,}".format(round(saldoquitacao,1)).replace(",",".")}}0</b> </li>
                 <br>
                <h5><span><b>-Resultado Parcial</b></span></h5>
-            <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Saldo Parcial do Projeto</b></span> <b>R$ {{="{:,}".format(round(saldo_investimento,1)).replace(",",".")}}0</b> </li>
+            <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Saldo Parcial do Projeto</b></span> <b>R$ {{="{:,}".format(round(saldo_investimento-saldoquitacao,1)).replace(",",".")}}0</b> </li>
               
               
             <br>{{saldo_investimento-=saldoquitacao}}
@@ -455,7 +456,7 @@
             <br>
 {{saldo_investimento+=debito_quitacao}}
               <h5><span><b>-Resultado Final</b></span></h5>
-            <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Saldo Final do Projeto</b></span> <b>R$ {{="{:,}".format(round(saldo_investimento,1)).replace(",",".")}}0</b> </li>
+            <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Saldo Final do Projeto</b></span> <b>R$ {{="{:,}".format(round(0,1)).replace(",",".")}}0</b> </li>
               {{else:}}
               <br>
               <h5><span><b>-Ainda não bateu o ponto de equilibrio</b></span></h5>

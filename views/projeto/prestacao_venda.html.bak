@@ -150,7 +150,7 @@
 <li class="list-group-item d-flex justify-content-between">
     <div>
         {{if projeto.empresa==3:}}
-                  <h6 class="my-0">Depositos</h6>
+                  <h6 class="my-0">Depósitos</h6>
                     {{else:}}
                   <h6 class="my-0">Dinheiro Devolvido</h6>
                     {{pass}}

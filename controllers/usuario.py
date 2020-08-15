@@ -29,8 +29,7 @@ def abencoado():
 def fsprojetos():
     
     empresa = db.empresa(request.args(0, cast=int))
-    if empresa.id==8:
-        response.flash = T("Alerta de pegamento! pendente à 13 dias")
+    
     if auth.user.id==10:
         empresa = db.empresa(8)
     rows = db(db.projeto.empresa==empresa.id).select(orderby=~db.projeto.descricao)

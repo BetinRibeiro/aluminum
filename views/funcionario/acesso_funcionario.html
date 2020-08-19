@@ -66,14 +66,14 @@
                                 
                             </tr>
                             {{if saldo>0:}}
-                            {{saldof+=saldo}}
+                                {{saldof+=saldo}}
                             {{else:}}
-                            {{debitof=saldo}}
+                                {{debitof+=saldo}}
                             {{pass}}
                             {{totalvale+=row.vale_saida}}
                             {{totalcaderno+=row.total_vale_caderno}}
                             {{totalsalario+=row.salario}}
-                            {{pass}}
+                        {{pass}}
                             <tr>
                                 <th>#</th>
                                 <th></th>

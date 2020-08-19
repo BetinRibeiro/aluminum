@@ -1,0 +1,144 @@
+{{extend 'layout.html'}}
+
+{{total_pecas=0}}
+{{total_pecas_gratificacao=0}}
+{{total_preco_gratificacao=0}}
+{{total_custo_gratificacao=0}}
+{{total_pecas_refugo=0}}
+{{total_preco_refugo=0}}
+{{total_custo_refugo=0}}
+{{total_pecas_retorno=0}}
+{{total_preco_retorno=0}}
+{{total_custo_retorno=0}}
+<div class="py-5" >
+    <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+          <h5 class="">Mercadoria de Retorno, Gratificação e Refugo de ( {{=projeto.descricao}} )</h5>
+        </div>
+      </div>
+        <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link" href="{{=URL('acs_projeto','index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">Descrição</th>
+                  <th scope="col" class="text-center">Gratificação</th>
+                  <th scope="col" class="text-center">Total</th>
+                  <th scope="col" class="text-center">Refugo</th>
+                  <th scope="col" class="text-center">Total</th>
+                  <th scope="col" class="text-center">Retorno</th>
+                  <th scope="col" class="text-center">Total</th>
+                  <th scope="col" class="text-center">Opção</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {{nome=""}}
+                  {{for row in rows:}}
+                  {{if row.q_pcs>0:}}
+                  {{if nome==row.descricao:}}
+                        {{row.descricao="-----"}}
+                  {{else:}}
+                  {{if (row.quant_pcs_grt>0) or (row.quant_pcs_rfg>0) or (row.quant_pcs_rtr>0):}}
+                <tr>
+                    {{else:}}
+                    <tr id="noprint">
+                        {{pass}}
+                 
+                        
+                        
+                       
+                        <th><a href="{{=URL('alterar_descricao', args=row.id)}}" class="text-dark">{{=(row.descricao)[0:20]}}</a></th>
+                        
+                    
+                    {{if not projeto.venda_finalizada:}}
+                    <td class="text-center">
+                        {{=row.quant_pcs_grt}}
+                    </td>
+                    {{else:}}
+                     <td class="text-center">
+                        {{=row.quant_pcs_grt}}
+                    </td>
+                    {{pass}}
+
+                    <td class="text-center">R$ {{="{:,}".format(round(row.quant_pcs_grt*row.preco_unitario,1)).replace(",",".")}}0</td>
+
+                    {{if not projeto.venda_finalizada:}}
+                    <td class="text-center">
+                        {{=row.quant_pcs_rfg}} 
+                    </td>
+                    {{else:}}
+                     <td class="text-center">
+                        {{=row.quant_pcs_rfg}}
+                    </td>
+                    {{pass}}
+                    <td class="text-center">R$ {{="{:,}".format(round(row.quant_pcs_rfg*row.preco_unitario,1)).replace(",",".")}}0</td>
+                    
+                    {{if not projeto.venda_finalizada:}}
+                    <td class="text-center">
+                        {{=row.quant_pcs_rtr}}
+                    </td>
+                    {{else:}}
+                     <td class="text-center">
+                        {{=row.quant_pcs_rtr}}
+                    </td>
+                    {{pass}}
+                    <td class="text-center">R$ {{="{:,}".format(round(row.quant_pcs_rtr*row.preco_unitario,1)).replace(",",".")}}0</td>
+                    <td class="text-center"><a class="btn btn-link" href="{{=URL('alterar_retorno', args=row.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-pencil-square-o"></i> </a></td>
+                </tr>
+                   {{nome=row.descricao}}
+                        {{pass}}
+                        {{pass}}
+{{total_pecas+=row.q_pcs}}
+
+{{total_pecas_gratificacao+=row.quant_pcs_grt}}
+{{total_preco_gratificacao+=row.quant_pcs_grt*row.preco_unitario}}
+{{total_custo_gratificacao+=row.quant_pcs_grt*row.custo_unitario}}
+
+{{total_pecas_refugo+=row.quant_pcs_rfg}}
+{{total_preco_refugo+=row.quant_pcs_rfg*row.preco_unitario}}
+{{total_custo_refugo+=row.quant_pcs_rfg*row.custo_unitario}}
+
+{{total_pecas_retorno+=row.quant_pcs_rtr}}
+{{total_preco_retorno+=row.quant_pcs_rtr*row.preco_unitario}}
+{{total_custo_retorno+=row.quant_pcs_rtr*row.custo_unitario}}
+                  {{pass}}
+                  <tr>
+                    
+                    <td>#</td>
+                       <th  class="text-center">{{=total_pecas_gratificacao}}</th>
+                    <th class="text-center">R$ {{="{:,}".format(round(total_preco_gratificacao,1)).replace(",",".")}}0</th>
+                       <th class="text-center">{{=total_pecas_refugo}}</td>
+                    <th class="text-center">R$ {{="{:,}".format(round(total_preco_refugo,1)).replace(",",".")}}0</th>
+                       <th class="text-center">{{=total_pecas_retorno}}</td>
+                    <th class="text-center">R$ {{="{:,}".format(round(total_preco_retorno,1)).replace(",",".")}}0</th>
+                      
+                      <td class="text-center"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          </div>
+          </div>
+
+{{if not projeto.venda_finalizada:}}
+{{projeto.total_pecas_gratificacao=total_pecas_gratificacao}}
+{{projeto.total_preco_gratificacao=total_preco_gratificacao}}
+{{projeto.total_custo_gratificacao=total_custo_gratificacao}}
+
+{{projeto.total_pecas_refugo=total_pecas_refugo}}
+{{projeto.total_preco_refugo=total_preco_refugo}}
+{{projeto.total_custo_refugo=total_custo_refugo}}
+
+{{projeto.total_pecas_retorno=total_pecas_retorno}}
+{{projeto.total_preco_retorno=total_preco_retorno}}
+{{projeto.total_custo_retorno=total_custo_retorno}}
+{{projeto.update_record()}}
+{{pass}}

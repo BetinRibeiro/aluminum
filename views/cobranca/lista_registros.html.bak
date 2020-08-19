@@ -11,6 +11,7 @@
             <i class="fa text-success fa-plus fa-2x"></i>
             </a>
         </div>
+          {{if tipo=="Recebimento":}}
         <div class="col-md-6">
             <div class="form-group row">
                 <input type="text" class="form-control col-10 col-form-label" name="busca" placeholder="Faça uma pesquisa" />
@@ -21,6 +22,7 @@
                 </div>
             </div>
       </div>
+          {{pass}}
   </div>
 <marquee direction="left">
     <a class="navbar-brand text-info"> <h6>Após inserir o registro você só poderá alterar o mesmo até 72hrs depois do cadastro! Caso necessite fazer alguma alteração entre em contato com o Administrador</h6></a>

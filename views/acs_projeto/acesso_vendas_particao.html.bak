@@ -1,0 +1,114 @@
+{{extend 'layout.html'}}
+
+{{venda=0}}
+{{fichas_venda=0}}
+{{caderno=0}}
+{{entrada=0}}
+{{fichas_devolvidas=0}}
+{{valor_devolvido=0}}
+{{a=0}}
+
+{{tvenda=0}}
+{{tfichas_venda=0}}
+{{tcaderno=0}}
+{{tentrada=0}}
+{{tfichas_devolvidas=0}}
+{{tvalor_devolvido=0}}
+<div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="">Lista de Vendas da Rota ( {{=sub_venda.primeira_cidade}} )</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link" href="{{=URL('particoes',args=sub_venda.projeto)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+            <a class="btn btn-link" href="{{=URL('alterar_dados_rota',args=sub_venda.projeto)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Alterar dados da Rota</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" >#</th>
+                  <th scope="col" >Data</th>
+                  <th scope="col" class="text-center">Venda</th>
+                  <th scope="col" class="text-center">Fichas</th>
+                  <th scope="col" class="text-center">Caderno</th>
+                  <th scope="col" class="text-center">Entrada</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{data=request.now}}
+            {{if len(rows)>0:}}
+                {{data=rows.last().data_venda}}
+            {{pass}}
+            {{for row in rows:}}
+            <tr>
+                {{if row.data_venda==data:}}
+                    {{venda+=row.venda_praso-row.valor_devolvido}}
+                    {{fichas_venda+=row.quant_fichas-row.quant_fichas_devolvidas}}
+                    {{caderno+=row.vale_caderno}}
+                    {{entrada+=row.entradas_venda}}
+                    {{fichas_devolvidas+=row.quant_fichas_devolvidas}}
+                    {{valor_devolvido+=row.valor_devolvido}}
+                    {{data=row.data_venda}}
+                {{else:}}
+                    {{if venda!=0:}}
+                        {{a+=1}}
+                        <th>{{=a}}</th>
+                        <td>{{=("{}/{}/{}".format(data.day,data.month,data.year))}}</td>
+                        <td class="text-center">R$ {{="{:,}".format(round(venda,2)).replace(",",".")}}0</td>
+                        <td class="text-center">{{=fichas_venda}}</td>
+                        <td class="text-center">R$ {{="{:,}".format(round(caderno,2)).replace(",",".")}}0</td>
+                        <td class="text-center">R$ {{="{:,}".format(round(entrada,2)).replace(",",".")}}0</td>
+                    {{pass}}
+                
+                    {{data=row.data_venda}}
+                    {{venda=row.venda_praso-row.valor_devolvido}}
+                    {{fichas_venda=row.quant_fichas-row.quant_fichas_devolvidas}}
+                    {{caderno=row.vale_caderno}}
+                    {{entrada=row.entradas_venda}}
+                    {{fichas_devolvidas=row.quant_fichas_devolvidas}}
+                    {{valor_devolvido=row.valor_devolvido}}
+
+                    
+                {{pass}}
+                {{tvenda+=row.venda_praso-row.valor_devolvido}}
+                {{tfichas_venda+=row.quant_fichas-row.quant_fichas_devolvidas}}
+                {{tcaderno+=row.vale_caderno}}
+                {{tentrada+=row.entradas_venda}}
+                {{tfichas_devolvidas+=row.quant_fichas_devolvidas}}
+                {{tvalor_devolvido+=row.valor_devolvido}}
+            </tr>
+            {{pass}}
+            {{if  len(rows)>1:}}
+            <tr>
+                {{a+=1}}
+                <th>{{=a}}</th>
+                <td>{{=("{}/{}/{}".format(data.day,data.month,data.year))}}</td>
+                <td class="text-center">R$ {{="{:,}".format(round(venda,2)).replace(",",".")}}0</td>
+                <td class="text-center">{{=fichas_venda}}</td>
+                <td class="text-center">R$ {{="{:,}".format(round(caderno,2)).replace(",",".")}}0</td>
+                <td class="text-center">R$ {{="{:,}".format(round(entrada,2)).replace(",",".")}}0</td>
+            </tr>
+            {{pass}}
+            <tr>
+                <th>#</th>
+                <th></th>
+                <th class="text-center">R$ {{="{:,}".format(round(tvenda,2)).replace(",",".")}}0</th>
+                <th class="text-center">{{=tfichas_venda}}</th>
+                <th class="text-center">R$ {{="{:,}".format(round(tcaderno,2)).replace(",",".")}}0</th>
+                <th class="text-center">R$ {{="{:,}".format(round(tentrada,2)).replace(",",".")}}0</th>
+                
+            </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

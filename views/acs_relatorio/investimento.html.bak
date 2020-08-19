@@ -1,0 +1,434 @@
+{{extend 'layout.html'}}
+{{investimento=0}}
+<div class="py-5" >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="">Provisão de fluxo ( {{=projeto.descricao}} )</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link" href="{{=URL('acs_cobranca','index', args=projeto.id)}}" style="color:#3b5998">
+                    <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar
+                </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <ul class="list-group">
+            <h5><span><b>-Investimento Inicial do Projeto</b></span></h5>
+{{if projeto.total_custo_mercadoria>0:}}
+    {{investimento+=projeto.total_custo_mercadoria}}
+{{pass}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">
+                        <b>Custo da Mercadoria</b>
+                    </h6>
+                    <small class="text-muted" contenteditable="true">
+                        {{="{:,}".format(round(projeto.total_pecas_mercadoria,1)).replace(".0","")}} Peças
+                    </small>
+                </div>
+                <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_custo_mercadoria,1)).replace(",",".")}}0</span>
+            </li>
+{{if projeto.vale_saida>0:}}
+    {{investimento+=projeto.vale_saida}}
+{{pass}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">
+                        <i class="fa text-primary fa-arrow-right"></i>
+                        <b>Vale Chefe Equipe</b>
+                    </h6>
+                </div>
+                <span class="text-muted">R$ {{="{:,}".format(round(projeto.vale_saida,1)).replace(",",".")}}0</span>
+            </li>
+{{if projeto.total_vale_funcionario>0:}}
+    {{investimento+=projeto.total_vale_funcionario}}
+{{pass}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">
+                        <i class="fa text-primary fa-arrow-right"></i>
+                        <b>Vale Funcionarios</b>
+                    </h6>
+                    <small class="text-muted">
+                        {{="{:,}".format(round(projeto.quant_funcionario,1)).replace(".0","")}} Funcionarios
+                    </small>
+                </div>
+                <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_vale_funcionario,1)).replace(",",".")}}0</span>
+            </li>
+{{if projeto.total_vales_vendedor>0:}}
+    {{investimento+=projeto.total_vales_vendedor}}
+{{pass}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">
+                        <i class="fa text-primary fa-arrow-right"></i>
+                        <b>Vale Vendedores</b>
+                    </h6>
+                    <small class="text-muted">
+                        {{="{:,}".format(round(projeto.quant_vendedores,1)).replace(".0","")}} Vendedores
+                    </small>
+                </div>
+                <span class="text-muted">
+                    R$ {{="{:,}".format(round(projeto.total_vales_vendedor,1)).replace(",",".")}}0
+                </span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+                <div>
+                    <h6 class="my-0">
+                        <b>Total Investimento Inicial</b>
+                    </h6>
+                </div>
+                <span class="text-muted"><b>
+                    R$ {{="{:,}".format(round(investimento,1)).replace(",",".")}}0</b>
+                </span>
+            </li>
+            <br>
+            <h5> <span><b>-Despesas Local e Venda</b></span></h5>
+{{total_despesa_local=0}}
+{{if projeto.total_despesa_local>0:}}
+    {{total_despesa_local+=projeto.total_despesa_local}}
+{{pass}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">Despesa Local</h6>
+                </div>
+                <span class="text-muted">
+                    R$ {{="{:,}".format(round(projeto.total_despesa_local,1)).replace(",",".")}}0
+                </span>
+            </li>
+{{if projeto.adiantamento>0:}}
+    {{total_despesa_local+=projeto.adiantamento}}
+            
+{{pass}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">Adiantamento (Venda)&nbsp;</h6>
+                </div>
+                <span class="text-muted">
+                    R$ {{="{:,}".format(round(projeto.adiantamento,1)).replace(",",".")}}0
+                </span>
+            </li>
+{{investimento+=total_despesa_local}}
+            <li class="list-group-item d-flex justify-content-between bg-light">
+                <span><b>Total Despesas</b></span>
+                <b>R$ {{="{:,}".format(round(total_despesa_local,1)).replace(",",".")}}0</b>
+            </li>
+            <br>
+            <h5 > <span><b>-Complemento Investimento Inicial</b></span></h5>
+{{complemento=0}}
+{{if projeto.total_saldo_chefe>0:}}
+    {{complemento+=projeto.total_saldo_chefe}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">Saldo Chefe</h6>
+                </div>
+                <span class="text-muted">
+                    R$ {{="{:,}".format(round(projeto.total_saldo_chefe,1)).replace(",",".")}}0
+                </span>
+            </li>
+              
+{{pass}}
+{{if projeto.total_saldo_funcionario>0:}}
+    {{complemento+=projeto.total_saldo_funcionario}}
+{{pass}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">Saldo Funcionarios</h6>
+                </div>
+                <span class="text-muted">
+                    R$ {{="{:,}".format(round(projeto.total_saldo_funcionario,1)).replace(",",".")}}0
+                </span>
+            </li>
+{{if projeto.total_saldo_vendedor>0:}}
+{{complemento+=projeto.total_saldo_vendedor}}
+{{pass}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">Saldo Vendedores</h6>
+                </div>
+                <span class="text-muted">
+                    R$ {{="{:,}".format(round(projeto.total_saldo_vendedor,1)).replace(",",".")}}0
+                </span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+                <span><b>Total Saldo</b></span>
+                <b>R$ {{="{:,}".format(round(complemento,1)).replace(",",".")}}0</b>
+            </li>
+            <br>
+{{investimento+=complemento}}
+            <h5> <span><b>-Investimento Complementar</b></span></h5>
+{{investimento_complementar=0}}
+{{if projeto.total_vale_cobrador>0:}}
+{{investimento_complementar+=projeto.total_vale_cobrador}}
+{{pass}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">Total Vales Cobrador</h6>
+                </div>
+                <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_vale_cobrador,1)).replace(",",".")}}0</span>
+            </li>
+{{if projeto.total_adiantamento_cobranca>0:}}
+{{investimento_complementar+=projeto.total_adiantamento_cobranca}}
+{{pass}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">Total Adiantamento Cobrança</h6>
+                </div>
+                <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_adiantamento_cobranca,1)).replace(",",".")}}0</span>
+            </li>
+{{if projeto.total_gratificacao>0:}}
+{{investimento_complementar+=projeto.total_gratificacao}}
+{{pass}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                <h6 class="my-0">Gratificações e Percas</h6>
+                </div> <span class="text-muted">
+                    R$ {{="{:,}".format(round(projeto.total_gratificacao,1)).replace(",",".")}}0
+                </span>
+            </li>
+{{investimento+=investimento_complementar}}
+            <li class="list-group-item d-flex justify-content-between bg-light">
+                <span><b>Total Investimento Complementar</b></span>
+                <b>R$ {{="{:,}".format(round(investimento_complementar,1)).replace(",",".")}}0</b>
+            </li>
+              <br>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+                <span><b>Investimento sem Descontar</b></span>
+                <b>R$ {{="{:,}".format(round(investimento,1)).replace(",",".")}}0</b>
+            </li>
+            <br>
+            <h5> <span><b>-Valores Abatido do Investimento</b></span></h5>
+{{abatimento=0}}
+{{if projeto.total_custo_retorno>0:}}
+{{abatimento+=projeto.total_custo_retorno}}
+{{pass}}
+            <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">Retorno da Mercadoria</h6>
+                </div>
+                <span class="text-muted">
+                    R$ {{="{:,}".format(round(projeto.total_custo_retorno,1)).replace(",",".")}}0
+                </span>
+            </li>
+              {{if projeto.total_debito_chefe>=0:}}
+{{else:}}
+{{abatimento+=projeto.total_debito_chefe*-1}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">Debito do Chefe</h6>
+                </div>
+                <span class="text-muted">
+                    R$ {{="{:,}".format(round(projeto.total_debito_chefe*-1,1)).replace(",",".")}}0
+                </span>
+            </li>
+{{pass}}
+            
+{{if projeto.total_debito_funcionario>=0:}}
+{{else:}}
+{{abatimento+=projeto.total_debito_funcionario*-1}}
+{{pass}}
+              {{if not projeto.total_debito_funcionario>=0:}}
+            <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">Debito dos Funcionarios</h6>
+                </div>
+                <span class="text-muted">
+                    R$ {{="{:,}".format(round(projeto.total_debito_funcionario*-1,1)).replace(",",".")}}0
+                </span>
+            </li>
+              {{pass}}
+{{if projeto.total_debito_vendedor>=0:}}
+{{else:}}
+{{abatimento+=projeto.total_debito_vendedor*-1}}
+{{pass}}
+            <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">Debito dos Vendedores</h6>
+                </div>
+                <span class="text-muted">
+                    R$ {{="{:,}".format(round(projeto.total_debito_vendedor*-1,1)).replace(",",".")}}0
+                </span>
+            </li>
+              
+              {{if projeto.total_devolucao_dinheiro>0:}}
+               <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">Devolução em Dinheiro</h6>
+                </div>
+                <span class="text-muted">
+                    R$ {{="{:,}".format(round(projeto.total_devolucao_dinheiro,1)).replace(",",".")}}0
+                </span>
+            </li>
+              
+{{abatimento+=projeto.total_devolucao_dinheiro}}
+              {{pass}}
+{{investimento-=abatimento}}
+            <li class="list-group-item d-flex justify-content-between bg-light">
+                <span><b>Total Valor Abatido Investimento</b></span>
+                <b>R$ {{="{:,}".format(round(abatimento,1)).replace(",",".")}}0</b>
+            </li>
+
+            <br>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+                <span><b>Investimento Real</b></span>
+                <b>R$ {{="{:,}".format(round(investimento,1)).replace(",",".")}}0</b>
+            </li>
+        </ul>
+
+
+        </div>
+        <div class="col-md-6">
+          <ul class="list-group">
+            <h5><span><b>-Informações Posteriores</b></span></h5>
+
+
+            <li class="list-group-item d-flex justify-content-between">
+            <div>
+            <h6 class="my-0">
+                <b>Valor Total da Venda</b>
+            </h6>
+                <small class="text-muted"></small>
+            </div>
+                <span class="text-primary">
+                    R$ {{="{:,}".format(round(projeto.total_venda_prazo,1)).replace(",",".")}}0
+                </span>
+            </li>
+
+
+            <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    <h6 class="my-0">
+                        <i class="fa text-primary fa-arrow-right"></i>
+                        <b>Valor Cobrado</b>
+                    </h6>
+                    {{if projeto.total_cobrado>0:}}
+                    {{percent=projeto.total_cobrado/projeto.total_venda_prazo*100}}
+                    <small class="text-muted">
+                        {{="{:,}".format(round(percent,1)).replace(",",".")}}%
+                    </small>
+                    {{pass}}
+                </div>
+                    <span class="text-muted">
+                        R$ {{="{:,}".format(round(projeto.total_cobrado,1)).replace(",",".")}}0
+                    </span>
+            </li>
+
+
+<li class="list-group-item d-flex justify-content-between">
+<div>
+<h6 class="my-0">
+    <i class="fa text-primary fa-arrow-right"></i>
+    <b>Despesa da Cobrança</b>
+</h6>{{percent=0}}
+    {{if projeto.total_despesa_cobranca>0 and projeto.total_cobrado>0:}}
+    {{percent=projeto.total_despesa_cobranca/projeto.total_cobrado*100}}
+    <small class="text-muted">
+        {{="{:,}".format(round(percent,1)).replace(",",".")}}%
+    </small>
+    {{pass}}
+</div>
+    <span class="text-muted">
+        R$ {{="{:,}".format(round(projeto.total_despesa_cobranca,1)).replace(",",".")}}0
+    </span>
+</li>
+
+
+
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0"><i class="fa text-primary fa-arrow-right"></i>Vale Caderno Cobrador</h6>
+              </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_vale_caderno_cobrador,1)).replace(",",".")}}0</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div>
+                <h6 class="my-0"><b>Total Depositos</b></h6> <small class="text-muted"></small>
+              </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_deposito_cobranca,1)).replace(",",".")}}0</span>
+            </li>
+            <br>
+            <h5> <span><b>-Saldo Investimento Parcial</b></span></h5>
+
+              {{saldo_investimento=projeto.total_deposito_cobranca-investimento}}
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">Total Depositos</h6>
+              </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_deposito_cobranca,1)).replace(",",".")}}0</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">Investimento Total</h6>
+              </div> <span class="text-muted">R$ {{="{:,}".format(round(investimento,1)).replace(",",".")}}0</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Saldo Investimento</b></span> <b>R$ {{="{:,}".format(round(saldo_investimento)).replace(",",".")}}0</b> </li>
+              <br>
+              {{saldo_quitacao=0}}
+              <h5> <span><b>-Saldo e Quitação</b></span></h5>
+              <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">Saldo Cobradores</h6>
+              </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_saldo_cobradores,1)).replace(",",".")}}0</span>
+                </li>
+              {{saldo_quitacao+=projeto.total_saldo_cobradores}}
+              {{for row in rows:}}
+              <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">Quiatação - {{=(row.descricao)[0:15]}}</h6>
+              </div> <span class="text-muted">R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</span>
+                </li>
+               {{saldo_quitacao+=row.valor}}
+              {{pass}}
+              <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Total</b></span> <b>R$ {{="{:,}".format(round(saldo_quitacao)).replace(",",".")}}0</b> </li>
+             
+              <br>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+                {{if saldo_investimento-saldo_quitacao>0:}}
+                <span><b>Lucro Depois da Quitação</b></span>
+                {{else:}}
+                <span><b>Prejuizo Depois da Quitação</b></span>
+                {{pass}}
+                {{saldo_investimento=saldo_investimento-saldo_quitacao}}
+                <b>R$ {{="{:,}".format(round(saldo_investimento,1)).replace(",",".")}}0</b>
+            </li>
+            <br>
+               {{entrada_extra=0}}
+              <h5> <span><b>-Entradas Extras</b></span></h5>
+              <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">Custo Devolução (Sem Uso)</h6>
+              </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_custo_devolucao_nova,1)).replace(",",".")}}0</span>
+                </li>
+               {{entrada_extra+=projeto.total_custo_devolucao_nova}}
+               <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">Custo Devolução ( Reaproveitamento )</h6>
+              </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_custo_devolucao_aproveitamento,1)).replace(",",".")}}0</span>
+                </li>>
+               {{entrada_extra+=projeto.total_custo_devolucao_aproveitamento}}
+              {{for row in rowsr:}}
+              <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">Entr. de Repasse( {{=(row.descricao)[0:8]}} )</h6>
+              </div> <span class="text-muted">R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</span>
+                </li>
+              {{entrada_extra+=row.valor}}
+              {{pass}}
+              <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Total</b></span> <b>R$ {{="{:,}".format(round(entrada_extra)).replace(",",".")}}0</b> </li>
+              <br>
+              {{saldo_investimento=saldo_investimento+entrada_extra}}
+            <li class="list-group-item d-flex justify-content-between bg-light">
+                {{if saldo_investimento>0:}}
+                <span><b>Lucro Liquido Real</b></span>
+                {{else:}}
+                <span><b>Prejuizo Liquido Real</b></span>
+                {{pass}}
+                <b>R$ {{="{:,}".format(round(saldo_investimento,1)).replace(",",".")}}0</b>
+            </li>
+            <br>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>

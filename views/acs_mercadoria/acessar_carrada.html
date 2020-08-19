@@ -1,0 +1,95 @@
+{{extend 'layout.html'}}
+{{preco=0}}
+{{pecas=0}}
+{{custo=0}}
+<div class="py-5" >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="">Lista de Itens da Carrada  do dia( {{=("{}/{}/{}".format(carrada.data_envio.day,carrada.data_envio.month,carrada.data_envio.year))}} ) para ( {{=carrada.projeto.descricao}})</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link" href="{{=URL('carradas', args=carrada.projeto)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          <a class="btn btn-link" href="{{=URL('adicionar_item_carrada', args=carrada.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar Produto</a>
+            <a class="btn btn-link" href="{{=URL('alterar_dados_carrada', args=carrada.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-file-text"></i> Alterar dados da Carrada</a>
+            
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">Quant</th>
+                  <th scope="col">Descrição</th>
+                  <th scope="col" class="text-center">Custo</th>
+                  <th scope="col" class="text-center">Total</th>
+                  <th scope="col" class="text-center">Preço</th>
+                  <th scope="col" class="text-center">Total</th>
+                  <th scope="col" class="text-center">Margem</th>
+                  <th scope="col" class="text-center">Opção</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {{for row in rows:}}
+                <tr>
+                  <th scope="row">{{=row.q_pcs}}</th>
+                  <td>{{=row.descricao}}</td>
+                  <td class="text-center">R$ {{="{:,}".format(round(row.custo_unitario)).replace(",",".")}}0</td>
+                  <td class="text-center">R$ {{="{:,}".format(round(row.custo_unitario*row.q_pcs)).replace(",",".")}}0</td>
+                  <td class="text-center">R$ {{="{:,}".format(round(row.preco_unitario)).replace(",",".")}}0</td>
+                  <td class="text-center">R$ {{="{:,}".format(round(row.preco_unitario*row.q_pcs)).replace(",",".")}}0</td>
+                    {{margem=0}}
+                    {{if row.custo_unitario>0 and row.preco_unitario>0:}}
+                    {{margem=row.preco_unitario/row.custo_unitario*100}}
+                    {{pass}}
+                    
+                    {{if margem>349:}}
+                  <td class="text-center text-success">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></td>
+                    {{elif margem>250:}}
+                  <td class="text-center text-warning">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></td>
+                    {{else:}}
+                  <td class="text-center text-danger">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></td>                    
+                    {{pass}}
+                  <td class="text-center"><a class="btn btn-link" href="{{=URL('alterar_item_carrada', args=row.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-file-text"></i></a></td>
+                </tr>
+                  
+{{preco+=row.preco_unitario*row.q_pcs}}
+{{pecas+=row.q_pcs}}
+{{custo+=row.custo_unitario*row.q_pcs}}
+                  {{pass}}
+                  
+                  {{margem=0}}
+                    {{if custo>0 and preco>0:}}
+                    {{margem=preco/custo*100}}
+                    {{pass}}
+                <tr>
+                  <th scope="row">{{=pecas}}</th>
+                  <th>#</th>
+                  <th class="text-center">Total</th>
+                  <th class="text-center">R$ {{="{:,}".format(round(custo)).replace(",",".")}}0</th>
+                  <th class="text-center">Total</th>
+                  <th class="text-center">R$ {{="{:,}".format(round(preco)).replace(",",".")}}0</th>
+                    {{if margem>349:}}
+                  <th class="text-center text-success">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></th>
+                    {{elif margem>250:}}
+                  <th class="text-center text-warning">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></th>
+                    {{else:}}
+                  <th class="text-center text-danger">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></th>                    
+                    {{pass}}
+                  <td class="text-center">#</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{carrada.total_preco=preco}}
+{{carrada.total_custo=custo}}
+{{carrada.total_pecas=pecas}}
+{{carrada.update_record()}}

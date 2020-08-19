@@ -1,0 +1,148 @@
+{{extend 'layout.html'}}
+{{totalgr=0}}
+{{trecebido=0}}
+{{tdevolvido=0}}
+{{tprego=0}}
+{{tfichasd=0}}
+{{totalgeralfichas=0}}
+
+{{vendaq=0}}
+{{row=sub_venda}}
+
+<div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="">Alocação de valores de {{=vendedor.nome}} recebidos por {{=sub_venda.nome_cobrador}}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link" href="{{=URL('alocar_valores', args=sub_venda.id)}}" style="color:#3b5998">
+                 <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar
+             </a>
+            <a class="btn btn-link" href="{{=URL('inserir_cobranca', args=[row.id,vendedor.id])}}" style="color:#3b5998">
+                 <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Inserir soma
+             </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-striped">
+        <thead>
+                <tr>
+                    <th>Data Inicio</th>
+                    <th>Primeira Cidade</th>
+                    <th>Venda</th>
+                    <th>Fichas</th>
+                </tr>
+            </thead>
+
+            {{fichas=0}}
+            {{for row1 in rows_vend:}}
+            {{if row1.sub_venda==row.id:}}
+            {{vendaq+=row1.venda_praso-row1.valor_devolvido}}
+            {{fichas+=row1.quant_fichas-row1.quant_fichas_devolvidas}}
+            {{pass}}
+            {{pass}}
+            <tbody>
+                <tr>
+                    <td>{{=("{}/{}/{}".format(row.data_inicio_cobranca.day,row.data_inicio_cobranca.month,row.data_inicio_cobranca.year))}}</td>
+                    <td>{{=row.primeira_cidade}}</td>
+                    <td>R$ {{="{:,}".format(round(vendaq,1)).replace(",",".")}}0</td>
+                    <td>{{=fichas}}</td>
+                    {{totalgeralfichas=fichas}}
+                </tr>
+            </tbody>
+    </table>
+</div>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th>Recebido</th>
+                <th>Devolvido</th>
+                <th>Prego</th>
+                <th>Total</th>
+                <th>Fichas</th>
+                <th>#</th>
+            </tr>
+        </thead>
+        {{fichas=0}}
+        {{venda=0}}
+        {{recebido=0}}
+        {{devolvido=0}}
+        {{prego=0}}
+        {{fichasd=0}}
+        <tbody>
+            {{for row2 in rows_cob:}}
+                {{if (row2.sub_venda==row.id) and (row2.vendedor==vendedor.id):}}
+                    <tr>
+                        <td>
+                            R$ {{="{:,}".format(round(row2.recebido,1)).replace(",",".")}}0
+                            
+                        </td>
+                        <td>R$ {{="{:,}".format(round(row2.devolvido,1)).replace(",",".")}}0</td>
+                        <td>R$ {{="{:,}".format(round(row2.prego,1)).replace(",",".")}}0</td>
+                        {{totalfs=row2.prego+row2.devolvido+row2.recebido}}
+                        <td>R$ {{="{:,}".format(round(totalfs,1)).replace(",",".")}}0</td>
+                        <td>{{=row2.quant_fichas_devolvidas}}</td>
+                        <td><a href="{{=URL('alterar_cobranca', args=row2.id)}}"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i></a></td>
+                    </tr>
+            
+
+                    {{recebido+=row2.recebido}}
+                    {{devolvido+=row2.devolvido}}
+                    {{prego+=row2.prego}}
+                    {{fichasd+=row2.quant_fichas_devolvidas}}
+                    {{totalgr+=totalfs}}
+                {{pass}}
+            {{trecebido+=row2.recebido}}
+            {{tdevolvido+=row2.devolvido}}
+            {{tprego+=row2.prego}}
+            {{tfichasd+=row2.quant_fichas_devolvidas}}
+            {{pass}}
+
+            <tr>
+                <th>R$ {{="{:,}".format(round(recebido,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(devolvido,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(prego,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(totalgr,1)).replace(",",".")}}0</th>
+                <th>{{=fichasd}}</th>
+                        <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+
+{{valort = totalgr-vendaq}}
+{{if valort>0:}}
+    Está sobrando <b>R$ {{="{:,}".format(round(valort,1)).replace(",",".")}}0</b> verifique!! 
+{{elif valort==0:}}
+    Tudo ok nos valores 
+{{else:}}
+     Está faltando <b>R$ {{="{:,}".format(round(valort,1)).replace(",",".")}}0</b> à ser inserido 
+{{pass}}
+
+            {{fichas_faltando= totalgeralfichas - fichasd}}
+
+            {{if fichas_faltando>0:}}
+            e e stá faltando <b>{{=fichas_faltando}}</b> fichas à ser inseridas
+            {{elif fichas_faltando==0:}}
+            e ok nas fichas
+            {{else:}}
+            e está sobrando <b>{{=fichas_faltando}}</b> fichas verifique!!
+            
+            {{pass}}
+
+</div>
+</div>
+{{vendedor.total_recebido=trecebido}}
+{{vendedor.total_devolvido=tdevolvido}}
+{{vendedor.total_prego=tprego}}
+{{vendedor.total_fichas_retorno=tfichasd}}
+{{vendedor.update_record()}}

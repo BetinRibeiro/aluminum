@@ -14,7 +14,7 @@ response.menu = [
 # ----------------------------------------------------------------------------------------------------------------------
 
 #membro = db.auth_membership(auth_membership.group_id==2)
-if auth.has_membership('admin')==True:
+if auth.has_membership('admin'):
     response.menu += [
     (T('BD'), False, URL('appadmin', 'index')),
     ]

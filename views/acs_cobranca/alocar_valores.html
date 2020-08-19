@@ -1,0 +1,115 @@
+{{extend 'layout.html'}}
+{{venda=0}}
+{{fichas=0}}
+{{recebido=0}}
+{{devolvido=0}}
+{{prego=0}}
+{{a=0}}
+
+<div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="">Alocação de Valores da cobrança {{=sub_venda.primeira_cidade}}</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link" href="{{=URL('relatorio_cobranca', args=sub_venda.id)}}" style="color:#3b5998">
+                 <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar
+             </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Venda</th>
+                <th>Recebido</th>
+                <th>Devolvido</th>
+                <th>Prego</th>
+                <th>Alocar</th>
+                <th>Opção</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{for row in rows:}}
+
+            <tr>
+                {{a+=1}}
+                <td>{{=a}}º</td>
+
+                <td>{{=row.nome}}</td>
+                {{total_venda=0}}
+                {{total_fichas=0}}
+                {{for row1 in rowscob:}}
+                    {{if row1.vendedor==row.id:}}
+                        {{total_venda+=row1.venda_praso}}
+                {{total_fichas+=row1.quant_fichas}}
+                    {{pass}}
+                {{pass}}
+                {{total_recebido=0}}
+                {{total_devolvido=0}}
+                {{total_prego=0}}
+                {{for row2 in rowsrec:}}
+                    {{if row2.vendedor==row.id:}}
+                        {{total_recebido+=row2.recebido}}
+                        {{total_devolvido+=row2.devolvido}}
+                        {{total_prego+=row2.prego}}
+                    {{pass}}
+
+                {{pass}}
+
+
+
+                {{saldo=total_venda}}
+                <td>R$ {{="{:,}".format(round(total_venda,1)).replace(",",".")}}0</td>
+                <td>R$ {{="{:,}".format(round(total_recebido,1)).replace(",",".")}}0</td>
+                <td>R$ {{="{:,}".format(round(total_devolvido,1)).replace(",",".")}}0</td>
+                <td>R$ {{="{:,}".format(round(total_prego,1)).replace(",",".")}}0</td>
+                {{saldo-=total_recebido+total_devolvido+total_prego}}
+                {{if saldo>0:}}
+                <td class="text-danger">R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</td>
+                {{elif saldo==0:}}
+                <td>OK</td>
+                {{else:}}
+                <td class="text-sucess">Sobrando</td>
+                {{pass}}
+                <td><a href="{{=URL('cobranca_individual', args=[row.id,sub_venda.id])}}"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> </a></td>
+
+{{venda+=total_venda}}
+{{recebido+=total_recebido}}
+{{fichas+=total_fichas}}
+{{devolvido+=total_devolvido}}
+{{prego+=total_prego}}
+            </tr>
+            {{pass}}
+            <tr>
+                <th>#</th>
+                <th></th>
+                <th>R$ {{="{:,}".format(round(venda,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(recebido,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(devolvido,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(prego,1)).replace(",",".")}}0</th>
+                {{perc=0}}
+                {{if recebido>0:}}
+                {{perc=recebido/venda*100}}
+                {{pass}}
+                <th>{{="{:,}".format(round(perc,1)).replace(",",".")}}%</th>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+<hr>
+<br>
+
+
+{{projeto.quant_vendedores=a}}
+{{projeto.update_record()}}

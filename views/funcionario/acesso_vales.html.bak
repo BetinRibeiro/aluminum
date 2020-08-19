@@ -27,16 +27,16 @@
                                 {{a+=1}}
                                 <td>{{=row.descricao}}</td>
                                 <td>{{=("{}/{}/{}".format(row.data_vale.day,row.data_vale.month,row.data_vale.year))}}</td>
-                                <td>R$ {{="{:,}".format(round(row.valor,2)).replace(",",".")}}0</td>
+                                <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
                                 {{totalvale+=row.valor}}
-                                <td><a href="{{=URL('alterar_vale', args=row.id)}}"><i class="fa text-warning fa-exchange" ></i></a></td>
+                                <th class="text-center"><a class="btn btn-link" href="{{=URL('alterar_vale_caderno', args=row.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-pencil-square-o"></i> </a></th>
                                 {{pass}}
                             </tr>
                             <tr>
                                 <th>#</th>
                                 <th>#</th>
                                 <th>#</th>
-                                <th>R$ {{="{:,}".format(round(totalvale,2)).replace(",",".")}}0</th>
+                                <th>R$ {{="{:,}".format(round(totalvale,1)).replace(",",".")}}0</th>
                                 <th>#</th>
                             </tr>
                         </tbody>

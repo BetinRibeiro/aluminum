@@ -1,0 +1,121 @@
+{{extend 'layout.html'}}
+<div class="py-5" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+              <h5 class="">Acesso ao Administrativo ( {{=projeto.descricao}} )</h5><h6 class="">Chefe Atual ( {{=projeto.auth_user.first_name}} )<a class="btn btn-link" href="{{=URL('definir_chefe', args=projeto.id)}}" style="color:#3b5998" >
+                 <i class="fa fa-fw fa-1x py-1 fa-street-view"></i> Definir Chefe da Equipe
+             </a><a class="btn btn-link" href="{{=URL('acs_relatorio','prestacao_venda', args=projeto.id)}}" style="color:#3b5998" >
+                 <i class="fa fa-fw fa-1x py-1 fa-calculator "></i> Prestar Contas com Chefe
+             </a></h6>
+            </div>
+        </div>
+       <div class="row">
+           <div class="col-md-12">
+             <a class="btn btn-link" href="{{=URL('acs_principal','index', args=projeto.empresa*12)}}" style="color:#3b5998">
+                 <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar
+             </a>
+             
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" >
+                <a class="btn btn-link" href="{{=URL('acs_principal','alterar_projeto', args=projeto.id)}}" style="color:#3b5998">
+                    <i class="fa fa-fw fa-1x py-1 fa-cog"></i> Alterar Dados
+                </a>
+              </li>
+            <li class="list-group-item" >
+                <a class="btn btn-link" href="{{=URL('acs_mercadoria','carradas', args=projeto.id)}}" style="color:#3b5998">
+                    <i class="fa fa-fw fa-1x py-1 fa-truck"></i> Mercadoria/Envio
+                </a>
+            </li>
+            <li class="list-group-item" >
+                <a class="btn btn-link" href="{{=URL('acs_mercadoria','retorno', args=projeto.id)}}" style="color:#3b5998">
+                    <i class="fa fa-fw fa-1x py-1 fa-truck"></i> Mercadoria/Retorno
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a class="btn btn-link" href="{{=URL('acs_projeto','particoes', args=projeto.id)}}" style="color:#3b5998">
+                    <i class="fa fa-fw fa-1x py-1 fa-pie-chart "></i> Particionamento
+                </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                  <a class="btn btn-link" href="{{=URL('acs_funcionario','index', args=projeto.id)}}" style="color:#3b5998">
+                      <i class="fa fa-fw fa-1x py-1 fa-users"></i> Funcionarios
+                  </a>
+              </li>
+              <li class="list-group-item">
+                  <a class="btn btn-link" href="{{=URL('acs_equipe','index', args=projeto.id)}}" style="color:#3b5998">
+                      <i class="fa fa-fw fa-1x py-1 fa-sitemap"></i> Equipe/Vendas
+                  </a>
+              </li>
+              <li class="list-group-item">
+                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_registro','index', args=[projeto.id,'venda_vista'])}}">
+                      <i class="fa fa-fw fa-1x py-1 fa-list "></i> Venda à Vista
+                  </a>
+              </li>
+              <li class="list-group-item">
+                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_despesa_projeto','index', args=[projeto.id,'Despesa_Venda'])}}">
+                      <i class="fa fa-fw fa-1x py-1 fa-minus-square"></i> Despesa da Venda
+                  </a>
+              </li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_despesa_projeto','index', args=[projeto.id,'Despesa_Local'])}}">
+                    <i class="fa fa-fw fa-1x py-1 fa-minus-circle"></i> Despesa Local
+                </a>
+              </li>
+              <li class="list-group-item">
+                <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_registro','index', args=[projeto.id,'caderno_chefe'])}}">
+                    <i class="fa fa-fw fa-1x py-1 fa-book"></i> Caderno do chefe
+                  </a>
+              </li>
+              <li class="list-group-item">
+                <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_registro','index', args=[projeto.id,'Gratificacao'])}}">
+                    <i class="fa fa-fw fa-1x py-1 fa-times"></i> Percas e Gratificações
+                  </a>
+              </li>
+              <li class="list-group-item">
+                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_relatorio','relatorio_chefe', args=projeto.id)}}">
+                    <i class="fa fa-fw fa-1x py-1 fa-file-text"></i> Relatório Chefe
+                  </a>
+              </li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <a class="btn btn-link" href="{{=URL('acs_cobranca','index', args=projeto.id)}}" style="color:#3b5998">
+                    <i class="fa fa-fw fa-1x py-1 fa-newspaper-o"></i> Cobrança
+                </a>
+              </li>
+              <li class="list-group-item">
+                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_cobranca','saldo_quitacao', args=[projeto.id])}}">
+                      <i class="fa fa-fw fa-1x py-1 fa-percent "></i> Saldo Quitação
+                  </a>
+              </li>
+              <li class="list-group-item">
+                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_registro','index', args=[projeto.id,'Saldo_quitacao'])}}">
+                      <i class="fa fa-fw fa-1x py-1 fa-usd "></i> Pagamento Quitação
+                  </a>
+              </li>
+              <li class="list-group-item">
+                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_registro','index', args=[projeto.id,'Entrada_repasse'])}}">
+                      <i class="fa fa-fw fa-1x py-1 fa-share "></i> Entradas Repasse
+                  </a>
+              </li>
+              
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>

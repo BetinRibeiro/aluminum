@@ -1,0 +1,88 @@
+{{extend 'layout.html'}}
+
+ {{a=1}}
+ {{valor=0}}
+{{recebido=0}}
+{{despesa=0}}
+{{deposito=0}}
+{{caderno=0}}
+{{fichas=0}}
+{{total_adiantamento=0}}
+{{total_vale_cobrador=0}}
+{{saldo=0}}
+{{debito=0}}
+<div class="py-5">
+    <div class="container">
+        <div class="row">
+        <div class="col-md-12">
+          <h5 class="">Listagem de Rotas de Cobrança ( {{=projeto.descricao}} )</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link" href="{{=URL('acs_projeto','index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          <a class="btn btn-link" href="{{=URL('acs_relatorio','investimento', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-shield"></i> Ver Relatorio de Investimento</a>
+        </div>
+      </div>
+      
+      <div class="row">
+          {{for row in rows:}}
+        <div class="col-lg-4 col-md-6 p-3" >
+          <div class="card bg-light">
+            <div class="card-body p-4">
+              <div class="row">
+                <div class="col-6">
+                  <h6 class="mb-0">{{=row.nome_cobrador}}</h6>
+                </div>
+                <div class="col-6 text-right">
+                  <h6 class="mb-0"> <b>R$ {{="{:,}".format(round(row.total_venda_praso,1)).replace(",",".")}}0</b> </h6>
+                </div>
+              </div>
+              <p class="my-3">{{=("{}/{}/{}".format(row.data_inicio_cobranca.day,row.data_inicio_cobranca.month,row.data_inicio_cobranca.year))}}<br>{{=row.primeira_cidade}}</p>
+              <ul class="pl-3">
+                <li>Recebido- <b>R$ {{="{:,}".format(round(row.total_recebido,1)).replace(",",".")}}0</b></li>
+                <li>Despesa - <b>R$ {{="{:,}".format(round(row.total_despesa,1)).replace(",",".")}}0</b>{{if row.total_despesa>0 and row.total_recebido>0:}} ({{="{:,}".format(round(row.total_despesa/row.total_recebido*100,1)).replace(",",".")}}%) {{pass}}</li>
+                <li>Deposito- <b>R$ {{="{:,}".format(round(row.total_deposito,1)).replace(",",".")}}0</b></li>
+                  {{if row.total_recebido>0 and row.total_venda_praso:}}
+                  <hr>
+                <li><b>{{="{:,}".format(round(row.total_recebido/row.total_venda_praso*100,1)).replace(",",".")}}%</b></li>
+                  {{pass}}
+              </ul> <a class="btn btn-primary mt-3" href="{{=URL('relatorio_cobranca', args=[row.id])}}">Acessar Cobrança</a>
+            </div>
+          </div>
+        </div>
+          {{if row.total_saldo_cobrador>0:}}
+                  {{saldo+=row.total_saldo_cobrador}}
+                  {{else:}}
+                  {{debito+=row.total_saldo_cobrador}}
+                  {{pass}}
+                  {{if row.total_venda_praso>0:}}
+                {{valor+=row.total_venda_praso}}
+                  {{pass}}
+              {{total_vale_cobrador+=row.total_vale_saida_cobrador}}
+{{total_adiantamento+=row.adiantamento_cobranca}}
+{{recebido+=row.total_recebido}}
+                  {{despesa+=row.total_despesa}}
+{{deposito+=row.total_deposito}}
+{{caderno+=row.total_caderno_cobrador}}
+                  {{if row.total_fichas>0:}}
+                  {{fichas+=row.total_fichas}}
+                  {{pass}}
+        {{pass}}
+        
+      </div>
+    </div>
+  </div>
+
+{{projeto.total_saldo_cobradores=saldo}}
+{{projeto.total_debito_cobradores=debito}}
+
+
+{{projeto.total_fichas=fichas}}
+{{projeto.total_vale_caderno_cobrador=caderno}}
+{{projeto.total_deposito_cobranca=deposito}}
+{{projeto.total_despesa_cobranca=despesa}}
+{{projeto.total_cobrado=recebido}}
+{{projeto.total_adiantamento_cobranca=total_adiantamento}}
+{{projeto.total_vale_cobrador=total_vale_cobrador}}
+{{projeto.update_record()}}

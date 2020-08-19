@@ -1,36 +1,44 @@
 {{extend 'layout.html'}}
+{{from datetime import *}}
+
+{{if usuario.id==1:}}
+<a class="btn btn-link" href="{{=URL('lista_empresas', args=usuario.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Lista Empresas</a>
+{{pass}}
 <div class="py-5" >
     <div class="container">
-      <h2 class="">Nome da Empresa <small class="text-muted">Pessoa que está logado</small></h2>
+      <h2 class="">{{=empresa.nome}} <small class="text-muted">{{=usuario.first_name}}</small></h2>
       <div class="row">
         <div class="col-md-12">
           <h5 class="">Projetos de Venda</h5>
-          <a class="btn btn-link" href="#" style="color:#3b5998" target="_blank"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Inserir Projeto</a>
+          <a class="btn btn-link" href="{{=URL('inserir_projeto', args=empresa.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Inserir Projeto</a>
           <div class="table-responsive">
             <table class="table table-striped table-borderless">
               <thead>
                 <tr>
-                  <th scope="col">N º</th>
                   <th scope="col">Chefe</th>
-                  <th scope="col">Data Inicial</th>
+                  <th scope="col">Descrição</th>
+                  <th scope="col">Venda</th>
                   <th scope="col">Opções</th>
                 </tr>
               </thead>
               <tbody>
+                  {{for row in rows:}}
                 <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td><a class="btn btn-link" href="#" style="color:#3b5998" target="_blank"><i class="fa fa-fw fa-1x py-1 fa-sign-in"></i></a></td>
+                  <th scope="row">{{=row.auth_user.first_name}}</th>
+                  <td>{{=row.descricao}}</td>
+                  <td>R$ {{="{:,}".format(round(row.total_venda_prazo)).replace(",",".")}}0</td>
+                  <td><a class="btn btn-link" href="{{=URL('acs_projeto','index', args=row.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-sign-in"></i></a></td>
                 </tr>
+                  {{pass}}
               </tbody>
             </table>
           </div>
           <div class="row">
             <div class="col-md-12">
               <h5 class="">Despesas Locais (Desvinculadas aos projetos)</h5>
-              <a class="btn btn-link" href="#" style="color:#3b5998" target="_blank"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Inserir Classe</a>
-              <a class="btn btn-link" href="#" style="color:#3b5998" target="_blank"><i class="fa fa-fw fa-1x py-1 fa-server"></i>&nbsp;Cheques por data</a>
+              <a class="btn btn-link" href="{{=URL('inserir_class_desp', args=empresa.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Inserir Classe</a>
+              <a class="btn btn-link" href="{{=URL('acs_cheques','index',args=[data.month,data.year,empresa.id])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-server"></i>&nbsp;Cheques por data</a>
+                <a class="btn btn-link" href="{{=URL('acs_transporte','index',args=empresa.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-car "></i>&nbsp;Transportes</a>
               <div class="table-responsive">
                 <table class="table table-striped table-borderless">
                   <thead>
@@ -42,12 +50,16 @@
                     </tr>
                   </thead>
                   <tbody>
+                      {{a=0}}
+                      {{for row in rowsdesp:}}
+                      {{a+=1}}
                     <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td><a class="btn btn-link" href="#" style="color:#3b5998" target="_blank"><i class="fa fa-fw fa-1x py-1 fa-sign-in"></i></a></td>
+                      <th scope="row">{{=a}}</th>
+                      <td>{{=row.descricao}}</td>
+                      <td>R$ {{="{:,}".format(round(row.total_classe)).replace(",",".")}}0</td>
+                      <td><a class="btn btn-link" href="{{=URL('acs_despesa_local', 'index', args=row.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-sign-in"></i></a></td>
                     </tr>
+                      {{pass}}
                   </tbody>
                 </table>
               </div>
@@ -55,7 +67,7 @@
           </div>
           <div class="row">
             <div class="col-md-12">
-              <h5 class="" contenteditable="true">Usuarios do Sistema (Administradores, Chefes e Cobradores)</h5>
+              <h5 class="" >Usuários do Sistema (Administradores, Chefes e Cobradores)</h5>
               <a class="btn btn-link" href="#" style="color:#3b5998" target="_blank"><i class="fa fa-fw fa-1x py-1 fa-server"></i>&nbsp;Lista de Cobranças</a>
               <div class="table-responsive">
                 <table class="table table-striped table-borderless">
@@ -67,17 +79,23 @@
                       <th scope="col">Opções</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody>{{a=0}}
+                      {{for row in rowsuser:}}
+                    {{a+=1}}
                     <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
+                      <th scope="row">{{=a}}</th>
+                      <td>{{=row.nome}}</td>
+                      <td>{{=row.telefone}}</td>
                       <td><a class="btn btn-link" href="#" style="color:#3b5998" target="_blank"><i class="fa fa-fw fa-1x py-1 fa-bars"></i></a></td>
                     </tr>
+                      {{pass}}
                   </tbody>
                 </table>
               </div>
               <h5 class="">Pagamentos do Sistema</h5>
+                {{if usuario.id==1:}}
+                <a class="btn btn-link" href="{{=URL('inserir_pagamento', args=empresa.id)}}" style="color:#3b5900"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Inserir Pagamento</a>
+                {{pass}}
               <div class="table-responsive">
                 <table class="table table-striped table-borderless">
                   <thead>
@@ -89,12 +107,26 @@
                     </tr>
                   </thead>
                   <tbody>
+                      {{for row in rowspgmt:}}
                     <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td><a class="btn btn-link" href="#" style="color:#3b5998" target="_blank"><i class="fa fa-fw fa-1x py-1 fa-hand-o-right"></i></a></td>
+                      <th scope="row">{{=("{}/{}/{}".format(row.data_vencimento.day,row.data_vencimento.month,row.data_vencimento.year))}}</th>
+                      <td>{{=row.descricao}}</td>
+                        {{if row.quitado:}}
+                      <td>Quitado</td>
+                        {{else:}}
+                        {{response.flash = row.observacao}}
+                    <script>
+                        alert("Não identificamos o pagamento do sistema.");
+                    </script>
+                      <td>Pendente</td>
+                        {{pass}}
+                {{if usuario.id==1:}}
+                      <td><a class="btn btn-link" href="{{=URL('alterar_pagamento',  args=row.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-usd"></i></a></td>
+                        {{else:}}
+                      <td><a class="btn btn-link" href="#" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-hand-o-right"></i></a></td>
+                        {{pass}}
                     </tr>
+                      {{pass}}
                   </tbody>
                 </table>
               </div>

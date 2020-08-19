@@ -1,0 +1,61 @@
+{{extend 'layout.html'}}
+{{total=0.0}}
+<div class="py-5" >
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="">Lista de Despesas {{=sub_venda.descricao}} |{{=sub_venda.projeto.descricao}}
+
+              </h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <a class="btn btn-link" href="{{=URL('index', args=sub_venda.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          <a class="btn btn-link" href="{{=URL('criar_desp', args=[classe_despesa_cobranca.id])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Adicionar Despesa</a>
+             {{if classe_despesa_cobranca.descricao=="DIÁRIAS" and len(rows)>0:}}
+        <a class="btn btn-link" href="{{=URL('criar_desp', args=[classe_despesa_cobranca.id,1])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i>Repitir Valor</a>
+        {{pass}}
+        </div>
+            
+      </div>
+      <div class="row">
+        <div class="col-md-12"><div class="table-responsive">
+                    <table class="table table-striped table-borderless table-sm">
+                <thead>
+					  <tr>
+						<th>Descrição</th>
+						<th>Data</th>
+                          <th>Total</th>
+                          <th>Opção</th>
+					  </tr>
+					</thead>
+					<tbody>
+						{{for row in rows:}}
+					  <tr>
+                          {{if row.descricao=="":}}
+                          {{row.descricao="DESPESA"}}
+                          {{row.update_record()}}
+                          {{pass}}
+                          <td>{{=row.descricao}}</td>
+
+						<td> {{=("{}/{}/{}".format(row.data_inicio.day,row.data_inicio.month,row.data_inicio.year))}}</td>
+                      <td>R$ {{="{:,}".format(round(row.valor,2)).replace(",",".")}}0</td>
+               <td><a href="{{=URL('alterar_desp', args=[row.id])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i></a></td>
+					  </tr>
+                        {{total+=row.valor}}
+					  {{pass}}
+                         <tr>
+						<th>#</th>
+						<th>#</th>
+                          <th>R$ {{="{:,}".format(round(total,2)).replace(",",".")}}0</th>
+					  </tr>
+					</tbody>
+				  </table>
+</div>
+</div>
+</div>
+
+{{classe_despesa_cobranca.total_despesa=total}}
+{{classe_despesa_cobranca.update_record()}}

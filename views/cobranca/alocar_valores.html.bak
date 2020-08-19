@@ -5,14 +5,23 @@
 {{devolvido=0}}
 {{prego=0}}
 {{a=0}}
-<div class="row">
-    <div class="col-md-6">
-        <a  class="btn btn-outline-light" href="{{=URL('acesso_particao_cobranca', args=sub_venda.id)}}">
-            <i class="fa text-danger fa-arrow-left  fa-2x"></i>
-        </a>
-    </div>
-</div>
-Vendas e Cobranças
+
+<div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="">#</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link" href="{{=URL('relatorio_cobranca', args=sub_venda.id)}}" style="color:#3b5998">
+                 <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar
+             </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
 <div class="table-responsive">
     <table class="table table-bordered table-sm table-striped">
         <thead>
@@ -57,7 +66,7 @@ Vendas e Cobranças
 
 
                 {{saldo=total_venda}}
-                <td>#R$ {{="{:,}".format(round(total_venda,1)).replace(",",".")}}0</td>
+                <td>R$ {{="{:,}".format(round(total_venda,1)).replace(",",".")}}0</td>
                 <td>R$ {{="{:,}".format(round(total_recebido,1)).replace(",",".")}}0</td>
                 <td>R$ {{="{:,}".format(round(total_devolvido,1)).replace(",",".")}}0</td>
                 <td>R$ {{="{:,}".format(round(total_prego,1)).replace(",",".")}}0</td>
@@ -93,6 +102,8 @@ Vendas e Cobranças
             </tr>
         </tbody>
     </table>
+</div>
+</div>
 </div>
 <hr>
 <br>

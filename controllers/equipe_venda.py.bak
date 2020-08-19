@@ -107,7 +107,7 @@ def alterar_venda():
     db.venda.vendedor.writable = False
     
     usuario = auth.user
-    if usuario.id==24:
+    if usuario.id==2324:
         session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
         redirect(URL('acesso_venda', args=vendedor.id))
 

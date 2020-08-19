@@ -1,0 +1,128 @@
+{{extend 'layout.html'}}
+{{total=0}}
+{{aproveitamento=0}}
+{{quant_pecas=0}}
+
+{{quant_pecas_ditada=0}}
+{{custo_ditado=0}}
+{{preco_ditado=0}}
+<div class="py-5" >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+            {{if devolucao.recolhido==True:}}
+            <h5 class="">Lista de Itens de Devolução Recolhida( {{=("{}/{}/{}".format(devolucao.data_recolhimento.day,devolucao.data_recolhimento.month,devolucao.data_recolhimento.year))}} ) | ( {{=devolucao.descricao}})</h5>
+            {{else:}}
+          <h5 class="">Lista de Itens de Devolução Ditada( {{=("{}/{}/{}".format(devolucao.data_registro.day,devolucao.data_registro.month,devolucao.data_registro.year))}} ) | ( {{=devolucao.descricao}})</h5>
+            {{pass}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link" href="{{=URL('index', args=devolucao.sub_venda)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          <a class="btn btn-link" href="{{=URL('adicionar_item_devolucao', args=devolucao.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar Produto</a>
+            <a class="btn btn-link" href="{{=URL('alterar_dados_devolucao', args=devolucao.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-file-text"></i> Alterar dados da Devolução</a>
+            {{if devolucao.recolhido==True:}}
+            <a class="btn btn-link" href="{{=URL('confirmar_recolhimento', args=devolucao.id)}}" style="color:#ff3300" ><i class="fa fa-fw fa-1x py-1 fa-thumbs-o-down"></i> Desfazer Recolhimento</a>
+            {{else:}}
+            <a class="btn btn-link" href="{{=URL('confirmar_recolhimento', args=devolucao.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-thumbs-o-up"></i> Confirmar Recolhimento</a>
+            {{pass}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-borderless">
+                {{if devolucao.recolhido==True:}}
+                <thead>
+                <tr>
+                  <th scope="col">Custo</th>
+                  <th scope="col">Descrição</th>
+                  <th scope="col" class="text-center">Quant Recolh</th>
+                  <th scope="col" class="text-center">Custo Recolh</th>
+                  <th scope="col" class="text-center">Quant Novas</th>
+                  <th scope="col" class="text-center">Custo Reapro</th>
+                  <th scope="col" class="text-center">Opção</th>
+                </tr>
+              </thead>
+              <tbody>
+                  
+                  {{for row in rows:}}
+                  <tr>
+                      <td>R$ {{="{:,}".format(round(row.custo,1)).replace(",",".")}}0</td>
+                      <td>{{=row.descricao}}</td>
+                      <td class="text-center">{{=row.quant_recolhida}}</td>
+                      <th class="text-center">R$ {{="{:,}".format(round(row.quant_recolhida*row.custo,1)).replace(",",".")}}0</th>
+                      <td class="text-center">{{=row.quant_novas}}</td>
+                      <th class="text-center">R$ {{="{:,}".format(round(row.quant_novas*row.custo,1)).replace(",",".")}}0</th>
+                      <td class="text-center">
+                          <a class="btn btn-link" href="{{=URL('alterar_item_devolucao_rec', args=row.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-file-text"></i></a></td>
+                  </tr>
+{{quant_pecas+=row.quant_recolhida}}
+{{total+=row.quant_recolhida*row.custo}}
+{{aproveitamento+=row.quant_novas*row.custo}}
+                  {{pass}}
+                  <tr>
+                      <td></td>
+                      <td></td>
+                      <td class="text-center">{{=quant_pecas}}</td>
+                      <th class="text-center">R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0</th>
+                      <td></td>
+                      <th class="text-center">R$ {{="{:,}".format(round(aproveitamento,1)).replace(",",".")}}0</th>
+                      
+                  </tr>
+                </tbody>
+                {{else:}}
+              <thead>
+                <tr>
+                  <th scope="col">Quant Ditada</th>
+                  <th scope="col">Descrição</th>
+                  <th scope="col" class="text-center">Custo</th>
+                  <th scope="col" class="text-center">Total</th>
+                  <th scope="col" class="text-center">Preço</th>
+                  <th scope="col" class="text-center">Total</th>
+                  <th scope="col" class="text-center">Opção</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {{for row in rows:}}
+                <tr>
+                  <th scope="row">{{=row.quant_ditada}}</th>
+                  <td>{{=row.descricao}}</td>
+                  <td>R$ {{="{:,}".format(round(row.custo,1)).replace(",",".")}}0</td>
+                    {{custo=row.quant_ditada*row.custo}}
+                  <td>R$ {{="{:,}".format(round(custo,1)).replace(",",".")}}0</td>
+                  <td>R$ {{="{:,}".format(round(row.preco,1)).replace(",",".")}}0</td>
+                    {{preco=row.quant_ditada*row.preco}}
+                  <td>R$ {{="{:,}".format(round(preco,1)).replace(",",".")}}0</td>
+                  
+                    
+                  <td class="text-center"><a class="btn btn-link" href="{{=URL('alterar_item_devolucao', args=row.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-file-text"></i></a></td>
+                    {{quant_pecas_ditada+=row.quant_ditada}}
+                    {{custo_ditado+=custo}}
+                    {{preco_ditado+=preco}}
+                    {{pass}}
+                </tr>
+                  
+                <tr>
+                  <th scope="row">#</th>
+                  <th>#</th>
+                  <th>{{=quant_pecas_ditada}}</th>
+                  <th>R$ {{="{:,}".format(round(custo_ditado,1)).replace(",",".")}}0 </th>
+                  <th>#</th>
+                  <th>R$ {{="{:,}".format(round(preco_ditado,1)).replace(",",".")}}0 </th>
+                  
+                </tr>
+              </tbody>
+                {{pass}}
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{{devolucao.q_pecas=quant_pecas}}
+{{devolucao.custo_pecas_novas=aproveitamento}}
+{{devolucao.update_record()}}

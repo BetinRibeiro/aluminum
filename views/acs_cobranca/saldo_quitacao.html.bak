@@ -1,0 +1,190 @@
+{{extend 'layout.html'}}
+{{venda=0}}
+{{fichas=0}}
+{{recebido=0}}
+{{devolvido=0}}
+{{prego=0}}
+{{a=0}}
+{{saldototal=0}}
+{{debitototal=0}}
+
+<div class="py-5" >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="">Saldo e Quitação ( {{=projeto.descricao}} )</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_projeto','index', args=projeto.id)}}"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+           
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Venda</th>
+                <th>Recebido</th>
+                <th>Devolvido</th>
+                <th>Prego</th>
+                <th>Fichas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{for row in rows:}}
+
+            <tr>
+                {{a+=1}}
+                <td>{{=a}}º</td>
+
+                <td>{{=row.nome}}</td>
+                <td>R$ {{="{:,}".format(round(row.total_vendas,1)).replace(",",".")}}0</td>
+                <td>R$ {{="{:,}".format(round(row.total_recebido,1)).replace(",",".")}}0</td>
+                <td>R$ {{="{:,}".format(round(row.total_devolvido,1)).replace(",",".")}}0</a></td>
+                <td>R$ {{="{:,}".format(round(row.total_prego,1)).replace(",",".")}}0</a></td>
+                <td>{{=row.total_fichas}}</a></td>
+{{venda+=row.total_vendas}}
+{{recebido+=row.total_recebido}}
+{{fichas+=row.total_fichas}}
+{{devolvido+=row.total_devolvido}}
+{{prego+=row.total_prego}}
+            </tr>
+            {{pass}}
+            <tr>
+                <th>#</th>
+                <th></th>
+                <th>R$ {{="{:,}".format(round(venda,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(recebido,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(devolvido,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(prego,1)).replace(",",".")}}0</th>
+                <th>{{=fichas}}</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<hr>
+<br>
+
+{{venda=0}}
+{{recebido=0}}
+{{comissaovt=0}}
+{{comissaoct=0}}
+{{saldototal=0}}
+Quitação e Comissão
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Venda</th>
+                <th>Comissão</th>
+                <th>Recebido</th>
+                <th>Comissão</th>
+                <th>Saldo</th>
+                <th>%</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {{for row in rows:}}
+            {{comissaov=0}}
+            {{comissaoc=0}}
+            {{percent=0}}
+            {{if row.total_vendas>0:}}
+            {{comissaov=row.total_vendas*row.comissao_venda/100}}
+            {{pass}}
+            {{if row.total_recebido>0:}}
+            {{percent=row.total_recebido/row.total_vendas*100}}
+            {{comissaoc=row.total_recebido*row.comissao_cobranca/100}}
+            {{pass}}
+            {{saldo=comissaoc-comissaov}}
+            
+            <tr>
+                <td><a class="btn btn-link" style="color:#3b5998" href="{{=URL('alterar_comissao_cobranca', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-refresh"></i> </a></td>
+                <td>{{=row.nome}}</td>
+                <td>R$ {{="{:,}".format(round(row.total_vendas,1)).replace(",",".")}}0</td>
+                <td>R$ {{="{:,}".format(round(comissaov,1)).replace(",",".")}}0</td>
+                <td>R$ {{="{:,}".format(round(row.total_recebido,1)).replace(",",".")}}0</a></td>
+                <td>R$ {{="{:,}".format(round(comissaoc,1)).replace(",",".")}}0</a></td>
+     {{if saldo>0:}}
+                <td>R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</a></td>
+{{else:}}
+<td class="text-danger">R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</a></td>
+{{pass}}
+                <td>{{="{:,}".format(round(percent,1)).replace(",",".")}}%</a></td>
+            </tr>
+{{venda+=row.total_vendas}}
+{{recebido+=row.total_recebido}}
+{{comissaovt+=comissaov}}
+{{comissaoct+=comissaoc}}
+{{if saldo>0:}}
+{{saldototal+=saldo}}
+{{else:}}
+
+{{debitototal+=saldo}}
+{{pass}}
+{{perctotal=0}}
+            {{pass}}
+            <tr>
+                <th></th>
+                <th>R$ {{="{:,}".format(round(venda,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(comissaovt,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(recebido,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(comissaoct,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(saldototal,1)).replace(",",".")}}0</th>
+                {{if recebido>0:}}
+                {{perctotal=recebido/venda*100}}
+                {{pass}}
+                <th>{{="{:,}".format(round(perctotal,1)).replace(",",".")}}%</th>
+            </tr>
+   </tbody>
+    </table>
+</div>
+<hr>
+<div class="table-responsive">
+    <table class="table table-bordered table-sm table-striped">
+         <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Venda</th>
+                <th>Comissão</th>
+                <th>Recebido</th>
+                <th>Comissão</th>
+                <th>Saldo</th>
+                <th>%</th>
+            </tr>
+        </thead>
+        <tbody>
+ <tr>
+                <th>{{=projeto.nome_chefe}}</th>
+                <th>R$ {{="{:,}".format(round(venda,1)).replace(",",".")}}0</th>
+     {{com_venda_chefe=venda*projeto.comissao_praso/100}}
+                <th>R$ {{="{:,}".format(round(com_venda_chefe,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,}".format(round(recebido,1)).replace(",",".")}}0</th>
+     
+     {{com_cobranca_chefe=recebido*projeto.comissao_cobranca/100}}
+                <th>R$ {{="{:,}".format(round(com_cobranca_chefe,1)).replace(",",".")}}0</th>
+     
+     {{saldochefe=com_cobranca_chefe-com_venda_chefe}}
+                <th>R$ {{="{:,}".format(round(saldochefe,1)).replace(",",".")}}0</th>
+                {{if recebido>0:}}
+                {{perctotal=recebido/venda*100}}
+                {{pass}}
+                <th>{{="{:,}".format(round(perctotal,1)).replace(",",".")}}%</th>
+            </tr>
+        </tbody>
+    </table>
+</div>
+{{projeto.total_saldo_quitacao_chefe=saldochefe}}
+{{projeto.total_saldo_quitacao_vendedores=saldototal}}
+{{projeto.total_debito_quitacao_vendedores=debitototal}}
+
+{{projeto.quant_vendedores=a}}
+{{projeto.update_record()}}

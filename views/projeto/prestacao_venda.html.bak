@@ -1,22 +1,19 @@
 {{extend 'layout.html'}}
 
-<div class="py-1" >
+
+<div class="py-5" >
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <a class="btn btn-outline-light"  href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> 
-                    <i class="fa text-danger fa-arrow-left  fa-2x"></i>
-                </a>
-                <a class="btn btn-outline-light" href="{{=URL('alterar_ent_said', args=projeto.id)}}">
-                    <i class="fa text-primary fa-list-alt fa-2x"></i></a>
-                </div>
-            </div>
-    </div>
-</div>
-<div class="py-2" >
-    <div class="container">
-        <h5>Prestação da Venda {{=projeto.descricao}}</h5>
-
+        <div class="col-md-12">
+          <h5 class="">Prestação de Contas ( {{=projeto.descricao}} )</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link" href="{{=URL('acs_projeto','index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          <a class="btn btn-link" href="{{=URL('alterar_ent_said', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-shield"></i> Ver Relatorio de Investimento</a>
+        </div>
+      </div>
         <div class="row">
             <div class="col-md-6">
                 <p class="d-flex justify-content-between mb-3"> <span><b>Informações Mercadoria</b></span> </p>
@@ -239,6 +236,7 @@
                 <h6 class="my-0"><b class="text-success">Saldo Chefe</b></h6>
             </div> <span class="text-success">R$ {{="{:,}".format(round(saldoq)).replace(",",".")}}0</span>
             {{projeto.total_saldo_chefe=saldoq}}
+            {{projeto.total_debito_chefe=0}}
 
             
             {{else:}}
@@ -246,6 +244,7 @@
                 <h6 class="my-0"><b class="text-danger">Saldo Negativo</b></h6>
             </div> <span class="text-danger">R$ {{="{:,}".format(round(saldoq)).replace(",",".")}}0</span>
             {{projeto.total_debito_chefe=saldoq}}
+            {{projeto.total_saldo_chefe=0}}
             {{pass}}
 {{projeto.update_record()}}
         </li>

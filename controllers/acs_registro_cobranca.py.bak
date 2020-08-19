@@ -1,0 +1,17 @@
+# -*- coding: utf-8 -*-
+# tente algo como
+def index():
+    usuario=auth.user
+    sub_venda = db.sub_venda(request.args(0, auth.user))
+    tipo = request.args(1, auth.user)
+    dataontem=datetime.date(request.now.year, request.now.month, request.now.day)
+    if (dataontem.day>2):
+        dataontem=datetime.date(dataontem.year, dataontem.month, dataontem.day-2)
+    else:dataontem=datetime.date(dataontem.year, dataontem.month-1, 27)
+    rows = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo==tipo)).select(orderby=db.registro_cobranca.data_inicio)
+    consul=(request.args(2))
+    if consul:
+        consul= "entrou no if"
+        #consulta = request.args(2, auth.user)
+        rows = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo==tipo)&(db.registro_cobranca.descricao.contains(request.args(2)))).select(orderby=db.registro_cobranca.data_inicio)
+    return locals()

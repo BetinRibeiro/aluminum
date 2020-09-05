@@ -7,3 +7,10 @@ def motivos():
 
 def principios(): 
     return locals()
+def foco():
+    return locals()
+def meme_abencoado():
+    sub_venda = db.sub_venda(db.sub_venda.id==81)
+    projeto = db.projeto(sub_venda.projeto)
+    rows = db(db.venda.sub_venda == sub_venda.id).select(orderby=db.venda.data_venda)
+    return locals()

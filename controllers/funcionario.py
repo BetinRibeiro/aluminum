@@ -33,9 +33,7 @@ def alterar_funcionario():
     db.funcionario.projeto.writable = False
 
     usuario = auth.user
-    if usuario.id==24:
-        session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
-        redirect(URL('acesso_funcionario', args=projeto.id))
+    
     form = SQLFORM(db.funcionario, request.args(0, cast=int), deletable=True)
     if form.process().accepted:
         session.flash = 'Atualizado'

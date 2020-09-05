@@ -518,3 +518,6 @@ ALTER TABLE "projeto" ADD "total_custo_devolucao_aproveitamento" DOUBLE NOT NULL
 timestamp: 2020-08-17T06:30:41.299222
 ALTER TABLE "projeto" ADD "total_custo_devolucao_nova" DOUBLE NOT NULL DEFAULT 0.0;
 success!
+timestamp: 2020-08-25T16:28:22.261295
+ALTER TABLE "registro_cobranca" ADD "empresa" INTEGER REFERENCES "empresa" ("id") ON DELETE CASCADE  ;
+success!

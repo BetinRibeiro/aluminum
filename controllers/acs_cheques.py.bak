@@ -14,7 +14,7 @@ def index():
         ultima_data=datetime.date(ano+1, 1, 1)
     else:
         ultima_data=datetime.date(ano, mes+1, 1)
-    rows = db((db.cheque.empresa==empresa.id)&(db.cheque.data_cheque>=primeira_data)&(db.cheque.data_cheque<ultima_data)).select(orderby=db.cheque.data_cheque)
+    rows = db((db.cheque.empresa!=1000)&(db.cheque.data_cheque>=primeira_data)&(db.cheque.data_cheque<ultima_data)).select(orderby=db.cheque.data_cheque)
     return locals()
 
 @auth.requires_login()
@@ -40,6 +40,7 @@ def cadastrar_cheque():
 def alterar():
     response.view = 'generic.html' # use a generic view
     cheque = db.cheque(request.args(0, cast=int))
+    empresa = db.empresa(cheque.empresa)
     data=cheque.data_cheque
     db.cheque.id.readable = False
     db.cheque.id.writable = False

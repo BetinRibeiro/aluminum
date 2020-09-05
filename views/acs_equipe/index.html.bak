@@ -30,14 +30,14 @@
               <thead>
 					  <tr>
                           <th>#</th>
-						<th>NOME</th>
-						<th>VENDA</th>
-						<th>COMISSÃO</th>
-						<th>VALE</th>
-                          <th>CADERNO</th>
-                          <th>SALDO</th>
+						<th>Nome</th>
+						<th>Venda</th>
+						<th>Comissão</th>
+						<th>Vale</th>
+                          <th>Caderno</th>
+                          <th>Saldo</th>
                             {{if not projeto.venda_finalizada:}}
-                            <th id="noprint">ALTERAR</th>
+                            <th id="noprint">Opção</th>
                           {{pass}}
 					  </tr>
 					</thead>

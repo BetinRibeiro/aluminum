@@ -4,12 +4,14 @@ def index():
     data=request.now
     empresa = db.empresa(db.empresa.auth_user==auth.user.id)
     usuario=auth.user
-    
+    usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
     #caso não tenha nem uma empresa o usuario pode estar vinculado a
     #algum projeto ou sub venda pode ser (chefe ou cobrador)
     if not empresa:
-        #redireciona para pagina de usuario)
-        redirect(URL('default','index'))
+        empresa = db.empresa(usuario_empresa.empresa)
+        if not empresa:
+            #redireciona para pagina de usuario)
+            redirect(URL('default','index'))
     consul=(request.args(0))
     if consul:
         n=int(consul)/12
@@ -24,6 +26,49 @@ def index():
     #2 consultas no banco
     return locals()
 
+@auth.requires_login()
+def lista_logins():
+    data=request.now
+    empresa = db.empresa(db.empresa.auth_user==auth.user.id)
+    consul=(request.args(0))
+    if consul:
+        n=int(consul)/12
+        empresa = db.empresa(n)
+    usuario=auth.user
+    row = db(db.usuario_empresa.empresa==empresa.id).select()
+    if request.args(0, auth.user)=="235":
+        rows = db(db.usuario_empresa.empresa).select(orderby=db.empresa)
+    #2 consultas no banco
+    return locals()
+
+@auth.requires_login()
+def lista_pagmt_sistema():
+    data=request.now
+    empresa = db.empresa(db.empresa.auth_user==auth.user.id)
+    consul=(request.args(0))
+    if consul:
+        n=int(consul)/12
+        empresa = db.empresa(n)
+    usuario=auth.user
+    rows = db(db.pagamento.empresa==empresa.id).select()
+    if request.args(0, auth.user)=="235":
+        rows = db(db.pagamento.empresa).select(orderby=db.empresa)
+    #2 consultas no banco
+    return locals()
+@auth.requires_login()
+def lista_projetos():
+    data=request.now
+    empresa = db.empresa(db.empresa.auth_user==auth.user.id)
+    consul=(request.args(0))
+    if consul:
+        n=int(consul)/12
+        empresa = db.empresa(n)
+    usuario=auth.user
+    usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
+    if (usuario.id!=1)and(usuario_empresa.empresa!=empresa.id):
+        redirect(URL('default','index'))
+    rows = db(db.projeto.empresa==empresa.id).select(orderby=db.projeto.descricao)
+    return locals()
 @auth.requires_login()
 def inserir_projeto():
     response.view = 'generic.html' # use a generic view
@@ -47,7 +92,7 @@ def inserir_projeto():
         #caso aceito redireciona para tela de acesso inicial
         response.flash = 'Formulario aceito'
         projeto=db.projeto(form.vars.id)
-        redirect(URL('index', args=empresa.id*12))
+        redirect(URL('lista_projetos', args=empresa.id*12))
     elif form.errors:
         response.flash = 'Formulario não aceito'
     else:
@@ -65,7 +110,7 @@ def alterar_projeto():
     #pois não pode ser alterado
     if projeto.venda_finalizada:
         session.flash = 'A venda já foi finalizada'
-        redirect(URL('index', args=projeto.empresa*12))
+        redirect(URL('lista_projetos', args=projeto.empresa*12))
     #bloqueia id para visualização e alteração
     db.projeto.id.readable = False
     db.projeto.id.writable = False

@@ -1,9 +1,10 @@
 {{extend 'layout.html'}}
+{{total=0}}
 <div class="py-5" >
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h5 class="">Lista de Carradas Enviadas ( {{=projeto.descricao}} )</h5>
+          <h5 class="">Lista de Rotas de Cobrança ( {{=projeto.descricao}} )</h5>
         </div>
       </div>
       <div class="row">
@@ -34,6 +35,7 @@
                     <td class="text-center">R$ {{="{:,}".format(round(row.venda_praso,1)).replace(",",".")}}0</td>
                   <th class="text-center"><a class="btn btn-link" href="{{=URL('acesso_vendas_particao', args=row.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-pencil-square-o"></i> </a></th>
                 </tr>
+{{total+=row.venda_praso}}
                   {{pass}}
               </tbody>
             </table>

@@ -39,7 +39,7 @@
                   
                   {{a=0}}
                   {{for row in rows:}}
-                  {{saldo=row.salario-row.vale_saida-row.total_vale_caderno}}
+                  {{saldo=0}}
                   {{a+=1}}
                 <tr>
                   <th>{{=a}}</th>
@@ -48,7 +48,7 @@
                     <td>R$ {{="{:,}".format(round(row.salario,1)).replace(",",".")}}0</td>
                     <td>R$ {{="{:,}".format(round(row.vale_saida,1)).replace(",",".")}}0</td>
                     <td>R$ {{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0</td>
-                    {{saldo=saldo-row.vale_saida-row.total_vale_caderno}}
+                    {{saldo=row.salario-row.vale_saida-row.total_vale_caderno}}
                                 {{if saldo > 0:}}
                                 <td>R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</td>
                                 {{else:}}

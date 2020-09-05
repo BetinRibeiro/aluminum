@@ -14,8 +14,40 @@ def index():
         row.update_record()
     return locals()
 
+@auth.requires_login()
+def cobranca_periodo():
+    empresa = db.empresa(request.args(2, auth.user))
+    mes=request.now
+    ano=request.now
+    mes=request.args(0, cast=int)
+    ano=request.args(1, cast=int)
+    primeira_data=datetime.date(ano, mes, 1)
+    ultima_data=datetime.date(ano, mes, 1)
+
+    if (mes==12):
+        ultima_data=datetime.date(ano+1, 1, 1)
+    else:
+        ultima_data=datetime.date(ano, mes+1, 1)
+    rows = db((db.registro_cobranca.empresa==empresa.id)&(db.registro_cobranca.tipo=='Recebimento')&(db.registro_cobranca.data_inicio>=primeira_data)&(db.registro_cobranca.data_inicio<ultima_data)).select(orderby=db.registro_cobranca.data_inicio)
+    return locals()
 
 
+@auth.requires_login()
+def depositos_periodo():
+    empresa = db.empresa(request.args(2, auth.user))
+    mes=request.now
+    ano=request.now
+    mes=request.args(0, cast=int)
+    ano=request.args(1, cast=int)
+    primeira_data=datetime.date(ano, mes, 1)
+    ultima_data=datetime.date(ano, mes, 1)
+
+    if (mes==12):
+        ultima_data=datetime.date(ano+1, 1, 1)
+    else:
+        ultima_data=datetime.date(ano, mes+1, 1)
+    rows = db((db.registro_cobranca.empresa==empresa.id)&(db.registro_cobranca.tipo=='Deposito')&(db.registro_cobranca.data_inicio>=primeira_data)&(db.registro_cobranca.data_inicio<ultima_data)).select(orderby=db.registro_cobranca.data_inicio)
+    return locals()
 @auth.requires_login()
 def relatorio_cobranca():
     sub_venda = db.sub_venda(request.args(0, cast=int))
@@ -25,7 +57,13 @@ def relatorio_cobranca():
     if sub_venda.total_venda_praso<0:
         redirect(URL('acessar_cobrancas',args=sub_venda.projeto))
     return locals()
-
+def inserir_empresa():
+    rows=db((db.registro_cobranca)).select()
+    for row in rows:
+        row.empresa=row.sub_venda.projeto.empresa
+        #row.update_record()
+    redirect(URL('default','index'))
+    return locals()
 
 @auth.requires_login()
 def definir_cobrador():
@@ -97,7 +135,7 @@ def alterar_dados():
     form = SQLFORM(db.sub_venda, request.args(0, cast=int), deletable=False)
     if form.process().accepted:
         session.flash = 'Atualizado'
-        redirect(URL('acesso_particao_cobranca', args=sub_venda.id))
+        redirect(URL('relatorio_cobranca', args=sub_venda.id))
     elif form.errors:
         response.flash = 'Erros no formulário!'
     else:

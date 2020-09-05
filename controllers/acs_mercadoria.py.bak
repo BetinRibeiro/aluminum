@@ -229,6 +229,15 @@ def alterar_retorno():
 
     db.item_carrada.preco_unitario.readable = True
     db.item_carrada.preco_unitario.writable = False
+
+    db.item_carrada.quant_pcs_grt.readable = True
+    db.item_carrada.quant_pcs_grt.writable = True
+
+    db.item_carrada.quant_pcs_rtr.readable = True
+    db.item_carrada.quant_pcs_rtr.writable = True
+
+    db.item_carrada.quant_pcs_rfg.readable = True
+    db.item_carrada.quant_pcs_rfg.writable = True
     empresa = db.empresa(projeto.empresa)
     
     form = SQLFORM(db.item_carrada, request.args(0, cast=int), deletable=False)

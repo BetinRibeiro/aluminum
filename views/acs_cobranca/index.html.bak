@@ -11,6 +11,8 @@
 {{total_vale_cobrador=0}}
 {{saldo=0}}
 {{debito=0}}
+{{total_custo_devolucao_nova=0}}
+{{total_custo_devolucao_aproveitamento=0}}
 <div class="py-5">
     <div class="container">
         <div class="row">
@@ -68,6 +70,10 @@
                   {{if row.total_fichas>0:}}
                   {{fichas+=row.total_fichas}}
                   {{pass}}
+          
+{{total_custo_devolucao_nova+=row.total_custo_devolucao_nova}}
+{{total_custo_devolucao_aproveitamento+=row.total_custo_devolucao_aproveitamento}}
+          
         {{pass}}
         
       </div>
@@ -77,6 +83,8 @@
 {{projeto.total_saldo_cobradores=saldo}}
 {{projeto.total_debito_cobradores=debito}}
 
+{{projeto.total_custo_devolucao_nova=total_custo_devolucao_nova}}
+{{projeto.total_custo_devolucao_aproveitamento=total_custo_devolucao_aproveitamento}}
 
 {{projeto.total_fichas=fichas}}
 {{projeto.total_vale_caderno_cobrador=caderno}}

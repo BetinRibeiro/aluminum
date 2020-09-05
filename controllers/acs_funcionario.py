@@ -4,7 +4,6 @@ def index():
     rows = db(db.funcionario.projeto == request.args(0, cast=int)).select(orderby=~db.funcionario.vale_saida)
     return locals()
 
-
 def acesso_funcionario():
     funcionario = db.funcionario(request.args(0, cast=int))
     rows = db(db.vale_funcionario.funcionario == request.args(0, cast=int)).select(orderby=~db.vale_funcionario.data_vale)
@@ -17,14 +16,9 @@ def alterar_funcionario():
     projeto = db.projeto(funcionario.projeto)
     db.funcionario.id.readable = False
     db.funcionario.id.writable = False
-    
     db.funcionario.projeto.readable = False
     db.funcionario.projeto.writable = False
-
     usuario = auth.user
-    if usuario.id==24:
-        session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
-        redirect(URL('acesso_funcionario', args=projeto.id))
     form = SQLFORM(db.funcionario, request.args(0, cast=int), deletable=True)
     if form.process().accepted:
         session.flash = 'Atualizado'
@@ -53,7 +47,6 @@ def adicionar_funcionario():
         response.flash = 'Preencha o formulario'
     return dict(form=form)
 
-
 def adicionar_vale_caderno():
     response.view = 'generic.html' # use a generic view
     funcionario = db.funcionario(request.args(0, auth.user))
@@ -70,7 +63,7 @@ def adicionar_vale_caderno():
     else:
         response.flash = 'Preencha o formulario'
     return dict(form=form)
-    
+
 @auth.requires_login()
 def alterar_vale_caderno():
     response.view = 'generic.html' # use a generic view
@@ -78,10 +71,8 @@ def alterar_vale_caderno():
     funcionario = db.funcionario(vale_funcionario.funcionario)
     db.vale_funcionario.id.readable = False
     db.vale_funcionario.id.writable = False
-
     db.vale_funcionario.funcionario.readable = False
     db.vale_funcionario.funcionario.writable = False
-
     form = SQLFORM(db.vale_funcionario, request.args(0, cast=int), deletable=True)
     if form.process().accepted:
         session.flash = 'Atualizado'

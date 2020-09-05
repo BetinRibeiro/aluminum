@@ -24,30 +24,7 @@
 {{pass}}
 
 {{saldofinal = comissao-sub_venda.total_caderno_cobrador-sub_venda.total_vale_saida_cobrador-caixa}}
-<nav class="navbar navbar-expand-md navbar-dark bg-dark" >
-    <div class="container"> <a class="navbar-brand" href="{{=URL('alterar_dados', args=sub_venda.id)}}">
-        <h6>#{{=sub_venda.nome_cobrador}}</h6>
-      </a> <button class="navbar-toggler navbar-toggler-right border-0" type="button" data-toggle="collapse" data-target="#navbar10">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar10">
-        <ul class="navbar-nav ml-auto">
-        {{if desbloqueado:}}
-            <li class="nav-item"> <a class="nav-link" href="{{=URL('dados_cobrador', args=sub_venda.id)}}">Cobrador</a> </li>
-            
-            {{pass}}
-            <li class="nav-item  text-muted"> <a class="btn btn-outline-primary" href="{{=URL('lista_registros', args=[sub_venda.id,'Deposito_extra'])}}">Depositos Extra</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{=URL('lista_registros', args=[sub_venda.id,'Recebimento'])}}">Recebimento</a> </li>
-            <li class="nav-item"> <a class="nav-link" href="{{=URL('lista_registros', args=[sub_venda.id,'Deposito'])}}">Depositos</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{=URL('lista_registros', args=[sub_venda.id,'Caderno'])}}">Caderno</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{=URL('despesa_cobranca','acessar_despesa', args=sub_venda.id)}}">Despesas</a></li>
-        {{if desbloqueado:}}
-            
-            <li class="nav-item"> <a class="nav-link" href="{{=URL('alocar_valores', args=[sub_venda.id])}}">Alocar Valores</a></li>{{pass}}
-        </ul>
-      </div>
-    </div>
-  </nav>
+
 
 <div class="py-5" >
     <div class="container">
@@ -86,7 +63,7 @@
                <a class="btn btn-link" href="{{=URL('acs_registro_cobranca','index', args=[sub_venda.id,'Recebimento'])}}" style="color:#3b5998">
                  <i class="fa fa-fw fa-1x py-1 fa-dollar"></i> Lista de Recebimentos
              </a>
-               <a class="btn btn-link" href="{{=URL('acs_registro_cobranca','index', args=[sub_venda.id,'Recebimento'])}}" style="color:#3b5998">
+               <a class="btn btn-link" href="{{=URL('acs_registro_cobranca','index', args=[sub_venda.id,'Deposito'])}}" style="color:#3b5998">
                  <i class="fa fa-fw fa-1x py-1 fa-sign-in"></i> Lista de Depositos
              </a>
                <a class="btn btn-link" href="{{=URL('acs_registro_cobranca','index', args=[sub_venda.id,'Recebimento'])}}" style="color:#3b5998">

@@ -378,6 +378,7 @@ db.define_table('registro_venda',
 				)
 db.define_table('registro_cobranca',
 				Field('sub_venda','reference sub_venda', label='Cobrança'),
+				Field('empresa','reference empresa', label='empresa'),
                 Field('projeto','reference projeto'),
                 Field('tipo', 'string', label='tipo',requires = IS_UPPER(), writable=False, readable=True , notnull=True),
                 Field('data_inicio', 'date', label="Data", default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),

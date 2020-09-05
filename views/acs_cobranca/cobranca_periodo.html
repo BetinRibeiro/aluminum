@@ -1,0 +1,105 @@
+{{extend 'layout.html'}}
+
+
+
+{{mes="Janeiro"}}
+{{if primeira_data.month==2:}}
+{{mes="Fevereiro"}}
+
+{{elif primeira_data.month==3:}}
+{{mes="Março"}}
+
+{{elif primeira_data.month==4:}}
+{{mes="Abril"}}
+
+{{elif primeira_data.month==5:}}
+{{mes="Maio"}}
+
+{{elif primeira_data.month==6:}}
+{{mes="Junho"}}
+
+{{elif primeira_data.month==7:}}
+{{mes="Julho"}}
+
+{{elif primeira_data.month==8:}}
+{{mes="Agosto"}}
+
+{{elif primeira_data.month==9:}}
+{{mes="Setembro"}}
+
+{{elif primeira_data.month==10:}}
+{{mes="Outubro"}}
+
+{{elif primeira_data.month==11:}}
+{{mes="Novembro"}}
+
+{{elif primeira_data.month==12:}}
+{{mes="Dezembro"}}
+{{pass}}
+{{if primeira_data.month==1:}}
+    {{primeira_data=datetime.date(primeira_data.year-1, 12, 1)}}
+{{else:}}
+    {{primeira_data=datetime.date(primeira_data.year,  primeira_data.month-1, 1)}}
+{{pass}}
+
+{{total=0}}
+<div class="py-5" style="">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="">Lista de Recebimentos das Cobranças</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link" href="{{=URL('acs_principal','index', args=empresa.id*12)}}" style="color:#3b5998">
+            <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar </a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <center>
+            <a class="btn btn-link" href="{{=URL('cobranca_periodo', args=[primeira_data.month,primeira_data.year,empresa.id])}}" style="color:#3b5998">
+              <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Mês Anterior</a> Recebimentos do mês de <b>{{=mes}}</b>
+            <a class="btn btn-link" href="{{=URL('cobranca_periodo',  args=[ultima_data.month,ultima_data.year,empresa.id])}}" style="color:#3b5998">Próximo Mês <i class="fa fa-fw fa-1x py-1 fa-arrow-right"></i>
+            </a></center>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive" >
+            <table class="table table-striped table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">Data</th>
+                  <th scope="col">Projeto</th>
+                  <th scope="col">Cobrador</th>
+                  <th scope="col">Tipo</th>
+                  <th scope="col">Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {{for row in rows:}}
+                <tr>
+                  <th>{{=("{}/{}/{}".format(row.data_inicio.day,row.data_inicio.month,row.data_inicio.year))}}</th>
+                  <td>{{=row.sub_venda.projeto.descricao}}</td>
+                  <td>{{=row.sub_venda.auth_user.first_name}}</td>
+                    <td>{{=row.descricao}}</td>
+                  <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
+{{total+=row.valor}}
+                </tr>
+                  {{pass}}
+                <tr>
+                  <th scope="row">#</th>
+                  <th>#</th>
+                  <th>#</th>
+                  <th>#</th>
+                  <th>R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

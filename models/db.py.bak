@@ -221,6 +221,9 @@ db.define_table('projeto',
                 Field('total_saldo_cobradores', 'double', writable=False, readable=False , notnull=True, default=0),
                 Field('total_debito_cobradores', 'double', writable=False, readable=False , notnull=True, default=0),
 
+                Field('total_custo_devolucao_nova', 'double', writable=False, readable=False , notnull=True, default=0),
+                Field('total_custo_devolucao_aproveitamento', 'double', writable=False, readable=False , notnull=True, default=0),
+
                 Field('total_saldo_quitacao_chefe', 'double', writable=False, readable=False , notnull=True, default=0),
                 Field('total_saldo_quitacao_vendedores', 'double', writable=False, readable=False , notnull=True, default=0),
                 Field('total_debito_quitacao_vendedores', 'double', writable=False, readable=False , notnull=True, default=0),

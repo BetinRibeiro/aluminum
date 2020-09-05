@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 
 @auth.requires_login()
+def lista_despesas():
+    empresa = db.empresa(request.args(0, auth.user))
+    rows = db(db.classe_despesa_local.empresa==empresa.id).select(orderby=db.classe_despesa_local.descricao)
+    return locals()
+@auth.requires_login()
 def index():
     despesa = db.classe_despesa_local(request.args(0, auth.user))
     empresa = db.empresa(despesa.empresa)
@@ -21,12 +26,32 @@ def alterar_nome_classe():
     form = SQLFORM(db.classe_despesa_local, request.args(0, cast=int), deletable=True)
     if form.process().accepted:
         session.flash = 'Projeto atualizado'
-        redirect(URL('acs_principal', 'index', args=empresa.id*12))
+        redirect(URL('lista_despesas', args=empresa.id))
     elif form.errors:
         response.flash = 'Erros no formulário!'
     return  dict(form=form)
 
 
+@auth.requires_login()
+def inserir_class_desp():
+    response.view = 'generic.html' # use a generic view
+
+    empresa = db.empresa(request.args(0, auth.user))
+
+    db.classe_despesa_local.empresa.default = empresa.id
+    db.classe_despesa_local.empresa.writable = False
+
+    form = SQLFORM(db.classe_despesa_local).process()
+    if form.accepted:
+        #caso aceito redireciona para tela de acesso inicial
+        response.flash = 'Formulario aceito'
+        redirect(URL('lista_despesas', args=empresa.id))
+    elif form.errors:
+        response.flash = 'Formulario não aceito'
+    else:
+        response.flash = 'Preencha o formulario'
+    #2 consultas no banco
+    return  dict(form=form)
 @auth.requires_login()
 def inserir_despesa():
     response.view = 'generic.html' # use a generic view

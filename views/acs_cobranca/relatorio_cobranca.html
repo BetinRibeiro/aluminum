@@ -38,16 +38,16 @@
             <div class="col-md-12">
               <h5 class="">Relatorio de Cobrança ( {{=sub_venda.projeto.descricao}} | {{=sub_venda.primeira_cidade}}) | {{=sub_venda.nome_cobrador}} )</h5>
                 <h6 class="">Cobrador Atual ( {{=sub_venda.auth_user.first_name}} )
-                    <a class="btn btn-link" href="{{=URL('definir_cobrador', args=sub_venda.id)}}" style="color:#3b5998" >
+                    <a class="btn btn-link  m-1 border-info rounded-top" href="{{=URL('definir_cobrador', args=sub_venda.id)}}" style="color:#3b5998" >
                          <i class="fa fa-fw fa-1x py-1 fa-street-view"></i> Definir Cobrador
                     </a>
-                    <a class="btn btn-link" href="{{=URL('alterar_dados', args=sub_venda.id)}}" style="color:#3b5998" >
+                    <a class="btn btn-link  m-1 border-info rounded-top" href="{{=URL('alterar_dados', args=sub_venda.id)}}" style="color:#3b5998" >
                          <i class="fa fa-fw fa-1x py-1 fa-database"></i> Alterar Dados Cobrança
                     </a>
-                     <a class="btn btn-link" href="{{=URL('acs_devolucao','index', args=sub_venda.id)}}" style="color:#3b5998" >
+                     <a class="btn btn-link  m-1 border-info rounded-top" href="{{=URL('acs_devolucao','index', args=sub_venda.id)}}" style="color:#3b5998" >
                          <i class="fa fa-fw fa-1x py-1 fa-database"></i> Registrar Devolução
                     </a>
-                    <a class="btn btn-link" href="{{=URL('alocar_valores', args=[sub_venda.id])}}" style="color:#3b5998" >
+                    <a class="btn btn-link  m-1 border-info rounded-top" href="{{=URL('alocar_valores', args=[sub_venda.id])}}" style="color:#3b5998" >
                          <i class="fa fa-fw fa-1x py-1 fa-hand-pointer-o "></i> Alocar Valores
                     </a>
                 </h6>
@@ -63,7 +63,7 @@
                <a class="btn btn-link" href="{{=URL('acs_registro_cobranca','index', args=[sub_venda.id,'Recebimento'])}}" style="color:#3b5998">
                  <i class="fa fa-fw fa-1x py-1 fa-dollar"></i> Lista de Recebimentos
              </a>
-               <a class="btn btn-link" href="{{=URL('acs_registro_cobranca','index', args=[sub_venda.id,'Recebimento'])}}" style="color:#3b5998">
+               <a class="btn btn-link" href="{{=URL('acs_registro_cobranca','index', args=[sub_venda.id,'Deposito'])}}" style="color:#3b5998">
                  <i class="fa fa-fw fa-1x py-1 fa-sign-in"></i> Lista de Depositos
              </a>
                <a class="btn btn-link" href="{{=URL('acs_registro_cobranca','index', args=[sub_venda.id,'Recebimento'])}}" style="color:#3b5998">

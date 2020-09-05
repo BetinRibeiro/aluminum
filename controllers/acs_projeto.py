@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-def index(): 
+def index():
     projeto = db.projeto(request.args(0, auth.user))
+    usuario=auth.user
+    usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
+    if (usuario.id!=1)and(usuario_empresa.empresa!=projeto.empresa):
+        redirect(URL('default','index'))
     return locals()
 
 def definir_chefe():
     projeto = db.projeto(request.args(0, auth.user))
     rows = db(db.usuario_empresa.empresa==projeto.empresa).select()
     return locals()
-
 
 def definir_chefe_confirmar():
     projeto = db.projeto(request.args(0, auth.user))
@@ -32,8 +35,8 @@ def particoes():
         for rowv in rowsv:
             total_venda+=rowv.venda_praso-rowv.valor_devolvido
             total_fichas+=rowv.quant_fichas-rowv.quant_fichas_devolvidas
-        row.quant_fichas=total_fichas
-        row.venda_praso=total_venda
+        row.total_fichas=total_fichas
+        row.total_venda_praso=total_venda
         row.update_record()
     return locals()
 
@@ -80,8 +83,6 @@ def alterar_dados_rota():
     db.sub_venda.cobranca_iniciada.label = 'Venda Finalizada'
     db.sub_venda.cobranca_iniciada.readable = True
     db.sub_venda.cobranca_iniciada.writable = True
-    
-    
 
     db.sub_venda.data_final_cobranca.readable = False
     db.sub_venda.data_final_cobranca.writable = False

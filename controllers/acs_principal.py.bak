@@ -11,7 +11,7 @@ def index():
         empresa = db.empresa(usuario_empresa.empresa)
         if not empresa:
             #redireciona para pagina de usuario)
-            redirect(URL('default','index'))
+            redirect(URL('acs_chefe','index'))
     consul=(request.args(0))
     if consul:
         n=int(consul)/12
@@ -65,12 +65,9 @@ def lista_projetos():
         empresa = db.empresa(n)
     usuario=auth.user
     usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
-    if (usuario.id!=1)and(usuario_empresa.empresa!=projeto.empresa):
+    if (usuario.id!=1)and(usuario_empresa.empresa!=empresa.id):
         redirect(URL('default','index'))
     rows = db(db.projeto.empresa==empresa.id).select(orderby=db.projeto.descricao)
-    if request.args(0, auth.user)=="235":
-        rows = db(db.projeto.empresa).select(orderby=db.empresa)
-    #2 consultas no banco
     return locals()
 @auth.requires_login()
 def inserir_projeto():

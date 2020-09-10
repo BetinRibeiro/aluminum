@@ -1,0 +1,75 @@
+{{extend 'layout.html'}}
+<div class="py-1" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <a class="btn btn-link" href="{{=URL('index', args=projeto.empresa)}}" style="color:#3b5998">
+                    <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="py-5" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+              <h5 class="">Acesso a venda ( {{=projeto.descricao}} )</h5><h6 class="">Chefe Atual ( {{=projeto.auth_user.first_name}} )
+                {{if projeto.empresa==17:}}
+                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_chf_relatorio','relatorio_chefe_sal', args=projeto.id)}}">
+                      <i class="fa fa-fw fa-1x py-1 fa-file-text"></i> Relatório
+                  </a>
+              {{else:}}
+                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_chf_relatorio','relatorio_chefe', args=projeto.id)}}">
+                      <i class="fa fa-fw fa-1x py-1 fa-file-text"></i> Relatório
+                  </a>
+              {{pass}}
+                </h6>
+            </div>
+        </div>
+      <div class="row">
+        <div class="col-md-4">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" >
+                <a class="btn btn-link" href="{{=URL('acs_chf_mercadoria','carradas', args=projeto.id)}}" style="color:#3b5998">
+                    <i class="fa fa-fw fa-1x py-1 fa-truck"></i> Mercadoria
+                </a>
+            </li>
+           <li class="list-group-item">
+                  <a class="btn btn-link" href="{{=URL('acs_chf_funcionario','index', args=projeto.id)}}" style="color:#3b5998">
+                      <i class="fa fa-fw fa-1x py-1 fa-users"></i> Funcionarios
+                  </a>
+              </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                  <a class="btn btn-link" href="{{=URL('acs_chf_equipe','index', args=projeto.id)}}" style="color:#3b5998">
+                      <i class="fa fa-fw fa-1x py-1 fa-sitemap"></i> Equipe/Vendas
+                  </a>
+              </li>
+              <li class="list-group-item">
+                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_chf_registro','index', args=[projeto.id,'venda_vista'])}}">
+                      <i class="fa fa-fw fa-1x py-1 fa-list "></i> Venda à Vista
+                  </a>
+              </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-group list-group-flush">
+             <li class="list-group-item">
+                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_despesa_chf','index', args=[projeto.id,'Despesa_Venda'])}}">
+                      <i class="fa fa-fw fa-1x py-1 fa-minus-square"></i> Despesas
+                  </a>
+              </li>
+              <li class="list-group-item">
+                <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_chf_registro','index', args=[projeto.id,'caderno_chefe'])}}">
+                    <i class="fa fa-fw fa-1x py-1 fa-book"></i> Caderno do chefe
+                  </a>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>

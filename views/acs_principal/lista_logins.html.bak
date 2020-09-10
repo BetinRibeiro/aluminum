@@ -15,15 +15,13 @@
       
 <div class="row">
             <div class="col-md-12">
-              
-                
               <div class="table-responsive">
                 <table class="table table-striped table-borderless">
                   <thead>
                     <tr>
                       <th scope="col">Nº</th>
                       <th scope="col">Nome</th>
-                      <th scope="col">Senha</th>
+                      <th scope="col">Email</th>
                       <th scope="col">Opções</th>
                     </tr>
                   </thead>
@@ -32,14 +30,13 @@
                     {{a+=1}}
                     <tr>
                       <th scope="row">{{=a}}</th>
-                      <td>{{=row.nome}}</td>
-                      <td>{{=row.telefone}}</td>
-                      <td><a class="btn btn-link" href="#" style="color:#3b5998""><i class="fa fa-fw fa-1x py-1 fa-bars"></i></a></td>
+                      <td>{{=row.auth_user.first_name}}</td>
+                      <td>{{=row.auth_user.email}}</td>
+                      <td><a class="btn btn-link" href="{{=URL('acs_chf_equipe','projetos', args=row.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-bars"></i></a></td>
                     </tr>
                       {{pass}}
                   </tbody>
                 </table>
-              </div>
               </div>
               </div>
               </div>

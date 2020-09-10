@@ -1,0 +1,74 @@
+{{extend 'layout.html'}}
+{{pecas=0}}
+{{preco=0}}
+{{custo=0}}
+<div class="py-5" >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h5 class="">Lista de Carradas Enviadas ( {{=projeto.descricao}} )</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <a class="btn btn-link" href="{{=URL('acs_chefe','acesso_projeto', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+            {{if (not projeto.venda_finalizada):}}
+          <a class="btn btn-link" href="{{=URL('adicionar_carrada', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar Carrada Nova</a>
+            {{pass}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">Data</th>
+                  <th scope="col">Descrição</th>
+                  <th scope="col" class="text-center">Peças</th>
+                  <th scope="col" class="text-center">Preço</th>
+                  <th scope="col" class="text-center">Opção</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {{for row in rows:}}
+                <tr>
+                  <th scope="row">{{=("{}/{}/{}".format(row.data_envio.day,row.data_envio.month,row.data_envio.year))}}</th>
+                  <td>{{=(row.descricao)[0:30]}}</td>
+                  <td class="text-center">{{=row.total_pecas}}</td>
+                  <td class="text-center">R$ {{="{:,}".format(round(row.total_preco)).replace(",",".")}}0</td>
+                    {{margem=0}}
+                    {{if row.total_custo>0 and row.total_preco>0:}}
+                    {{margem=row.total_preco/row.total_custo*100}}
+                    {{pass}}
+                    
+                   
+                  <td class="text-center"><a class="btn btn-link" href="{{=URL('acs_chf_mercadoria','acessar_carrada', args=row.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-truck"></i></a></td>
+                </tr>
+{{pecas+=row.total_pecas}}
+{{custo+=row.total_custo}}
+{{preco+=row.total_preco}}
+                  {{pass}}
+                <tr>
+                  <th scope="row">#</th>
+                  <th>#</th>
+                  <th class="text-center">{{=pecas}}</th>
+                  <th class="text-center">R$ {{="{:,}".format(round(preco)).replace(",",".")}}0</th>
+                    {{margem=0}}
+                    {{if custo>0 and preco>0:}}
+                    {{margem=preco/custo*100}}
+                    {{pass}}
+                    
+                  <td class="text-center">#</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{projeto.total_pecas_mercadoria=pecas}}
+{{projeto.total_preco_mercadoria=preco}}
+{{projeto.total_custo_mercadoria=custo}}
+{{projeto.update_record()}}

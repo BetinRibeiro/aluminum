@@ -87,6 +87,7 @@ ga('send', 'pageview');
       <div class="row">
         <div class="col-md-6 my-5 text-lg-left text-center align-self-center">
             <a class="btn btn-danger btn-lg btn-block" href="{{=URL('acesso_inicial')}}">Acessar</a>
+          <a class="btn btn-outline-primary btn-lg btn-block" href="{{=URL('acs_chefe','index')}}">Chefe Equipe</a>
           <h1 class="display-4">Aluminum</h1>
           <p class="lead">Sistema Multiplataforma</p>
           <div class="row mt-5">
@@ -112,7 +113,7 @@ ga('send', 'pageview');
         <div class="col-md-7 align-self-center order-1 order-md-2 my-3 text-md-left text-center">
           <h2>Fácil acesso, múltiplos usuários. </h2>
           <p class="my-4 text-muted">A departamentalização das funções dentro da sua organização precisam ser bem definidas e com restrições entre acessos, o usuário administrativo tem acesso a custos e investimentos relatórios para facilitar a tomada de decisões, o líder da equipe de vendas controla cada parte de vendas como mercadoria, despesas da venda, venda à vista, vendedores, particionamento das cobranças e vendas a prazo, o cobrador tem acesso restrito aos depósitos, despesas da cobrança e valores cobrados, cada parte funciona de forma interdependente e harmônica.</p>
-          <a class="btn btn-outline-primary btn-lg btn-block" href="{{=URL('acesso_inicial')}}">Acessar</a>
+          <a class="btn btn-outline-primary btn-lg btn-block" href="{{=URL('acs_principal','index')}}">Acessar</a>
         </div>
       </div>
       <div class="row pt-5" id="plataforma">

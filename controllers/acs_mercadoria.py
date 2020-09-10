@@ -48,9 +48,7 @@ def alterar_dados_carrada():
     carrada = db.carrada(request.args(0, cast=int))
     projeto = db.projeto(carrada.projeto)
     empresa = db.empresa(projeto.empresa)
-    if projeto.venda_finalizada:
-        session.flash = 'A venda já foi finalizada'
-        redirect(URL('carradas', args=projeto.id))
+    
     db.carrada.id.readable = False
     db.carrada.id.writable = False
 

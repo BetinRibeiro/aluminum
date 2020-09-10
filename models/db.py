@@ -230,6 +230,7 @@ db.define_table('projeto',
 
                 Field('dias_cobrando', 'integer', writable=False, readable=False , notnull=True, default=0),
                 Field('venda_finalizada', 'boolean', writable=False, readable=False, default=False),
+                Field('bloqueio_chefe', 'boolean', writable=True, readable=False, default=False),
                 format='%(descricao)s')
 
 db.define_table('carrada',
@@ -378,7 +379,7 @@ db.define_table('registro_venda',
 				)
 db.define_table('registro_cobranca',
 				Field('sub_venda','reference sub_venda', label='Cobrança'),
-				Field('empresa','reference empresa', label='empresa'),
+				Field('empresa','reference empresa', writable=False, readable=False, label='empresa'),
                 Field('projeto','reference projeto'),
                 Field('tipo', 'string', label='tipo',requires = IS_UPPER(), writable=False, readable=True , notnull=True),
                 Field('data_inicio', 'date', label="Data", default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),

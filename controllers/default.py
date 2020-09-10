@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-@cache.action()
 def index():
     return locals()
 #gera arquivo para criação de toda empresa e projetos

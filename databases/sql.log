@@ -521,3 +521,6 @@ success!
 timestamp: 2020-08-25T16:28:22.261295
 ALTER TABLE "registro_cobranca" ADD "empresa" INTEGER REFERENCES "empresa" ("id") ON DELETE CASCADE  ;
 success!
+timestamp: 2020-09-08T21:20:09.699803
+ALTER TABLE "projeto" ADD "bloqueio_chefe" CHAR(1);
+success!

@@ -4,6 +4,10 @@ def index(): return dict(message="hello from acs_mercadoria.py")
 
 def carradas():
     projeto = db.projeto(request.args(0, auth.user))
+    usuario=auth.user
+    usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
+    if (usuario.id!=1)and(usuario_empresa.empresa!=projeto.empresa):
+        redirect(URL('default','index'))
     rows = db(db.carrada.projeto==projeto.id).select()
     return locals()
 

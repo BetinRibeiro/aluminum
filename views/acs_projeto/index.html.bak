@@ -3,11 +3,20 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-              <h5 class="">Acesso ao Administrativo ( {{=projeto.descricao}} )</h5><h6 class="">Chefe Atual ( {{=projeto.auth_user.first_name}} )<a class="btn btn-link  border m-1 rounded-top" href="{{=URL('definir_chefe', args=projeto.id)}}" style="color:#3b5998" >
+              <h5 class="">Acesso ao Administrativo ( {{=projeto.descricao}} )</h5><h6 class="">Chefe Atual ( {{=projeto.auth_user.first_name}} )<a class="btn btn-link  border m-1 border-info rounded-top" href="{{=URL('definir_chefe', args=projeto.id)}}" style="color:#3b5998" >
                  <i class="fa fa-fw fa-1x py-1 fa-street-view"></i> Definir Chefe da Equipe
-             </a><a class="btn btn-link border m-2 rounded-top" href="{{=URL('acs_relatorio','prestacao_venda', args=projeto.id)}}" style="color:#3b5998" >
+             </a>
+                
+              {{if projeto.empresa==17:}}
+                <a class="btn btn-link border border-info m-2 rounded-top" href="{{=URL('acs_relatorio','prestacao_venda_sal', args=projeto.id)}}" style="color:#3b5998" >
                  <i class="fa fa-fw fa-1x py-1 fa-calculator "></i> Prestar Contas com Chefe
-             </a></h6>
+             </a>
+                {{else:}}
+                <a class="btn btn-link border border-info m-2 rounded-top" href="{{=URL('acs_relatorio','prestacao_venda', args=projeto.id)}}" style="color:#3b5998" >
+                 <i class="fa fa-fw fa-1x py-1 fa-calculator "></i> Prestar Contas com Chefe
+             </a>
+                {{pass}}
+                </h6>
             </div>
         </div>
        <div class="row">
@@ -85,9 +94,16 @@
                   </a>
               </li>
               <li class="list-group-item">
-                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_relatorio','relatorio_chefe', args=projeto.id)}}">
-                    <i class="fa fa-fw fa-1x py-1 fa-file-text"></i> Relatório Chefe
+              {{if projeto.empresa==17:}}
+                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_relatorio','relatorio_chefe_sal', args=projeto.id)}}">
+                      <i class="fa fa-fw fa-1x py-1 fa-file-text"></i> Relatório Chefe
                   </a>
+              {{else:}}
+                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_relatorio','relatorio_chefe', args=projeto.id)}}">
+                      <i class="fa fa-fw fa-1x py-1 fa-file-text"></i> Relatório Chefe
+                  </a>
+              {{pass}}
+                      
               </li>
           </ul>
         </div>

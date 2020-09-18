@@ -69,34 +69,12 @@
                     {{if projeto.total_preco_mercadoria>0 and projeto.total_pecas_mercadoria>0:}}
                     {{media_pecas=projeto.total_preco_mercadoria/projeto.total_pecas_mercadoria}}
                     {{pass}}
-                    {{if venda_vista!=0:}}
-                    <li class="list-group-item d-flex justify-content-between">
-                        
-                            {{if venda_vista>0:}}
-                            {{media_pecas=venda_vista/media_pecas}}
-                            {{pass}}
-                            {{if venda_vista>0:}}
-                        <div class="text-danger">
-                            <h6 class="my-0"><b>Diferênça Mercadoria</b></h6> 
-                            <small class="text-muted">Média de {{="{:,}".format(round(media_pecas,0)).replace(".0","")}} Itens que Faltaram</small>
-                        </div> <span class="text-muted">R$ {{="{:,}".format(round(venda_vista)).replace(",",".")}}0</span>
-                        
-                        {{else:}}
-                        
-                            <div class="text-danger">
-                            <h6 class="my-0 text-danger"><b>Erro!! </b><span class="text-dark">(R$ {{="{:,}".format(round((venda_vista-projeto.total_preco_mercadoria)*-1)).replace(",",".")}}0)</span></h6> 
-                            <small class="text-danger">Apresentando mais mercadoria do que levou</small>
-                        </div> 
-                        <h6 class="text-danger">R$ {{="{:,}".format(round(venda_vista)).replace(",",".")}}0</h6>
-                        
-                        {{pass}}
-                    </li>
-                    {{pass}}
+                   
                     <br>
                     <p class="d-flex justify-content-between mb-3"> <span><b>Dinheiro da Viagem</b></span> </p>
                     <li class="list-group-item d-flex justify-content-between bg-light">
                         <div class="text-success">
-                            <h6 class="my-0"><b>Venda à Vista</b></h6> <small>R$ {{="{:,}".format(round(projeto.total_venda_vista*2)).replace(",",".")}}0 Mercadoria&nbsp;</small>
+                            <h6 class="my-0"><b>Venda à Vista</b></h6> <small>R$ {{="{:,}".format(round(total_venda_vista)).replace(",",".")}}0 Mercadoria&nbsp;</small>
 
                         </div> <span class="text-success">R$ {{="{:,}".format(round(projeto.total_venda_vista)).replace(",",".")}}0</span>
                     </li>

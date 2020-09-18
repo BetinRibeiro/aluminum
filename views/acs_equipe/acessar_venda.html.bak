@@ -21,11 +21,11 @@
       </div>
     <div class="row">
         <div class="col-md-6">
-            <a class="btn btn-link" href="{{=URL('acs_projeto','index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+            <a class="btn btn-link" href="{{=URL('index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
             <a class="btn btn-link" href="{{=URL('alterar_vendedor', args=vendedor.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-cog"></i> Alterar dados do Vendedor</a>
         </div>
     </div>
-           
+
             {{for row1 in rows_sub:}}
             <hr class="border bg-danger" >
 
@@ -63,14 +63,14 @@
                             {{aentrada=0}}
                             {{adevolucao=0}}
                         {{for row in rows_vend:}}
-                            {{if (vendedor.id==107) and (row.sub_venda==64):}}
-                                {{row.sub_venda=66}}
-                                {{row.vendedor=107}}
+                            {{if (vendedor.id==301) and (row.sub_venda==104):}}
+                                {{row.sub_venda=81}}
                                 {{row.update_record()}}
                             {{pass}}
                         {{if row.sub_venda == row1.id:}}
                             <tr>
                                 {{a+=1}}
+
                                 {{row.venda_praso=row.venda_praso-row.valor_devolvido}}
                                 {{row.quant_fichas=row.quant_fichas-row.quant_fichas_devolvidas}}
                                 {{caderno+=row.vale_caderno}}
@@ -79,7 +79,7 @@
                                 {{fichas_devolvidas+=row.quant_fichas_devolvidas}}
                                 {{entrada+=row.entradas_venda}}
                                 {{devolucao+=row.valor_devolvido}}
-                                
+
                                 {{acaderno+=row.vale_caderno}}
                                 {{aprazo+=row.venda_praso}}
                                 {{afichas+=row.quant_fichas}}
@@ -89,7 +89,7 @@
                                 <td>{{=a}}</td>
                                 <td>
                                     {{if not projeto.venda_finalizada:}}
-                                    
+
 {{if (not row1.cobranca_iniciada):}}
                 {{if (usuario.id!=2324):}}
                                     <a href="{{=URL('alterar_venda', args=row.id)}}">{{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}</a>
@@ -100,7 +100,7 @@
                                     {{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}
                                     {{pass}}
                                     {{pass}}
-                                
+
                                 </td>
                                 <td>R$ {{="{:,}".format(round(row.venda_praso,1)).replace(",",".")}}0</td>
                                 <td>{{=row.quant_fichas}}</td>
@@ -122,8 +122,8 @@
                             </tbody>
 
                     </table>
-                            
-                        
+
+
                 {{totalcaderno+=caderno}}
                 {{totalprazo+=prazo}}
                 {{totalfichas+=fichas}}
@@ -133,9 +133,9 @@
             {{pass}}
                 <hr>
                 <div class="table-responsive">
-                    
+
                  <table class="table table-bordered table-sm table-striped">
-                    
+
                                 <thead>
                                      <tr>
                             <th>V.Prazo</th>

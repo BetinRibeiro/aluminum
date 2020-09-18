@@ -53,6 +53,8 @@ def acesso_inicial():
     #busca empresa que tenha o usuario iguela ao logado
     empresa = db.empresa(db.empresa.auth_user==auth.user.id)
     usuario=auth.user
+    if (auth.user.id==44) or (auth.user.id==45) or (auth.user.id==46):
+        redirect(URL('acs_chefe','index'))
     if (auth.user.id==6):
         empresa = db.empresa(4)
         #empresa.id

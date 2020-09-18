@@ -48,9 +48,7 @@ def alterar_dados_carrada():
     carrada = db.carrada(request.args(0, cast=int))
     projeto = db.projeto(carrada.projeto)
     empresa = db.empresa(projeto.empresa)
-    if projeto.venda_finalizada:
-        session.flash = 'A venda já foi finalizada'
-        redirect(URL('carradas', args=projeto.id))
+    
     db.carrada.id.readable = False
     db.carrada.id.writable = False
 
@@ -72,7 +70,7 @@ def alterar_dados_carrada():
             db.carrada.descricao.readable = True
             db.carrada.descricao.writable = False
     deletar =True
-    if carrada.total_pecas>0:
+    if carrada.total_pecas>10000:
         deletar =False
         
     form = SQLFORM(db.carrada, request.args(0, cast=int), deletable=deletar)

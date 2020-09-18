@@ -32,7 +32,7 @@
                   <th scope="col" class="text-center">Vale</th>
                   <th scope="col" class="text-center">Caderno</th>
                   <th scope="col" class="text-center">Saldo</th>
-                  <th scope="col" class="text-center">Opção</th>
+                  <th scope="col" class="text-center noprint">Opção</th>
                 </tr>
               </thead>
               <tbody>
@@ -48,14 +48,14 @@
                     <td>R$ {{="{:,}".format(round(row.salario,1)).replace(",",".")}}0</td>
                     <td>R$ {{="{:,}".format(round(row.vale_saida,1)).replace(",",".")}}0</td>
                     <td>R$ {{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0</td>
-                    {{saldo=saldo-row.vale_saida-row.total_vale_caderno}}
+                    {{saldo=row.salario-row.vale_saida-row.total_vale_caderno}}
                                 {{if saldo > 0:}}
                                 <td>R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</td>
                                 {{else:}}
                                 <th class="text-danger"><a>R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</a></th>
                                 {{pass}}
                                 
-                  <th class="text-center"><a class="btn btn-link" href="{{=URL('acesso_funcionario', args=row.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-pencil-square-o"></i> </a></th>
+                  <th id="noprint text-center"><a class="btn btn-link" href="{{=URL('acesso_funcionario', args=row.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-pencil-square-o"></i> </a></th>
                 </tr>
                    {{if saldo>0:}}
                                 {{saldof+=saldo}}
@@ -75,7 +75,7 @@
                                 <th>R$ {{="{:,}".format(round(totalcaderno,1)).replace(",",".")}}0</th>
                                 <th>R$ {{="{:,}".format(round(saldof,1)).replace(",",".")}}0</th>
                                {{if not projeto.venda_finalizada:}}
-                                <th></th>
+                                <th id="noprint"></th>
                                 {{pass}}
                             </tr>
               </tbody>

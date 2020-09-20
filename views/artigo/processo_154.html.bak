@@ -1,0 +1,227 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+<style type="text/css">
+    body {
+        font-size: 14px;
+    }
+    #bd {
+        font-size: 18px;
+    }
+</style>
+
+</head>
+
+<body>
+    
+{{saldo=0}}
+{{msaida=projeto.total_preco_gratificacao+projeto.total_preco_refugo+projeto.total_preco_retorno}}
+{{psaida=projeto.total_pecas_gratificacao+projeto.total_pecas_refugo+projeto.total_pecas_retorno}}
+{{estoque=projeto.total_preco_mercadoria-msaida-(projeto.total_venda_vista*2)-projeto.total_venda_prazo}}
+{{dinheiro_viagem=projeto.total_entradas_venda+projeto.adiantamento+projeto.total_venda_vista}}
+{{perc_desp=0}}
+{{if projeto.total_despesa_venda>0 and projeto.total_venda_prazo:}}
+{{perc_desp=projeto.total_despesa_venda/projeto.total_venda_prazo*100}}
+{{pass}}
+{{dinh_apresentado=projeto.total_caderno_chefe+projeto.total_caderno_funcionario+	projeto.total_caderno_vendedor+projeto.total_despesa_venda+projeto.total_devolucao_dinheiro}}
+{{diferencav=dinheiro_viagem-dinh_apresentado}}
+{{comissaov=0.0}}
+{{if projeto.total_venda_vista>0 and projeto.comissao_vista>0:}}
+{{comissaov=(projeto.total_venda_vista*projeto.comissao_vista)/100}}
+{{pass}}
+{{comissaop=0.0}}
+{{if projeto.total_venda_prazo>0 and projeto.comissao_praso>0:}}
+{{comissaop=(projeto.total_venda_prazo*projeto.comissao_praso)/100}}
+{{pass}}
+{{total_comissao=comissaop+comissaov}}
+{{saldo_chefe=0.0}}
+{{saldo_chefe=total_comissao-projeto.total_caderno_chefe-projeto.vale_saida}}
+<div class="py-1">
+      <div class="container "  style="font-family: Roboto">
+    
+          <h4><b>Relatório do Chefe</b></h4>
+          <h5><b>Luiz Gomes</b></h5>
+          
+        <div class="row">
+          <div class="col-md-6">
+            <p class="d-flex justify-content-between mb-3"> <span><b>Informações Mercadoria</b></span> </p>
+            <ul class="list-group" >
+              <b> <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class=“my-0”><b><b>Total Mercadoria&nbsp;</b></b></h6> <small class=“text-dark”><b>{{=projeto.total_pecas_mercadoria}} Peças</b></small>
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(projeto.total_preco_mercadoria,1)).replace(",",".")}}0</span>
+              </li></b>
+                
+                {{if msaida>0:}}
+              <b> <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class=“my-0”><b><i class="fa text-primary fa-arrow-right"></i> <b>Saida Mercadoria</b></b></h6> <small class=“text-dark”><b>{{=psaida}} Peças</b></small>
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(msaida,1)).replace(",",".")}}0</span>
+              </li></b>
+                {{pass}}
+                 {{if projeto.total_venda_prazo>0:}}
+              <b> <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class=“my-0”><b><b>Total Venda à Prazo</b></b></h6> <small class=“text-dark”><b>{{=projeto.quant_fichas_venda}} Fichas</b></small>
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(projeto.total_venda_prazo,1)).replace(",",".")}}0</span>
+              </li></b>
+                {{pass}}
+                {{if projeto.total_venda_vista>0:}}
+              <b> <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class=“my-0”><b><b>Total Venda à Vista</b></b></h6> <small class=“text-dark”><b>{{=projeto.quant_dias_venda_vista}} Dias Registrados</b></small>
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(projeto.total_venda_vista,1)).replace(",",".")}}0</span>
+              </li></b>
+                {{pass}}
+              <b> <li class="list-group-item d-flex justify-content-between bg-light">
+                <div>
+                  <h6 class=“my-0”><b><b>Estoque da Mercadoria</b></b></h6> <small class=“text-dark”><b>No final da Viagem não pode faltar</b></small>
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(estoque,2)).replace(",",".")}}0</span>
+              </li></b>
+              <br>
+              <p class="d-flex justify-content-between mb-3"> <span><b>Dinheiro da Viagem.</b></span> </p>
+              <b> <li class="list-group-item d-flex justify-content-between bg-light">
+                <div class="text-success">
+                  <h6 class=“my-0”>
+                      <b>Venda à Vista</b></h6>
+                      <small>
+                          <b>R$ {{="{:,}".format(round(projeto.total_venda_vista*2,2)).replace(",",".")}}0&nbsp;Mercadoria&nbsp;</b>
+                      </small>
+                </div> <span class="text-success">R$ {{="{:,}".format(round(projeto.total_venda_vista,1)).replace(",",".")}}0</span>
+              </li></b>
+              <b> <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class=“my-0”><b>Adiantamento</b></h6>
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(projeto.adiantamento,1)).replace(",",".")}}0</span>
+              </li></b>
+                {{if projeto.total_entradas_venda>0:}}
+              <b> <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class=“my-0”><b>Entradas da Venda</b></h6>
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(projeto.total_entradas_venda,1)).replace(",",".")}}0</span>
+              </li></b>
+                {{pass}}
+              <b> <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Dinheiro da Viagem</b></span> <b>R$ {{="{:,}".format(round(dinheiro_viagem,1)).replace(",",".")}}0</b> </li></b>
+            </ul>
+            <br>
+            <p class="d-flex justify-content-between mb-3"> <span><b>Valor Apresentado.</b></span> </p>
+            <ul class="list-group">
+               <li class="list-group-item d-flex justify-content-between bg-light">
+                <div>
+                  <h6 class="my-0 text-danger"><b>Total Despesa</b></h6> 
+                    <small class="text-danger"><b>{{="{:,}".format(round(perc_desp,1)).replace(",",".")}}%</b>
+                    </small>
+                  
+                </div> <span class="text-danger">R$ {{="{:,}".format(round(projeto.total_despesa_venda,1)).replace(",",".")}}0</span>
+              </li>
+                {{if projeto.total_caderno_vendedor>0:}}
+              <b> <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class=“my-0”><b>Vale da Viagem Vendedor</b></h6>
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(projeto.total_caderno_vendedor,1)).replace(",",".")}}0</span>
+              </li></b>
+                {{pass}}
+                
+                {{if projeto.total_caderno_funcionario>0:}}
+              <b> <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class=“my-0”><b>Vale da Viagem Funcionario</b></h6>
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(projeto.total_caderno_funcionario,1)).replace(",",".")}}0</span>
+              </li></b>
+                {{pass}}
+                
+                {{if projeto.total_caderno_chefe>0:}}
+              <b> <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class=“my-0”><b>Vale da Viagem Chefe</b></h6>
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(projeto.total_caderno_chefe,1)).replace(",",".")}}0</span>
+              </li></b>
+                {{pass}}
+                 {{if projeto.total_devolucao_dinheiro>0:}}
+              <b> <li class="list-group-item d-flex justify-content-between">
+                <div>
+                    {{if projeto.empresa==3:}}
+                  <h6 class=“my-0”><b>Depósitos</b></h6>
+                    {{else:}}
+                  <h6 class=“my-0”><b>Dinheiro Devolvido</b></h6>
+                    {{pass}}
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(projeto.total_devolucao_dinheiro,1)).replace(",",".")}}0</span>
+              </li></b>
+                {{pass}}
+              <b> <li class="list-group-item d-flex justify-content-between"> <span><b>Dinheiro Apresentado</b></span> <b>R$ {{="{:,}".format(round(dinh_apresentado,1)).replace(",",".")}}0</b> </li></b>
+              <br>
+                {{if diferencav>=0:}}
+              <b> <li class="list-group-item d-flex justify-content-between bg-light">
+                <div class="text-success">
+                  <h6 class=“my-0”><b>
+                    <font class="text-primary">Dinheiro em Caixa</font>
+                  </b></h6>
+                </div> <span class="text-primary">R$ {{="{:,}".format(round(diferencav,1)).replace(",",".")}}0</span>
+              </li></b>
+                {{else:}}
+                 <b> <li class="list-group-item d-flex justify-content-between bg-light">
+                <div class="text-danger">
+                  <h5 class="my-0">
+                    <font class="text-danger">Está sendo apresentado dinheiro de mais!!</font>
+                      {{diferencav=0}}
+                  </h5>
+                </div> 
+              </li></b>
+                {{pass}}
+            </ul><br>
+          </div>
+          <div class="col-md-6">
+            <p class="d-flex justify-content-between mb-3"> <span><b>Saldo Chefe ({{=projeto.nome_chefe}})</b></span> </p>
+            <ul class="list-group">
+              <b> <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class=“my-0”><b>Comissão Venda à Prazo</b></h6> <small class=“text-dark”><b>R$ {{="{:,}".format(round(projeto.total_venda_prazo,1)).replace(",",".")}}0 - {{=projeto.comissao_praso}}%</b></small>
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(comissaop)).replace(",",".")}}0</span>
+              </li></b>
+                {{if projeto.comissao_vista>0:}}
+              <b> <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class=“my-0”><b>Comissão Venda à Vista</b></h6> <small class=“text-dark”><b>R$ {{="{:,}".format(round(projeto.total_venda_vista,1)).replace(",",".")}}0 - {{=projeto.comissao_vista}}%</b></small>
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(comissaov)).replace(",",".")}}0</span>
+              </li></b>
+                {{pass}}
+              <b> <li class="list-group-item d-flex justify-content-between bg-light">
+                <div class="text-success">
+                  <h6 class=“my-0”><b>Total Comissão<br></b></h6>
+                </div> <span class="text-success">R$ {{="{:,}".format(round(total_comissao,1)).replace(",",".")}}0</span>
+              </li></b>
+              <br>
+              <b> <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class=“my-0”><b>Vale Saída</b></h6>
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(projeto.vale_saida,1)).replace(",",".")}}0</span>
+              </li></b>
+              <b> <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class=“my-0”><b>Vale Caderno</b></h6>
+                </div> <span class="text-dark">R$ {{="{:,}".format(round(projeto.total_caderno_chefe,1)).replace(",",".")}}0</span>
+              </li></b>
+                              {{if saldo_chefe>0:}}
+              <b> <li class="list-group-item d-flex justify-content-between bg-light">
+                <div class="text-success">
+                  <h6 class=“my-0”><b><b class="text-success">Saldo Chefe</b></b></h6>
+                </div> <span class="text-success">R$ {{="{:,}".format(round(saldo_chefe,1)).replace(",",".")}}0</span>
+              </li></b>
+                {{else:}}
+                <b> <li class="list-group-item d-flex justify-content-between bg-light">
+                <div class="text-danger">
+                  <h6 class=“my-0”><b><b class="text-danger">Saldo Chefe</b></b></h6>
+                </div> <span class="text-danger">R$ {{="{:,}".format(round(saldo_chefe,1)).replace(",",".")}}0</span>
+              </li></b>
+                {{pass}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    </body>

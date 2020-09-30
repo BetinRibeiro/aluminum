@@ -109,3 +109,9 @@ def acesso_vendas_particao():
     sub_venda = db.sub_venda(request.args(0, cast=int))
     rows = db(db.venda.sub_venda == sub_venda.id).select(orderby=db.venda.data_venda)
     return locals()
+
+def prestacao_vendedor():
+    projeto = db.projeto(request.args(0, cast=int))
+    rows = db(db.vendedor.projeto == projeto.id).select(orderby=db.vendedor.nome)
+    rowsf = db(db.funcionario.projeto == projeto.id).select(orderby=db.funcionario.nome)
+    return locals()

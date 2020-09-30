@@ -1,0 +1,148 @@
+{{extend 'layout.html'}}
+<div class="py-1 text-center mx-1 mb-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h5 class="">Lista da Equipe ( {{=projeto.descricao}} )</h5>
+            </div>
+        </div>
+        <div class="row text-left">
+            <div class="col-md-12">
+            <a class="btn btn-link" href="{{=URL('acs_chefe','acesso_projeto', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+        {{if not projeto.venda_finalizada:}}
+            {{if not projeto.bloqueio_chefe:}}
+            <a class="btn btn-link" href="{{=URL('adicionar_funcionario', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar Funcionario ao Projeto</a>
+            {{pass}}
+        {{pass}}
+        </div>
+    </div>
+    {{a=0}}
+    <div class="row" >
+        
+        <div class="mx-auto p-0 my-1 col-md-6 bg-light border-1">
+            <a class="btn btn-link" href="{{=URL('acs_chefe','acesso_projeto', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+            <ul class="list-group">
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center list-group-item-info"> {{=projeto.auth_user.first_name}} </li>
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                VENDA <smart>R$ {{="{:,}".format(round(projeto.total_venda_prazo,2)).replace(",",".")}}0</smart></li>
+                {{comissao=0}}
+                {{if (projeto.comissao_praso > 0) and (projeto.total_venda_prazo>0):}}
+                {{comissao=projeto.total_venda_prazo*projeto.comissao_praso/100}}
+                {{pass}}
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                COMISSÃO <smart>R$ {{="{:,}".format(round(comissao,2)).replace(",",".")}}0</smart></li>
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                VALE <smart>R$ {{="{:,}".format(round(projeto.vale_saida,2)).replace(",",".")}}0</smart></li>
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                CADERNO <smart>R$ {{="{:,}".format(round(projeto.total_caderno_chefe,2)).replace(",",".")}}0</smart></li>
+                {{comissao-=projeto.total_caderno_chefe+projeto.vale_saida}}
+                {{if comissao>0:}}
+                    <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                    SALDO <smart>R$ {{="{:,}".format(round(comissao,2)).replace(",",".")}}0</smart></li>
+                {{elif comissao==0:}}
+                    <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                    QUITADO</li>
+                {{else:}}
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center  text-danger">
+                    DÉBITO <smart>R$ {{="{:,}".format(round(comissao,2)).replace(",",".")}}0</smart></li>
+                {{pass}}
+            </ul>
+        </div>
+        <div class="mx-auto p-0 my-1 col-md-6 bg-light">
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center  list-group-item-info">Composição do Vale</li>
+                <li class="list-group-item d-flex justify-content-between align-items-center ">{{=projeto.descricao_vale}}</li>
+            </ul>
+        </div>
+    </div>
+    {{a+=1}}
+    {{if a==4:}}
+        <div style="page-break-after: always;"></div>
+        {{a=0}}
+    {{pass}}
+    <hr>
+    {{for row in rows:}}
+    <div class="row" >
+        <div class="mx-auto p-0 my-1 col-md-6 bg-light border-1">
+            <ul class="list-group">
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center list-group-item-info"> {{=row.nome}} </li>
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                VENDA <smart>R$ {{="{:,}".format(round(row.total_vendas,2)).replace(",",".")}}0</smart></li>
+                {{comissao=0}}
+                {{if (row.comissao_venda > 0) and (row.total_vendas>0):}}
+                    {{comissao=row.total_vendas*row.comissao_venda/100}}
+                {{pass}}
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                COMISSÃO <smart>R$ {{="{:,}".format(round(comissao,2)).replace(",",".")}}0</smart></li>
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                VALE <smart>R$ {{="{:,}".format(round(row.vale_saida,2)).replace(",",".")}}0</smart></li>
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                CADERNO <smart>R$ {{="{:,}".format(round(row.total_vale_caderno,2)).replace(",",".")}}0</smart></li>
+            {{comissao-=row.total_vale_caderno+row.vale_saida}}
+            {{if comissao>0:}}
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                SALDO <smart>R$ {{="{:,}".format(round(comissao,2)).replace(",",".")}}0</smart></li>
+            {{elif comissao==0:}}
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                QUITADO</li>
+            {{else:}}
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center  text-danger">
+                DÉBITO <smart>R$ {{="{:,}".format(round(comissao,2)).replace(",",".")}}0</smart></li>
+            {{pass}}
+            </ul>
+        </div>
+        <div class="mx-auto p-0 my-1 col-md-6 bg-light">
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center  list-group-item-info">Composição do Vale</li>
+                <li class="list-group-item d-flex justify-content-between align-items-center ">{{=row.descricao}}</li>
+            </ul>
+        </div>
+    </div>
+    {{a+=1}}
+    {{if a==4:}}
+    <div style="page-break-after: always;"></div>
+        {{a=0}}
+        {{pass}}
+        <hr>
+        {{pass}}
+        {{for row in rowsf:}}
+            <div class="row" >
+                <div class="mx-auto p-0 my-1 col-md-6 bg-light border-1">
+                    <ul class="list-group">
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center list-group-item-info"> {{=row.nome}} </li>
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                SALARIO <smart>R$ {{="{:,}".format(round(row.salario))}}0</smart></li>
+                {{comissao=row.salario}}
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                VALE <smart>R$ {{="{:,}".format(round(row.vale_saida,2)).replace(",",".")}}0</smart></li>
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                CADERNO <smart>R$ {{="{:,}".format(round(row.total_vale_caderno,2)).replace(",",".")}}0</smart></li>
+            {{comissao-=row.total_vale_caderno+row.vale_saida}}
+            {{if comissao>0:}}
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                SALDO <smart>R$ {{="{:,}".format(round(comissao,2)).replace(",",".")}}0</smart></li>
+            {{elif comissao==0:}}
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center">
+                QUITADO</li>
+            {{else:}}
+                <li class=" border-1 list-group-item d-flex justify-content-between align-items-center  text-danger">
+                DÉBITO <smart>R$ {{="{:,}".format(round(comissao,2)).replace(",",".")}}0</smart></li>
+            {{pass}}
+            </ul>
+        </div>
+        <div class="mx-auto p-0 my-1 col-md-6 bg-light">
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center  list-group-item-info">Composição do Vale</li>
+                <li class="list-group-item d-flex justify-content-between align-items-center ">{{=row.descricao_vale}}</li>
+            </ul>
+        </div>
+    </div>
+    {{a+=1}}
+    {{if a==4:}}
+    <div style="page-break-after: always;"></div>
+        {{a=0}}
+        {{pass}}
+        <hr>
+        {{pass}}
+    </div>
+</div>

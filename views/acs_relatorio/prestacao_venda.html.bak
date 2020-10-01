@@ -56,7 +56,7 @@
                     </li>
                     {{venda_vista-=(projeto.total_venda_vista*2)}}
                     {{media_pecas=0}}
-                    {{if projeto.total_preco_mercadoria>0 and projeto.total_pecas_mercadoria>0:}}
+                    {{if (projeto.total_preco_mercadoria!=0) and (projeto.total_pecas_mercadoria!=0):}}
                     {{media_pecas=projeto.total_preco_mercadoria/projeto.total_pecas_mercadoria}}
                     {{pass}}
                     {{if venda_vista!=0:}}
@@ -160,7 +160,7 @@
 <br>
 {{diferencaprest=venda_vista-dinheiro_presente}}
 <li class="list-group-item d-flex justify-content-between bg-light">
-    {{if diferencaprest>0:}}
+    {{if diferencaprest>=0:}}
     <div class="text-success">
         <h6 class="my-0"><b class="text-danger">Diferênça da Prestação</b></h6> 
     </div> <span class="text-danger">R$ {{="{:,}".format(round(diferencaprest)).replace(",",".")}}0</span>

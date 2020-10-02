@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 def index():
     projeto = db.projeto(request.args(0, auth.user))
+    empresa = db.empresa(projeto.empresa)
     usuario=auth.user
     usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
     if (usuario.id!=1)and(usuario_empresa.empresa!=projeto.empresa):
         redirect(URL('default','index'))
+    if (projeto.empresa==17):
+        redirect(URL('acs_projeto_boletos','index'))
     return locals()
 
 def definir_chefe():
@@ -113,4 +116,5 @@ def acesso_vendas_particao():
 def prestacao_vendedor():
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.vendedor.projeto == projeto.id).select(orderby=db.vendedor.nome)
+    rowsf = db(db.funcionario.projeto == projeto.id).select(orderby=db.funcionario.nome)
     return locals()

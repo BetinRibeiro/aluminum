@@ -63,8 +63,8 @@
                             {{aentrada=0}}
                             {{adevolucao=0}}
                         {{for row in rows_vend:}}
-                            {{if (vendedor.id==298) and (row.sub_venda==104):}}
-                                {{row.sub_venda=81}}
+                            {{if (vendedor.id==234) and (row.sub_venda==111) and (not row.data_venda.day>4) and (row.data_venda.month==7):}}
+                                {{row.sub_venda=113}}
                                 {{row.update_record()}}
                             {{pass}}
                         {{if row.sub_venda == row1.id:}}

@@ -2,9 +2,93 @@
 def index():
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.vendedor.projeto == request.args(0, cast=int)).select(orderby=~db.vendedor.total_vendas)
+    if projeto.empresa==17:
+        redirect(URL('vendedores_boletos', args=projeto.id))
     return locals()
 
+def vendedores_boletos():
+    projeto = db.projeto(request.args(0, cast=int))
+    total_boletos = db(db.boleto.projeto==projeto.id).count()
+    id=0
+    conexao = db.conexao(db.conexao.projeto==projeto.id)
+    if not conexao:
+        id=db.conexao.update_or_insert((db.conexao.projeto == projeto.id),
+                           projeto=projeto.id,
+                           chave_acesso='#',
+                           total_boletos=0)
+        conexao = db.conexao(id)
+    rows = db(db.vendedor.projeto == request.args(0, cast=int)).select(orderby=~db.vendedor.total_vendas)
+    return locals()
 
+def atualizar_boletos():
+    response.view = 'generic.html' # use a generic view
+    conexao = db.conexao(request.args(0, cast=int))
+    projeto = db.projeto(conexao.projeto)
+    import json
+    import urllib, urllib2
+    import gluon.contrib.simplejson as sj
+    import datetime
+    headers = {
+        'Content-Type': 'application/json',
+        'access_token': conexao.chave_acesso
+    }
+    req = Request('https://www.asaas.com/api/v3/payments?dateCreated%5Bge%5D='+(conexao.data_inicio).strftime("%Y-%m-%d")+'&dateCreated%5Ble%5D='+(conexao.data_final).strftime("%Y-%m-%d")+'&offset=3&limit=50', headers=headers)
+    page = urlopen(req).read()
+    total_boletos=json.loads(page).values()[1]
+    total_paginas = total_boletos/50
+    #total_paginas=2
+    a=0
+    while a<total_boletos:
+        req = Request('https://www.asaas.com/api/v3/payments?dateCreated%5Bge%5D='+(conexao.data_inicio).strftime("%Y-%m-%d")+'&dateCreated%5Ble%5D='+(conexao.data_final).strftime("%Y-%m-%d")+'&offset='+str(a)+'&limit=50', headers=headers)
+        page = urlopen(req).read()
+        page=json.loads(page)
+        for row in page.values()[5]:
+            id=db.boleto.update_or_insert((db.boleto.id_asaas == row.get("id")),
+                           id_asaas=row.get("id"),
+                           projeto=projeto.id,
+                           description=row.get("description"),
+                           value_total=row.get("value"),
+                           status=row.get("status"),
+                           due_date=row.get("dueDate"),
+                           value_receber=row.get("netValue"))
+        a+=50
+    
+    #redirect(URL('vendedores_boletos', args=projeto.id))
+    return dict(page=page,total_boletos=total_boletos,total_paginas=total_paginas,a=a)
+
+def ver_boletos():
+    projeto = db.projeto(request.args(0, cast=int))
+    rows = db(db.boleto.projeto==projeto.id).select(orderby=db.boleto.due_date)
+    consul=(request.args(1))
+    if (consul):
+        rows = db((db.boleto.projeto==projeto.id)and(db.boleto.description.contains(consul))).select(orderby=db.boleto.due_date)
+    return locals()
+def deletar_tudo():
+    projeto = db.projeto(request.args(0, cast=int))
+    rows = db(db.boleto.projeto==projeto.id).delete()
+    redirect(URL('ver_boletos', args=projeto.id))
+    return locals()
+def alterar_acesso():
+    response.view = 'generic.html' # use a generic view
+    conexao = db.conexao(request.args(0, cast=int))
+    projeto = db.projeto(conexao.projeto)
+    db.conexao.id.readable = False
+    db.conexao.id.writable = False
+
+    db.conexao.projeto.readable = False
+    db.conexao.projeto.writable = False
+    deletar=False
+    usuario = auth.user
+    form = SQLFORM(db.conexao, request.args(0, cast=int), deletable=deletar)
+    if form.process().accepted:
+        session.flash = 'Atualizado'
+        redirect(URL('vendedores_boletos', args=projeto.id))
+    elif form.errors:
+        response.flash = 'Erros no formulário!'
+    else:
+        if not response.flash:
+            response.flash = 'Preencha o formulário!'
+    return dict(form=form)
 def adicionar_vendedor():
     response.view = 'generic.html' # use a generic view
     projeto = db.projeto(request.args(0, auth.user))

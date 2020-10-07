@@ -524,3 +524,37 @@ success!
 timestamp: 2020-09-08T21:20:09.699803
 ALTER TABLE "projeto" ADD "bloqueio_chefe" CHAR(1);
 success!
+timestamp: 2020-10-04T01:54:14.352552
+CREATE TABLE "conexao"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "projeto" INTEGER REFERENCES "projeto" ("id") ON DELETE CASCADE  ,
+    "data_inicio" DATE NOT NULL DEFAULT '2020-10-04',
+    "data_final" DATE NOT NULL DEFAULT '2020-10-04',
+    "total_boletos" INTEGER NOT NULL DEFAULT 0
+);
+success!
+timestamp: 2020-10-04T01:55:16.846546
+ALTER TABLE "conexao" ADD "descricao" CHAR(512);
+success!
+timestamp: 2020-10-04T01:55:20.051648
+ALTER TABLE "conexao" ADD "descricao" CHAR(512);
+timestamp: 2020-10-04T01:56:16.747385
+ALTER TABLE "conexao" ADD "descricao" CHAR(512);
+timestamp: 2020-10-04T01:57:17.997166
+ALTER TABLE "conexao" ADD "descricao" CHAR(512);
+timestamp: 2020-10-04T01:58:01.703751
+ALTER TABLE "conexao" ADD "chave_acesso" CHAR(512);
+success!
+timestamp: 2020-10-05T05:10:56.709778
+CREATE TABLE "boleto"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "projeto" INTEGER REFERENCES "projeto" ("id") ON DELETE CASCADE  ,
+    "vendedor" INTEGER REFERENCES "vendedor" ("id") ON DELETE CASCADE  ,
+    "id_asaas" CHAR(512) UNIQUE,
+    "description" CHAR(512),
+    "status" CHAR(512),
+    "due_date" DATE,
+    "value_total" DOUBLE NOT NULL DEFAULT 0.0,
+    "value_receber" DOUBLE NOT NULL DEFAULT 0.0
+);
+success!

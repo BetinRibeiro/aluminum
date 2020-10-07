@@ -57,3 +57,22 @@ db.define_table('item_devolucao',
                 Field('quant_recolhida', 'integer', label='Quant Recolhida', writable=True, readable=True , notnull=True, default=0),
                 Field('quant_novas', 'integer', label='Quant Pças Novas', writable=True, readable=True , notnull=True, default=0),
                 format='%(descricao)s')
+
+
+db.define_table('conexao',
+                Field('projeto','reference projeto', label='Projeto'),
+                Field('chave_acesso', 'string', label='Chave Acesso'),
+                Field('data_inicio', 'date', label="Data Inicial",notnull=True, default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),
+                Field('data_final', 'date', label="Data Final",notnull=True, default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),
+                Field('total_boletos', 'integer', label='Total Boletos', writable=False, readable=False , notnull=True, default=0),
+                )
+db.define_table('boleto',
+                Field('projeto','reference projeto', label='Projeto'),
+                Field('vendedor','reference vendedor', label='Vendedor'),
+                Field('id_asaas', 'string', label='Id asaas', unique=True),
+                Field('description', 'string', label='Descrição'),
+                Field('status', 'string', label='status'),
+                Field('due_date', 'date', label="Data Recebimento", default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),
+                Field('value_total', 'double',label='Valor', notnull=True, default=0),
+                Field('value_receber', 'double',label='Valor', notnull=True, default=0),
+                )

@@ -1,0 +1,146 @@
+{{extend 'layout.html'}}
+{{extend 'layout.html'}}
+{{quitadas=0}}
+{{vencidas=0}}
+{{aguardando=0}}
+{{total_receber=0}}
+<a class="btn btn-link" href="{{=URL('deletar_tudo', args=projeto.id)}}" style="color:#3b4115"><i class="fa fa-fw fa-1x py-1 fa-user-plus"></i> Deletar Tudo</a>
+      
+<div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+             <div class="col-md-6">
+            <div class="form-group row">
+                  <input type="text" class="form-control col-10 col-form-label" name="busca" placeholder="Consulta" id="input"/>
+                <div class="col-2">
+                      <button class="btn btn-primary botao" id="bt" type="button">
+                          <i class="fa fa-search"></i>
+                      </button>
+                </div>
+                    </div>
+            </div>
+          <div class="table-responsive" >
+            <table class="table table-striped table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Data</th>
+                  <th scope="col">Descrição</th>
+                  <th scope="col">Valor Receber</th>
+                  <th scope="col">Valor Total</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {{a=1}}
+                  {{total=0}}
+                  {{for row in rows:}}
+                <tr>
+                    <th>{{=a}}</th>
+                    {{row.id_asaas}}
+                    {{if row.due_date:}}
+                    <th>{{=("{}/{}/{}".format(row.due_date.day,row.due_date.month,row.due_date.year))}}</th>
+                    {{else:}}
+                    <th>Cancelado</th>
+                    {{pass}}
+                    {{a+=1}}
+                  <td>{{=(row.description).replace(".","")[0:len(row.description)].replace(" de ","/").replace(".","")}}</td>
+                  <td>R$ {{="{:,}".format(round(row.value_total,2)).replace(",",".")}}</td>
+                  <td>R$ {{="{:,}".format(round(row.value_receber,2)).replace(",",".")}}</td>
+                    {{if row.status=="PENDING":}}
+                  <td class="table-warning">Pendente</td>
+                    {{aguardando+=row.value_total}}
+                    {{elif row.status=="RECEIVED":}}
+                  <td class="table-success">Quitado</td>
+                    {{quitadas+=row.value_total}}
+                    {{elif row.status=="OVERDUE":}}
+                  <td class="table-danger">Vencida</td>
+                    {{vencidas+=row.value_total}}
+                    {{else:}}
+                  <td>{{=row.status}}</td>
+                    {{pass}}
+                    
+                  {{total+=row.value_total}}
+                  {{total_receber+=row.value_receber}}
+                </tr>
+                  {{pass}}
+                    <tr>
+                  <th scope="row">#</th>
+                  <td>#</td>
+                  <td>#</td>
+                  <th>R$ {{="{:,}".format(round(total)).replace(",",".")}}0</th>
+                  <th>R$ {{="{:,}".format(round(total_receber)).replace(",",".")}}0</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div style="page-break-after: always"></div>
+<div class="py-5" >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+<center>
+<h2>{{=projeto.descricao}}</h2>
+    </center>
+{{total_parcial=quitadas+vencidas}}
+<div class="row d-flex justify-content-around" >
+        <div class="col-lg-3 p-4 py-5 bg-light d-flex flex-column mb-3">
+          <h3 class="pb-3 border-bottom">Venda Total</h3>
+          <h3> <b>R$ {{="{:,}".format(round(total)).replace(",",".")}}0</b></h3>
+            <hr>
+          <h3 class="pb-3 border-bottom">Aguardando</h3>
+          <h3> <b>R$ {{="{:,}".format(round(aguardando)).replace(",",".")}}0</b></h3>
+          <p class="pb-3 border-bottom">Aguardando Confirmação de Pagamento, não estão em atraso</p>
+        </div>
+        <div class="col-lg-3 px-4  py-5 bg-light d-flex flex-column mb-3">
+          <h3 class="pb-3 border-bottom">Quitadas</h3>
+          <h3> <b>R$ {{="{:,}".format(round(quitadas)).replace(",",".")}}0</b></h3>
+            {{if (quitadas>0) and(total_parcial>0):}}
+            {{perc_quitadas=quitadas/total_parcial*100}}
+          <p class="pb-3 border-bottom">{{="{:,}".format(round(perc_quitadas,2)).replace(",",".")}}% Até a data Atual</p>
+            {{pass}}
+                {{if (quitadas>0) and(total>0):}}
+            {{perc_quitadas=quitadas/total*100}}
+          <p class="pb-3 border-bottom">{{="{:,}".format(round(perc_quitadas,2)).replace(",",".")}}% em relação ao total da cobrança</p>
+            {{pass}}
+            
+        </div>
+        <div class="col-lg-3 px-4  py-5 bg-light d-flex flex-column mb-3">
+          <h3 class="pb-3 border-bottom">Vencidas</h3>
+          <h3> <b>R$ {{="{:,}".format(round(vencidas)).replace(",",".")}}0</b></h3>
+            {{if (vencidas>0) and(total_parcial>0):}}
+            {{perc_prego=vencidas/total_parcial*100}}
+          <p class="pb-3 border-bottom">{{="{:,}".format(round(perc_prego,2)).replace(",",".")}}%  Até a data Atual</p>
+           
+            {{pass}}
+             {{if (vencidas>0) and(total>0):}}
+            {{perc_prego=vencidas/total*100}}
+          <p class="pb-3 border-bottom">{{="{:,}".format(round(perc_prego,2)).replace(",",".")}}%  em relação ao total da cobrança</p>
+           
+            {{pass}}
+        </div>
+      </div>
+        </div>
+      </div>
+        </div>
+      </div>
+<script>
+    var inputElement = document.querySelector('input[name=busca]');
+    var btnElement = document.querySelector('button.botao');
+
+    btnElement.onclick = function(){
+     var busca= inputElement.value;
+        window.location.href = "{{=URL('ver_boletos')}}/"+{{=projeto.id}}+"/"+busca
+    }
+    $(document).keypress(function(e) {
+    if(e.which == 13) {
+     var busca= inputElement.value;
+        window.location.href = "{{=URL('ver_boletos')}}/"+{{=projeto.id}}+"/"+busca
+    }
+});
+</script>

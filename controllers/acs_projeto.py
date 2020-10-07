@@ -13,6 +13,8 @@ def index():
 def definir_chefe():
     projeto = db.projeto(request.args(0, auth.user))
     rows = db(db.usuario_empresa.empresa==projeto.empresa).select()
+    if (projeto.empresa==17):
+        redirect(URL('acs_equipe','vendedores', args=projeto.id))
     return locals()
 
 def definir_chefe_confirmar():

@@ -45,7 +45,7 @@
 a:hover{font:20px "verdana"; color:black; text-decoration:underline;}
     }
       </style>
-    <div class="w2p_flash alert alert-dismissable">{{=response.flash or ''}}</div>
+    <div>{{=response.flash or ''}}</div>
     <!-- Navbar ======================================= -->
     <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
         <a class="navbar-brand" href="https://rogoberto.pythonanywhere.com/aluminum/#acesso">Aluminum</a>
@@ -55,7 +55,7 @@ a:hover{font:20px "verdana"; color:black; text-decoration:underline;}
        <div class="navbar-collapse collapse w-100" id="navbarNavDropdown">
          <ul class="navbar-nav w-100 justify-content-center">
           {{for _item in response.menu or []:}}
-          {{if len(_item)<4 or not _item[3]:}}
+          {{if (not len(_item)>4) or not _item[3]:}}
           <li class="nav-item {{if _item[1]:}}active{{pass}}">
             <a class="nav-link" href="{{=_item[2]}}">{{=_item[0]}}</a>
           </li>
@@ -137,7 +137,7 @@ a:hover{font:20px "verdana"; color:black; text-decoration:underline;}
         <div class="col-md-12">
           <div class="copyright pull-left">Suporte - (88)98112-6816</div>
           <div id="poweredBy" class="pull-right">
-            
+             {{if auth.user:}}{{=auth.user.first_name}} {{=auth.user.last_name}}{{else:}}Aluminum System{{pass}}
           </div>
         </div>
       </div>

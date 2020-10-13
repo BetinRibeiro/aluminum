@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+@auth.requires_login()
 def index():
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.vendedor.projeto == request.args(0, cast=int)).select(orderby=~db.vendedor.total_vendas)
@@ -6,7 +7,9 @@ def index():
         redirect(URL('vendedores_boletos', args=projeto.id))
     return locals()
 
+@auth.requires_login()
 def vendedores_boletos():
+    usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
     total_boletos = db(db.boleto.projeto==projeto.id).count()
     id=0
@@ -20,6 +23,7 @@ def vendedores_boletos():
     rows = db(db.vendedor.projeto == request.args(0, cast=int)).select(orderby=~db.vendedor.total_vendas)
     return locals()
 
+@auth.requires_login()
 def atualizar_boletos():
     response.view = 'generic.html' # use a generic view
     conexao = db.conexao(request.args(0, cast=int))
@@ -38,12 +42,15 @@ def atualizar_boletos():
     total_paginas = total_boletos/50
     #total_paginas=2
     a=0
-    while a<total_paginas:
+    while a<total_boletos:
         req = Request('https://www.asaas.com/api/v3/payments?dateCreated%5Bge%5D='+(conexao.data_inicio).strftime("%Y-%m-%d")+'&dateCreated%5Ble%5D='+(conexao.data_final).strftime("%Y-%m-%d")+'&offset='+str(a)+'&limit=50', headers=headers)
         page = urlopen(req).read()
         page=json.loads(page)
         for row in page.values()[5]:
-            id=db.boleto.update_or_insert((db.boleto.id_asaas == row.get("id")),
+          cobrado=True
+          if row.get("value")=="OVERDUE":
+            cobrado=False
+          id=db.boleto.update_or_insert((db.boleto.id_asaas == row.get("id")),
                            id_asaas=row.get("id"),
                            projeto=projeto.id,
                            description=row.get("description"),
@@ -51,11 +58,12 @@ def atualizar_boletos():
                            status=row.get("status"),
                            due_date=row.get("dueDate"),
                            value_receber=row.get("netValue"))
-        a+=1
+        a+=50
     
     #redirect(URL('vendedores_boletos', args=projeto.id))
     return dict(page=page,total_boletos=total_boletos,total_paginas=total_paginas,a=a)
 
+@auth.requires_login()
 def ver_boletos():
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.boleto.projeto==projeto.id).select(orderby=db.boleto.due_date)
@@ -63,11 +71,15 @@ def ver_boletos():
     if (consul):
         rows = db((db.boleto.projeto==projeto.id)and(db.boleto.description.contains(consul))).select(orderby=db.boleto.due_date)
     return locals()
+  
+@auth.requires_login()
 def deletar_tudo():
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.boleto.projeto==projeto.id).delete()
     redirect(URL('ver_boletos', args=projeto.id))
     return locals()
+  
+@auth.requires_login()
 def alterar_acesso():
     response.view = 'generic.html' # use a generic view
     conexao = db.conexao(request.args(0, cast=int))
@@ -89,6 +101,8 @@ def alterar_acesso():
         if not response.flash:
             response.flash = 'Preencha o formulário!'
     return dict(form=form)
+  
+@auth.requires_login()
 def adicionar_vendedor():
     response.view = 'generic.html' # use a generic view
     projeto = db.projeto(request.args(0, auth.user))
@@ -109,6 +123,7 @@ def adicionar_vendedor():
         response.flash = 'Preencha o formulario'
     return dict(form=form)
 
+@auth.requires_login()
 def acessar_venda():
     usuario = auth.user
     vendedor = db.vendedor(request.args(0, cast=int))
@@ -117,6 +132,7 @@ def acessar_venda():
     rows_vend = db(db.venda.vendedor == request.args(0, cast=int)).select(orderby=db.venda.sub_venda|db.venda.data_venda)
     return locals()
 
+@auth.requires_login()
 def alterar_vendedor():
     response.view = 'generic.html' # use a generic view
     vendedor = db.vendedor(request.args(0, cast=int))
@@ -149,6 +165,7 @@ def alterar_vendedor():
     return dict(form=form)
 
 
+@auth.requires_login()
 def inserir_venda():
     response.view = 'generic.html' # use a generic view
     vendedor = db.vendedor(request.args(0, auth.user))

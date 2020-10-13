@@ -6,6 +6,7 @@
 # -------------------------------------------------------------------------
 from gluon.contrib.appconfig import AppConfig
 from gluon.tools import Auth
+from urllib2 import Request, urlopen
 
 # -------------------------------------------------------------------------
 # This scaffolding model makes your app work on Google App Engine too

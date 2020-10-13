@@ -21,10 +21,11 @@ Total de Boletos - {{=total_boletos}}
         <div class="col-md-12">
           <a class="btn btn-link" href="{{=URL('acs_projeto','index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
           <a class="btn btn-link" href="{{=URL('adicionar_vendedor', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-user-plus"></i> Adicionar Vendedor no Projeto</a>
-            
+            {{if usuario.id==1:}}
           <a class="btn btn-link" href="{{=URL('alterar_acesso', args=conexao.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-user-plus"></i> Conexão com Asaas</a>
         <a class="btn btn-link" href="{{=URL('atualizar_boletos', args=conexao.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-user-plus"></i> Atualizar</a>
-        <a class="btn btn-link" href="{{=URL('ver_boletos', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-user-plus"></i> Ver boletos</a>
+          {{pass}}
+        <a class="btn btn-link" href="{{=URL('ver_boletos', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-building-o"></i> Ver boletos</a>
        </div>
       </div>
       <div class="row">

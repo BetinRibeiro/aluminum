@@ -1,5 +1,5 @@
 {{extend 'layout.html'}}
-
+{{=rows}}
 
 
 {{mes="Janeiro"}}
@@ -59,9 +59,9 @@
       <div class="row">
         <div class="col-md-12">
           <center>
-            <a class="btn btn-link" href="{{=URL('deposito_periodo', args=[primeira_data.month,primeira_data.year,empresa.id])}}" style="color:#3b5998">
+            <a class="btn btn-link" href="{{=URL('depositos_periodo', args=[primeira_data.month,primeira_data.year,empresa.id])}}" style="color:#3b5998">
               <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Mês Anterior</a> Depositos do mês de <b>{{=mes}}</b>
-            <a class="btn btn-link" href="{{=URL('deposito_periodo',  args=[ultima_data.month,ultima_data.year,empresa.id])}}" style="color:#3b5998">Próximo Mês <i class="fa fa-fw fa-1x py-1 fa-arrow-right"></i>
+            <a class="btn btn-link" href="{{=URL('depositos_periodo',  args=[ultima_data.month,ultima_data.year,empresa.id])}}" style="color:#3b5998">Próximo Mês <i class="fa fa-fw fa-1x py-1 fa-arrow-right"></i>
             </a></center>
         </div>
       </div>

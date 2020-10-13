@@ -29,7 +29,7 @@ FAÇA SEU PRIMEIRO CADASTRO DE CARRADA
                     <th>%</th>
                     {{pass}}
                     {{if not projeto.venda_finalizada:}}
-                  <th>Alterar</th>
+                  <th id="noprint">Alterar</th>
                     {{pass}}
                 </tr>
               </thead>
@@ -42,7 +42,7 @@ FAÇA SEU PRIMEIRO CADASTRO DE CARRADA
                   <td>R$ {{="{:,}".format(round(row.total_preco,1)).replace(",",".")}}0</td>
                     {{if desbloqueado:}}
                   <td>R$ {{="{:,}".format(round(row.total_custo,1)).replace(",",".")}}0</td>
-                     {{if (row.total_preco>0)and(row.total_custo>0):}}
+                     {{if (row.total_preco>0)&&(row.total_custo>0):}}
                   <td>{{="{:,}".format(round(row.total_preco/row.total_custo*100)).replace(".0","")}}%</td>
                     {{else:}}
                     <td>%</td>

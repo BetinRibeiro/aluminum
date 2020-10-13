@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+@auth.requires_login()
 def index():
     projeto = db.projeto(request.args(0, auth.user))
     empresa = db.empresa(projeto.empresa)
@@ -10,6 +11,7 @@ def index():
         redirect(URL('acs_projeto_boletos','index'))
     return locals()
 
+@auth.requires_login()
 def definir_chefe():
     projeto = db.projeto(request.args(0, auth.user))
     rows = db(db.usuario_empresa.empresa==projeto.empresa).select()
@@ -17,6 +19,7 @@ def definir_chefe():
         redirect(URL('acs_equipe','vendedores', args=projeto.id))
     return locals()
 
+@auth.requires_login()
 def definir_chefe_confirmar():
     projeto = db.projeto(request.args(0, auth.user))
     usuario = db.usuario_empresa(request.args(1, auth.user))
@@ -25,6 +28,7 @@ def definir_chefe_confirmar():
     redirect(URL('definir_chefe', args=projeto.id))
     return locals()
 
+@auth.requires_login()
 def particoes():
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.sub_venda.projeto == projeto.id).select()
@@ -45,6 +49,7 @@ def particoes():
         row.update_record()
     return locals()
 
+@auth.requires_login()
 def adicionar_rota_cobranca():
     response.view = 'generic.html' # use a generic view
     projeto = db.projeto(request.args(0, cast=int))
@@ -71,6 +76,7 @@ def adicionar_rota_cobranca():
         response.flash = 'Formulario não aceito'
     return dict(form=form)
 
+@auth.requires_login()
 def alterar_dados_rota():
     response.view = 'generic.html' # use a generic view
     sub_venda = db.sub_venda(request.args(0, cast=int))
@@ -110,11 +116,13 @@ def alterar_dados_rota():
     return dict(form=form)
 
 
+@auth.requires_login()
 def acesso_vendas_particao():
     sub_venda = db.sub_venda(request.args(0, cast=int))
     rows = db(db.venda.sub_venda == sub_venda.id).select(orderby=db.venda.data_venda)
     return locals()
 
+@auth.requires_login()
 def prestacao_vendedor():
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.vendedor.projeto == projeto.id).select(orderby=db.vendedor.nome)

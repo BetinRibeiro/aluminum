@@ -8,7 +8,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h5 class="">Lista de Despesas da Cobrança de {{=sub_venda.primeira_cidade}}
+          <h5 class="">Lista de Despesas da Cobrança de {{=sub_venda.primeira_cidade}} | {{=sub_venda.projeto.descricao}}
 
               </h5>
         </div>
@@ -40,10 +40,11 @@
                                 <td>{{=row.descricao}}</td>
                                 <td>R$ {{="{:,}".format(round(row.total_despesa,1)).replace(",",".")}}0</td>
                                 <td><a href="{{=URL('acesso_despesa', args=[row.id])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i></a></td>
-
                                 {{a+=1}}
                             </tr>
                             {{total+=row.total_despesa}}
+                            {{row.empresa=sub_venda.projeto.empresa}}
+                            {{row.update_record()}}
                             {{pass}}
                             <tr>
                                 <th>#</th>

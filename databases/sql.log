@@ -558,3 +558,15 @@ CREATE TABLE "boleto"(
     "value_receber" DOUBLE NOT NULL DEFAULT 0.0
 );
 success!
+timestamp: 2020-10-10T23:11:45.050155
+ALTER TABLE "km" ADD "condutor" CHAR(512);
+timestamp: 2020-10-10T23:11:48.706880
+ALTER TABLE "km" ADD "valor_conbustivel" DOUBLE NOT NULL DEFAULT 0.0;
+success!
+timestamp: 2020-10-12T10:31:01.544251
+ALTER TABLE "boleto" ADD "id_cliente" CHAR(512) UNIQUE;
+timestamp: 2020-10-12T10:31:13.195652
+ALTER TABLE "boleto" ADD "id_cliente" CHAR(512) UNIQUE;
+timestamp: 2020-10-12T10:31:25.198590
+ALTER TABLE "boleto" ADD "id_cliente" CHAR(512) UNIQUE;
+success!

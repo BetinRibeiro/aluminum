@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# tente algo como
 def index():
     usuario=auth.user
     sub_venda = db.sub_venda(request.args(0, auth.user))
@@ -28,6 +27,9 @@ def inserir_registro():
 
     db.registro_cobranca.projeto.default = sub_venda.projeto
     db.registro_cobranca.projeto.writable = False
+
+    db.registro_cobranca.empresa.default = projeto.empresa
+    db.registro_cobranca.empresa.writable = False
 
     db.registro_cobranca.tipo.default = tipo
     db.registro_cobranca.tipo.writable = False

@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
+@auth.requires_login()
 def index():
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.vendedor.projeto == request.args(0, cast=int)).select(orderby=~db.vendedor.total_vendas)
     return locals()
 
+@auth.requires_login()
 def projetos():
     usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==request.args(0, cast=int))
     empresa = db.empresa(usuario_empresa.empresa)
     rows = db(db.projeto.auth_user == usuario_empresa.auth_user).select(orderby=~db.projeto.descricao)
     return locals()
 
+@auth.requires_login()
 def adicionar_vendedor():
     response.view = 'generic.html' # use a generic view
     projeto = db.projeto(request.args(0, auth.user))
@@ -30,6 +33,7 @@ def adicionar_vendedor():
         response.flash = 'Preencha o formulario'
     return dict(form=form)
 
+@auth.requires_login()
 def acessar_venda():
     usuario = auth.user
     vendedor = db.vendedor(request.args(0, cast=int))
@@ -70,6 +74,7 @@ def alterar_vendedor():
     return dict(form=form)
 
 
+@auth.requires_login()
 def inserir_venda():
     response.view = 'generic.html' # use a generic view
     vendedor = db.vendedor(request.args(0, auth.user))

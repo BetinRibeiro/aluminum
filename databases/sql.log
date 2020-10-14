@@ -570,3 +570,21 @@ ALTER TABLE "boleto" ADD "id_cliente" CHAR(512) UNIQUE;
 timestamp: 2020-10-12T10:31:25.198590
 ALTER TABLE "boleto" ADD "id_cliente" CHAR(512) UNIQUE;
 success!
+timestamp: 2020-10-13T00:16:12.163504
+CREATE TABLE "boleto_atrasado"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "projeto" INTEGER REFERENCES "projeto" ("id") ON DELETE CASCADE  ,
+    "vendedor" INTEGER REFERENCES "vendedor" ("id") ON DELETE CASCADE  ,
+    "id_cliente" CHAR(512),
+    "id_asaas" CHAR(512) UNIQUE,
+    "description" CHAR(512),
+    "status" CHAR(512),
+    "due_date" DATE,
+    "value_total" DOUBLE NOT NULL DEFAULT 0.0,
+    "value_receber" DOUBLE NOT NULL DEFAULT 0.0,
+    "observacao" TEXT,
+    "ligou" CHAR(1),
+    "atendeu" CHAR(1),
+    "cobrou" CHAR(1)
+);
+success!

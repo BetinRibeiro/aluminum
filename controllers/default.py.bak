@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 def index():
+    
+    if  auth.is_logged_in():
+      if auth.user.id==1:
+        response.flash='Acesso em atraso, ultima data de pagamento dia 10/set/2020, data do vencimento 10/out/2020, avite o bloqueio do seu acesso após 10 dias de atraso dia 20/out/2020'
     return locals()
 #gera arquivo para criação de toda empresa e projetos
 @auth.requires_membership('admin') # can only be accessed by members of admin groupd
@@ -53,6 +57,8 @@ def acesso_inicial():
     #busca empresa que tenha o usuario iguela ao logado
     empresa = db.empresa(db.empresa.auth_user==auth.user.id)
     usuario=auth.user
+    if (auth.user.id==44) or (auth.user.id==45) or (auth.user.id==46):
+        redirect(URL('acs_chefe','index'))
     if (auth.user.id==6):
         empresa = db.empresa(4)
         #empresa.id

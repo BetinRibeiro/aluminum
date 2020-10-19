@@ -1,37 +1,5 @@
 # -*- coding: utf-8 -*-
 def index():
-    projeto = db.projeto(request.args(0, cast=int))
-  
-    conexao = db.conexao(db.conexao.projeto==projeto)
-    import json
-    import urllib, urllib2
-    import gluon.contrib.simplejson as sj
-    import datetime
-    headers = {
-        'Content-Type': 'application/json',
-        'access_token': conexao.chave_acesso
-    }
-    req = Request('https://www.asaas.com/api/v3/payments?dateCreated%5Bge%5D='+(conexao.data_inicio).strftime("%Y-%m-%d")+'&dateCreated%5Ble%5D='+(conexao.data_final).strftime("%Y-%m-%d")+'&offset=3&limit=50?status=OVERDUE', headers=headers)
-    page = urlopen(req).read()
-    total_boletos=json.loads(page).values()[1]
-    total_paginas = total_boletos/50
-    #total_paginas=2
-    a=0
-    while a<total_boletos:
-        req = Request('https://www.asaas.com/api/v3/payments?dateCreated%5Bge%5D='+(conexao.data_inicio).strftime("%Y-%m-%d")+'&dateCreated%5Ble%5D='+(conexao.data_final).strftime("%Y-%m-%d")+'&offset='+str(a)+'&limit=50?status=OVERDUE', headers=headers)
-        page = urlopen(req).read()
-        page=json.loads(page)
-        for row in page.values()[5]:
-          id=db.boleto_atrasado.update_or_insert((db.boleto_atrasado.id_asaas == row.get("id")),
-                           id_asaas=row.get("id"),
-                           id_cliente=row.get("customer"),
-                           projeto=projeto.id,
-                           description=row.get("description"),
-                           value_total=row.get("value"),
-                           status=row.get("status"),
-                           due_date=row.get("dueDate"),
-                           value_receber=row.get("netValue"))
-        a+=50
     
     rows = db(db.boleto_atrasado).select()
     #grid = SQLFORM.smartgrid(db.boleto)

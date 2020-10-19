@@ -1,4 +1,26 @@
 # -*- coding: utf-8 -*-
+
+def atualizar_projetos():
+  rows = db.projeto().select()
+  for row in rows:
+    row.mercadiria_conferida=False
+    row.retorno_conferido=False
+    row.particionamento_conferida=False
+    row.vales_conferido=False
+    row.funcionario_caderno_conferido=False
+    row.venda_prazo_conferida=False
+    row.venda_vista_conferida=False
+    row.despesa_venda_conferida=False
+    row.despesa_local_conferida=False
+    row.caderno_chefe_conferido=False
+    row.percas e gratificacao_conferido=False
+    row.pagamento_quitacao_conferido=False
+    row.entrada_repasse_conferido=False
+    row.cobranca_conferida=False
+
+    row.update_or_insert()
+
+  return locals()
 @auth.requires_login()
 def acesso_projeto():
     projeto = db.projeto(request.args(0, cast=int))
@@ -13,7 +35,7 @@ def acesso_projeto():
     usuario=auth.user
     #if (usuario.id==1):
         #redirect(URL('usuario','betinho_acesso',args=projeto.id))
-    if (usuario.id==68097)or(usuario.id==1686734):
+    if (usuario.id==6)or(usuario.id==1686734):
         redirect(URL('usuario','abencoado',args=projeto.id))
     if (usuario.id==105435)or(usuario.id==1456789):
         redirect(URL('usuario','fscontador',args=projeto.id))

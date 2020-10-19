@@ -1,4 +1,26 @@
 # -*- coding: utf-8 -*-
+
+def atualizar_projetos():
+  rows = db.projeto().select()
+  for row in rows:
+    row.mercadiria_conferida=False
+    row.retorno_conferido=False
+    row.particionamento_conferida=False
+    row.vales_conferido=False
+    row.funcionario_caderno_conferido=False
+    row.venda_prazo_conferida=False
+    row.venda_vista_conferida=False
+    row.despesa_venda_conferida=False
+    row.despesa_local_conferida=False
+    row.caderno_chefe_conferido=False
+    row.percas_gratificacao_conferido=False
+    row.pagamento_quitacao_conferido=False
+    row.entrada_repasse_conferido=False
+    row.cobranca_conferida=False
+
+    row.update_or_insert()
+
+  return locals()
 @auth.requires_login()
 def acesso_projeto():
     projeto = db.projeto(request.args(0, cast=int))

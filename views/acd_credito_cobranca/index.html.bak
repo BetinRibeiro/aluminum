@@ -20,9 +20,10 @@
                 </tr>
               </thead>
               <tbody>
+                {{a=0}}
                 {{for row in rows:}}
-                <tr>
-                  <th scope="row">1</th>
+                <tr>{{a+=1}}
+                  <th scope="row">{{=a}}</th>
                   <td>{{=row.description}}</td>
                   <th>{{=("{}/{}/{}".format(row.due_date.day,row.due_date.month,row.due_date.year))}}</th>
                   <td>{{=row.value_total}}</td>

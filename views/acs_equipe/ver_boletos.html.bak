@@ -36,6 +36,7 @@
                   {{a=1}}
                   {{total=0}}
                   {{for row in rows:}}
+                {{if row.status=="OVERDUE":}}
                 <tr>
                     <th>{{=a}}</th>
                     {{row.id_asaas}}
@@ -65,6 +66,7 @@
                   {{total_receber+=row.value_receber}}
                 </tr>
                   {{pass}}
+                  {{pass}}
                     <tr>
                   <th scope="row">#</th>
                   <td>#</td>
@@ -90,10 +92,10 @@
 {{total_parcial=quitadas+vencidas}}
 <div class="row d-flex justify-content-around" >
         <div class="col-lg-3 p-4 py-5 bg-light d-flex flex-column mb-3">
-          <h3 class="pb-3 border-bottom">Total</h3>
+          <h3 class="pb-3 border-bottom">Venda Total</h3>
           <h3> <b>R$ {{="{:,}".format(round(total)).replace(",",".")}}0</b></h3>
             <hr>
-          <h3 class="pb-3 border-bottom">Total</h3>
+          <h3 class="pb-3 border-bottom">Aguardando</h3>
           <h3> <b>R$ {{="{:,}".format(round(aguardando)).replace(",",".")}}0</b></h3>
           <p class="pb-3 border-bottom">Aguardando Confirmação de Pagamento, não estão em atraso</p>
         </div>

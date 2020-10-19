@@ -588,3 +588,9 @@ CREATE TABLE "boleto_atrasado"(
     "cobrou" CHAR(1)
 );
 success!
+timestamp: 2020-10-15T12:31:06.849664
+ALTER TABLE "projeto" ADD "venda_prazo_conferida" CHAR(1);
+timestamp: 2020-10-15T12:31:57.409448
+ALTER TABLE "projeto" ADD "venda_vista_conferida" CHAR(1);
+timestamp: 2020-10-15T12:33:00.237497
+ALTER TABLE "projeto" ADD "pagamento_quitacao_conferido" CHAR(1);

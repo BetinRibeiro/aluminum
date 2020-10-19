@@ -77,11 +77,12 @@ def criar_desp():
     return dict(form=form)
 @auth.requires_login()
 def alterar_desp():
-    try:
-        response.view = 'generic.html' # use a generic view
-        despesa_cobranca = db.despesa_cobranca(request.args(0, cast=int))
 
-        classe_despesa_cobranca = db.classe_despesa_cobranca(despesa_cobranca.classe_despesa_cobranca)
+    response.view = 'generic.html' # use a generic view
+    despesa_cobranca = db.despesa_cobranca(request.args(0, cast=int))
+
+    classe_despesa_cobranca = db.classe_despesa_cobranca(despesa_cobranca.classe_despesa_cobranca)
+    try:
 
         db.despesa_cobranca.id.readable = False
         db.despesa_cobranca.id.writable = False
@@ -100,5 +101,5 @@ def alterar_desp():
                 response.flash = 'Preencha o formulário!'
 
     except:
-        redirect(URL('acesso_despesa', args=request.args(0, cast=int)))
+        redirect(URL('acesso_despesa', args=classe_despesa_cobranca.id))
     return dict(form=form)

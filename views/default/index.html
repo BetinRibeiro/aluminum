@@ -32,6 +32,12 @@ ga('send', 'pageview');
     
 <!-- End Google Analytics -->
 </head>
+{{include 'web2py_ajax.html'}}
+{{if response.flash:}}
+<div class="alert alert-danger fixed-top" role="alert">
+  <marquee>{{=response.flash}}.</marquee>
+</div>
+{{else:}}
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container">
       <a class="navbar-brand text-info" href="#">Aluminum</a>
@@ -81,7 +87,9 @@ ga('send', 'pageview');
       </div>
     </div>
   </nav>
+{{pass}}
  <!-- Cover -->
+
   <div class="section-fade-out pt-5" style="background-image: url(&quot;https://images.unsplash.com/photo-1513530534585-c7b1394c6d51?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=751&q=80&quot;); background-position: bottom;">
     <div class="container mt-5 pt-5">
       <div class="row">

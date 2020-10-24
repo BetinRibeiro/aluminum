@@ -11,7 +11,7 @@ def index():
         empresa = db.empresa(usuario_empresa.empresa)
         if not empresa:
             #redireciona para pagina de usuario)
-            redirect(URL('acs_chefe','index'))
+            redirect(URL('default','index'))
     consul=(request.args(0))
     if consul:
         n=int(consul)/12

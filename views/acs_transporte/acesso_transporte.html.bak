@@ -8,8 +8,16 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <a class="btn btn-link" href="{{=URL('index', args=transporte.empresa)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
-          <a class="btn btn-link" href="{{=URL('inserir_km', args=transporte.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar novo km</a>
+          <a class="btn btn-link" href="{{=URL('index', args=transporte.empresa)}}" style="color:#3b5998">
+            <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar
+          </a>
+          
+          <a class="btn btn-link" href="{{=URL('alterar_transporte', args=transporte.id)}}" style="color:#3b5998">
+            <i class="fa fa-fw fa-1x py-1 fa-plus"></i> Alterar dados
+          </a>
+          <a class="btn btn-link" href="{{=URL('inserir_km', args=transporte.id)}}" style="color:#3b5998">
+            <i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar novo km
+          </a>
         </div>
       </div>
       <div class="row">
@@ -35,7 +43,9 @@
                 {{kmanterior=row.km}}
                 {{pass}}
                 <tr>
-                  <th scope="row">{{=("{}/{}/{}".format(row.data_registro.day,row.data_registro.month,row.data_registro.year))}}</th>
+                  <th scope="row">
+                    {{=("{}/{}/{}".format(row.data_registro.day,row.data_registro.month,row.data_registro.year))}}
+                  </th>
                   <td>{{=row.condutor}}</td>
                   <td>{{=row.descricao}}</td>
                   <td>{{=row.km}}</td>
@@ -44,13 +54,13 @@
                   {{consumo=row.valor_conbustivel}}
                   {{if (total_rodado>0) and (consumo):}}
                   <td>{{=total_rodado/consumo}}</td>
-                  
                   {{else:}}
                   <td>{{=consumo}}</td>
-                  
                   {{pass}}
-                  
-                  <td><a class="btn btn-link" href="{{=URL('alterar_km', args=row.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-th-list"></i></a></td>
+                  <td><a class="btn btn-link" href="{{=URL('alterar_km', args=row.id)}}" style="color:#3b5998" >
+                    <i class="fa fa-fw fa-1x py-1 fa-th-list"></i>
+                    </a>
+                  </td>
                   {{kmanterior=row.km}}
                 </tr>
                   {{km=row.km}}
@@ -62,6 +72,5 @@
       </div>
     </div>
   </div>
-
 {{transporte.km=km}}
 {{transporte.update_record()}}

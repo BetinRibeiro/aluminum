@@ -1,7 +1,7 @@
 {{extend 'layout.html'}}
 {{total=0}}
 {{a=1}}
-<div class="py-1">
+<div class="py-5">
       <div class="row">
         <div class="col-md-6" >
             <a class="btn btn-outline-light" href="{{=URL('acesso_particao_cobranca', args=[sub_venda.id])}}"> 
@@ -11,7 +11,7 @@
             <i class="fa text-success fa-plus fa-2x"></i>
             </a>
         </div>
-          {{if tipo=="Recebimento":}}
+    {{if tipo=="Recebimento":}}
         <div class="col-md-6">
             <div class="form-group row">
                 <input type="text" class="form-control col-10 col-form-label" name="busca" placeholder="Faça uma pesquisa" />
@@ -22,14 +22,12 @@
                 </div>
             </div>
       </div>
-          {{pass}}
+    {{pass}}
   </div>
 <marquee direction="left">
     <a class="navbar-brand text-info"> <h6>Após inserir o registro você só poderá alterar o mesmo até 72hrs depois do cadastro! Caso necessite fazer alguma alteração entre em contato com o Administrador</h6></a>
 </marquee>
-
         {{=tipo}} da cobrança de {{=sub_venda.primeira_cidade}}
-        
             <table class="table table-bordered table-sm table-striped">
               <thead>
                 <tr>
@@ -49,7 +47,11 @@
                   <td>{{=row.descricao}}</td>
                   <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
                     {{if not (dataontem>=row.data_inicio) or(usuario.id!=sub_venda.auth_user):}}
+                  {{if (usuario.id!=10):
                   <td><a href="{{=URL('alterar_registro', args=[row.id,tipo])}}"><i class="fa text-warning fa-exchange" ></i></a></td>
+                    {{else:}}
+                    <td><i class="fa text-dark fa-exchange" ></i></td>
+                    {{pass}}
                     {{else:}}
                     <td><i class="fa text-dark fa-exchange" ></i></td>
                     {{pass}}

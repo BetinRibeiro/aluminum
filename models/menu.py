@@ -16,7 +16,7 @@ response.menu = [
 #membro = db.auth_membership(auth_membership.group_id==2)
 if auth.has_membership('admin'):
     response.menu += [
-    (T('BD'), False, URL('appadmin', 'index')),
+    (T('Home'), False, URL('default', 'index'), [])
     ]
 if configuration.get('app.production'):
     _app = request.application

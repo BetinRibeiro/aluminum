@@ -22,8 +22,8 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <a class="btn btn-link" href="{{=URL('acs_projeto','index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
-          <a class="btn btn-link" href="{{=URL('acs_relatorio','investimento', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-shield"></i> Ver Relatorio de Investimento</a>
+          <a class="btn btn-link " href="{{=URL('acs_projeto','index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          <a class="btn btn-link  m-1 border-info rounded-top" href="{{=URL('acs_relatorio','investimento', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-shield"></i> Ver Relatorio de Investimento</a>
         </div>
       </div>
       

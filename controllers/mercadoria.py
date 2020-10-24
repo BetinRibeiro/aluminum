@@ -5,6 +5,7 @@
 @auth.requires_login()
 def acesso_carradas():
     #busca no bando de dados o projeto que estamos trabalhando
+    usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
     empresa = db.empresa(projeto.empresa)
     #caso o usuario da empresa for diferênte do usuario logado
@@ -55,6 +56,7 @@ def criar_carrada():
 @auth.requires_login()
 def alterar_carrada():
     response.view = 'generic.html' # use a generic view
+    usuario=auth.user
     carrada = db.carrada(request.args(0, cast=int))
     projeto = db.projeto(carrada.projeto)
     empresa = db.empresa(projeto.empresa)
@@ -71,7 +73,7 @@ def alterar_carrada():
     deletable=True
     #caso o usuario seja diferênte do chefe ele pode finalizar a carrada
     #ou liberar só o chefe que não pode alterar
-    if empresa.auth_user!=auth.user.id:
+    if (empresa.auth_user!=auth.user.id):
         db.carrada.finalizada.readable = True
         db.carrada.finalizada.writable = True
         if carrada.finalizada:
@@ -82,6 +84,12 @@ def alterar_carrada():
             db.carrada.descricao.readable = True
             db.carrada.descricao.writable = False
     deletar =True
+    if  (usuario.id==10) and (carrada.finalizada):
+        deletable=False
+        db.carrada.data_envio.readable = False
+        db.carrada.data_envio.writable = False
+        db.carrada.finalizada.readable = False
+        db.carrada.finalizada.writable = False
     if carrada.total_pecas>0:
         deletar =False
         
@@ -92,6 +100,16 @@ def alterar_carrada():
     elif form.errors:
         response.flash = 'Erros no formulário!'
     return dict(form=form)
+
+def verifica():
+    carrada = db.carrada(request.args(0, cast=int))
+    if carrada.finalizada:
+      carrada.finalizada=False
+    else:
+      carrada.finalizada=True
+    carrada.update_record()
+    
+    return redirect(URL('acesso_carradas', args=carrada.projeto))
 @auth.requires_login()
 def acesso_item_carrada():
     usuario=auth.user

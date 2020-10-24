@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-
 import datetime
 @auth.requires_login()
 def acessar_cobrancas():
+  
+    usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.sub_venda.projeto == request.args(0, cast=int)).select(orderby=db.sub_venda.data_inicio_cobranca)
     for row in rows:
@@ -27,40 +28,29 @@ def acesso_particao_cobranca():
 def alterar_dados():
     response.view = 'generic.html' # use a generic view
     sub_venda = db.sub_venda(request.args(0, cast=int))
-    
     if auth.user.id==sub_venda.auth_user:
         redirect(URL('acesso_particao_cobranca',args=sub_venda.id))
     projeto = db.projeto(sub_venda.projeto)
     db.sub_venda.id.readable = False
     db.sub_venda.id.writable = False
-
     db.sub_venda.projeto.readable = False
     db.sub_venda.projeto.writable = False
-
     db.sub_venda.data_inicio_cobranca.readable = False
     db.sub_venda.data_inicio_cobranca.writable = False
-
     db.sub_venda.data_final_cobranca.readable = False
     db.sub_venda.data_final_cobranca.writable = False
-
     db.sub_venda.primeira_cidade.readable = False
     db.sub_venda.primeira_cidade.writable = False
-
     db.sub_venda.ultima_cidade.readable = False
     db.sub_venda.ultima_cidade.writable = False
-
     db.sub_venda.comissao_cobranca.readable = True
     db.sub_venda.comissao_cobranca.writable = True
-
     db.sub_venda.adiantamento_cobranca.readable = True
     db.sub_venda.adiantamento_cobranca.writable = True
-
     db.sub_venda.total_vale_saida_cobrador.readable = True
     db.sub_venda.total_vale_saida_cobrador.writable = True
-
     db.sub_venda.cobranca_finalizada.readable = True
     db.sub_venda.cobranca_finalizada.writable = True
-
     form = SQLFORM(db.sub_venda, request.args(0, cast=int), deletable=False)
     if form.process().accepted:
         session.flash = 'Atualizado'
@@ -79,40 +69,28 @@ def alterar_particao():
     projeto = db.projeto(sub_venda.projeto)
     db.sub_venda.id.readable = False
     db.sub_venda.id.writable = False
-
     db.sub_venda.projeto.readable = False
     db.sub_venda.projeto.writable = False
-
     db.sub_venda.data_inicio_cobranca.readable = False
     db.sub_venda.data_inicio_cobranca.writable = False
-
     db.sub_venda.data_final_cobranca.readable = False
     db.sub_venda.data_final_cobranca.writable = False
-
     db.sub_venda.primeira_cidade.readable = False
     db.sub_venda.primeira_cidade.writable = False
-
     db.sub_venda.comissao_cobranca.readable = True
     db.sub_venda.comissao_cobranca.writable = True
-
     db.sub_venda.adiantamento_cobranca.readable = True
     db.sub_venda.adiantamento_cobranca.writable = True
-
     db.sub_venda.descricao.readable = True
     db.sub_venda.descricao.writable = True
-
     db.sub_venda.total_vale_saida_cobrador.readable = True
     db.sub_venda.total_vale_saida_cobrador.writable = True
-
     db.sub_venda.cobranca_iniciada.readable = True
     db.sub_venda.cobranca_iniciada.writable = True
-
     db.sub_venda.data_final_cobranca.readable = True
     db.sub_venda.data_final_cobranca.writable = True
-
     db.sub_venda.cobranca_finalizada.readable = True
     db.sub_venda.cobranca_finalizada.writable = True
-
     form = SQLFORM(db.sub_venda, request.args(0, cast=int), deletable=False)
     if form.process().accepted:
         session.flash = 'Atualizado'
@@ -123,6 +101,7 @@ def alterar_particao():
         if not response.flash:
             response.flash = 'Preencha o formulário!'
     return dict(form=form)
+
 @auth.requires_login()
 def lista_registros():
     usuario=auth.user
@@ -148,15 +127,11 @@ def inserir_registro():
     tipo = request.args(1, auth.user)
     db.registro_cobranca.sub_venda.default = sub_venda.id
     db.registro_cobranca.sub_venda.writable = False
-
     db.registro_cobranca.projeto.default = sub_venda.projeto
     db.registro_cobranca.projeto.writable = False
-
     db.registro_cobranca.tipo.default = tipo
     db.registro_cobranca.tipo.writable = False
-
     db.registro_cobranca.descricao.default = tipo
-
     form = SQLFORM(db.registro_cobranca).process()
     if form.accepted:
         response.flash = 'Formulario aceito'
@@ -174,25 +149,17 @@ def alterar_registro():
     registro_cobranca = db.registro_cobranca(request.args(0, cast=int))
     tipo = request.args(1)
     sub_venda = db.sub_venda(registro_cobranca.sub_venda)
-
     db.registro_cobranca.id.readable = False
     db.registro_cobranca.id.writable = False
-
     db.registro_cobranca.sub_venda.readable = False
     db.registro_cobranca.sub_venda.writable = False
-
     db.registro_cobranca.projeto.readable = False
     db.registro_cobranca.projeto.writable = False
-
     db.registro_cobranca.tipo.readable = False
     db.registro_cobranca.tipo.writable = False
-    
     if (registro_cobranca.tipo=="Deposito") and (usuario.id!=sub_venda.auth_user):
-
         db.registro_cobranca.observacao.readable = True
         db.registro_cobranca.observacao.writable = True
-        
-
     form = SQLFORM(db.registro_cobranca, request.args(0, cast=int), deletable=True)
     if form.process().accepted:
         session.flash = 'Atualizado'
@@ -212,10 +179,8 @@ def saldo_quitacao():
 @auth.requires_login()
 def cobranca_individual():
     vendedor = db.vendedor(request.args(0, cast=int))
-
     projeto = db.projeto(vendedor.projeto)
     sub_venda = db.sub_venda(request.args(1, cast=int))
-
     rows_cob= db(db.cobranca_venda.vendedor==vendedor.id).select(orderby=db.cobranca_venda.recebido)
     rows_vend = db(db.venda.vendedor == vendedor.id).select(orderby=db.venda.data_venda)
     return locals()
@@ -224,13 +189,10 @@ def inserir_cobranca():
     response.view = 'generic.html' # use a generic view
     sub_venda=db.sub_venda(request.args(0, cast=int))
     vendedor=db.vendedor(request.args(1, cast=int))
-
     db.cobranca_venda.sub_venda.default = sub_venda.id
     db.cobranca_venda.sub_venda.writable = False
-
     db.cobranca_venda.vendedor.default = vendedor.id
     db.cobranca_venda.vendedor.writable = False
-
     form = SQLFORM(db.cobranca_venda).process()
     if form.accepted:
         response.flash = 'Formulario aceito'
@@ -245,13 +207,10 @@ def alterar_cobranca():
     response.view = 'generic.html' # use a generic view
     cobranca_venda = db.cobranca_venda(request.args(0, cast=int))
     vendedor = db.vendedor(cobranca_venda.vendedor)
-
     db.cobranca_venda.id.readable = False
     db.cobranca_venda.id.writable = False
-
     db.cobranca_venda.sub_venda.readable = False
     db.cobranca_venda.sub_venda.writable = False
-
     db.cobranca_venda.vendedor.readable = False
     db.cobranca_venda.vendedor.writable = False
 
@@ -281,22 +240,16 @@ def alterar_comissao():
     projeto = db.projeto(vendedor.projeto)
     db.vendedor.id.readable = False
     db.vendedor.id.writable = False
-
     db.vendedor.projeto.readable = False
     db.vendedor.projeto.writable = False
-
     db.vendedor.nome.readable = True
     db.vendedor.nome.writable = False
-
     db.vendedor.vale_saida.readable = False
     db.vendedor.vale_saida.writable = False
-
     db.vendedor.comissao_venda.readable = False
     db.vendedor.comissao_venda.writable = False
-
     db.vendedor.descricao.readable = False
     db.vendedor.descricao.writable = False
-
     form = SQLFORM(db.vendedor, request.args(0, cast=int), deletable=False)
     if form.process().accepted:
         session.flash = 'Atualizado'
@@ -342,35 +295,24 @@ def alterar_dados_cobrador():
     if sub_venda.cobranca_finalizada:
         session.flash = 'A Cobrança já foi finalizada'
         redirect(URL('acesso_particao_cobranca', args=sub_venda.id))
-
     db.sub_venda.id.readable = False
     db.sub_venda.id.writable = False
-
     db.sub_venda.primeira_cidade.readable = False
     db.sub_venda.primeira_cidade.writable = False
-
     db.sub_venda.projeto.readable = False
     db.sub_venda.projeto.writable = False
-
     db.sub_venda.ultima_cidade.readable = False
     db.sub_venda.ultima_cidade.writable = False
-
     db.sub_venda.data_inicio_cobranca.readable = False
     db.sub_venda.data_inicio_cobranca.writable = False
-
     db.sub_venda.data_final_cobranca.readable = False
     db.sub_venda.data_final_cobranca.writable = False
-
     db.sub_venda.adiantamento_cobranca.readable = True
     db.sub_venda.adiantamento_cobranca.writable = True
-
     db.sub_venda.comissao_cobranca.readable = True
     db.sub_venda.comissao_cobranca.writable = True
-
     db.sub_venda.total_vale_saida_cobrador.readable = True
     db.sub_venda.total_vale_saida_cobrador.writable = True
-
-
     form = SQLFORM(db.sub_venda, request.args(0, cast=int), deletable=False)
     if form.process().accepted:
         session.flash = 'Partição atualizado'

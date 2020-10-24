@@ -20,7 +20,9 @@
       <div class="collapse navbar-collapse" id="navbar10">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"> <a class="nav-link" href="{{=URL('default','acesso_inicial')}}">Projetos</a> </li>
+          {{if usuario!=10:}}
             <li class="nav-item  text-muted"> <a class="btn btn-outline-primary" href="{{=URL('projeto','investimento', args=projeto.id)}}">Investimento</a></li>
+          {{pass}}
         </ul>
       </div>
     </div>
@@ -51,6 +53,8 @@
                   <td>{{=row.primeira_cidade}}</td>
                     {{if row.total_venda_praso>0:}}
                   <td>R$ {{="{:,}".format(round(row.total_venda_praso,1)).replace(",",".")}}0</td>
+                    {{else:}}
+                  <td>R$ {{="{:,}".format(round(0,1)).replace(",",".")}}0</td>
                     {{pass}}
                   <td>R$ {{="{:,}".format(round(row.total_recebido,1)).replace(",",".")}}0</td>
                   <td>R$ {{="{:,}".format(round(row.total_despesa,1)).replace(",",".")}}0</td>

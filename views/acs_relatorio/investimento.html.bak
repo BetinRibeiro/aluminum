@@ -143,6 +143,10 @@
                     R$ {{="{:,}".format(round(projeto.total_saldo_funcionario,1)).replace(",",".")}}0
                 </span>
             </li>
+            {{if projeto.id==20:}}
+                {{projeto.total_saldo_vendedor=14390.80}}
+            {{pass}}
+            
 {{if projeto.total_saldo_vendedor>0:}}
 {{complemento+=projeto.total_saldo_vendedor}}
 {{pass}}
@@ -150,6 +154,7 @@
                 <div>
                     <h6 class="my-0">Saldo Vendedores</h6>
                 </div>
+                
                 <span class="text-muted">
                     R$ {{="{:,}".format(round(projeto.total_saldo_vendedor,1)).replace(",",".")}}0
                 </span>
@@ -241,6 +246,10 @@
                 </span>
             </li>
               {{pass}}
+             {{if projeto.id==20:}}
+                {{projeto.total_debito_vendedor=12609.3}}
+            {{pass}}
+            
 {{if projeto.total_debito_vendedor>=0:}}
 {{else:}}
 {{abatimento+=projeto.total_debito_vendedor*-1}}
@@ -405,7 +414,7 @@
               <div>
                 <h6 class="my-0">Custo Devolução ( Reaproveitamento )</h6>
               </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_custo_devolucao_aproveitamento,1)).replace(",",".")}}0</span>
-                </li>>
+                </li>
                {{entrada_extra+=projeto.total_custo_devolucao_aproveitamento}}
               {{for row in rowsr:}}
               <li class="list-group-item d-flex justify-content-between">

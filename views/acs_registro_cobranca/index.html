@@ -53,7 +53,11 @@
                   <td>{{=row.descricao}}</td>
                   <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
                     {{if not (dataontem>=row.data_inicio) or(usuario.id!=sub_venda.auth_user):}}
+                  {{if (usuario.id!=10):}}
                   <td><a  style="color:#3b5998" href="{{=URL('alterar_registro', args=[row.id,tipo])}}"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i></a></td>
+                  {{else:}}
+                    <td><i class="fa text-dark fa-exchange" ></i></td>
+                    {{pass}}
                     {{else:}}
                     <td><i class="fa text-dark fa-exchange" ></i></td>
                     {{pass}}

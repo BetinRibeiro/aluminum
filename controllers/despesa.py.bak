@@ -19,7 +19,7 @@ def criar_classe_despesa():
     
     db.classe_despesa.tipo.writable = False
     usuario = auth.user
-    if usuario.id==24:
+    if usuario.id==2544:
         session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
         redirect(URL('acessar_despesa', args=[projeto.id,tipodesp]))
 
@@ -48,7 +48,7 @@ def alterar_classe_despesa():
     db.classe_despesa.tipo.writable = False
 
     usuario = auth.user
-    if usuario.id==24:
+    if usuario.id==25434:
         session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
         redirect(URL('acessar_despesa', args=[projeto.id,tipodesp]))
 
@@ -85,7 +85,7 @@ def criar_desp():
         return redirect(URL('acesso_despesa', args=[classe_despesa.id,tipodesp]))
     
     usuario = auth.user
-    if usuario.id==24:
+    if usuario.id==2344:
         session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
         redirect(URL('acesso_despesa', args=[classe_despesa.id,tipodesp]))
 
@@ -106,6 +106,7 @@ def alterar_desp():
     response.view = 'generic.html' # use a generic view
     despesa = db.despesa(request.args(0, cast=int))
     classe_despesa = db.classe_despesa(despesa.classe_despesa)
+    
     tipodesp=(request.args(1, auth.user))
     
     db.despesa.id.readable = False
@@ -115,7 +116,7 @@ def alterar_desp():
     db.despesa.classe_despesa.writable = False
     
     usuario = auth.user
-    if usuario.id==24:
+    if usuario.id==2344:
         session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
         redirect(URL('acesso_despesa', args=[classe_despesa.id,tipodesp]))
     form = SQLFORM(db.despesa, request.args(0, cast=int), deletable=True)

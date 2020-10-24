@@ -20,7 +20,9 @@
       <div class="collapse navbar-collapse" id="navbar10">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item"> <a class="nav-link" href="{{=URL('default','acesso_inicial')}}">Projetos</a> </li>
+          {{if usuario.id!=10:}}
             <li class="nav-item  text-muted"> <a class="btn btn-outline-primary" href="{{=URL('projeto','investimento', args=projeto.id)}}">Investimento</a></li>
+          {{pass}}
         </ul>
       </div>
     </div>

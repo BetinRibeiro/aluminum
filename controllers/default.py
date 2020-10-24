@@ -2,7 +2,7 @@
 def index():
     
     if  auth.is_logged_in():
-      if auth.user.id==24:
+      if auth.user.id==241456:
         response.flash='Acesso em atraso, ultima data de pagamento dia 10/set/2020, data do vencimento 10/out/2020, avite o bloqueio do seu acesso após 10 dias de atraso dia 20/out/2020'
     return locals()
 #gera arquivo para criação de toda empresa e projetos

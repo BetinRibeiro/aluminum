@@ -40,6 +40,11 @@
                 {{if not projeto.venda_finalizada:}}
                 <th id="noprint">Alterar</th>
                 {{pass}}{{pass}}
+              
+              {{if (usuario.id==11)or(usuario.id==1):}}
+                <th id="noprint">Verificação</th>
+              
+              {{pass}}
             </tr>
         </thead>
             <tbody>
@@ -117,10 +122,10 @@
                     </th>
                     
                 {{if desbloqueado:}}
-                    <th id="noprint"
+                    <th
                         >R$ {{="{:,}".format(round(0,1)).replace(",",".")}}0
                     </th>
-                    <th id="noprint"
+                    <th
                         >R$ {{="{:,}".format(round(custo,1)).replace(",",".")}}0
                     </th>
                     {{pass}}

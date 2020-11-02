@@ -40,6 +40,11 @@
                 {{if not projeto.venda_finalizada:}}
                 <th id="noprint">Alterar</th>
                 {{pass}}{{pass}}
+              
+              {{if (usuario.id==11)or(usuario.id==1):}}
+                <th id="noprint">Verificação</th>
+              
+              {{pass}}
             </tr>
         </thead>
             <tbody>
@@ -97,6 +102,13 @@
                       {{if not projeto.venda_finalizada:}}
                     <td id="noprint"><a href="{{=URL('alterar_item_carrada', args=row.id)}}"><i class="fa text-warning fa-exchange" ></i></a></td>
                     {{pass}}{{pass}}
+                  
+              {{if (usuario.id==11)or(usuario.id==1):}}
+                  <td>
+                            <i class="fa text-danger fa-circle"></i>
+                                {{="{:,}".format(round(margem,0)).replace(".0","")}}%
+                        </td>
+                  {{pass}}
                 </tr>
                         {{pcas+=row.q_pcs}}
                         {{total+=row.preco_unitario*row.q_pcs}}

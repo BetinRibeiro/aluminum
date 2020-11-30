@@ -27,9 +27,8 @@ def abencoado():
     return locals()
 @auth.requires_login()
 def fsprojetos():
-    
     empresa = db.empresa(request.args(0, cast=int))
-    
+    usuario = auth.user
     if auth.user.id==10:
         empresa = db.empresa(8)
     rows = db(db.projeto.empresa==empresa.id).select(orderby=~db.projeto.descricao)

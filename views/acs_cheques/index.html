@@ -98,8 +98,12 @@
                   <td>{{=row.banco}}</td>
                   <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
                   <td><a class="btn btn-link" href="{{=URL('alterar', args=row.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-bars"></i> </a></td>
-                </tr>
 {{total+=row.valor}}
+                  {{if False:}}
+                  <th>{{=totalq}}</th>
+                  {{pass}}
+                
+                </tr>
                   {{pass}}
                 <tr>
                   <th scope="row">#</th>

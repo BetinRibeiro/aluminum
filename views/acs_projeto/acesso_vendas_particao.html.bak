@@ -14,6 +14,7 @@
 {{tentrada=0}}
 {{tfichas_devolvidas=0}}
 {{tvalor_devolvido=0}}
+{{=rows[0]}}
 <div class="py-5">
     <div class="container">
       <div class="row">
@@ -24,7 +25,7 @@
       <div class="row">
         <div class="col-md-12">
           <a class="btn btn-link" href="{{=URL('particoes',args=sub_venda.projeto)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
-            <a class="btn btn-link" href="{{=URL('alterar_dados_rota',args=sub_venda.projeto)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Alterar dados da Rota</a>
+            <a class="btn btn-link" href="{{=URL('alterar_dados_rota',args=sub_venda.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Alterar dados da Rota</a>
         </div>
       </div>
       <div class="row">

@@ -45,6 +45,7 @@
                 {{data=rows.last().data_venda}}
             {{pass}}
             {{for row in rows:}}
+          
             <tr>
                 {{if row.data_venda==data:}}
                     {{venda+=row.venda_praso-row.valor_devolvido}}
@@ -54,8 +55,9 @@
                     {{fichas_devolvidas+=row.quant_fichas_devolvidas}}
                     {{valor_devolvido+=row.valor_devolvido}}
                     {{data=row.data_venda}}
+              
                 {{else:}}
-                    {{if venda!=0:}}
+                    {{if venda>=0:}}
                         {{a+=1}}
                         <th>{{=a}}</th>
                         <td>{{=("{}/{}/{}".format(data.day,data.month,data.year))}}</td>
@@ -94,7 +96,8 @@
                 <td>{{=fichas_venda}}</td>
                 <td>R$ {{="{:,}".format(round(caderno,2)).replace(",",".")}}0</td>
                 <td>R$ {{="{:,}".format(round(entrada,2)).replace(",",".")}}0</td>
-                
+                <td>{{=fichas_devolvidas}}</td>
+                <td>R$ {{="{:,}".format(round(valor_devolvido,2)).replace(",",".")}}0</td>
             </tr>
             {{pass}}
             <tr>
@@ -104,7 +107,8 @@
                 <th>{{=tfichas_venda}}</th>
                 <th>R$ {{="{:,}".format(round(tcaderno,2)).replace(",",".")}}0</th>
                 <th>R$ {{="{:,}".format(round(tentrada,2)).replace(",",".")}}0</th>
-                
+                <th>{{=tfichas_devolvidas}}</th>
+                <th>R$ {{="{:,}".format(round(tvalor_devolvido,2)).replace(",",".")}}0</th>
             </tr>
         </tbody>
     </table>

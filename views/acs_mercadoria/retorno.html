@@ -36,26 +36,25 @@
                   <th scope="col" class="text-center">Total</th>
                   <th scope="col" class="text-center">Retorno</th>
                   <th scope="col" class="text-center">Total</th>
+          {{if not projeto.venda_finalizada:}}
                   <th scope="col" class="text-center">Opção</th>
+                  {{pass}}
+                  {{if (usuario.id==11)or(usuario.id==1):}}
+                  <th id="noprint" class="text-center">Verificação</th>
+
+                  {{pass}}
                 </tr>
               </thead>
               <tbody>
                   {{nome=""}}
                   {{for row in rows:}}
-                  {{if row.q_pcs>0:}}
-                  {{if nome==row.descricao:}}
-                        {{row.descricao="-----"}}
-                  {{else:}}
-                  {{if (row.quant_pcs_grt>0) or (row.quant_pcs_rfg>0) or (row.quant_pcs_rtr>0):}}
+                 
+                {{if (row.quant_pcs_grt>0) or (row.quant_pcs_rfg>0) or (row.quant_pcs_rtr>0):}}
                 <tr>
                     {{else:}}
                     <tr id="noprint">
                         {{pass}}
-                 
-                        
-                        
-                       
-                        <th><a href="{{=URL('alterar_descricao', args=row.id)}}" class="text-dark">{{=(row.descricao)[0:20]}}</a></th>
+                        <th><a href="{{=URL('alterar_descricao', args=row.id)}}" class="text-dark">{{=(row.descricao.replace("cfrd","").replace("rtnc",""))[0:20]}}</a></th>
                         
                     
                     {{if not projeto.venda_finalizada:}}
@@ -91,11 +90,25 @@
                     </td>
                     {{pass}}
                     <td class="text-center">R$ {{="{:,}".format(round(row.quant_pcs_rtr*row.preco_unitario,1)).replace(",",".")}}0</td>
-                    <th class="text-center"><a class="btn btn-link" href="{{=URL('alterar_retorno', args=row.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-pencil-square-o"></i> </a></th>
+                      
+          {{if not projeto.venda_finalizada:}}
+                    <th class="text-center">
+                      <a class="btn btn-link" href="{{=URL('alterar_retorno', args=row.id)}}" style="color:#3b5998">
+                        <i class="fa fa-fw fa-1x py-1 fa-pencil-square-o"></i> 
+                      </a>
+                      </th>
+                      {{pass}}
+                       {{if (usuario.id==11)or(usuario.id==1):}}
+                  <td id="noprint" class="text-center">
+                    {{if 'rtnc' in row.descricao:}}
+                    <a class="btn btn-link" style="color:#55acee"  href="{{=URL('conferir_retorno', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-check" ></i> </a>
+                    {{else:}}
+                            <a class="btn btn-link" href="{{=URL('conferir_retorno', args=row.id)}}" style="color:#dd4b39"><i class="fa fa-fw fa-1x py-1 fa-square-o"></i> </a>
+                    {{pass}}
+                        </td>
+                  {{pass}}
                 </tr>
                    {{nome=row.descricao}}
-                        {{pass}}
-                        {{pass}}
 {{total_pecas+=row.q_pcs}}
 
 {{total_pecas_gratificacao+=row.quant_pcs_grt}}
@@ -109,6 +122,9 @@
 {{total_pecas_retorno+=row.quant_pcs_rtr}}
 {{total_preco_retorno+=row.quant_pcs_rtr*row.preco_unitario}}
 {{total_custo_retorno+=row.quant_pcs_rtr*row.custo_unitario}}
+                        {{pass}}
+                
+                        {{pass}}
                   {{pass}}
                   <tr>
                     

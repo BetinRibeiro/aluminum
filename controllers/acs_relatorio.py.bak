@@ -59,6 +59,11 @@ def prestacao_venda():
     return locals()
 
 @auth.requires_login()
+def prestacao_venda_sal():
+    projeto = db.projeto(request.args(0, cast=int))
+    return locals()
+
+@auth.requires_login()
 def alterar_ent_said():
     response.view = 'generic.html' # use a generic view
     projeto = db.projeto(request.args(0, cast=int))
@@ -99,8 +104,8 @@ def alterar_ent_said():
     db.projeto.descricao_adiantamento.readable = True
     db.projeto.descricao_adiantamento.writable = True
     
-    db.projeto.venda_finalizada.readable = True
-    db.projeto.venda_finalizada.writable = True
+    db.projeto.venda_finalizada.readable = False
+    db.projeto.venda_finalizada.writable = False
 
     form = SQLFORM(db.projeto, request.args(0, cast=int), deletable=False)
     if form.process().accepted:

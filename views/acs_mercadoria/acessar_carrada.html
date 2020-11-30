@@ -12,9 +12,10 @@
       <div class="row">
         <div class="col-md-12">
           <a class="btn btn-link" href="{{=URL('carradas', args=carrada.projeto)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          {{if not projeto.venda_finalizada:}}
           <a class="btn btn-link" href="{{=URL('adicionar_item_carrada', args=carrada.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar Produto</a>
             <a class="btn btn-link" href="{{=URL('alterar_dados_carrada', args=carrada.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-file-text"></i> Alterar dados da Carrada</a>
-            
+            {{pass}}
         </div>
       </div>
       <div class="row">
@@ -30,14 +31,20 @@
                   <th scope="col" class="text-center">Preço</th>
                   <th scope="col" class="text-center">Total</th>
                   <th scope="col" class="text-center">Margem</th>
-                  <th scope="col" class="text-center">Opção</th>
+          {{if not projeto.venda_finalizada:}}
+                  <th id="noprint" class="text-center">Opção</th>
+                  {{pass}}
+                  {{if (usuario.id==11)or(usuario.id==1):}}
+                  <th id="noprint" class="text-center">Verificação</th>
+
+                  {{pass}}
                 </tr>
               </thead>
               <tbody>
                   {{for row in rows:}}
                 <tr>
                   <th scope="row">{{=row.q_pcs}}</th>
-                  <td>{{=row.descricao}}</td>
+                  <td>{{=row.descricao.replace("cfrd","")}}</td>
                   <td class="text-center">R$ {{="{:,}".format(round(row.custo_unitario)).replace(",",".")}}0</td>
                   <td class="text-center">R$ {{="{:,}".format(round(row.custo_unitario*row.q_pcs)).replace(",",".")}}0</td>
                   <td class="text-center">R$ {{="{:,}".format(round(row.preco_unitario)).replace(",",".")}}0</td>
@@ -54,7 +61,19 @@
                     {{else:}}
                   <td class="text-center text-danger">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></td>                    
                     {{pass}}
-                  <td class="text-center"><a class="btn btn-link" href="{{=URL('alterar_item_carrada', args=row.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-file-text"></i></a></td>
+                  
+          {{if not projeto.venda_finalizada:}}
+                  <td id="noprint" class="text-center"><a class="btn btn-link" href="{{=URL('alterar_item_carrada', args=row.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-file-text"></i></a></td>
+                  {{pass}}
+                   {{if (usuario.id==11)or(usuario.id==1):}}
+                  <td id="noprint" class="text-center">
+                    {{if 'cfrd' in row.descricao:}}
+                    <a class="btn btn-link" style="color:#55acee"  href="{{=URL('conferir', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-check" ></i> </a>
+                    {{else:}}
+                            <a class="btn btn-link" href="{{=URL('conferir', args=row.id)}}" style="color:#dd4b39"><i class="fa fa-fw fa-1x py-1 fa-square-o"></i> </a>
+                    {{pass}}
+                        </td>
+                  {{pass}}
                 </tr>
                   
 {{preco+=row.preco_unitario*row.q_pcs}}
@@ -80,7 +99,7 @@
                     {{else:}}
                   <th class="text-center text-danger">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></th>                    
                     {{pass}}
-                  <td class="text-center">#</td>
+                  <td id="noprint" class="text-center">#</td>
                 </tr>
               </tbody>
             </table>

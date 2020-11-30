@@ -24,9 +24,7 @@ FAÇA SEU PRIMEIRO CADASTRO DE CARRADA
             <table class="table table-sm table-striped">
               <thead class="thead-dark">
                 <tr>
-                  {{if r==7:}}
-                  <th>Verificação</th>
-                  {{pass}}
+                  
                   <th>Descrição</th>
                   <th>Data</th>
                   <th>Q. Peças</th>
@@ -38,18 +36,15 @@ FAÇA SEU PRIMEIRO CADASTRO DE CARRADA
                     {{if not projeto.venda_finalizada:}}
                   <th id="noprint">Alterar</th>
                     {{pass}}
+                  {{if r==7:}}
+                  <th>Verificação</th>
+                  {{pass}}
                 </tr>
               </thead>
               <tbody>
 {{for row in rows:}}
                 <tr>
-                  {{if r==7:}}
-                  {{if row.finalizada:}}
-                  <th><a class="btn btn-link" style="color:#55acee" href="{{=URL('mercadoria','verifica', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-thumbs-up" ></i></a></th>Finalizada
-                  {{else:}}
-                  <th><a class="btn btn-link" style="color:#55acee"  href="{{=URL('mercadoria','verifica', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-thumbs-down text-danger" ></i></a></th>
-                  {{pass}}
-                  {{pass}}
+                  
                   <th>{{=row.descricao}}</th>
                   <th><a href="{{=URL('mercadoria','acesso_item_carrada', args=row.id)}}" >{{=("{}/{}/{}".format(row.data_envio.day,row.data_envio.month,row.data_envio.year))}}</a></th>
                   <td >{{=row.total_pecas}}</td>
@@ -65,6 +60,13 @@ FAÇA SEU PRIMEIRO CADASTRO DE CARRADA
                     {{if not projeto.venda_finalizada:}}
                     <td id="noprint"><a href="{{=URL('mercadoria','alterar_carrada', args=row.id)}}"><i class="fa text-warning fa-exchange" ></i></a></td>
                     {{pass}}
+                  {{if r==7:}}
+                  {{if row.finalizada:}}
+                  <th><a class="btn btn-link" style="color:#55acee" href="{{=URL('mercadoria','verifica', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-check" ></i></a></th>
+                  {{else:}}
+                  <th><a class="btn btn-link" style="color:#55acee"  href="{{=URL('mercadoria','verifica', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-square-o text-danger" ></i></a></th>
+                  {{pass}}
+                  {{pass}}
                 </tr>
 
 {{pcs+=row.total_pecas}}

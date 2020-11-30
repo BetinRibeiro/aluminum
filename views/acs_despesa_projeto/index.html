@@ -26,11 +26,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>DESCRIÇÃO</th>
-                                <th>TOTAL</th>
-                                {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
-                                <th>ALTERAR</th>
-                                {{pass}}
+                                <th>Descrição</th>
+                                <th>Total</th>
+                                <th>Alterar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,11 +41,9 @@
                                     {{=row.descricao}}
                                 </td>
                                 <td>R$ {{="{:,}".format(round(row.total_classe,1)).replace(",",".")}}0</td>
-                                {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
                                 <td>
                                     <a  class="btn btn-link" style="color:#3b5998" href="{{=URL('acesso_despesa', args=[row.id,tipodesp])}}"><i class="fa fa-fw fa-1x py-1 fa-exchange"></i></a>
                                 </td>
-                                {{pass}}
                                 {{listadata+=[a]}}
                                 {{lista+=[row.total_classe]}}
                                 {{a+=1}}
@@ -58,9 +54,6 @@
                                 <th>#</th>
                                 <th>#</th>
                                 <th>R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0</th>
-                                {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
-                                <th></th>
-                                {{pass}}
                             </tr>
                         </tbody>
                     </table>

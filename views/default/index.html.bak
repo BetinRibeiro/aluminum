@@ -35,7 +35,7 @@ ga('send', 'pageview');
 {{include 'web2py_ajax.html'}}
 {{if response.flash:}}
 <div class="alert alert-danger fixed-top" role="alert">
-  {{=response.flash}}.
+  <marquee>{{=response.flash}}.</marquee>
 </div>
 {{else:}}
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -277,6 +277,12 @@ ga('send', 'pageview');
               <input type="email" class="form-control" placeholder="Your e-mail here"> </div>
             <button type="submit" class="btn ml-2 btn-outline-primary">Enviar</button>
           </form>
+        </div>
+        <div class="col-4 col-md-1 align-self-center my-3">
+          <a href="https://belachicsemijoias.com.br/" target="blank">neto e helo</a>
+        </div>
+         <div class="col-4 col-md-1 align-self-center my-3">
+          <a href="https://belachicsemijoias.efficiens.cloud/consig/acesso" target="blank">neto e helo</a>
         </div>
         <div class="col-4 col-md-1 align-self-center my-3">
           <a href="https://www.facebook.com/betin.ribeiro.1" target="blank"><i class="fa fa-fw fa-facebook fa-3x text-white"></i></a>

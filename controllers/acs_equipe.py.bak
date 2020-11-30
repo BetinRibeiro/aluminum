@@ -1,6 +1,20 @@
 # -*- coding: utf-8 -*-
+
+def conferir():
+  response.view = 'generic.html' # use a generic view
+  vendedor = db.vendedor(request.args(0, cast=int))
+  a=False
+  if 'cfrd' in vendedor.nome:
+    a=True
+    vendedor.nome=vendedor.nome.replace('cfrd','')
+  else:
+    vendedor.nome=vendedor.nome+'cfrd'
+  vendedor.update_record()
+  redirect(URL('index', args=vendedor.projeto))
+  return locals()
 @auth.requires_login()
 def index():
+    usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.vendedor.projeto == request.args(0, cast=int)).select(orderby=~db.vendedor.total_vendas)
     if projeto.empresa==17:
@@ -52,8 +66,8 @@ def atualizar_boletos():
             cobrado=False
           id=db.boleto.update_or_insert((db.boleto.id_asaas == row.get("id")),
                            id_asaas=row.get("id"),
-                           projeto=projeto.id,
-                           description=row.get("description"),
+                           #projeto=projeto.id,
+                           #description=row.get("description"),
                            value_total=row.get("value"),
                            status=row.get("status"),
                            due_date=row.get("dueDate"),

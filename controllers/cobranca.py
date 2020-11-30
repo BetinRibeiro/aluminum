@@ -129,6 +129,8 @@ def inserir_registro():
     db.registro_cobranca.sub_venda.writable = False
     db.registro_cobranca.projeto.default = sub_venda.projeto
     db.registro_cobranca.projeto.writable = False
+    db.registro_cobranca.empresa.default = projeto.empresa
+    db.registro_cobranca.empresa.writable = False
     db.registro_cobranca.tipo.default = tipo
     db.registro_cobranca.tipo.writable = False
     db.registro_cobranca.descricao.default = tipo
@@ -148,6 +150,8 @@ def alterar_registro():
     response.view = 'generic.html' # use a generic view
     registro_cobranca = db.registro_cobranca(request.args(0, cast=int))
     tipo = request.args(1)
+    if 'cfrd' in registro_cobranca.descricao:
+      redirect(URL('lista_registros', args=[registro_cobranca.sub_venda,tipo]))
     sub_venda = db.sub_venda(registro_cobranca.sub_venda)
     db.registro_cobranca.id.readable = False
     db.registro_cobranca.id.writable = False
@@ -155,6 +159,7 @@ def alterar_registro():
     db.registro_cobranca.sub_venda.writable = False
     db.registro_cobranca.projeto.readable = False
     db.registro_cobranca.projeto.writable = False
+    db.registro_cobranca.empresa.writable = False
     db.registro_cobranca.tipo.readable = False
     db.registro_cobranca.tipo.writable = False
     if (registro_cobranca.tipo=="Deposito") and (usuario.id!=sub_venda.auth_user):
@@ -323,3 +328,15 @@ def alterar_dados_cobrador():
         if not response.flash:
             response.flash = 'Preencha o formulário!'
     return dict(form=form)
+def conferir():
+  response.view = 'generic.html' # use a generic view
+  registro_cobranca = db.registro_cobranca(request.args(0, cast=int))
+  a=False
+  if 'cfrd' in registro_cobranca.descricao:
+    a=True
+    registro_cobranca.descricao=registro_cobranca.descricao.replace('cfrd','')
+  else:
+    registro_cobranca.descricao=registro_cobranca.descricao+'cfrd'
+  registro_cobranca.update_record()
+  redirect(URL('lista_registros', args=[registro_cobranca.sub_venda,registro_cobranca.tipo]))
+  return locals()

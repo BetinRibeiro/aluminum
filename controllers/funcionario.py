@@ -1,6 +1,21 @@
 # -*- coding: utf-8 -*-
+
+@auth.requires_login()
+def conferir():
+  response.view = 'generic.html' # use a generic view
+  funcionario = db.funcionario(request.args(0, cast=int))
+  a=False
+  if 'cfrd' in funcionario.nome:
+    a=True
+    funcionario.nome=funcionario.nome.replace('cfrd','')
+  else:
+    funcionario.nome=funcionario.nome+'cfrd'
+  funcionario.update_record()
+  redirect(URL('acesso_funcionario', args=[funcionario.projeto,a]))
+  return locals()
 @auth.requires_login()
 def acesso_funcionario():
+    usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.funcionario.projeto == request.args(0, cast=int)).select(orderby=~db.funcionario.vale_saida)
     return locals()
@@ -26,6 +41,8 @@ def alterar_funcionario():
     response.view = 'generic.html' # use a generic view
     funcionario = db.funcionario(request.args(0, cast=int))
     projeto = db.projeto(funcionario.projeto)
+    if 'cfrd' in funcionario.nome:
+      redirect(URL('acesso_funcionario', args=projeto.id))
     db.funcionario.id.readable = False
     db.funcionario.id.writable = False
     

@@ -12,7 +12,9 @@
       <div class="row">
         <div class="col-md-12">
           <a class="btn btn-link" href="{{=URL('acs_projeto','index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          {{if not projeto.finalizado:}}
           <a class="btn btn-link" href="{{=URL('adicionar_carrada', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Adicionar Carrada Nova</a>
+          {{pass}}
         </div>
       </div>
       <div class="row">
@@ -83,3 +85,7 @@
       </div>
     </div>
   </div>
+{{projeto.total_pecas_mercadoria=pecas}}
+{{projeto.total_preco_mercadoria=preco}}
+{{projeto.total_custo_mercadoria=custo}}
+{{projeto.update_record()}}

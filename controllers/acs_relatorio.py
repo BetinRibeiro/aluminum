@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 @auth.requires_login()
 def relatorio_chefe():
     projeto = db.projeto(request.args(0, cast=int))
@@ -104,8 +103,8 @@ def alterar_ent_said():
     db.projeto.descricao_adiantamento.readable = True
     db.projeto.descricao_adiantamento.writable = True
     
-    db.projeto.venda_finalizada.readable = True
-    db.projeto.venda_finalizada.writable = True
+    db.projeto.venda_finalizada.readable = False
+    db.projeto.venda_finalizada.writable = False
 
     form = SQLFORM(db.projeto, request.args(0, cast=int), deletable=False)
     if form.process().accepted:

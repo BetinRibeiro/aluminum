@@ -52,6 +52,8 @@ def alterar_registro():
     response.view = 'generic.html' # use a generic view
     registro_cobranca = db.registro_cobranca(request.args(0, cast=int))
     tipo = request.args(1)
+    if 'cfrd' in registro_cobranca.descricao:
+      redirect(URL('index', args=[registro_cobranca.sub_venda,registro_cobranca.tipo]))
     sub_venda = db.sub_venda(registro_cobranca.sub_venda)
 
     db.registro_cobranca.id.readable = False
@@ -82,3 +84,15 @@ def alterar_registro():
         if not response.flash:
             response.flash = 'Preencha o formulário!'
     return dict(form=form)
+def conferir():
+  response.view = 'generic.html' # use a generic view
+  registro_cobranca = db.registro_cobranca(request.args(0, cast=int))
+  a=False
+  if 'cfrd' in registro_cobranca.descricao:
+    a=True
+    registro_cobranca.descricao=registro_cobranca.descricao.replace('cfrd','')
+  else:
+    registro_cobranca.descricao=registro_cobranca.descricao+'cfrd'
+  registro_cobranca.update_record()
+  redirect(URL('index', args=[registro_cobranca.sub_venda,registro_cobranca.tipo]))
+  return locals()

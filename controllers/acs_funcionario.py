@@ -1,11 +1,26 @@
 # -*- coding: utf-8 -*-
+
+def conferir():
+  response.view = 'generic.html' # use a generic view
+  funcionario = db.funcionario(request.args(0, cast=int))
+  a=False
+  if 'cfrd' in funcionario.nome:
+    a=True
+    funcionario.nome=funcionario.nome.replace('cfrd','')
+  else:
+    funcionario.nome=funcionario.nome+'cfrd'
+  funcionario.update_record()
+  redirect(URL('index', args=funcionario.projeto))
+  return locals()
 def index():
+    usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.funcionario.projeto == request.args(0, cast=int)).select(orderby=~db.funcionario.vale_saida)
     return locals()
 
 def acesso_funcionario():
     funcionario = db.funcionario(request.args(0, cast=int))
+    projeto = db.projeto(funcionario.projeto)    
     rows = db(db.vale_funcionario.funcionario == request.args(0, cast=int)).select(orderby=~db.vale_funcionario.data_vale)
     return locals()
 
@@ -18,6 +33,8 @@ def alterar_funcionario():
     db.funcionario.id.writable = False
     db.funcionario.projeto.readable = False
     db.funcionario.projeto.writable = False
+    if 'cfrd' in funcionario.nome:
+      redirect(URL('index', args=funcionario.projeto))
     usuario = auth.user
     form = SQLFORM(db.funcionario, request.args(0, cast=int), deletable=True)
     if form.process().accepted:

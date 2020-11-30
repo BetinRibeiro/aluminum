@@ -20,7 +20,9 @@
       <div class="row">
         <div class="col-md-12">
           <a class="btn btn-link" href="{{=URL('acs_projeto','index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          {{if not projeto.venda_finalizada:}}
           <a class="btn btn-link" href="{{=URL('adicionar_vendedor', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-user-plus"></i> Adicionar Vendedor no Projeto</a>
+          {{pass}}
         </div>
       </div>
       <div class="row">
@@ -39,6 +41,10 @@
                             {{if not projeto.venda_finalizada:}}
                             <th id="noprint">Opção</th>
                           {{pass}}
+               {{if (usuario.id==11)or(usuario.id==1):}}
+                  <th id="noprint" class="text-center">Verificação</th>
+
+                  {{pass}}
 					  </tr>
 					</thead>
 					<tbody>
@@ -47,7 +53,7 @@
 					  <tr>{{a+=1}}
                           <th>{{=a}}º</th>
                           
-                        <td>{{=row.nome}}</td>
+                        <td>{{=row.nome.replace("cfrd","")}}</td>
                           <td>R$ {{="{:,}".format(round(row.total_vendas,1)).replace(",",".")}}0 {{if row.total_vendas>0:}}- <span><b>{{="{:,}".format(round(row.comissao_venda)).replace(".0","")}}% </b></span>{{pass}}</td>
                            {{comissao=row.total_vendas}}
                           {{if comissao > 0:}}
@@ -66,6 +72,15 @@
                            {{if not projeto.venda_finalizada:}}
                           <td id="noprint"><a href="{{=URL('acessar_venda', args=row.id)}}" class="btn"><i class="fa fa-fw fa-1x py-1 fa-exchange" ></i></a></td>
                           {{pass}}
+              {{if (usuario.id==11)or(usuario.id==1):}}
+                  <td id="noprint" class="text-center">
+                    {{if 'cfrd' in row.nome:}}
+                    <a class="btn btn-link" style="color:#55acee"  href="{{=URL('conferir', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-check" ></i> </a>
+                    {{else:}}
+                            <a class="btn btn-link" href="{{=URL('conferir', args=row.id)}}" style="color:#dd4b39"><i class="fa fa-fw fa-1x py-1 fa-square-o"></i> </a>
+                    {{pass}}
+                        </td>
+                  {{pass}}
 					  </tr>
                          {{if saldo>0:}}
                         {{saldof+=saldo}}
@@ -93,6 +108,9 @@
 					  </tr>
 					</tbody>
 				  </table>
+</div>
+</div>
+</div>
 </div>
  {{if not projeto.venda_finalizada:}}
 {{projeto.total_debito_vendedor=debitof}}

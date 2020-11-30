@@ -45,6 +45,7 @@
                 {{data=rows.last().data_venda}}
             {{pass}}
             {{for row in rows:}}
+          
             <tr>
                 {{if row.data_venda==data:}}
                     {{venda+=row.venda_praso-row.valor_devolvido}}
@@ -54,8 +55,9 @@
                     {{fichas_devolvidas+=row.quant_fichas_devolvidas}}
                     {{valor_devolvido+=row.valor_devolvido}}
                     {{data=row.data_venda}}
+              
                 {{else:}}
-                    {{if venda!=0:}}
+                    {{if venda>=0:}}
                         {{a+=1}}
                         <th>{{=a}}</th>
                         <td>{{=("{}/{}/{}".format(data.day,data.month,data.year))}}</td>
@@ -86,6 +88,7 @@
             </tr>
             {{pass}}
             {{if  len(rows)>1:}}
+                    {{if venda>=0:}}
             <tr>
                 {{a+=1}}
                 <th>{{=a}}</th>
@@ -97,6 +100,7 @@
                 <td>{{=fichas_devolvidas}}</td>
                 <td>R$ {{="{:,}".format(round(valor_devolvido,2)).replace(",",".")}}0</td>
             </tr>
+            {{pass}}
             {{pass}}
             <tr>
                 <th>#</th>

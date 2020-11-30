@@ -14,7 +14,10 @@
       <div class="row">
         <div class="col-md-12">
           <a class="btn btn-link" href="{{=URL('index',args=funcionario.projeto)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          {{if not projeto.venda_finalizada:}}
           <a class="btn btn-link" href="{{=URL('adicionar_vale_caderno', args=funcionario.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar Vale de Caderno</a>
+            <a class="btn btn-link" href="{{=URL('alterar_funcionario', args=funcionario.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Alterar dados do Funcionario</a>
+          {{pass}}
         </div>
       </div>
       <div class="row">
@@ -27,7 +30,9 @@
                   <th scope="col">Data</th>
                   <th scope="col">Descrição</th>
                   <th scope="col" class="text-center">Valor</th>
+          {{if not projeto.venda_finalizada:}}
                   <th scope="col" class="text-center">Opções</th>
+                  {{pass}}
                 </tr>
               </thead>
               <tbody>
@@ -38,7 +43,9 @@
                   <td>{{=("{}/{}/{}".format(row.data_vale.day,row.data_vale.month,row.data_vale.year))}}</td>
                   <td >{{=row.descricao}}</td>
                   <td class="text-center">R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
+          {{if not projeto.venda_finalizada:}}
                   <th class="text-center"><a class="btn btn-link" href="{{=URL('alterar_vale_caderno', args=row.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-pencil-square-o"></i> </a></th>
+                  {{pass}}
                 </tr>
 {{total+=row.valor}}
                   {{pass}}

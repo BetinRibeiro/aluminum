@@ -4,50 +4,53 @@
     <div class="container">
 <h5>{{=empresa.nome}}</h5>
         <div class="row">
-            <div class="col-md-6">
-                 <H3>
-                    Projetos de Venda
-                </H3>
-                 <a class="btn btn-outline-light"  href="{{=URL('default','criar_projeto', args=empresa.id)}}">
-            <i class="fa text-primary fa-plus-square fa-2x" ></i>
-        </a>
-               
-<div class="table-responsive" >
-        <table class="table table-bordered table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">DESCRIÇÃO</th>
-                <th scope="col">VENDA</th>
-               <th scope="col">ALTERAR</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{for row in rows:}}
-                  <tr>
-                    <td><a  href="{{=URL('projeto','acesso_projeto', args=row.id)}}">{{=row.descricao}}</a></td>
-                      <td>R$ {{="{:,}".format(round(row.total_venda_prazo,1)).replace(",",".")}}0</td>
-                    <td><a href="{{=URL('default','alterar_projeto', args=row.id)}}"><i class="fa mr-2 fa-exchange text-warning" ></i></a></td>
-                  </tr>
-                  {{pass}}
-          </tbody>
-        </table>
-      </div>
+{{if usuario.id!=50:}}
+<div class="col-md-6">
+  <H3>
+    Projetos de Venda
+  </H3>
+  <a class="btn btn-outline-light"  href="{{=URL('default','criar_projeto', args=empresa.id)}}">
+    <i class="fa text-primary fa-plus-square fa-2x" ></i>
+  </a>
+  <div class="table-responsive" >
+    <table class="table table-bordered table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">DESCRIÇÃO</th>
+          <th scope="col">VENDA</th>
+          <th scope="col">ALTERAR</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{for row in rows:}}
+        <tr>
+          <td><a  href="{{=URL('projeto','acesso_projeto', args=row.id)}}">{{=row.descricao}}</a></td>
+          <td>R$ {{="{:,}".format(round(row.total_venda_prazo,1)).replace(",",".")}}0</td>
+          <td><a href="{{=URL('default','alterar_projeto', args=row.id)}}"><i class="fa mr-2 fa-exchange text-warning" ></i></a></td>
+        </tr>
+        {{pass}}
+      </tbody>
+    </table>
+  </div>
 {{pass}}
-<hr>{{a=1}}
-                <div class="hidden-xs">
-                    
-                {{if empresa.id==8:}}
-                Usuarios e Login's
-              <ul class="list-group list-group-flush">
-                  {{for ro in rowsuser:}}
-                  <li class="list-group-item">{{=a}} - {{=ro.nome}}</li>
-                  {{a+=1}}
-                  {{pass}}
-                </ul>  
-                {{pass}}
-                    
-                </div>
-      </div>
+  
+{{if usuario.id!=50:}}
+<hr>
+  {{a=1}}
+<div class="hidden-xs">
+  {{if empresa.id==8:}}
+  Usuarios e Login's
+  <ul class="list-group list-group-flush">
+    {{for ro in rowsuser:}}
+    <li class="list-group-item">{{=a}} - {{=ro.nome}}</li>
+    {{a+=1}}
+    {{pass}}
+  </ul>
+  {{pass}}
+  </div>
+          </div>
+{{pass}}
+{{pass}}
             <div class="border border-danger col-md-6">
                 <h3>
                     Despesas Locais
@@ -73,6 +76,7 @@
           </tbody>
         </table>
             </div>
+{{if usuario.id!=50:}}
         {{if empresa.id==8:}}
         <h5>Pagamentos Sistema</h5>
           <div class="table-responsive">
@@ -104,35 +108,36 @@
                   <td>R$ 500,00</td>
                   <td>Quitado</td>
                 </tr>
-                <tr>
-                  <td style=""><a href="https://bit.ly/ALFS-15072020">15/07/2020</a></td>
-                  <td><a href="https://bit.ly/ALFS-15072020">Fazer Pagamento</a></td>
-                  <td><a href="https://bit.ly/ALFS-15072020">R$ 500,00</a></td>
-                  <td><a href="https://bit.ly/ALFS-15072020">Pendente</a></td>
-                </tr>
-                <tr>
-                  <td><a href="https://bit.ly/ALFS-15082020">15/08/2020</a></td>
-              <td><a href="https://bit.ly/ALFS-15082020">à Vencer</a></td>
-                  <td><a href="https://bit.ly/ALFS-15082020">R$ 500,00</a></td>
-                  <td><a href="https://bit.ly/ALFS-15082020">...</a></td>
-                </tr>
-                <tr>
-                  <td>15/09/2020</td>
-                  <td>##</td>
+                  <tr>
+                  <td>15/07/2020</td>
+                  <td>Pago - 15/07/2020</td>
                   <td>R$ 500,00</td>
-                  <td>...</td>
+                  <td>Quitado</td>
+                </tr>
+                
+                <tr>
+                  <td>15/08/2020</td>
+                  <td>Pago - 15/08/2020</td>
+                  <td>R$ 500,00</td>
+                  <td>Quitado</td>
                 </tr>
                 <tr>
-                  <td>15/10/2020</td>
-                  <td>##</td>
+                  <td>01/09/2020</td>
+                  <td>Pago - 01/09/2020</td>
                   <td>R$ 500,00</td>
-                  <td>...</td>
+                  <td>Quitado</td>
                 </tr>
                 <tr>
-                  <td>15/11/2020</td>
-                  <td>##</td>
+                  <td>01/10/2020</td>
+                  <td>Pago - 01/10/2020</td>
                   <td>R$ 500,00</td>
-                  <td>...</td>
+                  <td>Quitado</td>
+                </tr>
+                <tr>
+                  <td>01/11/2020</td>
+                  <td>Pago - 01/11/2020</td>
+                  <td>R$ 200,00</td>
+                  <td>Quitado</td>
                 </tr>
                 <tr>
                   <td>15/12/2020</td>
@@ -147,3 +152,4 @@
       </div>
   </div>
       </div>
+            {{pass}}

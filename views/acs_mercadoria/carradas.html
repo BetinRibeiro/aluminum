@@ -12,7 +12,9 @@
       <div class="row">
         <div class="col-md-12">
           <a class="btn btn-link" href="{{=URL('acs_projeto','index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          {{if not projeto.venda_finalizada:}}
           <a class="btn btn-link" href="{{=URL('adicionar_carrada', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Adicionar Carrada Nova</a>
+          {{pass}}
         </div>
       </div>
       <div class="row">

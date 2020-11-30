@@ -61,7 +61,7 @@
                             {{=row.q_pcs}}
                     </td>
                     <td>
-                            {{=row.descricao}}
+                            {{=row.descricao.replace("cfrd","")}}
                     </td>
                     <td>
                             R$ {{="{:,}".format(round(row.preco_unitario,1)).replace(",",".")}}0
@@ -102,6 +102,15 @@
                       {{if not projeto.venda_finalizada:}}
                     <td id="noprint"><a href="{{=URL('alterar_item_carrada', args=row.id)}}"><i class="fa text-warning fa-exchange" ></i></a></td>
                     {{pass}}{{pass}}
+                  
+              {{if (usuario.id==11)or(usuario.id==1):}}
+                  <td>{{if 'cfrd' in row.descricao:}}
+                    <a class="btn btn-link" style="color:#55acee"  href="{{=URL('conferir', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-check" ></i> </a>
+                    {{else:}}
+                            <a class="btn btn-link" href="{{=URL('conferir', args=row.id)}}" style="color:#dd4b39"><i class="fa fa-fw fa-1x py-1 fa-square-o"></i> </a>
+                    {{pass}}
+                        </td>
+                  {{pass}}
                 </tr>
                         {{pcas+=row.q_pcs}}
                         {{total+=row.preco_unitario*row.q_pcs}}

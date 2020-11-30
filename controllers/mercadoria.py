@@ -27,7 +27,31 @@ def acesso_carradas():
     #retorna todas as variaveis a lista de carradas e o projeto
     return locals()
 #cria carrada
-#chegamos aqui pelo acesso as carradas
+#chegamos aqui pelo acesso as carradas@auth.requires_login()
+def conferir():
+  response.view = 'generic.html' # use a generic view
+  item_carrada = db.item_carrada(request.args(0, cast=int))
+  a=False
+  if 'cfrd' in item_carrada.descricao:
+    a=True
+    item_carrada.descricao=item_carrada.descricao.replace('cfrd','')
+  else:
+    item_carrada.descricao=item_carrada.descricao+'cfrd'
+  item_carrada.update_record()
+  redirect(URL('acesso_item_carrada', args=item_carrada.carrada))
+  return locals()
+def conferir_retorno():
+  response.view = 'generic.html' # use a generic view
+  item_carrada = db.item_carrada(request.args(0, cast=int))
+  a=False
+  if 'rtnc' in item_carrada.descricao:
+    a=True
+    item_carrada.descricao=item_carrada.descricao.replace('rtnc','')
+  else:
+    item_carrada.descricao=item_carrada.descricao+'rtnc'
+  item_carrada.update_record()
+  redirect(URL('acesso_item', args=item_carrada.projeto))
+  return locals()
 @auth.requires_login()
 def criar_carrada():
     response.view = 'generic.html' # use a generic view
@@ -92,7 +116,7 @@ def alterar_carrada():
         db.carrada.finalizada.writable = False
     if carrada.total_pecas>0:
         deletar =False
-        
+
     form = SQLFORM(db.carrada, request.args(0, cast=int), deletable=deletar)
     if form.process().accepted:
         session.flash = 'Atualizado'
@@ -108,7 +132,7 @@ def verifica():
     else:
       carrada.finalizada=True
     carrada.update_record()
-    
+
     return redirect(URL('acesso_carradas', args=carrada.projeto))
 @auth.requires_login()
 def acesso_item_carrada():
@@ -148,7 +172,7 @@ def criar_item_carrada():
         session.flash = 'A venda já foi finalizada'
         redirect(URL('projeto','acesso_projeto', args=projeto.id))
     db.item_carrada.projeto.default = projeto.id
-    
+
     db.item_carrada.carrada.default = carrada.id
     db.item_carrada.carrada.writable = False
 
@@ -181,13 +205,15 @@ def alterar_item_carrada():
     response.view = 'generic.html' # use a generic view
     item_carrada = db.item_carrada(request.args(0, cast=int))
     carrada = db.carrada(item_carrada.carrada)
+    if 'cfrd' in item_carrada.descricao:
+        redirect(URL('acesso_item_carrada', args=carrada.id))
     projeto = db.projeto(carrada.projeto)
     if projeto.venda_finalizada:
         session.flash = 'A venda já foi finalizada'
         redirect(URL('projeto','acesso_projeto', args=projeto.id))
     db.item_carrada.id.readable = False
     db.item_carrada.id.writable = False
-    
+
     db.item_carrada.projeto.default = projeto.id
 
     db.item_carrada.carrada.readable = False
@@ -221,6 +247,7 @@ def alterar_item_carrada():
 
 @auth.requires_login()
 def acesso_item():
+    usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
     rowscarrada = db(db.carrada.projeto == request.args(0, cast=int)).select(orderby=db.carrada.data_envio)
     rows = db(db.item_carrada.projeto==projeto.id).select(orderby=db.item_carrada.descricao)

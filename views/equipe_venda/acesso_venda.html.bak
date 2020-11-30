@@ -27,7 +27,7 @@
  {{if (not projeto.venda_finalizada):}}
 {{if (not row1.cobranca_iniciada):}}
 
-                {{if (usuario.id!=24):}}
+                {{if (usuario.id!=2324):}}
 <div class="row">
     <div class="col-md-6">
             <a class="btn btn-outline-light" href="{{=URL('inserir_venda', args=[vendedor.id,row1.id])}}"><i class="fa text-success fa-plus-square fa-2x"></i></a>
@@ -64,6 +64,9 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
                                 {{row.update_record()}}
                             {{pass}}
                         {{if row.sub_venda == row1.id:}}
+                          {{if not (row.venda_praso>0):}}
+                          
+                          {{else:}}
                             <tr>
                                 {{a+=1}}
                                 {{row.venda_praso=row.venda_praso-row.valor_devolvido}}
@@ -86,7 +89,7 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
                                     {{if not projeto.venda_finalizada:}}
                                     
 {{if (not row1.cobranca_iniciada):}}
-                {{if (usuario.id!=24):}}
+                {{if (usuario.id!=2324):}}
                                     <a href="{{=URL('alterar_venda', args=row.id)}}">{{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}</a>
                                     {{else:}}
                                     {{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}
@@ -104,6 +107,7 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
                                 <td>{{=row.quant_fichas_devolvidas}}</td>
                                 <td>R$ {{="{:,}".format(round(row.valor_devolvido,1)).replace(",",".")}}0</td>
                             </tr>
+                            {{pass}}
                             {{pass}}
                             {{pass}}
                             <th>#</th>

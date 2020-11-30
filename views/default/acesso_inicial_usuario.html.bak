@@ -44,11 +44,13 @@
           </thead>
           <tbody>
             {{for row1 in rowscob:}}
+            {{if not row.cobranca_finalizada:}}
                   <tr>
                     <td><a  href="{{=URL('cobranca','acesso_particao_cobranca', args=row1.id)}}">{{=("{}/{}/{}".format(row1.data_inicio_cobranca.day,row1.data_inicio_cobranca.month,row1.data_inicio_cobranca.year))}}</a></td>
                       <td>{{=row1.primeira_cidade}}</td>
                       <td>R$ {{="{:,}".format(round(row1.total_venda_praso,1)).replace(",",".")}}0</td>
                   </tr>
+{{pass}}
             {{pass}}
           </tbody>
         </table>
@@ -57,7 +59,8 @@
 
 {{else:}}
 <h2>
+     <marquee direction="left">
     <a class="navbar-brand text-danger"> <h6>Você não possui nem um projeto de venda nem cobranças vinculado ao seu login!</h6></a>
-    
+    </marquee>
 </h2>
 {{pass}}

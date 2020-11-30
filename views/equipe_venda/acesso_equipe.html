@@ -27,15 +27,19 @@
 					<thead>
 					  <tr>
                           <th>#</th>
-						<th>NOME</th>
-						<th>VENDA</th>
-						<th>COMISSÃO</th>
-						<th>VALE</th>
-                          <th>CADERNO</th>
-                          <th>SALDO</th>
+						<th>Nome</th>
+						<th>Venda</th>
+						<th>Comissão</th>
+						<th>Vale</th>
+                          <th>Caderno</th>
+                          <th>Saldo</th>
                             {{if not projeto.venda_finalizada:}}
-                            <th id="noprint">ALTERAR</th>
+                            <th id="noprint">Alterar</th>
                           {{pass}}
+              {{if (usuario.id==11)or(usuario.id==1):}}
+                  <th id="noprint" class="text-center">Verificação</th>
+
+                  {{pass}}
 					  </tr>
 					</thead>
 					<tbody>
@@ -44,7 +48,7 @@
 					  <tr>{{a+=1}}
                           <td>{{=a}}º</td>
                           
-                        <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">{{=row.nome}}</a></td>
+                        <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">{{=row.nome.replace("cfrd","")}}</a></td>
                           <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,}".format(round(row.total_vendas,1)).replace(",",".")}}0 {{if row.total_vendas>0:}}- <span><b>{{="{:,}".format(round(row.comissao_venda)).replace(".0","")}}% </b></span></a>{{pass}}</td>
                            {{comissao=row.total_vendas}}
                           {{if comissao > 0:}}
@@ -63,6 +67,15 @@
                            {{if not projeto.venda_finalizada:}}
                           <td id="noprint"><a href="{{=URL('alterar_vendedor', args=row.id)}}" class="btn"><i class="fa text-warning fa-exchange" ></i></a></td>
                           {{pass}}
+              
+                   {{if (usuario.id==11)or(usuario.id==1):}}
+              <th id="noprint" class="text-center">
+                
+                              {{if 'cfrd' in row.nome:}}
+                    <a class="btn btn-link" style="color:#55acee"  href="{{=URL('conferir', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-check" ></i> </a>
+                    {{else:}}
+                            <a class="btn btn-link" href="{{=URL('conferir', args=row.id)}}" style="color:#dd4b39"><i class="fa fa-fw fa-1x py-1 fa-square-o"></i> </a>
+                    {{pass}}</th> {{pass}}
 					  </tr>
                          {{if saldo>0:}}
                         {{saldof+=saldo}}

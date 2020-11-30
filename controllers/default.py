@@ -39,6 +39,10 @@ def acesso_inicial_usuario():
     #define empresa como nula
     empresa =None
     #caso o uruario esteja vinculado a alguma empresa
+    if auth.user.id==50:
+      
+        redirect(URL('usuario','fsprojetos',args=8))
+ 
     if usuario_empresa:
         #busca a empresa que o funcionario esta vinculado
         empresa = db.empresa(usuario_empresa.empresa)

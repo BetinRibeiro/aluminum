@@ -14,7 +14,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_projeto','index', args=projeto.id)}}"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_chefe','acesso_projeto', args=projeto.id)}}"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
             {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
           <a class="btn btn-link" href="{{=URL('criar_classe_despesa', args=[projeto.id,tipodesp])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar {{=tipodesp}}</a>{{pass}}
         </div>
@@ -26,11 +26,9 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>DESCRIÇÃO</th>
-                                <th>TOTAL</th>
-                                {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
-                                <th>ALTERAR</th>
-                                {{pass}}
+                                <th>Descrição</th>
+                                <th>Total</th>
+                                <th>Alterar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,11 +41,9 @@
                                     {{=row.descricao}}
                                 </td>
                                 <td>R$ {{="{:,}".format(round(row.total_classe,1)).replace(",",".")}}0</td>
-                                {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
                                 <td>
                                     <a  class="btn btn-link" style="color:#3b5998" href="{{=URL('acesso_despesa', args=[row.id,tipodesp])}}"><i class="fa fa-fw fa-1x py-1 fa-exchange"></i></a>
                                 </td>
-                                {{pass}}
                                 {{listadata+=[a]}}
                                 {{lista+=[row.total_classe]}}
                                 {{a+=1}}
@@ -58,9 +54,6 @@
                                 <th>#</th>
                                 <th>#</th>
                                 <th>R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0</th>
-                                {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
-                                <th></th>
-                                {{pass}}
                             </tr>
                         </tbody>
                     </table>

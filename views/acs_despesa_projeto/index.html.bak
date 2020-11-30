@@ -14,7 +14,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <a class="btn btn-link" href="{{=URL('acs_projeto','index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_projeto','index', args=projeto.id)}}"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
             {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
           <a class="btn btn-link" href="{{=URL('criar_classe_despesa', args=[projeto.id,tipodesp])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar {{=tipodesp}}</a>{{pass}}
         </div>
@@ -45,7 +45,7 @@
                                 <td>R$ {{="{:,}".format(round(row.total_classe,1)).replace(",",".")}}0</td>
                                 {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
                                 <td>
-                                    <a href="{{=URL('acesso_despesa', args=[row.id,tipodesp])}}"><i class="fa text-warning fa-exchange" ></i></a>
+                                    <a  class="btn btn-link" style="color:#3b5998" href="{{=URL('acesso_despesa', args=[row.id,tipodesp])}}"><i class="fa fa-fw fa-1x py-1 fa-exchange"></i></a>
                                 </td>
                                 {{pass}}
                                 {{listadata+=[a]}}

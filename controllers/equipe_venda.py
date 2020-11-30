@@ -1,5 +1,18 @@
 # -*- coding: utf-8 -*-
-# tente algo como
+
+@auth.requires_login()
+def conferir():
+  response.view = 'generic.html' # use a generic view
+  vendedor = db.vendedor(request.args(0, cast=int))
+  a=False
+  if 'cfrd' in vendedor.nome:
+    a=True
+    vendedor.nome=vendedor.nome.replace('cfrd','')
+  else:
+    vendedor.nome=vendedor.nome+'cfrd'
+  vendedor.update_record()
+  redirect(URL('acesso_equipe', args=[vendedor.projeto,a]))
+  return locals()
 @auth.requires_login()
 def acesso_equipe():
     usuario = auth.user
@@ -30,6 +43,8 @@ def alterar_vendedor():
     response.view = 'generic.html' # use a generic view
     vendedor = db.vendedor(request.args(0, cast=int))
     projeto = db.projeto(vendedor.projeto)
+    if 'cfrd' in vendedor.nome:
+      redirect(URL('acesso_equipe', args=projeto.id))
     db.vendedor.id.readable = False
     db.vendedor.id.writable = False
 

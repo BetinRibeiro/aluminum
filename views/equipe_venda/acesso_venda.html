@@ -64,6 +64,23 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
                                 {{row.update_record()}}
                             {{pass}}
                         {{if row.sub_venda == row1.id:}}
+                          {{if not (row.venda_praso>0):}}
+                          {{row.venda_praso=row.venda_praso-row.valor_devolvido}}
+                                {{row.quant_fichas=row.quant_fichas-row.quant_fichas_devolvidas}}
+                                {{caderno+=row.vale_caderno}}
+                                {{prazo+=row.venda_praso}}
+                                {{fichas+=row.quant_fichas}}
+                                {{fichas_devolvidas+=row.quant_fichas_devolvidas}}
+                                {{entrada+=row.entradas_venda}}
+                                {{devolucao+=row.valor_devolvido}}
+                                
+                                {{acaderno+=row.vale_caderno}}
+                                {{aprazo+=row.venda_praso}}
+                                {{afichas+=row.quant_fichas}}
+                                {{afichas_devolvidas+=row.quant_fichas_devolvidas}}
+                                {{aentrada+=row.entradas_venda}}
+                                {{adevolucao+=row.valor_devolvido}}
+                          {{else:}}
                             <tr>
                                 {{a+=1}}
                                 {{row.venda_praso=row.venda_praso-row.valor_devolvido}}
@@ -104,6 +121,7 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
                                 <td>{{=row.quant_fichas_devolvidas}}</td>
                                 <td>R$ {{="{:,}".format(round(row.valor_devolvido,1)).replace(",",".")}}0</td>
                             </tr>
+                            {{pass}}
                             {{pass}}
                             {{pass}}
                             <th>#</th>

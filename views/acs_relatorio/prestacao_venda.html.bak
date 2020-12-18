@@ -62,7 +62,7 @@
                     {{if venda_vista!=0:}}
                     <li class="list-group-item d-flex justify-content-between">
                         
-                            {{if venda_vista>0:}}
+                            {{if venda_vista>0 and media_pecas>0:}}
                             {{media_pecas=venda_vista/media_pecas}}
                             {{pass}}
                             {{if venda_vista>0:}}
@@ -188,7 +188,7 @@
     <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between">
             <div>{{saldoq=0}}
-                <h6 class="my-0">Comissão Venda à Praso</h6> <small class="text-muted">R$ {{="{:,}".format(round(projeto.total_venda_prazo)).replace(",",".")}}0 - {{=projeto.comissao_praso}}%</small>
+                <h6 class="my-0">Comissão Venda à Prazo</h6> <small class="text-muted">R$ {{="{:,}".format(round(projeto.total_venda_prazo)).replace(",",".")}}0 - {{=projeto.comissao_praso}}%</small>
                 {{comissaop=0}}
                 {{if projeto.total_venda_prazo>0:}}
                 {{comissaop=projeto.total_venda_prazo*projeto.comissao_praso/100}}

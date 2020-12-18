@@ -44,7 +44,7 @@ def alterar_vendedor():
     vendedor = db.vendedor(request.args(0, cast=int))
     projeto = db.projeto(vendedor.projeto)
     if 'cfrd' in vendedor.nome:
-      redirect(URL('acesso_funcionario', args=projeto.id))
+      redirect(URL('acesso_equipe', args=projeto.id))
     db.vendedor.id.readable = False
     db.vendedor.id.writable = False
 
@@ -110,6 +110,10 @@ def inserir_venda():
 def alterar_venda():
     response.view = 'generic.html' # use a generic view
     venda = db.venda(request.args(0, cast=int))
+    vendedor =  db.vendedor(venda.vendedor)
+    projeto =  db.projeto(vendedor.projeto)
+    descricao =str(venda.descricao_devolucao)
+    valor =(venda.venda_praso)
     vendedor = db.vendedor(venda.vendedor)
     db.venda.id.readable = False
     db.venda.id.writable = False
@@ -125,10 +129,20 @@ def alterar_venda():
     if usuario.id==2324:
         session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
         redirect(URL('acesso_venda', args=vendedor.id))
+    #CASO NÃO SEJA O CHEFE DE EQUIPE NÃO PODERÁ ALTERAR A OBSERVAÇÃO
+    if (usuario.id!=projeto.auth_user) and(usuario.id!=1):
+      db.venda.descricao_devolucao.readable = True
+      db.venda.descricao_devolucao.writable = False
 
-    form = SQLFORM(db.venda, request.args(0, cast=int), deletable=True)
+    form = SQLFORM(db.venda, request.args(0, cast=int), deletable=False)
     if form.process().accepted:
         session.flash = 'Atualizado'
+        #CASO NÃO SEJA O CHEFE DE EQUIPE IRÁ SALVAR O LOG DE ALTERAÇÃO COM O VALOR ANTERIOR
+        if (usuario.id!=projeto.auth_user) and(usuario.id!=1):
+          venda = db.venda(request.args(0, cast=int))
+          descricao = str(descricao)+" "+str(auth.user.id)+"-A-"+str(venda.data_venda)+"V"+str(valor)
+          venda.descricao_devolucao=descricao
+          venda.update_record()
         redirect(URL('acesso_venda', args=vendedor.id))
     elif form.errors:
         response.flash = 'Erros no formulário!'

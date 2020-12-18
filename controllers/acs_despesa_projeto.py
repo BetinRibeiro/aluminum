@@ -1,10 +1,19 @@
 # -*- coding: utf-8 -*-
 @auth.requires_login()
 def index():
+    usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
     tipo= (request.args(1))
     rows = db((db.classe_despesa.projeto == projeto.id) & (db.classe_despesa.tipo == tipo)).select()
     tipodesp=(request.args(1, auth.user))
+    return locals()
+  
+def mudar_classe():
+    response.view = 'generic.html' # use a generic view
+    classe_despesa = db.classe_despesa(request.args(0, cast=int))
+    classe_despesa.projeto=80
+    classe_despesa.update_record()
+    redirect(URL('index', args=[classe_despesa.projeto,"Despesa_Venda"]))
     return locals()
 @auth.requires_login()
 def criar_classe_despesa():

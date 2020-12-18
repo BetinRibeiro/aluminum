@@ -61,7 +61,7 @@
                             {{=row.q_pcs}}
                     </td>
                     <td>
-                            {{=row.descricao.replace("cfrd","")}}
+                            {{=row.descricao.replace("cfrd","").replace("rtnc","")}}
                     </td>
                     <td>
                             R$ {{="{:,}".format(round(row.preco_unitario,1)).replace(",",".")}}0

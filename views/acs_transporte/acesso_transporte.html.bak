@@ -13,7 +13,7 @@
           </a>
           
           <a class="btn btn-link" href="{{=URL('alterar_transporte', args=transporte.id)}}" style="color:#3b5998">
-            <i class="fa fa-fw fa-1x py-1 fa-plus"></i> Alterar dados
+            <i class="fa fa-fw fa-1x py-1 fa-square-o "></i> Alterar dados
           </a>
           <a class="btn btn-link" href="{{=URL('inserir_km', args=transporte.id)}}" style="color:#3b5998">
             <i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar novo km
@@ -31,7 +31,7 @@
                   <th scope="col">Descricao</th>
                   <th scope="col">km</th>
                   <th scope="col">Rodado</th>
-                  <th scope="col">Consumo</th>
+                  <th scope="col">Custo/Km</th>
                   <th scope="col">Opção</th>
                 </tr>
               </thead>
@@ -52,10 +52,11 @@
                   {{total_rodado=row.km-kmanterior}}
                   <td>{{=total_rodado}}</td>
                   {{consumo=row.valor_conbustivel}}
-                  {{if (total_rodado>0) and (consumo):}}
-                  <td>{{=total_rodado/consumo}}</td>
+                  {{if (total_rodado>0) and (consumo>0):}}
+                  {{custokm=consumo/total_rodado}}
+                  <td>R$ {{="{:,}".format(round(custokm,2)).replace(",",".")}}0</td>
                   {{else:}}
-                  <td>{{=consumo}}</td>
+                  <td>R$ 0.00</td>
                   {{pass}}
                   <td><a class="btn btn-link" href="{{=URL('alterar_km', args=row.id)}}" style="color:#3b5998" >
                     <i class="fa fa-fw fa-1x py-1 fa-th-list"></i>

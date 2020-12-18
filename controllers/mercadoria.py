@@ -250,7 +250,7 @@ def acesso_item():
     usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
     rowscarrada = db(db.carrada.projeto == request.args(0, cast=int)).select(orderby=db.carrada.data_envio)
-    rows = db(db.item_carrada.projeto==projeto.id).select(orderby=db.item_carrada.descricao)
+    rows = db(db.item_carrada.projeto==projeto.id).select(orderby=db.item_carrada.id)
     return locals()
 
 @auth.requires_login()

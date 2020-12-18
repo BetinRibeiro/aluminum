@@ -1,10 +1,19 @@
 # -*- coding: utf-8 -*-
 @auth.requires_login()
 def index():
+    usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
     tipo= (request.args(1))
     rows = db((db.classe_despesa.projeto == projeto.id) & (db.classe_despesa.tipo == tipo)).select()
     tipodesp=(request.args(1, auth.user))
+    return locals()
+  
+def mudar_classe():
+    response.view = 'generic.html' # use a generic view
+    classe_despesa = db.classe_despesa(request.args(0, cast=int))
+    classe_despesa.projeto=82
+    classe_despesa.update_record()
+    redirect(URL('index', args=[classe_despesa.projeto,"Despesa_Venda"]))
     return locals()
 @auth.requires_login()
 def criar_classe_despesa():
@@ -21,12 +30,12 @@ def criar_classe_despesa():
     usuario = auth.user
     if usuario.id==2544:
         session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
-        redirect(URL('acessar_despesa', args=[projeto.id,tipodesp]))
+        redirect(URL('index', args=[projeto.id,tipodesp]))
 
     form = SQLFORM(db.classe_despesa).process()
     if form.accepted:
         response.flash = 'Formulario aceito'
-        redirect(URL('acessar_despesa', args=[projeto.id,tipodesp]))
+        redirect(URL('index', args=[projeto.id,tipodesp]))
     elif form.errors:
         response.flash = 'Formulario não aceito'
     else:
@@ -50,12 +59,12 @@ def alterar_classe_despesa():
     usuario = auth.user
     if usuario.id==25434:
         session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
-        redirect(URL('acessar_despesa', args=[projeto.id,tipodesp]))
+        redirect(URL('index', args=[projeto.id,tipodesp]))
 
     form = SQLFORM(db.classe_despesa, request.args(0, cast=int), deletable=True)
     if form.process().accepted:
         session.flash = 'Atualizado'
-        redirect(URL('acessar_despesa', args=[projeto.id,tipodesp]))
+        redirect(URL('index', args=[projeto.id,tipodesp]))
     elif form.errors:
         response.flash = 'Erros no formulário!'
     else:

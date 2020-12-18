@@ -34,8 +34,9 @@
         <ul class="navbar-nav ml-auto">
         {{if desbloqueado:}}
             <li class="nav-item"> <a class="nav-link" href="{{=URL('dados_cobrador', args=sub_venda.id)}}">Cobrador</a> </li>
-            <li class="nav-item  text-muted"> <a class="btn btn-outline-primary" href="{{=URL('lista_registros', args=[sub_venda.id,'Deposito_extra'])}}">Depositos Extra</a></li>
+            
             {{pass}}
+            <li class="nav-item  text-muted"> <a class="btn btn-outline-primary" href="{{=URL('lista_registros', args=[sub_venda.id,'Deposito_extra'])}}">Depositos Extra</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{=URL('lista_registros', args=[sub_venda.id,'Recebimento'])}}">Recebimento</a> </li>
             <li class="nav-item"> <a class="nav-link" href="{{=URL('lista_registros', args=[sub_venda.id,'Deposito'])}}">Depositos</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{=URL('lista_registros', args=[sub_venda.id,'Caderno'])}}">Caderno</a></li>
@@ -128,7 +129,7 @@
                   <span class="text-muted">R$ {{="{:,}".format(round(sub_venda.total_caderno_cobrador,1)).replace(",",".")}}0</span>
                 </li>
                   
-                  {{if  caixa>=0:}}
+                  {{if  caixa>=-1:}}
                 <li class="list-group-item d-flex justify-content-between ">
                   <div>
                     <h6 class="my-0">Caixa</h6>

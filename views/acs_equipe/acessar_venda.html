@@ -122,6 +122,9 @@
                                 <td>R$ {{="{:,}".format(round(row.entradas_venda,1)).replace(",",".")}}0</td>
                                 <td>{{=row.quant_fichas_devolvidas}}</td>
                                 <td>R$ {{="{:,}".format(round(row.valor_devolvido,1)).replace(",",".")}}0</td>
+                              {{if usuario.id==1:}}
+                              <td><a class="btn btn-link" href="{{=URL('trocar', args=row.id)}}">Trocar</a></td>
+                              {{pass}}
                             </tr>
                             {{pass}}
                             {{pass}}

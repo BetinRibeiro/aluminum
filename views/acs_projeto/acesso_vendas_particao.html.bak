@@ -14,7 +14,6 @@
 {{tentrada=0}}
 {{tfichas_devolvidas=0}}
 {{tvalor_devolvido=0}}
-{{=rows[0]}}
 <div class="py-5">
     <div class="container">
       <div class="row">
@@ -36,10 +35,7 @@
                 <tr>
                   <th scope="col" >#</th>
                   <th scope="col" >Data</th>
-                  <th scope="col" class="text-center">Venda</th>
                   <th scope="col" class="text-center">Fichas</th>
-                  <th scope="col" class="text-center">Caderno</th>
-                  <th scope="col" class="text-center">Entrada</th>
                 </tr>
               </thead>
               <tbody>
@@ -62,10 +58,7 @@
                         {{a+=1}}
                         <th>{{=a}}</th>
                         <td>{{=("{}/{}/{}".format(data.day,data.month,data.year))}}</td>
-                        <td class="text-center">R$ {{="{:,}".format(round(venda,2)).replace(",",".")}}0</td>
                         <td class="text-center">{{=fichas_venda}}</td>
-                        <td class="text-center">R$ {{="{:,}".format(round(caderno,2)).replace(",",".")}}0</td>
-                        <td class="text-center">R$ {{="{:,}".format(round(entrada,2)).replace(",",".")}}0</td>
                     {{pass}}
                 
                     {{data=row.data_venda}}
@@ -91,19 +84,15 @@
                 {{a+=1}}
                 <th>{{=a}}</th>
                 <td>{{=("{}/{}/{}".format(data.day,data.month,data.year))}}</td>
-                <td class="text-center">R$ {{="{:,}".format(round(venda,2)).replace(",",".")}}0</td>
                 <td class="text-center">{{=fichas_venda}}</td>
-                <td class="text-center">R$ {{="{:,}".format(round(caderno,2)).replace(",",".")}}0</td>
-                <td class="text-center">R$ {{="{:,}".format(round(entrada,2)).replace(",",".")}}0</td>
             </tr>
             {{pass}}
             <tr>
                 <th>#</th>
                 <th></th>
-                <th class="text-center">R$ {{="{:,}".format(round(tvenda,2)).replace(",",".")}}0</th>
                 <th class="text-center">{{=tfichas_venda}}</th>
-                <th class="text-center">R$ {{="{:,}".format(round(tcaderno,2)).replace(",",".")}}0</th>
-                <th class="text-center">R$ {{="{:,}".format(round(tentrada,2)).replace(",",".")}}0</th>
+                <th class="text-center">#################</th>
+                <th class="text-center">#################</th>
                 
             </tr>
               </tbody>

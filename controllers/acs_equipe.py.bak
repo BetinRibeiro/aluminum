@@ -12,6 +12,14 @@ def conferir():
   vendedor.update_record()
   redirect(URL('index', args=vendedor.projeto))
   return locals()
+
+def trocar():
+  response.view = 'generic.html' # use a generic view
+  venda = db.venda(request.args(0, cast=int))
+  venda.sub_venda=105
+  venda.update_record()
+  redirect(URL('acessar_venda', args=venda.vendedor))
+  return locals()
 @auth.requires_login()
 def index():
     usuario=auth.user
@@ -151,6 +159,8 @@ def alterar_vendedor():
     response.view = 'generic.html' # use a generic view
     vendedor = db.vendedor(request.args(0, cast=int))
     projeto = db.projeto(vendedor.projeto)
+    if 'cfrd' in vendedor.nome:
+      redirect(URL('index', args=projeto.id))
     db.vendedor.id.readable = False
     db.vendedor.id.writable = False
 

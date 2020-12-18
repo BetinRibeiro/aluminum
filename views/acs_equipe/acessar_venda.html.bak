@@ -22,11 +22,11 @@
     <div class="row">
         <div class="col-md-6">
             <a class="btn btn-link" href="{{=URL('index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          {{if not projeto.venda_finalizada:}}
           {{if not 'cfrd' in vendedor.nome:}}
             <a class="btn btn-link" href="{{=URL('alterar_vendedor', args=vendedor.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-cog"></i> Alterar dados do Vendedor</a>
           {{pass}}
           
-          {{if not projeto.venda_finalizada:}}
           {{if (usuario.id==11)or(usuario.id==1):}}
                   <td id="noprint" class="text-center">
                     {{if 'cfrd' in vendedor.nome:}}
@@ -122,6 +122,9 @@
                                 <td>R$ {{="{:,}".format(round(row.entradas_venda,1)).replace(",",".")}}0</td>
                                 <td>{{=row.quant_fichas_devolvidas}}</td>
                                 <td>R$ {{="{:,}".format(round(row.valor_devolvido,1)).replace(",",".")}}0</td>
+                              {{if usuario.id==167543:}}
+                              <td><a class="btn btn-link" href="{{=URL('trocar', args=row.id)}}">Trocar</a></td>
+                              {{pass}}
                             </tr>
                             {{pass}}
                             {{pass}}

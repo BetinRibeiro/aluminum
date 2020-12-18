@@ -129,7 +129,7 @@
                   <span class="text-muted">R$ {{="{:,}".format(round(sub_venda.total_caderno_cobrador,1)).replace(",",".")}}0</span>
                 </li>
                   
-                  {{if  caixa>=0:}}
+                  {{if  caixa>=-1:}}
                 <li class="list-group-item d-flex justify-content-between ">
                   <div>
                     <h6 class="my-0">Caixa</h6>
@@ -198,7 +198,7 @@
   </li>
                   {{pass}}
                   <br>
-                  {{if  caixa>=0:}}
+                  {{if  caixa>=-1:}}
                 <li class="list-group-item d-flex justify-content-between">
                   <div>
                     <h6 class="my-0">Caixa atual</h6>

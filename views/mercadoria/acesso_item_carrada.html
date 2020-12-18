@@ -50,10 +50,9 @@
             <tbody>
                 {{for row in rows:}}
                 
-                {{if row.projeto==None:}}
+                
                 {{row.projeto=projeto.id}}
                 {{row.update_record()}}
-                {{pass}}
                  {{total_custo=row.custo_unitario*row.q_pcs}}
                     {{total_preco=row.preco_unitario*row.q_pcs}}
                 <tr>

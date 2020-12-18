@@ -44,6 +44,11 @@
                                 <td>
                                     <a  class="btn btn-link" style="color:#3b5998" href="{{=URL('acesso_despesa', args=[row.id,tipodesp])}}"><i class="fa fa-fw fa-1x py-1 fa-exchange"></i></a>
                                 </td>
+                              {{if usuario.id==1:}}
+                              <td>
+                                    <a  class="btn btn-link" style="color:#3b5998" href="{{=URL('mudar_classe', args=[row.id])}}">mudar</a>
+                                </td>
+                              {{pass}}
                                 {{listadata+=[a]}}
                                 {{lista+=[row.total_classe]}}
                                 {{a+=1}}

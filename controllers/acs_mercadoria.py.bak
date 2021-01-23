@@ -39,6 +39,7 @@ def carradas():
 def acessar_carrada():
     usuario=auth.user
     carrada = db.carrada(request.args(0, auth.user))
+    projeto = db.projeto(carrada.projeto)
     rows = db(db.item_carrada.carrada==carrada.id).select()
     return locals()
 

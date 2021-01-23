@@ -4,6 +4,9 @@ def index():
     data=request.now
     empresa = db.empresa(db.empresa.auth_user==auth.user.id)
     usuario=auth.user
+    if usuario.id==1:
+      #redireciona para pagina de usuario)
+            redirect(URL('default','index'))
     usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
     #caso não tenha nem uma empresa o usuario pode estar vinculado a
     #algum projeto ou sub venda pode ser (chefe ou cobrador)

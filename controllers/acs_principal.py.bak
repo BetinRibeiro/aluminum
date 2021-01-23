@@ -191,3 +191,9 @@ def alterar_pagamento():
 def lista_empresas():
     rows = db(db.empresa).select(orderby=db.empresa.nome)
     return locals()
+
+
+@auth.requires_membership('admin')
+def bloqueio_verificacao():
+    projeto = db.projeto(request.args(0, cast=int))
+    return locals()

@@ -96,7 +96,7 @@ def alterar_dados_carrada():
             db.carrada.descricao.readable = True
             db.carrada.descricao.writable = False
     deletar =True
-    if carrada.total_pecas>0:
+    if (carrada.total_pecas>1000):
         deletar =False
         
     form = SQLFORM(db.carrada, request.args(0, cast=int), deletable=deletar)

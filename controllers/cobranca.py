@@ -5,6 +5,7 @@ def acessar_cobrancas():
   
     usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
+    
     rows = db(db.sub_venda.projeto == request.args(0, cast=int)).select(orderby=db.sub_venda.data_inicio_cobranca)
     for row in rows:
         sum = db.venda.venda_praso.sum()-db.venda.valor_devolvido.sum()
@@ -16,7 +17,12 @@ def acessar_cobrancas():
     return locals()
 @auth.requires_login()
 def acesso_particao_cobranca():
+    quant_cobrancas = db(db.sub_venda.auth_user==auth.user.id).count()
     sub_venda = db.sub_venda(request.args(0, cast=int))
+    usuario=auth.user
+    #se for ramon redireciona para a proxima cobranca
+    if usuario.id==47:
+      sub_venda = db.sub_venda(121)
     desbloqueado=True
     if auth.user.id==sub_venda.auth_user:
         desbloqueado=False

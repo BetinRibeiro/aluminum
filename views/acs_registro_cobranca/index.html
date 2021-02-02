@@ -116,7 +116,7 @@
 
     btnElement.onclick = function(){
      var busca= inputElement.value;
-        window.location.href = "{{=URL('lista_registros', args=[sub_venda.id,tipo])}}"+"/"+busca
+        window.location.href = "{{=URL('index', args=[sub_venda.id,tipo])}}"+"/"+busca
 
     }
 

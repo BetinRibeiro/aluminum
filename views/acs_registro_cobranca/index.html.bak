@@ -53,7 +53,7 @@
                   <th>{{=a}}</th>
                     {{a+=1}}
                   <td>{{=("{}/{}/{}".format(row.data_inicio.day,row.data_inicio.month,row.data_inicio.year))}}</td>
-                  <td>{{=row.descricao}}</td>
+                  <td>{{=row.descricao.replace('cfrd','')}}</td>
                   <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
                     {{if not (dataontem>=row.data_inicio) or(usuario.id!=sub_venda.auth_user):}}
                   {{if (usuario.id!=10):}}

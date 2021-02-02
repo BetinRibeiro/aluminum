@@ -4838,3 +4838,5 @@
 [2021-01-16 20:50:07] EDIT aluminum/controllers/cobranca.py: -1
 [2021-01-16 20:54:57] EDIT aluminum/controllers/cobranca.py: 2
 [2021-01-16 20:55:04] EDIT aluminum/controllers/cobranca.py: -1
+[2021-01-26 18:43:16] EDIT aluminum/controllers/acs_principal.py: 0
+[2021-01-26 18:45:57] EDIT aluminum/views/acs_registro_cobranca/index.html: 0

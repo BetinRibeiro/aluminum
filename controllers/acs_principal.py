@@ -4,7 +4,7 @@ def index():
     data=request.now
     empresa = db.empresa(db.empresa.auth_user==auth.user.id)
     usuario=auth.user
-    if usuario.id==1:
+    if usuario.id==16543:
       #redireciona para pagina de usuario)
             redirect(URL('default','index'))
     usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)

@@ -70,13 +70,11 @@ def acesso_inicial():
         #empresa.id
         redirect(URL('usuario','fsprojetos',args=empresa.id))
     #caso seja hiago vai listar todos os projetos da empresa fs
-    if (auth.user.id==11)or(auth.user.id==10):
+    if (auth.user.id==11):
         empresa = db.empresa(8)
         #empresa.id
         redirect(URL('usuario','fsprojetos',args=empresa.id))
-    if auth.user.id==10:
-        empresa = db.empresa(8)
-        redirect(URL('usuario','fsprojetos',args=empresa.id))
+    
     #caso não tenha nem uma empresa o usuario pode estar vinculado a
     #algum projeto ou sub venda pode ser (chefe ou cobrador)
     if not empresa:

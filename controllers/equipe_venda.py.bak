@@ -138,7 +138,7 @@ def alterar_venda():
     if form.process().accepted:
         session.flash = 'Atualizado'
         #CASO NÃO SEJA O CHEFE DE EQUIPE IRÁ SALVAR O LOG DE ALTERAÇÃO COM O VALOR ANTERIOR
-        if (usuario.id!=projeto.auth_user) and(usuario.id!=1):
+        if (usuario.id!=1):
           venda = db.venda(request.args(0, cast=int))
           descricao = str(descricao)+" "+str(auth.user.id)+"-A-"+str(venda.data_venda)+"V"+str(valor)
           venda.descricao_devolucao=descricao

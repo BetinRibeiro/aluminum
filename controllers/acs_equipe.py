@@ -16,6 +16,7 @@ def conferir():
 def trocar():
   response.view = 'generic.html' # use a generic view
   venda = db.venda(request.args(0, cast=int))
+  #132 partição geral 14 dede
   venda.sub_venda=132
   venda.update_record()
   redirect(URL('acessar_venda', args=venda.vendedor))

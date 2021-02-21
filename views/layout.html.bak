@@ -28,6 +28,7 @@
     <!-- All JavaScript at the bottom, except for Modernizr which enables
          HTML5 elements & feature detects -->
     <script src="{{=URL('static','js/modernizr-2.8.3.min.js')}}"></script>
+    <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.css"/>
     <!-- Favicons -->
     {{include 'web2py_ajax.html'}} <!-- this includes jquery.js, calendar.js/.css and web2py.js -->
     {{block head}}{{end}}
@@ -45,7 +46,7 @@
 a:hover{font:20px "verdana"; color:black; text-decoration:underline;}
     }
       </style>
-    <div>{{=response.flash or ''}}</div>
+    <div class="w2p_flash alert alert-dismissable">{{=response.flash or ''}}</div>
     <!-- Navbar ======================================= -->
     <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
         <a class="navbar-brand" href="https://rogoberto.pythonanywhere.com/aluminum/#acesso">Aluminum</a>

@@ -140,9 +140,9 @@ def alterar_venda():
         #CASO NÃO SEJA O CHEFE DE EQUIPE IRÁ SALVAR O LOG DE ALTERAÇÃO COM O VALOR ANTERIOR
         if (usuario.id!=1):
           venda = db.venda(request.args(0, cast=int))
-          descricao = str(descricao)+" "+str(auth.user.id)+"-A-"+str(venda.data_venda)+"V"+str(valor)
-          venda.descricao_devolucao=descricao
-          venda.update_record()
+          #descricao = str(descricao)+" "+str(auth.user.id)+"-A-"+str(venda.data_venda)+"V"+str(valor)
+          #venda.descricao_devolucao=descricao
+          #venda.update_record()
         redirect(URL('acesso_venda', args=vendedor.id))
     elif form.errors:
         response.flash = 'Erros no formulário!'

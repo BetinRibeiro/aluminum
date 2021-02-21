@@ -123,7 +123,9 @@
                                 <td>{{=row.quant_fichas_devolvidas}}</td>
                                 <td>R$ {{="{:,}".format(round(row.valor_devolvido,1)).replace(",",".")}}0</td>
                               {{if usuario.id==1:}}
+{{if (not row1.cobranca_iniciada):}}
                               <td><a class="btn btn-link" href="{{=URL('trocar', args=row.id)}}">Trocar</a></td>
+                              {{pass}}
                               {{pass}}
                             </tr>
                             {{pass}}

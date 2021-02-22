@@ -1,0 +1,632 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.RuntimeError'> File /home/rogoberto/web2py/applications/aluminum/databases/c8b669d15150d7109e5f7ab36744a5b7_projeto.table appears corrupted"
+p3
+sS'layer'
+p4
+S'/home/rogoberto/web2py/applications/aluminum/models/db.py'
+p5
+sS'code'
+p6
+S'<code object <module> at 0x7fd6ba0c23b0, file "/home/rogoberto/web2py/applications/aluminum/models/db.py", line 7>'
+p7
+sS'snapshot'
+p8
+(dp9
+S'exception'
+p10
+(dp11
+S'__getslice__'
+p12
+S"<method-wrapper '__getslice__' of exceptions.RuntimeError object>"
+p13
+sS'__str__'
+p14
+S"<method-wrapper '__str__' of exceptions.RuntimeError object>"
+p15
+sS'__reduce__'
+p16
+S'<built-in method __reduce__ of exceptions.RuntimeError object>'
+p17
+sS'__dict__'
+p18
+S'{}'
+p19
+sS'message'
+p20
+S"'File /home/rogoberto/web2py/applications/aluminu...09e5f7ab36744a5b7_projeto.table appears corrupted'"
+p21
+sS'__sizeof__'
+p22
+S'<built-in method __sizeof__ of exceptions.RuntimeError object>'
+p23
+sS'__init__'
+p24
+S"<method-wrapper '__init__' of exceptions.RuntimeError object>"
+p25
+sS'__setattr__'
+p26
+S"<method-wrapper '__setattr__' of exceptions.RuntimeError object>"
+p27
+sS'__reduce_ex__'
+p28
+S'<built-in method __reduce_ex__ of exceptions.RuntimeError object>'
+p29
+sS'__new__'
+p30
+S'<built-in method __new__ of type object>'
+p31
+sS'__format__'
+p32
+S'<built-in method __format__ of exceptions.RuntimeError object>'
+p33
+sS'__class__'
+p34
+S"<type 'exceptions.RuntimeError'>"
+p35
+sS'__doc__'
+p36
+S"'Unspecified run-time error.'"
+p37
+sS'__getitem__'
+p38
+S"<method-wrapper '__getitem__' of exceptions.RuntimeError object>"
+p39
+sS'__setstate__'
+p40
+S'<built-in method __setstate__ of exceptions.RuntimeError object>'
+p41
+sS'__getattribute__'
+p42
+S"<method-wrapper '__getattribute__' of exceptions.RuntimeError object>"
+p43
+sS'args'
+p44
+S"('File /home/rogoberto/web2py/applications/aluminu...09e5f7ab36744a5b7_projeto.table appears corrupted',)"
+p45
+sS'__subclasshook__'
+p46
+S'<built-in method __subclasshook__ of type object>'
+p47
+sS'__unicode__'
+p48
+S'<built-in method __unicode__ of exceptions.RuntimeError object>'
+p49
+sS'__delattr__'
+p50
+S"<method-wrapper '__delattr__' of exceptions.RuntimeError object>"
+p51
+sS'__repr__'
+p52
+S"<method-wrapper '__repr__' of exceptions.RuntimeError object>"
+p53
+sS'__hash__'
+p54
+S"<method-wrapper '__hash__' of exceptions.RuntimeError object>"
+p55
+ssS'evalue'
+p56
+S'File /home/rogoberto/web2py/applications/aluminum/databases/c8b669d15150d7109e5f7ab36744a5b7_projeto.table appears corrupted'
+p57
+sS'request'
+p58
+cgluon.html
+XML_unpickle
+p59
+(S's\xedg\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">ajax</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">application</td><td style="vertical-align:top;">:</td><td><div>aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cid</td><td style="vertical-align:top;">:</td><td><div>c894742533117</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">client</td><td style="vertical-align:top;">:</td><td><div>177.37.224.149</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">controller</td><td style="vertical-align:top;">:</td><td><div>appadmin</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_admin</td><td style="vertical-align:top;">:</td><td><div>177.37.224.149-de08e068-8f19-479f-9404-e9a8b6a68507<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_agrosystem</td><td style="vertical-align:top;">:</td><td><div>177.37.224.149-3e1ae3ab-2ce7-4119-b84b-72d2c643bd34<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_aluminum</td><td style="vertical-align:top;">:</td><td><div>177.37.224.149-35e3d840-0b33-4e54-9819-acca7f24e271<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_prodigy</td><td style="vertical-align:top;">:</td><td><div>177.37.224.149-548b77f8-9414-4b3f-b481-f51266c361e0<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">env</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">CONTENT_LENGTH</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">CONTENT_TYPE</td><td style="vertical-align:top;">:</td><td><div>application/x-www-form-urlencoded; charset=UTF-8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">DOCUMENT_ROOT</td><td style="vertical-align:top;">:</td><td><div>/usr/local/openresty/nginx/html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTPS</td><td style="vertical-align:top;">:</td><td><div>on</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT</td><td style="vertical-align:top;">:</td><td><div>*/*</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_ENCODING</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate, br</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_LANGUAGE</td><td style="vertical-align:top;">:</td><td><div>pt-BR,pt;q=0.9</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CONNECTION</td><td style="vertical-align:top;">:</td><td><div>close</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CONTENT_TYPE</td><td style="vertical-align:top;">:</td><td><div>application/x-www-form-urlencoded; charset=UTF-8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_COOKIE</td><td style="vertical-align:top;">:</td><td><div>_ga=GA1.2.1826198659.1609012104; session_id_agrosystem=177.37.224.149-3e1ae3ab-2ce7-4119-b84b-72d2c643bd34; session_id_admin=177.37.224.149-de08e068-8f19-479f-9404-e9a8b6a68507; _gid=GA1.2.454375942.1613914302; session_id_aluminum=177.37.224.149-35e3d840-0b33-4e54-9819-acca7f24e271; session_id_prodigy=177.37.224.149-548b77f8-9414-4b3f-b481-f51266c361e0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_HOST</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_REFERER</td><td style="vertical-align:top;">:</td><td><div>https://rogoberto.pythonanywhere.com/admin/default/edit/aluminum/models/db.py?id=models__db__py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_SEC_FETCH_DEST</td><td style="vertical-align:top;">:</td><td><div>empty</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_SEC_FETCH_MODE</td><td style="vertical-align:top;">:</td><td><div>cors</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_SEC_FETCH_SITE</td><td style="vertical-align:top;">:</td><td><div>same-origin</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_USER_AGENT</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_WEB2PY_COMPONENT_ELEMENT</td><td style="vertical-align:top;">:</td><td><div>c894742533117</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_WEB2PY_COMPONENT_LOCATION</td><td style="vertical-align:top;">:</td><td><div>https://rogoberto.pythonanywhere.com/admin/default/edit/aluminum/models/db.py?id=models__db__py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_X_FORWARDED_FOR</td><td style="vertical-align:top;">:</td><td><div>177.37.224.149</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_X_REAL_IP</td><td style="vertical-align:top;">:</td><td><div>177.37.224.149</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_X_REQUESTED_WITH</td><td style="vertical-align:top;">:</td><td><div>XMLHttpRequest</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">PATH_INFO</td><td style="vertical-align:top;">:</td><td><div>/aluminum/appadmin/hooks</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">QUERY_STRING</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_ADDR</td><td style="vertical-align:top;">:</td><td><div>10.0.0.124</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_PORT</td><td style="vertical-align:top;">:</td><td><div>44810</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_METHOD</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_URI</td><td style="vertical-align:top;">:</td><td><div>/aluminum/appadmin/hooks</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SCRIPT_NAME</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_NAME</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PORT</td><td style="vertical-align:top;">:</td><td><div>443</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PROTOCOL</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;/home/rogoberto/web2py/applications/welcome/&#x27;, &#x27;/home/rogoberto/web2py/applications/admin/&#x27;, &#x27;/home/rogoberto/web2py/applications/agrosystem/&#x27;, &#x27;/home/rogoberto/web2py/applications/prodigy/&#x27;, &#x27;/home/rogoberto/web2py/applications/aluminum/&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">content_length</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">content_type</td><td style="vertical-align:top;">:</td><td><div>application/x-www-form-urlencoded; charset=UTF-8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">document_root</td><td style="vertical-align:top;">:</td><td><div>/usr/local/openresty/nginx/html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept</td><td style="vertical-align:top;">:</td><td><div>*/*</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_encoding</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate, br</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_language</td><td style="vertical-align:top;">:</td><td><div>pt-BR,pt;q=0.9</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_connection</td><td style="vertical-align:top;">:</td><td><div>close</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_content_type</td><td style="vertical-align:top;">:</td><td><div>application/x-www-form-urlencoded; charset=UTF-8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cookie</td><td style="vertical-align:top;">:</td><td><div>_ga=GA1.2.1826198659.1609012104; session_id_agrosystem=177.37.224.149-3e1ae3ab-2ce7-4119-b84b-72d2c643bd34; session_id_admin=177.37.224.149-de08e068-8f19-479f-9404-e9a8b6a68507; _gid=GA1.2.454375942.1613914302; session_id_aluminum=177.37.224.149-35e3d840-0b33-4e54-9819-acca7f24e271; session_id_prodigy=177.37.224.149-548b77f8-9414-4b3f-b481-f51266c361e0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_host</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_referer</td><td style="vertical-align:top;">:</td><td><div>https://rogoberto.pythonanywhere.com/admin/default/edit/aluminum/models/db.py?id=models__db__py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_sec_fetch_dest</td><td style="vertical-align:top;">:</td><td><div>empty</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_sec_fetch_mode</td><td style="vertical-align:top;">:</td><td><div>cors</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_sec_fetch_site</td><td style="vertical-align:top;">:</td><td><div>same-origin</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_user_agent</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_web2py_component_element</td><td style="vertical-align:top;">:</td><td><div>c894742533117</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_web2py_component_location</td><td style="vertical-align:top;">:</td><td><div>https://rogoberto.pythonanywhere.com/admin/default/edit/aluminum/models/db.py?id=models__db__py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_x_forwarded_for</td><td style="vertical-align:top;">:</td><td><div>177.37.224.149</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_x_real_ip</td><td style="vertical-align:top;">:</td><td><div>177.37.224.149</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_x_requested_with</td><td style="vertical-align:top;">:</td><td><div>XMLHttpRequest</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">https</td><td style="vertical-align:top;">:</td><td><div>on</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_py2</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>35.173.69.207</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td><div>blue-liveweb2</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>localhost</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path_info</td><td style="vertical-align:top;">:</td><td><div>/aluminum/appadmin/hooks</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">query_string</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_addr</td><td style="vertical-align:top;">:</td><td><div>10.0.0.124</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_port</td><td style="vertical-align:top;">:</td><td><div>44810</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_method</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_uri</td><td style="vertical-align:top;">:</td><td><div>/aluminum/appadmin/hooks</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">script_name</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_name</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_port</td><td style="vertical-align:top;">:</td><td><div>443</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_protocol</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi.node</td><td style="vertical-align:top;">:</td><td><div>blue-liveweb2</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi.version</td><td style="vertical-align:top;">:</td><td><div>2.0.17.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi_node</td><td style="vertical-align:top;">:</td><td><div>blue-liveweb2</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi_version</td><td style="vertical-align:top;">:</td><td><div>2.0.17.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_path</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.17.1-stable+timestamp.2018.08.06.01.02.56</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.errors</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi_file__bin_user_wsgi_wrapper.ErrorLogFile object at 0x7fd6c1fa0c10&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;built-in function uwsgi_sendfile&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.input</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi._Input object at 0x7fd6c33afea0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multiprocess</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multithread</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.url_scheme</td><td style="vertical-align:top;">:</td><td><div>https</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_errors</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi_file__bin_user_wsgi_wrapper.ErrorLogFile object at 0x7fd6c1fa0c10&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;built-in function uwsgi_sendfile&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_input</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi._Input object at 0x7fd6c33afea0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multiprocess</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multithread</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_url_scheme</td><td style="vertical-align:top;">:</td><td><div>https</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">extension</td><td style="vertical-align:top;">:</td><td><div>html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">folder</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py/applications/aluminum/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">function</td><td style="vertical-align:top;">:</td><td><div>hooks</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">global_settings</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;/home/rogoberto/web2py/applications/welcome/&#x27;, &#x27;/home/rogoberto/web2py/applications/admin/&#x27;, &#x27;/home/rogoberto/web2py/applications/agrosystem/&#x27;, &#x27;/home/rogoberto/web2py/applications/prodigy/&#x27;, &#x27;/home/rogoberto/web2py/applications/aluminum/&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_py2</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>35.173.69.207</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td><div>blue-liveweb2</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>localhost</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.17.1-stable+timestamp.2018.08.06.01.02.56</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_https</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_local</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_restful</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_scheduler</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_shell</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">method</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">now</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2021, 2, 21, 17, 0, 23, 94983)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_args</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_extension</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">url</td><td style="vertical-align:top;">:</td><td><div>/aluminum/appadmin/hooks</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">utcnow</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2021, 2, 21, 17, 0, 23, 95005)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi</td><td style="vertical-align:top;">:</td><td><div>&lt;gluon.main.LazyWSGI object at 0x7fd6ba969690&gt;</div></td></tr></table></div>'
+tRp60
+sS'frames'
+p61
+(lp62
+(dp63
+S'file'
+p64
+S'/home/rogoberto/web2py/gluon/restricted.py'
+p65
+sS'dump'
+p66
+(dp67
+S'environment'
+p68
+S"{'A': <class 'gluon.html.A'>, 'ANY_OF': <class 'gluon.validators.ANY_OF'>, 'ASSIGNJS': <function ASSIGNJS>, 'AppConfig': <function AppConfig>, 'Auth': <class 'gluon.tools.Auth'>, 'B': <class 'gluon.html.B'>, 'BEAUTIFY': <class 'gluon.html.BEAUTIFY'>, 'BODY': <class 'gluon.html.BODY'>, 'BR': <class 'gluon.html.BR'>, 'BUTTON': <class 'gluon.html.BUTTON'>, ...}"
+p69
+sS'ccode'
+p70
+S'<code object <module> at 0x7fd6ba0c23b0, file "/...b2py/applications/aluminum/models/db.py", line 7>'
+p71
+ssS'lnum'
+p72
+I219
+sS'lines'
+p73
+(dp74
+I214
+S'    if environment is None:'
+p75
+sI215
+S'        environment = {}'
+p76
+sI216
+S"    environment['__file__'] = layer"
+p77
+sI217
+S"    environment['__name__'] = '__restricted__'"
+p78
+sI218
+S'    try:'
+p79
+sI219
+S'        exec(ccode, environment)'
+p80
+sI220
+S'    except HTTP:'
+p81
+sI221
+S'        raise'
+p82
+sI222
+S'    except RestrictedError:'
+p83
+sI223
+S'        # do not encapsulate (obfuscate) the original RestrictedError'
+p84
+ssS'call'
+p85
+S'(ccode=<code object <module> at 0x7fd6ba0c23b0, file "/...b2py/applications/aluminum/models/db.py", line 7>, environment={\'A\': <class \'gluon.html.A\'>, \'ANY_OF\': <class \'gluon.validators.ANY_OF\'>, \'ASSIGNJS\': <function ASSIGNJS>, \'AppConfig\': <function AppConfig>, \'Auth\': <class \'gluon.tools.Auth\'>, \'B\': <class \'gluon.html.B\'>, \'BEAUTIFY\': <class \'gluon.html.BEAUTIFY\'>, \'BODY\': <class \'gluon.html.BODY\'>, \'BR\': <class \'gluon.html.BR\'>, \'BUTTON\': <class \'gluon.html.BUTTON\'>, ...}, layer=\'/home/rogoberto/web2py/applications/aluminum/models/db.py\', scode=<code object <module> at 0x7fd6ba0c23b0, file "/...b2py/applications/aluminum/models/db.py", line 7>)'
+p86
+sS'func'
+p87
+S'restricted'
+p88
+sa(dp89
+g64
+S'/home/rogoberto/web2py/applications/aluminum/models/db.py'
+p90
+sg66
+(dp91
+S'builtinformat'
+p92
+S'<built-in function format>'
+p93
+ssg72
+I235
+sg73
+(dp94
+I230
+S"                Field('total_debito_quitacao_vendedores', 'double', writable=False, readable=False , notnull=True, default=0),"
+p95
+sI231
+S''
+sI232
+S"                Field('dias_cobrando', 'integer', writable=False, readable=False , notnull=True, default=0),"
+p96
+sI233
+S"                Field('venda_finalizada', 'boolean', writable=False, readable=False, default=False),"
+p97
+sI234
+S"                Field('bloqueio_chefe', 'boolean', writable=True, readable=False, default=False),"
+p98
+sI235
+S"                format='%(descricao)s')"
+p99
+sI236
+S''
+sI237
+S"db.define_table('carrada',"
+p100
+sI238
+S"                Field('projeto','reference projeto', label='Equipe'),"
+p101
+sI239
+S'                Field(\'data_envio\', \'date\', label="Data", default=request.now, requires = IS_DATE(format=(\'%d-%m-%Y\'))),'
+p102
+ssg85
+S'()'
+p103
+sg87
+S'<module>'
+p104
+sa(dp105
+g64
+S'/home/rogoberto/web2py/gluon/packages/dal/pydal/base.py'
+p106
+sg66
+(dp107
+S'fields'
+p108
+S'(<pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, ...)'
+p109
+sS'self'
+p110
+S'<DAL uri="sqlite://storage.sqlite">'
+p111
+sS'tablename'
+p112
+S"'projeto'"
+p113
+sS'kwargs'
+p114
+S"{'format': '%(descricao)s'}"
+p115
+sS'table'
+p116
+S'undefined'
+p117
+sS'self.lazy_define_table'
+p118
+S'<bound method DAL.lazy_define_table of <DAL uri="sqlite://storage.sqlite">>'
+p119
+ssg72
+I590
+sg73
+(dp120
+I585
+S'        if self._lazy_tables:'
+p121
+sI586
+S'            if tablename not in self._LAZY_TABLES or redefine:'
+p122
+sI587
+S'                self._LAZY_TABLES[tablename] = (tablename, fields, kwargs)'
+p123
+sI588
+S'            table = None'
+p124
+sI589
+S'        else:'
+p125
+sI590
+S'            table = self.lazy_define_table(tablename, *fields, **kwargs)'
+p126
+sI591
+S'        if tablename not in self.tables:'
+p127
+sI592
+S'            self.tables.append(tablename)'
+p128
+sI593
+S'        return table'
+p129
+sI594
+S''
+ssg85
+S'(self=<DAL uri="sqlite://storage.sqlite">, tablename=\'projeto\', *fields=(<pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, ...), **kwargs={\'format\': \'%(descricao)s\'})'
+p130
+sg87
+S'define_table'
+p131
+sa(dp132
+g64
+S'/home/rogoberto/web2py/gluon/packages/dal/pydal/base.py'
+p133
+sg66
+(dp134
+S'polymodel'
+p135
+S'None'
+p136
+ssg72
+I624
+sg73
+(dp137
+I619
+S'            try:'
+p138
+sI620
+S'                GLOBAL_LOCKER.acquire()'
+p139
+sI621
+S'                self._adapter.create_table('
+p140
+sI622
+S'                    table, migrate=migrate,'
+p141
+sI623
+S'                    fake_migrate=fake_migrate,'
+p142
+sI624
+S'                    polymodel=polymodel)'
+p143
+sI625
+S'            finally:'
+p144
+sI626
+S'                GLOBAL_LOCKER.release()'
+p145
+sI627
+S'        else:'
+p146
+sI628
+S'            table._dbt = None'
+p147
+ssg85
+S'(self=<DAL uri="sqlite://storage.sqlite">, tablename=\'projeto\', *fields=(<pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, <pydal.objects.Field object>, ...), **kwargs={\'format\': \'%(descricao)s\'})'
+p148
+sg87
+S'lazy_define_table'
+p149
+sa(dp150
+g64
+S'/home/rogoberto/web2py/gluon/packages/dal/pydal/adapters/base.py'
+p151
+sg66
+(dp152
+S'self'
+p153
+S'<pydal.adapters.sqlite.SQLite object>'
+p154
+sS'args'
+p155
+S'(<Table projeto (id, empresa, descricao, adiantam...dias_cobrando, venda_finalizada, bloqueio_chefe)>,)'
+p156
+sS'self.migrator'
+p157
+S'<pydal.migrator.Migrator object>'
+p158
+sS'self.migrator.create_table'
+p159
+S'<bound method Migrator.create_table of <pydal.migrator.Migrator object>>'
+p160
+sS'kwargs'
+p161
+S"{'fake_migrate': True, 'migrate': True, 'polymodel': None}"
+p162
+ssg72
+I798
+sg73
+(dp163
+I800
+S'    def _drop_table_cleanup(self, table):'
+p164
+sI801
+S'        super(SQLAdapter, self)._drop_table_cleanup(table)'
+p165
+sI802
+S'        if table._dbt:'
+p166
+sI793
+S''
+sI794
+S'    def bulk_insert(self, table, items):'
+p167
+sI795
+S'        return [self.insert(table, item) for item in items]'
+p168
+sI796
+S''
+sI797
+S'    def create_table(self, *args, **kwargs):'
+p169
+sI798
+S'        return self.migrator.create_table(*args, **kwargs)'
+p170
+sI799
+S''
+ssg85
+S"(self=<pydal.adapters.sqlite.SQLite object>, *args=(<Table projeto (id, empresa, descricao, adiantam...dias_cobrando, venda_finalizada, bloqueio_chefe)>,), **kwargs={'fake_migrate': True, 'migrate': True, 'polymodel': None})"
+p171
+sg87
+S'create_table'
+p172
+sa(dp173
+g64
+S'/home/rogoberto/web2py/gluon/packages/dal/pydal/migrator.py'
+p174
+sg66
+(dp175
+S'table'
+p176
+S'<Table projeto (id, empresa, descricao, adiantam...dias_cobrando, venda_finalizada, bloqueio_chefe)>'
+p177
+sS'table._dbt'
+p178
+S"'/home/rogoberto/web2py/applications/aluminum/dat...es/c8b669d15150d7109e5f7ab36744a5b7_projeto.table'"
+p179
+sS'builtinRuntimeError'
+p180
+S"<type 'exceptions.RuntimeError'>"
+p181
+ssg72
+I299
+sg73
+(dp182
+I294
+S"            tfile = self.file_open(table._dbt, 'rb')"
+p183
+sI295
+S'            try:'
+p184
+sI296
+S'                sql_fields_old = pickle.load(tfile)'
+p185
+sI297
+S'            except EOFError:'
+p186
+sI298
+S'                self.file_close(tfile)'
+p187
+sI299
+S"                raise RuntimeError('File %s appears corrupted' % table._dbt)"
+p188
+sI300
+S'            self.file_close(tfile)'
+p189
+sI301
+S'            # add missing rnames'
+p190
+sI302
+S'            for key, item in sql_fields_old.items():'
+p191
+sI303
+S'                tmp = sql_fields.get(key)'
+p192
+ssg85
+S'(self=<pydal.migrator.Migrator object>, table=<Table projeto (id, empresa, descricao, adiantam...dias_cobrando, venda_finalizada, bloqueio_chefe)>, migrate=True, fake_migrate=True, polymodel=None)'
+p193
+sg87
+g172
+sasS'pyver'
+p194
+S'Python 2.7.12: /usr/local/bin/uwsgi (prefix: /usr)'
+p195
+sS'session'
+p196
+g59
+(S's\x98\x00\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div>'
+tRp197
+sS'etype'
+p198
+S"<type 'exceptions.RuntimeError'>"
+p199
+sS'date'
+p200
+S'Sun Feb 21 17:00:23 2021'
+p201
+sS'response'
+p202
+g59
+(S'sL\x1b\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">body</td><td style="vertical-align:top;">:</td><td><div>&lt;cStringIO.StringO object at 0x7fd6ba0a9928&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_aluminum</td><td style="vertical-align:top;">:</td><td><div>177.37.224.149-35e3d840-0b33-4e54-9819-acca7f24e271<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div>/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">delimiters</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>{{</div></td></tr><tr><td><div>}}</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">files</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">form_label_separator</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">formstyle</td><td style="vertical-align:top;">:</td><td><div>bootstrap4_inline</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generic_patterns</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">google_analytics_id</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">headers</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">X-Powered-By</td><td style="vertical-align:top;">:</td><td><div>web2py</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">menu</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">meta</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">author</td><td style="vertical-align:top;">:</td><td><div>Your Name &lt;you@example.com&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">description</td><td style="vertical-align:top;">:</td><td><div>a cool new app</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generator</td><td style="vertical-align:top;">:</td><td><div>Web2py Web Framework</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">keywords</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>web2py</div></td></tr><tr><td><div>python</div></td></tr><tr><td><div>framework</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">models_to_run</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>^\\w+\\.py$</div></td></tr><tr><td><div>^appadmin/\\w+\\.py$</div></td></tr><tr><td><div>^appadmin/hooks/\\w+\\.py$</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">postprocessing</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_client</td><td style="vertical-align:top;">:</td><td><div>177.37.224.149</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_compression_level</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_expires</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_data_name</td><td style="vertical-align:top;">:</td><td><div>session_data_aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_file</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;/home/rogoberto/web2py/applications/aluminum/sessions/11f/0f4/177.37.224.149-35e3d840-0b33-4e54-9819-acca7f24e271&#x27;, mode &#x27;rb+&#x27; at 0x7fd6ba9b3780&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_filename</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py/applications/aluminum/sessions/177.37.224.149-35e3d840-0b33-4e54-9819-acca7f24e271</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_hash</td><td style="vertical-align:top;">:</td><td><div>38e09c31f19ab12de3e047456d1dadbf</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id</td><td style="vertical-align:top;">:</td><td><div>177.37.224.149-35e3d840-0b33-4e54-9819-acca7f24e271</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_name</td><td style="vertical-align:top;">:</td><td><div>session_id_aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_locked</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_masterapp</td><td style="vertical-align:top;">:</td><td><div>aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_new</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_storage_type</td><td style="vertical-align:top;">:</td><td><div>file</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">show_toolbar</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">status</td><td style="vertical-align:top;">:</td><td><div>200</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">view</td><td style="vertical-align:top;">:</td><td><div>appadmin/hooks.html</div></td></tr></table></div>'
+tRp203
+sS'locals'
+p204
+(dp205
+S'rtablename'
+p206
+S"'auth_user'"
+p207
+sS'referenced'
+p208
+S"'auth_user'"
+p209
+sS'dbpath'
+p210
+S"'/home/rogoberto/web2py/applications/aluminum/databases'"
+p211
+sS'migrate'
+p212
+S'True'
+p213
+sS'constraint_name'
+p214
+S"'projeto_auth_user__constraint'"
+p215
+sS'table'
+p216
+S'<Table projeto (id, empresa, descricao, adiantam...dias_cobrando, venda_finalizada, bloqueio_chefe)>'
+p217
+sS'query'
+p218
+S'\'CREATE TABLE "projeto"(\\n    "id" INTEGER PRIMARY...alizada" CHAR(1),\\n    "bloqueio_chefe" CHAR(1)\\n);\''
+p219
+sS'real_referenced'
+p220
+S'\'"auth_user"\''
+p221
+sS'postcreation_fields'
+p222
+S'[]'
+p223
+sS'field_type'
+p224
+S"'boolean'"
+p225
+sS'field'
+p226
+S'<pydal.objects.Field object>'
+p227
+sS'self'
+p228
+S'<pydal.migrator.Migrator object>'
+p229
+sS'type_name'
+p230
+S"'reference'"
+p231
+sS'tablename'
+p232
+S"'projeto'"
+p233
+sS'not_null'
+p234
+S"'NOT NULL DEFAULT 0'"
+p235
+sS'ftype'
+p236
+S"'CHAR(1)'"
+p237
+sS'rtable'
+p238
+S'<Table auth_user (id, first_name, last_name, ema...ration_key, reset_password_key, registration_id)>'
+p239
+sS'id_fieldname'
+p240
+S'\'"id"\''
+p241
+sS'polymodel'
+p242
+S'None'
+p243
+sS'ftype_info'
+p244
+S'{\'constraint_name\': \'"projeto_auth_user__constraint"\', \'field_name\': \'"auth_user"\', \'foreign_key\': \'"auth_user" ("id")\', \'index_name\': \'"auth_user__idx"\', \'null\': \'\', \'on_delete_action\': \'CASCADE\', \'unique\': \'\'}'
+p245
+sS'rfieldname'
+p246
+S"'id'"
+p247
+sS'tfile'
+p248
+S'<pydal.contrib.portalocker.LockedFile object>'
+p249
+sS'db'
+p250
+S'<DAL uri="sqlite://storage.sqlite">'
+p251
+sS'fake_migrate'
+p252
+g213
+sS'sql_fields'
+p253
+S'{\'adiantamento\': {\'length\': 512, \'notnull\': True, \'raw_rname\': \'adiantamento\', \'rname\': \'"adiantamento"\', \'sortable\': 4, \'sql\': \'DOUBLE NOT NULL\', \'type\': \'double\', \'unique\': False}, \'auth_user\': {\'length\': 512, \'notnull\': False, \'raw_rname\': \'auth_user\', \'rname\': \'"auth_user"\', \'sortable\': 6, \'sql\': \'INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  \', \'type\': \'reference auth_user\', \'unique\': False}, \'bloqueio_chefe\': {\'length\': 512, \'notnull\': False, \'raw_rname\': \'bloqueio_chefe\', \'rname\': \'"bloqueio_chefe"\', \'sortable\': 66, \'sql\': \'CHAR(1)\', \'type\': \'boolean\', \'unique\': False}, \'comissao_cobranca\': {\'length\': 512, \'notnull\': True, \'raw_rname\': \'comissao_cobranca\', \'rname\': \'"comissao_cobranca"\', \'sortable\': 12, \'sql\': \'DOUBLE NOT NULL\', \'type\': \'double\', \'unique\': False}, \'comissao_praso\': {\'length\': 512, \'notnull\': True, \'raw_rname\': \'comissao_praso\', \'rname\': \'"comissao_praso"\', \'sortable\': 11, \'sql\': \'DOUBLE NOT NULL\', \'type\': \'double\', \'unique\': False}, \'comissao_vista\': {\'length\': 512, \'notnull\': True, \'raw_rname\': \'comissao_vista\', \'rname\': \'"comissao_vista"\', \'sortable\': 10, \'sql\': \'DOUBLE NOT NULL\', \'type\': \'double\', \'unique\': False}, \'descricao\': {\'length\': 512, \'notnull\': False, \'raw_rname\': \'descricao\', \'rname\': \'"descricao"\', \'sortable\': 3, \'sql\': \'CHAR(512)\', \'type\': \'string\', \'unique\': False}, \'descricao_adiantamento\': {\'length\': 32768, \'notnull\': False, \'raw_rname\': \'descricao_adiantamento\', \'rname\': \'"descricao_adiantamento"\', \'sortable\': 5, \'sql\': \'TEXT\', \'type\': \'text\', \'unique\': False}, \'descricao_devolucao_dinheiro\': {\'length\': 32768, \'notnull\': False, \'raw_rname\': \'descricao_devolucao_dinheiro\', \'rname\': \'"descricao_devolucao_dinheiro"\', \'sortable\': 51, \'sql\': \'TEXT\', \'type\': \'text\', \'unique\': False}, \'descricao_vale\': {\'length\': 32768, \'notnull\': False, \'raw_rname\': \'descricao_vale\', \'rname\': \'"descricao_vale"\', \'sortable\': 9, \'sql\': \'TEXT\', \'type\': \'text\', \'unique\': False}, ...}'
+p254
+sS'field_name'
+p255
+S"'bloqueio_chefe'"
+p256
+sS'types'
+p257
+S"{'big-id': 'INTEGER PRIMARY KEY AUTOINCREMENT', 'big-reference': 'INTEGER REFERENCES %(foreign_key)s ON DELETE %(on_delete_action)s %(null)s %(unique)s', 'bigint': 'INTEGER', 'blob': 'BLOB', 'boolean': 'CHAR(1)', 'date': 'DATE', 'datetime': 'TIMESTAMP', 'decimal': 'DOUBLE', 'double': 'DOUBLE', 'float': 'DOUBLE', ...}"
+p258
+sS'sortable'
+p259
+S'66'
+p260
+sS'sql_fields_aux'
+p261
+S'{\'adiantamento\': {\'sql\': \'DOUBLE NOT NULL DEFAULT 0.0\'}, \'auth_user\': {\'sql\': \'INTEGER REFERENCES "auth_user" ("id") ON DELETE CASCADE  \'}, \'bloqueio_chefe\': {\'sql\': \'CHAR(1)\'}, \'comissao_cobranca\': {\'sql\': \'DOUBLE NOT NULL DEFAULT 5.0\'}, \'comissao_praso\': {\'sql\': \'DOUBLE NOT NULL DEFAULT 3.0\'}, \'comissao_vista\': {\'sql\': \'DOUBLE NOT NULL DEFAULT 6.0\'}, \'descricao\': {\'sql\': \'CHAR(512)\'}, \'descricao_adiantamento\': {\'sql\': \'TEXT\'}, \'descricao_devolucao_dinheiro\': {\'sql\': \'TEXT\'}, \'descricao_vale\': {\'sql\': \'TEXT\'}, ...}'
+p262
+sS'TFK'
+p263
+g19
+sS'fields'
+p264
+S'\'"id" INTEGER PRIMARY KEY AUTOINCREMENT,\\n    "emp...finalizada" CHAR(1),\\n    "bloqueio_chefe" CHAR(1)\''
+p265
+sS'uri'
+p266
+S"'sqlite://storage.sqlite'"
+p267
+sS'rfield'
+p268
+S'<pydal.objects.Field object>'
+p269
+sS'other'
+p270
+S"';'"
+p271
+sssS'traceback'
+p272
+S'Traceback (most recent call last):\n  File "/home/rogoberto/web2py/gluon/restricted.py", line 219, in restricted\n    exec(ccode, environment)\n  File "/home/rogoberto/web2py/applications/aluminum/models/db.py", line 235, in <module>\n    format=\'%(descricao)s\')\n  File "/home/rogoberto/web2py/gluon/packages/dal/pydal/base.py", line 590, in define_table\n    table = self.lazy_define_table(tablename, *fields, **kwargs)\n  File "/home/rogoberto/web2py/gluon/packages/dal/pydal/base.py", line 624, in lazy_define_table\n    polymodel=polymodel)\n  File "/home/rogoberto/web2py/gluon/packages/dal/pydal/adapters/base.py", line 798, in create_table\n    return self.migrator.create_table(*args, **kwargs)\n  File "/home/rogoberto/web2py/gluon/packages/dal/pydal/migrator.py", line 299, in create_table\n    raise RuntimeError(\'File %s appears corrupted\' % table._dbt)\nRuntimeError: File /home/rogoberto/web2py/applications/aluminum/databases/c8b669d15150d7109e5f7ab36744a5b7_projeto.table appears corrupted\n'
+p273
+s.

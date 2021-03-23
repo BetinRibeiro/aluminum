@@ -34,7 +34,7 @@ def alterar_class_desp():
     db.classe_despesa_cobranca.sub_venda.readable = False
     db.classe_despesa_cobranca.sub_venda.writable = False
 
-    form = SQLFORM(db.classe_despesa_cobranca, request.args(0, cast=int), deletable=True)
+    form = SQLFORM(db.classe_despesa_cobranca, request.args(0, cast=int), deletable=False)
     if form.process().accepted:
         session.flash = 'Atualizado'
         redirect(URL('acessar_despesa', args=[sub_venda.id]))
@@ -101,5 +101,5 @@ def alterar_desp():
                 response.flash = 'Preencha o formulário!'
 
     except:
-        redirect(URL('acesso_despesa', args=request.args(0, cast=int)))
+        redirect(URL('acesso_despesa', args=classe_despesa_cobranca.id))
     return dict(form=form)

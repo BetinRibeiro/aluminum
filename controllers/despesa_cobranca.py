@@ -26,15 +26,15 @@ def criar_class_desp():
 def alterar_class_desp():
     response.view = 'generic.html' # use a generic view
     classe_despesa_cobranca = db.classe_despesa_cobranca(request.args(0, cast=int))
-    
+
     sub_venda = db.sub_venda(classe_despesa_cobranca.sub_venda)
     db.classe_despesa_cobranca.id.readable = False
     db.classe_despesa_cobranca.id.writable = False
-    
+
     db.classe_despesa_cobranca.sub_venda.readable = False
     db.classe_despesa_cobranca.sub_venda.writable = False
 
-    form = SQLFORM(db.classe_despesa_cobranca, request.args(0, cast=int), deletable=True)
+    form = SQLFORM(db.classe_despesa_cobranca, request.args(0, cast=int), deletable=False)
     if form.process().accepted:
         session.flash = 'Atualizado'
         redirect(URL('acessar_despesa', args=[sub_venda.id]))
@@ -62,7 +62,7 @@ def criar_desp():
         newdespesa = db(db.despesa_cobranca.classe_despesa_cobranca == classe_despesa_cobranca.id).select().last()
         db.despesa_cobranca.insert(classe_despesa_cobranca=classe_despesa_cobranca.id, data_inicio=request.now , descricao=newdespesa.descricao , valor=newdespesa.valor)
         return redirect(URL('acesso_despesa', args=[classe_despesa_cobranca.id]))
-    
+
     db.despesa_cobranca.classe_despesa_cobranca.default = classe_despesa_cobranca.id
     db.despesa_cobranca.classe_despesa_cobranca.writable = False
 
@@ -99,7 +99,6 @@ def alterar_desp():
         else:
             if not response.flash:
                 response.flash = 'Preencha o formulário!'
-
     except:
         redirect(URL('acesso_despesa', args=classe_despesa_cobranca.id))
     return dict(form=form)

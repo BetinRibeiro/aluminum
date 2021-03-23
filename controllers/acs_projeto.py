@@ -104,7 +104,7 @@ def alterar_dados_rota():
     if sub_venda.total_venda_praso>0:
         deletar =False
 
-    form = SQLFORM(db.sub_venda, request.args(0, cast=int), deletable=True)
+    form = SQLFORM(db.sub_venda, request.args(0, cast=int), deletable=deletar)
     if form.process().accepted:
         session.flash = 'Atualizado'
         redirect(URL('particoes', args=projeto.id))

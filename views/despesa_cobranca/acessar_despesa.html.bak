@@ -2,23 +2,30 @@
 
 {{total=0.0}}
 {{tipodesp=""}}
-
-<div class="py-5" >
-
+<div class="py-2">
     <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <h5 class="">Lista de Despesas da Cobrança de {{=sub_venda.primeira_cidade}}
-
-              </h5>
+      <div class="row  text-center">
+        <div class="col-md-12">
+          <h3 class="mb-3">Despesa da Cobrança</h3>
+          <p>{{=sub_venda.primeira_cidade}}</p>
         </div>
       </div>
-      <div class="row">
+<div class="row">
         <div class="col-md-6">
-          <a class="btn btn-link" href="{{=URL('acs_cobranca','relatorio_cobranca', args=sub_venda.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
-          <a class="btn btn-link" href="{{=URL('criar_class_desp', args=[sub_venda.id])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Adicionar Nova Despesa</a>
+          <div class="row">
+            <div class="col-md-6 col-6 my-1" >
+              <a  class="btn btn-outline-danger btn-block"  href="{{=URL('cobranca','acesso_particao_cobranca', args=[sub_venda.id])}}">
+                <i class="fa  fa-arrow-left  fa-1x"></i>
+              </a>
+            </div>
+            <div class="col-md-6 col-6 my-1" >
+              <a class="btn btn-outline-success btn-block"  href="{{=URL('criar_class_desp', args=[sub_venda.id])}}">
+                <i class="fa  fa-plus fa-1x"></i>
+              </a>
+            </div>
+          </div>
         </div>
-            
+        <div class="col-md-6"></div>
       </div>
       <div class="row">
         <div class="col-md-12">
@@ -37,9 +44,11 @@
                             {{for row in rows:}}
                             <tr>
                                 <td>{{=a}}</td>
-                                <td><a href="{{=URL('acesso_despesa', args=[row.id])}}">{{=row.descricao}}</a></td>
-                                <td>R$ {{="{:,}".format(round(row.total_despesa,1)).replace(",",".")}}0</td>
-                                <td><a href="{{=URL('alterar_class_desp', args=[row.id])}}"><i class="fa text-warning fa-exchange" ></i></a></td>
+                                <td><a class="btn btn-outline-primary btn-block text-left"  href="{{=URL('acesso_despesa', args=[row.id])}}">{{=row.descricao}}</a></td>
+                                <td>R$ {{="{:,.2f}".format(round(row.total_despesa,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                              {{if row.bloqueado==False:}}  
+                              <td><a class="btn btn-outline-warning btn-block text-center" href="{{=URL('alterar_class_desp', args=[row.id])}}"><i class="fa fa-exchange" ></i></a></td>
+                              {{pass}}
 
                                 {{a+=1}}
                             </tr>
@@ -48,13 +57,18 @@
                             <tr>
                                 <th>#</th>
                                 <th>#</th>
-                                <th>R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0</th>
-                                <th></th>
+                                <td>R$ {{="{:,.2f}".format(round(total,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-            </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 {{sub_venda.total_despesa=total}}
 {{sub_venda.update_record()}}

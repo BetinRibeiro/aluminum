@@ -60,12 +60,13 @@
                     {{if venda!=0:}}
                         {{a+=1}}
                         <th>{{=a}}</th>
-                        <td>{{=("{}/{}/{}".format(data.day,data.month,data.year))}}</td>
+                        <td>{{=data.strftime('%d/%m/%Y')}}</td>
                         <td class="text-center">R$ {{="{:,}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#",".")}}0</td>
                         <td class="text-center">{{=fichas_venda}}</td>
                         <td class="text-center">R$ {{="{:,}".format(round(caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}0</td>
                         <td class="text-center">R$ {{="{:,}".format(round(entrada,2)).replace(",","#").replace(".",",").replace("#",".")}}0</td>
                 <th class="text-center">R$ {{="{:,}".format(round(tvenda,2)).replace(",","#").replace(".",",").replace("#",".")}}0</th>
+                <th class="text-center">{{=tfichas_venda}}</th>
                     {{pass}}
                 
                     {{data=row.data_venda}}
@@ -96,6 +97,7 @@
                 <td class="text-center">R$ {{="{:,}".format(round(caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}0</td>
                 <td class="text-center">R$ {{="{:,}".format(round(entrada,2)).replace(",","#").replace(".",",").replace("#",".")}}0</td>
                 <th class="text-center">R$ {{="{:,}".format(round(tvenda,2)).replace(",","#").replace(".",",").replace("#",".")}}0</th>
+                <th class="text-center">{{=tfichas_venda}}</th>
             </tr>
             {{pass}}
             <tr>

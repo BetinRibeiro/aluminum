@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 @auth.requires_login()
 def relatorio_chefe():
     projeto = db.projeto(request.args(0, cast=int))

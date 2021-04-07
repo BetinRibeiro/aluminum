@@ -13,105 +13,125 @@
 {{tentrada=0}}
 {{tfichas_devolvidas=0}}
 {{tvalor_devolvido=0}}
+<div class="py-5">
+    <div class="container">
+      <div class="row  text-center">
+        <div class="col-md-12">
+          <h3 class="mb-3">{{=projeto.descricao}}</h3>
+          <p >{{=sub_venda.primeira_cidade}}</p>
+        </div>
+      </div>
 <div class="row">
-    <div class="col-md-6">
-        <a  class="btn btn-outline-light" href="{{=URL('acesso_particao', args=sub_venda.projeto)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6 col-6 my-1" >
+              <a  class="btn btn-outline-danger btn-block"  href="{{=URL('acesso_particao', args=sub_venda.projeto)}}"> 
+                <i class="fa  fa-arrow-left  fa-1x"></i>
+              </a>
+            </div>
+            <div class="col-md-6 col-6 my-1" >
+             
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+              <table class="table table-bordered table-sm table-striped">
+                  <thead>
+                      <tr>
+                          <th>#</th>
+                          <th>Data</th>
+                          <th>V.Prazo</th>
+                          <th>Fichas</th>
+                          <th>Caderno</th>
+                          <th>Entrada</th>
+                          <th>Ficha.D</th>
+                          <th>V. Devolvido</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {{data=request.now}}
+                      {{if len(rows)>0:}}
+                          {{data=rows.last().data_venda}}
+                      {{pass}}
+                      {{for row in rows:}}
+
+                      <tr>
+                          {{if row.data_venda==data:}}
+                              {{venda+=row.venda_praso-row.valor_devolvido}}
+                              {{fichas_venda+=row.quant_fichas-row.quant_fichas_devolvidas}}
+                              {{caderno+=row.vale_caderno}}
+                              {{entrada+=row.entradas_venda}}
+                              {{fichas_devolvidas+=row.quant_fichas_devolvidas}}
+                              {{valor_devolvido+=row.valor_devolvido}}
+                              {{data=row.data_venda}}
+
+                          {{else:}}
+                              {{if venda>=0:}}
+                                  {{a+=1}}
+                                  <th>{{=a}}</th>
+                                  <td>{{=data.strftime('%d/%m/%Y')}}</td>
+                                  <td>R$ {{="{:,.2f}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                                  <td>{{=fichas_venda}}</td>
+                                  <td>R$ {{="{:,.2f}".format(round(caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                                  <td>R$ {{="{:,.2f}".format(round(entrada,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                                  <td>{{=fichas_devolvidas}}</td>
+                                  <td>R$ {{="{:,.2f}".format(round(valor_devolvido,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                              {{pass}}
+
+                              {{data=row.data_venda}}
+                              {{venda=row.venda_praso-row.valor_devolvido}}
+                              {{fichas_venda=row.quant_fichas-row.quant_fichas_devolvidas}}
+                              {{caderno=row.vale_caderno}}
+                              {{entrada=row.entradas_venda}}
+                              {{fichas_devolvidas=row.quant_fichas_devolvidas}}
+                              {{valor_devolvido=row.valor_devolvido}}
+
+
+                          {{pass}}
+                          {{tvenda+=row.venda_praso-row.valor_devolvido}}
+                          {{tfichas_venda+=row.quant_fichas-row.quant_fichas_devolvidas}}
+                          {{tcaderno+=row.vale_caderno}}
+                          {{tentrada+=row.entradas_venda}}
+                          {{tfichas_devolvidas+=row.quant_fichas_devolvidas}}
+                          {{tvalor_devolvido+=row.valor_devolvido}}
+                      </tr>
+                      {{pass}}
+                      {{if  len(rows)>1:}}
+                              {{if venda>=0:}}
+                      <tr>
+                          {{a+=1}}
+                          <th>{{=a}}</th>
+                                  <td>{{=data.strftime('%d/%m/%Y')}}</td>
+                          <td>R$ {{="{:,.2f}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                          <td>{{=fichas_venda}}</td>
+                          <td>R$ {{="{:,.2f}".format(round(caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                          <td>R$ {{="{:,.2f}".format(round(entrada,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                          <td>{{=fichas_devolvidas}}</td>
+                          <td>R$ {{="{:,.2f}".format(round(valor_devolvido,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                      </tr>
+                      {{pass}}
+                      {{pass}}
+                      <tr>
+                          <th>#</th>
+                          <th></th>
+                          <th>R$ {{="{:,.2f}".format(round(tvenda,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                          <th>{{=tfichas_venda}}</th>
+                          <th>R$ {{="{:,.2f}".format(round(tcaderno,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                          <th>R$ {{="{:,.2f}".format(round(tentrada,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                          <th>{{=tfichas_devolvidas}}</th>
+                          <th>R$ {{="{:,.2f}".format(round(tvalor_devolvido,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
-
-
-{{if len(rows)>0:}}
-    Partição da venda - {{=sub_venda.primeira_cidade}} 
-{{else:}}
-    Você precisa inserir vendas em algum vendedor
-{{pass}}
-<div class="table-responsive">
-    <table class="table table-bordered table-sm table-striped">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Data</th>
-                <th>V.Prazo</th>
-                <th>Fichas</th>
-                <th>Caderno</th>
-                <th>Entrada</th>
-                <th>Ficha.D</th>
-                <th>V. Devolvido</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{data=request.now}}
-            {{if len(rows)>0:}}
-                {{data=rows.last().data_venda}}
-            {{pass}}
-            {{for row in rows:}}
-          
-            <tr>
-                {{if row.data_venda==data:}}
-                    {{venda+=row.venda_praso-row.valor_devolvido}}
-                    {{fichas_venda+=row.quant_fichas-row.quant_fichas_devolvidas}}
-                    {{caderno+=row.vale_caderno}}
-                    {{entrada+=row.entradas_venda}}
-                    {{fichas_devolvidas+=row.quant_fichas_devolvidas}}
-                    {{valor_devolvido+=row.valor_devolvido}}
-                    {{data=row.data_venda}}
-              
-                {{else:}}
-                    {{if venda>=0:}}
-                        {{a+=1}}
-                        <th>{{=a}}</th>
-                        <td>{{=("{}/{}/{}".format(data.day,data.month,data.year))}}</td>
-                        <td>R$ {{="{:,}".format(round(venda,2)).replace(",",".")}}0</td>
-                        <td>{{=fichas_venda}}</td>
-                        <td>R$ {{="{:,}".format(round(caderno,2)).replace(",",".")}}0</td>
-                        <td>R$ {{="{:,}".format(round(entrada,2)).replace(",",".")}}0</td>
-                        <td>{{=fichas_devolvidas}}</td>
-                        <td>R$ {{="{:,}".format(round(valor_devolvido,2)).replace(",",".")}}0</td>
-                    {{pass}}
-                
-                    {{data=row.data_venda}}
-                    {{venda=row.venda_praso-row.valor_devolvido}}
-                    {{fichas_venda=row.quant_fichas-row.quant_fichas_devolvidas}}
-                    {{caderno=row.vale_caderno}}
-                    {{entrada=row.entradas_venda}}
-                    {{fichas_devolvidas=row.quant_fichas_devolvidas}}
-                    {{valor_devolvido=row.valor_devolvido}}
-
-                    
-                {{pass}}
-                {{tvenda+=row.venda_praso-row.valor_devolvido}}
-                {{tfichas_venda+=row.quant_fichas-row.quant_fichas_devolvidas}}
-                {{tcaderno+=row.vale_caderno}}
-                {{tentrada+=row.entradas_venda}}
-                {{tfichas_devolvidas+=row.quant_fichas_devolvidas}}
-                {{tvalor_devolvido+=row.valor_devolvido}}
-            </tr>
-            {{pass}}
-            {{if  len(rows)>1:}}
-                    {{if venda>=0:}}
-            <tr>
-                {{a+=1}}
-                <th>{{=a}}</th>
-                <td>{{=("{}/{}/{}".format(data.day,data.month,data.year))}}</td>
-                <td>R$ {{="{:,}".format(round(venda,2)).replace(",",".")}}0</td>
-                <td>{{=fichas_venda}}</td>
-                <td>R$ {{="{:,}".format(round(caderno,2)).replace(",",".")}}0</td>
-                <td>R$ {{="{:,}".format(round(entrada,2)).replace(",",".")}}0</td>
-                <td>{{=fichas_devolvidas}}</td>
-                <td>R$ {{="{:,}".format(round(valor_devolvido,2)).replace(",",".")}}0</td>
-            </tr>
-            {{pass}}
-            {{pass}}
-            <tr>
-                <th>#</th>
-                <th></th>
-                <th>R$ {{="{:,}".format(round(tvenda,2)).replace(",",".")}}0</th>
-                <th>{{=tfichas_venda}}</th>
-                <th>R$ {{="{:,}".format(round(tcaderno,2)).replace(",",".")}}0</th>
-                <th>R$ {{="{:,}".format(round(tentrada,2)).replace(",",".")}}0</th>
-                <th>{{=tfichas_devolvidas}}</th>
-                <th>R$ {{="{:,}".format(round(tvalor_devolvido,2)).replace(",",".")}}0</th>
-            </tr>
-        </tbody>
-    </table>
+</div>
 </div>

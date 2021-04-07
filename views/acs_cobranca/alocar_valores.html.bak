@@ -43,13 +43,13 @@
                 {{a+=1}}
                 <td>{{=a}}º</td>
 
-                <td>{{=row.nome}}</td>
+                <td>{{=row.nome.nome.replace("cfrd","")}}</td>
                 {{total_venda=0}}
                 {{total_fichas=0}}
                 {{for row1 in rowscob:}}
                     {{if row1.vendedor==row.id:}}
-                        {{total_venda+=row1.venda_praso}}
-                {{total_fichas+=row1.quant_fichas}}
+                        {{total_venda+=row1.venda_praso-row1.valor_devolvido}}
+                {{total_fichas+=row1.quant_fichas-row1.quant_fichas_devolvidas}}
                     {{pass}}
                 {{pass}}
                 {{total_recebido=0}}
@@ -79,7 +79,7 @@
                 {{else:}}
                 <td class="text-sucess">Sobrando</td>
                 {{pass}}
-                <td><a href="{{=URL('cobranca','cobranca_individual', args=[row.id,sub_venda.id])}}"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> </a></td>
+                <td><a href="{{=URL('cobranca_individual', args=[row.id,sub_venda.id])}}"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> </a></td>
 
 {{venda+=total_venda}}
 {{recebido+=total_recebido}}

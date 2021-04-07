@@ -46,7 +46,11 @@ def alterar_classe_despesa():
     if usuario.id==25434:
         session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
         redirect(URL('acessar_despesa', args=[projeto.id,tipodesp]))
-    form = SQLFORM(db.classe_despesa, request.args(0, cast=int), deletable=True)
+        
+    deletar=True
+    if classe_despesa.total_classe>0:
+      deletar=False
+    form = SQLFORM(db.classe_despesa, request.args(0, cast=int), deletable=deletar)
     if form.process().accepted:
         session.flash = 'Atualizado'
         redirect(URL('acessar_despesa', args=[projeto.id,tipodesp]))
@@ -154,7 +158,8 @@ def alterar_classe_despesa_local():
     db.classe_despesa_local.id.writable = False
     db.classe_despesa_local.empresa.readable = False
     db.classe_despesa_local.empresa.writable = False
-    form = SQLFORM(db.classe_despesa_local, request.args(0, cast=int), deletable=True)
+    
+    form = SQLFORM(db.classe_despesa_local, request.args(0, cast=int), deletable=False)
     if form.process().accepted:
         session.flash = 'Atualizado'
         redirect(URL('usuario','fsprojetos', args=[empresa.id]))

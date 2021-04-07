@@ -3,6 +3,8 @@
 import datetime
 @auth.requires_login()
 def index():
+    usuario=auth.user
+    usuario
     projeto = db.projeto(request.args(0, cast=int))
     rows = db((db.sub_venda.projeto == request.args(0, cast=int)) & (db.sub_venda.total_venda_praso>0)).select(orderby=db.sub_venda.data_inicio_cobranca)
     for row in rows:

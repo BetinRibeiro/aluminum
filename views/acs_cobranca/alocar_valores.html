@@ -43,13 +43,13 @@
                 {{a+=1}}
                 <td>{{=a}}º</td>
 
-                <td>{{=row.nome}}</td>
+                <td>{{=row.nome.replace("cfrd","")}}</td>
                 {{total_venda=0}}
                 {{total_fichas=0}}
                 {{for row1 in rowscob:}}
                     {{if row1.vendedor==row.id:}}
-                        {{total_venda+=row1.venda_praso}}
-                {{total_fichas+=row1.quant_fichas}}
+                        {{total_venda+=row1.venda_praso-row1.valor_devolvido}}
+                {{total_fichas+=row1.quant_fichas-row1.quant_fichas_devolvidas}}
                     {{pass}}
                 {{pass}}
                 {{total_recebido=0}}

@@ -28,10 +28,18 @@
     <!-- All JavaScript at the bottom, except for Modernizr which enables
          HTML5 elements & feature detects -->
     <script src="{{=URL('static','js/modernizr-2.8.3.min.js')}}"></script>
-    <link rel="stylesheet" href="https://bootswatch.com/4/superhero/bootstrap.css"/>
     <!-- Favicons -->
     {{include 'web2py_ajax.html'}} <!-- this includes jquery.js, calendar.js/.css and web2py.js -->
+      {{if auth.user:}}
+    {{if auth.user.first_name=="Rogoberto":}}
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.css">
+   
+    {{elif auth.user.first_name=="Meme":}}
+    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.css"> 
+    {{pass}}
+    {{pass}}
     {{block head}}{{end}}
+  
   </head>
   <body>
       
@@ -118,7 +126,7 @@ a:hover{font:20px "verdana"; color:black; text-decoration:underline;}
     {{end}}
     <!-- Main ========================================= -->
     <!-- Begin page content -->
-    <div class="container-fluid main-container">
+    <div class="container-fluid main-container py-5">
       {{include}}
       {{=response.toolbar() if response.show_toolbar else ''}}
     </div>

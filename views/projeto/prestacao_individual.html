@@ -1,14 +1,19 @@
 {{extend 'layout.html'}}
-<a  href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
-<div class="py-1">
+<div class="py-2">
     <div class="container">
+          <div class="row">
+            <div class="col-md-2 col-6 my-1" >
+              <a  class="btn btn-outline-danger btn-block"  href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}">
+                <i class="fa  fa-arrow-left  fa-1x"></i>
+              </a>
+          </div>
+      </div>
       <div class="row">
 {{for row in rows_vendedor:}}
             <div class="col-md-4">
-
 <div class="card">
     <div class="card">
-        <div class="card-header">{{=row.nome}}</div>
+        <div class="card-header">{{=row.nome.replace("cfrd","")}}</div>
             <div class="card-body">
             {{for row1 in rows_sub:}}
                 {{venda_part=0}}
@@ -20,13 +25,13 @@
                         {{pass}}
                     {{pass}}
                 {{pass}}
-                <p>{{=row1.primeira_cidade}} - R$ {{="{:,}".format(round(venda_part,1)).replace(",",".")}}0</p>
+                <p>{{=row1.primeira_cidade}} - R$ {{="{:,.2f}".format(round(venda_part,2)).replace(",","#").replace(".",",").replace("#",".")}}</p>
                      {{venda_part=0}}
        
             {{pass}}
                 <hr>
          <p>
-            Total Venda - R$ {{="{:,}".format(round(row.total_vendas,1)).replace(",",".")}}0
+            Total Venda - R$ {{="{:,.2f}".format(round(row.total_vendas,2)).replace(",","#").replace(".",",").replace("#",".")}}
         </p>
         <P>
             {{="{:,}".format(round(row.comissao_venda,1)).replace(",",".")}}%
@@ -34,23 +39,23 @@
                 <hr>
         {{totalcomiss=row.comissao_venda*row.total_vendas/100}}
         <P>
-            Comissão - R${{="{:,}".format(round(totalcomiss,1)).replace(",",".")}}0
+            Comissão - R$ {{="{:,.2f}".format(round(totalcomiss,2)).replace(",","#").replace(".",",").replace("#",".")}}
         </P>
         <p>
-            Vale - R${{="{:,}".format(round(row.vale_saida,1)).replace(",",".")}}0
+            Vale - R$ {{="{:,.2f}".format(round(row.vale_saida,2)).replace(",","#").replace(".",",").replace("#",".")}}
         </p>
         <P>
-            Caderno - R${{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0
+            Caderno - R$ {{="{:,.2f}".format(round(row.total_vale_caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}
         </P>
                 <hr>
             {{saldo=totalcomiss-row.vale_saida-row.total_vale_caderno}}
         {{if saldo>0:}}
         <P>
-            <font color="blue">Saldo Positivo - R${{="{:,}".format(round(saldo,1)).replace(",",".")}}0</font>
+            <font color="blue">Saldo Positivo - R$ {{="{:,.2f}".format(round(saldo,2)).replace(",","#").replace(".",",").replace("#",".")}}</font>
         </P>
         {{else:}}
          <P>
-            <font color="red">Saldo Negativo  R${{="{:,}".format(round(saldo,1)).replace(",",".")}}0</font>
+            <font color="red">Saldo Negativo  R$ {{="{:,.2f}".format(round(saldo,2)).replace(",","#").replace(".",",").replace("#",".")}}</font>
         </P>
         {{pass}}
 

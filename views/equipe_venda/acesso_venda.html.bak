@@ -12,15 +12,35 @@
 {{fichas=0}}
 {{entrada=0}}
 {{devolucao=0}}
+<div class="py-5">
+    <div class="container">
+      <div class="row  text-center">
+        <div class="col-md-12">
+          <h3 class="mb-3">{{=projeto.descricao}}</h3>
+          <p>Acesso a venda de {{=vendedor.nome.replace("cfrd","")}}</p>
+        </div>
+      </div>
 <div class="row">
-    <div class="col-md-6">
-        <a class="btn btn-outline-light" href="{{=URL('acesso_equipe', args=vendedor.projeto)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
-       
-    </div>
-</div>
-        
-
-            Acesso a venda de {{=vendedor.nome}}
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6 col-6 my-1" >
+              <a  class="btn btn-outline-danger btn-block"  href="{{=URL('acesso_equipe', args=vendedor.projeto)}}">
+                <i class="fa  fa-arrow-left  fa-1x"></i>
+              </a>
+            </div>
+            <div class="col-md-6 col-6 my-1" >
+              {{if False:}}
+              <a class="btn btn-outline-success btn-block"  href="#">
+                <i class="fa  fa-user-plus fa-1x"></i>
+              </a>
+              {{pass}}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
             {{for row1 in rows_sub:}}
             <hr class="border bg-danger" >
 
@@ -29,12 +49,18 @@
 
                 {{if (usuario.id!=2324):}}
 <div class="row">
-    <div class="col-md-6">
-            <a class="btn btn-outline-light" href="{{=URL('inserir_venda', args=[vendedor.id,row1.id])}}"><i class="fa text-success fa-plus-square fa-2x"></i></a>
+    <div class="col-md-1 col-6 my-1">
+      <a class="btn btn-outline-success btn-block"  href="{{=URL('inserir_venda', args=[vendedor.id,row1.id])}}">
+              <i class="fa fa-plus-square fa-1x"></i>
+      </a>
     </div>
 </div>
 {{pass}}{{pass}}{{pass}}
-VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
+<div class="row">
+    <div class="col-md-12 col-12 my-2">
+      VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome.replace("cfrd","")}}
+    </div>
+</div>
             <div class="table-responsive">
             {{a=0}}
                 <table class="table table-bordered table-sm table-striped">
@@ -65,7 +91,21 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
                             {{pass}}
                         {{if row.sub_venda == row1.id:}}
                           {{if not (row.venda_praso>0):}}
-                          
+                          {{row.venda_praso=row.venda_praso-row.valor_devolvido}}
+                                {{row.quant_fichas=row.quant_fichas-row.quant_fichas_devolvidas}}
+                                {{caderno+=row.vale_caderno}}
+                                {{prazo+=row.venda_praso}}
+                                {{fichas+=row.quant_fichas}}
+                                {{fichas_devolvidas+=row.quant_fichas_devolvidas}}
+                                {{entrada+=row.entradas_venda}}
+                                {{devolucao+=row.valor_devolvido}}
+                                
+                                {{acaderno+=row.vale_caderno}}
+                                {{aprazo+=row.venda_praso}}
+                                {{afichas+=row.quant_fichas}}
+                                {{afichas_devolvidas+=row.quant_fichas_devolvidas}}
+                                {{aentrada+=row.entradas_venda}}
+                                {{adevolucao+=row.valor_devolvido}}
                           {{else:}}
                             <tr>
                                 {{a+=1}}
@@ -87,10 +127,9 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
                                 <td>{{=a}}</td>
                                 <td>
                                     {{if not projeto.venda_finalizada:}}
-                                    
 {{if (not row1.cobranca_iniciada):}}
                 {{if (usuario.id!=2324):}}
-                                    <a href="{{=URL('alterar_venda', args=row.id)}}">{{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}</a>
+                                    <a class="btn btn-outline-success btn-block" href="{{=URL('alterar_venda', args=row.id)}}">{{=row.data_venda.strftime('%d/%m/%Y')}}</a>
                                     {{else:}}
                                     {{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}
                                     {{pass}}
@@ -100,24 +139,24 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
                                     {{pass}}
                                 
                                 </td>
-                                <td>R$ {{="{:,}".format(round(row.venda_praso,1)).replace(",",".")}}0</td>
+                                <td>R$ {{="{:,.2f}".format(round(row.venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                                 <td>{{=row.quant_fichas}}</td>
-                                <td>R$ {{="{:,}".format(round(row.vale_caderno,1)).replace(",",".")}}0</td>
-                                <td>R$ {{="{:,}".format(round(row.entradas_venda,1)).replace(",",".")}}0</td>
+                                <td>R$ {{="{:,.2f}".format(round(row.vale_caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                                <td>R$ {{="{:,.2f}".format(round(row.entradas_venda,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                                 <td>{{=row.quant_fichas_devolvidas}}</td>
-                                <td>R$ {{="{:,}".format(round(row.valor_devolvido,1)).replace(",",".")}}0</td>
+                                <td>R$ {{="{:,.2f}".format(round(row.valor_devolvido,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                             </tr>
                             {{pass}}
                             {{pass}}
                             {{pass}}
                             <th>#</th>
                                         <th>Total</th>
-                                        <th>R$ {{="{:,}".format(round(aprazo,1)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,.2f}".format(round(aprazo,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                                         <th>{{=afichas}}</th>
-                                        <th>R$ {{="{:,}".format(round(acaderno,1)).replace(",",".")}}0</th>
-                                        <th>R$ {{="{:,}".format(round(aentrada,1)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,.2f}".format(round(acaderno,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                                        <th>R$ {{="{:,.2f}".format(round(aentrada,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                                         <th>  {{=afichas_devolvidas}}</th>
-                                        <th>R$ {{="{:,}".format(round(adevolucao,1)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,.2f}".format(round(adevolucao,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                             </tbody>
 
                     </table>
@@ -132,9 +171,7 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
             {{pass}}
                 <hr>
                 <div class="table-responsive">
-                    
                  <table class="table table-bordered table-sm table-striped">
-                    
                                 <thead>
                                      <tr>
                             <th>V.Prazo</th>
@@ -147,16 +184,23 @@ VENDA PARTIÇÃO {{=row1.primeira_cidade}} VENDEDOR {{=vendedor.nome}}
                                      </thead>
                                 <tbody>
                                     <tr>
-                                        <th>R$ {{="{:,}".format(round(prazo,1)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,.2f}".format(round(prazo,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                                         <th>{{=fichas}}</th>
-                                        <th>R$ {{="{:,}".format(round(caderno,1)).replace(",",".")}}0</th>
-                                        <th>R$ {{="{:,}".format(round(entrada,1)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,.2f}".format(round(caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                                        <th>R$ {{="{:,.2f}".format(round(entrada,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                                         <th>  {{=fichas_devolvidas}}</th>
-                                        <th>R$ {{="{:,}".format(round(devolucao,1)).replace(",",".")}}0</th>
+                                        <th>R$ {{="{:,.2f}".format(round(devolucao,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                                     </tr>
                                 </tbody>
                             </table>
-                </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
 
 {{vendedor.total_entradas=entrada}}

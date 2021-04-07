@@ -4,7 +4,7 @@ def index():
     data=request.now
     empresa = db.empresa(db.empresa.auth_user==auth.user.id)
     usuario=auth.user
-    if usuario.id==1:
+    if usuario.id==16543:
       #redireciona para pagina de usuario)
             redirect(URL('default','index'))
     usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
@@ -38,7 +38,7 @@ def lista_logins():
         n=int(consul)/12
         empresa = db.empresa(n)
     usuario=auth.user
-    row = db(db.usuario_empresa.empresa==empresa.id).select()
+    row = db(db.usuario_empresa.empresa==empresa.id).select(orderby=db.usuario_empresa.nome)
     if request.args(0, auth.user)=="235":
         rows = db(db.usuario_empresa.empresa).select(orderby=db.empresa)
     #2 consultas no banco
@@ -104,6 +104,20 @@ def inserir_projeto():
     return  dict(form=form)
 
 @auth.requires_login()
+def cadastrar_empresa():
+    response.view = 'generic.html' # use a generic view
+    db.empresa.auth_user.default = 1
+    form = SQLFORM(db.empresa).process()
+    if form.accepted:
+        response.flash = 'Formulario aceito'
+        redirect(URL('acs_principal','lista_empresas', args=1))
+    elif form.errors:
+        response.flash = 'Formulario não aceito'
+    else:
+        response.flash = 'Preencha o formulario'
+    #2 consultas no banco
+    return  dict(form=form)
+@auth.requires_login()
 def alterar_projeto():
     response.view = 'generic.html' # use a generic view
     #recebe id do projeto e busca projeto no banco
@@ -120,6 +134,10 @@ def alterar_projeto():
     #bloqueia empresa para alteração
     db.projeto.empresa.readable = True
     db.projeto.empresa.writable = False
+    
+    if usuario.id==1:
+      db.projeto.data_final.readable = True
+      db.projeto.data_final.writable = True
     a=True
     if projeto.total_venda_prazo>0:
         a=False
@@ -135,6 +153,19 @@ def alterar_projeto():
         response.flash = 'Erros no formulário!'
     return  dict(form=form)
 
+@auth.requires_login()
+def alterar_empresa():
+    response.view = 'generic.html' # use a generic view
+    #recebe id do projeto e busca projeto no banco
+    usuario = auth.user
+    empresa = db.empresa(request.args(0, cast=int))
+    form = SQLFORM(db.empresa, request.args(0, cast=int), deletable=False)
+    if form.process().accepted:
+        session.flash = 'Projeto atualizado'
+        redirect(URL('lista_empresas', args=empresa.id*12))
+    elif form.errors:
+        response.flash = 'Erros no formulário!'
+    return  dict(form=form)
 @auth.requires_login()
 def inserir_class_desp():
     response.view = 'generic.html' # use a generic view
@@ -176,7 +207,42 @@ def inserir_pagamento():
     #2 consultas no banco
     return  dict(form=form)
 
-
+def alterar_usuario_empresa():
+    response.view = 'generic.html' # use a generic view
+    #recebe id do projeto e busca projeto no banco
+    usuario = auth.user
+    usuario_empresa = db.usuario_empresa(request.args(0, cast=int))
+    db.usuario_empresa.id.readable = False
+    db.usuario_empresa.auth_user.writable = False
+    db.usuario_empresa.empresa.readable = True
+    db.usuario_empresa.empresa.writable = False
+    if usuario_empresa.nome=="Bloqueio 2714":
+      db.usuario_empresa.nome.writable = False
+      db.usuario_empresa.bloqueado.writable = False
+    if usuario.id==1:
+      db.usuario_empresa.empresa.writable = True
+      db.usuario_empresa.auth_user.writable = True
+      db.usuario_empresa.bloqueado.writable = True
+    form = SQLFORM(db.usuario_empresa, request.args(0, cast=int), deletable=False)
+    if form.process().accepted:
+      session.flash = 'Projeto atualizado'
+      redirect(URL('alterar_usuario', args=usuario_empresa.auth_user))
+    elif form.errors:
+      response.flash = 'Erros no formulário!'
+    return  dict(form=form)
+def alterar_usuario():
+    response.view = 'generic.html' # use a generic view
+    #recebe id do projeto e busca projeto no banco
+    usuario = db.auth_user(request.args(0, cast=int))
+    usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==usuario.id)
+    db.auth_user.id.readable = False
+    form = SQLFORM(db.auth_user, request.args(0, cast=int), deletable=False)
+    if form.process().accepted:
+      session.flash = 'Projeto atualizado'
+      redirect(URL('lista_logins', args=usuario_empresa.empresa*12))
+    elif form.errors:
+      response.flash = 'Erros no formulário!'
+    return  dict(form=form)
 @auth.requires_login()
 def alterar_pagamento():
     response.view = 'generic.html' # use a generic view

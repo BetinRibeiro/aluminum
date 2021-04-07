@@ -9,19 +9,35 @@
 {{total_entradas=0}}
 {{saldof=0}}
 {{debitof=0}}
+<div class="py-5">
+    <div class="container">
+      <div class="row  text-center">
+        <div class="col-md-12">
+          <h3 class="mb-3">{{=projeto.descricao}}</h3>
+          <p>Equipe de Vendas</p>
+        </div>
+      </div>
 <div class="row">
-    <div class="col-md-6">
-        <a  class="btn btn-outline-light" href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
-         {{if not projeto.venda_finalizada:}}
-            <a  class="btn btn-outline-light" href="{{=URL('criar_vendedor', args=projeto.id)}}"><i class="fa text-primary fa-user-plus  fa-2x"></i></a>
-        {{pass}}
-    </div>
-</div>
-                {{if len(rows)>0:}}
-              Equipe de Vendas {{=projeto.descricao}}
-                {{else:}}
-                Você precisa cadastrar um Vendedor
-                {{pass}}
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6 col-6 my-1" >
+              <a  class="btn btn-outline-danger btn-block"  href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}">
+                <i class="fa  fa-arrow-left  fa-1x"></i>
+              </a>
+            </div>
+            <div class="col-md-6 col-6 my-1" >
+                            {{if not projeto.venda_finalizada:}}
+              <a class="btn btn-outline-success btn-block"  href="{{=URL('criar_vendedor', args=projeto.id)}}">
+                <i class="fa  fa-user-plus fa-1x"></i>
+              </a>
+              {{pass}}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
           <div class="table-responsive">
            <table class="table table-bordered table-sm table-striped">
 					<thead>
@@ -48,24 +64,24 @@
 					  <tr>{{a+=1}}
                           <td>{{=a}}º</td>
                           
-                        <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">{{=row.nome.replace("cfrd","")}}</a></td>
-                          <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,}".format(round(row.total_vendas,1)).replace(",",".")}}0 {{if row.total_vendas>0:}}- <span><b>{{="{:,}".format(round(row.comissao_venda)).replace(".0","")}}% </b></span></a>{{pass}}</td>
+                        <td><a class="btn btn-outline-primary text-left btn-block" href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">{{=row.nome.replace("cfrd","")}}</a></td>
+                          <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,.2f}".format(round(row.total_vendas,2)).replace(",","#").replace(".",",").replace("#",".")}} {{if row.total_vendas>0:}}- <span><b>{{="{:,}".format(round(row.comissao_venda)).replace(".0","")}}% </b></span></a>{{pass}}</td>
                            {{comissao=row.total_vendas}}
                           {{if comissao > 0:}}
                           {{comissao=row.total_vendas*row.comissao_venda/100}}
 {{comissaot+=comissao}}
                           {{pass}}
-						<td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,}".format(round(comissao,1)).replace(",",".")}}0</a></td>
-                        <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,}".format(round(row.vale_saida,1)).replace(",",".")}}0</a></td>
-                        <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0</a></td>
+						<td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,.2f}".format(round(comissao,2)).replace(",","#").replace(".",",").replace("#",".")}}</a></td>
+                        <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,.2f}".format(round(row.vale_saida,2)).replace(",","#").replace(".",",").replace("#",".")}}</a></td>
+                        <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,.2f}".format(round(row.total_vale_caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}</a></td>
                           {{saldo=comissao-row.vale_saida-row.total_vale_caderno}}
                           {{if saldo > 0:}}
-						<td>R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</td>
+						<td>R$ {{="{:,.2f}".format(round(saldo,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                           {{else:}}
-                          <td class="text-danger">R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</td>
+                          <td class="text-danger">R$ {{="{:,.2f}".format(round(saldo,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                           {{pass}}
                            {{if not projeto.venda_finalizada:}}
-                          <td id="noprint"><a href="{{=URL('alterar_vendedor', args=row.id)}}" class="btn"><i class="fa text-warning fa-exchange" ></i></a></td>
+                          <td id="noprint"><a class="btn btn-outline-warning btn-block" href="{{=URL('alterar_vendedor', args=row.id)}}" class="btn"><i class="fa fa-exchange" ></i></a></td>
                           {{pass}}
               
                    {{if (usuario.id==11)or(usuario.id==1):}}
@@ -92,17 +108,24 @@
                          <tr>
 						<th>#</th>
                              <th></th>
-						<th>R$ {{="{:,}".format(round(venda,1)).replace(",",".")}}0</th>
-						<th>R$ {{="{:,}".format(round(comissaot,1)).replace(",",".")}}0</th>
-						<th>R$ {{="{:,}".format(round(vale,1)).replace(",",".")}}0</th>
-                          <th>R$ {{="{:,}".format(round(caderno,1)).replace(",",".")}}0</th>
-                          <th>R$ {{="{:,}".format(round(saldof,1)).replace(",",".")}}0</th>
+						<th>R$ {{="{:,.2f}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+						<th>R$ {{="{:,.2f}".format(round(comissaot,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+						<th>R$ {{="{:,.2f}".format(round(vale,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                          <th>R$ {{="{:,.2f}".format(round(caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                          <th>R$ {{="{:,.2f}".format(round(saldof,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                                {{if not projeto.venda_finalizada:}}
                              <th id="noprint">#</th>
                              {{pass}}
 					  </tr>
 					</tbody>
 				  </table>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
  {{if not projeto.venda_finalizada:}}
 {{projeto.total_debito_vendedor=debitof}}

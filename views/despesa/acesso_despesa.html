@@ -1,29 +1,48 @@
 {{extend 'layout.html'}}
 {{total=0.0}}
-
+<div class="py-5">
+    <div class="container">
+      <div class="row  text-center">
+        <div class="col-md-12">
+          <h3 class="mb-3">{{=projeto.descricao}}</h3>
+          <p>Despesas de {{=tipodesp}}</p>
+        </div>
+      </div>
 <div class="row">
-    <div class="col-md-6">
-        <a class="btn btn-outline-light" href="{{=URL('acessar_despesa', args=[classe_despesa.projeto,tipodesp])}}"> <i class="fa text-danger fa-arrow-left  fa-2x"></i></a>
-        <a  class="btn btn-outline-light" href="{{=URL('criar_desp', args=[classe_despesa.id,tipodesp])}}"><i class="fa text-success fa-plus fa-2x"></i></a>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6 col-6 my-1" >
+              <a  class="btn btn-outline-danger btn-block"  href="{{=URL('acessar_despesa', args=[classe_despesa.projeto,tipodesp])}}">
+                <i class="fa  fa-arrow-left  fa-1x"></i>
+              </a>
+            </div>
+            <div class="col-md-6 col-6 my-1" >
+        {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
+              <a  class="btn btn-outline-success btn-block"  href="{{=URL('criar_desp', args=[classe_despesa.id,tipodesp])}}">
+                <i class="fa  fa-plus fa-1x"></i>
+              </a>
+              {{pass}}
+            </div>
+            <div class="col-md-6 col-6 my-1" >
         {{if ("DIÁRIAS" in classe_despesa.descricao) and (len(rows)>0):}}
-        <a class="btn btn-primary" href="{{=URL('criar_desp', args=[classe_despesa.id,tipodesp,1])}}">Repitir Valor</a>
+              <a class="btn btn-outline-primary btn-block"  href="{{=URL('criar_desp', args=[classe_despesa.id,tipodesp,1])}}">
+                <i class="fa  fa-plus fa-1x"></i>
+              </a>
         {{pass}}
-    </div>
-</div>
-
-
-                {{if len(rows)>0:}}
-                Despesas de {{=tipodesp}}
-                {{else:}}
-                Você precisa cadastrar uma despesa
-                {{pass}}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
 <div class="table-responsive">
            <table class="table table-striped table-borderless table-sm">
-                <thead class="thead-dark">
+                <thead>
 					  <tr>
-						<th>DESCRIÇÃO</th>
-						<th>DATA</th>
-                          <th>TOTAL</th>
+						<th>Descrição</th>
+						<th>Data</th>
+                          <th>Total</th>
 					  </tr>
 					</thead>
 					<tbody>
@@ -34,21 +53,32 @@
                           {{row.update_record()}}
                           {{pass}}
                           <td>
-                              <a href="{{=URL('alterar_desp', args=[row.id,tipodesp])}}">{{=row.descricao}}</a>
+        {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
+                              <a class="btn btn-outline-primary text-left btn-block" href="{{=URL('alterar_desp', args=[row.id,tipodesp])}}">{{=row.descricao}}</a>
+              {{else:}}
+              {{=row.descricao}}
+              {{pass}}
                               </td>
 
-						<td> {{=("{}/{}/{}".format(row.data_inicio.day,row.data_inicio.month,row.data_inicio.year))}}</td>
-                      <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
+						<td>{{=row.data_inicio.strftime('%d/%m/%Y')}}</td>
+                      <td>R$ {{="{:,.2f}".format(round(row.valor,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
 					  </tr>
                         {{total+=row.valor}}
 					  {{pass}}
                          <tr>
 						<th>#</th>
 						<th>#</th>
-                          <th>R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0</th>
+                          <th>R$ {{="{:,.2f}".format(round(total,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
 					  </tr>
 					</tbody>
 				  </table>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 {{classe_despesa.total_classe=total}}
     {{classe_despesa.update_record()}}

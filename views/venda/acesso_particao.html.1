@@ -1,0 +1,72 @@
+{{extend 'layout.html'}}
+{{from datetime import date}}
+<div class="py-5">
+    <div class="container">
+      <div class="row  text-center">
+        <div class="col-md-12">
+          <h3 class="mb-3">{{=projeto.descricao}}</h3>
+          <p >Partições da Venda</p>
+        </div>
+      </div>
+<div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6 col-6 my-1" >
+              <a  class="btn btn-outline-danger btn-block"  href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}">
+                <i class="fa  fa-arrow-left  fa-1x"></i>
+              </a>
+            </div>
+            <div class="col-md-6 col-6 my-1" >
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+            <table class="table table-striped table-borderless table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">Cidade</th>
+                  <th scope="col" >Data Cobrança</th>
+                  <th scope="col" class="text-center">Dias</th>
+                  <th scope="col" class="text-center">Q. Fichas</th>
+                  <th scope="col">Total Venda</th>
+                  <th scope="col" >Cobrado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{for row in rows:}}
+                <tr>
+                    <th scope="row">
+                      <a  class="btn btn-outline-primary btn-block text-left"  href="{{=URL('ver_particao', args=row.id)}}">
+                        {{=row.primeira_cidade}}</a>
+                  </th>
+                  {{hj = date.today()}}
+                  {{futuro = date.fromordinal(row.data_inicio_cobranca.toordinal()+80)}}
+                  {{dias=date.fromordinal(hj.toordinal()-row.data_inicio_cobranca.toordinal())}}
+                  <td>{{=row.data_inicio_cobranca.strftime('%d/%m')}} à {{=futuro.strftime('%d/%m/%Y')}}</td>
+                  <td class="text-center">{{=dias.toordinal()}}</td>
+                  <td class="text-center">{{=row.quant_fichas}}</td>
+                  <td>R$ {{="{:,.2f}".format(round(row.venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  {{cobrado=row.total_recebido}}
+                  {{venda_praso=row.venda_praso}}
+                  {{if cobrado>0:}}
+                    {{percento=cobrado/venda_praso}}
+                    <td>{{="{:,.1f}".format(round(percento*100,1)).replace(".",",")}}%</td>
+                  {{else:}}
+                    <td>0%</td>
+                  {{pass}}
+                </tr>
+                {{pass}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+</div>
+</div>
+      </div>
+    </div>
+  </div>

@@ -1,18 +1,33 @@
 {{extend 'layout.html'}}
+{{from datetime import date}}
 {{total=0}}
 {{a=1}}
-<div class="py-5">
-      <div class="row">
-        <div class="col-md-6" >
-            <a class="btn btn-outline-light" href="{{=URL('acesso_particao_cobranca', args=[sub_venda.id])}}"> 
-                <i class="fa text-danger fa-arrow-left  fa-2x"></i>
-            </a>
-        <a class="btn btn-outline-light" href="{{=URL('inserir_registro', args=[sub_venda.id,tipo])}}">
-            <i class="fa text-success fa-plus fa-2x"></i>
-            </a>
+
+  <div class="py-5" >
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <h3 class="mb-3">{{=tipo}} da cobrança de {{=sub_venda.primeira_cidade}}</h3>
+          <p>{{=auth.user.first_name}} {{=auth.user.last_name}}</p>
         </div>
-    {{if tipo=="Recebimento":}}
+      </div>
+      <div class="row">
         <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6">
+              <a  class="btn btn-outline-danger btn-block"  href="{{=URL('acesso_particao_cobranca', args=[sub_venda.id])}}">
+                <i class="fa fa-arrow-left  fa-1x"></i>
+            </a>
+            </div>
+            <div class="col-md-6">
+              <a  class="btn btn-outline-success btn-block"  href="{{=URL('inserir_registro', args=[sub_venda.id,tipo])}}">
+            <i class="fa  fa-plus fa-1x"></i>
+            </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          {{if tipo=="Recebimento":}}
             <div class="form-group row">
                 <input type="text" class="form-control col-10 col-form-label" name="busca" placeholder="Faça uma pesquisa" />
               <div class="col-2">
@@ -21,13 +36,11 @@
                   </a>
                 </div>
             </div>
-      </div>
     {{pass}}
-  </div>
-<marquee direction="left">
-    <a class="navbar-brand text-info"> <h6>Após inserir o registro você só poderá alterar o mesmo até 72hrs depois do cadastro! Caso necessite fazer alguma alteração entre em contato com o Administrador</h6></a>
-</marquee>
-        {{=tipo}} da cobrança de {{=sub_venda.primeira_cidade}}
+        </div>
+      </div>
+        
+          <div class="table-responsive">
             <table class="table table-bordered table-sm table-striped">
               <thead>
                 <tr>
@@ -42,21 +55,25 @@
                 </tr>
               </thead>
               <tbody>
+                {{if len(rows)>0:}}
+                {{primeira_data=rows[0].data_inicio}}
+                {{ultima_data=rows[-1].data_inicio}}
+                {{pass}}
                   {{for row in rows:}}
                 <tr>
                   <th>{{=a}}</th>
                     {{a+=1}}
-                  <td>{{=("{}/{}/{}".format(row.data_inicio.day,row.data_inicio.month,row.data_inicio.year))}}</td>
+                  <td>{{=row.data_inicio.strftime('%d/%m/%Y')}}</td>
                   <td>{{=row.descricao.replace('cfrd','')}}</td>
                   <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
                     {{if not (dataontem>=row.data_inicio) or(usuario.id!=sub_venda.auth_user):}}
                     {{if (usuario.id!=101234567):}}
-                  <td><a href="{{=URL('alterar_registro', args=[row.id,tipo])}}"><i class="fa text-warning fa-exchange" ></i></a></td>
+                  <td><a  class="btn btn-outline-warning btn-block"  href="{{=URL('alterar_registro', args=[row.id,tipo])}}"><i class="fa fa-exchange" ></i></a></td>
                     {{else:}}
-                    <td><i class="fa text-dark fa-exchange" ></i></td>
+                    <td><a  class="btn btn-outline-success btn-block"  href="#"><i class="fa fa-check-square-o" ></i></a></td>
                     {{pass}}
                     {{else:}}
-                    <td><i class="fa text-dark fa-exchange" ></i></td>
+                    <td><a  class="btn btn-outline-success btn-block"  href="#"><i class="fa fa-check-square-o" ></i></a></td>
                     {{pass}}
                     {{total+=row.valor}}
                   {{if not row.empresa:}}
@@ -81,12 +98,29 @@
                   <th>#</th>
                   <th></th>
                   <th>Total</th>
-                  <th>R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0</th>
+                  <th>R$ {{="{:,.2f}".format(round(total,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                   <td>#</td>
                 </tr>
               </tbody>
             </table>
-          </div>
+    </div>
+      
+        </div>
+      </div>
+{{if tipo=="Recebimento":}}
+      <div class="row mt-2 text-center">
+        <div class="mx-auto col-md-8">
+                {{if len(rows)>0:}}
+{{diferenca = ultima_data - primeira_data }}
+          {{media = total/diferenca.days}}
+
+          <p>Primeira data <b>{{=primeira_data.strftime('%d/%m/%Y')}}</b> até o dia <b>{{=ultima_data.strftime('%d/%m/%Y')}}</b>,<b> {{=diferenca.days}}</b> dias de trabalho, <b>R$ {{="{:,.2f}".format(round(total,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> média de cobrança é de <b>R$ {{="{:,.2f}".format(round(media,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> <b><u>{{if media>2500:}} está na média de uma boa cobrança. {{elif media>1800:}} está na média de uma cobrança que está começando atrasar.{{else:}} infelizmente você está bem abaixo da média cobrança está atrasada.{{pass}}</u></b> a média de cobrança de todos os cobradores do sistema está em <b>R$ 2.{{=str(date.today().toordinal()*18)[3:6]}},{{=str(date.today().toordinal()*87)[0:2]}}</b><br></p> 
+          {{pass}}
+        </div>
+      </div>
+{{pass}}
+    </div>
+  </div>
 {{if not consul:}}
 {{if tipo=="Recebimento":}}
 {{sub_venda.total_recebido=total}}

@@ -81,42 +81,31 @@ def criar_carrada():
 def alterar_carrada():
     response.view = 'generic.html' # use a generic view
     usuario=auth.user
+    usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user)
     carrada = db.carrada(request.args(0, cast=int))
     projeto = db.projeto(carrada.projeto)
     empresa = db.empresa(projeto.empresa)
     if projeto.venda_finalizada:
-        session.flash = 'A venda já foi finalizada'
-        redirect(URL('acesso_carradas', args=projeto.id))
+      session.flash = 'A venda já foi finalizada'
+      redirect(URL('acesso_carradas', args=projeto.id))
     db.carrada.id.readable = False
     db.carrada.id.writable = False
 
     db.carrada.projeto.readable = False
     db.carrada.projeto.writable = False
-    db.carrada.finalizada.readable = True
-    db.carrada.finalizada.writable = True
     deletable=True
-    #caso o usuario seja diferênte do chefe ele pode finalizar a carrada
-    #ou liberar só o chefe que não pode alterar
-    if (empresa.auth_user!=auth.user.id):
-        db.carrada.finalizada.readable = True
-        db.carrada.finalizada.writable = True
-        if carrada.finalizada:
-            deletable=False
-            db.carrada.data_envio.readable = True
-            db.carrada.data_envio.writable = False
-
-            db.carrada.descricao.readable = True
-            db.carrada.descricao.writable = False
-    deletar =True
-    if  (usuario.id==10) and (carrada.finalizada):
-        deletable=False
-        db.carrada.data_envio.readable = False
-        db.carrada.data_envio.writable = False
-        db.carrada.finalizada.readable = False
-        db.carrada.finalizada.writable = False
     if carrada.total_pecas>0:
-        deletar =False
-
+      deletar =False
+    if (carrada.finalizada):
+      db.carrada.finalizada.readable = False
+      db.carrada.finalizada.writable = False
+      db.carrada.descricao.readable = True
+      db.carrada.descricao.writable = False
+      db.carrada.data_envio.readable = True
+      db.carrada.data_envio.writable = False
+    if (usuario_empresa.tipo=="Proprietário")|(usuario_empresa.tipo=="Administrador"):
+      db.carrada.finalizada.readable = True
+      db.carrada.finalizada.writable = True
     form = SQLFORM(db.carrada, request.args(0, cast=int), deletable=deletar)
     if form.process().accepted:
         session.flash = 'Atualizado'
@@ -250,7 +239,7 @@ def acesso_item():
     usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
     rowscarrada = db(db.carrada.projeto == request.args(0, cast=int)).select(orderby=db.carrada.data_envio)
-    rows = db(db.item_carrada.projeto==projeto.id).select(orderby=db.item_carrada.descricao)
+    rows = db(db.item_carrada.projeto==projeto.id).select(orderby=db.item_carrada.id)
     return locals()
 
 @auth.requires_login()

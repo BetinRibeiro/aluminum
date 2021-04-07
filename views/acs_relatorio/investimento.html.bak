@@ -24,6 +24,7 @@
               <li class="list-group-item d-flex justify-content-between">
                 <div>
                     <h6 class="my-0">
+                        <span class="badge badge-success">30 à 35% (projeção venda)</span>
                         <b>Custo da Mercadoria</b>
                     </h6>
                     <small class="text-muted" contenteditable="true">
@@ -69,7 +70,7 @@
                         <b>Vale Vendedores</b>
                     </h6>
                     <small class="text-muted">
-                        {{="{:,}".format(round(projeto.quant_vendedores,1)).replace(".0","")}} Vendedores
+                        <span class="badge badge-success">5 à 10% (projeção venda)</span>{{="{:,}".format(round(projeto.quant_vendedores,1)).replace(".0","")}} Vendedores
                     </small>
                 </div>
                 <span class="text-muted">
@@ -87,14 +88,15 @@
                 </span>
             </li>
             <br>
-            <h5> <span><b>-Despesas Local e Venda</b></span></h5>
+            <h5> 
+<span><b>-Despesas Local e Venda</b></span></h5>
 {{total_despesa_local=0}}
 {{if projeto.total_despesa_local>0:}}
     {{total_despesa_local+=projeto.total_despesa_local}}
 {{pass}}
               <li class="list-group-item d-flex justify-content-between">
                 <div>
-                    <h6 class="my-0">Despesa Local</h6>
+                    <h6 class="my-0"><span class="badge badge-success">5% (venda)</span> Despesa Local</h6>
                 </div>
                 <span class="text-muted">
                     R$ {{="{:,}".format(round(projeto.total_despesa_local,1)).replace(",",".")}}0
@@ -213,7 +215,7 @@
 {{pass}}
             <li class="list-group-item d-flex justify-content-between">
                 <div>
-                    <h6 class="my-0">Retorno da Mercadoria</h6>
+                    <h6 class="my-0"><span class="badge badge-success">5 à 15% (Custo)</span> Retorno da Mercadoria</h6>
                 </div>
                 <span class="text-muted">
                     R$ {{="{:,}".format(round(projeto.total_custo_retorno,1)).replace(",",".")}}0
@@ -247,7 +249,7 @@
             </li>
               {{pass}}
              {{if projeto.id==20:}}
-                {{projeto.total_debito_vendedor=12609.3}}
+                {{projeto.total_debito_vendedor=-12609.3}}
             {{pass}}
             
 {{if projeto.total_debito_vendedor>=0:}}
@@ -256,7 +258,7 @@
 {{pass}}
             <li class="list-group-item d-flex justify-content-between">
                 <div>
-                    <h6 class="my-0">Debito dos Vendedores</h6>
+                    <h6 class="my-0"><span class="badge badge-success">5 à 15% (dos vales)</span> Debito dos Vendedores</h6>
                 </div>
                 <span class="text-muted">
                     R$ {{="{:,}".format(round(projeto.total_debito_vendedor*-1,1)).replace(",",".")}}0
@@ -283,7 +285,7 @@
 
             <br>
             <li class="list-group-item d-flex justify-content-between bg-light">
-                <span><b>Investimento Real</b></span>
+                <span><b><span class="badge badge-success">45 à 50% (venda)</span> Investimento Real</b></span>
                 <b>R$ {{="{:,}".format(round(investimento,1)).replace(",",".")}}0</b>
             </li>
         </ul>
@@ -311,6 +313,7 @@
             <li class="list-group-item d-flex justify-content-between">
                 <div>
                     <h6 class="my-0">
+                      <span class="badge badge-success">75 à 100%(venda)</span> 
                         <i class="fa text-primary fa-arrow-right"></i>
                         <b>Valor Cobrado</b>
                     </h6>
@@ -330,6 +333,7 @@
 <li class="list-group-item d-flex justify-content-between">
 <div>
 <h6 class="my-0">
+  <span class="badge badge-success">5 à 7% (Cobrado)</span>
     <i class="fa text-primary fa-arrow-right"></i>
     <b>Despesa da Cobrança</b>
 </h6>{{percent=0}}
@@ -363,12 +367,12 @@
               {{saldo_investimento=projeto.total_deposito_cobranca-investimento}}
             <li class="list-group-item d-flex justify-content-between">
               <div>
-                <h6 class="my-0">Total Depositos</h6>
+                <h6 class="my-0"><span class="badge badge-success">63 à 75% (venda)</span> Total Depositos</h6>
               </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_deposito_cobranca,1)).replace(",",".")}}0</span>
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <div>
-                <h6 class="my-0">Investimento Total</h6>
+                <h6 class="my-0"><span class="badge badge-success">45 à 50% (venda)</span> Investimento Total</h6>
               </div> <span class="text-muted">R$ {{="{:,}".format(round(investimento,1)).replace(",",".")}}0</span>
             </li>
             <li class="list-group-item d-flex justify-content-between bg-light"> <span><b>Saldo Investimento</b></span> <b>R$ {{="{:,}".format(round(saldo_investimento)).replace(",",".")}}0</b> </li>
@@ -428,10 +432,11 @@
               <br>
               {{saldo_investimento=saldo_investimento+entrada_extra}}
             <li class="list-group-item d-flex justify-content-between bg-light">
+              <span><span class="badge badge-success">20 à 33% (venda)</span> 
                 {{if saldo_investimento>0:}}
-                <span><b>Lucro Liquido Real</b></span>
+                <b>Lucro Liquido Real</b></span>
                 {{else:}}
-                <span><b>Prejuizo Liquido Real</b></span>
+                <b>Prejuizo Liquido Real</b></span>
                 {{pass}}
                 <b>R$ {{="{:,}".format(round(saldo_investimento,1)).replace(",",".")}}0</b>
             </li>

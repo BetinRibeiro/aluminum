@@ -5,7 +5,9 @@ You should not modify this file.
 It is used as default when a view is not provided for your controllers
 
 """}}
-
+<div class="">
+  <div class="container">
+      <div class="mx-auto col-md-10">
 <div class="card" >
     <div class="card-header">{{=' '.join(x.capitalize() for x in request.function.split('_'))}}</div>
 {{if len(response._vars)==1:}}
@@ -13,4 +15,7 @@ It is used as default when a view is not provided for your controllers
 {{elif len(response._vars)>1:}}
      <div class="card-body">{{=BEAUTIFY(response._vars)}}</div>
 {{pass}}
+</div>
+    </div>
+  </div>
 </div>

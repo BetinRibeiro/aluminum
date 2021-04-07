@@ -78,17 +78,6 @@ db.define_table('boleto',
                 Field('value_total', 'double',label='Valor', notnull=True, default=0),
                 Field('value_receber', 'double',label='Valor', notnull=True, default=0),
                 )
-
-db.define_table('cliente',
-                Field('projeto','reference projeto', label='Projeto'),
-                Field('id_cliente','string', label='Cliente'),
-                Field('id_asaas', 'string', label='Id asaas', unique=True),
-                Field('description', 'string', label='Descrição'),
-                Field('status', 'string', label='status'),
-                Field('due_date', 'date', label="Data Recebimento", default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),
-                Field('value_total', 'double',label='Valor', notnull=True, default=0),
-                Field('value_receber', 'double',label='Valor', notnull=True, default=0),
-                )
 db.define_table('boleto_atrasado',
                 Field('projeto','reference projeto', label='Projeto'),
                 Field('vendedor','reference vendedor', label='Vendedor'),

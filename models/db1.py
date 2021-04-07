@@ -17,7 +17,7 @@ db.define_table('pagamento',
                 Field('valor', 'double', writable=True, readable=True , notnull=True, default=0),
                 Field('link', 'string', label='Link Recebimento',requires = IS_UPPER()),
                 Field('observacao', 'text', label='Observação', writable=True, readable=True,requires = IS_UPPER()),
-                Field('quitado', 'boolean', writable=True, readable=True, default=False),
+                Field('quitado', 'boolean', writable=True, readable=True, default=True),
                 format='%(descricao)s')
 
 db.define_table('transporte',

@@ -12,7 +12,7 @@
       <div class="row">
         <div class="col-md-12">
           <a class="btn btn-link" href="{{=URL('acs_projeto','index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
-          {{if not projeto.finalizado:}}
+          {{if not projeto.venda_finalizada:}}
           <a class="btn btn-link" href="{{=URL('adicionar_carrada', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Adicionar Carrada Nova</a>
           {{pass}}
         </div>
@@ -35,11 +35,11 @@
               <tbody>
                   {{for row in rows:}}
                 <tr>
-                  <th scope="row">{{=("{}/{}/{}".format(row.data_envio.day,row.data_envio.month,row.data_envio.year))}}</th>
+                  <th scope="row">{{=row.data_envio.strftime('%d/%m/%Y')}}</th>
                   <td>{{=(row.descricao)[0:30]}}</td>
                   <td class="text-center">{{=row.total_pecas}}</td>
-                  <td class="text-center">R$ {{="{:,}".format(round(row.total_custo)).replace(",",".")}}0</td>
-                  <td class="text-center">R$ {{="{:,}".format(round(row.total_preco)).replace(",",".")}}0</td>
+                  <td class="text-center">R$ {{="{:,.2f}".format(round(row.total_custo,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  <td class="text-center">R$ {{="{:,.2f}".format(round(row.total_preco,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                     {{margem=0}}
                     {{if row.total_custo>0 and row.total_preco>0:}}
                     {{margem=row.total_preco/row.total_custo*100}}
@@ -62,17 +62,17 @@
                   <th scope="row">#</th>
                   <th>#</th>
                   <th class="text-center">{{=pecas}}</th>
-                  <th class="text-center">R$ {{="{:,}".format(round(custo)).replace(",",".")}}0</th>
-                  <th class="text-center">R$ {{="{:,}".format(round(preco)).replace(",",".")}}0</th>
+                  <th class="text-center">R$ {{="{:,.2f}".format(round(custo,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                  <th class="text-center">R$ {{="{:,.2f}".format(round(preco,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                     {{margem=0}}
                     {{if custo>0 and preco>0:}}
                     {{margem=preco/custo*100}}
                     {{pass}}
                     
                     {{if margem>349:}}
-                  <th class="text-center text-success">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></th>
+                  <th class="text-center text-success">{{="{:,.1f}".format(round(margem,1)).replace(".",",")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></th>
                     {{elif margem>250:}}
-                  <th class="text-center text-warning">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></th>
+                  <th class="text-center text-warning">{{="{:,.1f}".format(round(margem,1)).replace(".",",")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></th>
                     {{else:}}
                   <th class="text-center text-danger">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></th>                    
                     {{pass}}

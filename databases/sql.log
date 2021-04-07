@@ -664,3 +664,29 @@ CREATE TABLE "projeto"(
     "bloqueio_chefe" CHAR(1)
 );
 faked!
+timestamp: 2021-04-05T01:10:42.829649
+ALTER TABLE "empresa" ADD "data_bloqueio" DATE;
+success!
+timestamp: 2021-04-05T01:40:04.936586
+ALTER TABLE "usuario_empresa" ADD "tipo" CHAR(512);
+success!
+timestamp: 2021-04-05T02:06:31.310289
+ALTER TABLE "projeto" ADD "data_inicial" DATE;
+timestamp: 2021-04-05T02:06:33.286952
+ALTER TABLE "projeto" ADD "data_final" DATE;
+success!
+timestamp: 2021-04-06T03:11:10.281818
+ALTER TABLE "empresa" ADD "quant_usuarios" INTEGER NOT NULL DEFAULT 4;
+success!
+timestamp: 2021-04-06T04:05:32.900667
+ALTER TABLE "empresa" ADD "bloqueada" CHAR(1);
+success!
+timestamp: 2021-04-06T04:19:46.865740
+ALTER TABLE "empresa" ADD "valor" DOUBLE NOT NULL DEFAULT 0.0;
+success!
+timestamp: 2021-04-06T15:25:25.877641
+ALTER TABLE "usuario_empresa" ADD "bloqueado" CHAR(1);
+success!
+timestamp: 2021-04-07T09:53:44.046876
+ALTER TABLE "classe_despesa_cobranca" ADD "bloqueado" CHAR(1);
+success!

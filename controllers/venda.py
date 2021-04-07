@@ -3,15 +3,12 @@
 @auth.requires_login()
 def acesso_particao():
     projeto = db.projeto(request.args(0, cast=int))
-    rows = db(db.sub_venda.projeto == projeto.id).select()
+    rows = db(db.sub_venda.projeto == projeto.id).select(orderby=db.sub_venda.data_inicio_cobranca)
     total_venda=0.0
     total_fichas=0
     for row in rows:
         total_venda=0.0
         total_fichas=0
-        #sum = db.venda.venda_praso.sum()
-        #row.venda_praso=(db(db.venda.sub_venda == row.id).select(sum).first()[sum])
-        #row.update_record()
         rowsv = db(db.venda.sub_venda == row.id).select()
         for rowv in rowsv:
             total_venda+=rowv.venda_praso-rowv.valor_devolvido
@@ -55,9 +52,6 @@ def alterar_particao():
     deletar =True
     if sub_venda.total_venda_praso>0:
         deletar =False
-        
-    
-
     form = SQLFORM(db.sub_venda, request.args(0, cast=int), deletable=deletar)
     if form.process().accepted:
         session.flash = 'Atualizado'
@@ -72,5 +66,6 @@ def alterar_particao():
 @auth.requires_login()
 def ver_particao():
     sub_venda = db.sub_venda(request.args(0, cast=int))
+    projeto = db.projeto(sub_venda.projeto)
     rows = db(db.venda.sub_venda == sub_venda.id).select(orderby=db.venda.data_venda)
     return locals()

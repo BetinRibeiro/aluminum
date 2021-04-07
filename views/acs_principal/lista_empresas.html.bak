@@ -1,11 +1,18 @@
 {{extend 'layout.html'}}
+ {{block head}}
+    <link rel="stylesheet" href="https://bootswatch.com/4/solar/bootstrap.css"/>
+{{end}}
 <div class="py-5" >
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h3 class="">Ecesso Administrativo Geral</h3>
+          <h3 class="">Acesso Administrativo Geral</h3>
         </div>
       </div>
+      <a class="btn btn-link" href="{{=URL('cadastrar_empresa')}}" style="color:#3b5998">
+        <i class="fa fa-fw fa-1x py-1 fa-plus"></i>
+        Adicionar
+      </a>
       <div class="row">
         <div class="col-md-12">
           <div class="table-responsive">
@@ -14,16 +21,33 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Nome Empresa</th>
-                  <th scope="col">Opção</th>
+                  <th scope="col">Usuarios</th>
+                  <th scope="col">Alterar</th>
+                  <th scope="col">Acessar</th>
                 </tr>
               </thead>
               <tbody>
                   {{a=1}}
                   {{for row in rows:}}
                 <tr>
-                  <th scope="row">{{=a}}</th>
+                  <th scope="row"><a class="btn btn-link" style="color:#55acee"href="{{=URL('alterar_empresa', args=row.id)}}">{{=5000+row.id}}</a></th>
+                  {{if row.bloqueada:}}
+                  <td class="text-danger" >{{=row.nome}}</td>
+                  <td>0</td>
+                  {{else:}}
                   <td>{{=row.nome}}</td>
-                  <td><a class="btn btn-link" style="color:#55acee"href="{{=URL('index', args=row.id*12)}}"><i class="fa fa-twitter fa-fw fa-1x py-1"></i></a></td>
+                  <td>{{=row.quant_usuarios}}</td>
+                  {{pass}}
+                  <td>
+                    <a class="btn btn-link" style="color:#55acee"href="{{=URL('alterar_empresa', args=row.id)}}">
+                      <i class="fa fa-pencil fa-fw fa-1x py-1"></i>
+                    </a>
+                  </td>
+                  <td>
+                    <a class="btn btn-link" style="color:#55acee"href="{{=URL('index', args=row.id*12)}}">
+                      <i class="fa fa-square fa-fw fa-1x py-1"></i>
+                    </a>
+                  </td>
                 </tr>
                   {{a+=1}}
                   {{pass}}

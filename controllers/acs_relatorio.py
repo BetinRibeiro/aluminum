@@ -103,8 +103,8 @@ def alterar_ent_said():
     db.projeto.descricao_adiantamento.readable = True
     db.projeto.descricao_adiantamento.writable = True
     
-    db.projeto.venda_finalizada.readable = False
-    db.projeto.venda_finalizada.writable = False
+    db.projeto.venda_finalizada.readable = True
+    db.projeto.venda_finalizada.writable = True
 
     form = SQLFORM(db.projeto, request.args(0, cast=int), deletable=False)
     if form.process().accepted:

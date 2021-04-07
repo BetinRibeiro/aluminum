@@ -105,8 +105,8 @@ def alterar_dados():
     db.sub_venda.projeto.readable = False
     db.sub_venda.projeto.writable = False
 
-    db.sub_venda.data_inicio_cobranca.readable = False
-    db.sub_venda.data_inicio_cobranca.writable = False
+    db.sub_venda.data_inicio_cobranca.readable = True
+    db.sub_venda.data_inicio_cobranca.writable = True
 
     db.sub_venda.nome_cobrador.writable = False
 

@@ -8,59 +8,97 @@
 {{pass}}
 
 {{if len(rows)>0:}}
-<div class="table-responsive" >
-        <table class="table table-bordered table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">DESCRIÇÃO</th>
-                <th scope="col">VENDA</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{for row in rows:}}
-                  <tr>
-                    <td><a  href="{{=URL('projeto','acesso_projeto', args=row.id)}}">{{=row.descricao}}</a></td>
-                      <td>R$ {{="{:,}".format(round(row.total_venda_prazo,1)).replace(",",".")}}0</td>
-                      {{if liberar==9:}}
-                      <td><a href="{{=URL('alterar_projeto', args=row.id)}}"><i class="fa mr-2 fa-exchange text-warning" ></i></a></td>
-                      {{pass}}
-                      
-                  </tr>
+
+  <div class="py-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" >
+          <div class="table-responsive" >
+            <table class="table table-bordered table-striped table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">DESCRIÇÃO</th>
+                    <th scope="col">VENDA</th>
+                    <th scope="col">PERC</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{for row in rows:}}
+                <tr>
+                  <td>
+                    <a class="btn btn-outline-primary btn-block text-left" href="{{=URL('projeto','acesso_projeto', args=row.id)}}">
+                      {{=row.descricao}}
+                    </a>
+                  </td>
+                  <td>R$ {{="{:,.2f}".format(round(row.total_venda_prazo,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  {{perc=0}}
+                  {{if (row.total_venda_prazo>0)and(row.total_cobrado>0):}}
+                  {{perc=row.total_cobrado/row.total_venda_prazo*100}}
                   {{pass}}
-          </tbody>
-        </table>
+                  <td>{{="{:,.1f}".format(round(perc,1)).replace(",","#").replace(".",",").replace("#",".")}}%</td>
+                  {{if liberar==9:}}
+                  <td><a href="{{=URL('alterar_projeto', args=row.id)}}"><i class="fa mr-2 fa-exchange text-warning" ></i></a></td>
+                  {{pass}}
+                </tr>
+                {{pass}}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
 {{pass}}
 <hr>
 {{if len(rowscob)>0:}}
-<div class="table-responsive" >
-        <table class="table table-bordered table-striped table-sm">
-          <thead>
-            <tr>
-              <th scope="col">DATA</th>
-               <th scope="col">CIDADE</th>
-               <th scope="col">VALOR</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{for row1 in rowscob:}}
-            {{if not row1.cobranca_finalizada:}}
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" >
+          <div class="table-responsive" >
+            <table class="table table-bordered table-striped table-sm">
+              <thead>
+                <tr>
+                  <th scope="col">DATA</th>
+                   <th scope="col">CIDADE</th>
+                   <th scope="col">VALOR</th>
+                </tr>
+              </thead>
+              <tbody>
+              {{for row1 in rowscob:}}
+              {{if not row1.cobranca_finalizada:}}
                   <tr>
-                    <td><a  href="{{=URL('cobranca','acesso_particao_cobranca', args=row1.id)}}">{{=("{}/{}/{}".format(row1.data_inicio_cobranca.day,row1.data_inicio_cobranca.month,row1.data_inicio_cobranca.year))}}</a></td>
+                    <td>
+                      <a  class="btn btn-outline-primary btn-block text-left" href="{{=URL('cobranca','acesso_particao_cobranca', args=row1.id)}}">
+                        {{=row1.data_inicio_cobranca.strftime('%d/%m/%Y')}}
+                      </a>
+                    </td>
                       <td>{{=row1.primeira_cidade}}</td>
-                      <td>R$ {{="{:,}".format(round(row1.total_venda_praso,1)).replace(",",".")}}0</td>
+                      <td>R$ {{="{:,.2f}".format(round(row1.total_venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                   </tr>
-{{pass}}
+                {{pass}}
             {{pass}}
           </tbody>
         </table>
       </div>
+      </div>
+    </div>
+  </div>
 {{pass}}
 
 {{else:}}
-<h2>
-     <marquee direction="left">
-    <a class="navbar-brand text-danger"> <h6>Você não possui nem um projeto de venda nem cobranças vinculado ao seu login!</h6></a>
-    </marquee>
-</h2>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12" >
+          <h2>
+               <marquee direction="left">
+                  <a class="navbar-brand text-danger"> 
+                    <h6>Você não possui nem um projeto de venda nem cobranças vinculado ao seu login!</h6>
+                 </a>
+              </marquee>
+          </h2>
+      </div>
+    </div>
+  </div>
 {{pass}}

@@ -5,9 +5,18 @@ You should not modify this file.
 It is used as default when a view is not provided for your controllers
 
 """}}
-<h2>{{=' '.join(x.capitalize() for x in request.function.split('_'))}}</h2>
+<div class="">
+  <div class="container">
+      <div class="mx-auto col-md-10">
+<div class="card" >
+    <div class="card-header">{{=' '.join(x.capitalize() for x in request.function.split('_'))}}</div>
 {{if len(response._vars)==1:}}
-{{=BEAUTIFY(response._vars[next(iter(response._vars))])}}
+     <div class="card-body">{{=BEAUTIFY(response._vars[next(iter(response._vars))])}}</div>
 {{elif len(response._vars)>1:}}
-{{=BEAUTIFY(response._vars)}}
+     <div class="card-body">{{=BEAUTIFY(response._vars)}}</div>
 {{pass}}
+</div>
+        
+    </div>
+  </div>
+</div>

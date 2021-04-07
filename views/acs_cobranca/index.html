@@ -1,7 +1,8 @@
 {{extend 'layout.html'}}
+{{from datetime import date}}
 
- {{a=1}}
- {{valor=0}}
+{{a=1}}
+{{valor=0}}
 {{recebido=0}}
 {{despesa=0}}
 {{deposito=0}}
@@ -39,19 +40,59 @@
                   <h6 class="mb-0">{{=row.nome_cobrador}}</h6>
                 </div>
                 <div class="col-6 text-right">
-                  <h6 class="mb-0"> <b>R$ {{="{:,}".format(round(row.total_venda_praso,1)).replace(",",".")}}0</b> </h6>
+                  <h6 class="mb-0"> <b>R$ {{="{:,}".format(round(row.total_venda_praso,1)).replace(",","#").replace(".",",").replace("#",".")}}0</b> </h6>
+                  <h7>{{=row.total_fichas}} Fichas</h7>
                 </div>
               </div>
-              <p class="my-3">{{=("{}/{}/{}".format(row.data_inicio_cobranca.day,row.data_inicio_cobranca.month,row.data_inicio_cobranca.year))}}<br>{{=row.primeira_cidade}}</p>
+              <p class="my-3">{{=row.data_inicio_cobranca.strftime('%d/%m/%Y')}}<br>{{=row.primeira_cidade}}</p>
+              
               <ul class="pl-3">
-                <li>Recebido- <b>R$ {{="{:,}".format(round(row.total_recebido,1)).replace(",",".")}}0</b></li>
-                <li>Despesa - <b>R$ {{="{:,}".format(round(row.total_despesa,1)).replace(",",".")}}0</b>{{if row.total_despesa>0 and row.total_recebido>0:}} ({{="{:,}".format(round(row.total_despesa/row.total_recebido*100,1)).replace(",",".")}}%) {{pass}}</li>
-                <li>Deposito- <b>R$ {{="{:,}".format(round(row.total_deposito,1)).replace(",",".")}}0</b></li>
+                <li>Recebido- <b>R$ {{="{:,}".format(round(row.total_recebido,1)).replace(",","#").replace(".",",").replace("#",".")}}0</b></li>
+                <li>Despesa - <b>R$ {{="{:,}".format(round(row.total_despesa,1)).replace(",","#").replace(".",",").replace("#",".")}}0</b>{{if row.total_despesa>0 and row.total_recebido>0:}} ({{="{:,}".format(round(row.total_despesa/row.total_recebido*100,1)).replace(",","#").replace(".",",").replace("#",".")}}%) {{pass}}</li>
+                <li>Deposito- <b>R$ {{="{:,}".format(round(row.total_deposito,1)).replace(",","#").replace(".",",").replace("#",".")}}0</b></li>
                   {{if row.total_recebido>0 and row.total_venda_praso:}}
                   <hr>
-                <li><b>{{="{:,}".format(round(row.total_recebido/row.total_venda_praso*100,1)).replace(",",".")}}%</b></li>
+                <li><b>{{="{:,}".format(round(row.total_recebido/row.total_venda_praso*100,1)).replace(",","#").replace(".",",").replace("#",".")}}%</b></li>
                   {{pass}}
-              </ul> <a class="btn btn-primary mt-3" href="{{=URL('relatorio_cobranca', args=[row.id])}}">Acessar Cobrança</a>
+                
+              </ul>
+              
+                  {{diferenca=date.today()-row.data_inicio_cobranca}}
+              {{if usuario.id==11 or usuario.id==1 or usuario.id==5:}}
+              {{if row.total_deposito>0 and row.total_recebido>0 and row.total_despesa>0:}}
+              {{if diferenca.days>5 and not diferenca.days>150:}}
+                  {{=diferenca.days}} Dias
+              {{media_dia=row.total_recebido/diferenca.days}}
+                  médias: 
+              <br> R$ {{="{:,}".format(round(media_dia,1)).replace(",","#").replace(".",",").replace("#",".")}}0 Cobrado/Dia
+              {{media_dia=row.total_deposito/diferenca.days}}
+              <br> R$ {{="{:,}".format(round(media_dia,1)).replace(",","#").replace(".",",").replace("#",".")}}0 Depositos/Dia
+              {{media_dia=row.total_despesa/diferenca.days}}
+              <br> R$ {{="{:,}".format(round(media_dia,1)).replace(",","#").replace(".",",").replace("#",".")}}0 Despesa/Dia
+              <hr>
+              {{media_dia=row.total_recebido/diferenca.days}}
+              {{setperc=row.total_venda_praso*0.60}}
+              <br><b>60%</b> - em {{=int(round(setperc/media_dia, 0))}} Dias
+               {{media_dia=row.total_recebido/diferenca.days}}
+              {{setperc=row.total_venda_praso*0.65}}
+              <br><b>65%</b> - em {{=int(round(setperc/media_dia, 0))}} Dias
+              
+              {{media_dia=row.total_recebido/diferenca.days}}
+              {{setperc=row.total_venda_praso*0.7}}
+              <br><b>70%</b> - em {{=int(round(setperc/media_dia, 0))}} Dias
+              
+              {{media_dia=row.total_recebido/diferenca.days}}
+              {{setperc=row.total_venda_praso*0.75}}
+              <br><b>75%</b> - em {{=int(round(setperc/media_dia, 0))}} Dias
+              
+              {{media_dia=row.total_recebido/diferenca.days}}
+              {{setperc=row.total_venda_praso*0.8}}
+              <br><b>80%</b> - em {{=int(round(setperc/media_dia, 0))}} Dias
+              {{pass}}
+              {{pass}}
+              {{pass}}
+                <hr>
+              <a class="btn btn-primary mt-3" href="{{=URL('relatorio_cobranca', args=[row.id])}}">Acessar Cobrança</a>
             </div>
           </div>
         </div>

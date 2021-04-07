@@ -31,7 +31,9 @@
                   <th scope="col" class="text-center">Preço</th>
                   <th scope="col" class="text-center">Total</th>
                   <th scope="col" class="text-center">Margem</th>
+          {{if not projeto.venda_finalizada:}}
                   <th id="noprint" class="text-center">Opção</th>
+                  {{pass}}
                   {{if (usuario.id==11)or(usuario.id==1):}}
                   <th id="noprint" class="text-center">Verificação</th>
 
@@ -43,23 +45,26 @@
                 <tr>
                   <th scope="row">{{=row.q_pcs}}</th>
                   <td>{{=row.descricao.replace("cfrd","")}}</td>
-                  <td class="text-center">R$ {{="{:,}".format(round(row.custo_unitario)).replace(",",".")}}0</td>
-                  <td class="text-center">R$ {{="{:,}".format(round(row.custo_unitario*row.q_pcs)).replace(",",".")}}0</td>
-                  <td class="text-center">R$ {{="{:,}".format(round(row.preco_unitario)).replace(",",".")}}0</td>
-                  <td class="text-center">R$ {{="{:,}".format(round(row.preco_unitario*row.q_pcs)).replace(",",".")}}0</td>
+                  <td class="text-center">R$ {{="{:,.2f}".format(round(row.custo_unitario,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  <td class="text-center">R$ {{="{:,.2f}".format(round(row.custo_unitario*row.q_pcs,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  <td class="text-center">R$ {{="{:,}".format(round(row.preco_unitario,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  <td class="text-center">R$ {{="{:,.2f}".format(round(row.preco_unitario*row.q_pcs,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                     {{margem=0}}
                     {{if row.custo_unitario>0 and row.preco_unitario>0:}}
                     {{margem=row.preco_unitario/row.custo_unitario*100}}
                     {{pass}}
                     
                     {{if margem>349:}}
-                  <td class="text-center text-success">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></td>
+                  <td class="text-center text-success">{{="{:,.1f}".format(round(margem,1)).replace(".",",")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></td>
                     {{elif margem>250:}}
                   <td class="text-center text-warning">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></td>
                     {{else:}}
                   <td class="text-center text-danger">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></td>                    
                     {{pass}}
+                  
+          {{if not projeto.venda_finalizada:}}
                   <td id="noprint" class="text-center"><a class="btn btn-link" href="{{=URL('alterar_item_carrada', args=row.id)}}" style="color:#3b5998" ><i class="fa fa-fw fa-1x py-1 fa-file-text"></i></a></td>
+                  {{pass}}
                    {{if (usuario.id==11)or(usuario.id==1):}}
                   <td id="noprint" class="text-center">
                     {{if 'cfrd' in row.descricao:}}

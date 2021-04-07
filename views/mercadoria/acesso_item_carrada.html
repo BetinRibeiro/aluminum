@@ -2,24 +2,35 @@
 {{pcas=0}}
 {{total=0}}
 {{custo=0}}
+<div class="py-5">
+    <div class="container">
+      <div class="row  text-center">
+        <div class="col-md-12">
+          <h3 class="mb-3">{{=carrada.descricao}}</h3>
+          <p >Itens da Carrada</p>
+        </div>
+      </div>
 <div class="row">
-    <div class="col-md-6">
-<a  class="btn btn-outline-light" href="{{=URL('mercadoria','acesso_carradas', args=carrada.projeto)}}"> <i class="fa text-danger fa-arrow-left fa-2x"></i></a>
-{{if not projeto.venda_finalizada:}}
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6 col-6 my-1" >
+              <a  class="btn btn-outline-danger btn-block"  href="{{=URL('mercadoria','acesso_carradas', args=carrada.projeto)}}"> 
+                <i class="fa  fa-arrow-left  fa-1x"></i>
+              </a>
+            </div>
+            <div class="col-md-6 col-6 my-1" >
         {{if not carrada.finalizada:}}
-<a class="btn btn-outline-light" href="{{=URL('criar_item_carrada', args=carrada.id)}}"><i class="fa text-success fa-plus fa-2x"></i></a>
-{{pass}}{{pass}}
-        {{if (usuario.id==1) and (len(rows)==0):}}
-<a class="btn btn-outline-light" href="{{=URL('gerar_mercadorias', args=carrada.id)}}"><i class="fa text-info fa-plus fa-2x"></i></a>
-        
+            <a class="btn btn-outline-success btn-block"  href="{{=URL('criar_item_carrada', args=carrada.id)}}">
+              <i class="fa  fa-plus fa-1x"></i>
+              </a>
         {{pass}}
-    </div></div>
-
-{{if len(rows)>0:}}
-    {{=carrada.descricao}}
-{{else:}}
-    Cadastre Itens
-{{pass}}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
 <div class="table-responsive">
     <table class="table thead-light table-sm table-striped">
         <thead class="">
@@ -99,7 +110,7 @@
                     {{pass}}
                     {{if not carrada.finalizada:}}
                       {{if not projeto.venda_finalizada:}}
-                    <td id="noprint"><a href="{{=URL('alterar_item_carrada', args=row.id)}}"><i class="fa text-warning fa-exchange" ></i></a></td>
+                    <td id="noprint"><a class="btn btn-outline-warning btn-block" href="{{=URL('alterar_item_carrada', args=row.id)}}"><i class="fa  fa-exchange" ></i></a></td>
                     {{pass}}{{pass}}
                   
               {{if (usuario.id==11)or(usuario.id==1):}}
@@ -146,6 +157,13 @@
                 </tr>
         </tbody>
     </table>
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 {{if not projeto.venda_finalizada:}}
 {{carrada.total_preco=total}}

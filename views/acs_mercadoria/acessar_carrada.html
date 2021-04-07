@@ -6,7 +6,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h5 class="">Lista de Itens da Carrada  do dia( {{=("{}/{}/{}".format(carrada.data_envio.day,carrada.data_envio.month,carrada.data_envio.year))}} ) para ( {{=carrada.projeto.descricao}})</h5>
+          <h5 class="">Lista de Itens da Carrada  do dia( {{=carrada.data_envio.strftime('%d/%m/%Y')}} ) para ( {{=carrada.projeto.descricao}})</h5>
         </div>
       </div>
       <div class="row">
@@ -45,17 +45,17 @@
                 <tr>
                   <th scope="row">{{=row.q_pcs}}</th>
                   <td>{{=row.descricao.replace("cfrd","")}}</td>
-                  <td class="text-center">R$ {{="{:,}".format(round(row.custo_unitario)).replace(",",".")}}0</td>
-                  <td class="text-center">R$ {{="{:,}".format(round(row.custo_unitario*row.q_pcs)).replace(",",".")}}0</td>
-                  <td class="text-center">R$ {{="{:,}".format(round(row.preco_unitario)).replace(",",".")}}0</td>
-                  <td class="text-center">R$ {{="{:,}".format(round(row.preco_unitario*row.q_pcs)).replace(",",".")}}0</td>
+                  <td class="text-center">R$ {{="{:,.2f}".format(round(row.custo_unitario,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  <td class="text-center">R$ {{="{:,.2f}".format(round(row.custo_unitario*row.q_pcs,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  <td class="text-center">R$ {{="{:,}".format(round(row.preco_unitario,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  <td class="text-center">R$ {{="{:,.2f}".format(round(row.preco_unitario*row.q_pcs,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                     {{margem=0}}
                     {{if row.custo_unitario>0 and row.preco_unitario>0:}}
                     {{margem=row.preco_unitario/row.custo_unitario*100}}
                     {{pass}}
                     
                     {{if margem>349:}}
-                  <td class="text-center text-success">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></td>
+                  <td class="text-center text-success">{{="{:,.1f}".format(round(margem,1)).replace(".",",")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></td>
                     {{elif margem>250:}}
                   <td class="text-center text-warning">{{="{:,}".format(round(margem,1)).replace(",",".")}}%<i class="fa fa-fw fa-1x py-1 fa-circle"></i></td>
                     {{else:}}

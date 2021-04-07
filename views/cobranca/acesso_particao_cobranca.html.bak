@@ -198,7 +198,7 @@
   </li>
                   {{pass}}
                   <br>
-                  {{if  caixa>=0:}}
+                  {{if  caixa>=-1:}}
                 <li class="list-group-item d-flex justify-content-between">
                   <div>
                     <h6 class="my-0">Caixa atual</h6>

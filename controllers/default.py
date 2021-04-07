@@ -1,35 +1,10 @@
 # -*- coding: utf-8 -*-
 def index():
-    
-    if  auth.is_logged_in():
-      if auth.user.id==241456:
-        response.flash='Acesso em atraso, ultima data de pagamento dia 10/set/2020, data do vencimento 10/out/2020, avite o bloqueio do seu acesso após 10 dias de atraso dia 20/out/2020'
     return locals()
 #gera arquivo para criação de toda empresa e projetos
 @auth.requires_membership('admin') # can only be accessed by members of admin groupd
 def captura_empresa():
-    
     a1 = SQLFORM.smartgrid(db.empresa)
-    #a2 = SQLFORM.grid(db.empresa,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #a3 = SQLFORM.grid(db.projeto,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #a4 = SQLFORM.grid(db.carrada,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #a5 = SQLFORM.grid(db.item_carrada,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    
-    #a6 = SQLFORM.grid(db.funcionario,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #a7 = SQLFORM.grid(db.vale_funcionario,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #a8 = SQLFORM.grid(db.vendedor,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #a9 = SQLFORM.grid(db.sub_venda,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #b1 = SQLFORM.grid(db.venda,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #b2 = SQLFORM.grid(db.cobranca_venda,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #b3 = SQLFORM.grid(db.classe_despesa,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #b4 = SQLFORM.grid(db.despesa,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    
-    #b5 = SQLFORM.grid(db.classe_despesa_cobranca,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #b6 = SQLFORM.grid(db.despesa_cobranca,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #b7 = SQLFORM.grid(db.registro_venda,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #b8 = SQLFORM.grid(db.registro_cobranca,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #b9 = SQLFORM.grid(db.classe_despesa_local,paginate=40,searchable=False,create=False,deletable=False,editable=False)
-    #c1 = SQLFORM.grid(db.despesa_local,paginate=40,searchable=False,create=False,deletable=False,editable=False)
     return locals()
 @auth.requires_login()
 def acesso_inicial_usuario():
@@ -40,20 +15,16 @@ def acesso_inicial_usuario():
     empresa =None
     #caso o uruario esteja vinculado a alguma empresa
     if auth.user.id==50:
-      
         redirect(URL('usuario','fsprojetos',args=8))
- 
     if usuario_empresa:
         #busca a empresa que o funcionario esta vinculado
         empresa = db.empresa(usuario_empresa.empresa)
+        if usuario_empresa.bloqueado:
+          redirect(URL('acs_mensagem','usuario_bloqueado',args="Entre em contato com o administrador da empresa e verifique o motivo do bloqueio!"))
     else:
-        #caso contrario retorna ao index (pagina inicial)
-        session.flash = 'Procure o administrador'
-        redirect(('https://api.whatsapp.com/send?phone=5588981126816'))
-        #busca todos os projetos do usuario
-    rows = db(db.projeto.auth_user==auth.user.id).select()
+        redirect(URL('index'))
+    rows = db(db.projeto.auth_user==auth.user.id).select(limitby=(0,5),orderby=~db.projeto.id)
     rowscob = db(db.sub_venda.auth_user==auth.user.id).select()
-    #3 consultas no banco
     return locals()
 #o acesso inicial requer estar logado
 @auth.requires_login()
@@ -61,25 +32,26 @@ def acesso_inicial():
     #busca empresa que tenha o usuario iguela ao logado
     empresa = db.empresa(db.empresa.auth_user==auth.user.id)
     usuario=auth.user
-    if (auth.user.id==55):
+    
+    if (auth.user.id==1):
         redirect(URL('acs_principal','index'))
-    if (auth.user.id==44) or (auth.user.id==45) or (auth.user.id==46):
-        redirect(URL('acs_chefe','index'))
+    #caso meme passa
     if (auth.user.id==6):
         empresa = db.empresa(4)
         #empresa.id
         redirect(URL('usuario','fsprojetos',args=empresa.id))
-    #caso seja hiago vai listar todos os projetos da empresa fs
+    #caso flavio passa
     if (auth.user.id==11):
         empresa = db.empresa(8)
         #empresa.id
         redirect(URL('usuario','fsprojetos',args=empresa.id))
-    #caso não tenha nem uma empresa o usuario pode estar vinculado a
-    #algum projeto ou sub venda pode ser (chefe ou cobrador)
-    if not empresa:
-        #redireciona para pagina de usuario)
+    
+    usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
+    if usuario_empresa:
+      if (usuario_empresa.tipo=="Proprietário")|(usuario_empresa.tipo=="Administrador"):
+        redirect(URL('acs_principal','index'))
+      else:
         redirect(URL('acesso_inicial_usuario'))
-    #caso contrario procegue, busca todos os projetos da empresa
     rows = db(db.projeto.empresa==empresa.id).select()
     if request.args(0, auth.user)=="235":
         rows = db(db.projeto.empresa).select(orderby=db.empresa)

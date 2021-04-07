@@ -1,4 +1,5 @@
 {{extend 'layout.html'}}
+{{from datetime import date}}
 <div class="py-5" >
     <div class="container">
       <h2 class="">{{=empresa.nome}} <small class="text-muted">{{=usuario.first_name}}</small></h2>
@@ -8,7 +9,9 @@
             <a class="btn btn-link" href="{{=URL('acs_principal','index', args=empresa.id*12)}}" style="color:#3b5998">
                  <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar
              </a>
-          <a class="btn btn-link" href="{{=URL('inserir_projeto', args=empresa.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Inserir Projeto</a>
+          <a class="btn btn-link" href="{{=URL('inserir_projeto', args=empresa.id)}}" style="color:#3b5998">
+            <i class="fa fa-fw fa-1x py-1 fa-plus"></i> Inserir Projeto
+          </a>
           <div class="table-responsive">
             <table class="table table-striped table-borderless">
               <thead>
@@ -24,14 +27,23 @@
                 <tr>
                   <th scope="row">{{=row.auth_user.first_name}}</th>
                   <td>{{=row.descricao}}</td>
-                  <td>R$ {{="{:,}".format(round(row.total_venda_prazo)).replace(",",".")}}0</td>
-                  <td><a class="btn btn-link" href="{{=URL('acs_projeto','index', args=row.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-sign-in"></i></a></td>
+                  <td>R$ {{="{:,.2f}".format(round(row.total_venda_prazo,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  <td>
+                    <a class="btn btn-link" href="{{=URL('acs_projeto','index', args=row.id)}}" style="color:#3b5998">
+                      <i class="fa fa-fw fa-1x py-1 fa-sign-in"></i>
+                    </a>
+                  </td>
+                {{if row.data_inicial:}}
+                {{row.data_final=date.fromordinal(row.data_inicial.toordinal()+60)}}
+                {{row.update_record()}}
+                  <td>{{=row.data_inicial.strftime('%d/%m')}} à {{=row.data_final.strftime('%d/%m/%Y')}}</td>
+                {{pass}}
                 </tr>
-                  {{pass}}
+                {{pass}}
               </tbody>
             </table>
           </div>
-          </div>
-          </div>
-          </div>
-          </div>
+        </div>
+      </div>
+    </div>
+  </div>

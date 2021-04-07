@@ -10,6 +10,7 @@ def projetos():
     usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==request.args(0, cast=int))
     empresa = db.empresa(usuario_empresa.empresa)
     rows = db(db.projeto.auth_user == usuario_empresa.auth_user).select(orderby=~db.projeto.descricao)
+    rows_cobrancas = db(db.sub_venda.auth_user == usuario_empresa.auth_user).select(orderby=~db.sub_venda.primeira_cidade)
     return locals()
 
 @auth.requires_login()

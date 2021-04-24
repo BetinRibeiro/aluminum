@@ -18,7 +18,6 @@ def acessar_cobrancas():
 @auth.requires_login()
 def acesso_particao_cobranca():
     quant_cobrancas = db(db.sub_venda.auth_user==auth.user.id).count()
-    if sub_venda:
     sub_venda = db.sub_venda(request.args(0, cast=int))
     usuario=auth.user
     #se for ramon redireciona para a proxima cobranca

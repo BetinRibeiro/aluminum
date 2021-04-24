@@ -66,17 +66,19 @@
               </thead>
               <tbody>
               {{for row1 in rowscob:}}
-              {{if not row1.cobranca_finalizada:}}
                   <tr>
                     <td>
+              {{if  row1.cobranca_finalizada:}}
+                      <a  class="btn btn-outline-success btn-block text-left" href="{{=URL('cobranca','acesso_particao_cobranca', args=row1.id)}}">
+                        {{else:}}
                       <a  class="btn btn-outline-primary btn-block text-left" href="{{=URL('cobranca','acesso_particao_cobranca', args=row1.id)}}">
+                {{pass}}
                         {{=row1.data_inicio_cobranca.strftime('%d/%m/%Y')}}
                       </a>
                     </td>
                       <td>{{=row1.primeira_cidade}}</td>
                       <td>R$ {{="{:,.2f}".format(round(row1.total_venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                   </tr>
-                {{pass}}
             {{pass}}
           </tbody>
         </table>

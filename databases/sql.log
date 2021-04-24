@@ -690,3 +690,6 @@ success!
 timestamp: 2021-04-07T09:53:44.046876
 ALTER TABLE "classe_despesa_cobranca" ADD "bloqueado" CHAR(1);
 success!
+timestamp: 2021-04-13T01:15:47.813677
+ALTER TABLE "despesa" ADD "projeto" INTEGER REFERENCES "projeto" ("id") ON DELETE CASCADE  ;
+success!

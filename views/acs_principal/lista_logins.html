@@ -10,7 +10,7 @@
           <a class="btn btn-link" href="{{=URL('acs_principal','index', args=empresa.id*12)}}" style="color:#3b5998">
             <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar </a>
           {{if empresa.quant_usuarios>len(row):}}
-          <a class="btn btn-link" href="{{=URL('cadastrar_login')}}" style="color:#3b5998">
+          <a class="btn btn-link" href="{{=URL('cadastrar_login', args=empresa.id)}}" style="color:#3b5998">
             <i class="fa fa-fw fa-1x py-1 fa-user-plus"></i> Adicionar </a>
           {{else:}}
           <p>

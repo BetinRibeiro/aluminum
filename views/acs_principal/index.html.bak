@@ -51,7 +51,7 @@
                   <i class="fa fa-fw fa-1x py-1 fa-5x fa-dollar text-primary"></i>
                 </center>
                 <div class="card-body">
-                  <h4 class="card-title">Recebido Cobrança</h4>
+                  <h4 class="card-title">Recebimentos e Cobrança</h4>
                   <p class="card-text">Todos os recebimentos das cobranças, agora, vamos aos modelos de carta de cobrança que você pode utilizar</p> <a href="{{=URL('acs_cobranca','cobranca_periodo',args=[data.month,data.year,empresa.id])}}" class="btn btn-primary btn-block">Acessar</a>
                 </div>
               </div>

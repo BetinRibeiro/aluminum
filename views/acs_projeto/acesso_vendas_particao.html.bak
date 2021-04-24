@@ -1,5 +1,5 @@
 {{extend 'layout.html'}}
-
+{{from datetime import date}}
 {{venda=0}}
 {{fichas_venda=0}}
 {{caderno=0}}
@@ -7,13 +7,15 @@
 {{fichas_devolvidas=0}}
 {{valor_devolvido=0}}
 {{a=0}}
-
+{{totaldespesa=0}}
 {{tvenda=0}}
 {{tfichas_venda=0}}
 {{tcaderno=0}}
 {{tentrada=0}}
 {{tfichas_devolvidas=0}}
 {{tvalor_devolvido=0}}
+
+{{primiradata=0}}{{ultimadata=0}}
 <div class="py-5">
     <div class="container">
       <div class="row">
@@ -39,12 +41,16 @@
                   <th scope="col" class="text-center">Fichas</th>
                   <th scope="col" class="text-center">Caderno</th>
                   <th scope="col" class="text-center">Entrada</th>
+                  <th scope="col" class="text-center">Despesa</th>
+                  <th scope="col" class="text-center">Acumulado</th>
                 </tr>
               </thead>
               <tbody>
                 {{data=request.now}}
             {{if len(rows)>0:}}
-                {{data=rows.last().data_venda}}
+                {{data=rows.first().data_venda}}
+{{ultimadata=rows.last().data_venda}}
+{{primiradata=rows.first().data_venda}}
             {{pass}}
             {{for row in rows:}}
             <tr>
@@ -61,14 +67,24 @@
                         {{a+=1}}
                         <th>{{=a}}</th>
                         <td>{{=data.strftime('%d/%m/%Y')}}</td>
-                        <td class="text-center">R$ {{="{:,}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#",".")}}0</td>
-                        <td class="text-center">{{=fichas_venda}}</td>
-                        <td class="text-center">R$ {{="{:,}".format(round(caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}0</td>
-                        <td class="text-center">R$ {{="{:,}".format(round(entrada,2)).replace(",","#").replace(".",",").replace("#",".")}}0</td>
-                <th class="text-center">R$ {{="{:,}".format(round(tvenda,2)).replace(",","#").replace(".",",").replace("#",".")}}0</th>
-                <th class="text-center">{{=tfichas_venda}}</th>
+                        <td >R$ {{="{:,.2f}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                        <td >{{=fichas_venda}}</td>
+                        <td >R$ {{="{:,.2f}".format(round(caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                        <td>R$ {{="{:,.2f}".format(round(entrada,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+              {{totaldesp=0}}  
+              {{for row1 in rowsdesp:}}
+              {{if (a==1)and(row1.data_inicio==data):}}
+              {{totaldesp+=row1.valor}}
+              {{elif (row1.data_inicio==data):}}
+              {{totaldesp+=row1.valor}}
+              {{pass}}
+              {{pass}}
+              <td class="text-danger">R$ {{="{:,.2f}".format(round(totaldesp,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+{{totaldespesa+=totaldesp}}
+              <th class="text-danger">R$ {{="{:,.2f}".format(round(totaldespesa,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+              <th>R$ {{="{:,.2f}".format(round(tvenda,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                <th >{{=tfichas_venda}}</th>
                     {{pass}}
-                
                     {{data=row.data_venda}}
                     {{venda=row.venda_praso-row.valor_devolvido}}
                     {{fichas_venda=row.quant_fichas-row.quant_fichas_devolvidas}}
@@ -76,8 +92,6 @@
                     {{entrada=row.entradas_venda}}
                     {{fichas_devolvidas=row.quant_fichas_devolvidas}}
                     {{valor_devolvido=row.valor_devolvido}}
-
-                    
                 {{pass}}
                 {{tvenda+=row.venda_praso-row.valor_devolvido}}
                 {{tfichas_venda+=row.quant_fichas-row.quant_fichas_devolvidas}}
@@ -91,23 +105,32 @@
             <tr>
                 {{a+=1}}
                 <th>{{=a}}</th>
-                <td>{{=("{}/{}/{}".format(data.day,data.month,data.year))}}</td>
-                <td class="text-center">R$ {{="{:,}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#",".")}}0</td>
-                <td class="text-center">{{=fichas_venda}}</td>
-                <td class="text-center">R$ {{="{:,}".format(round(caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}0</td>
-                <td class="text-center">R$ {{="{:,}".format(round(entrada,2)).replace(",","#").replace(".",",").replace("#",".")}}0</td>
-                <th class="text-center">R$ {{="{:,}".format(round(tvenda,2)).replace(",","#").replace(".",",").replace("#",".")}}0</th>
-                <th class="text-center">{{=tfichas_venda}}</th>
+                        <td>{{=data.strftime('%d/%m/%Y')}}</td>
+                <td>R$ {{="{:,.2f}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                <td>{{=fichas_venda}}</td>
+                <td >R$ {{="{:,.2f}".format(round(caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                <td>R$ {{="{:,.2f}".format(round(entrada,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+               {{totaldesp=0}}  
+              {{for row1 in rowsdesp:}}
+              {{if row1.data_inicio==data:}}
+              {{totaldesp+=row1.valor}}
+              {{pass}}
+              {{pass}}
+              <td class="text-danger">R$ {{="{:,.2f}".format(round(totaldesp,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+{{totaldespesa+=totaldesp}}
+              <th  class="text-danger">R$ {{="{:,.2f}".format(round(totaldespesa,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                <th >R$ {{="{:,.2f}".format(round(tvenda,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                <th>{{=tfichas_venda}}</th>
             </tr>
             {{pass}}
             <tr>
                 <th>#</th>
                 <th></th>
-                <th class="text-center">R$ {{="{:,}".format(round(tvenda,2)).replace(",","#").replace(".",",").replace("#",".")}}0</th>
-                <th class="text-center">{{=tfichas_venda}}</th>
-                <th class="text-center">R$ {{="{:,}".format(round(tcaderno,2)).replace(",","#").replace(".",",").replace("#",".")}}0</th>
-                <th class="text-center">R$ {{="{:,}".format(round(tentrada,2)).replace(",","#").replace(".",",").replace("#",".")}}0</th>
-                
+                <th>R$ {{="{:,.2f}".format(round(tvenda,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                <th>{{=tfichas_venda}}</th>
+                <th>R$ {{="{:,.2f}".format(round(tcaderno,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                <th>R$ {{="{:,.2f}".format(round(tentrada,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                <th>R$ {{="{:,.2f}".format(round(totaldespesa,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
             </tr>
               </tbody>
             </table>
@@ -116,3 +139,138 @@
       </div>
     </div>
   </div>
+
+  {{if auth.user.id==1:}}
+Primeira data - {{=primiradata}}<br>
+Ultima data - {{=ultimadata}}
+<hr>
+{{diferenca=ultimadata-primiradata}}
+{{dias=diferenca.days}}
+<div class="py-3" >
+    <div class="container">
+      <div class="row text-center">
+        <div class="mx-auto col-md-8">
+          <h3 class="mb-3">Projeção de Venda</h3>
+          <p class="lead">Relação de Situação da venda</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0"><b>Mercadoria</b></h6> <small class="text-muted">Total</small>
+              </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(projeto.total_preco_mercadoria,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+            </li>
+            {{if (projeto.total_venda_prazo!=0)and(dias!=0):}}
+            {{media_prazo=projeto.total_venda_prazo/dias}}{{else:}}{{media_prazo=0}}{{pass}}
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0"><b>Média Prazo</b></h6> <small class="text-muted">Por dia</small>
+              </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(media_prazo,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+            </li>
+            {{if (projeto.total_venda_vista!=0)and(dias!=0):}}
+            {{media_vista=projeto.total_venda_vista/dias}}{{else:}}{{media_vista=0}}{{pass}}
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                  <h6 class="my-0"><b>Média Vista</b></h6> <small class="text-muted">Por dia</small>
+              </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(media_vista,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+            </li>
+            {{venda_ideal=projeto.total_preco_mercadoria*0.85}}
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0"><b>Venda Ideal</b></h6> <small>Projeção 85%</small>
+              </div> <span class="text-success">R$ {{="{:,.2f}".format(round(venda_ideal,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+            </li>
+            
+        {{datafinalprojetada=ultimadata}}
+        {{totalmediavenda=media_vista+media_prazo}}
+        {{if (totalmediavenda>0) and (venda_ideal>0):}}
+        {{projecao=(venda_ideal)/totalmediavenda}}
+        {{else:}}
+        {{projecao=0}}
+        {{pass}}
+        {{datafinalprojetada=date.fromordinal(primiradata.toordinal()+int(projecao))}}
+            {{estoque_ideal=projeto.total_preco_mercadoria*0.15}}
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0"><b>Estoque/Ideal</b></h6> <small class="text-muted">{{=datafinalprojetada.strftime('%d/%m/%Y')}}</small>
+              </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(estoque_ideal,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-group">
+            {{if (projeto.total_despesa_venda>0)and(projeto.total_venda_prazo>0):}}
+            {{percentototal=projeto.total_despesa_venda/projeto.total_venda_prazo}}
+            {{else:}}
+            {{percentototal=0}}
+            {{pass}}
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                  <h6 class="my-0"><b>Total Despesa</b></h6> <small class="text-muted">{{="{:,.1f}".format(round(percentototal*100,1))}}%</small>
+              </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(projeto.total_despesa_venda,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                {{despsemvenda=projeto.total_despesa_venda-totaldespesa}}
+            {{if (despsemvenda>0)and(projeto.total_venda_prazo>0):}}
+            {{percentototal=despsemvenda/projeto.total_venda_prazo*100}}
+            {{else:}}
+            {{percentototal=0}}
+            {{pass}}
+                <h6 class="my-0">Despesa Sem Venda</h6> <small class="text-muted">{{="{:,.1f}".format(round(percentototal,1))}}%</small>
+              </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(despsemvenda,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+            {{if (totaldespesa>0)and(projeto.total_venda_prazo>0):}}
+            {{percentototal=totaldespesa/projeto.total_venda_prazo*100}}
+            {{else:}}
+            {{percentototal=0}}
+            {{pass}}
+                <h6 class="my-0"><b>Despesa Com Venda</b></h6> <small class="text-muted">{{="{:,.1f}".format(round(percentototal,1))}}%</small>
+              </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(totaldespesa,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              {{if (dias>0)and(totaldespesa>0):}}
+              {{mediadia=totaldespesa/dias}}
+              {{else:}}
+               {{mediadia=0}}
+              {{pass}}
+              <div class="text-success">
+                <h6 class="my-0"><b>Média por dia</b></h6> <small>Despesa com venda</small>
+              </div> <span class="text-success">R$ {{="{:,.2f}".format(round(mediadia,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between"> <span>Total (USD)</span> <b>R$ {{="{:,.2f}".format(round(mediadia,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0"><b>Total de Vales</b></h6> <small class="text-muted">##</small>
+              </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(projeto.total_vales_vendedor,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">Caderno</h6> <small class="text-muted">##</small>
+              </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(projeto.total_caderno_vendedor,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0"><b></b></h6> <small class="text-muted">Brief description</small>
+              </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(0,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0"><b>Promo code</b></h6> <small>EXAMPLECODE</small>
+              </div> <span class="text-success">-R$ {{="{:,.2f}".format(round(0,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between"> <span>Total (USD)</span> <b>R$ {{="{:,.2f}".format(round(0,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{{pass}}

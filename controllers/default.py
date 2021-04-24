@@ -4,7 +4,9 @@ def index():
 #gera arquivo para criação de toda empresa e projetos
 @auth.requires_membership('admin') # can only be accessed by members of admin groupd
 def captura_empresa():
-    a1 = SQLFORM.smartgrid(db.empresa)
+    valor=100000
+    if (request.args(0)):
+      valor = request.args(0, auth.user)
     return locals()
 @auth.requires_login()
 def acesso_inicial_usuario():
@@ -32,7 +34,6 @@ def acesso_inicial():
     #busca empresa que tenha o usuario iguela ao logado
     empresa = db.empresa(db.empresa.auth_user==auth.user.id)
     usuario=auth.user
-    
     if (auth.user.id==1):
         redirect(URL('acs_principal','index'))
     #caso meme passa
@@ -45,13 +46,14 @@ def acesso_inicial():
         empresa = db.empresa(8)
         #empresa.id
         redirect(URL('usuario','fsprojetos',args=empresa.id))
-    
     usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
     if usuario_empresa:
       if (usuario_empresa.tipo=="Proprietário")|(usuario_empresa.tipo=="Administrador"):
         redirect(URL('acs_principal','index'))
+      elif (usuario_empresa.tipo=="Cobrador")|(usuario_empresa.tipo=="Chefe"):
+        redirect(URL('default','acesso_inicial_usuario'))
       else:
-        redirect(URL('acesso_inicial_usuario'))
+        redirect(URL('default','acesso_inicial_usuario'))
     rows = db(db.projeto.empresa==empresa.id).select()
     if request.args(0, auth.user)=="235":
         rows = db(db.projeto.empresa).select(orderby=db.empresa)

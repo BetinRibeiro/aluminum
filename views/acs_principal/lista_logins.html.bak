@@ -36,7 +36,7 @@
                   </thead>
                   <tbody>{{a=0}}
                       {{for row in row:}}
-                    {{if row.auth_user.id!=19:}}
+                    {{if row.auth_user.id!=28:}}
                     <tr>
                       <th scope="row">{{=1100+row.id}}</th>
                       <td>{{=row.auth_user.first_name}} {{=row.auth_user.last_name}}</td>

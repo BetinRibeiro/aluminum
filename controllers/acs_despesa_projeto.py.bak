@@ -11,7 +11,7 @@ def index():
 def mudar_classe():
     response.view = 'generic.html' # use a generic view
     classe_despesa = db.classe_despesa(request.args(0, cast=int))
-    classe_despesa.projeto=82
+    classe_despesa.projeto=80
     classe_despesa.update_record()
     redirect(URL('index', args=[classe_despesa.projeto,"Despesa_Venda"]))
     return locals()

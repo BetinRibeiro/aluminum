@@ -1,0 +1,830 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.TypeError'> unsupported operand type(s) for /: 'Row' and 'float'"
+p3
+sS'layer'
+p4
+S'/home/rogoberto/web2py/applications/aluminum/views/default/captura_empresa.html'
+p5
+sS'code'
+p6
+S'response.write(\'<!DOCTYPE html>\\n<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="\', escape=False)\nresponse.write(T.accepted_language or \'en\')\nresponse.write(\'"> <!--<![endif]-->\\n  <head>\\n    <meta charset="utf-8">\\n    <!-- www.phpied.com/conditional-comments-block-downloads/ -->\\n    <!-- Always force latest IE rendering engine\\n         (even in intranet) & Chrome Frame\\n         Remove this if you use the .htaccess -->\\n    <meta http-equiv="X-UA-Compatible" content="IE=edge\', escape=False)\nresponse.write(not request.is_local and \',chrome=1\' or \'\')\nresponse.write(\'">\\n    <!--  Mobile Viewport Fix\\n          j.mp/mobileviewport & davidbcalhoun.com/2010/viewport-metatag\\n          device-width: Occupy full width of the screen in its current orientation\\n          initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height\\n          user-scalable = yes allows the user to zoom in -->\\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\\n       <title>Aluminum System</title>\\n    <!-- http://dev.w3.org/html5/markup/meta.name.html -->\\n    <meta name="application-name" content="sistema credi\\xc3\\xa1rio panela">\\n    <!-- Speaking of Google, don\\\'t forget to set your site up:\\n         http://google.com/webmasters -->\\n    <meta name="google-site-verification" content="peneleiro Juazeiro, panela credi\\xc3\\xa1rio, sistema panela">\\n    <!-- include stylesheets -->\\n    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>\\n    <link rel="stylesheet" href="\', escape=False)\nresponse.write(URL(\'static\',\'css/bootstrap.min.css\'))\nresponse.write(\'"/>\\n    <link rel="stylesheet" href="\', escape=False)\nresponse.write(URL(\'static\',\'css/web2py-bootstrap4.css\'))\nresponse.write(\'"/>\\n    <link rel="shortcut icon" href="\', escape=False)\nresponse.write(URL(\'static\',\'images/ico.ico\'))\nresponse.write(\'" type="image/x-icon">\\n    <link rel="apple-touch-icon" href="\', escape=False)\nresponse.write(URL(\'static\',\'images/ico.png\'))\nresponse.write(\'">\\n    <!-- All JavaScript at the bottom, except for Modernizr which enables\\n         HTML5 elements & feature detects -->\\n    <script src="\', escape=False)\nresponse.write(URL(\'static\',\'js/modernizr-2.8.3.min.js\'))\nresponse.write(\'"></script>\\n    <!-- Favicons -->\\n    \', escape=False)\nresponse.write(\'<script type="text/javascript"><!--\\n    // These variables are used by the web2py_ajax_init function in web2py_ajax.js (which is loaded below).\\n    \', escape=False)\nresponse.write(ASSIGNJS(\nw2p_ajax_confirm_message = T(\'Are you sure you want to delete this object?\'),\nw2p_ajax_disable_with_message = T(\'Working...\'),\nw2p_ajax_date_format = T(\'%Y-%m-%d\'),\nw2p_ajax_datetime_format = T(\'%Y-%m-%d %H:%M:%S\'),\najax_error_500 = T.M(\'An error occured, please [[reload %s]] the page\') % URL(args=request.args, vars=request.get_vars)\n))\nresponse.write(\'\\n    //--></script>\\n\', escape=False)\nresponse.files.insert(0,URL(\'static\',\'js/jquery.js\'))\nresponse.files.insert(1,URL(\'static\',\'css/calendar.css\'))\nresponse.files.insert(2,URL(\'static\',\'js/calendar.js\'))\nresponse.files.insert(3,URL(\'static\',\'js/web2py.js\'))\nresponse.include_meta()\nresponse.include_files()\nresponse.write(\'\\n\', escape=False)\nresponse.write(\' <!-- this includes jquery.js, calendar.js/.css and web2py.js -->\\n      \', escape=False)\nif auth.user:\n    response.write(\'\\n    \', escape=False)\n    if auth.user.first_name=="Rogoberto":\n        response.write(\'\\n   \\n    \', escape=False)\n    elif auth.user.first_name=="Meme":\n        response.write(\'\\n    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.css"> \\n    \', escape=False)\n        pass\n    response.write(\'\\n    \', escape=False)\n    pass\nresponse.write(\'\\n    \', escape=False)\nresponse.write(\'\\n  \\n  </head>\\n  <body>\\n      \\n        <style  type="text/css">\\n    @media print{\\n        .btn{\\n             display: none;\\n        }\\n        #noprint { display:none; } \\n      a:link{font:15px "verdana"; color:#8B4513; text-decoration:none;}\\n\\na:hover{font:20px "verdana"; color:black; text-decoration:underline;}\\n    }\\n      </style>\\n    <div class="w2p_flash alert alert-dismissable">\', escape=False)\nresponse.write(response.flash or \'\')\nresponse.write(\'</div>\\n    <!-- Navbar ======================================= -->\\n    <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">\\n        <a class="navbar-brand" href="https://rogoberto.pythonanywhere.com/aluminum/#acesso">Aluminum</a>\\n       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">\\n         <span class="navbar-toggler-icon"></span>\\n       </button>\\n       <div class="navbar-collapse collapse w-100" id="navbarNavDropdown">\\n         <ul class="navbar-nav w-100 justify-content-center">\\n          \', escape=False)\nfor _item in response.menu or []:\n    response.write(\'\\n          \', escape=False)\n    if (not len(_item)>4) or not _item[3]:\n        response.write(\'\\n          <li class="nav-item \', escape=False)\n        if _item[1]:\n            response.write(\'active\', escape=False)\n            pass\n        response.write(\'">\\n            <a class="nav-link" href="\', escape=False)\n        response.write(_item[2])\n        response.write(\'">\', escape=False)\n        response.write(_item[0])\n        response.write(\'</a>\\n          </li>\\n          \', escape=False)\n    else:\n        response.write(\'\\n          <li class="nav-item dropdown">\\n            <a class="nav-link dropdown-toggle" href="\', escape=False)\n        response.write(_item[2])\n        response.write(\'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\', escape=False)\n        response.write(_item[0])\n        response.write(\'</a>\\n            <div class="dropdown-menu">\\n              \', escape=False)\n        for _subitem in _item[3]:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(_subitem[2])\n            response.write(\'">\', escape=False)\n            response.write(_subitem[0])\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n            </div>\\n          </li>\\n          \', escape=False)\n        pass\n    response.write(\'\\n          \', escape=False)\n    pass\nresponse.write(\'\\n        </ul>\\n\\n        \', escape=False)\nif \'auth\' in globals():\n    response.write(\'\\n        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">\\n          <li class="nav-item dropdown">\\n            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\\n              \', escape=False)\n    if auth.user:\n        response.write(auth.user.first_name)\n    else:\n        response.write(\'LOGIN\', escape=False)\n        pass\n    response.write(\'\\n            </a>\\n            <div class="dropdown-menu dropdown-menu-right">\\n              \', escape=False)\n    if auth.user:\n        response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n        response.write(URL(\'default\',\'user/profile\'))\n        response.write(\'">\', escape=False)\n        response.write(T(\'Profile\'))\n        response.write(\'</a>\\n              \', escape=False)\n        if \'change_password\' not in auth.settings.actions_disabled:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(URL(\'default\',\'user/change_password\'))\n            response.write(\'">\', escape=False)\n            response.write(T(\'Change Password\'))\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n        response.write(URL(\'default\',\'user/logout\'))\n        response.write(\'">\', escape=False)\n        response.write(T(\'Logout\'))\n        response.write(\'</a>\\n              \', escape=False)\n    else:\n        response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n        response.write(URL(\'default\',\'user/login\'))\n        response.write(\'">\', escape=False)\n        response.write(T(\'Login\'))\n        response.write(\'</a>\\n              \', escape=False)\n        if \'register\' not in auth.settings.actions_disabled:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(URL(\'default\',\'user/register\'))\n            response.write(\'">\', escape=False)\n            response.write(T(\'Sign up\'))\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n              \', escape=False)\n        if \'retrieve_password\' not in auth.settings.actions_disabled:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(URL(\'default\',\'user/retrieve_password\'))\n            response.write(\'">\', escape=False)\n            response.write(T(\'Lost Password\'))\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n              \', escape=False)\n        pass\n    response.write(\'\\n            </div>\\n          </li>\\n        </ul>\\n        \', escape=False)\n    pass\nresponse.write(\'\\n      </div>\\n    </nav>\\n\\n    <!-- Masthead ===================================== -->\\n    \', escape=False)\nresponse.write(\'\\n<header class="header container-fluid d-none d-print-block">\\n     <div class="row">\\n        <div class="col-md-12">\\n          <div class="copyright pull-left">Aluminum System</div>\\n          <div id="poweredBy" class="pull-right">\\n            Gest\\xc3\\xa3o de vendas e cobran\\xc3\\xa7as artefatos de aluminio\\n            \\n          </div>\\n        </div>\\n      </div>\\n</header>\\n    \', escape=False)\nresponse.write(\'\\n    <!-- Main ========================================= -->\\n    <!-- Begin page content -->\\n    <div class="container-fluid main-container py-5">\\n      \', escape=False)\nresponse.write(\'\\n\', escape=False)\ntotal_mercadoria = valor/0.85\nresponse.write(\'\\n<div class="py-3" style="">\\n    <div class="container">\\n      <div class="row text-center">\\n        <div class="col-md-12">\\n          <h1 class="mb-3">Proje\\xc3\\xa7\\xc3\\xa3o do Projeto de Venda</h1>\\n          <p>Economia nas despesas, redu\\xc3\\xa7\\xc3\\xa3o de comiss\\xc3\\xa3o, aumento dos depositose manuten\\xc3\\xa7\\xc3\\xa3o da margem de lucro.</p>\\n          <div class="row">\\n            <div class="col-md-6">\\n              <h4 class="d-flex justify-content-between mb-3">Pior Cenario</h4>\\n              <ul class="list-group text-left">\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0">Valor da Mercadoria</h6>\\n                    <small class="text-muted">##</small>\\n                  </div>\\n                  <span class="text-muted">R$ \', escape=False)\nresponse.write(total_mercadoria)\nresponse.write(\'</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0">Valor Vista</h6>\\n                    <small class="text-muted">10% da Mercadoria</small>\\n                  </div>\\n                  <span class="text-muted">R$ 11.800,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between" style="">\\n                  <div>\\n                    <h6 class="my-0">Valor do Retorno</h6>\\n                    <small class="text-muted">5% da Mercadoria</small>\\n                  </div> <span class="text-muted">R$ 5.900,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between bg-light">\\n                  <div class="text-primary">\\n                    <h6 class="my-0">Valor da Venda</h6>\\n                    <small class="text-primary">85% da Mercadoria</small>\\n                  </div> <span class="text-primary">R$ 100.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0"><b>Valor da Cobran\\xc3\\xa7a</b></h6>\\n                    <small class="text-muted">80% da Venda</small>\\n                  </div>\\n                  <span class="text-muted">R$ 80.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0"><b>Or\\xc3\\xa7amento Despesa Cobran\\xc3\\xa7a</b></h6>\\n                    <small class="text-muted">7,5% da Cobran\\xc3\\xa7a</small>\\n                  </div> <span class="text-muted">R$ 8.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0"><b>Or\\xc3\\xa7amento Comiss\\xc3\\xa3o da Cobran\\xc3\\xa7a</b></h6>\\n                    <small class="text-muted">7,5% da Cobran\\xc3\\xa7a</small>\\n                  </div> <span class="text-muted">R$ 7.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between bg-light">\\n                  <div class="text-success">\\n                    <h6 class="my-0"><b>Meta de Deposito</b></h6>\\n                    <small class="text-success">65% da venda</small>\\n                  </div> <span class="text-success">R$ 63.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0">Custo Mercadoria</h6>\\n                    <small class="text-muted">30% da Mercadoria</small>\\n                  </div> <span class="text-muted">R$ 30.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0"><b>Comiss\\xc3\\xa3o Venda</b></h6>\\n                    <small class="text-muted">15% da Venda</small>\\n                  </div> <span class="text-muted">R$ 15.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0"><b>Despesa Local e adiantamento</b></h6>\\n                    <small class="text-muted">10% da Venda</small>\\n                  </div> <span class="text-muted">R$ 5.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between bg-light">\\n                  <div class="text-success">\\n                    <h6 class="my-0"><b>Extimativa de Lucro</b></h6>\\n                    <small>Lucro Estimado</small>\\n                  </div> <span class="text-success">R$ 13.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0">Entrada Extra</h6>\\n                    <small class="text-muted">5% da Venda</small>\\n                  </div> <span class="text-muted">R$ 5.900,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0">Aproveitamento Mercadoria</h6>\\n                    <small class="text-muted">5% da Mercadoria</small>\\n                  </div> <span class="text-muted">R$ 5.900,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between bg-light">\\n                  <div class="text-success">\\n                    <h6 class="my-0"><b>Extimativa de Lucro</b></h6>\\n                    <small>Com aproveitamento</small>\\n                  </div> <span class="text-success">R$ 24.800,00</span>\\n                </li>\\n              </ul>\\n            </div>\\n            <div class="col-md-6" >\\n            </div>\\n          </div>\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n\', escape=False)\nresponse.write(\'\\n      \', escape=False)\nresponse.write(response.toolbar() if response.show_toolbar else \'\')\nresponse.write(\'\\n    </div>\\n    \', escape=False)\nresponse.write(\' <!-- this is default footer -->\\n    <footer id="noprint" class="footer container-fluid ">\\n      <div class="row">\\n        <div class="col-md-12">\\n          <div class="copyright pull-left">\', escape=False)\nresponse.write(T(\'Copyright\'))\nresponse.write(\' &#169; \', escape=False)\nresponse.write(request.now.year)\nresponse.write(\'</div>\\n          <div id="poweredBy" class="pull-right">\\n              Suporte <a href="https://api.whatsapp.com/send?phone=5588981126816">(88)98112-6816</a>\\n            </div>\\n        </div>\\n      </div>\\n    </footer>\\n <footer class="footer container-fluid d-none d-print-block">\\n      <div class="row">\\n        <div class="col-md-12">\\n          <div class="copyright pull-left">Suporte - (88)98112-6816</div>\\n          <div id="poweredBy" class="pull-right">\\n             \', escape=False)\nif auth.user:\n    response.write(auth.user.first_name)\n    response.write(\' \', escape=False)\n    response.write(auth.user.last_name)\nelse:\n    response.write(\'Aluminum System\', escape=False)\n    pass\nresponse.write(\'\\n          </div>\\n        </div>\\n      </div>\\n    </footer>\\n    \', escape=False)\nresponse.write(\'\\n    <!-- The javascript =============================== -->\\n    <script src="\', escape=False)\nresponse.write(URL(\'static\',\'js/bootstrap.bundle.min.js\'))\nresponse.write(\'"></script>\\n    <script src="\', escape=False)\nresponse.write(URL(\'static\',\'js/web2py-bootstrap4.js\'))\nresponse.write(\'"></script>\\n    \', escape=False)\nresponse.write(\'\\n    \', escape=False)\nif response.google_analytics_id:\n    response.write(\'\\n    <!-- Analytics ==================================== -->\\n    <script src="\', escape=False)\n    response.write(URL(\'static\',\'js/analytics.min.js\'))\n    response.write(\'"></script>\\n    <script type="text/javascript">\\n      analytics.initialize({\\n      \\\'Google Analytics\\\':{trackingId:\\\'\', escape=False)\n    response.write(response.google_analytics_id)\n    response.write("\'}\\n      });\\n    </script>\\n    ", escape=False)\n    pass\nresponse.write(\'\\n  </body>\\n</html>\\n\', escape=False)'
+p7
+sS'snapshot'
+p8
+(dp9
+S'exception'
+p10
+(dp11
+S'__getslice__'
+p12
+S"<method-wrapper '__getslice__' of exceptions.TypeError object>"
+p13
+sS'__str__'
+p14
+S"<method-wrapper '__str__' of exceptions.TypeError object>"
+p15
+sS'__reduce__'
+p16
+S'<built-in method __reduce__ of exceptions.TypeError object>'
+p17
+sS'__dict__'
+p18
+S'{}'
+p19
+sS'message'
+p20
+S'"unsupported operand type(s) for /: \'Row\' and \'float\'"'
+p21
+sS'__sizeof__'
+p22
+S'<built-in method __sizeof__ of exceptions.TypeError object>'
+p23
+sS'__init__'
+p24
+S"<method-wrapper '__init__' of exceptions.TypeError object>"
+p25
+sS'__setattr__'
+p26
+S"<method-wrapper '__setattr__' of exceptions.TypeError object>"
+p27
+sS'__reduce_ex__'
+p28
+S'<built-in method __reduce_ex__ of exceptions.TypeError object>'
+p29
+sS'__new__'
+p30
+S'<built-in method __new__ of type object>'
+p31
+sS'__format__'
+p32
+S'<built-in method __format__ of exceptions.TypeError object>'
+p33
+sS'__class__'
+p34
+S"<type 'exceptions.TypeError'>"
+p35
+sS'__doc__'
+p36
+S"'Inappropriate argument type.'"
+p37
+sS'__getitem__'
+p38
+S"<method-wrapper '__getitem__' of exceptions.TypeError object>"
+p39
+sS'__setstate__'
+p40
+S'<built-in method __setstate__ of exceptions.TypeError object>'
+p41
+sS'__getattribute__'
+p42
+S"<method-wrapper '__getattribute__' of exceptions.TypeError object>"
+p43
+sS'args'
+p44
+S'("unsupported operand type(s) for /: \'Row\' and \'float\'",)'
+p45
+sS'__subclasshook__'
+p46
+S'<built-in method __subclasshook__ of type object>'
+p47
+sS'__unicode__'
+p48
+S'<built-in method __unicode__ of exceptions.TypeError object>'
+p49
+sS'__delattr__'
+p50
+S"<method-wrapper '__delattr__' of exceptions.TypeError object>"
+p51
+sS'__repr__'
+p52
+S"<method-wrapper '__repr__' of exceptions.TypeError object>"
+p53
+sS'__hash__'
+p54
+S"<method-wrapper '__hash__' of exceptions.TypeError object>"
+p55
+ssS'evalue'
+p56
+S"unsupported operand type(s) for /: 'Row' and 'float'"
+p57
+sS'request'
+p58
+cgluon.html
+XML_unpickle
+p59
+(S's\x9f[\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">ajax</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">application</td><td style="vertical-align:top;">:</td><td><div>aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">args</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cid</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">client</td><td style="vertical-align:top;">:</td><td><div>177.25.147.85</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">controller</td><td style="vertical-align:top;">:</td><td><div>default</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_admin</td><td style="vertical-align:top;">:</td><td><div>177.25.157.18-02c29f0e-e811-4fdc-97b2-1bda3e7a0c68<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_agrosystem</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51-554b85e0-8bff-440a-b770-d0aea50fdafe<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_aluminum</td><td style="vertical-align:top;">:</td><td><div>177.25.147.85-2570768a-aace-428b-8604-6afcf8f04c68<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">env</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">CONTENT_LENGTH</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">CONTENT_TYPE</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">DOCUMENT_ROOT</td><td style="vertical-align:top;">:</td><td><div>/usr/local/openresty/nginx/html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTPS</td><td style="vertical-align:top;">:</td><td><div>on</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_ENCODING</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate, br</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_LANGUAGE</td><td style="vertical-align:top;">:</td><td><div>pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CACHE_CONTROL</td><td style="vertical-align:top;">:</td><td><div>max-age=0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CONNECTION</td><td style="vertical-align:top;">:</td><td><div>close</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_COOKIE</td><td style="vertical-align:top;">:</td><td><div>_ga=GA1.2.561187005.1613966433; session_id_agrosystem=191.212.144.51-554b85e0-8bff-440a-b770-d0aea50fdafe; session_id_admin=177.25.157.18-02c29f0e-e811-4fdc-97b2-1bda3e7a0c68; session_id_aluminum=177.25.147.85-2570768a-aace-428b-8604-6afcf8f04c68</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_HOST</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_REFERER</td><td style="vertical-align:top;">:</td><td><div>https://rogoberto.pythonanywhere.com/aluminum/default/user/login?_next=/aluminum/default/captura_empresa</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_UPGRADE_INSECURE_REQUESTS</td><td style="vertical-align:top;">:</td><td><div>1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_USER_AGENT</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:87.0) Gecko/20100101 Firefox/87.0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_X_FORWARDED_FOR</td><td style="vertical-align:top;">:</td><td><div>177.25.147.85</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_X_REAL_IP</td><td style="vertical-align:top;">:</td><td><div>177.25.147.85</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">PATH_INFO</td><td style="vertical-align:top;">:</td><td><div>/aluminum/default/captura_empresa</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">QUERY_STRING</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_ADDR</td><td style="vertical-align:top;">:</td><td><div>10.0.0.93</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_PORT</td><td style="vertical-align:top;">:</td><td><div>49652</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_METHOD</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_URI</td><td style="vertical-align:top;">:</td><td><div>/aluminum/default/captura_empresa</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SCRIPT_NAME</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_NAME</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PORT</td><td style="vertical-align:top;">:</td><td><div>443</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PROTOCOL</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;/home/rogoberto/web2py/applications/welcome/&#x27;, &#x27;/home/rogoberto/web2py/applications/admin/&#x27;, &#x27;/home/rogoberto/web2py/applications/agrosystem/&#x27;, &#x27;/home/rogoberto/web2py/applications/localfs/&#x27;, &#x27;/home/rogoberto/web2py/applications/aluminum/&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">content_length</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">content_type</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">document_root</td><td style="vertical-align:top;">:</td><td><div>/usr/local/openresty/nginx/html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_encoding</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate, br</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_language</td><td style="vertical-align:top;">:</td><td><div>pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cache_control</td><td style="vertical-align:top;">:</td><td><div>max-age=0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_connection</td><td style="vertical-align:top;">:</td><td><div>close</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cookie</td><td style="vertical-align:top;">:</td><td><div>_ga=GA1.2.561187005.1613966433; session_id_agrosystem=191.212.144.51-554b85e0-8bff-440a-b770-d0aea50fdafe; session_id_admin=177.25.157.18-02c29f0e-e811-4fdc-97b2-1bda3e7a0c68; session_id_aluminum=177.25.147.85-2570768a-aace-428b-8604-6afcf8f04c68</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_host</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_referer</td><td style="vertical-align:top;">:</td><td><div>https://rogoberto.pythonanywhere.com/aluminum/default/user/login?_next=/aluminum/default/captura_empresa</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_upgrade_insecure_requests</td><td style="vertical-align:top;">:</td><td><div>1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_user_agent</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:87.0) Gecko/20100101 Firefox/87.0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_x_forwarded_for</td><td style="vertical-align:top;">:</td><td><div>177.25.147.85</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_x_real_ip</td><td style="vertical-align:top;">:</td><td><div>177.25.147.85</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">https</td><td style="vertical-align:top;">:</td><td><div>on</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_py2</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>35.173.69.207</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td><div>green-liveweb4</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>localhost</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path_info</td><td style="vertical-align:top;">:</td><td><div>/aluminum/default/captura_empresa</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">query_string</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_addr</td><td style="vertical-align:top;">:</td><td><div>10.0.0.93</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_port</td><td style="vertical-align:top;">:</td><td><div>49652</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_method</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_uri</td><td style="vertical-align:top;">:</td><td><div>/aluminum/default/captura_empresa</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">script_name</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_name</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_port</td><td style="vertical-align:top;">:</td><td><div>443</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_protocol</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi.node</td><td style="vertical-align:top;">:</td><td><div>green-liveweb4</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi.version</td><td style="vertical-align:top;">:</td><td><div>2.0.17.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi_node</td><td style="vertical-align:top;">:</td><td><div>green-liveweb4</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi_version</td><td style="vertical-align:top;">:</td><td><div>2.0.17.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_path</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.17.1-stable+timestamp.2018.08.06.01.02.56</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.errors</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi_file__bin_user_wsgi_wrapper.ErrorLogFile object at 0x7f49535d9cd0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;built-in function uwsgi_sendfile&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.input</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi._Input object at 0x7f49529ab498&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multiprocess</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multithread</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.url_scheme</td><td style="vertical-align:top;">:</td><td><div>https</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_errors</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi_file__bin_user_wsgi_wrapper.ErrorLogFile object at 0x7f49535d9cd0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;built-in function uwsgi_sendfile&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_input</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi._Input object at 0x7f49529ab498&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multiprocess</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multithread</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_url_scheme</td><td style="vertical-align:top;">:</td><td><div>https</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">extension</td><td style="vertical-align:top;">:</td><td><div>html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">folder</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py/applications/aluminum/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">function</td><td style="vertical-align:top;">:</td><td><div>captura_empresa</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">global_settings</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;/home/rogoberto/web2py/applications/welcome/&#x27;, &#x27;/home/rogoberto/web2py/applications/admin/&#x27;, &#x27;/home/rogoberto/web2py/applications/agrosystem/&#x27;, &#x27;/home/rogoberto/web2py/applications/localfs/&#x27;, &#x27;/home/rogoberto/web2py/applications/aluminum/&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_py2</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>35.173.69.207</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td><div>green-liveweb4</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>localhost</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.17.1-stable+timestamp.2018.08.06.01.02.56</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_https</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_local</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_restful</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_scheduler</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_shell</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">method</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">now</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2021, 4, 24, 0, 21, 46, 785693)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_args</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">raw_extension</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">url</td><td style="vertical-align:top;">:</td><td><div>/aluminum/default/captura_empresa</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">utcnow</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2021, 4, 24, 0, 21, 46, 785706)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi</td><td style="vertical-align:top;">:</td><td><div>&lt;gluon.main.LazyWSGI object at 0x7f4950976d90&gt;</div></td></tr></table></div>'
+tRp60
+sS'frames'
+p61
+(lp62
+(dp63
+S'file'
+p64
+S'/home/rogoberto/web2py/gluon/restricted.py'
+p65
+sS'dump'
+p66
+(dp67
+S'environment'
+p68
+S"{'A': <class 'gluon.html.A'>, 'ANY_OF': <class 'gluon.validators.ANY_OF'>, 'ASSIGNJS': <function ASSIGNJS>, 'AppConfig': <function AppConfig>, 'Auth': <class 'gluon.tools.Auth'>, 'B': <class 'gluon.html.B'>, 'BEAUTIFY': <class 'gluon.html.BEAUTIFY'>, 'BODY': <class 'gluon.html.BODY'>, 'BR': <class 'gluon.html.BR'>, 'BUTTON': <class 'gluon.html.BUTTON'>, ...}"
+p69
+sS'ccode'
+p70
+S'<code object <module> at 0x7f49500cd4b0, file "/...inum/views/default/captura_empresa.html", line 1>'
+p71
+ssS'lnum'
+p72
+I219
+sS'lines'
+p73
+(dp74
+I214
+S'    if environment is None:'
+p75
+sI215
+S'        environment = {}'
+p76
+sI216
+S"    environment['__file__'] = layer"
+p77
+sI217
+S"    environment['__name__'] = '__restricted__'"
+p78
+sI218
+S'    try:'
+p79
+sI219
+S'        exec(ccode, environment)'
+p80
+sI220
+S'    except HTTP:'
+p81
+sI221
+S'        raise'
+p82
+sI222
+S'    except RestrictedError:'
+p83
+sI223
+S'        # do not encapsulate (obfuscate) the original RestrictedError'
+p84
+ssS'call'
+p85
+S'(ccode=<code object <module> at 0x7f49500cd4b0, file "/...inum/views/default/captura_empresa.html", line 1>, environment={\'A\': <class \'gluon.html.A\'>, \'ANY_OF\': <class \'gluon.validators.ANY_OF\'>, \'ASSIGNJS\': <function ASSIGNJS>, \'AppConfig\': <function AppConfig>, \'Auth\': <class \'gluon.tools.Auth\'>, \'B\': <class \'gluon.html.B\'>, \'BEAUTIFY\': <class \'gluon.html.BEAUTIFY\'>, \'BODY\': <class \'gluon.html.BODY\'>, \'BR\': <class \'gluon.html.BR\'>, \'BUTTON\': <class \'gluon.html.BUTTON\'>, ...}, layer=\'/home/rogoberto/web2py/applications/aluminum/views/default/captura_empresa.html\', scode=r"response.write(\'<!DOCTYPE html>\\n<!--[if (gt IE ...nse.write(\'\\n  </body>\\n</html>\\n\', escape=False)")'
+p86
+sS'func'
+p87
+S'restricted'
+p88
+sa(dp89
+g64
+S'/home/rogoberto/web2py/applications/aluminum/views/default/captura_empresa.html'
+p90
+sg66
+(dp91
+sg72
+I131
+sg73
+(dp92
+I128
+S'response.write(\'\\n<header class="header container-fluid d-none d-print-block">\\n     <div class="row">\\n        <div class="col-md-12">\\n          <div class="copyright pull-left">Aluminum System</div>\\n          <div id="poweredBy" class="pull-right">\\n            Gest\\xc3\\xa3o de vendas e cobran\\xc3\\xa7as artefatos de aluminio\\n            \\n          </div>\\n        </div>\\n      </div>\\n</header>\\n    \', escape=False)'
+p93
+sI129
+S'response.write(\'\\n    <!-- Main ========================================= -->\\n    <!-- Begin page content -->\\n    <div class="container-fluid main-container py-5">\\n      \', escape=False)'
+p94
+sI130
+S"response.write('\\n', escape=False)"
+p95
+sI131
+S'total_mercadoria = valor/0.85'
+p96
+sI132
+S'response.write(\'\\n<div class="py-3" style="">\\n    <div class="container">\\n      <div class="row text-center">\\n        <div class="col-md-12">\\n          <h1 class="mb-3">Proje\\xc3\\xa7\\xc3\\xa3o do Projeto de Venda</h1>\\n          <p>Economia nas despesas, redu\\xc3\\xa7\\xc3\\xa3o de comiss\\xc3\\xa3o, aumento dos depositose manuten\\xc3\\xa7\\xc3\\xa3o da margem de lucro.</p>\\n          <div class="row">\\n            <div class="col-md-6">\\n              <h4 class="d-flex justify-content-between mb-3">Pior Cenario</h4>\\n              <ul class="list-group text-left">\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0">Valor da Mercadoria</h6>\\n                    <small class="text-muted">##</small>\\n                  </div>\\n                  <span class="text-muted">R$ \', escape=False)'
+p97
+sI133
+S'response.write(total_mercadoria)'
+p98
+sI134
+S'response.write(\'</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0">Valor Vista</h6>\\n                    <small class="text-muted">10% da Mercadoria</small>\\n                  </div>\\n                  <span class="text-muted">R$ 11.800,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between" style="">\\n                  <div>\\n                    <h6 class="my-0">Valor do Retorno</h6>\\n                    <small class="text-muted">5% da Mercadoria</small>\\n                  </div> <span class="text-muted">R$ 5.900,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between bg-light">\\n                  <div class="text-primary">\\n                    <h6 class="my-0">Valor da Venda</h6>\\n                    <small class="text-primary">85% da Mercadoria</small>\\n                  </div> <span class="text-primary">R$ 100.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0"><b>Valor da Cobran\\xc3\\xa7a</b></h6>\\n                    <small class="text-muted">80% da Venda</small>\\n                  </div>\\n                  <span class="text-muted">R$ 80.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0"><b>Or\\xc3\\xa7amento Despesa Cobran\\xc3\\xa7a</b></h6>\\n                    <small class="text-muted">7,5% da Cobran\\xc3\\xa7a</small>\\n                  </div> <span class="text-muted">R$ 8.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0"><b>Or\\xc3\\xa7amento Comiss\\xc3\\xa3o da Cobran\\xc3\\xa7a</b></h6>\\n                    <small class="text-muted">7,5% da Cobran\\xc3\\xa7a</small>\\n                  </div> <span class="text-muted">R$ 7.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between bg-light">\\n                  <div class="text-success">\\n                    <h6 class="my-0"><b>Meta de Deposito</b></h6>\\n                    <small class="text-success">65% da venda</small>\\n                  </div> <span class="text-success">R$ 63.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0">Custo Mercadoria</h6>\\n                    <small class="text-muted">30% da Mercadoria</small>\\n                  </div> <span class="text-muted">R$ 30.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0"><b>Comiss\\xc3\\xa3o Venda</b></h6>\\n                    <small class="text-muted">15% da Venda</small>\\n                  </div> <span class="text-muted">R$ 15.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0"><b>Despesa Local e adiantamento</b></h6>\\n                    <small class="text-muted">10% da Venda</small>\\n                  </div> <span class="text-muted">R$ 5.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between bg-light">\\n                  <div class="text-success">\\n                    <h6 class="my-0"><b>Extimativa de Lucro</b></h6>\\n                    <small>Lucro Estimado</small>\\n                  </div> <span class="text-success">R$ 13.000,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0">Entrada Extra</h6>\\n                    <small class="text-muted">5% da Venda</small>\\n                  </div> <span class="text-muted">R$ 5.900,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between">\\n                  <div>\\n                    <h6 class="my-0">Aproveitamento Mercadoria</h6>\\n                    <small class="text-muted">5% da Mercadoria</small>\\n                  </div> <span class="text-muted">R$ 5.900,00</span>\\n                </li>\\n                <li class="list-group-item d-flex justify-content-between bg-light">\\n                  <div class="text-success">\\n                    <h6 class="my-0"><b>Extimativa de Lucro</b></h6>\\n                    <small>Com aproveitamento</small>\\n                  </div> <span class="text-success">R$ 24.800,00</span>\\n                </li>\\n              </ul>\\n            </div>\\n            <div class="col-md-6" >\\n            </div>\\n          </div>\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n\', escape=False)'
+p99
+sI135
+S"response.write('\\n      ', escape=False)"
+p100
+sI136
+S"response.write(response.toolbar() if response.show_toolbar else '')"
+p101
+sI137
+S"response.write('\\n    </div>\\n    ', escape=False)"
+p102
+sI138
+S'response.write(\' <!-- this is default footer -->\\n    <footer id="noprint" class="footer container-fluid ">\\n      <div class="row">\\n        <div class="col-md-12">\\n          <div class="copyright pull-left">\', escape=False)'
+p103
+sI139
+S"response.write(T('Copyright'))"
+p104
+sI140
+S"response.write(' &#169; ', escape=False)"
+p105
+sI141
+S'response.write(request.now.year)'
+p106
+sI122
+S'            pass'
+p107
+sI123
+S"        response.write('\\n              ', escape=False)"
+p108
+sI124
+S'        pass'
+p109
+sI125
+S"    response.write('\\n            </div>\\n          </li>\\n        </ul>\\n        ', escape=False)"
+p110
+sI126
+S'    pass'
+p111
+sI127
+S"response.write('\\n      </div>\\n    </nav>\\n\\n    <!-- Masthead ===================================== -->\\n    ', escape=False)"
+p112
+ssg85
+S'()'
+p113
+sg87
+S'<module>'
+p114
+sasS'pyver'
+p115
+S'Python 2.7.12: /usr/local/bin/uwsgi (prefix: /usr)'
+p116
+sS'session'
+p117
+g59
+(S's\xef\t\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">auth</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">expiration</td><td style="vertical-align:top;">:</td><td><div>3600</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">hmac_key</td><td style="vertical-align:top;">:</td><td><div>04a325fd-54b1-4121-9949-f9effa0be00e</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">last_visit</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2021, 4, 24, 0, 17, 32, 392887)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remember_me</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">user</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">email</td><td style="vertical-align:top;">:</td><td><div>betin@gmail.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">first_name</td><td style="vertical-align:top;">:</td><td><div>Rogoberto</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">id</td><td style="vertical-align:top;">:</td><td><div>1L</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">last_name</td><td style="vertical-align:top;">:</td><td><div>Ribeiro</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">registration_id</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">registration_key</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">reset_password_key</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">user_groups</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">1</td><td style="vertical-align:top;">:</td><td><div>user_1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">2</td><td style="vertical-align:top;">:</td><td><div>admin</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">3</td><td style="vertical-align:top;">:</td><td><div>wiki_editor</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr></table></div>'
+tRp118
+sS'etype'
+p119
+S"<type 'exceptions.TypeError'>"
+p120
+sS'date'
+p121
+S'Sat Apr 24 00:21:47 2021'
+p122
+sS'response'
+p123
+g59
+(S's\xee\x1d\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">body</td><td style="vertical-align:top;">:</td><td><div>&lt;cStringIO.StringO object at 0x7f494b3b3ca8&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_aluminum</td><td style="vertical-align:top;">:</td><td><div>177.25.147.85-2570768a-aace-428b-8604-6afcf8f04c68<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div>/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">delimiters</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>{{</div></td></tr><tr><td><div>}}</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">files</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>/aluminum/static/js/jquery.js</div></td></tr><tr><td><div>/aluminum/static/css/calendar.css</div></td></tr><tr><td><div>/aluminum/static/js/calendar.js</div></td></tr><tr><td><div>/aluminum/static/js/web2py.js</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">form_label_separator</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">formstyle</td><td style="vertical-align:top;">:</td><td><div>bootstrap4_inline</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generic_patterns</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">google_analytics_id</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">headers</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">X-Powered-By</td><td style="vertical-align:top;">:</td><td><div>web2py</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">menu</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div><table><tr><td><div>Principal</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/aluminum/default/index</div></td></tr><tr><td><div><table></table></div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Principal</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/aluminum/default/index</div></td></tr><tr><td><div><table></table></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">meta</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">author</td><td style="vertical-align:top;">:</td><td><div>Your Name &lt;you@example.com&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">description</td><td style="vertical-align:top;">:</td><td><div>a cool new app</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generator</td><td style="vertical-align:top;">:</td><td><div>Web2py Web Framework</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">keywords</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>web2py</div></td></tr><tr><td><div>python</div></td></tr><tr><td><div>framework</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">models_to_run</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>^\\w+\\.py$</div></td></tr><tr><td><div>^default/\\w+\\.py$</div></td></tr><tr><td><div>^default/captura_empresa/\\w+\\.py$</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">postprocessing</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_client</td><td style="vertical-align:top;">:</td><td><div>177.25.147.85</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_compression_level</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_expires</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_data_name</td><td style="vertical-align:top;">:</td><td><div>session_data_aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_file</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;/home/rogoberto/web2py/applications/aluminum/sessions/194/133/177.25.147.85-2570768a-aace-428b-8604-6afcf8f04c68&#x27;, mode &#x27;rb+&#x27; at 0x7f495026f4b0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_filename</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py/applications/aluminum/sessions/177.25.147.85-2570768a-aace-428b-8604-6afcf8f04c68</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_hash</td><td style="vertical-align:top;">:</td><td><div>9f326d27b559f9ba22d7aa9918f2e3ad</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id</td><td style="vertical-align:top;">:</td><td><div>177.25.147.85-2570768a-aace-428b-8604-6afcf8f04c68</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_name</td><td style="vertical-align:top;">:</td><td><div>session_id_aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_locked</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_masterapp</td><td style="vertical-align:top;">:</td><td><div>aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_new</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_storage_type</td><td style="vertical-align:top;">:</td><td><div>file</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">show_toolbar</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">status</td><td style="vertical-align:top;">:</td><td><div>200</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">view</td><td style="vertical-align:top;">:</td><td><div>default/captura_empresa.html</div></td></tr></table></div>'
+tRp124
+sS'locals'
+p125
+(dp126
+S'PY2'
+p127
+S'True'
+p128
+sS'OBJECT'
+p129
+S"<class 'gluon.html.OBJECT'>"
+p130
+sS'SQLDB'
+p131
+S"<class 'pydal.base.DAL'>"
+p132
+sg117
+S"<Storage {'auth': <Storage {'remember_me': False...-f024-4dfd-81db-5c0b52546e8d'], '_secure': True}>"
+p133
+sS'LINK'
+p134
+S"<class 'gluon.html.LINK'>"
+p135
+sS'BR'
+p136
+S"<class 'gluon.html.BR'>"
+p137
+sS'local_import'
+p138
+S'<function <lambda>>'
+p139
+sS'OPTGROUP'
+p140
+S"<class 'gluon.html.OPTGROUP'>"
+p141
+sS'__package__'
+p142
+S'None'
+p143
+sS'PRE'
+p144
+S"<class 'gluon.html.PRE'>"
+p145
+sS'IS_INT_IN_RANGE'
+p146
+S"<class 'gluon.validators.IS_INT_IN_RANGE'>"
+p147
+sS'to_bytes'
+p148
+S'<function to_bytes>'
+p149
+sS'IS_LOWER'
+p150
+S"<class 'gluon.validators.IS_LOWER'>"
+p151
+sS'IS_STRONG'
+p152
+S"<class 'gluon.validators.IS_STRONG'>"
+p153
+sS'cache'
+p154
+S'<gluon.cache.Cache object>'
+p155
+sS'IS_IN_DB'
+p156
+S"<class 'gluon.validators.IS_IN_DB'>"
+p157
+sS'TAG'
+p158
+S'<gluon.html.__TAG__ object>'
+p159
+sS'valor'
+p160
+S"<Row {'registration_id': '', 'last_name': 'Ribei...gistration_key': '', 'email': 'betin@gmail.com'}>"
+p161
+sS'SQLField'
+p162
+S"<class 'pydal.objects.Field'>"
+p163
+sS'mail'
+p164
+S'<gluon.tools.Mail object>'
+p165
+sS'BODY'
+p166
+S"<class 'gluon.html.BODY'>"
+p167
+sS'IS_DATE_IN_RANGE'
+p168
+S"<class 'gluon.validators.IS_DATE_IN_RANGE'>"
+p169
+sS'IFRAME'
+p170
+S"<class 'gluon.html.IFRAME'>"
+p171
+sS'URL'
+p172
+S'<function URL>'
+p173
+sS'__file__'
+p174
+S"'/home/rogoberto/web2py/applications/aluminum/views/default/captura_empresa.html'"
+p175
+sS'db'
+p176
+S'<DAL uri="sqlite://storage.sqlite">'
+p177
+sS'auth'
+p178
+S'<gluon.tools.Auth object>'
+p179
+sS'P'
+S"<class 'gluon.html.P'>"
+p180
+sS'TFOOT'
+p181
+S"<class 'gluon.html.TFOOT'>"
+p182
+sS'iteritems'
+p183
+S'<function <lambda>>'
+p184
+sS'XHTML'
+p185
+S"<class 'gluon.html.XHTML'>"
+p186
+sS'datetime'
+p187
+S"<module 'datetime' (built-in)>"
+p188
+sS'ON'
+p189
+g128
+sS'OL'
+p190
+S"<class 'gluon.html.OL'>"
+p191
+sS'TEXTAREA'
+p192
+S"<class 'gluon.html.TEXTAREA'>"
+p193
+sS'MENU'
+p194
+S"<class 'gluon.html.MENU'>"
+p195
+sS'IS_IMAGE'
+p196
+S"<class 'gluon.validators.IS_IMAGE'>"
+p197
+sS'EM'
+p198
+S"<class 'gluon.html.EM'>"
+p199
+sS'CODE'
+p200
+S"<class 'gluon.html.CODE'>"
+p201
+sS'HTTP'
+p202
+S"<class 'gluon.http.HTTP'>"
+p203
+sS'HR'
+p204
+S"<class 'gluon.html.HR'>"
+p205
+sS'IS_DATETIME'
+p206
+S"<class 'gluon.validators.IS_DATETIME'>"
+p207
+sS'reduce'
+p208
+S'<built-in function reduce>'
+p209
+sS'STYLE'
+p210
+S"<class 'gluon.html.STYLE'>"
+p211
+sS'LABEL'
+p212
+S"<class 'gluon.html.LABEL'>"
+p213
+sS'CLEANUP'
+p214
+S"<class 'gluon.validators.CLEANUP'>"
+p215
+sS'SELECT'
+p216
+S"<class 'gluon.html.SELECT'>"
+p217
+sS'CENTER'
+p218
+S"<class 'gluon.html.CENTER'>"
+p219
+sS'Auth'
+p220
+S"<class 'gluon.tools.Auth'>"
+p221
+sS'urlopen'
+p222
+S'<function urlopen>'
+p223
+sS'HTML'
+p224
+S"<class 'gluon.html.HTML'>"
+p225
+sS'SQLFORM'
+p226
+S"<class 'gluon.sqlhtml.SQLFORM'>"
+p227
+sS'_item'
+p228
+S"(<lazyT 'Home'>, False, '/aluminum/default/index', [])"
+p229
+sS'LOAD'
+p230
+S'<function LOAD>'
+p231
+sS'redirect'
+p232
+S'<function redirect>'
+p233
+sS'FIELDSET'
+p234
+S"<class 'gluon.html.FIELDSET'>"
+p235
+sS'IS_EQUAL_TO'
+p236
+S"<class 'gluon.validators.IS_EQUAL_TO'>"
+p237
+sS'embed64'
+p238
+S'<function embed64>'
+p239
+sS'IS_LIST_OF'
+p240
+S"<class 'gluon.validators.IS_LIST_OF'>"
+p241
+sS'INPUT'
+p242
+S"<class 'gluon.html.INPUT'>"
+p243
+sS'EMBED'
+p244
+S"<class 'gluon.html.EMBED'>"
+p245
+sS'configuration'
+p246
+S"{'host': {'names': 'localhost:*, 127.0.0.1:*, *:...': 'sqlite://storage.sqlite', 'pool_size': '10'}}"
+p247
+sS'H2'
+p248
+S"<class 'gluon.html.H2'>"
+p249
+sS'H3'
+p250
+S"<class 'gluon.html.H3'>"
+p251
+sS'AppConfig'
+p252
+S'<function AppConfig>'
+p253
+sS'H1'
+p254
+S"<class 'gluon.html.H1'>"
+p255
+sS'H6'
+p256
+S"<class 'gluon.html.H6'>"
+p257
+sS'H4'
+p258
+S"<class 'gluon.html.H4'>"
+p259
+sS'H5'
+p260
+S"<class 'gluon.html.H5'>"
+p261
+sS'UL'
+p262
+S"<class 'gluon.html.UL'>"
+p263
+sS'IS_UPPER'
+p264
+S"<class 'gluon.validators.IS_UPPER'>"
+p265
+sS'xmlescape'
+p266
+S'<function xmlescape>'
+p267
+sS'IS_TIME'
+p268
+S"<class 'gluon.validators.IS_TIME'>"
+p269
+sS'OPTION'
+p270
+S"<class 'gluon.html.OPTION'>"
+p271
+sS'TITLE'
+p272
+S"<class 'gluon.html.TITLE'>"
+p273
+sS'CRYPT'
+p274
+S"<class 'gluon.validators.CRYPT'>"
+p275
+sS'IS_EMPTY_OR'
+p276
+S"<class 'gluon.validators.IS_EMPTY_OR'>"
+p277
+sS'MARKMIN'
+p278
+S"<class 'gluon.html.MARKMIN'>"
+p279
+sS'__name__'
+p280
+S"'__restricted__'"
+p281
+sS'STRONG'
+p282
+S"<class 'gluon.html.STRONG'>"
+p283
+sS'COL'
+p284
+S"<class 'gluon.html.COL'>"
+p285
+sS'__builtins__'
+p286
+S"{'ArithmeticError': <type 'exceptions.ArithmeticError'>, 'AssertionError': <type 'exceptions.AssertionError'>, 'AttributeError': <type 'exceptions.AttributeError'>, 'BaseException': <type 'exceptions.BaseException'>, 'BufferError': <type 'exceptions.BufferError'>, 'BytesWarning': <type 'exceptions.BytesWarning'>, 'DeprecationWarning': <type 'exceptions.DeprecationWarning'>, 'EOFError': <type 'exceptions.EOFError'>, 'Ellipsis': Ellipsis, 'EnvironmentError': <type 'exceptions.EnvironmentError'>, ...}"
+p287
+sS'SCRIPT'
+p288
+S"<class 'gluon.html.SCRIPT'>"
+p289
+sS'TABLE'
+p290
+S"<class 'gluon.html.TABLE'>"
+p291
+sS'IS_IPV4'
+p292
+S"<class 'gluon.validators.IS_IPV4'>"
+p293
+sS'IS_LENGTH'
+p294
+S"<class 'gluon.validators.IS_LENGTH'>"
+p295
+sS'IS_IPV6'
+p296
+S"<class 'gluon.validators.IS_IPV6'>"
+p297
+sS'XML'
+p298
+S"<class 'gluon.html.XML'>"
+p299
+sS'B'
+S"<class 'gluon.html.B'>"
+p300
+sS'IMG'
+p301
+S"<class 'gluon.html.IMG'>"
+p302
+sS'SQLTABLE'
+p303
+S"<class 'gluon.sqlhtml.SQLTABLE'>"
+p304
+sS'IS_MATCH'
+p305
+S"<class 'gluon.validators.IS_MATCH'>"
+p306
+sS'IS_ALPHANUMERIC'
+p307
+S"<class 'gluon.validators.IS_ALPHANUMERIC'>"
+p308
+sS'SPAN'
+p309
+S"<class 'gluon.html.SPAN'>"
+p310
+sS'IS_JSON'
+p311
+S"<class 'gluon.validators.IS_JSON'>"
+p312
+sS'IS_IPADDRESS'
+p313
+S"<class 'gluon.validators.IS_IPADDRESS'>"
+p314
+sS'IS_SLUG'
+p315
+S"<class 'gluon.validators.IS_SLUG'>"
+p316
+sS'BEAUTIFY'
+p317
+S"<class 'gluon.html.BEAUTIFY'>"
+p318
+sS'META'
+p319
+S"<class 'gluon.html.META'>"
+p320
+sS'BUTTON'
+p321
+S"<class 'gluon.html.BUTTON'>"
+p322
+sS'IS_DATE'
+p323
+S"<class 'gluon.validators.IS_DATE'>"
+p324
+sS'IS_EMAIL'
+p325
+S"<class 'gluon.validators.IS_EMAIL'>"
+p326
+sS'IS_NOT_EMPTY'
+p327
+S"<class 'gluon.validators.IS_NOT_EMPTY'>"
+p328
+sS'xrange'
+p329
+S"<type 'xrange'>"
+p330
+sS'TBODY'
+p331
+S"<class 'gluon.html.TBODY'>"
+p332
+sS'CAT'
+p333
+S"<class 'gluon.html.CAT'>"
+p334
+sS'Field'
+p335
+S"<class 'pydal.objects.Field'>"
+p336
+sS'IS_LIST_OF_EMAILS'
+p337
+S"<class 'gluon.validators.IS_LIST_OF_EMAILS'>"
+p338
+sg58
+S"<Storage {'function': 'captura_empresa', 'cookie...se, 'is_https': True, 'client': '177.25.147.85'}>"
+p339
+sS'DIV'
+p340
+S"<class 'gluon.html.DIV'>"
+p341
+sS'LEGEND'
+p342
+S"<class 'gluon.html.LEGEND'>"
+p343
+sS'to_native'
+p344
+S'<function to_native>'
+p345
+sS'COLGROUP'
+p346
+S"<class 'gluon.html.COLGROUP'>"
+p347
+sS'DAL'
+p348
+S"<class 'pydal.base.DAL'>"
+p349
+sS'ASSIGNJS'
+p350
+S'<function ASSIGNJS>'
+p351
+sS'TR'
+p352
+S"<class 'gluon.html.TR'>"
+p353
+sS'LI'
+p354
+S"<class 'gluon.html.LI'>"
+p355
+sS'TH'
+p356
+S"<class 'gluon.html.TH'>"
+p357
+sS'TD'
+p358
+S"<class 'gluon.html.TD'>"
+p359
+sS'IS_URL'
+p360
+S"<class 'gluon.validators.IS_URL'>"
+p361
+sS'A'
+S"<class 'gluon.html.A'>"
+p362
+sS'HEAD'
+p363
+S"<class 'gluon.html.HEAD'>"
+p364
+sS'IS_DATETIME_IN_RANGE'
+p365
+S"<class 'gluon.validators.IS_DATETIME_IN_RANGE'>"
+p366
+sS'FORM'
+p367
+S"<class 'gluon.html.FORM'>"
+p368
+sS'I'
+S"<class 'gluon.html.I'>"
+p369
+sS'Request'
+p370
+S'<class urllib2.Request>'
+p371
+sS'IS_NOT_IN_DB'
+p372
+S"<class 'gluon.validators.IS_NOT_IN_DB'>"
+p373
+sg123
+S"<Storage {'body': <cStringIO.StringO object at 0...86ad70>, 'view': 'default/captura_empresa.html'}>"
+p374
+sS'THEAD'
+p375
+S"<class 'gluon.html.THEAD'>"
+p376
+sS'ANY_OF'
+p377
+S"<class 'gluon.validators.ANY_OF'>"
+p378
+sS'IS_NULL_OR'
+p379
+S"<class 'gluon.validators.IS_EMPTY_OR'>"
+p380
+sS'IS_FLOAT_IN_RANGE'
+p381
+S"<class 'gluon.validators.IS_FLOAT_IN_RANGE'>"
+p382
+sS'IS_EXPR'
+p383
+S"<class 'gluon.validators.IS_EXPR'>"
+p384
+sS'T'
+S'<gluon.languages.translator object>'
+p385
+sS'IS_IN_SET'
+p386
+S"<class 'gluon.validators.IS_IN_SET'>"
+p387
+sS'IS_UPLOAD_FILENAME'
+p388
+S"<class 'gluon.validators.IS_UPLOAD_FILENAME'>"
+p389
+sS'TT'
+p390
+S"<class 'gluon.html.TT'>"
+p391
+sS'IS_DECIMAL_IN_RANGE'
+p392
+S"<class 'gluon.validators.IS_DECIMAL_IN_RANGE'>"
+p393
+sssS'traceback'
+p394
+S'Traceback (most recent call last):\n  File "/home/rogoberto/web2py/gluon/restricted.py", line 219, in restricted\n    exec(ccode, environment)\n  File "/home/rogoberto/web2py/applications/aluminum/views/default/captura_empresa.html", line 131, in <module>\nTypeError: unsupported operand type(s) for /: \'Row\' and \'float\'\n'
+p395
+s.

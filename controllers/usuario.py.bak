@@ -13,10 +13,10 @@ def acesso_projeto():
     diferenca=projeto.data_final-hj
     if diferenca.days>=0:
       #redirect(URL('acs_mensagem','usuario_bloqueado',args="Usuario bloqueado"))
-      projeto.venda_finalizada=True
+      projeto.venda_finalizada=False
       projeto.update_record()
     else:
-      projeto.venda_finalizada=False
+      projeto.venda_finalizada=True
       projeto.update_record()
     empresa = db.empresa(projeto.empresa)
     usuario = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user)
@@ -37,7 +37,7 @@ def acesso_completo():
     empresa = db.empresa(projeto.empresa)
     return locals()
 def betinho_acesso():
-    projeto = db.projeto(request.args(0, cast=int))
+    redirect(URL('default','index'))
     empresa = db.empresa(projeto.empresa)
     return locals()
 @auth.requires_login()
@@ -49,9 +49,10 @@ def abencoado():
 @auth.requires_login()
 def fsprojetos():
     empresa = db.empresa(request.args(0, cast=int))
-    usuario = auth.user
     if auth.user.id==10:
         empresa = db.empresa(8)
+    else:
+      redirect(URL('default','index'))
     rows = db(db.projeto.empresa==empresa.id).select(orderby=~db.projeto.descricao)
     rowsd = db((db.classe_despesa_local.empresa == empresa.id)).select(orderby=~db.classe_despesa_local.descricao)
     rowsuser = db(db.usuario_empresa.empresa==empresa.id).select(orderby=db.usuario_empresa.nome)

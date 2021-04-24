@@ -48,7 +48,7 @@
                                 <td>{{=("{}/{}/{}".format(row.data_vale.day,row.data_vale.month,row.data_vale.year))}}</td>
                                 <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
                                 {{totalvale+=row.valor}}
-                                <td><a lass="btn btn-outline-warning btn-block"  href="{{=URL('alterar_vale', args=row.id)}}"><i class="fa fa-exchange" ></i></a></td>
+                                <td><a class="btn btn-outline-warning btn-block"  href="{{=URL('alterar_vale', args=row.id)}}"><i class="fa fa-exchange" ></i></a></td>
                                 {{pass}}
                             </tr>
                             <tr>

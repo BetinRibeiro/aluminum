@@ -2,10 +2,8 @@
 import datetime
 @auth.requires_login()
 def acessar_cobrancas():
-  
     usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
-    
     rows = db(db.sub_venda.projeto == request.args(0, cast=int)).select(orderby=db.sub_venda.data_inicio_cobranca)
     for row in rows:
         sum = db.venda.venda_praso.sum()-db.venda.valor_devolvido.sum()

@@ -120,6 +120,12 @@ def alterar_dados_rota():
 def acesso_vendas_particao():
     sub_venda = db.sub_venda(request.args(0, cast=int))
     rows = db(db.venda.sub_venda == sub_venda.id).select(orderby=db.venda.data_venda)
+    rowsdesp = db(db.despesa.projeto==sub_venda.projeto).select(orderby=db.despesa.data_inicio)
+    projeto = db.projeto(sub_venda.projeto)
+    #for row in rowsdesp:
+      #classe_despesa = db.classe_despesa(db.classe_despesa.id==row.classe_despesa)
+      #row.projeto=classe_despesa.projeto
+      #row.update_record()
     return locals()
 
 @auth.requires_login()

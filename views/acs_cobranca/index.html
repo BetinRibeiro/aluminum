@@ -29,7 +29,6 @@
           {{pass}}
         </div>
       </div>
-      
       <div class="row">
           {{for row in rows:}}
         <div class="col-lg-4 col-md-6 p-3" >
@@ -37,7 +36,13 @@
             <div class="card-body p-4">
               <div class="row">
                 <div class="col-6">
-                  <h6 class="mb-0">{{=row.nome_cobrador}}</h6>
+                  {{if row.auth_user:}}
+                  <h6 class="mb-0">{{=row.auth_user.first_name}} {{=row.auth_user.last_name}}</h6>
+                  {{else:}}
+                  <h6>
+                    Verificar Cobrador
+                  </h6>
+                  {{pass}}
                 </div>
                 <div class="col-6 text-right">
                   <h6 class="mb-0"> <b>R$ {{="{:,}".format(round(row.total_venda_praso,1)).replace(",","#").replace(".",",").replace("#",".")}}0</b> </h6>
@@ -58,7 +63,7 @@
               </ul>
               
                   {{diferenca=date.today()-row.data_inicio_cobranca}}
-              {{if usuario.id==11 or usuario.id==1 or usuario.id==5:}}
+              {{if True:}}
               {{if row.total_deposito>0 and row.total_recebido>0 and row.total_despesa>0:}}
               {{if diferenca.days>5 and not diferenca.days>150:}}
                   {{=diferenca.days}} Dias

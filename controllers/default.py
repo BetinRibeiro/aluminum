@@ -33,6 +33,8 @@ def acesso_inicial_usuario():
 def acesso_inicial():
     #busca empresa que tenha o usuario iguela ao logado
     empresa = db.empresa(db.empresa.auth_user==auth.user.id)
+    #caso não tenha empresa vinculada como proprietario
+    #redireciona para o index inicial
     usuario=auth.user
     if (auth.user.id==1):
         redirect(URL('acs_principal','index'))
@@ -54,7 +56,12 @@ def acesso_inicial():
         redirect(URL('default','acesso_inicial_usuario'))
       else:
         redirect(URL('default','acesso_inicial_usuario'))
-    rows = db(db.projeto.empresa==empresa.id).select()
+    else:
+        redirect(URL('default','index'))
+    if empresa:
+      rows = db(db.projeto.empresa==empresa.id).select()
+    else:
+      redirect(URL('index'))
     if request.args(0, auth.user)=="235":
         rows = db(db.projeto.empresa).select(orderby=db.empresa)
     #2 consultas no banco

@@ -100,6 +100,7 @@ def criar_desp():
 
     db.despesa.classe_despesa.default = classe_despesa.id
     db.despesa.classe_despesa.writable = False
+    db.despesa.tipo.default = (request.args(1, auth.user))
     db.despesa.projeto.default = classe_despesa.projeto
     db.despesa.projeto.writable = False
 

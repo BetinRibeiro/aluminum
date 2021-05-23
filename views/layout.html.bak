@@ -32,7 +32,6 @@
     {{include 'web2py_ajax.html'}} <!-- this includes jquery.js, calendar.js/.css and web2py.js -->
       {{if auth.user:}}
     {{if auth.user.first_name=="Rogoberto":}}
-    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.css">
    
     {{elif auth.user.first_name=="Meme":}}
     <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.css"> 

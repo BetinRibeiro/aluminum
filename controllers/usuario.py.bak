@@ -44,6 +44,8 @@ def betinho_acesso():
 def abencoado():
     projeto = db.projeto(request.args(0, cast=int))
     empresa = db.empresa(projeto.empresa)
+    if empresa.id!=4:
+      redirect(URL('default','index'))
     data=db(db.carrada.projeto == projeto.id).select(orderby=db.carrada.data_envio).first().data_envio
     return locals()
 @auth.requires_login()

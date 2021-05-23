@@ -2,9 +2,11 @@
 {{total=0}}
 {{a=1}}
 <div class="py-5" >
+  {{if False:}}
     <marquee direction="left">
     <a class="navbar-brand text-info"> <h6>Após inserir o registro você só poderá alterar o mesmo até 72hrs depois do cadastro! Caso necessite fazer alguma alteração entre em contato com o Administrador</h6></a>
 </marquee>
+  {{pass}}
     <div class="container">
       <div class="row">
         <div class="col-md-6">
@@ -15,8 +17,10 @@
       </div>
       <div class="row">
         <div class="col-md-6">
+          {{if auth.user.id!=82:}}
           <a class="btn btn-link" href="{{=URL('acs_cobranca','relatorio_cobranca', args=sub_venda.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
           <a class="btn btn-link" href="{{=URL('inserir_registro', args=[sub_venda.id,tipo])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Adicionar Registro</a>
+          {{pass}}
         </div>
             {{if tipo=="Recebimento":}}
         <div class="col-md-6">
@@ -42,7 +46,7 @@
                   <th>Descrição</th>
                   <th>Valor</th>
                   <th>Alterar</th>
-                  {{if (usuario.id==11)or(usuario.id==1):}}
+                  {{if (usuario.id==11)or(usuario.id==1)or(usuario.id==82):}}
                   <th>Conferir</th>
                   {{pass}}
                 </tr>
@@ -66,7 +70,7 @@
                     {{pass}}
                     {{total+=row.valor}}
                     {{if (usuario.id!=sub_venda.auth_user) and(row.tipo=="Deposito"):}}
-                  {{if (usuario.id==11)or(usuario.id==1):}}
+                  {{if (usuario.id==11)or(usuario.id==1)or(usuario.id==82):}}
                   <td>{{if 'cfrd' in row.descricao:}}
                     <a class="btn btn-link" style="color:#55acee"  href="{{=URL('conferir', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-check" ></i> </a>
                     {{else:}}

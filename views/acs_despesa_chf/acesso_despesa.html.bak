@@ -40,8 +40,13 @@
                           {{row.descricao="DESPESA"}}
                           {{row.update_record()}}
                           {{pass}}
+              <td>{{=row.projeto}}</td>
                           <td>
+                              {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
                               <a href="{{=URL('alterar_desp', args=[row.id,tipodesp])}}">{{=row.descricao}}</a>
+                              {{else:}}
+                              {{=row.descricao}}
+                              {{pass}}
                               </td>
 
 						<td> {{=("{}/{}/{}".format(row.data_inicio.day,row.data_inicio.month,row.data_inicio.year))}}</td>

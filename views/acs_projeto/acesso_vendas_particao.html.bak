@@ -79,7 +79,7 @@
               {{totaldesp+=row1.valor}}
               {{pass}}
               {{pass}}
-              <td class="text-danger">R$ {{="{:,.2f}".format(round(totaldesp,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+              <td class="text-danger"><a class="text-danger" href="{{=URL('ver_despesa',args=row.id)}}">R$ {{="{:,.2f}".format(round(totaldesp,2)).replace(",","#").replace(".",",").replace("#",".")}}</a></td>
 {{totaldespesa+=totaldesp}}
               <th class="text-danger">R$ {{="{:,.2f}".format(round(totaldespesa,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
               <th>R$ {{="{:,.2f}".format(round(tvenda,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
@@ -116,7 +116,7 @@
               {{totaldesp+=row1.valor}}
               {{pass}}
               {{pass}}
-              <td class="text-danger">R$ {{="{:,.2f}".format(round(totaldesp,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+              <td class="text-danger"><a class="text-danger" href="{{=URL('ver_despesa',args=[projeto.id,data])}}">R$ {{="{:,.2f}".format(round(totaldesp,2)).replace(",","#").replace(".",",").replace("#",".")}}</a></td>
 {{totaldespesa+=totaldesp}}
               <th  class="text-danger">R$ {{="{:,.2f}".format(round(totaldespesa,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                 <th >R$ {{="{:,.2f}".format(round(tvenda,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
@@ -259,8 +259,8 @@ Ultima data - {{=ultimadata}}
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <div>
-                <h6 class="my-0"><b></b></h6> <small class="text-muted">Brief description</small>
-              </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(0,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                <h6 class="my-0"><b>Total de Vales</b></h6> <small class="text-muted">Brief description</small>
+              </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(projeto.total_caderno_vendedor+projeto.total_vales_vendedor,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
             </li>
             <li class="list-group-item d-flex justify-content-between bg-light">
               <div class="text-success">

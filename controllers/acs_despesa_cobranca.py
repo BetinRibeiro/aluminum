@@ -25,15 +25,13 @@ def criar_class_desp():
 def alterar_class_desp():
     response.view = 'generic.html' # use a generic view
     classe_despesa_cobranca = db.classe_despesa_cobranca(request.args(0, cast=int))
-    
     sub_venda = db.sub_venda(classe_despesa_cobranca.sub_venda)
     db.classe_despesa_cobranca.id.readable = False
     db.classe_despesa_cobranca.id.writable = False
-    
     db.classe_despesa_cobranca.sub_venda.readable = False
     db.classe_despesa_cobranca.sub_venda.writable = False
 
-    form = SQLFORM(db.classe_despesa_cobranca, request.args(0, cast=int), deletable=True)
+    form = SQLFORM(db.classe_despesa_cobranca, request.args(0, cast=int), deletable=False)
     if form.process().accepted:
         session.flash = 'Atualizado'
         redirect(URL('index', args=[sub_venda.id]))

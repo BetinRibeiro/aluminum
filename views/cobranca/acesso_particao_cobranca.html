@@ -1,7 +1,8 @@
 {{extend 'layout.html'}}
 {{from datetime import date}}
 {{hj = date.today()}}
-{{data_bloqueio = date.fromordinal(sub_venda.data_inicio_cobranca.toordinal()+120)}}
+<!-- Colocar pra bloquear depois de 150 dias quando ramon concluir-->
+{{data_bloqueio = date.fromordinal(sub_venda.data_inicio_cobranca.toordinal()+520)}}
 {{diferenca = hj - data_bloqueio}}
 {{if int(diferenca.days)>0:}}
 {{sub_venda.cobranca_finalizada=True}}

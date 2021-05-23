@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h5 class="">Lista de Despesas {{=sub_venda.descricao}} |{{=sub_venda.projeto.descricao}}
+          <h5 class="">Lista de Despesas {{=sub_venda.primeira_cidade}} |{{=sub_venda.projeto.descricao}}
 
               </h5>
         </div>
@@ -14,6 +14,7 @@
         <div class="col-md-6">
           <a class="btn btn-link" href="{{=URL('index', args=sub_venda.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
           <a class="btn btn-link" href="{{=URL('criar_desp', args=[classe_despesa_cobranca.id])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Adicionar Despesa</a>
+          
              {{if classe_despesa_cobranca.descricao=="DIÁRIAS" and len(rows)>0:}}
         <a class="btn btn-link" href="{{=URL('criar_desp', args=[classe_despesa_cobranca.id,1])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i>Repitir Valor</a>
         {{pass}}

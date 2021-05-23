@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 def index():
     
-    rows = db(db.boleto_atrasado).select()
+    rows = SQLFORM.smartgrid(db.empresa)
     #grid = SQLFORM.smartgrid(db.boleto)
     return dict(rows=rows)

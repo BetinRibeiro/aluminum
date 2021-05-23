@@ -1,0 +1,153 @@
+{{extend 'layout.html'}}
+{{venda=simulacao.venda}}
+{{cobranca=venda*simulacao.perc_cobrado/100}}
+{{fator_prazo=(100-simulacao.perc_retorno-simulacao.perc_avista)/100}}
+{{fator_vista=simulacao.perc_avista/100}}
+{{fator_retorno=simulacao.perc_retorno/100}}
+{{total_mercadoria=venda/fator_prazo}}
+{{custo_compra=total_mercadoria/(simulacao.perc_margem/100)}}
+{{total_retorno=(total_mercadoria*fator_retorno)}}
+{{custo_retorno=total_retorno/(simulacao.perc_margem/100)}}
+{{custo_total=custo_compra-custo_retorno}}
+{{comissao_venda=venda*simulacao.perc_comiss_vendedor/100}}
+{{comissao_chefe=venda*simulacao.perc_comiss_chefe/100}}
+{{comissao_cobrador=cobranca*simulacao.perc_comiss_cobrador/100}}
+{{total_comissao=comissao_venda+comissao_chefe+comissao_cobrador}}
+
+{{desp_funcionario=venda*simulacao.perc_funcionarios/100}}
+{{desp_local=venda*simulacao.perc_desp_local/100}}
+{{desp_venda=venda*simulacao.perc_desp_venda/100}}
+{{desp_cobranca=cobranca*simulacao.perc_desp_cobranca/100}}
+{{total_desp=desp_funcionario+desp_local+desp_venda+desp_cobranca}}
+{{deposito=cobranca-desp_cobranca-comissao_cobrador}}
+{{mercadoria_vista=total_mercadoria*fator_vista}}
+{{venda_vista=mercadoria_vista/2}}
+{{custo_vista=mercadoria_vista/(simulacao.perc_margem/100)}}
+{{total_entradas=cobranca+venda_vista}}
+{{margem_bruta=total_entradas-total_comissao-custo_total}}
+{{margem_liquida=margem_bruta-total_desp}}
+
+
+{{valor=simulacao.perc_retorno}}
+{{valor=simulacao.perc_cobrado}}
+{{valor=simulacao.perc_devolucao}}
+{{valor=simulacao.perc_comiss_vendedor}}
+{{valor=simulacao.perc_comiss_chefe}}
+{{valor=simulacao.perc_comiss_cobrador}}
+{{valor=simulacao.perc_devolucao}}
+
+<div class="py-3">
+    <div class="container">
+      <div class="row" >
+        <div class="mx-auto col-md-8 text-center">
+          <h3 class="mb-3">Projeção Simulada</h3>
+          <p class="lead">{{=simulacao.descricao}}</p>
+          <div class="row">
+            <div class="col-md-6 col-6">
+              <a class="btn btn-primary my-1 btn-block" href="{{=URL('acs_principal','index')}}">
+                <i class="fa fa-arrow-left fa-fw"></i>Voltar</a>
+            </div>
+            <div class="col-md-6 col-6"><a class="btn btn-primary my-1 btn-block" href="{{=URL('alterar_simulacao', args=simulacao.id)}}">
+              <i class="fa fa-pencil fa-fw"></i>Alterar</a></div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 col-6">
+              <h5 class="my-2">
+                Venda - <b>R$ {{="{:,.2f}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#",".")}}</b>
+              </h5>
+            </div>
+            <div class="col-md-6 col-6">
+              <h5 class="my-2">Depósitos - <b>R$ {{="{:,.2f}".format(round(deposito,2)).replace(",","#").replace(".",",").replace("#",".")}}</b>
+              </h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-left">
+              <ul class="list-group my-2">
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0"><b>Venda à Vista</b></h6> <small class="text-muted">Custo - 
+                    R$ {{="{:,.2f}".format(round(custo_vista,2)).replace(",","#").replace(".",",").replace("#",".")}}</small>
+                  </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(venda_vista,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0">Recebido</h6> <small class="text-muted">Valor de Entrada</small>
+                  </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(cobranca,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                  <div class="text-success">
+                    <h6 class="my-0"><b>Total Entradas</b></h6> <small>Somatoria</small>
+                  </div> <span class="text-success">R$ {{="{:,.2f}".format(round(total_entradas,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0"><b>Custo Compra</b></h6> <small class="text-muted">Total - R$ {{="{:,.2f}".format(round(total_mercadoria,2)).replace(",","#").replace(".",",").replace("#",".")}}</small>
+                  </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(custo_compra,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0"><b>Custo de Retorno (Capital Imobilizado)</b></h6> <small class="text-muted">Total - R$ {{="{:,.2f}".format(round(total_retorno,2)).replace(",","#").replace(".",",").replace("#",".")}}</small>
+                  </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(custo_retorno,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                  <div class="text-success">
+                    <h6 class="my-0"><b>Custo Total</b></h6> <small>Compra menos retorno</small>
+                  </div> <span class="text-success">R$ {{="{:,.2f}".format(round(custo_total,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0"><b>Comissão Venda</b></h6> <small class="text-muted">Todos vendedores</small>
+                  </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(comissao_venda,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0"><b>Comissão Chefia</b></h6> <small class="text-muted">o Chefe da equipe</small>
+                  </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(comissao_chefe,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0"><b>Comissão Cobrança</b></h6> <small class="text-muted">Todos os cobradores</small>
+                  </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(comissao_cobrador,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                  <div class="text-success">
+                    <h6 class="my-0"><b>Total de Comissão</b></h6> <small>Todas as comissões</small>
+                  </div> <span class="text-success">R$ {{="{:,.2f}".format(round(total_comissao,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between"> <span>Margem de Lucro Bruta</span> <b>R$ {{="{:,.2f}".format(round(margem_bruta,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> </li>
+              </ul>
+              <ul class="list-group my-2">
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0"><b>Despesa (Funcionarios)</b></h6> <small class="text-muted">Funcionarios à salariado</small>
+                  </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(desp_funcionario,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0">Despesa (Local)</h6> <small class="text-muted">Fora a venda e cobrança</small>
+                  </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(desp_local,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0">Despesa (Venda)</h6> <small class="text-muted">Para manutenção da Venda</small>
+                  </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(desp_venda,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0">Despesa (Cobrança)</h6> <small class="text-muted">Para manutenção da Cobrança</small>
+                  </div> <span class="text-muted">R$ {{="{:,.2f}".format(round(desp_cobranca,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                  <div class="text-success">
+                    <h6 class="my-0"><b>Total das despesas</b></h6> <small>Somatoria</small>
+                  </div> <span class="text-success">R$ {{="{:,.2f}".format(round(total_desp,2)).replace(",","#").replace(".",",").replace("#",".")}}</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between"> <span>Margem de Lucro Liquida</span> <b>R$ {{="{:,.2f}".format(round(margem_liquida,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

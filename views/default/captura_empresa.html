@@ -6,16 +6,16 @@
 {{mercadoria_avista = float(total_mercadoria)*0.1}}
 {{mercadoria_retorno = float(total_mercadoria)*0.05}}
 {{cobranca = float(valor)*0.75}}
-{{desp_cobranca = float(cobranca)*0.08}}
-{{comissao_cobranca = float(cobranca)*0.065}}
+{{desp_cobranca = float(cobranca)*0.07}}
+{{comissao_cobranca = float(cobranca)*0.06}}
 {{deposito= cobranca-desp_cobranca-comissao_cobranca}}
 {{custo_mercadoria= float(total_mercadoria-mercadoria_retorno)*0.285}}
 {{comissao_venda= float(valor)*0.12}}
 {{despesa_venda= float(valor)*0.05}}
 {{lucro_bruto=deposito-custo_mercadoria-comissao_venda-despesa_venda}}
-{{entrada_extra=float(valor)*0.05}}
-{{reaproveitamento_mercadoria=float(total_mercadoria)*0.05}}
-
+{{entrada_extra=float(cobranca)*0.025}}
+{{reaproveitamento_mercadoria=float(cobranca)*0.05}}
+{{lucro_total=reaproveitamento_mercadoria+reaproveitamento_mercadoria+lucro_bruto}}
 {{pass}}
 <div class="py-3" style="">
     <div class="container">
@@ -24,7 +24,20 @@
           <h1 class="mb-3">Projeção do Projeto de Venda</h1>
           <p>Economia nas despesas, redução de comissão, aumento dos depositose manutenção da margem de lucro.</p>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 my-2">
+            </div>
+            <div class="col-md-6 my-2">
+            <div class="form-group row">
+                <input type="number" class="form-control col-10 col-form-label" name="busca" placeholder="Inserir um Valor" />
+              <div class="col-2">
+                  <a class="btn btn-outline-light col-2 botao">
+                      <i class="fa text-success fa-download  fa-2x"></i>
+                  </a>
+                </div>
+            </div>
+      </div></div>
+          <div class="row">
+            <div class="col-md-6 my-2">
               <h4 class="d-flex justify-content-between mb-3">Pior Cenario</h4>
               <ul class="list-group text-left">
                 <li class="list-group-item d-flex justify-content-between">
@@ -96,7 +109,7 @@
                 <li class="list-group-item d-flex justify-content-between">
                   <div>
                     <h6 class="my-0">Custo Mercadoria</h6>
-                    <small class="text-muted">28,5% da Vendas</small>
+                    <small class="text-muted">{{="{:,.1f}".format(round(custo_mercadoria/(total_mercadoria-mercadoria_retorno)*100,1))}}% da Vendas</small>
                   </div> <span class="text-muted">
                     R$ {{="{:,.2f}".format(round(custo_mercadoria,0)).replace(",","#").replace(".",",").replace("#",".")}}
                   </span>
@@ -104,7 +117,7 @@
                 <li class="list-group-item d-flex justify-content-between">
                   <div>
                     <h6 class="my-0"><b>Comissão Venda</b></h6>
-                    <small class="text-muted">12% da Venda</small>
+                    <small class="text-muted">{{="{:,.1f}".format(round(comissao_venda/(valor)*100,1))}}% da Venda</small>
                   </div> <span class="text-muted">
                     R$ {{="{:,.2f}".format(round(comissao_venda,0)).replace(",","#").replace(".",",").replace("#",".")}}
                   </span>
@@ -112,7 +125,7 @@
                 <li class="list-group-item d-flex justify-content-between">
                   <div>
                     <h6 class="my-0"><b>Despesa Local e adiantamento</b></h6>
-                    <small class="text-muted">5% da Venda</small>
+                    <small class="text-muted">{{="{:,.1f}".format(round(despesa_venda/(valor)*100,1))}}% da Venda</small>
                   </div> <span class="text-muted">
                     R$ {{="{:,.2f}".format(round(despesa_venda,0)).replace(",","#").replace(".",",").replace("#",".")}}
                   </span>
@@ -128,7 +141,7 @@
                 <li class="list-group-item d-flex justify-content-between">
                   <div>
                     <h6 class="my-0">Entrada Extra</h6>
-                    <small class="text-muted">5% da Venda</small>
+                    <small class="text-muted">{{="{:,.1f}".format(round(entrada_extra/(cobranca)*100,1))}}% da Cobrança</small>
                   </div> <span class="text-muted">
                     R$ {{="{:,.2f}".format(round(entrada_extra,0)).replace(",","#").replace(".",",").replace("#",".")}}
                   </span>
@@ -136,7 +149,7 @@
                 <li class="list-group-item d-flex justify-content-between">
                   <div>
                     <h6 class="my-0">Aproveitamento Mercadoria</h6>
-                    <small class="text-muted">5% da Mercadoria</small>
+                    <small class="text-muted">{{="{:,.1f}".format(round(reaproveitamento_mercadoria/(cobranca)*100,1))}}% da Cobrança</small>
                   </div> <span class="text-muted">
                     R$ {{="{:,.2f}".format(round(reaproveitamento_mercadoria,0)).replace(",","#").replace(".",",").replace("#",".")}}
                   </span>
@@ -145,14 +158,170 @@
                   <div class="text-success">
                     <h6 class="my-0"><b>Extimativa de Lucro</b></h6>
                     <small>Com aproveitamento</small>
-                  </div> <span class="text-success">R$ 24.800,00</span>
+                  </div> <span class="text-success">
+                    R$ {{="{:,.2f}".format(round(lucro_total,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
                 </li>
               </ul>
             </div>
-            <div class="col-md-6" >
+{{if valor>0:}}
+{{valor=float(valor)}}
+{{total_mercadoria = float(valor)/0.89}}
+{{mercadoria_avista = float(total_mercadoria)*0.08}}
+{{mercadoria_retorno = float(total_mercadoria)*0.03}}
+{{cobranca = float(valor)*0.85}}
+{{desp_cobranca = float(cobranca)*0.05}}
+{{comissao_cobranca = float(cobranca)*0.06}}
+{{deposito= cobranca-desp_cobranca-comissao_cobranca}}
+{{custo_mercadoria= float(total_mercadoria-mercadoria_retorno)*0.26}}
+{{comissao_venda= float(valor)*0.13}}
+{{despesa_venda= float(valor)*0.03}}
+{{lucro_bruto=deposito-custo_mercadoria-comissao_venda-despesa_venda}}
+{{entrada_extra=float(cobranca)*0.0}}
+{{reaproveitamento_mercadoria=float(cobranca)*0.01}}
+{{lucro_total=reaproveitamento_mercadoria+entrada_extra+lucro_bruto}}
+{{pass}}
+            <div class="col-md-6 my-2" >
+              <h4 class="d-flex justify-content-between mb-3">Melhor Cenario</h4>
+              <ul class="list-group text-left">
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0">Valor da Mercadoria</h6>
+                    <small class="text-muted">##</small>
+                  </div>
+                  <span class="text-muted">
+                    R$ {{="{:,.2f}".format(round(total_mercadoria,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0">Valor Vista</h6>
+                    <small class="text-muted">{{="{:,.0f}".format(round(mercadoria_avista/total_mercadoria*100))}}% da Mercadoria</small>
+                  </div>
+                  <span class="text-muted">
+                    R$ {{="{:,.2f}".format(round(mercadoria_avista,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between" style="">
+                  <div>
+                    <h6 class="my-0">Valor do Retorno</h6>
+                    <small class="text-muted">{{="{:,.0f}".format(round(mercadoria_retorno/total_mercadoria*100))}}% da Mercadoria</small>
+                  </div> <span class="text-muted">
+                    R$ {{="{:,.2f}".format(round(mercadoria_retorno,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                  <div class="text-primary">
+                    <h6 class="my-0">Valor da Venda</h6>
+                    <small class="text-primary">{{="{:,.0f}".format(round(valor/total_mercadoria*100))}}% da Mercadoria</small>
+                  </div> <span class="text-primary">
+                    R$ {{="{:,.2f}".format(round(valor,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0"><b>Valor da Cobrança</b></h6>
+                    <small class="text-muted">{{="{:,.0f}".format(round(cobranca/valor*100))}}% da Venda</small>
+                  </div>
+                    R$ {{="{:,.2f}".format(round(cobranca,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0"><b>Orçamento Despesa Cobrança</b></h6>
+                    <small class="text-muted">{{="{:,.1f}".format(round(desp_cobranca/cobranca*100,1))}}% da Cobrança</small>
+                  </div> <span class="text-muted">
+                    R$ {{="{:,.2f}".format(round(desp_cobranca,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0"><b>Orçamento Comissão da Cobrança</b></h6>
+                    <small class="text-muted">{{="{:,.1f}".format(round(comissao_cobranca/cobranca*100,1))}}% da Cobrança</small>
+                  </div> <span class="text-muted">
+                    R$ {{="{:,.2f}".format(round(comissao_cobranca,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                  <div class="text-success">
+                    <h6 class="my-0"><b>Meta de Deposito</b></h6>
+                    <small class="text-success">{{="{:,.1f}".format(round(deposito/valor*100,1))}}% da venda</small>
+                  </div> <span class="text-success">
+                    R$ {{="{:,.2f}".format(round(deposito,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0">Custo Mercadoria</h6>
+                    <small class="text-muted">{{="{:,.1f}".format(round(custo_mercadoria/(total_mercadoria-mercadoria_retorno)*100,1))}}% da Vendas</small>
+                  </div> <span class="text-muted">
+                    R$ {{="{:,.2f}".format(round(custo_mercadoria,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0"><b>Comissão Venda</b></h6>
+                    <small class="text-muted">{{="{:,.1f}".format(round(comissao_venda/(valor)*100,1))}}% da Venda</small>
+                  </div> <span class="text-muted">
+                    R$ {{="{:,.2f}".format(round(comissao_venda,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0"><b>Despesa Local e adiantamento</b></h6>
+                    <small class="text-muted">{{="{:,.1f}".format(round(despesa_venda/(valor)*100,1))}}% da Venda</small>
+                  </div> <span class="text-muted">
+                    R$ {{="{:,.2f}".format(round(despesa_venda,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                  <div class="text-success">
+                    <h6 class="my-0"><b>Extimativa de Lucro</b></h6>
+                    <small>Lucro Estimado</small>
+                  </div> <span class="text-success">
+                    R$ {{="{:,.2f}".format(round(lucro_bruto,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0">Entrada Extra</h6>
+                    <small class="text-muted">{{="{:,.1f}".format(round(entrada_extra/(cobranca)*100,1))}}% da Cobrança</small>
+                  </div> <span class="text-muted">
+                    R$ {{="{:,.2f}".format(round(entrada_extra,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between">
+                  <div>
+                    <h6 class="my-0">Aproveitamento Mercadoria</h6>
+                    <small class="text-muted">{{="{:,.1f}".format(round(reaproveitamento_mercadoria/(cobranca)*100,1))}}% da Cobrança</small>
+                  </div> <span class="text-muted">
+                    R$ {{="{:,.2f}".format(round(reaproveitamento_mercadoria,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                  <div class="text-success">
+                    <h6 class="my-0"><b>Extimativa de Lucro</b></h6>
+                    <small>Com aproveitamento</small>
+                  </div> <span class="text-success">
+                    R$ {{="{:,.2f}".format(round(lucro_total,0)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+<script>
+    var inputElement = document.querySelector('input[name=busca]');
+    var btnElement = document.querySelector('a.botao');
+
+    btnElement.onclick = function(){
+     var busca= inputElement.value;
+        window.location.href = "{{=URL('')}}"+"/"+busca
+
+    }
+
+</script>

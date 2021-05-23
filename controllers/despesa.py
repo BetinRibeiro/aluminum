@@ -86,6 +86,7 @@ def criar_desp():
         redirect(URL('acesso_despesa', args=[classe_despesa.id,tipodesp]))
     db.despesa.classe_despesa.default = classe_despesa.id
     db.despesa.classe_despesa.writable = False
+    db.despesa.tipo.default = (request.args(1, auth.user))
     db.despesa.projeto.default = classe_despesa.projeto
     db.despesa.projeto.writable = False
     form = SQLFORM(db.despesa).process()

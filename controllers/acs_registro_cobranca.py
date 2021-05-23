@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+@auth.requires_login()
 def index():
     usuario=auth.user
     sub_venda = db.sub_venda(request.args(0, auth.user))
@@ -84,6 +85,7 @@ def alterar_registro():
         if not response.flash:
             response.flash = 'Preencha o formulário!'
     return dict(form=form)
+@auth.requires_login()
 def conferir():
   response.view = 'generic.html' # use a generic view
   registro_cobranca = db.registro_cobranca(request.args(0, cast=int))

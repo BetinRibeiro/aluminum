@@ -693,3 +693,26 @@ success!
 timestamp: 2021-04-13T01:15:47.813677
 ALTER TABLE "despesa" ADD "projeto" INTEGER REFERENCES "projeto" ("id") ON DELETE CASCADE  ;
 success!
+timestamp: 2021-04-24T03:17:01.109630
+CREATE TABLE "simulacao"(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "empresa" INTEGER REFERENCES "empresa" ("id") ON DELETE CASCADE  ,
+    "descricao" CHAR(512),
+    "venda" DOUBLE NOT NULL DEFAULT 0.0,
+    "perc_margem" DOUBLE NOT NULL DEFAULT 0.0,
+    "perc_retorno" DOUBLE NOT NULL DEFAULT 0.0,
+    "perc_avista" DOUBLE NOT NULL DEFAULT 0.0,
+    "perc_desp_local" DOUBLE NOT NULL DEFAULT 0.0,
+    "perc_funcionarios" DOUBLE NOT NULL DEFAULT 0.0,
+    "perc_desp_venda" DOUBLE NOT NULL DEFAULT 0.0,
+    "perc_desp_cobranca" DOUBLE NOT NULL DEFAULT 0.0,
+    "perc_cobrado" DOUBLE NOT NULL DEFAULT 0.0,
+    "perc_devolucao" DOUBLE NOT NULL DEFAULT 0.0,
+    "perc_comiss_vendedor" DOUBLE NOT NULL DEFAULT 0.0,
+    "perc_comiss_chefe" DOUBLE NOT NULL DEFAULT 0.0,
+    "perc_comiss_cobrador" DOUBLE NOT NULL DEFAULT 0.0
+);
+success!
+timestamp: 2021-04-28T17:41:46.104334
+ALTER TABLE "despesa" ADD "tipo" CHAR(512);
+success!

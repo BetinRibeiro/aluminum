@@ -2,9 +2,11 @@
 {{total=0}}
 {{a=1}}
 <div class="py-5" >
+  {{if False:}}
     <marquee direction="left">
     <a class="navbar-brand text-info"> <h6>Após inserir o registro você só poderá alterar o mesmo até 72hrs depois do cadastro! Caso necessite fazer alguma alteração entre em contato com o Administrador</h6></a>
 </marquee>
+  {{pass}}
     <div class="container">
       <div class="row">
         <div class="col-md-6">
@@ -15,8 +17,10 @@
       </div>
       <div class="row">
         <div class="col-md-6">
+          {{if auth.user.id!=82:}}
           <a class="btn btn-link" href="{{=URL('acs_cobranca','relatorio_cobranca', args=sub_venda.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
           <a class="btn btn-link" href="{{=URL('inserir_registro', args=[sub_venda.id,tipo])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Adicionar Registro</a>
+          {{pass}}
         </div>
             {{if tipo=="Recebimento":}}
         <div class="col-md-6">
@@ -116,7 +120,7 @@
 
     btnElement.onclick = function(){
      var busca= inputElement.value;
-        window.location.href = "{{=URL('lista_registros', args=[sub_venda.id,tipo])}}"+"/"+busca
+        window.location.href = "{{=URL('index', args=[sub_venda.id,tipo])}}"+"/"+busca
 
     }
 

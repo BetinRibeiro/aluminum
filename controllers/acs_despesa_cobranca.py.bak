@@ -25,11 +25,9 @@ def criar_class_desp():
 def alterar_class_desp():
     response.view = 'generic.html' # use a generic view
     classe_despesa_cobranca = db.classe_despesa_cobranca(request.args(0, cast=int))
-    
     sub_venda = db.sub_venda(classe_despesa_cobranca.sub_venda)
     db.classe_despesa_cobranca.id.readable = False
     db.classe_despesa_cobranca.id.writable = False
-    
     db.classe_despesa_cobranca.sub_venda.readable = False
     db.classe_despesa_cobranca.sub_venda.writable = False
 
@@ -47,6 +45,7 @@ def alterar_class_desp():
 @auth.requires_login()
 def acesso_despesa():
     classe_despesa_cobranca = db.classe_despesa_cobranca(request.args(0, cast=int))
+    sub_venda = db.sub_venda(classe_despesa_cobranca.sub_venda)
     rows = db(db.despesa_cobranca.classe_despesa_cobranca == classe_despesa_cobranca.id).select(orderby=db.despesa_cobranca.data_inicio)
     return locals()
 

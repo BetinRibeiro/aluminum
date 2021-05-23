@@ -36,15 +36,14 @@
                             {{a=1}}
                             {{for row in rows:}}
                             <tr>
-                                <td>{{=a}}</td>
+                              <td><a href="{{=URL('alterar_classe', args=[row.id])}}" >{{=a}}</a></td>
                                 <td>{{=row.descricao}}</td>
                                 <td>R$ {{="{:,}".format(round(row.total_despesa,1)).replace(",",".")}}0</td>
                                 <td><a href="{{=URL('acesso_despesa', args=[row.id])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i></a></td>
                                 {{a+=1}}
                             </tr>
                             {{total+=row.total_despesa}}
-                            {{row.empresa=sub_venda.projeto.empresa}}
-                            {{row.update_record()}}
+                            
                             {{pass}}
                             <tr>
                                 <th>#</th>

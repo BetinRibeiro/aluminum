@@ -55,11 +55,13 @@
                 {{total_recebido=0}}
                 {{total_devolvido=0}}
                 {{total_prego=0}}
+                {{total_ficha=0}}
                 {{for row2 in rowsrec:}}
                     {{if row2.vendedor==row.id:}}
                         {{total_recebido+=row2.recebido}}
                         {{total_devolvido+=row2.devolvido}}
                         {{total_prego+=row2.prego}}
+                        {{total_ficha+=row2.quant_fichas_devolvidas}}
                     {{pass}}
 
                 {{pass}}
@@ -67,34 +69,35 @@
 
 
                 {{saldo=total_venda}}
-                <td>R$ {{="{:,}".format(round(total_venda,1)).replace(",",".")}}0</td>
-                <td>R$ {{="{:,}".format(round(total_recebido,1)).replace(",",".")}}0</td>
-                <td>R$ {{="{:,}".format(round(total_devolvido,1)).replace(",",".")}}0</td>
-                <td>R$ {{="{:,}".format(round(total_prego,1)).replace(",",".")}}0</td>
+                <td>R$ {{="{:,.2f}".format(round(total_venda,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                <td>R$ {{="{:,.2f}".format(round(total_recebido,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                <td>R$ {{="{:,.2f}".format(round(total_devolvido,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                <td>R$ {{="{:,.2f}".format(round(total_prego,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                 {{saldo-=total_recebido+total_devolvido+total_prego}}
                 {{if saldo>0:}}
-                <td class="text-danger">R$ {{="{:,}".format(round(saldo,1)).replace(",",".")}}0</td>
+                <td class="text-danger">R$ {{="{:,}".format(round(saldo,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                 {{elif saldo==0:}}
                 <td>OK</td>
                 {{else:}}
                 <td class="text-sucess">Sobrando</td>
                 {{pass}}
+              <td>{{=total_ficha}}</td>
                 <td><a href="{{=URL('cobranca_individual', args=[row.id,sub_venda.id])}}"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> </a></td>
 
 {{venda+=total_venda}}
 {{recebido+=total_recebido}}
-{{fichas+=total_fichas}}
 {{devolvido+=total_devolvido}}
 {{prego+=total_prego}}
+{{fichas+=total_ficha}}
             </tr>
             {{pass}}
             <tr>
                 <th>#</th>
                 <th></th>
-                <th>R$ {{="{:,}".format(round(venda,1)).replace(",",".")}}0</th>
-                <th>R$ {{="{:,}".format(round(recebido,1)).replace(",",".")}}0</th>
-                <th>R$ {{="{:,}".format(round(devolvido,1)).replace(",",".")}}0</th>
-                <th>R$ {{="{:,}".format(round(prego,1)).replace(",",".")}}0</th>
+                <th>R$ {{="{:,.2f}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                <th>R$ {{="{:,.2f}".format(round(recebido,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                <th>R$ {{="{:,.2f}".format(round(devolvido,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                <th>R$ {{="{:,.2f}".format(round(prego,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                 {{perc=0}}
                 {{if recebido>0:}}
                 {{perc=recebido/venda*100}}
@@ -105,6 +108,83 @@
         </tbody>
     </table>
 </div>
+          <div class="row text-center pt-5">
+        <div class="col-md-12">
+          <h3>Relação final de conferência</h3>
+        </div>
+      </div>
+   <hr>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Entregue</th>
+                  <th scope="col">Conferido</th>
+                  <th scope="col">Diferênça</th>
+                  <th scope="col">##</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  {{vlr_conferido =recebido+devolvido+prego}}
+                  {{resultado=vlr_conferido-venda}}
+                  <th scope="row">Valor</th>
+                <td>R$ {{="{:,.2f}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                <td>R$ {{="{:,.2f}".format(round(vlr_conferido,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  {{if resultado>=0:}}
+                <td>R$ {{="{:,.2f}".format(round(resultado,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  <td>Sobrando</td>
+                  {{else:}}
+                <td class="text-danger">R$ {{="{:,.2f}".format(round(resultado,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  <td>Faltando</td>
+                  {{pass}}
+                </tr>
+                <tr>
+                  {{resultado=fichas-sub_venda.total_fichas}}
+                  <th scope="row">Fichas</th>
+                  <td>{{=sub_venda.total_fichas}}</td>
+                  <td>{{=fichas}}</td>
+                  {{if resultado>=0:}}
+                <td>{{=resultado}}</td>
+                  <td>Sobrando</td>
+                  {{else:}}
+                <td class="text-danger">{{=resultado}}</td>
+                  <td>Faltando</td>
+                  {{pass}}
+                </tr>
+                
+              </tbody>
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Registrado</th>
+                  <th scope="col">Conferido</th>
+                  <th scope="col">Diferênça</th>
+                  <th scope="col">##</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  {{resultado=recebido-sub_venda.total_recebido}}
+                  <th scope="row">Valor Recebido</th>
+                <td>R$ {{="{:,.2f}".format(round(sub_venda.total_recebido,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                <td>R$ {{="{:,.2f}".format(round(recebido,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                   {{if not resultado>=0:}}
+                <td>R$ {{="{:,.2f}".format(round(resultado,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  <td>Sobrando</td>
+                  {{else:}}
+                <td class="text-danger">R$ {{="{:,.2f}".format(round(resultado,2)).replace(",","#").replace(".",",").replace("#",".")}} </td>
+                  <td>Faltando</td>
+                  {{pass}}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 </div>
 </div>
 <hr>

@@ -10,14 +10,18 @@ def acesso_projeto():
       db.sub_venda.insert(projeto=projeto.id,
                          data_inicio_cobranca=futuro,
                          primeira_cidade="Primeira Rota")
-    diferenca=projeto.data_final-hj
-    if diferenca.days>=0:
-      #redirect(URL('acs_mensagem','usuario_bloqueado',args="Usuario bloqueado"))
-      projeto.venda_finalizada=False
-      projeto.update_record()
+    if projeto.data_final:
+      diferenca=projeto.data_final-hj
+      if diferenca.days>=0:
+        #redirect(URL('acs_mensagem','usuario_bloqueado',args="Usuario bloqueado"))
+        projeto.venda_finalizada=False
+        projeto.update_record()
+      else:
+        projeto.venda_finalizada=True
+        projeto.update_record()
     else:
-      projeto.venda_finalizada=True
-      projeto.update_record()
+      projeto.data_final=date.fromordinal(hj.toordinal()+45)
+      
     empresa = db.empresa(projeto.empresa)
     usuario = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user)
     if usuario.bloqueado==True:

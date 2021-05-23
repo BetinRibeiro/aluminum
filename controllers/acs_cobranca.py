@@ -108,13 +108,13 @@ def alterar_dados():
     db.sub_venda.data_inicio_cobranca.readable = True
     db.sub_venda.data_inicio_cobranca.writable = True
 
-    db.sub_venda.nome_cobrador.writable = False
+    db.sub_venda.nome_cobrador.writable = True
 
     db.sub_venda.data_final_cobranca.readable = False
     db.sub_venda.data_final_cobranca.writable = False
 
-    db.sub_venda.primeira_cidade.readable = False
-    db.sub_venda.primeira_cidade.writable = False
+    db.sub_venda.primeira_cidade.readable = True
+    db.sub_venda.primeira_cidade.writable = True
 
     db.sub_venda.ultima_cidade.readable = False
     db.sub_venda.ultima_cidade.writable = False
@@ -223,7 +223,7 @@ def alterar_comissao_cobranca():
     db.vendedor.projeto.writable = False
 
     db.vendedor.nome.readable = True
-    db.vendedor.nome.writable = False
+    db.vendedor.nome.writable = True
 
     db.vendedor.vale_saida.readable = False
     db.vendedor.vale_saida.writable = False

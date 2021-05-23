@@ -120,12 +120,12 @@ def alterar_dados_rota():
 def acesso_vendas_particao():
     sub_venda = db.sub_venda(request.args(0, cast=int))
     rows = db(db.venda.sub_venda == sub_venda.id).select(orderby=db.venda.data_venda)
-    rowsdesp = db(db.despesa.projeto==sub_venda.projeto).select(orderby=db.despesa.data_inicio)
+    rowsdesp = db((db.despesa.projeto==sub_venda.projeto)&(db.despesa.tipo=="Despesa_Venda")).select(orderby=db.despesa.data_inicio)
     projeto = db.projeto(sub_venda.projeto)
-    #for row in rowsdesp:
-      #classe_despesa = db.classe_despesa(db.classe_despesa.id==row.classe_despesa)
-      #row.projeto=classe_despesa.projeto
-      #row.update_record()
+    for row in rowsdesp:
+      classe_despesa = db.classe_despesa(db.classe_despesa.id==row.classe_despesa)
+      row.projeto=classe_despesa.projeto
+      row.update_record()
     return locals()
 
 @auth.requires_login()
@@ -134,3 +134,17 @@ def prestacao_vendedor():
     rows = db(db.vendedor.projeto == projeto.id).select(orderby=db.vendedor.nome)
     rowsf = db(db.funcionario.projeto == projeto.id).select(orderby=db.funcionario.nome)
     return locals()
+
+
+@auth.requires_login()
+def ver_despesa():
+#   response.view = 'generic.html' # use a generic view
+  projeto = db.projeto(request.args(0, cast=int))
+  data = (request.args(1))
+  rows = db((db.despesa.projeto==projeto.id)&(db.despesa.data_inicio==data)&(db.despesa.tipo=="Despesa_Venda")).select(orderby=db.despesa.data_inicio)
+  ajuste= db((db.despesa)).select()
+#   for row in ajuste:
+#     row.tipo=row.classe_despesa.tipo
+#     row.projeto=row.classe_despesa.projeto
+#     row.update_record()
+  return locals()

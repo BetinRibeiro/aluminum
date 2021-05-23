@@ -1,0 +1,899 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.TypeError'> unsupported operand type(s) for +: 'datetime.date' and 'int'"
+p3
+sS'layer'
+p4
+S'/home/rogoberto/web2py/applications/aluminum/views/acs_cobranca/index.html'
+p5
+sS'code'
+p6
+S'response.write(\'<!DOCTYPE html>\\n<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="\', escape=False)\nresponse.write(T.accepted_language or \'en\')\nresponse.write(\'"> <!--<![endif]-->\\n  <head>\\n    <meta charset="utf-8">\\n    <!-- www.phpied.com/conditional-comments-block-downloads/ -->\\n    <!-- Always force latest IE rendering engine\\n         (even in intranet) & Chrome Frame\\n         Remove this if you use the .htaccess -->\\n    <meta http-equiv="X-UA-Compatible" content="IE=edge\', escape=False)\nresponse.write(not request.is_local and \',chrome=1\' or \'\')\nresponse.write(\'">\\n    <!--  Mobile Viewport Fix\\n          j.mp/mobileviewport & davidbcalhoun.com/2010/viewport-metatag\\n          device-width: Occupy full width of the screen in its current orientation\\n          initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height\\n          user-scalable = yes allows the user to zoom in -->\\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\\n       <title>Aluminum System</title>\\n    <!-- http://dev.w3.org/html5/markup/meta.name.html -->\\n    <meta name="application-name" content="sistema credi\\xc3\\xa1rio panela">\\n    <!-- Speaking of Google, don\\\'t forget to set your site up:\\n         http://google.com/webmasters -->\\n    <meta name="google-site-verification" content="peneleiro Juazeiro, panela credi\\xc3\\xa1rio, sistema panela">\\n    <!-- include stylesheets -->\\n    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>\\n    <link rel="stylesheet" href="\', escape=False)\nresponse.write(URL(\'static\',\'css/bootstrap.min.css\'))\nresponse.write(\'"/>\\n    <link rel="stylesheet" href="\', escape=False)\nresponse.write(URL(\'static\',\'css/web2py-bootstrap4.css\'))\nresponse.write(\'"/>\\n    <link rel="shortcut icon" href="\', escape=False)\nresponse.write(URL(\'static\',\'images/ico.ico\'))\nresponse.write(\'" type="image/x-icon">\\n    <link rel="apple-touch-icon" href="\', escape=False)\nresponse.write(URL(\'static\',\'images/ico.png\'))\nresponse.write(\'">\\n    <!-- All JavaScript at the bottom, except for Modernizr which enables\\n         HTML5 elements & feature detects -->\\n    <script src="\', escape=False)\nresponse.write(URL(\'static\',\'js/modernizr-2.8.3.min.js\'))\nresponse.write(\'"></script>\\n    <!-- Favicons -->\\n    \', escape=False)\nresponse.write(\'<script type="text/javascript"><!--\\n    // These variables are used by the web2py_ajax_init function in web2py_ajax.js (which is loaded below).\\n    \', escape=False)\nresponse.write(ASSIGNJS(\nw2p_ajax_confirm_message = T(\'Are you sure you want to delete this object?\'),\nw2p_ajax_disable_with_message = T(\'Working...\'),\nw2p_ajax_date_format = T(\'%Y-%m-%d\'),\nw2p_ajax_datetime_format = T(\'%Y-%m-%d %H:%M:%S\'),\najax_error_500 = T.M(\'An error occured, please [[reload %s]] the page\') % URL(args=request.args, vars=request.get_vars)\n))\nresponse.write(\'\\n    //--></script>\\n\', escape=False)\nresponse.files.insert(0,URL(\'static\',\'js/jquery.js\'))\nresponse.files.insert(1,URL(\'static\',\'css/calendar.css\'))\nresponse.files.insert(2,URL(\'static\',\'js/calendar.js\'))\nresponse.files.insert(3,URL(\'static\',\'js/web2py.js\'))\nresponse.include_meta()\nresponse.include_files()\nresponse.write(\'\\n\', escape=False)\nresponse.write(\' <!-- this includes jquery.js, calendar.js/.css and web2py.js -->\\n      \', escape=False)\nif auth.user:\n    response.write(\'\\n    \', escape=False)\n    if auth.user.first_name=="Rogoberto":\n        response.write(\'\\n   \\n    \', escape=False)\n    elif auth.user.first_name=="Meme":\n        response.write(\'\\n    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.css"> \\n    \', escape=False)\n        pass\n    response.write(\'\\n    \', escape=False)\n    pass\nresponse.write(\'\\n    \', escape=False)\nresponse.write(\'\\n  \\n  </head>\\n  <body>\\n      \\n        <style  type="text/css">\\n    @media print{\\n        .btn{\\n             display: none;\\n        }\\n        #noprint { display:none; } \\n      a:link{font:15px "verdana"; color:#8B4513; text-decoration:none;}\\n\\na:hover{font:20px "verdana"; color:black; text-decoration:underline;}\\n    }\\n      </style>\\n    <div class="w2p_flash alert alert-dismissable">\', escape=False)\nresponse.write(response.flash or \'\')\nresponse.write(\'</div>\\n    <!-- Navbar ======================================= -->\\n    <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">\\n        <a class="navbar-brand" href="https://rogoberto.pythonanywhere.com/aluminum/#acesso">Aluminum</a>\\n       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">\\n         <span class="navbar-toggler-icon"></span>\\n       </button>\\n       <div class="navbar-collapse collapse w-100" id="navbarNavDropdown">\\n         <ul class="navbar-nav w-100 justify-content-center">\\n          \', escape=False)\nfor _item in response.menu or []:\n    response.write(\'\\n          \', escape=False)\n    if (not len(_item)>4) or not _item[3]:\n        response.write(\'\\n          <li class="nav-item \', escape=False)\n        if _item[1]:\n            response.write(\'active\', escape=False)\n            pass\n        response.write(\'">\\n            <a class="nav-link" href="\', escape=False)\n        response.write(_item[2])\n        response.write(\'">\', escape=False)\n        response.write(_item[0])\n        response.write(\'</a>\\n          </li>\\n          \', escape=False)\n    else:\n        response.write(\'\\n          <li class="nav-item dropdown">\\n            <a class="nav-link dropdown-toggle" href="\', escape=False)\n        response.write(_item[2])\n        response.write(\'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\', escape=False)\n        response.write(_item[0])\n        response.write(\'</a>\\n            <div class="dropdown-menu">\\n              \', escape=False)\n        for _subitem in _item[3]:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(_subitem[2])\n            response.write(\'">\', escape=False)\n            response.write(_subitem[0])\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n            </div>\\n          </li>\\n          \', escape=False)\n        pass\n    response.write(\'\\n          \', escape=False)\n    pass\nresponse.write(\'\\n        </ul>\\n\\n        \', escape=False)\nif \'auth\' in globals():\n    response.write(\'\\n        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">\\n          <li class="nav-item dropdown">\\n            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\\n              \', escape=False)\n    if auth.user:\n        response.write(auth.user.first_name)\n    else:\n        response.write(\'LOGIN\', escape=False)\n        pass\n    response.write(\'\\n            </a>\\n            <div class="dropdown-menu dropdown-menu-right">\\n              \', escape=False)\n    if auth.user:\n        response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n        response.write(URL(\'default\',\'user/profile\'))\n        response.write(\'">\', escape=False)\n        response.write(T(\'Profile\'))\n        response.write(\'</a>\\n              \', escape=False)\n        if \'change_password\' not in auth.settings.actions_disabled:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(URL(\'default\',\'user/change_password\'))\n            response.write(\'">\', escape=False)\n            response.write(T(\'Change Password\'))\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n        response.write(URL(\'default\',\'user/logout\'))\n        response.write(\'">\', escape=False)\n        response.write(T(\'Logout\'))\n        response.write(\'</a>\\n              \', escape=False)\n    else:\n        response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n        response.write(URL(\'default\',\'user/login\'))\n        response.write(\'">\', escape=False)\n        response.write(T(\'Login\'))\n        response.write(\'</a>\\n              \', escape=False)\n        if \'register\' not in auth.settings.actions_disabled:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(URL(\'default\',\'user/register\'))\n            response.write(\'">\', escape=False)\n            response.write(T(\'Sign up\'))\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n              \', escape=False)\n        if \'retrieve_password\' not in auth.settings.actions_disabled:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(URL(\'default\',\'user/retrieve_password\'))\n            response.write(\'">\', escape=False)\n            response.write(T(\'Lost Password\'))\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n              \', escape=False)\n        pass\n    response.write(\'\\n            </div>\\n          </li>\\n        </ul>\\n        \', escape=False)\n    pass\nresponse.write(\'\\n      </div>\\n    </nav>\\n\\n    <!-- Masthead ===================================== -->\\n    \', escape=False)\nresponse.write(\'\\n<header class="header container-fluid d-none d-print-block">\\n     <div class="row">\\n        <div class="col-md-12">\\n          <div class="copyright pull-left">Aluminum System</div>\\n          <div id="poweredBy" class="pull-right">\\n            Gest\\xc3\\xa3o de vendas e cobran\\xc3\\xa7as artefatos de aluminio\\n            \\n          </div>\\n        </div>\\n      </div>\\n</header>\\n    \', escape=False)\nresponse.write(\'\\n    <!-- Main ========================================= -->\\n    <!-- Begin page content -->\\n    <div class="container-fluid main-container py-5">\\n      \', escape=False)\nresponse.write(\'\\n\', escape=False)\nfrom datetime import date\nresponse.write(\'\\n\\n\', escape=False)\na=1\nresponse.write(\'\\n\', escape=False)\nvalor=0\nresponse.write(\'\\n\', escape=False)\nrecebido=0\nresponse.write(\'\\n\', escape=False)\ndespesa=0\nresponse.write(\'\\n\', escape=False)\ndeposito=0\nresponse.write(\'\\n\', escape=False)\ncaderno=0\nresponse.write(\'\\n\', escape=False)\nfichas=0\nresponse.write(\'\\n\', escape=False)\ntotal_adiantamento=0\nresponse.write(\'\\n\', escape=False)\ntotal_vale_cobrador=0\nresponse.write(\'\\n\', escape=False)\nsaldo=0\nresponse.write(\'\\n\', escape=False)\ndebito=0\nresponse.write(\'\\n\', escape=False)\ntotal_custo_devolucao_nova=0\nresponse.write(\'\\n\', escape=False)\ntotal_custo_devolucao_aproveitamento=0\nresponse.write(\'\\n<div class="py-5">\\n    <div class="container">\\n        <div class="row">\\n        <div class="col-md-12">\\n          <h5 class="">Listagem de Rotas de Cobran\\xc3\\xa7a ( \', escape=False)\nresponse.write(projeto.descricao)\nresponse.write(\' )</h5>\\n        </div>\\n      </div>\\n      <div class="row">\\n        <div class="col-md-12">\\n          <a class="btn btn-link " href="\', escape=False)\nresponse.write(URL(\'acs_projeto\',\'index\', args=projeto.id))\nresponse.write(\'" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>\\n          \', escape=False)\nif usuario.id!=1:\n    response.write(\'\\n          <a class="btn btn-link  m-1 border-info rounded-top" href="\', escape=False)\n    response.write(URL(\'acs_relatorio\',\'investimento\', args=projeto.id))\n    response.write(\'" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-shield"></i> Ver Relatorio de Investimento</a>\\n          \', escape=False)\n    pass\nresponse.write(\'\\n        </div>\\n      </div>\\n      <div class="row">\\n        \\n        \', escape=False)\nif auth.user.id!=1:\n    response.write(\'\\n          \', escape=False)\n    for row in rows:\n        response.write(\'\\n        <div class="col-lg-4 col-md-6 p-3" >\\n          <div class="card bg-light">\\n            <div class="card-body p-4">\\n              <div class="row">\\n                <div class="col-6">\\n                  \', escape=False)\n        if row.auth_user:\n            response.write(\'\\n                  <h6 class="mb-0">\', escape=False)\n            response.write(row.auth_user.first_name)\n            response.write(\' \', escape=False)\n            response.write(row.auth_user.last_name)\n            response.write(\'</h6>\\n                  \', escape=False)\n        else:\n            response.write(\'\\n                  <h6>\\n                    Verificar Cobrador\\n                  </h6>\\n                  \', escape=False)\n            pass\n        response.write(\'\\n                </div>\\n                <div class="col-6 text-right">\\n                  <h6 class="mb-0"> <b>R$ \', escape=False)\n        response.write("{:,.2f}".format(round(row.total_venda_praso,1)).replace(",","#").replace(".",",").replace("#","."))\n        response.write(\'</b> </h6>\\n                  <h7>\', escape=False)\n        response.write(row.total_fichas)\n        response.write(\' Fichas</h7>\\n                </div>\\n              </div>\\n              <p class="my-3">\', escape=False)\n        response.write(row.data_inicio_cobranca.strftime(\'%d/%m/%Y\'))\n        response.write(\'<br>\', escape=False)\n        response.write(row.primeira_cidade)\n        response.write(\'</p>\\n              \\n              <ul class="pl-3">\\n                <li>\\n                  Recebido- <b>\\n                  R$ \', escape=False)\n        response.write("{:,}".format(round(row.total_recebido,1)).replace(",","#").replace(".",",").replace("#","."))\n        response.write(\'0\\n                  </b>\\n                </li>\\n                <li>Despesa - <b>\\n                  R$ \', escape=False)\n        response.write("{:,}".format(round(row.total_despesa,1)).replace(",","#").replace(".",",").replace("#","."))\n        response.write(\'0\\n                  </b>\\n                  \', escape=False)\n        if row.total_despesa>0 and row.total_recebido>0:\n            response.write(\'\\n                  (\', escape=False)\n            response.write("{:,}".format(round(row.total_despesa/row.total_recebido*100,1)).replace(",","#").replace(".",",").replace("#","."))\n            response.write(\'%)\\n                  \', escape=False)\n            pass\n        response.write(\'\\n                </li>\\n                <li>Deposito- <b>R$ \', escape=False)\n        response.write("{:,}".format(round(row.total_deposito,1)).replace(",","#").replace(".",",").replace("#","."))\n        response.write(\'0</b></li>\\n                  \', escape=False)\n        if row.total_recebido>0 and row.total_venda_praso:\n            response.write(\'\\n                  <hr>\\n                <li><b>\', escape=False)\n            response.write("{:,}".format(round(row.total_recebido/row.total_venda_praso*100,1)).replace(",","#").replace(".",",").replace("#","."))\n            response.write(\'%</b></li>\\n                  \', escape=False)\n            pass\n        response.write(\'\\n                \\n              </ul>\\n              \\n        \', escape=False)\n        if not row.cobranca_finalizada:\n            response.write(\'\\n                  \', escape=False)\n            diferenca=date.today()-row.data_inicio_cobranca\n            response.write(\'\\n              \', escape=False)\n            if True:\n                response.write(\'\\n              \', escape=False)\n                if row.total_deposito>0 and row.total_recebido>0 and row.total_despesa>0:\n                    response.write(\'\\n              \', escape=False)\n                    if diferenca.days>5 and not diferenca.days>150:\n                        response.write(\'\\n                  \', escape=False)\n                        response.write(diferenca.days)\n                        response.write(\' Dias\\n              \', escape=False)\n                        media_dia=row.total_recebido/diferenca.days\n                        response.write(\'\\n                  m\\xc3\\xa9dias: \\n              <br> R$ \', escape=False)\n                        response.write("{:,}".format(round(media_dia,1)).replace(",","#").replace(".",",").replace("#","."))\n                        response.write(\'0 Cobrado/Dia\\n              \', escape=False)\n                        media_dia=row.total_deposito/diferenca.days\n                        response.write(\'\\n              <br> R$ \', escape=False)\n                        response.write("{:,}".format(round(media_dia,1)).replace(",","#").replace(".",",").replace("#","."))\n                        response.write(\'0 Depositos/Dia\\n              \', escape=False)\n                        media_dia=row.total_despesa/diferenca.days\n                        response.write(\'\\n              <br> R$ \', escape=False)\n                        response.write("{:,}".format(round(media_dia,1)).replace(",","#").replace(".",",").replace("#","."))\n                        response.write(\'0 Despesa/Dia\\n              <hr>\\n              \', escape=False)\n                        media_dia=row.total_recebido/diferenca.days\n                        response.write(\'\\n              \', escape=False)\n                        setperc=row.total_venda_praso*0.60\n                        response.write(\'\\n              <br><b>60%</b> - em \', escape=False)\n                        response.write(int(round(setperc/media_dia, 0)))\n                        response.write(\' Dias\\n               \', escape=False)\n                        media_dia=row.total_recebido/diferenca.days\n                        response.write(\'\\n              \', escape=False)\n                        setperc=row.total_venda_praso*0.65\n                        response.write(\'\\n              <br><b>65%</b> - em \', escape=False)\n                        response.write(int(round(setperc/media_dia, 0)))\n                        response.write(\' Dias\\n              \\n              \', escape=False)\n                        media_dia=row.total_recebido/diferenca.days\n                        response.write(\'\\n              \', escape=False)\n                        setperc=row.total_venda_praso*0.7\n                        response.write(\'\\n              <br><b>70%</b> - em \', escape=False)\n                        response.write(int(round(setperc/media_dia, 0)))\n                        response.write(\' Dias\\n              \\n              \', escape=False)\n                        media_dia=row.total_recebido/diferenca.days\n                        response.write(\'\\n              \', escape=False)\n                        setperc=row.total_venda_praso*0.75\n                        response.write(\'\\n              <br><b>75%</b> - em \', escape=False)\n                        response.write(int(round(setperc/media_dia, 0)))\n                        response.write(\' Dias\\n              \', escape=False)\n                        media_dia=row.total_recebido/diferenca.days\n                        response.write(\'\\n              \', escape=False)\n                        setperc=row.total_venda_praso*0.8\n                        response.write(\'\\n              <br><b>80%</b> - em \', escape=False)\n                        response.write(int(round(setperc/media_dia, 0)))\n                        response.write(\' Dias\\n              \', escape=False)\n                        pass\n                    response.write(\'\\n              \', escape=False)\n                    pass\n                response.write(\'\\n        \', escape=False)\n                pass\n            response.write(\'\\n              \', escape=False)\n        else:\n            response.write(\'\\n              <a class="btn btn-success disabled mt-3" href="#">Cobran\\xc3\\xa7a Finalizada</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n                <hr>\\n              <a class="btn btn-primary mt-3" href="\', escape=False)\n        response.write(URL(\'relatorio_cobranca\', args=[row.id]))\n        response.write(\'">Acessar Cobran\\xc3\\xa7a</a>\\n            </div>\\n          </div>\\n        </div>\\n          \', escape=False)\n        if row.total_saldo_cobrador>0:\n            response.write(\'\\n                  \', escape=False)\n            saldo+=row.total_saldo_cobrador\n            response.write(\'\\n                  \', escape=False)\n        else:\n            response.write(\'\\n                  \', escape=False)\n            debito+=row.total_saldo_cobrador\n            response.write(\'\\n                  \', escape=False)\n            pass\n        response.write(\'\\n                  \', escape=False)\n        if row.total_venda_praso>0:\n            response.write(\'\\n                \', escape=False)\n            valor+=row.total_venda_praso\n            response.write(\'\\n                  \', escape=False)\n            pass\n        response.write(\'\\n              \', escape=False)\n        total_vale_cobrador+=row.total_vale_saida_cobrador\n        response.write(\'\\n\', escape=False)\n        total_adiantamento+=row.adiantamento_cobranca\n        response.write(\'\\n\', escape=False)\n        recebido+=row.total_recebido\n        response.write(\'\\n                  \', escape=False)\n        despesa+=row.total_despesa\n        response.write(\'\\n\', escape=False)\n        deposito+=row.total_deposito\n        response.write(\'\\n\', escape=False)\n        caderno+=row.total_caderno_cobrador\n        response.write(\'\\n                  \', escape=False)\n        if row.total_fichas>0:\n            response.write(\'\\n                  \', escape=False)\n            fichas+=row.total_fichas\n            response.write(\'\\n                  \', escape=False)\n            pass\n        response.write(\'\\n          \\n\', escape=False)\n        total_custo_devolucao_nova+=row.total_custo_devolucao_nova\n        response.write(\'\\n\', escape=False)\n        total_custo_devolucao_aproveitamento+=row.total_custo_devolucao_aproveitamento\n        response.write(\'\\n          \\n        \', escape=False)\n        pass\n    response.write(\'\\n        \\n        \\n        \', escape=False)\nelse:\n    response.write(\'\\n\', escape=False)\n    for row in rows:\n        response.write(\'\\n        <div class="col-md-4">\\n          <ul class="list-group text-left my-1">\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                <h6 class="my-0">\\n                  \', escape=False)\n        if row.auth_user:\n            response.write(\'\\n                  <b>\', escape=False)\n            response.write(row.auth_user.first_name)\n            response.write(\' \', escape=False)\n            response.write(row.auth_user.last_name)\n            response.write(\'</b>\\n                  \', escape=False)\n        else:\n            response.write(\'\\n                  <b>Verificar Seu Cobrador</b>\\n                  \', escape=False)\n            pass\n        response.write(\'\\n                </h6>\\n                <small class="text-muted">\', escape=False)\n        response.write(row.primeira_cidade)\n        response.write(\'</small>\\n              </div>\\n              <div>\\n                <h6 class="my-0">\\n                  <b>R$ \', escape=False)\n        response.write("{:,.2f}".format(round(row.total_venda_praso,1)).replace(",","#").replace(".",",").replace("#","."))\n        response.write(\'</b>\\n                </h6>\\n                <span class="text-muted">\', escape=False)\n        response.write(row.total_fichas)\n        response.write(\' Fichas</span>\\n              </div>\\n            </li>\\n            \', escape=False)\n        if row.total_recebido>0 and row.total_venda_praso>0:\n            response.write(\'\\n            \', escape=False)\n            percento_recebido=row.total_recebido/row.total_venda_praso*100\n            response.write(\'\\n            \', escape=False)\n            pass\n        response.write(\'\\n            <li class="list-group-item d-flex justify-content-between" >\\n              <div>\\n                <h6 class="my-0">\\n                  <b>Recebido</b>\\n                </h6>\\n                <small class="text-muted">\\n                  \', escape=False)\n        response.write("{:,.1f}".format(round(percento_recebido,1)).replace(",","#").replace(".",",").replace("#","."))\n        response.write(\'%\\n                </small>\\n              </div>\\n              <span class="text-muted">\\n                R$ \', escape=False)\n        response.write("{:,.2f}".format(round(row.total_recebido,1)).replace(",","#").replace(".",",").replace("#","."))\n        response.write(\'\\n              </span>\\n            </li>\\n            \', escape=False)\n        if row.total_despesa>0 and row.total_recebido>0:\n            response.write(\'\\n            \', escape=False)\n            percento_despesa=row.total_despesa/row.total_recebido*100\n            response.write(\'\\n            \', escape=False)\n            pass\n        response.write(\'\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                <h6 class="my-0 text-danger">\\n                  <b>Despesa</b>\\n                </h6> \\n                <small class="text-danger">\\n                  \', escape=False)\n        response.write("{:,.1f}".format(round(percento_despesa,1)).replace(",","#").replace(".",",").replace("#","."))\n        response.write(\'%\\n                </small>\\n              </div> <span class="text-danger">\\n              R$ \', escape=False)\n        response.write("{:,.2f}".format(round(row.total_despesa,1)).replace(",","#").replace(".",",").replace("#","."))\n        response.write(\'\\n              </span>\\n            </li>\\n            \', escape=False)\n        if row.total_deposito>0 and row.total_venda_praso>0:\n            response.write(\'\\n            \', escape=False)\n            percento_deposito=row.total_deposito/row.total_venda_praso*100\n            response.write(\'\\n            \', escape=False)\n            pass\n        response.write(\'\\n            <li class="list-group-item d-flex justify-content-between bg-light">\\n              <div class="text-success">\\n                <h6 class="my-0"><b>Depositado</b></h6>\\n                <small>\', escape=False)\n        response.write("{:,.1f}".format(round(percento_deposito,1)).replace(",","#").replace(".",",").replace("#","."))\n        response.write(\'%</small>\\n              </div> \\n              <span class="text-success">\\n                <b>R$ \', escape=False)\n        response.write("{:,.2f}".format(round(row.total_deposito,1)).replace(",","#").replace(".",",").replace("#","."))\n        response.write(\'</b>\\n              </span>\\n            </li>\\n            \', escape=False)\n        chegada=row.data_inicio_cobranca+75\n        response.write(\'\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                <h6 class="my-0">Data Sa\\xc3\\xadda</h6>\\n                <small class="text-muted">\', escape=False)\n        response.write(chegada)\n        response.write(\'</small>\\n              </div>\\n              <div class="text-muted">\\n                <h6 class="my-0 text-right">\', escape=False)\n        response.write(row.data_inicio_cobranca.strftime(\'%d/%m/%Y\'))\n        response.write(\'</h6>\\n                <span class="text-muted text-right">Dias</span>\\n              </div>\\n            </li>\\n        \', escape=False)\n        if not row.cobranca_finalizada:\n            response.write(\'\\n            <li class="list-group-item d-flex justify-content-between" style="">\\n              <div>\\n                <h6 class="my-0">\\n                  <b>Recebido</b>\\n                </h6>\\n                <small class="text-muted">M\\xc3\\xa9dia/dia</small>\\n              </div>\\n              <div>\\n                <h6 class="my-0">\\n                  <b>R$ 0,00</b>\\n                </h6>\\n              </div>\\n            </li>\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                <h6 class="my-0">Despesa</h6>\\n                <small class="text-muted">M\\xc3\\xa9dia/dia</small>\\n              </div>\\n              <div>\\n                <h6 class="my-0">\\n                  <b>R$ 0,00</b>\\n                </h6>\\n              </div>\\n            </li>\\n            <li class="list-group-item d-flex justify-content-between bg-light">\\n              <div class="text-success">\\n                <h6 class="my-0">Deposito</h6>\\n                <small class="text-success">M\\xc3\\xa9dia/dia</small>\\n              </div>\\n              <div>\\n                <span class="text-success"><b>R$ 0,00</b></span>\\n              </div>\\n            </li>\\n            <li class="list-group-item d-flex justify-content-between"> <span>X Dias</span> <b>70%</b> </li>\\n            <li class="list-group-item d-flex justify-content-between"> <span>X Dias</span> <b>75%</b> </li>\\n            <li class="list-group-item d-flex justify-content-between"> <span>X Dias</span> <b>80%</b> </li>\\n        \', escape=False)\n            pass\n        response.write(\'\\n          </ul>\\n          <div class="col-md-12 col-12 my-1">\\n            <a class="btn btn-primary my-1 btn-block" href="#"><i class="fa fa-download fa-fw"></i>&nbsp;Acessar</a>\\n          </div>\\n        </div>\\n        \', escape=False)\n        pass\n    response.write(\'\\n        \\n        \', escape=False)\n    pass\nresponse.write(\'\\n        \', escape=False)\npass\nresponse.write(\'\\n      </div>\\n    </div>\\n  </div>\\n\\n\', escape=False)\nprojeto.total_saldo_cobradores=saldo\nresponse.write(\'\\n\', escape=False)\nprojeto.total_debito_cobradores=debito\nresponse.write(\'\\n\\n\', escape=False)\nprojeto.total_custo_devolucao_nova=total_custo_devolucao_nova\nresponse.write(\'\\n\', escape=False)\nprojeto.total_custo_devolucao_aproveitamento=total_custo_devolucao_aproveitamento\nresponse.write(\'\\n\\n\', escape=False)\nprojeto.total_fichas=fichas\nresponse.write(\'\\n\', escape=False)\nprojeto.total_vale_caderno_cobrador=caderno\nresponse.write(\'\\n\', escape=False)\nprojeto.total_deposito_cobranca=deposito\nresponse.write(\'\\n\', escape=False)\nprojeto.total_despesa_cobranca=despesa\nresponse.write(\'\\n\', escape=False)\nprojeto.total_cobrado=recebido\nresponse.write(\'\\n\', escape=False)\nprojeto.total_adiantamento_cobranca=total_adiantamento\nresponse.write(\'\\n\', escape=False)\nprojeto.total_vale_cobrador=total_vale_cobrador\nresponse.write(\'\\n\', escape=False)\nprojeto.update_record()\nresponse.write(\'\\n\', escape=False)\nresponse.write(\'\\n      \', escape=False)\nresponse.write(response.toolbar() if response.show_toolbar else \'\')\nresponse.write(\'\\n    </div>\\n    \', escape=False)\nresponse.write(\' <!-- this is default footer -->\\n    <footer id="noprint" class="footer container-fluid ">\\n      <div class="row">\\n        <div class="col-md-12">\\n          <div class="copyright pull-left">\', escape=False)\nresponse.write(T(\'Copyright\'))\nresponse.write(\' &#169; \', escape=False)\nresponse.write(request.now.year)\nresponse.write(\'</div>\\n          <div id="poweredBy" class="pull-right">\\n              Suporte <a href="https://api.whatsapp.com/send?phone=5588981126816">(88)98112-6816</a>\\n            </div>\\n        </div>\\n      </div>\\n    </footer>\\n <footer class="footer container-fluid d-none d-print-block">\\n      <div class="row">\\n        <div class="col-md-12">\\n          <div class="copyright pull-left">Suporte - (88)98112-6816</div>\\n          <div id="poweredBy" class="pull-right">\\n             \', escape=False)\nif auth.user:\n    response.write(auth.user.first_name)\n    response.write(\' \', escape=False)\n    response.write(auth.user.last_name)\nelse:\n    response.write(\'Aluminum System\', escape=False)\n    pass\nresponse.write(\'\\n          </div>\\n        </div>\\n      </div>\\n    </footer>\\n    \', escape=False)\nresponse.write(\'\\n    <!-- The javascript =============================== -->\\n    <script src="\', escape=False)\nresponse.write(URL(\'static\',\'js/bootstrap.bundle.min.js\'))\nresponse.write(\'"></script>\\n    <script src="\', escape=False)\nresponse.write(URL(\'static\',\'js/web2py-bootstrap4.js\'))\nresponse.write(\'"></script>\\n    \', escape=False)\nresponse.write(\'\\n    \', escape=False)\nif response.google_analytics_id:\n    response.write(\'\\n    <!-- Analytics ==================================== -->\\n    <script src="\', escape=False)\n    response.write(URL(\'static\',\'js/analytics.min.js\'))\n    response.write(\'"></script>\\n    <script type="text/javascript">\\n      analytics.initialize({\\n      \\\'Google Analytics\\\':{trackingId:\\\'\', escape=False)\n    response.write(response.google_analytics_id)\n    response.write("\'}\\n      });\\n    </script>\\n    ", escape=False)\n    pass\nresponse.write(\'\\n  </body>\\n</html>\\n\', escape=False)'
+p7
+sS'snapshot'
+p8
+(dp9
+S'exception'
+p10
+(dp11
+S'__getslice__'
+p12
+S"<method-wrapper '__getslice__' of exceptions.TypeError object>"
+p13
+sS'__str__'
+p14
+S"<method-wrapper '__str__' of exceptions.TypeError object>"
+p15
+sS'__reduce__'
+p16
+S'<built-in method __reduce__ of exceptions.TypeError object>'
+p17
+sS'__dict__'
+p18
+S'{}'
+p19
+sS'message'
+p20
+S'"unsupported operand type(s) for +: \'datetime.date\' and \'int\'"'
+p21
+sS'__sizeof__'
+p22
+S'<built-in method __sizeof__ of exceptions.TypeError object>'
+p23
+sS'__init__'
+p24
+S"<method-wrapper '__init__' of exceptions.TypeError object>"
+p25
+sS'__setattr__'
+p26
+S"<method-wrapper '__setattr__' of exceptions.TypeError object>"
+p27
+sS'__reduce_ex__'
+p28
+S'<built-in method __reduce_ex__ of exceptions.TypeError object>'
+p29
+sS'__new__'
+p30
+S'<built-in method __new__ of type object>'
+p31
+sS'__format__'
+p32
+S'<built-in method __format__ of exceptions.TypeError object>'
+p33
+sS'__class__'
+p34
+S"<type 'exceptions.TypeError'>"
+p35
+sS'__doc__'
+p36
+S"'Inappropriate argument type.'"
+p37
+sS'__getitem__'
+p38
+S"<method-wrapper '__getitem__' of exceptions.TypeError object>"
+p39
+sS'__setstate__'
+p40
+S'<built-in method __setstate__ of exceptions.TypeError object>'
+p41
+sS'__getattribute__'
+p42
+S"<method-wrapper '__getattribute__' of exceptions.TypeError object>"
+p43
+sS'args'
+p44
+S'("unsupported operand type(s) for +: \'datetime.date\' and \'int\'",)'
+p45
+sS'__subclasshook__'
+p46
+S'<built-in method __subclasshook__ of type object>'
+p47
+sS'__unicode__'
+p48
+S'<built-in method __unicode__ of exceptions.TypeError object>'
+p49
+sS'__delattr__'
+p50
+S"<method-wrapper '__delattr__' of exceptions.TypeError object>"
+p51
+sS'__repr__'
+p52
+S"<method-wrapper '__repr__' of exceptions.TypeError object>"
+p53
+sS'__hash__'
+p54
+S"<method-wrapper '__hash__' of exceptions.TypeError object>"
+p55
+ssS'evalue'
+p56
+S"unsupported operand type(s) for +: 'datetime.date' and 'int'"
+p57
+sS'request'
+p58
+cgluon.html
+XML_unpickle
+p59
+(S's\xe1_\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">ajax</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">application</td><td style="vertical-align:top;">:</td><td><div>aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">args</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>93</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cid</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">client</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">controller</td><td style="vertical-align:top;">:</td><td><div>acs_cobranca</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_admin</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51-a5f5849b-5ede-4a69-8493-2f37486a9e65<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_agrosystem</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51-554b85e0-8bff-440a-b770-d0aea50fdafe<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_aluminum</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51-b67c81cb-21e5-425b-9fe5-265625ba8d39<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_welcome</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51-77dfdb0a-1e82-4573-a0f5-1044aeccb56d<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">env</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">CONTENT_LENGTH</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">CONTENT_TYPE</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">DOCUMENT_ROOT</td><td style="vertical-align:top;">:</td><td><div>/usr/local/openresty/nginx/html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTPS</td><td style="vertical-align:top;">:</td><td><div>on</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_ENCODING</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate, br</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_LANGUAGE</td><td style="vertical-align:top;">:</td><td><div>pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CACHE_CONTROL</td><td style="vertical-align:top;">:</td><td><div>max-age=0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CONNECTION</td><td style="vertical-align:top;">:</td><td><div>close</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_COOKIE</td><td style="vertical-align:top;">:</td><td><div>session_id_agrosystem=191.212.144.51-554b85e0-8bff-440a-b770-d0aea50fdafe; _ga=GA1.3.1719900492.1619628920; session_id_welcome=191.212.144.51-77dfdb0a-1e82-4573-a0f5-1044aeccb56d; session_id_admin=191.212.144.51-a5f5849b-5ede-4a69-8493-2f37486a9e65; session_id_aluminum=191.212.144.51-b67c81cb-21e5-425b-9fe5-265625ba8d39; _gid=GA1.3.1006964211.1620005748</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_HOST</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_REFERER</td><td style="vertical-align:top;">:</td><td><div>https://rogoberto.pythonanywhere.com/aluminum/acs_cobranca/relatorio_cobranca/168</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_UPGRADE_INSECURE_REQUESTS</td><td style="vertical-align:top;">:</td><td><div>1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_USER_AGENT</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_X_FORWARDED_FOR</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_X_REAL_IP</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">PATH_INFO</td><td style="vertical-align:top;">:</td><td><div>/aluminum/acs_cobranca/index/93</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">QUERY_STRING</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_ADDR</td><td style="vertical-align:top;">:</td><td><div>10.0.0.93</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_PORT</td><td style="vertical-align:top;">:</td><td><div>36796</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_METHOD</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_URI</td><td style="vertical-align:top;">:</td><td><div>/aluminum/acs_cobranca/index/93</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SCRIPT_NAME</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_NAME</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PORT</td><td style="vertical-align:top;">:</td><td><div>443</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PROTOCOL</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;/home/rogoberto/web2py/applications/admin/&#x27;, &#x27;/home/rogoberto/web2py/applications/agrosystem/&#x27;, &#x27;/home/rogoberto/web2py/applications/aluminum/&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">content_length</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">content_type</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">document_root</td><td style="vertical-align:top;">:</td><td><div>/usr/local/openresty/nginx/html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_encoding</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate, br</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_language</td><td style="vertical-align:top;">:</td><td><div>pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cache_control</td><td style="vertical-align:top;">:</td><td><div>max-age=0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_connection</td><td style="vertical-align:top;">:</td><td><div>close</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cookie</td><td style="vertical-align:top;">:</td><td><div>session_id_agrosystem=191.212.144.51-554b85e0-8bff-440a-b770-d0aea50fdafe; _ga=GA1.3.1719900492.1619628920; session_id_welcome=191.212.144.51-77dfdb0a-1e82-4573-a0f5-1044aeccb56d; session_id_admin=191.212.144.51-a5f5849b-5ede-4a69-8493-2f37486a9e65; session_id_aluminum=191.212.144.51-b67c81cb-21e5-425b-9fe5-265625ba8d39; _gid=GA1.3.1006964211.1620005748</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_host</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_referer</td><td style="vertical-align:top;">:</td><td><div>https://rogoberto.pythonanywhere.com/aluminum/acs_cobranca/relatorio_cobranca/168</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_upgrade_insecure_requests</td><td style="vertical-align:top;">:</td><td><div>1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_user_agent</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_x_forwarded_for</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_x_real_ip</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">https</td><td style="vertical-align:top;">:</td><td><div>on</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_py2</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>35.173.69.207</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td><div>green-liveweb4</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>localhost</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path_info</td><td style="vertical-align:top;">:</td><td><div>/aluminum/acs_cobranca/index/93</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">query_string</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_addr</td><td style="vertical-align:top;">:</td><td><div>10.0.0.93</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_port</td><td style="vertical-align:top;">:</td><td><div>36796</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_method</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_uri</td><td style="vertical-align:top;">:</td><td><div>/aluminum/acs_cobranca/index/93</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">script_name</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_name</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_port</td><td style="vertical-align:top;">:</td><td><div>443</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_protocol</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi.node</td><td style="vertical-align:top;">:</td><td><div>green-liveweb4</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi.version</td><td style="vertical-align:top;">:</td><td><div>2.0.17.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi_node</td><td style="vertical-align:top;">:</td><td><div>green-liveweb4</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi_version</td><td style="vertical-align:top;">:</td><td><div>2.0.17.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_original_uri</td><td style="vertical-align:top;">:</td><td><div>/aluminum/acs_cobranca/index/93</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_path</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.17.1-stable+timestamp.2018.08.06.01.02.56</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.errors</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi_file__bin_user_wsgi_wrapper.ErrorLogFile object at 0x7fdbcbde8cd0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;built-in function uwsgi_sendfile&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.input</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi._Input object at 0x7fdbcd1ede28&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multiprocess</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multithread</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.url_scheme</td><td style="vertical-align:top;">:</td><td><div>https</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_errors</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi_file__bin_user_wsgi_wrapper.ErrorLogFile object at 0x7fdbcbde8cd0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;built-in function uwsgi_sendfile&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_input</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi._Input object at 0x7fdbcd1ede28&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multiprocess</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multithread</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_url_scheme</td><td style="vertical-align:top;">:</td><td><div>https</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">extension</td><td style="vertical-align:top;">:</td><td><div>html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">folder</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py/applications/aluminum/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">function</td><td style="vertical-align:top;">:</td><td><div>index</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">global_settings</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;/home/rogoberto/web2py/applications/admin/&#x27;, &#x27;/home/rogoberto/web2py/applications/agrosystem/&#x27;, &#x27;/home/rogoberto/web2py/applications/aluminum/&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_py2</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>35.173.69.207</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td><div>green-liveweb4</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>localhost</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.17.1-stable+timestamp.2018.08.06.01.02.56</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_https</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_local</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_restful</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_scheduler</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_shell</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">method</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">now</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2021, 5, 3, 12, 44, 3, 618276)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">url</td><td style="vertical-align:top;">:</td><td><div>/aluminum/acs_cobranca/index/93</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">utcnow</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2021, 5, 3, 12, 44, 3, 618286)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi</td><td style="vertical-align:top;">:</td><td><div>&lt;gluon.main.LazyWSGI object at 0x7fdbc93b3c90&gt;</div></td></tr></table></div>'
+tRp60
+sS'frames'
+p61
+(lp62
+(dp63
+S'file'
+p64
+S'/home/rogoberto/web2py/gluon/restricted.py'
+p65
+sS'dump'
+p66
+(dp67
+S'environment'
+p68
+S"{'A': <class 'gluon.html.A'>, 'ANY_OF': <class 'gluon.validators.ANY_OF'>, 'ASSIGNJS': <function ASSIGNJS>, 'AppConfig': <function AppConfig>, 'Auth': <class 'gluon.tools.Auth'>, 'B': <class 'gluon.html.B'>, 'BEAUTIFY': <class 'gluon.html.BEAUTIFY'>, 'BODY': <class 'gluon.html.BODY'>, 'BR': <class 'gluon.html.BR'>, 'BUTTON': <class 'gluon.html.BUTTON'>, ...}"
+p69
+sS'ccode'
+p70
+S'<code object <module> at 0x7fdbc8e47ab0, file "/.../aluminum/views/acs_cobranca/index.html", line 1>'
+p71
+ssS'lnum'
+p72
+I219
+sS'lines'
+p73
+(dp74
+I214
+S'    if environment is None:'
+p75
+sI215
+S'        environment = {}'
+p76
+sI216
+S"    environment['__file__'] = layer"
+p77
+sI217
+S"    environment['__name__'] = '__restricted__'"
+p78
+sI218
+S'    try:'
+p79
+sI219
+S'        exec(ccode, environment)'
+p80
+sI220
+S'    except HTTP:'
+p81
+sI221
+S'        raise'
+p82
+sI222
+S'    except RestrictedError:'
+p83
+sI223
+S'        # do not encapsulate (obfuscate) the original RestrictedError'
+p84
+ssS'call'
+p85
+S'(ccode=<code object <module> at 0x7fdbc8e47ab0, file "/.../aluminum/views/acs_cobranca/index.html", line 1>, environment={\'A\': <class \'gluon.html.A\'>, \'ANY_OF\': <class \'gluon.validators.ANY_OF\'>, \'ASSIGNJS\': <function ASSIGNJS>, \'AppConfig\': <function AppConfig>, \'Auth\': <class \'gluon.tools.Auth\'>, \'B\': <class \'gluon.html.B\'>, \'BEAUTIFY\': <class \'gluon.html.BEAUTIFY\'>, \'BODY\': <class \'gluon.html.BODY\'>, \'BR\': <class \'gluon.html.BR\'>, \'BUTTON\': <class \'gluon.html.BUTTON\'>, ...}, layer=\'/home/rogoberto/web2py/applications/aluminum/views/acs_cobranca/index.html\', scode=r"response.write(\'<!DOCTYPE html>\\n<!--[if (gt IE ...nse.write(\'\\n  </body>\\n</html>\\n\', escape=False)")'
+p86
+sS'func'
+p87
+S'restricted'
+p88
+sa(dp89
+g64
+S'/home/rogoberto/web2py/applications/aluminum/views/acs_cobranca/index.html'
+p90
+sg66
+(dp91
+sg72
+I365
+sg73
+(dp92
+I356
+S"            response.write('\\n            ', escape=False)"
+p93
+sI357
+S'            percento_deposito=row.total_deposito/row.total_venda_praso*100'
+p94
+sI358
+S"            response.write('\\n            ', escape=False)"
+p95
+sI359
+S'            pass'
+p96
+sI360
+S'        response.write(\'\\n            <li class="list-group-item d-flex justify-content-between bg-light">\\n              <div class="text-success">\\n                <h6 class="my-0"><b>Depositado</b></h6>\\n                <small>\', escape=False)'
+p97
+sI361
+S'        response.write("{:,.1f}".format(round(percento_deposito,1)).replace(",","#").replace(".",",").replace("#","."))'
+p98
+sI362
+S'        response.write(\'%</small>\\n              </div> \\n              <span class="text-success">\\n                <b>R$ \', escape=False)'
+p99
+sI363
+S'        response.write("{:,.2f}".format(round(row.total_deposito,1)).replace(",","#").replace(".",",").replace("#","."))'
+p100
+sI364
+S"        response.write('</b>\\n              </span>\\n            </li>\\n            ', escape=False)"
+p101
+sI365
+S'        chegada=row.data_inicio_cobranca+75'
+p102
+sI366
+S'        response.write(\'\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                <h6 class="my-0">Data Sa\\xc3\\xadda</h6>\\n                <small class="text-muted">\', escape=False)'
+p103
+sI367
+S'        response.write(chegada)'
+p104
+sI368
+S'        response.write(\'</small>\\n              </div>\\n              <div class="text-muted">\\n                <h6 class="my-0 text-right">\', escape=False)'
+p105
+sI369
+S"        response.write(row.data_inicio_cobranca.strftime('%d/%m/%Y'))"
+p106
+sI370
+S'        response.write(\'</h6>\\n                <span class="text-muted text-right">Dias</span>\\n              </div>\\n            </li>\\n        \', escape=False)'
+p107
+sI371
+S'        if not row.cobranca_finalizada:'
+p108
+sI372
+S'            response.write(\'\\n            <li class="list-group-item d-flex justify-content-between" style="">\\n              <div>\\n                <h6 class="my-0">\\n                  <b>Recebido</b>\\n                </h6>\\n                <small class="text-muted">M\\xc3\\xa9dia/dia</small>\\n              </div>\\n              <div>\\n                <h6 class="my-0">\\n                  <b>R$ 0,00</b>\\n                </h6>\\n              </div>\\n            </li>\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                <h6 class="my-0">Despesa</h6>\\n                <small class="text-muted">M\\xc3\\xa9dia/dia</small>\\n              </div>\\n              <div>\\n                <h6 class="my-0">\\n                  <b>R$ 0,00</b>\\n                </h6>\\n              </div>\\n            </li>\\n            <li class="list-group-item d-flex justify-content-between bg-light">\\n              <div class="text-success">\\n                <h6 class="my-0">Deposito</h6>\\n                <small class="text-success">M\\xc3\\xa9dia/dia</small>\\n              </div>\\n              <div>\\n                <span class="text-success"><b>R$ 0,00</b></span>\\n              </div>\\n            </li>\\n            <li class="list-group-item d-flex justify-content-between"> <span>X Dias</span> <b>70%</b> </li>\\n            <li class="list-group-item d-flex justify-content-between"> <span>X Dias</span> <b>75%</b> </li>\\n            <li class="list-group-item d-flex justify-content-between"> <span>X Dias</span> <b>80%</b> </li>\\n        \', escape=False)'
+p109
+sI373
+S'            pass'
+p110
+sI374
+S'        response.write(\'\\n          </ul>\\n          <div class="col-md-12 col-12 my-1">\\n            <a class="btn btn-primary my-1 btn-block" href="#"><i class="fa fa-download fa-fw"></i>&nbsp;Acessar</a>\\n          </div>\\n        </div>\\n        \', escape=False)'
+p111
+sI375
+S'        pass'
+p112
+ssg85
+S'()'
+p113
+sg87
+S'<module>'
+p114
+sasS'pyver'
+p115
+S'Python 2.7.12: /usr/local/bin/uwsgi (prefix: /usr)'
+p116
+sS'session'
+p117
+g59
+(S's\xee\t\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">auth</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">expiration</td><td style="vertical-align:top;">:</td><td><div>3600</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">hmac_key</td><td style="vertical-align:top;">:</td><td><div>bf27ca76-968b-4218-aad4-7de2127c01ee</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">last_visit</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2021, 5, 3, 12, 38, 24, 31099)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remember_me</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">user</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">email</td><td style="vertical-align:top;">:</td><td><div>betin@gmail.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">first_name</td><td style="vertical-align:top;">:</td><td><div>Rogoberto</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">id</td><td style="vertical-align:top;">:</td><td><div>1L</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">last_name</td><td style="vertical-align:top;">:</td><td><div>Ribeiro</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">registration_id</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">registration_key</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">reset_password_key</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">user_groups</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">1</td><td style="vertical-align:top;">:</td><td><div>user_1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">2</td><td style="vertical-align:top;">:</td><td><div>admin</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">3</td><td style="vertical-align:top;">:</td><td><div>wiki_editor</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr></table></div>'
+tRp118
+sS'etype'
+p119
+S"<type 'exceptions.TypeError'>"
+p120
+sS'date'
+p121
+S'Mon May  3 12:44:04 2021'
+p122
+sS'response'
+p123
+g59
+(S's\xd2\x1d\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">body</td><td style="vertical-align:top;">:</td><td><div>&lt;cStringIO.StringO object at 0x7fdbc8c3b6f8&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_aluminum</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51-b67c81cb-21e5-425b-9fe5-265625ba8d39<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div>/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">delimiters</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>{{</div></td></tr><tr><td><div>}}</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">files</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>/aluminum/static/js/jquery.js</div></td></tr><tr><td><div>/aluminum/static/css/calendar.css</div></td></tr><tr><td><div>/aluminum/static/js/calendar.js</div></td></tr><tr><td><div>/aluminum/static/js/web2py.js</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">form_label_separator</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">formstyle</td><td style="vertical-align:top;">:</td><td><div>bootstrap4_inline</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generic_patterns</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">google_analytics_id</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">headers</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">X-Powered-By</td><td style="vertical-align:top;">:</td><td><div>web2py</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">menu</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div><table><tr><td><div>Principal</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/aluminum</div></td></tr><tr><td><div><table></table></div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Principal</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/aluminum</div></td></tr><tr><td><div><table></table></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">meta</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">author</td><td style="vertical-align:top;">:</td><td><div>Your Name &lt;you@example.com&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">description</td><td style="vertical-align:top;">:</td><td><div>a cool new app</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generator</td><td style="vertical-align:top;">:</td><td><div>Web2py Web Framework</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">keywords</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>web2py</div></td></tr><tr><td><div>python</div></td></tr><tr><td><div>framework</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">models_to_run</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>^\\w+\\.py$</div></td></tr><tr><td><div>^acs_cobranca/\\w+\\.py$</div></td></tr><tr><td><div>^acs_cobranca/index/\\w+\\.py$</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">postprocessing</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_client</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_compression_level</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_expires</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_data_name</td><td style="vertical-align:top;">:</td><td><div>session_data_aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_file</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;/home/rogoberto/web2py/applications/aluminum/sessions/07e/125/191.212.144.51-b67c81cb-21e5-425b-9fe5-265625ba8d39&#x27;, mode &#x27;rb+&#x27; at 0x7fdbc9013f60&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_filename</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py/applications/aluminum/sessions/191.212.144.51-b67c81cb-21e5-425b-9fe5-265625ba8d39</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_hash</td><td style="vertical-align:top;">:</td><td><div>10cb148bb2fe24b17f882c23aa263240</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51-b67c81cb-21e5-425b-9fe5-265625ba8d39</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_name</td><td style="vertical-align:top;">:</td><td><div>session_id_aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_locked</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_masterapp</td><td style="vertical-align:top;">:</td><td><div>aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_new</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_storage_type</td><td style="vertical-align:top;">:</td><td><div>file</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">show_toolbar</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">status</td><td style="vertical-align:top;">:</td><td><div>200</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">view</td><td style="vertical-align:top;">:</td><td><div>acs_cobranca/index.html</div></td></tr></table></div>'
+tRp124
+sS'locals'
+p125
+(dp126
+S'PY2'
+p127
+S'True'
+p128
+sS'OBJECT'
+p129
+S"<class 'gluon.html.OBJECT'>"
+p130
+sS'SQLDB'
+p131
+S"<class 'pydal.base.DAL'>"
+p132
+sg117
+S"<Storage {'_formkey[vendedor/776]': ['88d4a447-3...29df8', '98c23dec-0a79-43ea-8006-9d983f715685']}>"
+p133
+sS'LINK'
+p134
+S"<class 'gluon.html.LINK'>"
+p135
+sS'BR'
+p136
+S"<class 'gluon.html.BR'>"
+p137
+sS'local_import'
+p138
+S'<function <lambda>>'
+p139
+sS'OPTGROUP'
+p140
+S"<class 'gluon.html.OPTGROUP'>"
+p141
+sS'__package__'
+p142
+S'None'
+p143
+sS'total_adiantamento'
+p144
+S'0'
+sS'row'
+p145
+S'<Row {\'total_saldo_cobrador\': -295.1599999999998...volucao\': <Set ("devolucao"."sub_venda" = 167)>}>'
+p146
+sS'PRE'
+p147
+S"<class 'gluon.html.PRE'>"
+p148
+sS'IS_INT_IN_RANGE'
+p149
+S"<class 'gluon.validators.IS_INT_IN_RANGE'>"
+p150
+sS'to_bytes'
+p151
+S'<function to_bytes>'
+p152
+sS'IS_LOWER'
+p153
+S"<class 'gluon.validators.IS_LOWER'>"
+p154
+sS'IS_STRONG'
+p155
+S"<class 'gluon.validators.IS_STRONG'>"
+p156
+sS'cache'
+p157
+S'<gluon.cache.Cache object>'
+p158
+sS'IS_IN_DB'
+p159
+S"<class 'gluon.validators.IS_IN_DB'>"
+p160
+sS'deposito'
+p161
+S'0'
+sS'TAG'
+p162
+S'<gluon.html.__TAG__ object>'
+p163
+sS'valor'
+p164
+S'0'
+sS'SQLField'
+p165
+S"<class 'pydal.objects.Field'>"
+p166
+sS'mail'
+p167
+S'<gluon.tools.Mail object>'
+p168
+sS'BODY'
+p169
+S"<class 'gluon.html.BODY'>"
+p170
+sS'IS_DATE_IN_RANGE'
+p171
+S"<class 'gluon.validators.IS_DATE_IN_RANGE'>"
+p172
+sS'IFRAME'
+p173
+S"<class 'gluon.html.IFRAME'>"
+p174
+sS'URL'
+p175
+S'<function URL>'
+p176
+sS'__file__'
+p177
+S"'/home/rogoberto/web2py/applications/aluminum/views/acs_cobranca/index.html'"
+p178
+sS'db'
+p179
+S'<DAL uri="sqlite://storage.sqlite">'
+p180
+sS'auth'
+p181
+S'<gluon.tools.Auth object>'
+p182
+sS'P'
+S"<class 'gluon.html.P'>"
+p183
+sS'TFOOT'
+p184
+S"<class 'gluon.html.TFOOT'>"
+p185
+sS'iteritems'
+p186
+S'<function <lambda>>'
+p187
+sS'XHTML'
+p188
+S"<class 'gluon.html.XHTML'>"
+p189
+sS'datetime'
+p190
+S"<module 'datetime' (built-in)>"
+p191
+sS'total_custo_devolucao_nova'
+p192
+S'0'
+sS'ON'
+p193
+g128
+sS'OL'
+p194
+S"<class 'gluon.html.OL'>"
+p195
+sS'TEXTAREA'
+p196
+S"<class 'gluon.html.TEXTAREA'>"
+p197
+sS'MENU'
+p198
+S"<class 'gluon.html.MENU'>"
+p199
+sS'despesa'
+p200
+S'0'
+sS'IS_IMAGE'
+p201
+S"<class 'gluon.validators.IS_IMAGE'>"
+p202
+sS'_item'
+p203
+S"(<lazyT 'Home'>, False, '/aluminum', [])"
+p204
+sS'EM'
+p205
+S"<class 'gluon.html.EM'>"
+p206
+sS'CODE'
+p207
+S"<class 'gluon.html.CODE'>"
+p208
+sS'HTTP'
+p209
+S"<class 'gluon.http.HTTP'>"
+p210
+sS'HR'
+p211
+S"<class 'gluon.html.HR'>"
+p212
+sS'IS_DATETIME'
+p213
+S"<class 'gluon.validators.IS_DATETIME'>"
+p214
+sS'reduce'
+p215
+S'<built-in function reduce>'
+p216
+sS'STYLE'
+p217
+S"<class 'gluon.html.STYLE'>"
+p218
+sS'LABEL'
+p219
+S"<class 'gluon.html.LABEL'>"
+p220
+sS'CLEANUP'
+p221
+S"<class 'gluon.validators.CLEANUP'>"
+p222
+sS'BUTTON'
+p223
+S"<class 'gluon.html.BUTTON'>"
+p224
+sS'SELECT'
+p225
+S"<class 'gluon.html.SELECT'>"
+p226
+sS'CENTER'
+p227
+S"<class 'gluon.html.CENTER'>"
+p228
+sS'percento_recebido'
+p229
+S'24.319092479475717'
+p230
+sS'sum'
+p231
+S'<pydal.objects.Expression object>'
+p232
+sS'Auth'
+p233
+S"<class 'gluon.tools.Auth'>"
+p234
+sS'caderno'
+p235
+S'0'
+sS'urlopen'
+p236
+S'<function urlopen>'
+p237
+sS'HTML'
+p238
+S"<class 'gluon.html.HTML'>"
+p239
+sS'SQLFORM'
+p240
+S"<class 'gluon.sqlhtml.SQLFORM'>"
+p241
+sS'total_vale_cobrador'
+p242
+S'0'
+sS'LOAD'
+p243
+S'<function LOAD>'
+p244
+sS'redirect'
+p245
+S'<function redirect>'
+p246
+sS'FIELDSET'
+p247
+S"<class 'gluon.html.FIELDSET'>"
+p248
+sS'IS_EQUAL_TO'
+p249
+S"<class 'gluon.validators.IS_EQUAL_TO'>"
+p250
+sS'embed64'
+p251
+S'<function embed64>'
+p252
+sS'IS_LIST_OF'
+p253
+S"<class 'gluon.validators.IS_LIST_OF'>"
+p254
+sS'__name__'
+p255
+S"'__restricted__'"
+p256
+sS'EMBED'
+p257
+S"<class 'gluon.html.EMBED'>"
+p258
+sS'configuration'
+p259
+S"{'host': {'names': 'localhost:*, 127.0.0.1:*, *:...': 'sqlite://storage.sqlite', 'pool_size': '10'}}"
+p260
+sS'percento_deposito'
+p261
+S'22.482325076131286'
+p262
+sS'H2'
+p263
+S"<class 'gluon.html.H2'>"
+p264
+sS'H3'
+p265
+S"<class 'gluon.html.H3'>"
+p266
+sS'AppConfig'
+p267
+S'<function AppConfig>'
+p268
+sS'H1'
+p269
+S"<class 'gluon.html.H1'>"
+p270
+sS'H6'
+p271
+S"<class 'gluon.html.H6'>"
+p272
+sS'H4'
+p273
+S"<class 'gluon.html.H4'>"
+p274
+sS'H5'
+p275
+S"<class 'gluon.html.H5'>"
+p276
+sS'UL'
+p277
+S"<class 'gluon.html.UL'>"
+p278
+sS'IS_UPPER'
+p279
+S"<class 'gluon.validators.IS_UPPER'>"
+p280
+sS'xmlescape'
+p281
+S'<function xmlescape>'
+p282
+sS'IS_TIME'
+p283
+S"<class 'gluon.validators.IS_TIME'>"
+p284
+sS'debito'
+p285
+S'0'
+sS'OPTION'
+p286
+S"<class 'gluon.html.OPTION'>"
+p287
+sS'TITLE'
+p288
+S"<class 'gluon.html.TITLE'>"
+p289
+sS'CRYPT'
+p290
+S"<class 'gluon.validators.CRYPT'>"
+p291
+sS'IS_EMPTY_OR'
+p292
+S"<class 'gluon.validators.IS_EMPTY_OR'>"
+p293
+sS'MARKMIN'
+p294
+S"<class 'gluon.html.MARKMIN'>"
+p295
+sS'total_custo_devolucao_aproveitamento'
+p296
+S'0'
+sS'INPUT'
+p297
+S"<class 'gluon.html.INPUT'>"
+p298
+sS'STRONG'
+p299
+S"<class 'gluon.html.STRONG'>"
+p300
+sS'COL'
+p301
+S"<class 'gluon.html.COL'>"
+p302
+sS'__builtins__'
+p303
+S"{'ArithmeticError': <type 'exceptions.ArithmeticError'>, 'AssertionError': <type 'exceptions.AssertionError'>, 'AttributeError': <type 'exceptions.AttributeError'>, 'BaseException': <type 'exceptions.BaseException'>, 'BufferError': <type 'exceptions.BufferError'>, 'BytesWarning': <type 'exceptions.BytesWarning'>, 'DeprecationWarning': <type 'exceptions.DeprecationWarning'>, 'EOFError': <type 'exceptions.EOFError'>, 'Ellipsis': Ellipsis, 'EnvironmentError': <type 'exceptions.EnvironmentError'>, ...}"
+p304
+sS'rows'
+p305
+S'<Rows (3)>'
+p306
+sS'SCRIPT'
+p307
+S"<class 'gluon.html.SCRIPT'>"
+p308
+sS'recebido'
+p309
+S'0'
+sS'TABLE'
+p310
+S"<class 'gluon.html.TABLE'>"
+p311
+sS'IS_IPV4'
+p312
+S"<class 'gluon.validators.IS_IPV4'>"
+p313
+sS'IS_LENGTH'
+p314
+S"<class 'gluon.validators.IS_LENGTH'>"
+p315
+sS'IS_IPV6'
+p316
+S"<class 'gluon.validators.IS_IPV6'>"
+p317
+sS'XML'
+p318
+S"<class 'gluon.html.XML'>"
+p319
+sS'ANY_OF'
+p320
+S"<class 'gluon.validators.ANY_OF'>"
+p321
+sS'B'
+S"<class 'gluon.html.B'>"
+p322
+sS'IMG'
+p323
+S"<class 'gluon.html.IMG'>"
+p324
+sS'SQLTABLE'
+p325
+S"<class 'gluon.sqlhtml.SQLTABLE'>"
+p326
+sS'IS_MATCH'
+p327
+S"<class 'gluon.validators.IS_MATCH'>"
+p328
+sS'IS_ALPHANUMERIC'
+p329
+S"<class 'gluon.validators.IS_ALPHANUMERIC'>"
+p330
+sS'SPAN'
+p331
+S"<class 'gluon.html.SPAN'>"
+p332
+sS'IS_JSON'
+p333
+S"<class 'gluon.validators.IS_JSON'>"
+p334
+sS'IS_IPADDRESS'
+p335
+S"<class 'gluon.validators.IS_IPADDRESS'>"
+p336
+sS'IS_SLUG'
+p337
+S"<class 'gluon.validators.IS_SLUG'>"
+p338
+sS'BEAUTIFY'
+p339
+S"<class 'gluon.html.BEAUTIFY'>"
+p340
+sS'META'
+p341
+S"<class 'gluon.html.META'>"
+p342
+sS'percento_despesa'
+p343
+S'7.485409237033077'
+p344
+sS'projeto'
+p345
+S"<Row {'empresa': 8L, 'total_salario_funcionario'..._cobrado': 0.0, 'total_pecas_mercadoria': 6207L}>"
+p346
+sS'IS_DATE'
+p347
+S"<class 'gluon.validators.IS_DATE'>"
+p348
+sS'IS_EMAIL'
+p349
+S"<class 'gluon.validators.IS_EMAIL'>"
+p350
+sS'IS_NOT_EMPTY'
+p351
+S"<class 'gluon.validators.IS_NOT_EMPTY'>"
+p352
+sS'xrange'
+p353
+S"<type 'xrange'>"
+p354
+sS'TBODY'
+p355
+S"<class 'gluon.html.TBODY'>"
+p356
+sS'CAT'
+p357
+S"<class 'gluon.html.CAT'>"
+p358
+sS'Field'
+p359
+S"<class 'pydal.objects.Field'>"
+p360
+sS'IS_LIST_OF_EMAILS'
+p361
+S"<class 'gluon.validators.IS_LIST_OF_EMAILS'>"
+p362
+sg58
+S"<Storage {'_vars': None, 'function': 'index', 'c...web2py/applications/aluminum/', 'method': 'GET'}>"
+p363
+sS'DIV'
+p364
+S"<class 'gluon.html.DIV'>"
+p365
+sS'LEGEND'
+p366
+S"<class 'gluon.html.LEGEND'>"
+p367
+sS'to_native'
+p368
+S'<function to_native>'
+p369
+sS'COLGROUP'
+p370
+S"<class 'gluon.html.COLGROUP'>"
+p371
+sS'DAL'
+p372
+S"<class 'pydal.base.DAL'>"
+p373
+sS'ASSIGNJS'
+p374
+S'<function ASSIGNJS>'
+p375
+sS'TR'
+p376
+S"<class 'gluon.html.TR'>"
+p377
+sS'LI'
+p378
+S"<class 'gluon.html.LI'>"
+p379
+sS'TH'
+p380
+S"<class 'gluon.html.TH'>"
+p381
+sS'TD'
+p382
+S"<class 'gluon.html.TD'>"
+p383
+sS'IS_URL'
+p384
+S"<class 'gluon.validators.IS_URL'>"
+p385
+sS'A'
+S"<class 'gluon.html.A'>"
+p386
+sS'HEAD'
+p387
+S"<class 'gluon.html.HEAD'>"
+p388
+sS'IS_DATETIME_IN_RANGE'
+p389
+S"<class 'gluon.validators.IS_DATETIME_IN_RANGE'>"
+p390
+sS'FORM'
+p391
+S"<class 'gluon.html.FORM'>"
+p392
+sS'I'
+S"<class 'gluon.html.I'>"
+p393
+sS'Request'
+p394
+S'<class urllib2.Request>'
+p395
+sS'IS_NOT_IN_DB'
+p396
+S"<class 'gluon.validators.IS_NOT_IN_DB'>"
+p397
+sS'saldo'
+p398
+S'0'
+sg121
+S"<type 'datetime.date'>"
+p399
+sg123
+S"<Storage {'body': <cStringIO.StringO object at 0...fdbc90bfa28>, 'view': 'acs_cobranca/index.html'}>"
+p400
+sS'THEAD'
+p401
+S"<class 'gluon.html.THEAD'>"
+p402
+sS'a'
+S'1'
+sS'IS_NULL_OR'
+p403
+S"<class 'gluon.validators.IS_EMPTY_OR'>"
+p404
+sS'fichas'
+p405
+S'0'
+sS'usuario'
+p406
+S"<Row {'registration_id': '', 'last_name': 'Ribei...gistration_key': '', 'email': 'betin@gmail.com'}>"
+p407
+sS'IS_FLOAT_IN_RANGE'
+p408
+S"<class 'gluon.validators.IS_FLOAT_IN_RANGE'>"
+p409
+sS'IS_EXPR'
+p410
+S"<class 'gluon.validators.IS_EXPR'>"
+p411
+sS'T'
+S'<gluon.languages.translator object>'
+p412
+sS'IS_IN_SET'
+p413
+S"<class 'gluon.validators.IS_IN_SET'>"
+p414
+sS'IS_UPLOAD_FILENAME'
+p415
+S"<class 'gluon.validators.IS_UPLOAD_FILENAME'>"
+p416
+sS'TT'
+p417
+S"<class 'gluon.html.TT'>"
+p418
+sS'IS_DECIMAL_IN_RANGE'
+p419
+S"<class 'gluon.validators.IS_DECIMAL_IN_RANGE'>"
+p420
+sssS'traceback'
+p421
+S'Traceback (most recent call last):\n  File "/home/rogoberto/web2py/gluon/restricted.py", line 219, in restricted\n    exec(ccode, environment)\n  File "/home/rogoberto/web2py/applications/aluminum/views/acs_cobranca/index.html", line 365, in <module>\nTypeError: unsupported operand type(s) for +: \'datetime.date\' and \'int\'\n'
+p422
+s.

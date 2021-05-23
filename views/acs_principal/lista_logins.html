@@ -42,7 +42,10 @@
                       <td>{{=row.auth_user.first_name}} {{=row.auth_user.last_name}}</td>
                       <td>{{=row.tipo}}</td>
                       <td>{{=row.auth_user.email}}</td>
+                      {{if row.tipo!="Proprietário" or auth.user.id==1:}}
                        <td><a class="btn btn-warning" href="{{=URL('alterar_usuario_empresa', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-pencil"></i></a></td>
+                      {{else:}} <td><a class="btn btn-warning disabled" href="#"><i class="fa fa-fw fa-1x py-1 fa-pencil"></i></a></td>
+                      {{pass}}
                       <td><a class="btn btn-link" href="{{=URL('acs_chf_equipe','projetos', args=row.auth_user.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-bars"></i></a></td>
                     </tr>
                       {{pass}}

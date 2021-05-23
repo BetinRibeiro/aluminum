@@ -54,7 +54,7 @@
 </div>
 {{pass}}{{pass}}{{pass}}
 
-          <h5 class="">Lista de Vendas ( {{=vendedor.nome.replace("cfrd","")}} ) venda na rota de {{=row1.primeira_cidade}}</h5>
+          <h5 class="">Lista de Vendas ( {{=vendedor.nome.replace("cfrd","")}} ) na rota de {{=row1.primeira_cidade}}</h5>
             <div class="table-responsive">
             <table class="table table-striped table-borderless">
             {{a=0}}
@@ -123,8 +123,8 @@
                                 <td>R$ {{="{:,}".format(round(row.entradas_venda,1)).replace(",",".")}}0</td>
                                 <td>{{=row.quant_fichas_devolvidas}}</td>
                                 <td>R$ {{="{:,}".format(round(row.valor_devolvido,1)).replace(",",".")}}0</td>
-                              {{if usuario.id==1:}}
-{{if (not row1.cobranca_iniciada):}}
+                              {{if auth.user.id==1:}}
+{{if ( row1.cobranca_iniciada):}}
                               <td><a class="btn btn-link" href="{{=URL('trocar', args=row.id)}}">Trocar</a></td>
                               {{pass}}
                               {{pass}}

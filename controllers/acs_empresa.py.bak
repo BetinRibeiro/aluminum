@@ -10,10 +10,10 @@ def projecao_simulada():
                                     empresa = empresa.id,
                                     descricao=empresa.nome)
   else:
-      redirect(URL('default','index'))
-  if (auth.user.id==1)&(request.args(0, cast=int)):
-    empresa = db.empresa(request.args(0, cast=int))
-    simulacao = db.simulacao(db.simulacao.empresa==empresa.id)
+    redirect(URL('default','index'))
+    if (auth.user.id==1)&(request.args(0, cast=int)):
+      empresa = db.empresa(request.args(0, cast=int))
+      simulacao = db.simulacao(db.simulacao.empresa==empresa.id)
   return dict(simulacao=simulacao)
 
 
@@ -29,3 +29,9 @@ def alterar_simulacao():
   elif form.errors:
       response.flash = 'Erros no formulário!'
   return  dict(form=form)
+
+
+def mensagem():
+  response.view = 'generic.html' # use a generic view
+  mensagem = "Seu servidor de acesso e armazenamento não foi pago, entre em contato com seu provedor de serviço, para regularizar o débito. desde já agradecemos a compreenção!"
+  return dict(mensagem=mensagem)

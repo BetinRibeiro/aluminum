@@ -63,9 +63,9 @@
                   <th><a  class="btn btn-outline-primary btn-block text-left" href="{{=URL('mercadoria','acesso_item_carrada', args=row.id)}}" >{{=row.descricao}}</a></th>
                   <th><a  class="btn btn-outline-primary btn-block text-center" href="{{=URL('mercadoria','acesso_item_carrada', args=row.id)}}" >{{=row.data_envio.strftime('%d/%m/%Y')}}</a></th>
                   <td class="text-center">{{=row.total_pecas}}</td>
-                  <td>R$ {{="{:,.2f}".format(round(row.total_preco,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  <td>R$ {{="{:,.2f}".format(round(row.total_preco,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                     {{if desbloqueado==True:}}
-                  <td>R$ {{="{:,.2f}".format(round(row.total_custo,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  <td>R$ {{="{:,.2f}".format(round(row.total_custo,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                      {{if (row.total_preco>0)and(row.total_custo>0):}}
                   <td>{{="{:,.1f}".format(round(row.total_preco/row.total_custo*100,1)).replace(",","#").replace(".",",").replace("#",".")}}%</td>
                     {{else:}}
@@ -73,7 +73,11 @@
                     {{pass}}
                     {{pass}}
                     {{if not projeto.venda_finalizada:}}
-                  <td><a class="btn btn-outline-warning btn-block"  href="{{=URL('mercadoria','alterar_carrada', args=row.id)}}"><i class="fa fa-exchange" ></i></a></td>
+                  {{if not row.finalizada:}}
+                  <td><a class="btn btn-outline-warning"  href="{{=URL('mercadoria','alterar_carrada', args=row.id)}}"><i class="fa fa-pencil" ></i></a></td>
+                  {{else:}}
+                  <th><a class="btn btn-outline-success" href="{{=URL('mercadoria','verifica', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-check" ></i></a></th>
+                    {{pass}}
                     {{pass}}
                   {{if r==7:}}
                   {{if row.finalizada:}}

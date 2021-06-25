@@ -49,10 +49,24 @@
                     <i class="fa fa-fw fa-1x py-1 fa-pie-chart "></i> Particionamento
                 </a>
             </li>
+            {{if projeto.id>125:}}
+            <li class="list-group-item">
+                <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_registro','index', args=[projeto.id,'adiantamento'])}}">
+                    <i class="fa fa-fw fa-1x py-1 fa-book"></i> Adiantamento Venda
+                  </a>
+              </li>
+            {{pass}}
           </ul>
         </div>
         <div class="col-md-3">
           <ul class="list-group list-group-flush">
+            {{if projeto.id>125:}}
+            <li class="list-group-item">
+                <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_registro','index', args=[projeto.id,'vale_chefe'])}}">
+                    <i class="fa fa-fw fa-1x py-1 fa-book"></i> Vale do Chefe
+                  </a>
+              </li>
+            {{pass}}
               <li class="list-group-item">
                   <a class="btn btn-link" href="{{=URL('acs_funcionario','index', args=projeto.id)}}" style="color:#3b5998">
                       <i class="fa fa-fw fa-1x py-1 fa-users"></i> Funcionarios
@@ -77,6 +91,13 @@
         </div>
         <div class="col-md-3">
           <ul class="list-group list-group-flush">
+            {{if projeto.id>125:}}
+            <li class="list-group-item">
+                <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_registro','index', args=[projeto.id,'dinheiro_devolvido'])}}">
+                    <i class="fa fa-fw fa-1x py-1 fa-book"></i> Devolução Dinheiro
+                  </a>
+              </li>
+            {{pass}}
             <li class="list-group-item">
                 <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_despesa_projeto','index', args=[projeto.id,'Despesa_Local'])}}">
                     <i class="fa fa-fw fa-1x py-1 fa-minus-circle"></i> Despesa Local
@@ -93,16 +114,10 @@
                   </a>
               </li>
               <li class="list-group-item">
-              {{if projeto.empresa==17:}}
-                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_relatorio','relatorio_chefe_sal', args=projeto.id)}}">
-                      <i class="fa fa-fw fa-1x py-1 fa-file-text"></i> Relatório Chefe
-                  </a>
-              {{else:}}
+            
                   <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_relatorio','relatorio_chefe', args=projeto.id)}}">
                       <i class="fa fa-fw fa-1x py-1 fa-file-text"></i> Relatório Chefe
                   </a>
-              {{pass}}
-                      
               </li>
           </ul>
         </div>
@@ -128,7 +143,11 @@
                       <i class="fa fa-fw fa-1x py-1 fa-share "></i> Entradas Repasse
                   </a>
               </li>
-              
+               <li class="list-group-item">
+                  <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_equipe','relacao_individual', args=[projeto.id])}}">
+                      <i class="fa fa-fw fa-1x py-1 fa-user "></i> Relação indivicual
+                  </a>
+              </li>
           </ul>
         </div>
       </div>

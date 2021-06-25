@@ -157,7 +157,7 @@
             </ul><br>
           </div>
           <div class="col-md-6">
-            <p class="d-flex justify-content-between mb-3"> <span><b>Saldo Chefe ({{=projeto.nome_chefe}})</b></span> </p>
+            <p class="d-flex justify-content-between mb-3"> <span><b>Saldos e Comissões</b></span> </p>
             <ul class="list-group">
               <li class="list-group-item d-flex justify-content-between">
                 <div>
@@ -201,6 +201,60 @@
               </li>
                 {{pass}}
             </ul>
+            <br>
+            {{percentual_despesa_venda=0}}
+            {{if (projeto.total_despesa_venda>0) and (projeto.total_venda_prazo>0):}}
+              {{percentual_despesa_venda=projeto.total_despesa_venda/projeto.total_venda_prazo*100}}
+            {{pass}}
+            {{percentual_despesa_local=0}}
+            {{if (projeto.total_despesa_local>0) and (projeto.total_venda_prazo>0):}}
+              {{percentual_despesa_local=projeto.total_despesa_local/projeto.total_venda_prazo*100}}
+            {{pass}}
+            {{if projeto.empresa==21:}}
+            <p class="d-flex justify-content-between mb-3"> <span><b>Despesa Geral.</b></span> </p>
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class="my-0">Despesa Venda</h6>
+                  <small class="text-muted">
+                    {{="{:,}".format(round(percentual_despesa_venda,1)).replace(",",".")}}% ( DINHEIRO DA VENDA)
+                  </small>
+                </div>
+                <span class="text-muted">
+                  R$ {{="{:,.2f}".format(round(projeto.total_despesa_venda)).replace(",","#").replace(".",",").replace("#",".")}}
+                </span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class="my-0">Despesa Local</h6>
+                  <small class="text-muted">
+                     {{="{:,}".format(round(percentual_despesa_local,1)).replace(",",".")}}% ( DINHEIRO DA EMPRESA)
+                  </small>
+                </div>
+                <span class="text-muted">
+                  R$ {{="{:,.2f}".format(round(projeto.total_despesa_local)).replace(",","#").replace(".",",").replace("#",".")}}
+                </span>
+              </li>
+              {{total_despesas_geral=projeto.total_despesa_local+projeto.total_despesa_venda}}
+            {{percentual_despesa_geral=0}}
+            {{if (total_despesas_geral>0) and (projeto.total_venda_prazo>0):}}
+            {{percentual_despesa_geral=total_despesas_geral/projeto.total_venda_prazo*100}}
+            {{pass}}
+              <li class="list-group-item d-flex justify-content-between">
+                <div>
+                  <h6 class="my-0">Despesa Geral</h6>
+                  <small class="text-muted">
+                    {{="{:,}".format(round(percentual_despesa_geral,1)).replace(",",".")}}%
+                  </small>
+                </div>
+                <span class="text-muted">
+                  R$ {{="{:,.2f}".format(round(total_despesas_geral)).replace(",","#").replace(".",",").replace("#",".")}}
+                </span>
+              </li>
+              <ul>
+                {{pass}}
+            
+            
           </div>
         </div>
       </div>

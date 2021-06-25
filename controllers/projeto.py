@@ -23,6 +23,7 @@ def atualizar_projetos():
   return locals()
 @auth.requires_login()
 def acesso_projeto():
+#     redirect(URL('default','index'))
     projeto = db.projeto(request.args(0, cast=int))
     empresa = db.empresa(projeto.empresa)
     if len(db(db.carrada.projeto == projeto.id).select())>0:
@@ -32,6 +33,10 @@ def acesso_projeto():
     #caso o usuario da empresa for diferênte do usuario logado
     #redireciona pois será um usuario do projeto (chefe) ou 
     #usuario da sub_venda(Cobrador)
+    usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
+    if usuario_empresa:
+      if (usuario_empresa.tipo=="Cobrador"):
+        redirect(URL('default','index'))
     usuario=auth.user
     #if (usuario.id==1):
         #redirect(URL('usuario','betinho_acesso',args=projeto.id))
@@ -59,13 +64,13 @@ def alterar_ent_said():
 
     db.projeto.id.readable = False
     db.projeto.id.writable = False
-    
+
     db.projeto.descricao_adiantamento.readable = False
     db.projeto.descricao_adiantamento.writable = False
 
     db.projeto.descricao_vale.readable = False
     db.projeto.descricao_vale.writable = False
-    
+
     db.projeto.empresa.readable = False
     db.projeto.empresa.writable = False
 

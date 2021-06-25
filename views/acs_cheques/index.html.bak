@@ -79,6 +79,7 @@
                   <th scope="col">Data</th>
                   <th scope="col">Banco</th>
                   <th scope="col">Valor</th>
+                  <th scope="col">Descrição</th>
                   <th scope="col">Opções</th>
                 </tr>
               </thead>
@@ -97,8 +98,12 @@
                      {{pass}}
                   <td>{{=row.banco}}</td>
                   <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
+                  <td>{{=row.descricao}}</td>
                   <td><a class="btn btn-link" href="{{=URL('alterar', args=row.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-bars"></i> </a></td>
-{{total+=row.valor}}<th>{{=totalq}}</th>
+{{total+=row.valor}}
+                  {{if False:}}
+                  <th>{{=totalq}}</th>
+                  {{pass}}
                 
                 </tr>
                   {{pass}}

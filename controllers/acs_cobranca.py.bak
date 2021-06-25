@@ -58,6 +58,20 @@ def relatorio_cobranca():
         desbloqueado=False
     if sub_venda.total_venda_praso<0:
         redirect(URL('acessar_cobrancas',args=sub_venda.projeto))
+    sub_venda = db.sub_venda(request.args(0, cast=int))
+    rows = db(db.cobrador.sub_venda==sub_venda.id).select(orderby=~db.cobrador.total_recebido)
+    for row in rows:
+      quantidade = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Recebimento")&(db.registro_cobranca.descricao.contains(row.nome))).count()
+      if quantidade>0:
+            sum = db.registro_cobranca.valor.sum()
+            valor = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Recebimento")&(db.registro_cobranca.descricao.contains(row.nome))).select(sum).first()[sum]
+            row.total_recebido=valor
+      quantidade = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Caderno")&(db.registro_cobranca.descricao.contains(row.nome))).count()
+      if quantidade>0:
+            sum = db.registro_cobranca.valor.sum()
+            valor = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Caderno")&(db.registro_cobranca.descricao.contains(row.nome))).select(sum).first()[sum]
+            row.total_vale_caderno=valor
+      row.update_record()
     return locals()
 def inserir_empresa():
     rows=db((db.registro_cobranca)).select()
@@ -66,7 +80,55 @@ def inserir_empresa():
         #row.update_record()
     redirect(URL('default','index'))
     return locals()
-
+@auth.requires_login()
+def relacao_cobradores():
+    sub_venda = db.sub_venda(request.args(0, cast=int))
+    rows = db(db.cobrador.sub_venda==sub_venda.id).select(orderby=~db.cobrador.total_recebido)
+    for row in rows:
+      quantidade = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Recebimento")&(db.registro_cobranca.descricao.contains(row.nome))).count()
+      if quantidade>0:
+            sum = db.registro_cobranca.valor.sum()
+            valor = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Recebimento")&(db.registro_cobranca.descricao.contains(row.nome))).select(sum).first()[sum]
+            row.total_recebido=valor
+      quantidade = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Caderno")&(db.registro_cobranca.descricao.contains(row.nome))).count()
+      if quantidade>0:
+            sum = db.registro_cobranca.valor.sum()
+            valor = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Caderno")&(db.registro_cobranca.descricao.contains(row.nome))).select(sum).first()[sum]
+            row.total_vale_caderno=valor
+      row.update_record()
+    return locals()
+@auth.requires_login()
+def inserir_cobrador():
+    response.view = 'generic.html' # use a generic view
+    sub_venda = db.sub_venda(request.args(0, auth.user))
+    db.cobrador.sub_venda.default = sub_venda.id
+    db.cobrador.sub_venda.writable = False
+    form = SQLFORM(db.cobrador).process()
+    if form.accepted:
+        response.flash = 'Formulario aceito'
+        redirect(URL('relacao_cobradores', args=[sub_venda.id]))
+    elif form.errors:
+        response.flash = 'Formulario não aceito'
+    else:
+        response.flash = 'Preencha o formulario'
+    return dict(form=form)
+  
+@auth.requires_login()
+def alterar_pessoa():
+    response.view = 'generic.html' # use a generic view
+    cobrador = db.cobrador(request.args(0, auth.user))
+    db.cobrador.sub_venda.writable = False
+    db.cobrador.id.writable = False
+    form = SQLFORM(db.cobrador, request.args(0, cast=int), deletable=True)
+    if form.process().accepted:
+        session.flash = 'Atualizado'
+        redirect(URL('relatorio_cobranca', args=[cobrador.sub_venda]))
+    elif form.errors:
+        response.flash = 'Erros no formulário!'
+    else:
+        if not response.flash:
+            response.flash = 'Preencha o formulário!'
+    return dict(form=form)
 @auth.requires_login()
 def definir_cobrador():
     sub_venda = db.sub_venda(request.args(0, auth.user))
@@ -164,6 +226,7 @@ def cobranca_individual():
     rows_vend = db(db.venda.vendedor == vendedor.id).select(orderby=db.venda.data_venda)
     return locals()
 
+
 @auth.requires_login()
 def inserir_cobranca():
     response.view = 'generic.html' # use a generic view
@@ -223,7 +286,7 @@ def alterar_comissao_cobranca():
     db.vendedor.projeto.writable = False
 
     db.vendedor.nome.readable = True
-    db.vendedor.nome.writable = False
+    db.vendedor.nome.writable = True
 
     db.vendedor.vale_saida.readable = False
     db.vendedor.vale_saida.writable = False

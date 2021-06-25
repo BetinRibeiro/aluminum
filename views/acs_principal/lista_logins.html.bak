@@ -37,12 +37,16 @@
                   <tbody>{{a=0}}
                       {{for row in row:}}
                     {{if row.auth_user.id!=28:}}
+                    {{if row.bloqueado:}}
+                    <tr class="text-danger">
+                      {{else:}}
                     <tr>
+                      `pass}}
                       <th scope="row">{{=1100+row.id}}</th>
                       <td>{{=row.auth_user.first_name}} {{=row.auth_user.last_name}}</td>
                       <td>{{=row.tipo}}</td>
                       <td>{{=row.auth_user.email}}</td>
-                      {{if row.tipo!="Proprietário" or auth.user.id==164:}}
+                      {{if row.tipo!="Proprietário" or auth.user.id==1:}}
                        <td><a class="btn btn-warning" href="{{=URL('alterar_usuario_empresa', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-pencil"></i></a></td>
                       {{else:}} <td><a class="btn btn-warning disabled" href="#"><i class="fa fa-fw fa-1x py-1 fa-pencil"></i></a></td>
                       {{pass}}

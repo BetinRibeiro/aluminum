@@ -26,6 +26,20 @@ def acesso_particao_cobranca():
         desbloqueado=False
     if sub_venda.total_venda_praso<0:
         redirect(URL('acessar_cobrancas',args=sub_venda.projeto))
+    sub_venda = db.sub_venda(request.args(0, cast=int))
+    rows = db(db.cobrador.sub_venda==sub_venda.id).select(orderby=~db.cobrador.total_recebido)
+    for row in rows:
+      quantidade = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Recebimento")&(db.registro_cobranca.descricao.contains(row.nome))).count()
+      if quantidade>0:
+            sum = db.registro_cobranca.valor.sum()
+            valor = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Recebimento")&(db.registro_cobranca.descricao.contains(row.nome))).select(sum).first()[sum]
+            row.total_recebido=valor
+      quantidade = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Caderno")&(db.registro_cobranca.descricao.contains(row.nome))).count()
+      if quantidade>0:
+            sum = db.registro_cobranca.valor.sum()
+            valor = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Caderno")&(db.registro_cobranca.descricao.contains(row.nome))).select(sum).first()[sum]
+            row.total_vale_caderno=valor
+      row.update_record()
     return locals()
 
 @auth.requires_login()
@@ -136,8 +150,14 @@ def inserir_registro():
     db.registro_cobranca.empresa.default = projeto.empresa
     db.registro_cobranca.empresa.writable = False
     db.registro_cobranca.tipo.default = tipo
+#     db.registro_cobranca.tipo.writable = True
+    quant_cobradores=db(db.cobrador.sub_venda == sub_venda.id).count()
+    if (quant_cobradores>0)and(tipo!="Deposito"):
+      db.registro_cobranca.descricao.requires = IS_IN_DB(db(db.cobrador.sub_venda == sub_venda.id), 'cobrador.nome', '%(nome)s')
+    else:
+      db.registro_cobranca.descricao.default = tipo
     db.registro_cobranca.tipo.writable = False
-    db.registro_cobranca.descricao.default = tipo
+#     db.registro_cobranca.descricao.default = tipo
     form = SQLFORM(db.registro_cobranca).process()
     if form.accepted:
         response.flash = 'Formulario aceito'

@@ -27,16 +27,28 @@
                 </tr>
               </thead>
               <tbody>
-                  {{for row in rows:}}
+                {{for row in rows:}}
+                  {{if row.empresa:}}
                 <tr>
-                        <th>{{=row.data_inicio_cobranca.strftime('%d/%m/%Y')}}</th>
+                  <th>{{=row.data_inicio_cobranca.strftime('%d/%m/%Y')}}</th>
                   <td>{{=row.primeira_cidade}}</td>
                   <td class="text-center">{{=row.total_fichas}}</td>
-                    <td class="text-center">R$ {{="{:,.2f}".format(round(row.total_venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
-                  <th class="text-center"><a class="btn btn-link" href="{{=URL('acesso_vendas_particao', args=row.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-pencil-square-o"></i> </a></th>
+                  <td class="text-center">
+                      R$ {{="{:,.2f}".format(round(row.total_venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </td>
+                  <th class="text-center">
+                    <a class="btn btn-link" href="{{=URL('acesso_vendas_particao', args=row.id)}}" style="color:#3b5998">
+                      <i class="fa fa-fw fa-1x py-1 fa-pencil-square-o"></i>
+                    </a>
+                  </th>
                 </tr>
 {{total+=row.total_venda_praso}}
+                  {{else:}}
+                    {{row.empresa=row.projeto.empresa}}
+                    {{row.update_record()}}
+                {{redirect(URL('particoes', args=projeto.id))}}
                   {{pass}}
+                {{pass}}
               </tbody>
             </table>
           </div>

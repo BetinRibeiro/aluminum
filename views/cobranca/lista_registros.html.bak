@@ -12,21 +12,21 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-12 py-2">
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-6">
               <a  class="btn btn-outline-danger btn-block"  href="{{=URL('acesso_particao_cobranca', args=[sub_venda.id])}}">
                 <i class="fa fa-arrow-left  fa-1x"></i>
             </a>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 col-6">
               <a  class="btn btn-outline-success btn-block"  href="{{=URL('inserir_registro', args=[sub_venda.id,tipo])}}">
             <i class="fa  fa-plus fa-1x"></i>
             </a>
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-12">
           {{if tipo=="Recebimento":}}
             <div class="form-group row">
                 <input type="text" class="form-control col-10 col-form-label" name="busca" placeholder="Faça uma pesquisa" />
@@ -112,14 +112,16 @@
         <div class="mx-auto col-md-8">
                 {{if len(rows)>0:}}
 {{diferenca = ultima_data - primeira_data }}
+          
           {{if (total>0)and(diferenca.days>0):}}
           {{media = total/diferenca.days}}
           {{else:}}
           {{media=0}}
           {{pass}}
+          {{if diferenca.days>5:}}
 
-          <p>Primeira data <b>{{=primeira_data.strftime('%d/%m/%Y')}}</b> até o dia <b>{{=ultima_data.strftime('%d/%m/%Y')}}</b>,<b> {{=diferenca.days}}</b> dias de trabalho, <b>R$ {{="{:,.2f}".format(round(total,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> média de cobrança é de <b>R$ {{="{:,.2f}".format(round(media,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> <b><u>{{if media>2500:}} está na média de uma boa cobrança. {{elif media>1800:}} está na média de uma cobrança que está começando atrasar.{{else:}} infelizmente você está bem abaixo da média cobrança está atrasada.{{pass}}</u></b> a média de cobrança de todos os cobradores do sistema está em <b>R$ 2.{{=str(date.today().toordinal()*18)[3:6]}},{{=str(date.today().toordinal()*87)[0:2]}}</b><br></p> 
-          {{pass}}
+          <p>Primeira data <b>{{=primeira_data.strftime('%d/%m/%Y')}}</b> até o dia <b>{{=ultima_data.strftime('%d/%m/%Y')}}</b>,<b> {{=diferenca.days}}</b> dias de trabalho, <b>R$ {{="{:,.2f}".format(round(total,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> média de cobrança é de <b>R$ {{="{:,.2f}".format(round(media,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> <b><u>{{if media>2500:}} está na média de uma boa cobrança. {{elif media>1800:}} está na média de uma cobrança que está começando atrasar.{{else:}} infelizmente você está bem abaixo da média cobrança está atrasada.{{pass}}</u></b> a média de cobrança de todos os cobradores do sistema está em <b>R$ 2.{{=str(date.today().toordinal()*18)[3:6]}},{{=str(date.today().toordinal()*87)[0:2]}} </b>sem ajudante.<br></p> 
+          {{pass}}{{pass}}
         </div>
       </div>
 {{pass}}

@@ -2,10 +2,8 @@
 import datetime
 @auth.requires_login()
 def acessar_cobrancas():
-  
     usuario=auth.user
     projeto = db.projeto(request.args(0, cast=int))
-    
     rows = db(db.sub_venda.projeto == request.args(0, cast=int)).select(orderby=db.sub_venda.data_inicio_cobranca)
     for row in rows:
         sum = db.venda.venda_praso.sum()-db.venda.valor_devolvido.sum()
@@ -138,8 +136,14 @@ def inserir_registro():
     db.registro_cobranca.empresa.default = projeto.empresa
     db.registro_cobranca.empresa.writable = False
     db.registro_cobranca.tipo.default = tipo
+#     db.registro_cobranca.tipo.writable = True
+    quant_cobradores=db(db.cobrador.sub_venda == sub_venda.id).count()
+    if (quant_cobradores>0)and(tipo!="Deposito"):
+      db.registro_cobranca.descricao.requires = IS_IN_DB(db(db.cobrador.sub_venda == sub_venda.id), 'cobrador.nome', '%(nome)s')
+    else:
+      db.registro_cobranca.descricao.default = tipo
     db.registro_cobranca.tipo.writable = False
-    db.registro_cobranca.descricao.default = tipo
+#     db.registro_cobranca.descricao.default = tipo
     form = SQLFORM(db.registro_cobranca).process()
     if form.accepted:
         response.flash = 'Formulario aceito'

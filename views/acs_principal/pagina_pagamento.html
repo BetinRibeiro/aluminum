@@ -1,0 +1,108 @@
+{{extend 'layout.html'}}
+{{from datetime import date}}
+{{hj = date.today()}}
+{{diferenca = hj-pagamento.data_vencimento}}
+{{futuro = date.fromordinal(pagamento.data_vencimento.toordinal()+30)}}
+<div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="text-center col-md-12">
+          <h1>Formas de Pagamento</h1>
+        </div>
+      </div>
+      <div class="row">
+    <div class="col-md-12">
+      <a class="btn btn-link" href="{{=URL('acs_principal','lista_pagmt_sistema', args=empresa.id*12)}}" style="color:#3b5998">
+        <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i>
+        Voltar
+      </a>
+    </div>
+  </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-6 p-3">
+          <div class="card bg-light">
+            <div class="card-body p-4">
+              <div class="row">
+                <div class="col-8">
+                  <h5 class="mb-0">Pix/Transferência</h5>
+                </div>
+                <div class="col-4 text-right">
+                  <h6 class="mb-0"> <b>R$ {{="{:,.2f}".format(round(pagamento.valor,2)).replace(".","#").replace(",",".").replace("#",".")}}</b> </h6>
+                </div>
+              </div>
+              <p class="my-3">Sem taxas&nbsp;</p>
+              <ul class="pl-3">
+                <li>{{=diferenca.days}} Dias de atraso</li>
+                <li>Referência {{=pagamento.data_vencimento.strftime('%d/%m')}} à {{=futuro.strftime('%d/%m/%Y')}}</li>
+                <li>{{=empresa.quant_usuarios}} Logins à R$ 50,00</li>
+                {{valor_original=empresa.quant_usuarios*50}}
+                <li>
+                  <b>Valor total - R$ {{="{:,.2f}".format(round(valor_original,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
+              </li>
+                {{desconto=valor_original-pagamento.valor}}
+                 <li>
+                  <b>Desconto - R$ {{="{:,.2f}".format(round(desconto,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
+              </li>
+              </ul> <a class="btn btn-primary mt-3" href="#">Confirmação Automatica</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 p-3">
+          <div class="card bg-light">
+            <div class="card-body p-4">
+              <div class="row">
+                <div class="col-8">
+                  <h5 class="mb-0">Boleto Bancário</h5>
+                </div>
+                <div class="col-4 text-right">
+                  <h6 class="mb-0"> <b>R$ {{="{:,.2f}".format(round(valor_original,2)).replace(".","#").replace(",",".").replace("#",".")}}</b> </h6>
+                </div>
+              </div>
+              <p class="my-3">Sem Desconto</p>
+              <ul class="pl-3">
+                <li>{{=diferenca.days}} Dias de atraso</li>
+                <li>Referência {{=pagamento.data_vencimento.strftime('%d/%m')}} à {{=futuro.strftime('%d/%m/%Y')}}</li>
+                <li>{{=empresa.quant_usuarios}} Logins à R$ 50,00</li>
+                {{valor_original=empresa.quant_usuarios*50}}
+                <li>
+                  <b>Valor total - R$ {{="{:,.2f}".format(round(valor_original,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
+              </li>
+                {{desconto=valor_original-pagamento.valor}}
+                 <li>
+                  <b>Desconto - R$ {{="{:,.2f}".format(round(0,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
+              </li>
+              </ul> <a class="btn btn-primary mt-3" href="#">Confirmação Automatica</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 p-3">
+          <div class="card bg-light">
+            <div class="card-body p-4">
+              <div class="row">
+                <div class="col-8">
+                  <h5 class="mb-0">Cartão de Crédito</h5>
+                </div>
+                <div class="col-4 text-right">
+                  <h6 class="mb-0"> <b>R$ {{="{:,.2f}".format(round(valor_original,2)).replace(".","#").replace(",",".").replace("#",".")}}</b> </h6>
+                </div>
+              </div>
+              <p class="my-3">Sem Desconto</p>
+              <ul class="pl-3">
+                <li>{{=diferenca.days}} Dias de atraso</li>
+                <li>Referência {{=pagamento.data_vencimento.strftime('%d/%m')}} à {{=futuro.strftime('%d/%m/%Y')}}</li>
+                <li>{{=empresa.quant_usuarios}} Logins à R$ 50,00</li>
+                {{valor_original=empresa.quant_usuarios*50}}
+                <li>
+                  <b>Valor total - R$ {{="{:,.2f}".format(round(valor_original,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
+              </li>
+                {{desconto=valor_original-pagamento.valor}}
+                 <li>
+                  <b>Desconto - R$ {{="{:,.2f}".format(round(0,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
+              </li>
+              </ul> <a class="btn btn-primary mt-3" href="#">Confirmação Automatica</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

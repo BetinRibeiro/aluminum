@@ -1,0 +1,179 @@
+{{extend 'layout.html'}}
+{{a=0}}
+<div class="row">
+  <div class="col-md-12">
+    <h4 class="">Relação Individual </h4>
+    <p>
+      {{=projeto.descricao}}
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-6">
+    <div class="row">
+      <div class="col-md-4">
+        <a class="btn btn-primary my-1 btn-block" href="{{=URL('acs_projeto','index', args=projeto.id)}}">
+          <i class="fa fa-fw fa-arrow-left"></i> Voltar
+        </a>
+      </div>
+      <div class="col-md-6">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  {{for row in rows:}}
+  {{if a==3:}}
+  {{a=0}}
+</div>
+  <div style="break-after:page"></div>
+<div class="row">
+  {{pass}}
+  {{a+=1}}
+        <div class="col-md-4 p-3">
+          <h5 class="text-center">
+            <a class="text-primary"  href="{{=URL('alterar_comissoes_vendedor', args=row.id)}}">
+              <i class="fa fa-fw fa-pencil"></i></a>
+            {{=row.nome.replace("cfrd","")}}</h5>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">
+                  <b>Valor da Venda</b>
+                </h6>
+                <small class="text-muted">Total das Vendas</small>
+              </div>
+              <span class="text-muted">
+                R$ {{="{:,.2f}".format(round(row.total_vendas,2)).replace(",","#").replace(".",",").replace("#",".")}}
+              </span>
+            </li>
+            {{comissao=row.total_vendas}}
+            {{if comissao > 0:}}
+            {{comissao=row.total_vendas*row.comissao_venda/100}}
+            {{pass}}
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">
+                  <b>Adiantamento de Comissão</b>
+                </h6>
+                <small class="text-muted">{{=round(row.comissao_venda,0)}}%</small>
+              </div>
+              <span class="text-muted">
+                R$ {{="{:,.2f}".format(round(comissao,2)).replace(",","#").replace(".",",").replace("#",".")}}
+              </span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">
+                  <b>Vale Inicial</b>
+                </h6>
+                <small class="text-muted">
+                  Pego com a empresa
+                </small>
+              </div>
+              <span class="text-muted">
+                R$ {{="{:,.2f}".format(round(row.vale_saida,2)).replace(",","#").replace(".",",").replace("#",".")}}
+              </span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">
+                  <b>Vale de Viagem</b>
+                </h6>
+                <small class="text-muted">
+                  Pego durante a venda
+                </small>
+              </div> 
+              <span class="text-muted">
+                R$ {{="{:,.2f}".format(round(row.total_vale_caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}
+              </span>
+            </li>
+            {{saldo=comissao-row.vale_saida-row.total_vale_caderno}}
+            {{if saldo > 0:}}
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0">
+                  <b>Saldo</b>
+                </h6>
+                <small>Positivo</small>
+              </div> 
+              <span class="text-success">
+                R$ {{="{:,.2f}".format(round(saldo,2)).replace(",","#").replace(".",",").replace("#",".")}}
+              </span>
+            </li>
+            {{else:}}
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-danger">
+                <h6 class="my-0">
+                  <b>Saldo</b></h6> <small>Negativo</small>
+              </div>
+              <span class="text-danger">
+                R$ {{="{:,.2f}".format(round(saldo,2)).replace(",","#").replace(".",",").replace("#",".")}}
+              </span>
+            </li>
+            {{pass}}
+            {{if row.total_recebido>0:}}
+            {{percent=row.total_recebido/row.total_vendas*100}}
+            {{comissaoc=row.total_recebido*row.comissao_cobranca/100}}
+            {{saldo=comissaoc-comissao}}
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">
+                  <b>Valor Recebido</b>
+                </h6>
+                <small class="text-muted">{{=round(percent,0)}}%</small>
+              </div>
+              <span class="text-muted">
+                R$ {{="{:,.2f}".format(round(row.total_recebido,2)).replace(",","#").replace(".",",").replace("#",".")}}
+              </span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0"><b>Comissão Real</b></h6>
+                <small class="text-muted">{{=round(row.comissao_cobranca,0)}}%</small>
+              </div>
+              <span class="text-muted">
+                R$ {{="{:,.2f}".format(round(comissaoc,2)).replace(",","#").replace(".",",").replace("#",".")}}
+              </span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0"><b>Valor Descontado</b></h6>
+                <small class="text-muted">
+                  Valor Descontado
+                </small>
+              </div>
+              <span class="text-muted">
+                {{if row.total_descontado>=0:}}
+                R$ {{="{:,.2f}".format(round(row.total_descontado,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                {{else:}}
+                {{row.total_descontado=0}}
+                {{row.update_record()}}
+                R$ {{="{:,.2f}".format(round(row.total_descontado,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                {{pass}}
+              </span>
+            </li>
+            {{if saldo>=0:}}
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0"><b>Saldo</b></h6> <small>Positivo</small>
+              </div> <span class="text-success">
+                R$ {{="{:,.2f}".format(round(saldo,2)).replace(",","#").replace(".",",").replace("#",".")}}
+              </span>
+            </li>
+            {{else:}}
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-danger">
+                <h6 class="my-0"><b>Saldo</b></h6> <small>Negativo</small>
+              </div> <span class="text-danger">
+                R$ {{="{:,.2f}".format(round(saldo,2)).replace(",","#").replace(".",",").replace("#",".")}}
+              </span>
+            </li>
+            {{pass}}
+            
+  {{pass}}
+            
+          </ul>
+        </div>
+  {{pass}}
+</div>

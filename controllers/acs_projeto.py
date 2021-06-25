@@ -5,6 +5,12 @@ def index():
     empresa = db.empresa(projeto.empresa)
     usuario=auth.user
     usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
+    if usuario_empresa:
+      if (usuario_empresa.tipo=="Chefe")|(usuario_empresa.tipo=="Cobrador"):
+        redirect(URL('default','index'))
+    if usuario_empresa.bloqueado:
+      #redireciona para pagina de usuario)
+        redirect(URL('acs_empresa','mensagem'))
     if (usuario.id!=1)and(usuario_empresa.empresa!=projeto.empresa):
         redirect(URL('default','index'))
     if (projeto.empresa==4561):
@@ -81,7 +87,7 @@ def alterar_dados_rota():
     response.view = 'generic.html' # use a generic view
     sub_venda = db.sub_venda(request.args(0, cast=int))
     projeto = db.projeto(sub_venda.projeto)
-    
+
     if not sub_venda.auth_user:
         sub_venda.auth_user=28
         sub_venda.update_record()
@@ -90,7 +96,7 @@ def alterar_dados_rota():
 
     db.sub_venda.projeto.readable = False
     db.sub_venda.projeto.writable = False
-    
+
     db.sub_venda.cobranca_iniciada.label = 'Venda Finalizada'
     db.sub_venda.cobranca_iniciada.readable = True
     db.sub_venda.cobranca_iniciada.writable = True
@@ -142,7 +148,7 @@ def ver_despesa():
   projeto = db.projeto(request.args(0, cast=int))
   data = (request.args(1))
   rows = db((db.despesa.projeto==projeto.id)&(db.despesa.data_inicio==data)&(db.despesa.tipo=="Despesa_Venda")).select(orderby=db.despesa.data_inicio)
-  ajuste= db((db.despesa)).select()
+#   ajuste= db((db.despesa)).select()
 #   for row in ajuste:
 #     row.tipo=row.classe_despesa.tipo
 #     row.projeto=row.classe_despesa.projeto

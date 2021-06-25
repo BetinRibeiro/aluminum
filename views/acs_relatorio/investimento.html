@@ -208,6 +208,7 @@
                 <b>R$ {{="{:,}".format(round(investimento,1)).replace(",",".")}}0</b>
             </li>
             <br>
+            {{if projeto.venda_finalizada:}}
             <h5> <span><b>-Valores Abatido do Investimento</b></span></h5>
 {{abatimento=0}}
 {{if projeto.total_custo_retorno>0:}}
@@ -289,7 +290,13 @@
                 <b>R$ {{="{:,}".format(round(investimento,1)).replace(",",".")}}0</b>
             </li>
         </ul>
-
+          {{else:}}
+           <li class="list-group-item d-flex justify-content-between bg-light">
+                <span class="text-success"><b>A venda não está finalizada!</b></span>
+                <b>###</b>
+            </li>
+        </ul>
+{{pass}}
 
         </div>
         <div class="col-md-6">

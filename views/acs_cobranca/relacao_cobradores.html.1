@@ -1,0 +1,58 @@
+{{extend 'layout.html'}}
+<div class="py-5" >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="">Lista de Cobradores do projeto</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <a class="btn btn-link" href="{{=URL('acs_cobranca','relatorio_cobranca', args=sub_venda.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          <a class="btn btn-link" href="{{=URL('inserir_cobrador', args=[sub_venda.id])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar Cobrador</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-borderless">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nome</th>
+                  <th>Recebido</th>
+                  <th>Comissão</th>
+                  <th>Vale</th>
+                  <th>Caderno</th>
+                  <th>Saldo</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{a=1}}
+                {{for row in rows:}}
+                <tr>
+                  <th>{{=a}}</th>
+                  {{a+=1}}
+                  <td>{{=row.nome}}</td>
+                  <td>R$ {{="{:,.2f}".format(round(row.total_recebido,2)).replace(",",".")}}</td>
+                  {{total_recebido+=row.total_recebido}}
+                  <td>R$ {{="{:,.2f}".format(round(0,2)).replace(",",".")}}</td>
+                  <td>R$ {{="{:,.2f}".format(round(0,2)).replace(",",".")}}</td>
+                  <td>R$ {{="{:,.2f}".format(round(row.total_vale_caderno,2)).replace(",",".")}}</td>
+                  <td>R$ 0,00</td>
+                </tr>
+                {{pass}}
+                 <tr>
+                  <th>#</th>
+                  <th>#</th>
+                  <th>#</th>
+                  <th>R$ {{="{:,.2f}".format(round(total_recebido,2)).replace(",",".")}}</th>
+                  <th>R$ {{="{:,.2f}".format(round(0,2)).replace(",",".")}}</th>
+                  <th>R$ {{="{:,.2f}".format(round(0,2)).replace(",",".")}}</th>
+                  <th>R$ {{="{:,.2f}".format(round(0,2)).replace(",",".")}}</th>
+                  <th>R$ 0,00</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>

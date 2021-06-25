@@ -33,11 +33,8 @@ ga('send', 'pageview');
 <!-- End Google Analytics -->
 </head>
 {{include 'web2py_ajax.html'}}
-{{if response.flash:}}
-<div class="alert alert-danger fixed-top" role="alert">
-  <marquee>{{=response.flash}}.</marquee>
-</div>
-{{else:}}
+
+{{if True:}}
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container">
       <a class="navbar-brand text-info" href="#">Aluminum</a>
@@ -95,7 +92,7 @@ ga('send', 'pageview');
       <div class="row">
         <div class="col-md-6 my-5 text-lg-left text-center align-self-center">
             <a class="btn btn-danger btn-lg btn-block" href="{{=URL('acesso_inicial')}}">Acessar</a>
-          <h1 class="display-4">Aluminum</h1>
+          <h1 class="display-4">Luizinho</h1>
           <p class="lead">Sistema Multiplataforma</p>
           <div class="row mt-5">
             <div class="col-6 col-lg-4">

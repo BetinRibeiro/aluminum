@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h5 class="">Listagem ( {{=tipo}} )</h5>
+          <h5 class="">Listagem ( {{=tipo}} | {{=projeto.descricao}})</h5>
         </div>
       </div>
       <div class="row">
@@ -84,16 +84,31 @@
 </div>
 </div>
 {{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
-{{if tipo=="venda_vista":}}
-{{projeto.total_venda_vista=valor}}
-{{projeto.quant_dias_venda_vista=a}}
-{{projeto.update_record()}}
-{{elif tipo=="caderno_chefe":}}
-{{projeto.total_caderno_chefe=valor}}
-{{projeto.update_record()}}
-
-{{elif tipo=="Gratificacao":}}
-{{projeto.total_gratificacao=valor}}
-{{projeto.update_record()}}
-{{pass}}
+  {{if tipo=="venda_vista":}}
+    {{projeto.total_venda_vista=valor}}
+    {{projeto.quant_dias_venda_vista=a}}
+    {{projeto.update_record()}}
+  {{elif tipo=="caderno_chefe":}}
+    {{projeto.total_caderno_chefe=valor}}
+    {{projeto.update_record()}}
+  {{elif tipo=="Gratificacao":}}
+    {{projeto.total_gratificacao=valor}}
+    {{projeto.update_record()}}
+  {{elif tipo=="adiantamento":}}
+    {{if projeto.id>125:}}
+      {{projeto.adiantamento=valor}}
+      {{projeto.update_record()}}
+    {{pass}}
+  {{pass}}
+  {{elif tipo=="vale_chefe":}}
+    {{if projeto.id>125:}}
+      {{projeto.vale_saida=valor}}
+      {{projeto.update_record()}}
+    {{pass}}
+  {{elif tipo=="dinheiro_devolvido":}}
+    {{if projeto.id>125:}}
+      {{projeto.total_devolucao_dinheiro=valor}}
+      {{projeto.update_record()}}
+    {{pass}}
+  {{pass}}
 {{pass}}

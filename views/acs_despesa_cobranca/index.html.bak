@@ -16,7 +16,7 @@
       <div class="row">
         <div class="col-md-6">
           <a class="btn btn-link" href="{{=URL('acs_cobranca','relatorio_cobranca', args=sub_venda.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
-          <a class="btn btn-link" href="{{=URL('criar_class_desp', args=[sub_venda.id])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Adicionar Nova Despesa</a>
+          <a class="btn btn-link" href="{{=URL('criar_class_desp', args=[sub_venda.id])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar Nova Despesa</a>
         </div>
             
       </div>
@@ -36,10 +36,10 @@
                             {{a=1}}
                             {{for row in rows:}}
                             <tr>
-                              <td><a href="{{=URL('alterar_classe', args=[row.id])}}" >{{=a}}</a></td>
+                              <td><a class="btn btn-link" href="{{=URL('alterar_class_desp', args=[row.id])}}" >{{=a}}<i class="fa fa-fw fa-1x py-1 fa-pencil"></i></a></td>
                                 <td>{{=row.descricao}}</td>
-                                <td>R$ {{="{:,}".format(round(row.total_despesa,1)).replace(",",".")}}0</td>
-                                <td><a href="{{=URL('acesso_despesa', args=[row.id])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i></a></td>
+                                <td>R$ {{="{:,.2f}".format(round(row.total_despesa,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                                <td><a href="{{=URL('acesso_despesa', args=[row.id])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-pencil"></i></a></td>
                                 {{a+=1}}
                             </tr>
                             {{total+=row.total_despesa}}
@@ -48,7 +48,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>#</th>
-                                <th>R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0</th>
+                                <th>R$ {{="{:,.2f}".format(round(total,1)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                                 <th></th>
                             </tr>
                         </tbody>

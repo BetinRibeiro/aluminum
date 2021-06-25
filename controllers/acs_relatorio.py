@@ -87,7 +87,7 @@ def alterar_ent_said():
 
     db.projeto.descricao.readable = False
     db.projeto.descricao.writable = False
-
+    
     db.projeto.total_devolucao_dinheiro.readable = True
     db.projeto.total_devolucao_dinheiro.writable = True
 
@@ -99,13 +99,21 @@ def alterar_ent_said():
 
     db.projeto.descricao_devolucao_dinheiro.readable = True
     db.projeto.descricao_devolucao_dinheiro.writable = True
-
+      
     db.projeto.descricao_adiantamento.readable = True
     db.projeto.descricao_adiantamento.writable = True
     
     db.projeto.venda_finalizada.readable = True
     db.projeto.venda_finalizada.writable = True
-
+    
+    if projeto.id>125:
+      db.projeto.descricao_devolucao_dinheiro.writable = False
+      db.projeto.descricao_devolucao_dinheiro.readable = False
+      db.projeto.total_devolucao_dinheiro.writable = False
+      db.projeto.total_devolucao_dinheiro.readable = False
+      db.projeto.adiantamento.writable = False
+      db.projeto.descricao_adiantamento.readable = False
+      db.projeto.descricao_adiantamento.writable = False
     form = SQLFORM(db.projeto, request.args(0, cast=int), deletable=False)
     if form.process().accepted:
         session.flash = 'Projeto atualizado'

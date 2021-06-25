@@ -18,3 +18,17 @@ db.define_table('simulacao',
                 Field('perc_comiss_cobrador', 'double', label='%-Comiss Cobrador', notnull=True, default=0),
                 Field('perc_devolucao', 'double', label='%-Devolução', notnull=True, default=0),
                 format='%(descricao)s')
+
+
+
+db.define_table('cotacao',
+                Field('empresa','reference empresa', label='empresa', writable=False, readable=False),
+                Field('data_cotacao', 'date', label="Data Cotaçao", default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),
+                Field('fornecedor', 'string', label='Fornecedor', writable=True, readable=True, default="",requires = IS_UPPER()),
+                Field('produto', 'string', label='Produto', writable=True, readable=True, default="",requires = IS_UPPER()),
+                Field('tipo', 'string', label='Tipo de Compra', writable=True, readable=True, default="A Prazo"),
+                Field('custo', 'double', label='Valor Compra', notnull=True, default=0),
+                Field('preco', 'double', label='Valor Venda', notnull=True, default=0),
+                format='%(produto)s')
+
+db.cotacao.tipo.requires = IS_IN_SET(['À Vista','A Prazo'])

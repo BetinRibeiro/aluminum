@@ -134,7 +134,7 @@ def alterar_venda():
       db.venda.descricao_devolucao.readable = True
       db.venda.descricao_devolucao.writable = False
 
-    form = SQLFORM(db.venda, request.args(0, cast=int), deletable=False)
+    form = SQLFORM(db.venda, request.args(0, cast=int), deletable=True)
     if form.process().accepted:
         session.flash = 'Atualizado'
         #CASO NÃO SEJA O CHEFE DE EQUIPE IRÁ SALVAR O LOG DE ALTERAÇÃO COM O VALOR ANTERIOR

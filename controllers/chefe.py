@@ -1,19 +1,55 @@
 # -*- coding: utf-8 -*-
+@auth.requires_login()
+def relatorio():
+    projeto = db.projeto(request.args(0, cast=int))
+    usuario = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user)
+    if usuario.bloqueado==True:
+      redirect(URL('acs_mensagem','usuario_bloqueado',args="Usuario Temporariamente Bloqueado!"))
+    if usuario.empresa!=projeto.empresa:
+      usuario.bloqueado=True
+      usuario.nome="Bloqueio (tentou acessar outra empresa)"
+      usuario.update_record()
+      redirect(URL('acs_mensagem','usuario_bloqueado',args="Usuario bloqueado"))
+    #TINHA ISSO ANTES MAS RETIREI POR QUE NÃO ENCONTREI SENTIDO PRATICO E 
+    #NÃO ENTENDI O PORQUE QUE FIZ ISSO
+#     subvenda = db(db.sub_venda.projeto == projeto.id).select()
+#     totalvenda=0
+#     totalfichas=0
+#     try:
+#         for a in subvenda:
+#             totalvenda = db(db.venda.sub_venda == a.id).select(db.venda.venda_praso.sum()).first()[db.venda.venda_praso.sum()]
+#             totalvenda -= db(db.venda.sub_venda == a.id).select(db.venda.valor_devolvido.sum()).first()[db.venda.valor_devolvido.sum()]
+#             totalfichas = db(db.venda.sub_venda == a.id).select(db.venda.quant_fichas.sum()).first()[db.venda.quant_fichas.sum()]
+#             totalfichas -= db(db.venda.sub_venda == a.id).select(db.venda.quant_fichas_devolvidas.sum()).first()[db.venda.quant_fichas_devolvidas.sum()]
+#             a.quant_fichas=totalfichas
+#             a.venda_praso=totalvenda
+#             a.update_record()
+#             return locals()
+#     except:
+#         totalvenda=0
+#         totalfichas=0
+#         session.flash = 'Comece a Inserir vendas primeiro'
+#         #redirect(URL('projeto','acesso_projeto', args=projeto.id))
+    return locals()
 
+#FUNÇÕES DECONTINUADAS DIA 21 JUN 2021
 @auth.requires_login()
 def acesso_chefe():
+    redirect(URL('default','index'))
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.usuario_empresa.empresa==projeto.empresa).select()
     return locals()
 
 @auth.requires_login()
 def acesso_inicial_usuario():
+    redirect(URL('default','index'))
     projeto = db.projeto(request.args(0, cast=int))
     rows = db(db.usuario_empresa.empresa==projeto.empresa).select()
     return locals()
 
 @auth.requires_login()
 def alterar_dados_chefe():
+    redirect(URL('default','index'))
     response.view = 'generic.html' # use a generic view
     projeto = db.projeto(request.args(0, cast=int))
     db.projeto.nome_chefe.readable = True
@@ -45,7 +81,6 @@ def alterar_dados_chefe():
 
     db.projeto.comissao_praso.readable = True
     db.projeto.comissao_praso.writable = True
-    
     db.projeto.comissao_cobranca.readable = True
     db.projeto.comissao_cobranca.writable = True
 
@@ -55,35 +90,11 @@ def alterar_dados_chefe():
         redirect(URL('acesso_chefe', args=projeto.id))
     elif form.errors:
         response.flash = 'Erros no formulário!'
-        
     return dict(form=form)
-
-@auth.requires_login()
-def relatorio():
-    projeto = db.projeto(request.args(0, cast=int))
-    subvenda = db(db.sub_venda.projeto == projeto.id).select()
-    totalvenda=0
-    totalfichas=0
-    try:
-        for a in subvenda:
-            totalvenda = db(db.venda.sub_venda == a.id).select(db.venda.venda_praso.sum()).first()[db.venda.venda_praso.sum()]
-            totalvenda -= db(db.venda.sub_venda == a.id).select(db.venda.valor_devolvido.sum()).first()[db.venda.valor_devolvido.sum()]
-            totalfichas = db(db.venda.sub_venda == a.id).select(db.venda.quant_fichas.sum()).first()[db.venda.quant_fichas.sum()]
-            totalfichas -= db(db.venda.sub_venda == a.id).select(db.venda.quant_fichas_devolvidas.sum()).first()[db.venda.quant_fichas_devolvidas.sum()]
-            a.quant_fichas=totalfichas
-            a.venda_praso=totalvenda
-            a.update_record()
-            return locals()
-    except:
-        
-        totalvenda=0
-        totalfichas=0
-        session.flash = 'Comece a Inserir vendas primeiro'
-        #redirect(URL('projeto','acesso_projeto', args=projeto.id))
-    return locals()
-
+  
 @auth.requires_login()
 def relatoriomeme():
+    redirect(URL('default','index'))
     projeto = db.projeto(request.args(0, cast=int))
     subvenda = db(db.sub_venda.projeto == projeto.id).select()
     for a in subvenda:

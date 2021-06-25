@@ -1,0 +1,915 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.NameError'> name 'usuario' is not defined"
+p3
+sS'layer'
+p4
+S'/home/rogoberto/web2py/applications/aluminum/views/acs_projeto/acesso_vendas_particao.html'
+p5
+sS'code'
+p6
+S'response.write(\'<!DOCTYPE html>\\n<!--[if (gt IE 9)|!(IE)]><!--> <html class="no-js" lang="\', escape=False)\nresponse.write(T.accepted_language or \'en\')\nresponse.write(\'"> <!--<![endif]-->\\n  <head>\\n    <meta charset="utf-8">\\n    <!-- www.phpied.com/conditional-comments-block-downloads/ -->\\n    <!-- Always force latest IE rendering engine\\n         (even in intranet) & Chrome Frame\\n         Remove this if you use the .htaccess -->\\n    <meta http-equiv="X-UA-Compatible" content="IE=edge\', escape=False)\nresponse.write(not request.is_local and \',chrome=1\' or \'\')\nresponse.write(\'">\\n    <!--  Mobile Viewport Fix\\n          j.mp/mobileviewport & davidbcalhoun.com/2010/viewport-metatag\\n          device-width: Occupy full width of the screen in its current orientation\\n          initial-scale = 1.0 retains dimensions instead of zooming out if page height > device height\\n          user-scalable = yes allows the user to zoom in -->\\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\\n       <title>Aluminum System</title>\\n      <meta name="author" content="Arsenal System">\\n<!--       <meta name="description" content="cr\\xc3\\xa9diario de aluminio, controle seus custos, despesas vendas e cobran\\xc3\\xa7as"> -->\\n<!--       <meta name="keywords" content="Controle Cheque, pagamentos, Sistema"> -->\\n<!--       <meta name="author" content="Arsenal System"> -->\\n      <meta name="description" content="Gerenciamento controle de crediario">\\n    <!-- http://dev.w3.org/html5/markup/meta.name.html -->\\n    <meta name="application-name" content="sistema credi\\xc3\\xa1rio panela">\\n    <!-- Speaking of Google, don\\\'t forget to set your site up:\\n         http://google.com/webmasters -->\\n    <meta name="google-site-verification" content="peneleiro Juazeiro, panela credi\\xc3\\xa1rio, sistema panela">\\n    <!-- include stylesheets -->\\n    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>\\n    <link rel="stylesheet" href="\', escape=False)\nresponse.write(URL(\'static\',\'css/bootstrap.min.css\'))\nresponse.write(\'"/>\\n    <link rel="stylesheet" href="\', escape=False)\nresponse.write(URL(\'static\',\'css/web2py-bootstrap4.css\'))\nresponse.write(\'"/>\\n    <link rel="shortcut icon" href="\', escape=False)\nresponse.write(URL(\'static\',\'images/ico.ico\'))\nresponse.write(\'" type="image/x-icon">\\n    <link rel="apple-touch-icon" href="\', escape=False)\nresponse.write(URL(\'static\',\'images/ico.png\'))\nresponse.write(\'">\\n    <!-- All JavaScript at the bottom, except for Modernizr which enables\\n         HTML5 elements & feature detects -->\\n    <script src="\', escape=False)\nresponse.write(URL(\'static\',\'js/modernizr-2.8.3.min.js\'))\nresponse.write(\'"></script>\\n    <!-- Favicons -->\\n    \', escape=False)\nresponse.write(\'<script type="text/javascript"><!--\\n    // These variables are used by the web2py_ajax_init function in web2py_ajax.js (which is loaded below).\\n    \', escape=False)\nresponse.write(ASSIGNJS(\nw2p_ajax_confirm_message = T(\'Are you sure you want to delete this object?\'),\nw2p_ajax_disable_with_message = T(\'Working...\'),\nw2p_ajax_date_format = T(\'%Y-%m-%d\'),\nw2p_ajax_datetime_format = T(\'%Y-%m-%d %H:%M:%S\'),\najax_error_500 = T.M(\'An error occured, please [[reload %s]] the page\') % URL(args=request.args, vars=request.get_vars)\n))\nresponse.write(\'\\n    //--></script>\\n\', escape=False)\nresponse.files.insert(0,URL(\'static\',\'js/jquery.js\'))\nresponse.files.insert(1,URL(\'static\',\'css/calendar.css\'))\nresponse.files.insert(2,URL(\'static\',\'js/calendar.js\'))\nresponse.files.insert(3,URL(\'static\',\'js/web2py.js\'))\nresponse.include_meta()\nresponse.include_files()\nresponse.write(\'\\n\', escape=False)\nresponse.write(\' <!-- this includes jquery.js, calendar.js/.css and web2py.js -->\\n      \', escape=False)\nif auth.user:\n    response.write(\'\\n    \', escape=False)\n    if auth.user.first_name=="Rogoberto":\n        response.write(\'\\n   \\n    \', escape=False)\n    elif auth.user.first_name=="Meme":\n        response.write(\'\\n    <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.css"> \\n    \', escape=False)\n        pass\n    response.write(\'\\n    \', escape=False)\n    pass\nresponse.write(\'\\n    \', escape=False)\nresponse.write(\'\\n  \\n  </head>\\n  <body>\\n      \\n        <style  type="text/css">\\n    @media print{\\n        .btn{\\n             display: none;\\n        }\\n        #noprint { display:none; } \\n      a:link{font:15px "verdana"; color:#8B4513; text-decoration:none;}\\n\\na:hover{font:20px "verdana"; color:black; text-decoration:underline;}\\n    }\\n      </style>\\n    <div class="w2p_flash alert alert-dismissable">\', escape=False)\nresponse.write(response.flash or \'\')\nresponse.write(\'</div>\\n    <!-- Navbar ======================================= -->\\n    <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">\\n        <a class="navbar-brand" href="https://rogoberto.pythonanywhere.com/aluminum/#acesso">Aluminum</a>\\n       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">\\n         <span class="navbar-toggler-icon"></span>\\n       </button>\\n       <div class="navbar-collapse collapse w-100" id="navbarNavDropdown">\\n         <ul class="navbar-nav w-100 justify-content-center">\\n          \', escape=False)\nfor _item in response.menu or []:\n    response.write(\'\\n          \', escape=False)\n    if (not len(_item)>4) or not _item[3]:\n        response.write(\'\\n          <li class="nav-item \', escape=False)\n        if _item[1]:\n            response.write(\'active\', escape=False)\n            pass\n        response.write(\'">\\n            <a class="nav-link" href="\', escape=False)\n        response.write(_item[2])\n        response.write(\'">\', escape=False)\n        response.write(_item[0])\n        response.write(\'</a>\\n          </li>\\n          \', escape=False)\n    else:\n        response.write(\'\\n          <li class="nav-item dropdown">\\n            <a class="nav-link dropdown-toggle" href="\', escape=False)\n        response.write(_item[2])\n        response.write(\'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\', escape=False)\n        response.write(_item[0])\n        response.write(\'</a>\\n            <div class="dropdown-menu">\\n              \', escape=False)\n        for _subitem in _item[3]:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(_subitem[2])\n            response.write(\'">\', escape=False)\n            response.write(_subitem[0])\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n            </div>\\n          </li>\\n          \', escape=False)\n        pass\n    response.write(\'\\n          \', escape=False)\n    pass\nresponse.write(\'\\n        </ul>\\n\\n        \', escape=False)\nif \'auth\' in globals():\n    response.write(\'\\n        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">\\n          <li class="nav-item dropdown">\\n            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\\n              \', escape=False)\n    if auth.user:\n        response.write(auth.user.first_name)\n    else:\n        response.write(\'LOGIN\', escape=False)\n        pass\n    response.write(\'\\n            </a>\\n            <div class="dropdown-menu dropdown-menu-right">\\n              \', escape=False)\n    if auth.user:\n        response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n        response.write(URL(\'default\',\'user/profile\'))\n        response.write(\'">\', escape=False)\n        response.write(T(\'Profile\'))\n        response.write(\'</a>\\n              \', escape=False)\n        if \'change_password\' not in auth.settings.actions_disabled:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(URL(\'default\',\'user/change_password\'))\n            response.write(\'">\', escape=False)\n            response.write(T(\'Change Password\'))\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n        response.write(URL(\'default\',\'user/logout\'))\n        response.write(\'">\', escape=False)\n        response.write(T(\'Logout\'))\n        response.write(\'</a>\\n              \', escape=False)\n    else:\n        response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n        response.write(URL(\'default\',\'user/login\'))\n        response.write(\'">\', escape=False)\n        response.write(T(\'Login\'))\n        response.write(\'</a>\\n              \', escape=False)\n        if \'register\' not in auth.settings.actions_disabled:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(URL(\'default\',\'user/register\'))\n            response.write(\'">\', escape=False)\n            response.write(T(\'Sign up\'))\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n              \', escape=False)\n        if \'retrieve_password\' not in auth.settings.actions_disabled:\n            response.write(\'\\n              <a class="dropdown-item" href="\', escape=False)\n            response.write(URL(\'default\',\'user/retrieve_password\'))\n            response.write(\'">\', escape=False)\n            response.write(T(\'Lost Password\'))\n            response.write(\'</a>\\n              \', escape=False)\n            pass\n        response.write(\'\\n              \', escape=False)\n        pass\n    response.write(\'\\n            </div>\\n          </li>\\n        </ul>\\n        \', escape=False)\n    pass\nresponse.write(\'\\n      </div>\\n    </nav>\\n\\n    <!-- Masthead ===================================== -->\\n    \', escape=False)\nresponse.write(\'\\n<header class="header container-fluid d-none d-print-block">\\n     <div class="row">\\n        <div class="col-md-12">\\n          <div class="copyright pull-left">Aluminum System</div>\\n          <div id="poweredBy" class="pull-right">\\n            Gest\\xc3\\xa3o de vendas e cobran\\xc3\\xa7as artefatos de aluminio\\n            \\n          </div>\\n        </div>\\n      </div>\\n</header>\\n    \', escape=False)\nresponse.write(\'\\n    <!-- Main ========================================= -->\\n    <!-- Begin page content -->\\n    <div class="container-fluid main-container py-5">\\n      \', escape=False)\nresponse.write(\'\\n\', escape=False)\nfrom datetime import date\nresponse.write(\'\\n\', escape=False)\nvenda=0\nresponse.write(\'\\n\', escape=False)\nfichas_venda=0\nresponse.write(\'\\n\', escape=False)\ncaderno=0\nresponse.write(\'\\n\', escape=False)\nentrada=0\nresponse.write(\'\\n\', escape=False)\nfichas_devolvidas=0\nresponse.write(\'\\n\', escape=False)\nvalor_devolvido=0\nresponse.write(\'\\n\', escape=False)\na=0\nresponse.write(\'\\n\', escape=False)\ntotaldespesa=0\nresponse.write(\'\\n\', escape=False)\ntvenda=0\nresponse.write(\'\\n\', escape=False)\ntfichas_venda=0\nresponse.write(\'\\n\', escape=False)\ntcaderno=0\nresponse.write(\'\\n\', escape=False)\ntentrada=0\nresponse.write(\'\\n\', escape=False)\ntfichas_devolvidas=0\nresponse.write(\'\\n\', escape=False)\ntvalor_devolvido=0\nresponse.write(\'\\n\\n\', escape=False)\nprimiradata=0\nultimadata=0\nresponse.write(\'\\n\', escape=False)\nif not (usuario.id==1):\n    response.write(\'\\n<div class="py-5">\\n    <div class="container">\\n      \', escape=False)\n    pass\nresponse.write(\'\\n      <div class="row">\\n        <div class="col-md-12">\\n          <h5 class="">Lista de Vendas da Rota ( \', escape=False)\nresponse.write(sub_venda.primeira_cidade)\nresponse.write(\' )</h5>\\n        </div>\\n      </div>\\n      <div class="row">\\n        <div class="col-md-12">\\n          <a class="btn btn-link" href="\', escape=False)\nresponse.write(URL(\'particoes\',args=sub_venda.projeto))\nresponse.write(\'" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>\\n            <a class="btn btn-link" href="\', escape=False)\nresponse.write(URL(\'alterar_dados_rota\',args=sub_venda.id))\nresponse.write(\'" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Alterar dados da Rota</a>\\n        </div>\\n      </div>\\n      <div class="row">\\n        <div class="col-md-12">\\n          <div class="table-responsive">\\n            <table class="table table-striped table-borderless">\\n              <thead>\\n                <tr>\\n                  <th scope="col" >#</th>\\n                  <th scope="col" >Data</th>\\n                  <th scope="col" class="text-center">Venda</th>\\n                  <th scope="col" class="text-center">Fichas</th>\\n                  <th scope="col" class="text-center">Caderno</th>\\n                  <th scope="col" class="text-center">Entrada</th>\\n                  <th scope="col" class="text-center">Despesa</th>\\n                  <th scope="col" class="text-center">Acumulado</th>\\n                </tr>\\n              </thead>\\n              <tbody>\\n                \', escape=False)\ndata=request.now\nresponse.write(\'\\n            \', escape=False)\nif len(rows)>0:\n    response.write(\'\\n                \', escape=False)\n    data=rows.first().data_venda\n    response.write(\'\\n\', escape=False)\n    ultimadata=rows.last().data_venda\n    response.write(\'\\n\', escape=False)\n    primiradata=rows.first().data_venda\n    response.write(\'\\n            \', escape=False)\n    pass\nresponse.write(\'\\n            \', escape=False)\nfor row in rows:\n    response.write(\'\\n            <tr>\\n                \', escape=False)\n    if row.data_venda==data:\n        response.write(\'\\n                    \', escape=False)\n        venda+=row.venda_praso-row.valor_devolvido\n        response.write(\'\\n                    \', escape=False)\n        fichas_venda+=row.quant_fichas-row.quant_fichas_devolvidas\n        response.write(\'\\n                    \', escape=False)\n        caderno+=row.vale_caderno\n        response.write(\'\\n                    \', escape=False)\n        entrada+=row.entradas_venda\n        response.write(\'\\n                    \', escape=False)\n        fichas_devolvidas+=row.quant_fichas_devolvidas\n        response.write(\'\\n                    \', escape=False)\n        valor_devolvido+=row.valor_devolvido\n        response.write(\'\\n                    \', escape=False)\n        data=row.data_venda\n        response.write(\'\\n                \', escape=False)\n    else:\n        response.write(\'\\n                    \', escape=False)\n        if venda!=0:\n            response.write(\'\\n                        \', escape=False)\n            a+=1\n            response.write(\'\\n                        <th>\', escape=False)\n            response.write(a)\n            response.write(\'</th>\\n                        <td>\', escape=False)\n            response.write(data.strftime(\'%d/%m/%Y\'))\n            response.write(\'</td>\\n                        <td >R$ \', escape=False)\n            response.write("{:,.2f}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#","."))\n            response.write(\'</td>\\n                        <td >\', escape=False)\n            response.write(fichas_venda)\n            response.write(\'</td>\\n                        <td >R$ \', escape=False)\n            response.write("{:,.2f}".format(round(caderno,2)).replace(",","#").replace(".",",").replace("#","."))\n            response.write(\'</td>\\n                        <td>R$ \', escape=False)\n            response.write("{:,.2f}".format(round(entrada,2)).replace(",","#").replace(".",",").replace("#","."))\n            response.write(\'</td>\\n              \', escape=False)\n            totaldesp=0\n            response.write(\'  \\n              \', escape=False)\n            for row1 in rowsdesp:\n                response.write(\'\\n              \', escape=False)\n                if (a==1)and(row1.data_inicio==data):\n                    response.write(\'\\n              \', escape=False)\n                    totaldesp+=row1.valor\n                    response.write(\'\\n              \', escape=False)\n                elif (row1.data_inicio==data):\n                    response.write(\'\\n              \', escape=False)\n                    totaldesp+=row1.valor\n                    response.write(\'\\n              \', escape=False)\n                    pass\n                response.write(\'\\n              \', escape=False)\n                pass\n            response.write(\'\\n              <td class="text-danger"><a class="text-danger" href="\', escape=False)\n            response.write(URL(\'ver_despesa\',args=[projeto.id,data]))\n            response.write(\'">R$ \', escape=False)\n            response.write("{:,.2f}".format(round(totaldesp,2)).replace(",","#").replace(".",",").replace("#","."))\n            response.write(\'</a></td>\\n\', escape=False)\n            totaldespesa+=totaldesp\n            response.write(\'\\n              <th class="text-danger">R$ \', escape=False)\n            response.write("{:,.2f}".format(round(totaldespesa,2)).replace(",","#").replace(".",",").replace("#","."))\n            response.write(\'</th>\\n              <th>R$ \', escape=False)\n            response.write("{:,.2f}".format(round(tvenda,2)).replace(",","#").replace(".",",").replace("#","."))\n            response.write(\'</th>\\n                <th >\', escape=False)\n            response.write(tfichas_venda)\n            response.write(\'</th>\\n                    \', escape=False)\n            pass\n        response.write(\'\\n                    \', escape=False)\n        data=row.data_venda\n        response.write(\'\\n                    \', escape=False)\n        venda=row.venda_praso-row.valor_devolvido\n        response.write(\'\\n                    \', escape=False)\n        fichas_venda=row.quant_fichas-row.quant_fichas_devolvidas\n        response.write(\'\\n                    \', escape=False)\n        caderno=row.vale_caderno\n        response.write(\'\\n                    \', escape=False)\n        entrada=row.entradas_venda\n        response.write(\'\\n                    \', escape=False)\n        fichas_devolvidas=row.quant_fichas_devolvidas\n        response.write(\'\\n                    \', escape=False)\n        valor_devolvido=row.valor_devolvido\n        response.write(\'\\n                \', escape=False)\n        pass\n    response.write(\'\\n                \', escape=False)\n    tvenda+=row.venda_praso-row.valor_devolvido\n    response.write(\'\\n                \', escape=False)\n    tfichas_venda+=row.quant_fichas-row.quant_fichas_devolvidas\n    response.write(\'\\n                \', escape=False)\n    tcaderno+=row.vale_caderno\n    response.write(\'\\n                \', escape=False)\n    tentrada+=row.entradas_venda\n    response.write(\'\\n                \', escape=False)\n    tfichas_devolvidas+=row.quant_fichas_devolvidas\n    response.write(\'\\n                \', escape=False)\n    tvalor_devolvido+=row.valor_devolvido\n    response.write(\'\\n            </tr>\\n            \', escape=False)\n    pass\nresponse.write(\'\\n            \', escape=False)\nif  len(rows)>1:\n    response.write(\'\\n            <tr>\\n                \', escape=False)\n    a+=1\n    response.write(\'\\n                <th>\', escape=False)\n    response.write(a)\n    response.write(\'</th>\\n                        <td>\', escape=False)\n    response.write(data.strftime(\'%d/%m/%Y\'))\n    response.write(\'</td>\\n                <td>R$ \', escape=False)\n    response.write("{:,.2f}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</td>\\n                <td>\', escape=False)\n    response.write(fichas_venda)\n    response.write(\'</td>\\n                <td >R$ \', escape=False)\n    response.write("{:,.2f}".format(round(caderno,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</td>\\n                <td>R$ \', escape=False)\n    response.write("{:,.2f}".format(round(entrada,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</td>\\n               \', escape=False)\n    totaldesp=0\n    response.write(\'  \\n              \', escape=False)\n    for row1 in rowsdesp:\n        response.write(\'\\n              \', escape=False)\n        if row1.data_inicio==data:\n            response.write(\'\\n              \', escape=False)\n            totaldesp+=row1.valor\n            response.write(\'\\n              \', escape=False)\n            pass\n        response.write(\'\\n              \', escape=False)\n        pass\n    response.write(\'\\n              <td class="text-danger"><a class="text-danger" href="\', escape=False)\n    response.write(URL(\'ver_despesa\',args=[projeto.id,data]))\n    response.write(\'">R$ \', escape=False)\n    response.write("{:,.2f}".format(round(totaldesp,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</a></td>\\n\', escape=False)\n    totaldespesa+=totaldesp\n    response.write(\'\\n              <th  class="text-danger">R$ \', escape=False)\n    response.write("{:,.2f}".format(round(totaldespesa,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</th>\\n                <th >R$ \', escape=False)\n    response.write("{:,.2f}".format(round(tvenda,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</th>\\n                <th>\', escape=False)\n    response.write(tfichas_venda)\n    response.write(\'</th>\\n            </tr>\\n            \', escape=False)\n    pass\nresponse.write(\'\\n            <tr>\\n                <th>#</th>\\n                <th></th>\\n                <th>R$ \', escape=False)\nresponse.write("{:,.2f}".format(round(tvenda,2)).replace(",","#").replace(".",",").replace("#","."))\nresponse.write(\'</th>\\n                <th>\', escape=False)\nresponse.write(tfichas_venda)\nresponse.write(\'</th>\\n                <th>R$ \', escape=False)\nresponse.write("{:,.2f}".format(round(tcaderno,2)).replace(",","#").replace(".",",").replace("#","."))\nresponse.write(\'</th>\\n                <th>R$ \', escape=False)\nresponse.write("{:,.2f}".format(round(tentrada,2)).replace(",","#").replace(".",",").replace("#","."))\nresponse.write(\'</th>\\n                <th>R$ \', escape=False)\nresponse.write("{:,.2f}".format(round(totaldespesa,2)).replace(",","#").replace(".",",").replace("#","."))\nresponse.write(\'</th>\\n            </tr>\\n              </tbody>\\n            </table>\\n          </div>\\n        </div>\\n      </div>\\n    </div>\\n  </div>\\n\\n  \', escape=False)\nif auth.user.id==1:\n    response.write(\'\\nPrimeira data - \', escape=False)\n    response.write(primiradata)\n    response.write(\'<br>\\nUltima data - \', escape=False)\n    response.write(ultimadata)\n    response.write(\'\\n<hr>\\n\', escape=False)\n    diferenca=ultimadata-primiradata\n    response.write(\'\\n\', escape=False)\n    dias=diferenca.days\n    response.write(\'\\n<div class="py-3" >\\n    <div class="container">\\n      <div class="row text-center">\\n        <div class="mx-auto col-md-8">\\n          <h3 class="mb-3">Proje\\xc3\\xa7\\xc3\\xa3o de Venda</h3>\\n          <p class="lead">Rela\\xc3\\xa7\\xc3\\xa3o de Situa\\xc3\\xa7\\xc3\\xa3o da venda</p>\\n        </div>\\n      </div>\\n      <div class="row">\\n        <div class="col-md-4">\\n          <ul class="list-group">\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                <h6 class="my-0"><b>Mercadoria</b></h6> <small class="text-muted">Total</small>\\n              </div> <span class="text-muted">R$ \', escape=False)\n    response.write("{:,.2f}".format(round(projeto.total_preco_mercadoria,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</span>\\n            </li>\\n            \', escape=False)\n    if (projeto.total_venda_prazo!=0)and(dias!=0):\n        response.write(\'\\n            \', escape=False)\n        media_prazo=projeto.total_venda_prazo/dias\n    else:\n        media_prazo=0\n        pass\n    response.write(\'\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                <h6 class="my-0"><b>M\\xc3\\xa9dia Prazo</b></h6> <small class="text-muted">Por dia</small>\\n              </div> <span class="text-muted">R$ \', escape=False)\n    response.write("{:,.2f}".format(round(media_prazo,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</span>\\n            </li>\\n            \', escape=False)\n    if (projeto.total_venda_vista!=0)and(dias!=0):\n        response.write(\'\\n            \', escape=False)\n        media_vista=projeto.total_venda_vista/dias\n    else:\n        media_vista=0\n        pass\n    response.write(\'\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                  <h6 class="my-0"><b>M\\xc3\\xa9dia Vista</b></h6> <small class="text-muted">Por dia</small>\\n              </div> <span class="text-muted">R$ \', escape=False)\n    response.write("{:,.2f}".format(round(media_vista,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</span>\\n            </li>\\n            \', escape=False)\n    venda_ideal=projeto.total_preco_mercadoria*0.85\n    response.write(\'\\n            <li class="list-group-item d-flex justify-content-between bg-light">\\n              <div class="text-success">\\n                <h6 class="my-0"><b>Venda Ideal</b></h6> <small>Proje\\xc3\\xa7\\xc3\\xa3o 85%</small>\\n              </div> <span class="text-success">R$ \', escape=False)\n    response.write("{:,.2f}".format(round(venda_ideal,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</span>\\n            </li>\\n            \\n        \', escape=False)\n    datafinalprojetada=ultimadata\n    response.write(\'\\n        \', escape=False)\n    totalmediavenda=media_vista+media_prazo\n    response.write(\'\\n        \', escape=False)\n    if (totalmediavenda>0) and (venda_ideal>0):\n        response.write(\'\\n        \', escape=False)\n        projecao=(venda_ideal)/totalmediavenda\n        response.write(\'\\n        \', escape=False)\n    else:\n        response.write(\'\\n        \', escape=False)\n        projecao=0\n        response.write(\'\\n        \', escape=False)\n        pass\n    response.write(\'\\n        \', escape=False)\n    datafinalprojetada=date.fromordinal(primiradata.toordinal()+int(projecao))\n    response.write(\'\\n            \', escape=False)\n    estoque_ideal=projeto.total_preco_mercadoria*0.15\n    response.write(\'\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                <h6 class="my-0"><b>Estoque/Ideal</b></h6> <small class="text-muted">\', escape=False)\n    response.write(datafinalprojetada.strftime(\'%d/%m/%Y\'))\n    response.write(\'</small>\\n              </div> <span class="text-muted">R$ \', escape=False)\n    response.write("{:,.2f}".format(round(estoque_ideal,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</span>\\n            </li>\\n          </ul>\\n        </div>\\n        <div class="col-md-4">\\n          <ul class="list-group">\\n            \', escape=False)\n    if (projeto.total_despesa_venda>0)and(projeto.total_venda_prazo>0):\n        response.write(\'\\n            \', escape=False)\n        percentototal=projeto.total_despesa_venda/projeto.total_venda_prazo\n        response.write(\'\\n            \', escape=False)\n    else:\n        response.write(\'\\n            \', escape=False)\n        percentototal=0\n        response.write(\'\\n            \', escape=False)\n        pass\n    response.write(\'\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                  <h6 class="my-0"><b>Total Despesa</b></h6> <small class="text-muted">\', escape=False)\n    response.write("{:,.1f}".format(round(percentototal*100,1)))\n    response.write(\'%</small>\\n              </div> <span class="text-muted">R$ \', escape=False)\n    response.write("{:,.2f}".format(round(projeto.total_despesa_venda,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</span>\\n            </li>\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                \', escape=False)\n    despsemvenda=projeto.total_despesa_venda-totaldespesa\n    response.write(\'\\n            \', escape=False)\n    if (despsemvenda>0)and(projeto.total_venda_prazo>0):\n        response.write(\'\\n            \', escape=False)\n        percentototal=despsemvenda/projeto.total_venda_prazo*100\n        response.write(\'\\n            \', escape=False)\n    else:\n        response.write(\'\\n            \', escape=False)\n        percentototal=0\n        response.write(\'\\n            \', escape=False)\n        pass\n    response.write(\'\\n                <h6 class="my-0">Despesa Sem Venda</h6> <small class="text-muted">\', escape=False)\n    response.write("{:,.1f}".format(round(percentototal,1)))\n    response.write(\'%</small>\\n              </div> <span class="text-muted">R$ \', escape=False)\n    response.write("{:,.2f}".format(round(despsemvenda,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</span>\\n            </li>\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n            \', escape=False)\n    if (totaldespesa>0)and(projeto.total_venda_prazo>0):\n        response.write(\'\\n            \', escape=False)\n        percentototal=totaldespesa/projeto.total_venda_prazo*100\n        response.write(\'\\n            \', escape=False)\n    else:\n        response.write(\'\\n            \', escape=False)\n        percentototal=0\n        response.write(\'\\n            \', escape=False)\n        pass\n    response.write(\'\\n                <h6 class="my-0"><b>Despesa Com Venda</b></h6> <small class="text-muted">\', escape=False)\n    response.write("{:,.1f}".format(round(percentototal,1)))\n    response.write(\'%</small>\\n              </div> <span class="text-muted">R$ \', escape=False)\n    response.write("{:,.2f}".format(round(totaldespesa,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</span>\\n            </li>\\n            <li class="list-group-item d-flex justify-content-between bg-light">\\n              \', escape=False)\n    if (dias>0)and(totaldespesa>0):\n        response.write(\'\\n              \', escape=False)\n        mediadia=totaldespesa/dias\n        response.write(\'\\n              \', escape=False)\n    else:\n        response.write(\'\\n               \', escape=False)\n        mediadia=0\n        response.write(\'\\n              \', escape=False)\n        pass\n    response.write(\'\\n              <div class="text-success">\\n                <h6 class="my-0"><b>M\\xc3\\xa9dia por dia</b></h6> <small>Despesa com venda</small>\\n              </div> <span class="text-success">R$ \', escape=False)\n    response.write("{:,.2f}".format(round(mediadia,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</span>\\n            </li>\\n            <li class="list-group-item d-flex justify-content-between"> <span>Total (USD)</span> <b>R$ \', escape=False)\n    response.write("{:,.2f}".format(round(mediadia,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</b> </li>\\n          </ul>\\n        </div>\\n        <div class="col-md-4">\\n          <ul class="list-group">\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                <h6 class="my-0"><b>Total de Vales</b></h6> <small class="text-muted">##</small>\\n              </div> <span class="text-muted">R$ \', escape=False)\n    response.write("{:,.2f}".format(round(projeto.total_vales_vendedor,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</span>\\n            </li>\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                <h6 class="my-0">Caderno</h6> <small class="text-muted">##</small>\\n              </div> <span class="text-muted">R$ \', escape=False)\n    response.write("{:,.2f}".format(round(projeto.total_caderno_vendedor,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</span>\\n            </li>\\n            <li class="list-group-item d-flex justify-content-between">\\n              <div>\\n                <h6 class="my-0"><b>Total de Vales</b></h6> <small class="text-muted">Brief description</small>\\n              </div> <span class="text-muted">R$ \', escape=False)\n    response.write("{:,.2f}".format(round(projeto.total_caderno_vendedor+projeto.total_vales_vendedor,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</span>\\n            </li>\\n            <li class="list-group-item d-flex justify-content-between bg-light">\\n              <div class="text-success">\\n                <h6 class="my-0"><b>Promo code</b></h6> <small>EXAMPLECODE</small>\\n              </div> <span class="text-success">-R$ \', escape=False)\n    response.write("{:,.2f}".format(round(0,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</span>\\n            </li>\\n            <li class="list-group-item d-flex justify-content-between"> <span>Total (USD)</span> <b>R$ \', escape=False)\n    response.write("{:,.2f}".format(round(0,2)).replace(",","#").replace(".",",").replace("#","."))\n    response.write(\'</b> </li>\\n          </ul>\\n        </div>\\n      </div>\\n\', escape=False)\n    if not (usuario.id==1):\n        response.write(\'\\n    </div>\\n  </div>\\n\', escape=False)\n        pass\n    response.write(\'\\n\', escape=False)\n    pass\nresponse.write(\'\\n\', escape=False)\nresponse.write(\'\\n      \', escape=False)\nresponse.write(response.toolbar() if response.show_toolbar else \'\')\nresponse.write(\'\\n    </div>\\n    \', escape=False)\nresponse.write(\' <!-- this is default footer -->\\n    <footer id="noprint" class="footer container-fluid ">\\n      <div class="row">\\n        <div class="col-md-12">\\n          <div class="copyright pull-left">\', escape=False)\nresponse.write(T(\'Copyright\'))\nresponse.write(\' &#169; \', escape=False)\nresponse.write(request.now.year)\nresponse.write(\'</div>\\n          <div id="poweredBy" class="pull-right">\\n              Suporte <a href="https://api.whatsapp.com/send?phone=5588981126816">(88)98112-6816</a>\\n            </div>\\n        </div>\\n      </div>\\n    </footer>\\n <footer class="footer container-fluid d-none d-print-block">\\n      <div class="row">\\n        <div class="col-md-12">\\n          <div class="copyright pull-left">Suporte - (88)98112-6816</div>\\n          <div id="poweredBy" class="pull-right">\\n             \', escape=False)\nif auth.user:\n    response.write(auth.user.first_name)\n    response.write(\' \', escape=False)\n    response.write(auth.user.last_name)\nelse:\n    response.write(\'Aluminum System\', escape=False)\n    pass\nresponse.write(\'\\n          </div>\\n        </div>\\n      </div>\\n    </footer>\\n    \', escape=False)\nresponse.write(\'\\n    <!-- The javascript =============================== -->\\n    <script src="\', escape=False)\nresponse.write(URL(\'static\',\'js/bootstrap.bundle.min.js\'))\nresponse.write(\'"></script>\\n    <script src="\', escape=False)\nresponse.write(URL(\'static\',\'js/web2py-bootstrap4.js\'))\nresponse.write(\'"></script>\\n    \', escape=False)\nresponse.write(\'\\n    \', escape=False)\nif response.google_analytics_id:\n    response.write(\'\\n    <!-- Analytics ==================================== -->\\n    <script src="\', escape=False)\n    response.write(URL(\'static\',\'js/analytics.min.js\'))\n    response.write(\'"></script>\\n    <script type="text/javascript">\\n      analytics.initialize({\\n      \\\'Google Analytics\\\':{trackingId:\\\'\', escape=False)\n    response.write(response.google_analytics_id)\n    response.write("\'}\\n      });\\n    </script>\\n    ", escape=False)\n    pass\nresponse.write(\'\\n  </body>\\n</html>\\n\', escape=False)'
+p7
+sS'snapshot'
+p8
+(dp9
+S'exception'
+p10
+(dp11
+S'__getslice__'
+p12
+S"<method-wrapper '__getslice__' of exceptions.NameError object>"
+p13
+sS'__str__'
+p14
+S"<method-wrapper '__str__' of exceptions.NameError object>"
+p15
+sS'__reduce__'
+p16
+S'<built-in method __reduce__ of exceptions.NameError object>'
+p17
+sS'__dict__'
+p18
+S'{}'
+p19
+sS'message'
+p20
+S'"name \'usuario\' is not defined"'
+p21
+sS'__sizeof__'
+p22
+S'<built-in method __sizeof__ of exceptions.NameError object>'
+p23
+sS'__init__'
+p24
+S"<method-wrapper '__init__' of exceptions.NameError object>"
+p25
+sS'__setattr__'
+p26
+S"<method-wrapper '__setattr__' of exceptions.NameError object>"
+p27
+sS'__reduce_ex__'
+p28
+S'<built-in method __reduce_ex__ of exceptions.NameError object>'
+p29
+sS'__new__'
+p30
+S'<built-in method __new__ of type object>'
+p31
+sS'__format__'
+p32
+S'<built-in method __format__ of exceptions.NameError object>'
+p33
+sS'__class__'
+p34
+S"<type 'exceptions.NameError'>"
+p35
+sS'__doc__'
+p36
+S"'Name not found globally.'"
+p37
+sS'__getitem__'
+p38
+S"<method-wrapper '__getitem__' of exceptions.NameError object>"
+p39
+sS'__setstate__'
+p40
+S'<built-in method __setstate__ of exceptions.NameError object>'
+p41
+sS'__getattribute__'
+p42
+S"<method-wrapper '__getattribute__' of exceptions.NameError object>"
+p43
+sS'args'
+p44
+S'("name \'usuario\' is not defined",)'
+p45
+sS'__subclasshook__'
+p46
+S'<built-in method __subclasshook__ of type object>'
+p47
+sS'__unicode__'
+p48
+S'<built-in method __unicode__ of exceptions.NameError object>'
+p49
+sS'__delattr__'
+p50
+S"<method-wrapper '__delattr__' of exceptions.NameError object>"
+p51
+sS'__repr__'
+p52
+S"<method-wrapper '__repr__' of exceptions.NameError object>"
+p53
+sS'__hash__'
+p54
+S"<method-wrapper '__hash__' of exceptions.NameError object>"
+p55
+ssS'evalue'
+p56
+S"name 'usuario' is not defined"
+p57
+sS'request'
+p58
+cgluon.html
+XML_unpickle
+p59
+(S's\xdeZ\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">ajax</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">application</td><td style="vertical-align:top;">:</td><td><div>aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">args</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>162</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cid</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">client</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">controller</td><td style="vertical-align:top;">:</td><td><div>acs_projeto</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_admin</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51-9e162038-26a1-4010-b8d1-09d59eff7ee5<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_aluminum</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51-c71af549-7fe0-4633-b2fe-43c8bf9b19d2<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_welcome</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51-f1a6f639-a8b7-4fcb-8e88-496a8eda3535<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">env</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">CONTENT_LENGTH</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">CONTENT_TYPE</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">DOCUMENT_ROOT</td><td style="vertical-align:top;">:</td><td><div>/usr/local/openresty/nginx/html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTPS</td><td style="vertical-align:top;">:</td><td><div>on</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_ENCODING</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate, br</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_ACCEPT_LANGUAGE</td><td style="vertical-align:top;">:</td><td><div>pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CACHE_CONTROL</td><td style="vertical-align:top;">:</td><td><div>max-age=0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_CONNECTION</td><td style="vertical-align:top;">:</td><td><div>close</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_COOKIE</td><td style="vertical-align:top;">:</td><td><div>_ga=GA1.3.89391603.1621978944; _gid=GA1.3.1901976304.1621978944; session_id_admin=191.212.144.51-9e162038-26a1-4010-b8d1-09d59eff7ee5; session_id_aluminum=191.212.144.51-c71af549-7fe0-4633-b2fe-43c8bf9b19d2; session_id_welcome=191.212.144.51-f1a6f639-a8b7-4fcb-8e88-496a8eda3535</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_HOST</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_REFERER</td><td style="vertical-align:top;">:</td><td><div>https://rogoberto.pythonanywhere.com/aluminum/acs_projeto/particoes/109</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_UPGRADE_INSECURE_REQUESTS</td><td style="vertical-align:top;">:</td><td><div>1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_USER_AGENT</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_X_FORWARDED_FOR</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">HTTP_X_REAL_IP</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">PATH_INFO</td><td style="vertical-align:top;">:</td><td><div>/aluminum/acs_projeto/acesso_vendas_particao/162</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">QUERY_STRING</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_ADDR</td><td style="vertical-align:top;">:</td><td><div>10.0.0.93</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REMOTE_PORT</td><td style="vertical-align:top;">:</td><td><div>56424</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_METHOD</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">REQUEST_URI</td><td style="vertical-align:top;">:</td><td><div>/aluminum/acs_projeto/acesso_vendas_particao/162</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SCRIPT_NAME</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_NAME</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PORT</td><td style="vertical-align:top;">:</td><td><div>443</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">SERVER_PROTOCOL</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;/home/rogoberto/web2py/applications/welcome/&#x27;, &#x27;/home/rogoberto/web2py/applications/admin/&#x27;, &#x27;/home/rogoberto/web2py/applications/aluminum/&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">content_length</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">content_type</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">document_root</td><td style="vertical-align:top;">:</td><td><div>/usr/local/openresty/nginx/html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept</td><td style="vertical-align:top;">:</td><td><div>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_encoding</td><td style="vertical-align:top;">:</td><td><div>gzip, deflate, br</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_accept_language</td><td style="vertical-align:top;">:</td><td><div>pt-BR,pt;q=0.8,en-US;q=0.5,en;q=0.3</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cache_control</td><td style="vertical-align:top;">:</td><td><div>max-age=0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_connection</td><td style="vertical-align:top;">:</td><td><div>close</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_cookie</td><td style="vertical-align:top;">:</td><td><div>_ga=GA1.3.89391603.1621978944; _gid=GA1.3.1901976304.1621978944; session_id_admin=191.212.144.51-9e162038-26a1-4010-b8d1-09d59eff7ee5; session_id_aluminum=191.212.144.51-c71af549-7fe0-4633-b2fe-43c8bf9b19d2; session_id_welcome=191.212.144.51-f1a6f639-a8b7-4fcb-8e88-496a8eda3535</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_host</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_referer</td><td style="vertical-align:top;">:</td><td><div>https://rogoberto.pythonanywhere.com/aluminum/acs_projeto/particoes/109</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_upgrade_insecure_requests</td><td style="vertical-align:top;">:</td><td><div>1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_user_agent</td><td style="vertical-align:top;">:</td><td><div>Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_x_forwarded_for</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">http_x_real_ip</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">https</td><td style="vertical-align:top;">:</td><td><div>on</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_py2</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>35.173.69.207</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td><div>green-liveweb16</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>localhost</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path_info</td><td style="vertical-align:top;">:</td><td><div>/aluminum/acs_projeto/acesso_vendas_particao/162</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">query_string</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_addr</td><td style="vertical-align:top;">:</td><td><div>10.0.0.93</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remote_port</td><td style="vertical-align:top;">:</td><td><div>56424</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_method</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">request_uri</td><td style="vertical-align:top;">:</td><td><div>/aluminum/acs_projeto/acesso_vendas_particao/162</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">script_name</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_name</td><td style="vertical-align:top;">:</td><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_port</td><td style="vertical-align:top;">:</td><td><div>443</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">server_protocol</td><td style="vertical-align:top;">:</td><td><div>HTTP/1.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi.node</td><td style="vertical-align:top;">:</td><td><div>green-liveweb16</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi.version</td><td style="vertical-align:top;">:</td><td><div>2.0.17.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi_node</td><td style="vertical-align:top;">:</td><td><div>green-liveweb16</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">uwsgi_version</td><td style="vertical-align:top;">:</td><td><div>2.0.17.1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_original_uri</td><td style="vertical-align:top;">:</td><td><div>/aluminum/acs_projeto/acesso_vendas_particao/162</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_path</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.17.1-stable+timestamp.2018.08.06.01.02.56</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.errors</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi_file__bin_user_wsgi_wrapper.ErrorLogFile object at 0x7f41a8052cd0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;built-in function uwsgi_sendfile&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.input</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi._Input object at 0x7f41a9457bd0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multiprocess</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.multithread</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.url_scheme</td><td style="vertical-align:top;">:</td><td><div>https</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi.version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_errors</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi_file__bin_user_wsgi_wrapper.ErrorLogFile object at 0x7f41a8052cd0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_file_wrapper</td><td style="vertical-align:top;">:</td><td><div>&lt;built-in function uwsgi_sendfile&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_input</td><td style="vertical-align:top;">:</td><td><div>&lt;uwsgi._Input object at 0x7f41a9457bd0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multiprocess</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_multithread</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_run_once</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_url_scheme</td><td style="vertical-align:top;">:</td><td><div>https</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi_version</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>1</div></td></tr><tr><td><div>0</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">extension</td><td style="vertical-align:top;">:</td><td><div>html</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">folder</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py/applications/aluminum/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">function</td><td style="vertical-align:top;">:</td><td><div>acesso_vendas_particao</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">global_settings</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">app_folders</td><td style="vertical-align:top;">:</td><td><div>set([&#x27;/home/rogoberto/web2py/applications/welcome/&#x27;, &#x27;/home/rogoberto/web2py/applications/admin/&#x27;, &#x27;/home/rogoberto/web2py/applications/aluminum/&#x27;])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">applications_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">db_sessions</td><td style="vertical-align:top;">:</td><td><div>set([])</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">debugging</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">gluon_parent</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_jython</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_py2</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_pypy</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_source</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">local_hosts</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>35.173.69.207</div></td></tr><tr><td><div>::ffff:127.0.0.1</div></td></tr><tr><td><div>::1</div></td></tr><tr><td><div>rogoberto.pythonanywhere.com</div></td></tr><tr><td><div>green-liveweb16</div></td></tr><tr><td><div>127.0.0.1</div></td></tr><tr><td><div>localhost</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">web2py_version</td><td style="vertical-align:top;">:</td><td><div>2.17.1-stable+timestamp.2018.08.06.01.02.56</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_https</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_local</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_restful</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_scheduler</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">is_shell</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">method</td><td style="vertical-align:top;">:</td><td><div>GET</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">now</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2021, 5, 27, 6, 13, 23, 328912)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">url</td><td style="vertical-align:top;">:</td><td><div>/aluminum/acs_projeto/acesso_vendas_particao/162</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">utcnow</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2021, 5, 27, 6, 13, 23, 328923)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">wsgi</td><td style="vertical-align:top;">:</td><td><div>&lt;gluon.main.LazyWSGI object at 0x7f41a50914d0&gt;</div></td></tr></table></div>'
+tRp60
+sS'frames'
+p61
+(lp62
+(dp63
+S'file'
+p64
+S'/home/rogoberto/web2py/gluon/restricted.py'
+p65
+sS'dump'
+p66
+(dp67
+S'environment'
+p68
+S"{'A': <class 'gluon.html.A'>, 'ANY_OF': <class 'gluon.validators.ANY_OF'>, 'ASSIGNJS': <function ASSIGNJS>, 'AppConfig': <function AppConfig>, 'Auth': <class 'gluon.tools.Auth'>, 'B': <class 'gluon.html.B'>, 'BEAUTIFY': <class 'gluon.html.BEAUTIFY'>, 'BODY': <class 'gluon.html.BODY'>, 'BR': <class 'gluon.html.BR'>, 'BUTTON': <class 'gluon.html.BUTTON'>, ...}"
+p69
+sS'ccode'
+p70
+S'<code object <module> at 0x7f41a53a4e30, file "/...acs_projeto/acesso_vendas_particao.html", line 1>'
+p71
+ssS'lnum'
+p72
+I219
+sS'lines'
+p73
+(dp74
+I214
+S'    if environment is None:'
+p75
+sI215
+S'        environment = {}'
+p76
+sI216
+S"    environment['__file__'] = layer"
+p77
+sI217
+S"    environment['__name__'] = '__restricted__'"
+p78
+sI218
+S'    try:'
+p79
+sI219
+S'        exec(ccode, environment)'
+p80
+sI220
+S'    except HTTP:'
+p81
+sI221
+S'        raise'
+p82
+sI222
+S'    except RestrictedError:'
+p83
+sI223
+S'        # do not encapsulate (obfuscate) the original RestrictedError'
+p84
+ssS'call'
+p85
+S'(ccode=<code object <module> at 0x7f41a53a4e30, file "/...acs_projeto/acesso_vendas_particao.html", line 1>, environment={\'A\': <class \'gluon.html.A\'>, \'ANY_OF\': <class \'gluon.validators.ANY_OF\'>, \'ASSIGNJS\': <function ASSIGNJS>, \'AppConfig\': <function AppConfig>, \'Auth\': <class \'gluon.tools.Auth\'>, \'B\': <class \'gluon.html.B\'>, \'BEAUTIFY\': <class \'gluon.html.BEAUTIFY\'>, \'BODY\': <class \'gluon.html.BODY\'>, \'BR\': <class \'gluon.html.BR\'>, \'BUTTON\': <class \'gluon.html.BUTTON\'>, ...}, layer=\'/home/rogoberto/web2py/applications/aluminum/views/acs_projeto/acesso_vendas_particao.html\', scode=r"response.write(\'<!DOCTYPE html>\\n<!--[if (gt IE ...nse.write(\'\\n  </body>\\n</html>\\n\', escape=False)")'
+p86
+sS'func'
+p87
+S'restricted'
+p88
+sa(dp89
+g64
+S'/home/rogoberto/web2py/applications/aluminum/views/acs_projeto/acesso_vendas_particao.html'
+p90
+sg66
+(dp91
+S'small'
+p92
+S'undefined'
+p93
+sS'Total'
+p94
+g93
+sS'b'
+g93
+sS'h6'
+p95
+g93
+sS'Mercadoria'
+p96
+g93
+ssg72
+I164
+sg73
+(dp97
+I160
+S"response.write('\\n\\n', escape=False)"
+p98
+sI161
+S'primiradata=0'
+p99
+sI162
+S'ultimadata=0'
+p100
+sI163
+S"response.write('\\n', escape=False)"
+p101
+sI164
+S'if not (usuario.id==1):'
+p102
+sI165
+S'    response.write(\'\\n<div class="py-5">\\n    <div class="container">\\n      \', escape=False)'
+p103
+sI166
+S'    pass'
+p104
+sI167
+S'response.write(\'\\n      <div class="row">\\n        <div class="col-md-12">\\n          <h5 class="">Lista de Vendas da Rota ( \', escape=False)'
+p105
+sI168
+S'response.write(sub_venda.primeira_cidade)'
+p106
+sI169
+S'response.write(\' )</h5>\\n        </div>\\n      </div>\\n      <div class="row">\\n        <div class="col-md-12">\\n          <a class="btn btn-link" href="\', escape=False)'
+p107
+sI170
+S"response.write(URL('particoes',args=sub_venda.projeto))"
+p108
+sI171
+S'response.write(\'" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>\\n            <a class="btn btn-link" href="\', escape=False)'
+p109
+sI172
+S"response.write(URL('alterar_dados_rota',args=sub_venda.id))"
+p110
+sI173
+S'response.write(\'" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Alterar dados da Rota</a>\\n        </div>\\n      </div>\\n      <div class="row">\\n        <div class="col-md-12">\\n          <div class="table-responsive">\\n            <table class="table table-striped table-borderless">\\n              <thead>\\n                <tr>\\n                  <th scope="col" >#</th>\\n                  <th scope="col" >Data</th>\\n                  <th scope="col" class="text-center">Venda</th>\\n                  <th scope="col" class="text-center">Fichas</th>\\n                  <th scope="col" class="text-center">Caderno</th>\\n                  <th scope="col" class="text-center">Entrada</th>\\n                  <th scope="col" class="text-center">Despesa</th>\\n                  <th scope="col" class="text-center">Acumulado</th>\\n                </tr>\\n              </thead>\\n              <tbody>\\n                \', escape=False)'
+p111
+sI174
+S'data=request.now'
+p112
+sI155
+S'tentrada=0'
+p113
+sI156
+S"response.write('\\n', escape=False)"
+p114
+sI157
+S'tfichas_devolvidas=0'
+p115
+sI158
+S"response.write('\\n', escape=False)"
+p116
+sI159
+S'tvalor_devolvido=0'
+p117
+ssg85
+S'()'
+p118
+sg87
+S'<module>'
+p119
+sasS'pyver'
+p120
+S'Python 2.7.12: /usr/local/bin/uwsgi (prefix: /usr)'
+p121
+sS'session'
+p122
+g59
+(S's\xee\t\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">auth</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">expiration</td><td style="vertical-align:top;">:</td><td><div>3600</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">hmac_key</td><td style="vertical-align:top;">:</td><td><div>33a97f6c-d9dd-42e5-b898-2ae2de22b34f</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">last_visit</td><td style="vertical-align:top;">:</td><td><div>datetime.datetime(2021, 5, 27, 6, 8, 22, 537846)</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">remember_me</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">user</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">email</td><td style="vertical-align:top;">:</td><td><div>betin@gmail.com</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">first_name</td><td style="vertical-align:top;">:</td><td><div>Rogoberto</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">id</td><td style="vertical-align:top;">:</td><td><div>1L</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">last_name</td><td style="vertical-align:top;">:</td><td><div>Ribeiro</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">registration_id</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">registration_key</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">reset_password_key</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">user_groups</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">1</td><td style="vertical-align:top;">:</td><td><div>user_1</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">2</td><td style="vertical-align:top;">:</td><td><div>admin</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">3</td><td style="vertical-align:top;">:</td><td><div>wiki_editor</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr></table></div>'
+tRp123
+sS'etype'
+p124
+S"<type 'exceptions.NameError'>"
+p125
+sS'date'
+p126
+S'Thu May 27 06:13:26 2021'
+p127
+sS'response'
+p128
+g59
+(S's\xf1\x1d\x00\x00<div><table><tr><td style="font-weight:bold;vertical-align:top;">body</td><td style="vertical-align:top;">:</td><td><div>&lt;cStringIO.StringO object at 0x7f41a51b82d0&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">cookies</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">session_id_aluminum</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51-c71af549-7fe0-4633-b2fe-43c8bf9b19d2<table><tr><td style="font-weight:bold;vertical-align:top;">comment</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">domain</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">expires</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">httponly</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">max-age</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">path</td><td style="vertical-align:top;">:</td><td><div>/</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">secure</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">version</td><td style="vertical-align:top;">:</td><td><div></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">delimiters</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>{{</div></td></tr><tr><td><div>}}</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">files</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>/aluminum/static/js/jquery.js</div></td></tr><tr><td><div>/aluminum/static/css/calendar.css</div></td></tr><tr><td><div>/aluminum/static/js/calendar.js</div></td></tr><tr><td><div>/aluminum/static/js/web2py.js</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">flash</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">form_label_separator</td><td style="vertical-align:top;">:</td><td><div></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">formstyle</td><td style="vertical-align:top;">:</td><td><div>bootstrap4_inline</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generic_patterns</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">google_analytics_id</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">headers</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">X-Powered-By</td><td style="vertical-align:top;">:</td><td><div>web2py</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">menu</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div><table><tr><td><div>Principal</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/aluminum</div></td></tr><tr><td><div><table></table></div></td></tr></table></div></td></tr><tr><td><div><table><tr><td><div>Principal</div></td></tr><tr><td><div>False</div></td></tr><tr><td><div>/aluminum</div></td></tr><tr><td><div><table></table></div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">meta</td><td style="vertical-align:top;">:</td><td><div><table><tr><td style="font-weight:bold;vertical-align:top;">author</td><td style="vertical-align:top;">:</td><td><div>Your Name &lt;you@example.com&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">description</td><td style="vertical-align:top;">:</td><td><div>a cool new app</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">generator</td><td style="vertical-align:top;">:</td><td><div>Web2py Web Framework</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">keywords</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>web2py</div></td></tr><tr><td><div>python</div></td></tr><tr><td><div>framework</div></td></tr></table></div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">models_to_run</td><td style="vertical-align:top;">:</td><td><div><table><tr><td><div>^\\w+\\.py$</div></td></tr><tr><td><div>^acs_projeto/\\w+\\.py$</div></td></tr><tr><td><div>^acs_projeto/acesso_vendas_particao/\\w+\\.py$</div></td></tr></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">postprocessing</td><td style="vertical-align:top;">:</td><td><div><table></table></div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_client</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_compression_level</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_cookie_expires</td><td style="vertical-align:top;">:</td><td><div>None</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_data_name</td><td style="vertical-align:top;">:</td><td><div>session_data_aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_file</td><td style="vertical-align:top;">:</td><td><div>&lt;open file &#x27;/home/rogoberto/web2py/applications/aluminum/sessions/1b1/104/191.212.144.51-c71af549-7fe0-4633-b2fe-43c8bf9b19d2&#x27;, mode &#x27;rb+&#x27; at 0x7f41a4facd20&gt;</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_filename</td><td style="vertical-align:top;">:</td><td><div>/home/rogoberto/web2py/applications/aluminum/sessions/191.212.144.51-c71af549-7fe0-4633-b2fe-43c8bf9b19d2</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_hash</td><td style="vertical-align:top;">:</td><td><div>529b83cc479d535a5ec01fcd0eab8d06</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id</td><td style="vertical-align:top;">:</td><td><div>191.212.144.51-c71af549-7fe0-4633-b2fe-43c8bf9b19d2</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_id_name</td><td style="vertical-align:top;">:</td><td><div>session_id_aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_locked</td><td style="vertical-align:top;">:</td><td><div>True</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_masterapp</td><td style="vertical-align:top;">:</td><td><div>aluminum</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_new</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">session_storage_type</td><td style="vertical-align:top;">:</td><td><div>file</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">show_toolbar</td><td style="vertical-align:top;">:</td><td><div>False</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">status</td><td style="vertical-align:top;">:</td><td><div>200</div></td></tr><tr><td style="font-weight:bold;vertical-align:top;">view</td><td style="vertical-align:top;">:</td><td><div>acs_projeto/acesso_vendas_particao.html</div></td></tr></table></div>'
+tRp129
+sS'locals'
+p130
+(dp131
+S'PY2'
+p132
+S'True'
+p133
+sS'OBJECT'
+p134
+S"<class 'gluon.html.OBJECT'>"
+p135
+sS'SQLDB'
+p136
+S"<class 'pydal.base.DAL'>"
+p137
+sg122
+S"<Storage {'_formkey[classe_despesa/923]': ['15fe...23b51', '1f3c57c8-7ff6-48ec-8eab-ef0e794ae1d7']}>"
+p138
+sS'LINK'
+p139
+S"<class 'gluon.html.LINK'>"
+p140
+sS'BR'
+p141
+S"<class 'gluon.html.BR'>"
+p142
+sS'local_import'
+p143
+S'<function <lambda>>'
+p144
+sS'OPTGROUP'
+p145
+S"<class 'gluon.html.OPTGROUP'>"
+p146
+sS'fichas_devolvidas'
+p147
+S'0'
+sS'venda'
+p148
+S'0'
+sS'tfichas_devolvidas'
+p149
+S'0'
+sS'row'
+p150
+S"<Row {'tipo': 'Despesa_Venda', 'projeto': 109L, ...esa': 743L, 'id': 8199L, 'descricao': 'DESPESA'}>"
+p151
+sS'PRE'
+p152
+S"<class 'gluon.html.PRE'>"
+p153
+sS'IS_INT_IN_RANGE'
+p154
+S"<class 'gluon.validators.IS_INT_IN_RANGE'>"
+p155
+sS'to_bytes'
+p156
+S'<function to_bytes>'
+p157
+sS'IS_LOWER'
+p158
+S"<class 'gluon.validators.IS_LOWER'>"
+p159
+sS'IS_STRONG'
+p160
+S"<class 'gluon.validators.IS_STRONG'>"
+p161
+sS'cache'
+p162
+S'<gluon.cache.Cache object>'
+p163
+sS'IS_IN_DB'
+p164
+S"<class 'gluon.validators.IS_IN_DB'>"
+p165
+sS'TAG'
+p166
+S'<gluon.html.__TAG__ object>'
+p167
+sS'SQLField'
+p168
+S"<class 'pydal.objects.Field'>"
+p169
+sS'mail'
+p170
+S'<gluon.tools.Mail object>'
+p171
+sS'entrada'
+p172
+S'0'
+sS'BODY'
+p173
+S"<class 'gluon.html.BODY'>"
+p174
+sS'IS_DATE_IN_RANGE'
+p175
+S"<class 'gluon.validators.IS_DATE_IN_RANGE'>"
+p176
+sS'IFRAME'
+p177
+S"<class 'gluon.html.IFRAME'>"
+p178
+sS'URL'
+p179
+S'<function URL>'
+p180
+sS'__file__'
+p181
+S"'/home/rogoberto/web2py/applications/aluminum/views/acs_projeto/acesso_vendas_particao.html'"
+p182
+sS'db'
+p183
+S'<DAL uri="sqlite://storage.sqlite">'
+p184
+sS'auth'
+p185
+S'<gluon.tools.Auth object>'
+p186
+sS'P'
+S"<class 'gluon.html.P'>"
+p187
+sS'TFOOT'
+p188
+S"<class 'gluon.html.TFOOT'>"
+p189
+sS'iteritems'
+p190
+S'<function <lambda>>'
+p191
+sS'XHTML'
+p192
+S"<class 'gluon.html.XHTML'>"
+p193
+sS'datetime'
+p194
+S"<module 'datetime' (built-in)>"
+p195
+sS'ON'
+p196
+g133
+sS'OL'
+p197
+S"<class 'gluon.html.OL'>"
+p198
+sS'TEXTAREA'
+p199
+S"<class 'gluon.html.TEXTAREA'>"
+p200
+sS'MENU'
+p201
+S"<class 'gluon.html.MENU'>"
+p202
+sS'__package__'
+p203
+S'None'
+p204
+sS'IS_IMAGE'
+p205
+S"<class 'gluon.validators.IS_IMAGE'>"
+p206
+sS'IS_DATETIME_IN_RANGE'
+p207
+S"<class 'gluon.validators.IS_DATETIME_IN_RANGE'>"
+p208
+sS'EM'
+p209
+S"<class 'gluon.html.EM'>"
+p210
+sS'CODE'
+p211
+S"<class 'gluon.html.CODE'>"
+p212
+sS'HTTP'
+p213
+S"<class 'gluon.http.HTTP'>"
+p214
+sS'HR'
+p215
+S"<class 'gluon.html.HR'>"
+p216
+sS'IS_DATETIME'
+p217
+S"<class 'gluon.validators.IS_DATETIME'>"
+p218
+sS'reduce'
+p219
+S'<built-in function reduce>'
+p220
+sS'STYLE'
+p221
+S"<class 'gluon.html.STYLE'>"
+p222
+sS'LABEL'
+p223
+S"<class 'gluon.html.LABEL'>"
+p224
+sS'CLEANUP'
+p225
+S"<class 'gluon.validators.CLEANUP'>"
+p226
+sS'BUTTON'
+p227
+S"<class 'gluon.html.BUTTON'>"
+p228
+sS'SELECT'
+p229
+S"<class 'gluon.html.SELECT'>"
+p230
+sS'CENTER'
+p231
+S"<class 'gluon.html.CENTER'>"
+p232
+sS'tvenda'
+p233
+S'0'
+sS'Auth'
+p234
+S"<class 'gluon.tools.Auth'>"
+p235
+sS'caderno'
+p236
+S'0'
+sS'urlopen'
+p237
+S'<function urlopen>'
+p238
+sS'HTML'
+p239
+S"<class 'gluon.html.HTML'>"
+p240
+sS'SQLFORM'
+p241
+S"<class 'gluon.sqlhtml.SQLFORM'>"
+p242
+sS'_item'
+p243
+S"(<lazyT 'Home'>, False, '/aluminum', [])"
+p244
+sS'LOAD'
+p245
+S'<function LOAD>'
+p246
+sS'redirect'
+p247
+S'<function redirect>'
+p248
+sS'FIELDSET'
+p249
+S"<class 'gluon.html.FIELDSET'>"
+p250
+sS'IS_EQUAL_TO'
+p251
+S"<class 'gluon.validators.IS_EQUAL_TO'>"
+p252
+sS'fichas_venda'
+p253
+S'0'
+sS'embed64'
+p254
+S'<function embed64>'
+p255
+sS'tvalor_devolvido'
+p256
+S'0'
+sS'IS_LIST_OF'
+p257
+S"<class 'gluon.validators.IS_LIST_OF'>"
+p258
+sS'__name__'
+p259
+S"'__restricted__'"
+p260
+sS'EMBED'
+p261
+S"<class 'gluon.html.EMBED'>"
+p262
+sS'configuration'
+p263
+S"{'host': {'names': 'localhost:*, 127.0.0.1:*, *:...': 'sqlite://storage.sqlite', 'pool_size': '10'}}"
+p264
+sS'FORM'
+p265
+S"<class 'gluon.html.FORM'>"
+p266
+sS'H2'
+p267
+S"<class 'gluon.html.H2'>"
+p268
+sS'H3'
+p269
+S"<class 'gluon.html.H3'>"
+p270
+sS'projeto'
+p271
+S"<Row {'empresa': 4L, 'total_salario_funcionario'...rado': 29090.0, 'total_pecas_mercadoria': 4967L}>"
+p272
+sS'H1'
+p273
+S"<class 'gluon.html.H1'>"
+p274
+sS'H6'
+p275
+S"<class 'gluon.html.H6'>"
+p276
+sS'H4'
+p277
+S"<class 'gluon.html.H4'>"
+p278
+sS'H5'
+p279
+S"<class 'gluon.html.H5'>"
+p280
+sS'UL'
+p281
+S"<class 'gluon.html.UL'>"
+p282
+sS'IS_UPPER'
+p283
+S"<class 'gluon.validators.IS_UPPER'>"
+p284
+sS'xmlescape'
+p285
+S'<function xmlescape>'
+p286
+sS'IS_TIME'
+p287
+S"<class 'gluon.validators.IS_TIME'>"
+p288
+sS'OPTION'
+p289
+S"<class 'gluon.html.OPTION'>"
+p290
+sS'TITLE'
+p291
+S"<class 'gluon.html.TITLE'>"
+p292
+sS'CRYPT'
+p293
+S"<class 'gluon.validators.CRYPT'>"
+p294
+sS'IS_EMPTY_OR'
+p295
+S"<class 'gluon.validators.IS_EMPTY_OR'>"
+p296
+sS'MARKMIN'
+p297
+S"<class 'gluon.html.MARKMIN'>"
+p298
+sg126
+S"<type 'datetime.date'>"
+p299
+sS'INPUT'
+p300
+S"<class 'gluon.html.INPUT'>"
+p301
+sS'STRONG'
+p302
+S"<class 'gluon.html.STRONG'>"
+p303
+sS'COL'
+p304
+S"<class 'gluon.html.COL'>"
+p305
+sS'__builtins__'
+p306
+S"{'ArithmeticError': <type 'exceptions.ArithmeticError'>, 'AssertionError': <type 'exceptions.AssertionError'>, 'AttributeError': <type 'exceptions.AttributeError'>, 'BaseException': <type 'exceptions.BaseException'>, 'BufferError': <type 'exceptions.BufferError'>, 'BytesWarning': <type 'exceptions.BytesWarning'>, 'DeprecationWarning': <type 'exceptions.DeprecationWarning'>, 'EOFError': <type 'exceptions.EOFError'>, 'Ellipsis': Ellipsis, 'EnvironmentError': <type 'exceptions.EnvironmentError'>, ...}"
+p307
+sS'totaldespesa'
+p308
+S'0'
+sS'SCRIPT'
+p309
+S"<class 'gluon.html.SCRIPT'>"
+p310
+sS'primiradata'
+p311
+S'0'
+sS'TABLE'
+p312
+S"<class 'gluon.html.TABLE'>"
+p313
+sS'classe_despesa'
+p314
+S'<Row {\'modified_by\': 6L, \'despesa\': <Set ("despe..., 47), \'id\': 743L, \'descricao\': \'GASOLINA SAMY\'}>'
+p315
+sS'IS_IPV4'
+p316
+S"<class 'gluon.validators.IS_IPV4'>"
+p317
+sS'IS_LENGTH'
+p318
+S"<class 'gluon.validators.IS_LENGTH'>"
+p319
+sS'IS_IPV6'
+p320
+S"<class 'gluon.validators.IS_IPV6'>"
+p321
+sS'XML'
+p322
+S"<class 'gluon.html.XML'>"
+p323
+sS'ANY_OF'
+p324
+S"<class 'gluon.validators.ANY_OF'>"
+p325
+sS'B'
+S"<class 'gluon.html.B'>"
+p326
+sS'IMG'
+p327
+S"<class 'gluon.html.IMG'>"
+p328
+sS'SQLTABLE'
+p329
+S"<class 'gluon.sqlhtml.SQLTABLE'>"
+p330
+sS'IS_MATCH'
+p331
+S"<class 'gluon.validators.IS_MATCH'>"
+p332
+sS'IS_ALPHANUMERIC'
+p333
+S"<class 'gluon.validators.IS_ALPHANUMERIC'>"
+p334
+sS'SPAN'
+p335
+S"<class 'gluon.html.SPAN'>"
+p336
+sS'IS_JSON'
+p337
+S"<class 'gluon.validators.IS_JSON'>"
+p338
+sS'IS_IPADDRESS'
+p339
+S"<class 'gluon.validators.IS_IPADDRESS'>"
+p340
+sS'rowsdesp'
+p341
+S'<Rows (306)>'
+p342
+sS'IS_SLUG'
+p343
+S"<class 'gluon.validators.IS_SLUG'>"
+p344
+sS'tentrada'
+p345
+S'0'
+sS'sub_venda'
+p346
+S'<Row {\'total_saldo_cobrador\': -2558.570000000001...volucao\': <Set ("devolucao"."sub_venda" = 162)>}>'
+p347
+sS'BEAUTIFY'
+p348
+S"<class 'gluon.html.BEAUTIFY'>"
+p349
+sS'META'
+p350
+S"<class 'gluon.html.META'>"
+p351
+sS'AppConfig'
+p352
+S'<function AppConfig>'
+p353
+sS'IS_DATE'
+p354
+S"<class 'gluon.validators.IS_DATE'>"
+p355
+sS'IS_EMAIL'
+p356
+S"<class 'gluon.validators.IS_EMAIL'>"
+p357
+sS'IS_NOT_EMPTY'
+p358
+S"<class 'gluon.validators.IS_NOT_EMPTY'>"
+p359
+sS'xrange'
+p360
+S"<type 'xrange'>"
+p361
+sS'TBODY'
+p362
+S"<class 'gluon.html.TBODY'>"
+p363
+sS'CAT'
+p364
+S"<class 'gluon.html.CAT'>"
+p365
+sS'Field'
+p366
+S"<class 'pydal.objects.Field'>"
+p367
+sS'IS_LIST_OF_EMAILS'
+p368
+S"<class 'gluon.validators.IS_LIST_OF_EMAILS'>"
+p369
+sg58
+S"<Storage {'_vars': None, 'function': 'acesso_ven...web2py/applications/aluminum/', 'method': 'GET'}>"
+p370
+sS'DIV'
+p371
+S"<class 'gluon.html.DIV'>"
+p372
+sS'tcaderno'
+p373
+S'0'
+sS'LEGEND'
+p374
+S"<class 'gluon.html.LEGEND'>"
+p375
+sS'to_native'
+p376
+S'<function to_native>'
+p377
+sS'COLGROUP'
+p378
+S"<class 'gluon.html.COLGROUP'>"
+p379
+sS'DAL'
+p380
+S"<class 'pydal.base.DAL'>"
+p381
+sS'ASSIGNJS'
+p382
+S'<function ASSIGNJS>'
+p383
+sS'TR'
+p384
+S"<class 'gluon.html.TR'>"
+p385
+sS'LI'
+p386
+S"<class 'gluon.html.LI'>"
+p387
+sS'TH'
+p388
+S"<class 'gluon.html.TH'>"
+p389
+sS'TD'
+p390
+S"<class 'gluon.html.TD'>"
+p391
+sS'IS_URL'
+p392
+S"<class 'gluon.validators.IS_URL'>"
+p393
+sS'A'
+S"<class 'gluon.html.A'>"
+p394
+sS'HEAD'
+p395
+S"<class 'gluon.html.HEAD'>"
+p396
+sS'tfichas_venda'
+p397
+S'0'
+sS'ultimadata'
+p398
+S'0'
+sS'I'
+S"<class 'gluon.html.I'>"
+p399
+sS'Request'
+p400
+S'<class urllib2.Request>'
+p401
+sS'IS_NOT_IN_DB'
+p402
+S"<class 'gluon.validators.IS_NOT_IN_DB'>"
+p403
+sS'valor_devolvido'
+p404
+S'0'
+sS'rows'
+p405
+S'<Rows (383)>'
+p406
+sg128
+S"<Storage {'body': <cStringIO.StringO object at 0...iew': 'acs_projeto/acesso_vendas_particao.html'}>"
+p407
+sS'THEAD'
+p408
+S"<class 'gluon.html.THEAD'>"
+p409
+sS'a'
+S'0'
+sS'IS_NULL_OR'
+p410
+S"<class 'gluon.validators.IS_EMPTY_OR'>"
+p411
+sS'IS_FLOAT_IN_RANGE'
+p412
+S"<class 'gluon.validators.IS_FLOAT_IN_RANGE'>"
+p413
+sS'IS_EXPR'
+p414
+S"<class 'gluon.validators.IS_EXPR'>"
+p415
+sS'T'
+S'<gluon.languages.translator object>'
+p416
+sS'IS_IN_SET'
+p417
+S"<class 'gluon.validators.IS_IN_SET'>"
+p418
+sS'IS_UPLOAD_FILENAME'
+p419
+S"<class 'gluon.validators.IS_UPLOAD_FILENAME'>"
+p420
+sS'TT'
+p421
+S"<class 'gluon.html.TT'>"
+p422
+sS'IS_DECIMAL_IN_RANGE'
+p423
+S"<class 'gluon.validators.IS_DECIMAL_IN_RANGE'>"
+p424
+sssS'traceback'
+p425
+S'Traceback (most recent call last):\n  File "/home/rogoberto/web2py/gluon/restricted.py", line 219, in restricted\n    exec(ccode, environment)\n  File "/home/rogoberto/web2py/applications/aluminum/views/acs_projeto/acesso_vendas_particao.html", line 164, in <module>\n    <h6 class="my-0"><b>Mercadoria</b></h6> <small class="text-muted">Total</small>\nNameError: name \'usuario\' is not defined\n'
+p426
+s.

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 @auth.requires_login()
 def index():
+    redirect(URL('default','index'))
     try:
         data=request.now
         usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
@@ -11,8 +12,10 @@ def index():
         redirect(URL('default','index'))
     return locals()
 
+#FUNÇÃO DESCONTINUADA
 @auth.requires_login()
 def inserir_projeto():
+    redirect(URL('default','index'))
     response.view = 'generic.html' # use a generic view
     #recebe id da empresa como parametro e busca empresa
     empresa = db.empresa(request.args(0, auth.user))
@@ -51,6 +54,7 @@ def inserir_projeto():
 
 @auth.requires_login()
 def acesso_projeto():
+    redirect(URL('default','index'))
     projeto = db.projeto(request.args(0, auth.user))
     empresa = db.empresa(projeto.empresa)
     usuario=auth.user

@@ -16,8 +16,10 @@
 {{tvalor_devolvido=0}}
 
 {{primiradata=0}}{{ultimadata=0}}
+{{if not (auth.user.id==1):}}
 <div class="py-5">
     <div class="container">
+      {{pass}}
       <div class="row">
         <div class="col-md-12">
           <h5 class="">Lista de Vendas da Rota ( {{=sub_venda.primeira_cidade}} )</h5>
@@ -37,21 +39,26 @@
                 <tr>
                   <th scope="col" >#</th>
                   <th scope="col" >Data</th>
-                  <th scope="col" class="text-center">Venda</th>
-                  <th scope="col" class="text-center">Fichas</th>
-                  <th scope="col" class="text-center">Caderno</th>
-                  <th scope="col" class="text-center">Entrada</th>
-                  <th scope="col" class="text-center">Despesa</th>
-                  <th scope="col" class="text-center">Acumulado</th>
+                  <th scope="col" class="">Venda</th>
+                  <th scope="col" class="">Fichas</th>
+                  <th scope="col" class="">Caderno</th>
+                  <th scope="col" class="">Entrada</th>
+                  <th scope="col" class="">Despesa</th>
+                  <th scope="col" class="">Acumulado</th>
+                  <th scope="col" class="">Venda Acumulada</th>
+                  <th scope="col" class="">Fichas Acumulada</th>
                 </tr>
               </thead>
               <tbody>
                 {{data=request.now}}
             {{if len(rows)>0:}}
                 {{data=rows.first().data_venda}}
-{{ultimadata=rows.last().data_venda}}
-{{primiradata=rows.first().data_venda}}
-            {{pass}}
+                {{ultimadata=rows.last().data_venda}}
+                {{primiradata=rows.first().data_venda}}
+            {{else:}}
+                
+            {{redirect(URL('alterar_dados_rota', args=sub_venda.id))}}
+                {{pass}}
             {{for row in rows:}}
             <tr>
                 {{if row.data_venda==data:}}
@@ -271,6 +278,8 @@ Ultima data - {{=ultimadata}}
           </ul>
         </div>
       </div>
+  {{if not (auth.user.id==1):}}
     </div>
   </div>
+{{pass}}
 {{pass}}

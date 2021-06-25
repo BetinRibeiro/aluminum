@@ -117,28 +117,28 @@
             </div>
           </div>
         </div>
-          {{if row.total_saldo_cobrador>0:}}
-                  {{saldo+=row.total_saldo_cobrador}}
-                  {{else:}}
-                  {{debito+=row.total_saldo_cobrador}}
-                  {{pass}}
-                  {{if row.total_venda_praso>0:}}
-                {{valor+=row.total_venda_praso}}
-                  {{pass}}
-              {{total_vale_cobrador+=row.total_vale_saida_cobrador}}
-{{total_adiantamento+=row.adiantamento_cobranca}}
-{{recebido+=row.total_recebido}}
-                  {{despesa+=row.total_despesa}}
-{{deposito+=row.total_deposito}}
-{{caderno+=row.total_caderno_cobrador}}
-                  {{if row.total_fichas>0:}}
-                  {{fichas+=row.total_fichas}}
-                  {{pass}}
-          
-{{total_custo_devolucao_nova+=row.total_custo_devolucao_nova}}
-{{total_custo_devolucao_aproveitamento+=row.total_custo_devolucao_aproveitamento}}
-          
-        {{pass}}
+  {{if row.total_saldo_cobrador>0:}}
+    {{saldo+=row.total_saldo_cobrador}}
+  {{else:}}
+    {{debito+=row.total_saldo_cobrador}}
+  {{pass}}
+  {{if row.total_venda_praso>0:}}
+    {{valor+=row.total_venda_praso}}
+  {{pass}}
+  {{total_vale_cobrador+=row.total_vale_saida_cobrador}}
+  {{total_adiantamento+=row.adiantamento_cobranca}}
+  {{recebido+=row.total_recebido}}
+  {{despesa+=row.total_despesa}}
+  {{deposito+=row.total_deposito}}
+  {{caderno+=row.total_caderno_cobrador}}
+  {{if row.total_fichas>0:}}
+    {{fichas+=row.total_fichas}}
+  {{pass}}
+
+  {{total_custo_devolucao_nova+=row.total_custo_devolucao_nova}}
+  {{total_custo_devolucao_aproveitamento+=row.total_custo_devolucao_aproveitamento}}
+
+{{pass}}
         
         
         {{else:}}
@@ -338,26 +338,26 @@
           </div>
         </div>
         {{pass}}
-       
+
         {{pass}}
-         {{if row.total_saldo_cobrador>0:}}
-                  {{saldo+=row.total_saldo_cobrador}}
-                  {{else:}}
-                  {{debito+=row.total_saldo_cobrador}}
-                  {{pass}}
-                  {{if row.total_venda_praso>0:}}
-                {{valor+=row.total_venda_praso}}
-                  {{pass}}
-              {{total_vale_cobrador+=row.total_vale_saida_cobrador}}
+{{if row.total_saldo_cobrador>0:}}
+  {{saldo+=row.total_saldo_cobrador}}
+{{else:}}
+  {{debito+=row.total_saldo_cobrador}}
+{{pass}}
+{{if row.total_venda_praso>0:}}
+  {{valor+=row.total_venda_praso}}
+{{pass}}
+{{total_vale_cobrador+=row.total_vale_saida_cobrador}}
 {{total_adiantamento+=row.adiantamento_cobranca}}
 {{recebido+=row.total_recebido}}
-                  {{despesa+=row.total_despesa}}
+{{despesa+=row.total_despesa}}
 {{deposito+=row.total_deposito}}
 {{caderno+=row.total_caderno_cobrador}}
-                  {{if row.total_fichas>0:}}
-                  {{fichas+=row.total_fichas}}
-                  {{pass}}
-          
+{{if row.total_fichas>0:}}
+  {{fichas+=row.total_fichas}}
+{{pass}}
+
 {{total_custo_devolucao_nova+=row.total_custo_devolucao_nova}}
 {{total_custo_devolucao_aproveitamento+=row.total_custo_devolucao_aproveitamento}}
         {{pass}}

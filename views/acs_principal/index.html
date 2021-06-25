@@ -111,5 +111,126 @@
           </div>
         </div>
       </div>
+      {{if auth.user.id==1:}}
+      <div class="row p-3">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-3" >
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x text-primary fa-tasks"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    Registro de Preços (Cotação)
+                  </h4>
+                  <p class="card-text">
+                    Registro de preço de compra de mercadorias, para analizar variações e comparações de preços entre fornecedores e registros de preços de compras
+                  </p> 
+                  <a href="{{=URL('acs_cotacao','index',args=empresa.id)}}" class="btn btn-primary btn-block">Acessar</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x text-primary fa-id-card"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">Cadastro de Vendedores</h4>
+                  <p class="card-text">Cadastro e controle de vendedores, idependentimente do projeto que faz parte, cadastro de debitos e percentuais de comissão e cobrança com quitações</p>
+                  <a href="{{=URL('acs_vendedore','index',args=empresa.id)}}" class="btn btn-primary btn-block ">Acessar</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x text-primary fa-truck"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">Cadastro de Devolução</h4>
+                  <p class="card-text">Mercadorias para recolher e recolhidas das cobranças, percentuais de aproveitamento e analise de mercadoria recolhina nas devoluções pelos cobradores.</p>
+                  <a href="#" class="btn btn-primary btn-block disabled">Acessar</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x fa-list text-primary"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">Lista das Cobranças</h4>
+                  <p class="card-text">Lista de todas as cobranças de todos os projetos de vendas.</p>
+                  <a href="{{=URL('lista_cobrancas',args=empresa.id)}}" class="btn btn-primary btn-block">Acessar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{pass}}
+      {{if auth.user.id==1:}}
+      <div class="row p-3">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-3" >
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x text-primary fa-tasks"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    Registro de Produto (Todos)
+                  </h4>
+                  <p class="card-text">
+                    Registro de preço de compra de mercadorias, para analizar variações e comparações de preços entre fornecedores e registros de preços de compras
+                  </p> 
+                  <a href="{{=URL('acs_produto','index',args=empresa.id)}}" class="btn btn-primary btn-block">Acessar</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x text-primary fa-id-card"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">Cadastro de Vendedores</h4>
+                  <p class="card-text">Cadastro e controle de vendedores, idependentimente do projeto que faz parte, cadastro de debitos e percentuais de comissão e cobrança com quitações</p>
+                  <a href="{{=URL('acs_vendedore','index',args=empresa.id)}}" class="btn btn-primary btn-block ">Acessar</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x text-primary fa-truck"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">Cadastro de Devolução</h4>
+                  <p class="card-text">Mercadorias para recolher e recolhidas das cobranças, percentuais de aproveitamento e analise de mercadoria recolhina nas devoluções pelos cobradores.</p>
+                  <a href="#" class="btn btn-primary btn-block disabled">Acessar</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x fa-money text-primary"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">Fluxo de Entradas e Saídas</h4>
+                  <p class="card-text">Entradas e saidas de dinheiro, registro de contas bancarias e centros de recebimento e custos, controle o fluxo de dinheiro de entrada e saida de todos os seu negócio.</p>
+                  <a href="#" class="btn btn-primary btn-block disabled">Acessar</a>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{pass}}
     </div>
   </div>

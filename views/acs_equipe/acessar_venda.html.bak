@@ -105,7 +105,7 @@
                                 <td>
                                     {{if not projeto.venda_finalizada:}}
 
-{{if (not row1.cobranca_iniciada):}}
+{{if ( row1.cobranca_iniciada):}}
                 {{if (usuario.id!=2324):}}
                                     <a href="{{=URL('alterar_venda', args=row.id)}}">{{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}</a>
                                     {{else:}}
@@ -124,7 +124,7 @@
                                 <td>{{=row.quant_fichas_devolvidas}}</td>
                                 <td>R$ {{="{:,}".format(round(row.valor_devolvido,1)).replace(",",".")}}0</td>
                               {{if auth.user.id==1:}}
-{{if ( row1.cobranca_iniciada):}}
+{{if (not row1.cobranca_iniciada):}}
                               <td><a class="btn btn-link" href="{{=URL('trocar', args=row.id)}}">Trocar</a></td>
                               {{pass}}
                               {{pass}}

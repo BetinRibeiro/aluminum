@@ -37,7 +37,11 @@
                   <tbody>{{a=0}}
                       {{for row in row:}}
                     {{if row.auth_user.id!=28:}}
+                    {{if row.bloqueado:}}
+                    <tr class="text-danger">
+                      {{else:}}
                     <tr>
+                      {{pass}}
                       <th scope="row">{{=1100+row.id}}</th>
                       <td>{{=row.auth_user.first_name}} {{=row.auth_user.last_name}}</td>
                       <td>{{=row.tipo}}</td>

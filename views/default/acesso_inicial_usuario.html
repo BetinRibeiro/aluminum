@@ -1,16 +1,11 @@
 {{extend 'layout.html'}}
 <h5>{{=empresa.nome}}</h5>
-{{if (len(rows)>0) or(len(rowscob)>0):}}
-{{if liberar==9:}}
-        <a class="btn btn-outline-light"  href="{{=URL('criar_projeto', args=empresa.id)}}">
-            <i class="fa text-primary fa-plus-square fa-2x" ></i>
-        </a>
+{{if (len(rows)==0) and (len(rowscob)==0):}}
+<!--     quando não tem vendas nem cobranças vinculados -->
+{{redirect(URL('index'))}}
 {{pass}}
-
-{{if len(rows)>0:}}
-
-  <div class="py-2">
-    <div class="container">
+  {{if len(rows)>0:}}
+<!-- caso tenha vendas -->
       <div class="row">
         <div class="col-md-12" >
           <div class="table-responsive" >
@@ -18,8 +13,8 @@
               <thead>
                 <tr>
                   <th scope="col">DESCRIÇÃO</th>
-                    <th scope="col">VENDA</th>
-                    <th scope="col">PERC</th>
+                  <th scope="col">VENDA</th>
+                  <th scope="col">PERC</th>
                 </tr>
               </thead>
               <tbody>
@@ -27,7 +22,7 @@
                 <tr>
                   <td>
                     <a class="btn btn-outline-primary btn-block text-left" href="{{=URL('projeto','acesso_projeto', args=row.id)}}">
-                      {{=row.descricao}}
+                        {{=row.descricao}}
                     </a>
                   </td>
                   <td>R$ {{="{:,.2f}".format(round(row.total_venda_prazo,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
@@ -36,9 +31,6 @@
                   {{perc=row.total_cobrado/row.total_venda_prazo*100}}
                   {{pass}}
                   <td>{{="{:,.1f}".format(round(perc,1)).replace(",","#").replace(".",",").replace("#",".")}}%</td>
-                  {{if liberar==9:}}
-                  <td><a href="{{=URL('alterar_projeto', args=row.id)}}"><i class="fa mr-2 fa-exchange text-warning" ></i></a></td>
-                  {{pass}}
                 </tr>
                 {{pass}}
               </tbody>
@@ -46,13 +38,10 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
-{{pass}}
-<hr>
-{{if len(rowscob)>0:}}
-  <div class="py-5">
-    <div class="container">
+  {{pass}}
+  <hr>
+<!-- caso tenha cobranças -->
+  {{if len(rowscob)>0:}}
       <div class="row">
         <div class="col-md-12" >
           <div class="table-responsive" >
@@ -60,47 +49,32 @@
               <thead>
                 <tr>
                   <th scope="col">DATA</th>
-                   <th scope="col">CIDADE</th>
-                   <th scope="col">VALOR</th>
+                  <th scope="col">CIDADE</th>
+                  <th scope="col">VALOR</th>
                 </tr>
               </thead>
               <tbody>
-              {{for row1 in rowscob:}}
-                  <tr>
-                    <td>
-              {{if  row1.cobranca_finalizada:}}
-                      <a  class="btn btn-outline-success btn-block text-left" href="{{=URL('cobranca','acesso_particao_cobranca', args=row1.id)}}">
-                        {{else:}}
-                      <a  class="btn btn-outline-primary btn-block text-left" href="{{=URL('cobranca','acesso_particao_cobranca', args=row1.id)}}">
+                {{for row1 in rowscob:}}
+                <tr>
+                  <td>
+                    {{if  row1.cobranca_finalizada:}}
+                    <a  class="btn btn-outline-success  text-left" href="{{=URL('cobranca','acesso_particao_cobranca', args=row1.id)}}">
+                      {{=row1.data_inicio_cobranca.strftime('%d/%m/%Y')}}
+                    </a>
+                    {{else:}}
+                    <a  class="btn btn-outline-primary  text-left" href="{{=URL('cobranca','acesso_particao_cobranca', args=row1.id)}}">
+                      {{=row1.data_inicio_cobranca.strftime('%d/%m/%Y')}}
+                    </a>
+                    {{pass}}
+                  </td>
+                  <td>{{=row1.primeira_cidade}}</td>
+                  <td>
+                    R$ {{="{:,.2f}".format(round(row1.total_venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </td>
+                </tr>
                 {{pass}}
-                        {{=row1.data_inicio_cobranca.strftime('%d/%m/%Y')}}
-                      </a>
-                    </td>
-                      <td>{{=row1.primeira_cidade}}</td>
-                      <td>R$ {{="{:,.2f}".format(round(row1.total_venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
-                  </tr>
-            {{pass}}
-          </tbody>
-        </table>
-      </div>
-      </div>
-    </div>
-  </div>
-{{pass}}
-
-{{else:}}
-  <div class="py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12" >
-          <h2>
-               <marquee direction="left">
-                  <a class="navbar-brand text-danger"> 
-                    <h6>Você não possui nem um projeto de venda nem cobranças vinculado ao seu login!</h6>
-                 </a>
-              </marquee>
-          </h2>
-      </div>
-    </div>
-  </div>
-{{pass}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+  {{pass}}

@@ -1,0 +1,73 @@
+# -*- coding: utf-8 -*-
+
+@auth.requires_login()
+def index():
+    empresa = db.empresa(request.args(0, auth.user))
+    paginacao = 15
+    if len(request.args) == 1:
+        pagina = 1
+    else:
+        try:
+            pagina = int(request.args[1])
+        except ValueError:
+            redirect(URL('erro', vars={
+                  'msg':'Numero da página inválido'
+                  }))
+    if pagina <= 0:
+        pagina = 1
+    total = db((db.cotacao.empresa==empresa.id)).count()
+    paginas = total/paginacao
+    if total%paginacao:
+        paginas+=1
+    if total==0:
+        paginas=1
+    if pagina > paginas:
+        redirect(URL(args=[paginas]))
+    limites = (paginacao*(pagina-1), (paginacao*pagina))
+    registros = db((db.cotacao.empresa==empresa.id)).select(
+      limitby=limites,orderby=~db.cotacao.id|~db.cotacao.fornecedor
+      )
+    consul=(request.args(2))
+    if (consul):
+        registros = db((db.cotacao.empresa==empresa.id)&((db.cotacao.produto.contains(consul))|(db.cotacao.forenecedor.contains(consul)))).select(limitby=(0,100),orderby=~db.cotacao.id)
+    return dict(rows=registros, pagina=pagina, paginas=paginas, total=total, consul=consul,empresa=empresa,paginacao=paginacao)
+
+@auth.requires_login()
+def cadastrar():
+  try:
+    usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
+    if not usuario_empresa:
+      redirect(URL('default','index'))
+    #cria tela generica
+    response.view = 'generic.html' # use a generic view
+    request.function='Cadastro de Cotação'
+    db.cotacao.empresa.default = usuario_empresa.empresa
+    form = SQLFORM(db.cotacao).process()
+    if form.accepted:
+      response.flash = 'Formulario aceito'
+      redirect(URL('index',args=usuario_empresa.empresa))
+    elif form.errors:
+      response.flash = 'Formulario não aceito'
+    else:
+      response.flash = 'Prencha o formulario'
+  except:
+    redirect(URL('index',args=usuario_empresa.empresa))
+  return  dict(form=form)
+
+def alterar():
+    response.view = 'generic.html' # use a generic view
+    request.function='Alterar Cotação'
+    cotacao= db.cotacao(request.args(0, cast=int))
+    if auth.user.id==1:
+        db.cotacao.empresa.label="(Empresa) # Programador"
+        db.cotacao.empresa.writable=True
+        db.cotacao.empresa.readable=True
+    form = SQLFORM(db.cotacao, request.args(0, cast=int), deletable=True)
+    if form.process().accepted:
+        session.flash = 'Dados atualizado'
+        redirect(URL('index', args=cotacao.empresa))
+    elif form.errors:
+        response.flash = 'Formulario não aceito'
+    else:
+        response.flash = 'Preencha o formulario'
+    return dict(form=form)

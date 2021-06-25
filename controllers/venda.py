@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# tente algo como
 @auth.requires_login()
 def acesso_particao():
     projeto = db.projeto(request.args(0, cast=int))
@@ -19,7 +18,18 @@ def acesso_particao():
     return locals()
 
 @auth.requires_login()
+def ver_particao():
+    sub_venda = db.sub_venda(request.args(0, cast=int))
+    projeto = db.projeto(sub_venda.projeto)
+    rows = db(db.venda.sub_venda == sub_venda.id).select(orderby=db.venda.data_venda)
+    return locals()
+  
+##funções descontinuadas dia 21 jun 2021
+#verificar os proximos 90 dias
+#deleta-las
+@auth.requires_login()
 def criar_particao():
+    redirect(URL('default','index'))
     response.view = 'generic.html' # use a generic view
     projeto = db.projeto(request.args(0, auth.user))
 
@@ -37,6 +47,7 @@ def criar_particao():
     return dict(form=form)
 @auth.requires_login()
 def alterar_particao():
+    redirect(URL('default','index'))
     response.view = 'generic.html' # use a generic view
     sub_venda = db.sub_venda(request.args(0, cast=int))
     projeto = db.projeto(sub_venda.projeto)
@@ -45,7 +56,6 @@ def alterar_particao():
 
     db.sub_venda.projeto.readable = False
     db.sub_venda.projeto.writable = False
-    
     db.sub_venda.cobranca_iniciada.label = 'Venda Finalizada'
     db.sub_venda.cobranca_iniciada.readable = True
     db.sub_venda.cobranca_iniciada.writable = True
@@ -62,10 +72,3 @@ def alterar_particao():
         if not response.flash:
             response.flash = 'Preencha o formulário!'
     return dict(form=form)
-
-@auth.requires_login()
-def ver_particao():
-    sub_venda = db.sub_venda(request.args(0, cast=int))
-    projeto = db.projeto(sub_venda.projeto)
-    rows = db(db.venda.sub_venda == sub_venda.id).select(orderby=db.venda.data_venda)
-    return locals()

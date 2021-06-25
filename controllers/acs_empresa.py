@@ -29,3 +29,9 @@ def alterar_simulacao():
   elif form.errors:
       response.flash = 'Erros no formulário!'
   return  dict(form=form)
+
+
+def mensagem():
+  response.view = 'generic.html' # use a generic view
+  mensagem = "Seu servidor de acesso e armazenamento da empresa não foi pago, entre em contato com seu provedor de serviço, para regularizar o débito. desde já agradecemos a compreenção!"
+  return dict(mensagem=mensagem)

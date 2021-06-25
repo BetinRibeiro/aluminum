@@ -17,7 +17,7 @@ def trocar():
   response.view = 'generic.html' # use a generic view
   venda = db.venda(request.args(0, cast=int))
   #132 partição geral 14 dede
-  venda.sub_venda=150
+  venda.sub_venda=15478
   venda.update_record()
   redirect(URL('acessar_venda', args=venda.vendedor))
   return locals()
@@ -225,6 +225,53 @@ def inserir_venda():
     return dict(form=form)
 
 @auth.requires_login()
+def vincular_vendedor():
+    response.view = 'generic.html' # use a generic view
+    vendedor = db.vendedor(request.args(0, cast=int))
+    projeto = db.projeto(vendedor.projeto)
+    db.vendedor.id.readable = False
+    db.vendedor.id.writable = False
+
+    db.vendedor.projeto.readable = False
+    db.vendedor.projeto.writable = False
+    
+    db.vendedor.comissao_cobranca.readable = False
+    db.vendedor.comissao_cobranca.writable = False
+    
+    db.vendedor.vale_saida.readable = False
+    db.vendedor.vale_saida.writable = False
+    
+    db.vendedor.descricao.readable = False
+    db.vendedor.descricao.writable = False
+    
+    db.vendedor.comissao_venda.readable = False
+    db.vendedor.comissao_venda.writable = False
+    
+    db.vendedor.funcionario_empresa.readable = True
+    db.vendedor.funcionario_empresa.writable = True
+    db.vendedor.funcionario_empresa.writable = True
+    db.vendedor.funcionario_empresa.requires = IS_IN_DB(db((db.funcionario_empresa.empresa == projeto.empresa)&(db.funcionario_empresa.bloqueado == False)), 'funcionario_empresa.id', '%(nome)s')
+    
+    deletar=True
+    if vendedor.total_vendas>0:
+        deletar=False
+    usuario = auth.user
+    if usuario.id==2234:
+        session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
+        redirect(URL('index', args=projeto.id))
+    form = SQLFORM(db.vendedor, request.args(0, cast=int), deletable=deletar)
+    if form.process().accepted:
+        session.flash = 'Atualizado'
+        redirect(URL('index', args=projeto.id))
+    elif form.errors:
+        response.flash = 'Erros no formulário!'
+    else:
+        if not response.flash:
+            response.flash = 'Preencha o formulário!'
+    return dict(form=form)
+
+
+@auth.requires_login()
 def alterar_venda():
     response.view = 'generic.html' # use a generic view
     venda = db.venda(request.args(0, cast=int))
@@ -254,3 +301,46 @@ def alterar_venda():
         if not response.flash:
             response.flash = 'Preencha o formulário!'
     return dict(form=form)
+
+  
+def relacao_individual():
+  projeto = db.projeto(request.args(0, cast=int))
+  rows = db(db.vendedor.projeto == request.args(0, cast=int)).select(orderby=~db.vendedor.total_vendas)
+  return locals()
+
+def alterar_comissoes_vendedor():
+  response.view = 'generic.html' # use a generic view
+  vendedor = db.vendedor(request.args(0, cast=int))
+  projeto = db.projeto(vendedor.projeto)
+  db.vendedor.id.readable = False
+  db.vendedor.id.writable = False
+  db.vendedor.nome.writable = False
+  db.vendedor.nome.readable = True
+  db.vendedor.vale_saida.readable = False
+  db.vendedor.vale_saida.writable = False
+  db.vendedor.descricao.readable = False
+  db.vendedor.descricao.writable = False
+  db.vendedor.comissao_cobranca.readable = True
+  db.vendedor.comissao_cobranca.writable = True
+  db.vendedor.total_descontado.readable = True
+  db.vendedor.total_descontado.writable = True
+
+  db.vendedor.projeto.readable = True
+  db.vendedor.projeto.writable = False
+  deletar=True
+  if vendedor.total_vendas>0:
+      deletar=False
+  usuario = auth.user
+  if usuario.id==2234:
+      session.flash = 'Essa informação deve ser mantida pelo chefe de equipe'
+      redirect(URL('index', args=projeto.id))
+  form = SQLFORM(db.vendedor, request.args(0, cast=int), deletable=deletar)
+  if form.process().accepted:
+      session.flash = 'Atualizado'
+      redirect(URL('relacao_individual', args=projeto.id))
+  elif form.errors:
+      response.flash = 'Erros no formulário!'
+  else:
+      if not response.flash:
+          response.flash = 'Preencha o formulário!'
+  return dict(form=form)

@@ -73,6 +73,7 @@ def acesso_despesa():
 def criar_desp():
     response.view = 'generic.html' # use a generic view
     classe_despesa = db.classe_despesa(request.args(0, auth.user))
+    projeto = db.projeto(classe_despesa.projeto)
     tipodesp=(request.args(1, auth.user))
     variavel=0
     variavel=request.args(2, auth.user)
@@ -87,7 +88,7 @@ def criar_desp():
     db.despesa.classe_despesa.default = classe_despesa.id
     db.despesa.classe_despesa.writable = False
     db.despesa.tipo.default = (request.args(1, auth.user))
-    db.despesa.projeto.default = classe_despesa.projeto
+    db.despesa.projeto.default = projeto.id
     db.despesa.projeto.writable = False
     form = SQLFORM(db.despesa).process()
     if form.accepted:

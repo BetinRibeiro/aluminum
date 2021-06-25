@@ -28,6 +28,7 @@
             <tr>
                 <th>#</th>
                 <th>Nome</th>
+                <th>Ficha</th>
                 <th>Venda</th>
                 <th>Recebido</th>
                 <th>Devolvido</th>
@@ -44,6 +45,8 @@
                 <td>{{=a}}º</td>
 
                 <td>{{=row.nome.replace("cfrd","")}}</td>
+<!--               Colocar o valor de venda somente da parte que o cobrador pegou -->
+              <td><b>{{=row.total_fichas}}</b></td>
                 {{total_venda=0}}
                 {{total_fichas=0}}
                 {{for row1 in rowscob:}}
@@ -93,6 +96,7 @@
             {{pass}}
             <tr>
                 <th>#</th>
+                <th>#</th>
                 <th></th>
                 <th>R$ {{="{:,.2f}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                 <th>R$ {{="{:,.2f}".format(round(recebido,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
@@ -124,6 +128,7 @@
                   <th scope="col">Entregue</th>
                   <th scope="col">Conferido</th>
                   <th scope="col">Diferênça</th>
+                  <th scope="col">##</th>
                 </tr>
               </thead>
               <tbody>
@@ -162,6 +167,7 @@
                   <th scope="col">Registrado</th>
                   <th scope="col">Conferido</th>
                   <th scope="col">Diferênça</th>
+                  <th scope="col">##</th>
                 </tr>
               </thead>
               <tbody>

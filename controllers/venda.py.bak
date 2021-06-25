@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# tente algo como
 @auth.requires_login()
 def acesso_particao():
     projeto = db.projeto(request.args(0, cast=int))
@@ -9,9 +8,6 @@ def acesso_particao():
     for row in rows:
         total_venda=0.0
         total_fichas=0
-        #sum = db.venda.venda_praso.sum()
-        #row.venda_praso=(db(db.venda.sub_venda == row.id).select(sum).first()[sum])
-        #row.update_record()
         rowsv = db(db.venda.sub_venda == row.id).select()
         for rowv in rowsv:
             total_venda+=rowv.venda_praso-rowv.valor_devolvido
@@ -22,7 +18,18 @@ def acesso_particao():
     return locals()
 
 @auth.requires_login()
+def ver_particao():
+    sub_venda = db.sub_venda(request.args(0, cast=int))
+    projeto = db.projeto(sub_venda.projeto)
+    rows = db(db.venda.sub_venda == sub_venda.id).select(orderby=db.venda.data_venda)
+    return locals()
+  
+##funções descontinuadas dia 21 jun 2021
+#verificar os proximos 90 dias
+#deleta-las
+@auth.requires_login()
 def criar_particao():
+    redirect(URL('default','index'))
     response.view = 'generic.html' # use a generic view
     projeto = db.projeto(request.args(0, auth.user))
 
@@ -40,6 +47,7 @@ def criar_particao():
     return dict(form=form)
 @auth.requires_login()
 def alterar_particao():
+    redirect(URL('default','index'))
     response.view = 'generic.html' # use a generic view
     sub_venda = db.sub_venda(request.args(0, cast=int))
     projeto = db.projeto(sub_venda.projeto)
@@ -65,10 +73,3 @@ def alterar_particao():
         if not response.flash:
             response.flash = 'Preencha o formulário!'
     return dict(form=form)
-
-@auth.requires_login()
-def ver_particao():
-    sub_venda = db.sub_venda(request.args(0, cast=int))
-    projeto = db.projeto(sub_venda.projeto)
-    rows = db(db.venda.sub_venda == sub_venda.id).select(orderby=db.venda.data_venda)
-    return locals()

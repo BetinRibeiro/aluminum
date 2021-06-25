@@ -1,53 +1,9 @@
 # -*- coding: utf-8 -*-
 def index():
     return locals()
-#gera arquivo para criação de toda empresa e projetos
-@auth.requires_membership('admin') # can only be accessed by members of admin groupd
-def captura_empresa():
-    valor=100000
-    if (request.args(0)):
-      valor = request.args(0, auth.user)
-    return locals()
-@auth.requires_login()
-def acesso_inicial_usuario():
-    #busca usuario da empresa, para verificar de qual empresa o login é
-    usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
-    liberar = auth.user.id
-    #define empresa como nula
-    empresa =None
-    #caso o uruario esteja vinculado a alguma empresa
-    if auth.user.id==50:
-        redirect(URL('usuario','fsprojetos',args=8))
-    if usuario_empresa:
-        #busca a empresa que o funcionario esta vinculado
-        empresa = db.empresa(usuario_empresa.empresa)
-        if usuario_empresa.bloqueado:
-          redirect(URL('acs_mensagem','usuario_bloqueado',args="Entre em contato com o administrador da empresa e verifique o motivo do bloqueio!"))
-    else:
-        redirect(URL('index'))
-    rows = db(db.projeto.auth_user==auth.user.id).select(limitby=(0,5),orderby=~db.projeto.id)
-    rowscob = db(db.sub_venda.auth_user==auth.user.id).select()
-    return locals()
-#o acesso inicial requer estar logado
+
 @auth.requires_login()
 def acesso_inicial():
-    #busca empresa que tenha o usuario iguela ao logado
-    empresa = db.empresa(db.empresa.auth_user==auth.user.id)
-    #caso não tenha empresa vinculada como proprietario
-    #redireciona para o index inicial
-    usuario=auth.user
-    if (auth.user.id==1):
-        redirect(URL('acs_principal','index'))
-    #caso meme passa
-    if (auth.user.id==6):
-        empresa = db.empresa(4)
-        #empresa.id
-        redirect(URL('usuario','fsprojetos',args=empresa.id))
-    #caso flavio passa
-    if (auth.user.id==11):
-        empresa = db.empresa(8)
-        #empresa.id
-        redirect(URL('usuario','fsprojetos',args=empresa.id))
     usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
     if usuario_empresa:
       if (usuario_empresa.tipo=="Proprietário")|(usuario_empresa.tipo=="Administrador"):
@@ -58,84 +14,28 @@ def acesso_inicial():
         redirect(URL('default','acesso_inicial_usuario'))
     else:
         redirect(URL('default','index'))
-    if empresa:
-      rows = db(db.projeto.empresa==empresa.id).select()
-    else:
-      redirect(URL('index'))
-    if request.args(0, auth.user)=="235":
-        rows = db(db.projeto.empresa).select(orderby=db.empresa)
-    #2 consultas no banco
     return locals()
-@auth.requires_login()
-def criar_projeto():
-    response.view = 'generic.html' # use a generic view
-    #recebe id da empresa como parametro e busca empresa
-    empresa = db.empresa(request.args(0, auth.user))
-    #bloqueia visualização empresa e coloca o id da empresa como padrão
-    db.projeto.empresa.default = empresa.id
-    db.projeto.empresa.writable = False
-    #deixa o usuario que esta logado como usuario padrão
-    #deixa o id bloqueado para visualização
-    if (auth.user.id!=empresa.auth_user)or(auth.user.id!=11)or(auth.user.id!=1):
-        db.projeto.auth_user.default = auth.user.id
-        db.projeto.auth_user.writable = False
-    #deixa o nome padrão e bloqueia para visualização
-    db.projeto.nome_chefe.default = auth.user.first_name
-    db.projeto.nome_chefe.writable = False
-    #cria um sqlforma para ser processado
-    form = SQLFORM(db.projeto).process()
-    if form.accepted:
-        #caso aceito redireciona para tela de acesso inicial
-        response.flash = 'Formulario aceito'
-        projeto=db.projeto(form.vars.id)
-        redirect(URL('acesso_inicial'))
-    elif form.errors:
-        response.flash = 'Formulario não aceito'
-    else:
-        response.flash = 'Preencha o formulario'
-    #2 consultas no banco
-    return  dict(form=form)
 
-# para alterar precisa estar logado
 @auth.requires_login()
-def alterar_projeto():
-    response.view = 'generic.html' # use a generic view
-    #recebe id do projeto e busca projeto no banco
-    usuario = auth.user
-    projeto = db.projeto(request.args(0, cast=int))
-    #caso o projeto não esteja ativo redireciona
-    #pois não pode ser alterado
-    if projeto.venda_finalizada:
-        session.flash = 'A venda já foi finalizada'
-        redirect(URL('projeto','acesso_projeto', args=projeto.id))
-    
-        
-    #bloqueia id para visualização e alteração
-    db.projeto.id.readable = False
-    db.projeto.id.writable = False
-    #bloqueia empresa para alteração
-    db.projeto.empresa.readable = True
-    db.projeto.empresa.writable = False
-    a=True
-    #caso a venda a prazo seja maior que zero não deleta
-    #medida de segurança
-    if projeto.total_venda_prazo>0:
-        a=False
-    
-    if auth.user.id==1:
-        db.projeto.empresa.readable = True
-        db.projeto.empresa.writable = True
-        a=True
-    #buzca um sqlforma para ser alterado
-    form = SQLFORM(db.projeto, request.args(0, cast=int), deletable=a)
-    if form.process().accepted:
-        session.flash = 'Projeto atualizado'
-        redirect(URL('acesso_inicial'))
-    elif form.errors:
-        response.flash = 'Erros no formulário!'
-    
-    #2 consultas no banco
-    return  dict(form=form)
+def acesso_inicial_usuario():
+    #busca usuario da empresa, para verificar de qual empresa o login é
+    usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
+    #define empresa como nula
+    empresa = None
+    #caso o uruario esteja vinculado a alguma empresa
+    if usuario_empresa:
+        if (usuario_empresa.tipo=="Proprietário")|(usuario_empresa.tipo=="Administrador"):
+        redirect(URL('acs_principal','index'))
+        if usuario_empresa.bloqueado:
+          redirect(URL('acs_mensagem','usuario_bloqueado',args="Entre em contato com o administrador da empresa e verifique o motivo do bloqueio!"))
+        #busca a empresa que o funcionario esta vinculado
+        empresa = db.empresa(usuario_empresa.empresa)
+    else:
+        redirect(URL('index'))
+    rows = db(db.projeto.auth_user==auth.user.id).select(limitby=(0,5),orderby=~db.projeto.id)
+    rowscob = db(db.sub_venda.auth_user==auth.user.id).select(limitby=(0,5),orderby=~db.sub_venda.id)
+    return locals()
+
 # ---- API (example) -----
 @auth.requires_login()
 def api_get_user_email():
@@ -150,6 +50,7 @@ def grid():
     if not tablename in db.tables: raise HTTP(403)
     grid = SQLFORM.smartgrid(db[tablename], args=[tablename], deletable=True, editable=True)
     return dict(grid=grid)
+
 @auth.requires_membership('admin') # can only be accessed by members of admin groupd
 def gridsimples():
     response.view = 'generic.html' # use a generic view
@@ -190,3 +91,88 @@ def download():
     http://..../[app]/default/download/[filename]
     """
     return response.download(request, db)
+
+
+##funções abaixo serão descontinuadas
+##foram isoladas dia 21 jun de  2021
+#analizar os proximos 90 dias
+#se tudo tranquilo apagar elas
+@auth.requires_login()
+def criar_projeto():
+    redirect(URL('default','index'))
+    response.view = 'generic.html' # use a generic view
+    #recebe id da empresa como parametro e busca empresa
+    empresa = db.empresa(request.args(0, auth.user))
+    #bloqueia visualização empresa e coloca o id da empresa como padrão
+    db.projeto.empresa.default = empresa.id
+    db.projeto.empresa.writable = False
+    #deixa o usuario que esta logado como usuario padrão
+    #deixa o id bloqueado para visualização
+    if (auth.user.id!=empresa.auth_user)or(auth.user.id!=11)or(auth.user.id!=1):
+        db.projeto.auth_user.default = auth.user.id
+        db.projeto.auth_user.writable = False
+    #deixa o nome padrão e bloqueia para visualização
+    db.projeto.nome_chefe.default = auth.user.first_name
+    db.projeto.nome_chefe.writable = False
+    #cria um sqlforma para ser processado
+    form = SQLFORM(db.projeto).process()
+    if form.accepted:
+        #caso aceito redireciona para tela de acesso inicial
+        response.flash = 'Formulario aceito'
+        projeto=db.projeto(form.vars.id)
+        redirect(URL('acesso_inicial'))
+    elif form.errors:
+        response.flash = 'Formulario não aceito'
+    else:
+        response.flash = 'Preencha o formulario'
+    #2 consultas no banco
+    return  dict(form=form)
+
+# para alterar precisa estar logado
+@auth.requires_login()
+def alterar_projeto():
+    redirect(URL('default','index'))
+    response.view = 'generic.html' # use a generic view
+    #recebe id do projeto e busca projeto no banco
+    usuario = auth.user
+    projeto = db.projeto(request.args(0, cast=int))
+    #caso o projeto não esteja ativo redireciona
+    #pois não pode ser alterado
+    if projeto.venda_finalizada:
+        session.flash = 'A venda já foi finalizada'
+        redirect(URL('projeto','acesso_projeto', args=projeto.id))
+    #bloqueia id para visualização e alteração
+    db.projeto.id.readable = False
+    db.projeto.id.writable = False
+    #bloqueia empresa para alteração
+    db.projeto.empresa.readable = True
+    db.projeto.empresa.writable = False
+    a=True
+    #caso a venda a prazo seja maior que zero não deleta
+    #medida de segurança
+    if projeto.total_venda_prazo>0:
+        a=False
+    if auth.user.id==1:
+        db.projeto.empresa.readable = True
+        db.projeto.empresa.writable = True
+        a=True
+    #buzca um sqlforma para ser alterado
+    form = SQLFORM(db.projeto, request.args(0, cast=int), deletable=a)
+    if form.process().accepted:
+        session.flash = 'Projeto atualizado'
+        redirect(URL('acesso_inicial'))
+    elif form.errors:
+        response.flash = 'Erros no formulário!'
+    #2 consultas no banco
+    return  dict(form=form)
+
+
+
+#não me lembro nem pra que serve
+#gera arquivo para criação de toda empresa e projetos
+@auth.requires_membership('admin') # can only be accessed by members of admin groupd
+def captura_empresa():
+    valor=100000
+    if (request.args(0)):
+      valor = request.args(0, auth.user)
+    return locals()

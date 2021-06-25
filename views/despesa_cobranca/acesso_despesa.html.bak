@@ -1,5 +1,7 @@
 {{extend 'layout.html'}}
 {{total=0.0}}
+{{from datetime import date}}
+{{hj = date.today()}}
 <div class="py-5">
     <div class="container">
       <div class="row  text-center">
@@ -48,9 +50,20 @@
                           {{row.descricao="DESPESA"}}
                           {{row.update_record()}}
                           {{pass}}
-                          <td><a  class="btn btn-outline-primary text-left btn-block"  href="{{=URL('alterar_desp', args=[row.id])}}">{{=row.descricao}}</td>
+              {{diferenca =  hj - row.data_inicio}}
+{{if not diferenca.days>2:}}
+              <td>
+                <a  class="btn btn-outline-primary text-left btn-block"  href="{{=URL('alterar_desp', args=[row.id])}}">
+                  {{=row.descricao}} (Conferido)
+                </a>
+              </td>
+              {{else:}}
+              <td>
+                  {{=row.descricao}}
+              </td>
+              {{pass}}
 
-						<td> {{=row.data_inicio}}</td></a>
+						<td> {{=row.data_inicio.strftime('%d/%m/%Y')}}</td>
                                 <td>R$ {{="{:,.2f}".format(round(row.valor,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
 					  </tr>
                         {{total+=row.valor}}

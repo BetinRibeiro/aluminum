@@ -90,7 +90,7 @@
                                 {{row.update_record()}}
                             {{pass}}
                         {{if row.sub_venda == row1.id:}}
-                          {{if not (row.venda_praso>0):}}
+                          {{if False:}}
                           {{row.venda_praso=row.venda_praso-row.valor_devolvido}}
                                 {{row.quant_fichas=row.quant_fichas-row.quant_fichas_devolvidas}}
                                 {{caderno+=row.vale_caderno}}

@@ -1,0 +1,80 @@
+{{extend 'layout.html'}}
+{{total_recebido=0}}
+{{total_caderno=0}}
+{{total_comissao=0}}
+{{total_saldo=0}}
+{{total_debito=0}}
+{{=sub_venda.total_recebido}}
+<div class="py-5" >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5 class="">Lista de Cobradores do projeto</h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <a class="btn btn-link" href="{{=URL('acs_cobranca','relatorio_cobranca', args=sub_venda.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
+          <a class="btn btn-link" href="{{=URL('inserir_cobrador', args=[sub_venda.id])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar Cobrador</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-borderless">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nome</th>
+                  <th>Recebido</th>
+                  <th>Comissão</th>
+                  <th>Vale</th>
+                  <th>Caderno</th>
+                  <th>Saldo</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{a=1}}
+                {{for row in rows:}}
+                <tr>
+                  <th>{{=a}}</th>
+                  {{a+=1}}
+                  <td><a class="" href="{{=URL('acs_cobranca','alterar_pessoa', args=row.id)}}">{{=row.nome}}</a></td>
+                  <td>R$ {{="{:,.2f}".format(round(row.total_recebido,2)).replace(",",".")}}</td>
+                  {{total_recebido+=row.total_recebido}}
+                  {{comissao=0}}
+                  {{if sub_venda.total_recebido>0:}}
+                  {{if row.tipo_comissao=="Geral":}}
+                  {{comissao=sub_venda.total_recebido*row.comissao_venda/100}}
+                  {{else:}}
+                  {{comissao=row.total_recebido*row.comissao_venda/100}}
+                  {{pass}}
+                  {{pass}}
+                  <td>R$ {{="{:,.2f}".format(round(comissao,2)).replace(",",".")}}</td>
+                  {{total_comissao+=comissao}}
+                  <td>R$ {{="{:,.2f}".format(round(row.vale_saida,2)).replace(",",".")}}</td>
+                  <td>R$ {{="{:,.2f}".format(round(row.total_vale_caderno,2)).replace(",",".")}}</td>
+                  {{total_caderno+=row.total_vale_caderno}}
+                  {{saldo=comissao-row.total_vale_caderno-row.vale_saida}}
+                  {{if saldo>0:}}
+                  <td>R$ {{="{:,.2f}".format(round(saldo,2)).replace(",",".")}}</td>
+                  {{total_saldo+=saldo}}
+                  {{else:}}
+                  <td class="text-danger">R$ {{="{:,.2f}".format(round(saldo,2)).replace(",",".")}}</td>
+                  {{total_debito+=saldo}}
+                  {{pass}}
+                </tr>
+                {{pass}}
+                 <tr>
+                  <th>#</th>
+                  <th>#</th>
+                  <td>R$ {{="{:,.2f}".format(round(total_recebido,2)).replace(",",".")}}</td>
+                  <td>R$ {{="{:,.2f}".format(round(total_comissao,2)).replace(",",".")}}</td>
+                  <td>R$ {{="{:,.2f}".format(round(0,2)).replace(",",".")}}</td>
+                  <td>R$ {{="{:,.2f}".format(round(total_caderno,2)).replace(",",".")}}</td>
+                  <td>R$ {{="{:,.2f}".format(round(0,2)).replace(",",".")}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>

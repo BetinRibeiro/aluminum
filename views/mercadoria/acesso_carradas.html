@@ -73,7 +73,11 @@
                     {{pass}}
                     {{pass}}
                     {{if not projeto.venda_finalizada:}}
-                  <td><a class="btn btn-outline-warning btn-block"  href="{{=URL('mercadoria','alterar_carrada', args=row.id)}}"><i class="fa fa-exchange" ></i></a></td>
+                  {{if not row.finalizada:}}
+                  <td><a class="btn btn-outline-warning"  href="{{=URL('mercadoria','alterar_carrada', args=row.id)}}"><i class="fa fa-pencil" ></i></a></td>
+                  {{else:}}
+                  <th><a class="btn btn-outline-success" href="#"><i class="fa fa-fw fa-1x py-1 fa-check" ></i></a></th>
+                    {{pass}}
                     {{pass}}
                   {{if r==7:}}
                   {{if row.finalizada:}}

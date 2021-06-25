@@ -4,16 +4,15 @@ def index():
     data=request.now
     empresa = db.empresa(db.empresa.auth_user==auth.user.id)
     usuario=auth.user
-    if usuario.id==16543:
-      #redireciona para pagina de usuario)
-      redirect(URL('default','index'))
     usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
     #caso não tenha nem uma empresa o usuario pode estar vinculado a
     #algum projeto ou sub venda pode ser (chefe ou cobrador)
     if (usuario_empresa):
+      if usuario_empresa.bloqueado:
+      #redireciona para pagina de usuario)
+        redirect(URL('acs_empresa','mensagem'))
       if (usuario_empresa.tipo=="Cobrador")|(usuario_empresa.tipo=="Chefe"):
         redirect(URL('default','acesso_inicial_usuario'))
-      
     if not empresa:
       empresa = db.empresa(usuario_empresa.empresa)
       if not empresa:
@@ -42,7 +41,7 @@ def lista_logins():
         n=int(consul)
         empresa = db.empresa(n)
     usuario=auth.user
-    row = db(db.usuario_empresa.empresa==empresa.id).select(orderby=db.usuario_empresa.nome)
+    row = db(db.usuario_empresa.empresa==empresa.id).select(orderby=db.usuario_empresa.id)
     if request.args(0, auth.user)=="235":
         rows = db(db.usuario_empresa.empresa).select(orderby=db.empresa)
     #2 consultas no banco
@@ -57,7 +56,10 @@ def lista_pagmt_sistema():
         n=int(consul)/12
         empresa = db.empresa(n)
     usuario=auth.user
-    rows = db(db.pagamento.empresa==empresa.id).select()
+    limites = (0, 6)
+    if auth.user.id==1:
+      limites = (0, 20)
+    rows = db(db.pagamento.empresa==empresa.id).select(limitby=limites,orderby=~db.pagamento.id)
     if request.args(0, auth.user)=="235":
         rows = db(db.pagamento.empresa).select(orderby=db.empresa)
     #2 consultas no banco
@@ -72,6 +74,9 @@ def lista_projetos():
         empresa = db.empresa(n)
     usuario=auth.user
     usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
+    if usuario_empresa.bloqueado:
+      #redireciona para pagina de usuario)
+        redirect(URL('acs_empresa','mensagem'))
     if (usuario.id!=1)and(usuario_empresa.empresa!=empresa.id):
         redirect(URL('default','index'))
     rows = db(db.projeto.empresa==empresa.id).select(orderby=db.projeto.descricao)
@@ -87,7 +92,7 @@ def inserir_projeto():
     db.projeto.comissao_cobranca.writable = False
     #deixa o usuario que esta logado como usuario padrão
     #deixa o id bloqueado para visualização
-    
+
     db.projeto.auth_user.default = 28
     db.projeto.auth_user.writable = False
     #deixa o nome padrão e bloqueia para visualização
@@ -168,27 +173,38 @@ def alterar_projeto():
     if projeto.venda_finalizada:
         session.flash = 'A venda já foi finalizada'
         redirect(URL('lista_projetos', args=projeto.empresa*12))
-    #bloqueia id para visualização e alteração
+    db.projeto.empresa.readable = False
+    db.projeto.empresa.writable = False
     db.projeto.id.readable = False
     db.projeto.id.writable = False
-    #bloqueia empresa para alteração
-    db.projeto.empresa.readable = True
-    db.projeto.empresa.writable = False
-    
-    if usuario.id==1:
-      db.projeto.data_final.readable = True
-      db.projeto.data_final.writable = True
+
+    if projeto.id>125:
+      db.projeto.adiantamento.writable = False
+      db.projeto.descricao_adiantamento.readable = False
+      db.projeto.descricao_adiantamento.writable = False
+      db.projeto.vale_saida.writable = False
+      db.projeto.descricao_vale.readable = False
+      db.projeto.descricao_vale.writable = False
     a=True
     if projeto.total_venda_prazo>0:
         a=False
-    if auth.user.id==1:
-        db.projeto.empresa.readable = True
-        db.projeto.empresa.writable = True
-        a=True
+    if usuario.id==1:
+      db.projeto.data_final.label = "#Data_final"
+      db.projeto.data_final.readable = True
+      db.projeto.data_final.writable = True
+      db.projeto.id.readable = True
+      db.projeto.id.writable = True
+      db.projeto.empresa.label = "#Empresa"
+      db.projeto.empresa.readable = True
+      db.projeto.empresa.writable = True
+      a=True
     form = SQLFORM(db.projeto, request.args(0, cast=int), deletable=a)
     if form.process().accepted:
         session.flash = 'Projeto atualizado'
-        redirect(URL('index', args=projeto.empresa*12))
+        if projeto.total_venda_prazo>0:
+          redirect(URL('acs_projeto','index', args=projeto.id))
+        else:
+          redirect(URL('acs_principal','lista_projetos', args=projeto.empresa*12))
     elif form.errors:
         response.flash = 'Erros no formulário!'
     return  dict(form=form)
@@ -260,11 +276,15 @@ def alterar_usuario_empresa():
       db.usuario_empresa.nome.writable = False
       db.usuario_empresa.bloqueado.writable = False
     if usuario.id==1:
+      db.usuario_empresa.empresa.label = "#(Programador) Empresa"
+      db.usuario_empresa.nome.label = "#(Programador) Nome"
+      db.usuario_empresa.auth_user.label = "#(Programador) Usuario"
+      db.usuario_empresa.bloqueado.label = "#(Programador) Bloqueado"
       db.usuario_empresa.empresa.writable = True
       db.usuario_empresa.nome.writable = True
       db.usuario_empresa.auth_user.writable = True
       db.usuario_empresa.bloqueado.writable = True
-    form = SQLFORM(db.usuario_empresa, request.args(0, cast=int), deletable=True)
+    form = SQLFORM(db.usuario_empresa, request.args(0, cast=int), deletable=False)
     if form.process().accepted:
       session.flash = 'Projeto atualizado'
       redirect(URL('alterar_usuario', args=usuario_empresa.auth_user))
@@ -307,3 +327,57 @@ def lista_empresas():
 def bloqueio_verificacao():
     projeto = db.projeto(request.args(0, cast=int))
     return locals()
+  
+  
+def pagina_pagamento():
+    pagamento = db.pagamento(request.args(0, cast=int))
+    empresa = db.empresa(pagamento.empresa)
+    return locals()
+
+  
+def lista_cobrancas():
+    try:
+      empresa = db.empresa(request.args(0, auth.user))
+      paginacao = 15
+      if len(request.args) == 1:
+          pagina = 1
+      else:
+          try:
+              pagina = int(request.args[1])
+          except ValueError:
+              redirect(URL('erro', vars={
+                    'msg':'Numero da página inválido'
+                    }))
+      if pagina <= 0:
+          pagina = 1
+      total = db((db.sub_venda.empresa==empresa)).count()
+      paginas = total/paginacao
+      if total%paginacao:
+          paginas+=1
+      if total==0:
+          paginas=1
+      if pagina > paginas:
+          redirect(URL(args=[empresa.id,paginas]))
+      limites = (paginacao*(pagina-1), (paginacao*pagina))
+      registros = db((db.sub_venda.empresa==empresa)).select(
+        limitby=limites,orderby=~db.sub_venda.data_inicio_cobranca)
+      consul=(request.args(2))
+      if (consul):
+          registros = db((db.sub_venda.empresa==empresa)&(db.sub_venda.primeira_cidade.contains(consul))).select(limitby=(0,paginacao))
+    except:
+      redirect(URL('index', args=empresa.id*12))
+    return dict(rows=registros, pagina=pagina, paginas=paginas, total=total, consul=consul, empresa=empresa)
+  
+  
+def alterar_cobranca():
+    response.view = 'generic.html' # use a generic view
+    sub_venda = db.sub_venda(request.args(0, cast=int))
+    projeto = db.projeto(sub_venda.projeto)
+    db.sub_venda.cobranca_finalizada.writable = True
+    form = SQLFORM(db.sub_venda, request.args(0, cast=int), deletable=False)
+    if form.process().accepted:
+      session.flash = 'Projeto atualizado'
+      redirect(URL('lista_cobrancas', args=projeto.empresa))
+    elif form.errors:
+      response.flash = 'Erros no formulário!'
+    return  dict(form=form)

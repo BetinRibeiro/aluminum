@@ -1,0 +1,176 @@
+{{extend 'layout.html'}}
+<div class="row">
+        <div class="col-md-6 col-6">
+          <h3 class="">{{=funcionario_empresa.nome}}</h3>
+          <p class="lead">Historico</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2 col-6">
+          <a class="btn btn-outline-danger btn-block my-1" href="{{=URL('index',args=funcionario_empresa.empresa)}}">
+            <i class="fa fa-arrow-left fa-fw"></i>
+            Voltar
+          </a>
+        </div>
+        {{if False:}}
+        <div class="col-md-2 col-6">
+          <a class="btn btn-outline-primary btn-block my-1" href="#">
+            <i class="fa fa-download fa-fw"></i>
+            Cadastrar
+          </a>
+        </div>
+        {{pass}}
+        <div class="col-md-2  col-12"></div>
+        <div class="col-md-6 col-12"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-6">
+          <h4 class="my-2">Página {{=pagina}}/{{=paginas}}</h4>
+        </div>
+         <div class="col-md-6"  id="noprint">
+        {{if (total)>paginacao:}}
+        <ul class="pagination m-2  justify-content-end">
+            {{ if pagina != 1: }}
+            <li class="page-item"> <a class="page-link" href="{{ =URL('listar_projetos_vendedor',args=[funcionario_empresa.empresa,1])}}"> <i class="fa fa-angle-double-left"></i>
+</a> </li>
+              {{ pass }}
+               {{ if (paginas-pagina) > -3 and (pagina > 3)  : }}
+            <li class="page-item "> <a class="page-link" href="{{ =URL('listar_projetos_vendedor',args=[funcionario_empresa.empresa,pagina-3])}}">{{=pagina-3}}</a> </li>
+               {{ pass }}
+               {{ if (paginas-pagina) > -2 and (pagina > 2) : }}
+            <li class="page-item "> <a class="page-link" href="{{ =URL('listar_projetos_vendedor',args=[funcionario_empresa.empresa,pagina-2])}}">{{=pagina-2}}</a> </li>
+               {{ pass }}
+               {{ if (paginas-pagina) > -1 and (pagina != 1) : }}
+            <li class="page-item "> <a class="page-link" href="{{ =URL('listar_projetos_vendedor',args=[funcionario_empresa.empresa,pagina-1])}}">{{=pagina-1}}</a> </li>
+               {{ pass }}
+            {{ if (paginas) > 1: }}
+            <li class="page-item active"> <a class="page-link" href="#">{{=pagina}}</a> </li>
+               {{ pass }}
+            {{ if (paginas-pagina) > 0: }}
+            <li class="page-item "> <a class="page-link" href="{{ =URL('listar_projetos_vendedor',args=[funcionario_empresa.empresa,pagina+1])}}">{{=pagina+1}}</a> </li>
+               {{ pass }}
+            {{ if (paginas-pagina) > 1: }}
+            <li class="page-item"> <a class="page-link" href="{{ =URL('listar_projetos_vendedor',args=[funcionario_empresa.empresa,pagina+2])}}">{{=pagina+2}}</a> </li>
+                {{ pass }}
+            {{ if (paginas-pagina) > 2: }}
+            <li class="page-item"> <a class="page-link" href="{{ =URL('listar_projetos_vendedor',args=[funcionario_empresa.empresa,pagina+3])}}">{{=pagina+3}}</a> </li>
+              {{ pass }}
+            {{ if pagina != paginas: }}
+            <li class="page-item"> <a class="page-link" href="{{ =URL('listar_projetos_vendedor',args=[funcionario_empresa.empresa,paginas])}}">
+                <i class="fa fa-angle-double-right"></i>
+                </a>
+            </li>
+              {{ pass }}
+          </ul>
+            {{pass}}
+    </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          {{a=0}}
+          {{for row in rows:}}
+          {{a+=1}}
+          {{if a>3:}}
+          <div style="page-break-after: always"></div>
+          {{a=0}}
+          {{pass}}
+          <div class="table-responsive">
+            <table class="table table-striped table-borderless">
+              <tbody>
+                <tr>
+                  <th scope="col">Projeto</th>
+                  <th scope="col">Venda</th>
+                  <th scope="col">Comissão</th>
+                  <th scope="col">Vale</th>
+                  <th scope="col">Caderno</th>
+                  <th scope="col">Saldo</th>
+                </tr>
+                <tr>
+                  <th scope="row">{{=row.projeto.descricao}}</th>
+                  <td>R$ {{="{:,.2f}".format(round(row.total_vendas,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  {{comissao=row.total_vendas}}
+                  {{if comissao > 0:}}
+                    {{comissao=row.total_vendas*row.comissao_venda/100}}
+                  {{pass}}
+                  <td>R$ {{="{:,.2f}".format(round(comissao,1)).replace(",","#").replace(".",",").replace("#",".")}} - {{=row.comissao_venda}}%</td>
+                  <td>R$ {{="{:,.2f}".format(round(row.vale_saida,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  <td>R$ {{="{:,.2f}".format(round(row.total_vale_caderno,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  {{saldo=comissao-row.vale_saida-row.total_vale_caderno}}
+                  {{if saldo>0:}}
+                  <td>R$ {{="{:,.2f}".format(round(saldo,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  {{else:}}
+                  <td class="text-danger">R$ {{="{:,.2f}".format(round(saldo,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  {{pass}}
+                </tr>
+                <tr>
+                  <th scope="col">Recebido</th>
+                  <th scope="col">Percentual</th>
+                  <th scope="col">Devolvido</th>
+                  <th scope="col">Percentual</th>
+                  <th scope="col">Prego</th>
+                  <th scope="col">Percentual</th>
+                </tr>
+                <tr>
+                  <th>R$ {{="{:,.2f}".format(round(row.total_recebido,1)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                  {{percentual=0}}
+                  {{if (row.total_recebido>0)and(row.total_vendas>0):}}
+                  {{percentual=row.total_recebido/row.total_vendas*100}}
+                  {{pass}}
+                  <td class="text-success">{{="{:,.1f}".format(round(percentual,1)).replace(",","#").replace(".",",").replace("#",".")}}%</td>
+                  <td>R$ {{="{:,.2f}".format(round(row.total_devolvido,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  {{percentual=0}}
+                  {{if (row.total_devolvido>0)and(row.total_vendas>0):}}
+                  {{percentual=row.total_devolvido/row.total_vendas*100}}
+                  {{pass}}
+                  <td class="text-primary">{{="{:,.1f}".format(round(percentual,1)).replace(",","#").replace(".",",").replace("#",".")}}%</td>
+                  <td>R$ {{="{:,.2f}".format(round(row.total_prego,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  {{percentual=0}}
+                  {{if (row.total_prego>0)and(row.total_vendas>0):}}
+                  {{percentual=row.total_prego/row.total_vendas*100}}
+                  {{pass}}
+                  <td class="text-danger">{{="{:,.1f}".format(round(percentual,1)).replace(",","#").replace(".",",").replace("#",".")}}%</td>
+                </tr>
+                <tr>
+                  <th scope="col">Recebido</th>
+                  <th scope="col">Comissão Real</th>
+                  <th scope="col">Venda</th>
+                  <th scope="col">Comissão Venda</th>
+                  <th scope="col">Saldo</th>
+                  <th scope="col">Percentual</th>
+                </tr>
+                <tr>
+                  <th>R$ {{="{:,.2f}".format(round(row.total_recebido,1)).replace(",","#").replace(".",",").replace("#",".")}}</th>
+                   {{comissaocob=row.total_recebido}}
+                  {{if comissaocob > 0:}}
+                    {{comissaocob=row.total_recebido*row.comissao_cobranca/100}}
+                  {{pass}}
+                  <td>R$ {{="{:,.2f}".format(round(comissaocob,1)).replace(",","#").replace(".",",").replace("#",".")}} - {{=row.comissao_cobranca}}%</td>
+                  <td>R$ {{="{:,.2f}".format(round(row.total_vendas,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                   {{comissao=row.total_vendas}}
+                  {{if comissao > 0:}}
+                    {{comissao=row.total_vendas*row.comissao_venda/100}}
+                  {{pass}}
+                  <td>R$ {{="{:,.2f}".format(round(comissao,1)).replace(",","#").replace(".",",").replace("#",".")}} - {{=row.comissao_venda}}%</td>
+                  {{saldo_quitacao=comissaocob-comissao}}
+                  {{if saldo_quitacao>0:}}
+                  <td>R$ {{="{:,.2f}".format(round(saldo_quitacao,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  {{else:}}
+                  <td class="text-danger">R$ {{="{:,.2f}".format(round(saldo_quitacao,1)).replace(",","#").replace(".",",").replace("#",".")}}</td>
+                  {{pass}}
+                   {{percentual=0}}
+                  {{if (row.total_recebido>0)and(row.total_vendas>0):}}
+                  {{percentual=row.total_recebido/row.total_vendas*100}}
+                  {{pass}}
+                  <td class="text-success">{{="{:,.1f}".format(round(percentual,1)).replace(",","#").replace(".",",").replace("#",".")}}%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <hr>
+          {{pass}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6"></div>
+      </div>

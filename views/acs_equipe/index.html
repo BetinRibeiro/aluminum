@@ -9,9 +9,10 @@
 {{total_entradas=0}}
 {{saldof=0}}
 {{debitof=0}}
-
+{{if not (usuario.id==1):}}
 <div class="py-5" >
     <div class="container">
+      {{pass}}
       <div class="row">
         <div class="col-md-12">
           <h5 class="">Lista de Vendedores ( {{=projeto.descricao}} )</h5>
@@ -49,7 +50,7 @@
 						{{for row in rows:}}
                        
 					  <tr>{{a+=1}}
-                          <th>{{=a}}º</th>
+              <th><a class="" href="{{=URL('vincular_vendedor', args=row.id)}}">{{=a}}º{{if (usuario.id==1):}}</a> <span class="badge badge-primary badge-pill" >{{=row.total_fichas}} {{if row.funcionario_empresa:}}- OK{{pass}}</span>{{pass}}</th>
                           
                         <td>{{=row.nome.replace("cfrd","")}}</td>
                           <td>R$ {{="{:,}".format(round(row.total_vendas,1)).replace(",",".")}}0 {{if row.total_vendas>0:}}- <span><b>{{="{:,}".format(round(row.comissao_venda)).replace(".0","")}}% </b></span>{{pass}}</td>
@@ -91,8 +92,8 @@
                         {{total_fichas+=row.total_fichas}}
 					  {{pass}}
                          <tr>
+                             <th>{{=total_fichas}}</th>
 						<th>#</th>
-                             <th></th>
 						<th>R$ {{="{:,}".format(round(venda,1)).replace(",",".")}}0</th>
 						<th>R$ {{="{:,}".format(round(comissaot,1)).replace(",",".")}}0</th>
 						<th>R$ {{="{:,}".format(round(vale,1)).replace(",",".")}}0</th>
@@ -106,8 +107,10 @@
 				  </table>
 </div>
 </div>
+{{if not (usuario.id==1):}}
 </div>
 </div>
+  {{pass}}
  {{if not projeto.venda_finalizada:}}
 {{projeto.total_debito_vendedor=debitof}}
 {{projeto.total_saldo_vendedor=saldof}}

@@ -90,7 +90,7 @@
                                 {{row.update_record()}}
                             {{pass}}
                         {{if row.sub_venda == row1.id:}}
-                          {{if not (row.venda_praso>0):}}
+                          {{if True:}}
                           {{row.venda_praso=row.venda_praso-row.valor_devolvido}}
                                 {{row.quant_fichas=row.quant_fichas-row.quant_fichas_devolvidas}}
                                 {{caderno+=row.vale_caderno}}
@@ -129,7 +129,7 @@
                                     {{if not projeto.venda_finalizada:}}
 {{if (not row1.cobranca_iniciada):}}
                 {{if (usuario.id!=2324):}}
-                                    <a class="btn btn-outline-success btn-block" href="{{=URL('alterar_venda', args=row.id)}}">{{=row.data_venda.strftime('%d/%m/%Y')}}</a>
+                                    <a class="btn btn-outline-primary text-left btn-block" href="{{=URL('alterar_venda', args=row.id)}}">{{=row.data_venda.strftime('%d/%m/%Y')}}</a>
                                     {{else:}}
                                     {{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}
                                     {{pass}}

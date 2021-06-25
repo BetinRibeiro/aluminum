@@ -19,7 +19,7 @@
         <div class="col-md-6">
           {{if auth.user.id!=82:}}
           <a class="btn btn-link" href="{{=URL('acs_cobranca','relatorio_cobranca', args=sub_venda.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
-          <a class="btn btn-link" href="{{=URL('inserir_registro', args=[sub_venda.id,tipo])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Adicionar Registro</a>
+          <a class="btn btn-link" href="{{=URL('inserir_registro', args=[sub_venda.id,tipo])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar Registro</a>
           {{pass}}
         </div>
             {{if tipo=="Recebimento":}}
@@ -53,15 +53,20 @@
               </thead>
               <tbody>
                   {{for row in rows:}}
+{{if 'cfrd' in row.descricao:}}
+<tr class="bg-success">
+
+{{else:}}
                 <tr>
+{{pass}}
                   <th>{{=a}}</th>
                     {{a+=1}}
-                  <td>{{=("{}/{}/{}".format(row.data_inicio.day,row.data_inicio.month,row.data_inicio.year))}}</td>
+                  <td>{{=row.data_inicio.strftime('%d/%m/%Y')}}</td>
                   <td>{{=row.descricao.replace('cfrd','')}}</td>
-                  <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
+                  <td>R$ {{="{:,.2f}".format(round(row.valor,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                     {{if not (dataontem>=row.data_inicio) or(usuario.id!=sub_venda.auth_user):}}
                   {{if (usuario.id!=10):}}
-                  <td><a  style="color:#3b5998" href="{{=URL('alterar_registro', args=[row.id,tipo])}}"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i></a></td>
+                  <td><a  style="color:#3b5998" href="{{=URL('alterar_registro', args=[row.id,tipo])}}"><i class="fa fa-fw fa-1x py-1 fa-pencil"></i></a></td>
                   {{else:}}
                     <td><i class="fa text-dark fa-exchange" ></i></td>
                     {{pass}}
@@ -90,7 +95,7 @@
                   <th>#</th>
                   <th></th>
                   <th>Total</th>
-                  <th>R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0</th>
+                  <th>R$ {{="{:,.2f}".format(round(total,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                   <td>#</td>
                 </tr>
               </tbody>

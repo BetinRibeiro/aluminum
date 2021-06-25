@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 @auth.requires_login()
 def index():
-    data=request.now
-    usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
-    empresa = db.empresa(db.empresa.id==usuario_empresa.empresa)
-    usuario=auth.user
-    rows = db(db.projeto.auth_user==auth.user.id).select(orderby=db.projeto.descricao)
+    try:
+        data=request.now
+        usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
+        empresa = db.empresa(db.empresa.id==usuario_empresa.empresa)
+        usuario=auth.user
+        rows = db(db.projeto.auth_user==auth.user.id).select(orderby=db.projeto.descricao)
+    except:
+        redirect(URL('default','index'))
     return locals()
 
 @auth.requires_login()

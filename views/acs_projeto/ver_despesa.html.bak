@@ -2,9 +2,110 @@
 {{from datetime import date}}
 {{from datetime import datetime}}
 {{total=0}}
-               {{data = datetime.strptime(data, '%Y-%m-%d').date()}}
-<div class="py-3" >
-    <div class="container">
+{{data = datetime.strptime(data, '%Y-%m-%d').date()}}
+<div class="row">
+        <div class="mx-auto col-md-8 text-center">
+          <h4 class="mb-3">{{=projeto.descricao}}</h4>
+          <p>Projeto de Venda</p>
+          <p class="lead">{{=data.strftime('%d/%m/%Y')}}</p>
+        </div>
+      </div>
+      <div class="row p-1">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-6 col-12 p-1">
+              <div class="row">
+                <div class="col-md-4 col-6">
+                  <a class="btn btn-danger btn-block my-1" href="{{=URL('acs_projeto','particoes', args=[projeto.id])}}">
+                    <i class="fa fa-fw fa-arrow-left fa-download"></i>
+                    Voltar</a></div>
+                <div class="col-md-4 col-6"></div>
+                <div class="col-md-4 col-12"></div>
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <ul class="pagination justify-content-end">
+                <li class="page-item">
+                  {{tres_antes= date.fromordinal(data.toordinal()-3)}}
+                  <a class="page-link" href="{{=URL( args=[projeto.id,tres_antes])}}">
+                    <i class="fa fa-angle-double-left"></i>
+                  </a>
+                </li>
+                <li class="page-item">
+                  {{dois_antes= date.fromordinal(data.toordinal()-2)}}
+                  <a class="page-link" href="{{=URL( args=[projeto.id,dois_antes])}}">
+                    <i class="fa fa-angle-left"></i>
+                  </a>
+                </li>
+                <li class="page-item">
+                  {{um_antes= date.fromordinal(data.toordinal()-1)}}
+                  <a class="page-link" href="{{=URL( args=[projeto.id,um_antes])}}">
+                    <i class="fa fa-angle-left"></i>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="#">
+                    <i class="fa fa-circle"></i>
+                  </a>
+                </li>
+                <li class="page-item">
+                  {{um_depois= date.fromordinal(data.toordinal()+1)}}
+                  <a class="page-link" href="{{=URL( args=[projeto.id,um_depois])}}">
+                    <i class="fa fa-angle-right"></i>
+                  </a>
+                </li>
+                  {{dois_depois= date.fromordinal(data.toordinal()+2)}}
+                <li class="page-item">
+                  <a class="page-link" href="{{=URL( args=[projeto.id,dois_depois])}}">
+                    <i class="fa fa-angle-right"></i>
+                  </a>
+                </li>
+                  {{tres_depois= date.fromordinal(data.toordinal()+3)}}
+                <li class="page-item">
+                  <a class="page-link" href="{{=URL( args=[projeto.id,tres_depois])}}">
+                    <i class="fa fa-angle-double-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-striped table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col">Data</th>
+                      <th scope="col">Classificação</th>
+                      <th scope="col">Descrição</th>
+                      <th scope="col">Valor</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                   {{for row in rows:}}
+                <tr>
+                  <th scope="row">{{=row.data_inicio.strftime('%d/%m/%Y')}}</th>
+                  <td>{{=row.classe_despesa.descricao}}</td>
+                  <td>{{=row.descricao}}</td>
+                    <td>R$ {{="{:,.2f}".format(round(row.valor,1)).replace(",",".")}}</td>
+                </tr>
+                {{total+=row.valor}}
+                {{pass}}
+                <tr>
+                  <th scope="row">#</th>
+                  <td>Total</td>
+                  <td>Total</td>
+                    <td>R$ {{="{:,.2f}".format(round(total,1)).replace(",",".")}}</td>
+                </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+{{if False:}}
       <div class="row text-center">
         <div class="mx-auto col-md-8">
           <h3 class="mb-3">{{=projeto.descricao}}</h3>
@@ -12,7 +113,10 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-3"><a class="btn my-2 btn-block btn-danger" href="{{=URL('acs_projeto','particoes', args=[projeto.id])}}"><i class="fa fa-arrow-left fa-fw"></i>&nbsp;Voltar<br></a></div>
+        <div class="col-md-3">
+          <a class="btn my-2 btn-block btn-danger" href="{{=URL('acs_projeto','particoes', args=[projeto.id])}}">
+            <i class="fa fa-arrow-left fa-fw"></i>&nbsp;Voltar
+          </a></div>
         <div class="col-md-6">
           <div class="row">
             <div class="col-md-4">
@@ -26,7 +130,7 @@
             <div class="col-md-4">
               {{amanha= date.fromordinal(data.toordinal()+1)}}
               <a class="btn btn-primary my-2 btn-block" href="{{=URL( args=[projeto.id,amanha])}}">
-              <i class="fa fa-arrow-right fa-fw"></i>&nbsp;Próximo</a></div>
+              Próximo <i class="fa fa-arrow-right fa-fw"></i></a></div>
           </div>
         </div>
         <div class="col-md-3"></div>
@@ -64,5 +168,4 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+{{pass}}

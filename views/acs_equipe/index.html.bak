@@ -50,7 +50,7 @@
 						{{for row in rows:}}
                        
 					  <tr>{{a+=1}}
-              <th><a class="" href="{{=URL('vincular_vendedor', args=row.id)}}">{{=a}}º{{if (usuario.id==1):}}</a> <span class="badge badge-primary badge-pill" >{{=row.total_fichas}} - {{if row.funcionario_empresa:}}OK{{pass}}</span>{{pass}}</th>
+              <th><a class="" href="{{=URL('vincular_vendedor', args=row.id)}}">{{=a}}º{{if (usuario.id>0):}}</a> <span class="badge badge-primary badge-pill" >{{=row.total_fichas}} F {{if row.funcionario_empresa:}}- OK{{pass}}</span>{{pass}}</th>
                           
                         <td>{{=row.nome.replace("cfrd","")}}</td>
                           <td>R$ {{="{:,}".format(round(row.total_vendas,1)).replace(",",".")}}0 {{if row.total_vendas>0:}}- <span><b>{{="{:,}".format(round(row.comissao_venda)).replace(".0","")}}% </b></span>{{pass}}</td>

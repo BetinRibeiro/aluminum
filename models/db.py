@@ -188,8 +188,8 @@ db.define_table('projeto',
                 Field('nome_chefe', 'string', writable=False, readable=False, label='Nome_chefe',requires = IS_UPPER()),
                 Field('vale_saida', 'double', writable=True, readable=False, label='Vale Saida', default=0, notnull=True),
                 Field('descricao_vale', 'text', label='Descrição do Vale do Chefe',requires = IS_UPPER()),
-                Field('comissao_vista', 'double', writable=True, readable=False, label='Comissao Vista', default=6, notnull=True),
-                Field('comissao_praso', 'double', writable=True, readable=False, label='Comissao Prazo', default=3, notnull=True),
+                Field('comissao_vista', 'double', writable=True, readable=False, label='Comissao Vista (chefe)', default=6, notnull=True),
+                Field('comissao_praso', 'double', writable=True, readable=False, label='Comissao Prazo (chefe)', default=3, notnull=True),
                 Field('comissao_cobranca', 'double', writable=True, readable=False, label='Comissao Cobrança', default=5, notnull=True),
 
                  #informações Mercadoria e retorno
@@ -260,6 +260,10 @@ db.define_table('projeto',
                 Field('venda_finalizada', 'boolean', writable=False, readable=False, default=False),
                 Field('bloqueio_chefe', 'boolean', writable=True, readable=False, default=False),
                 format='%(descricao)s')
+db.projeto.empresa.readable = False
+db.projeto.empresa.writable = False
+db.projeto.id.readable = False
+db.projeto.id.writable = False
 
 db.define_table('carrada',
                 Field('projeto','reference projeto', label='Equipe'),
@@ -328,9 +332,9 @@ db.define_table('sub_venda',
                 Field('auth_user','reference auth_user', label='Cobrador', writable=False, readable=False),
                 Field('nome_cobrador', 'string', label='Nome Cobrador',requires = IS_UPPER()),
                 Field('data_inicio_cobranca', 'date', label="Data Cobrança",notnull=True, default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),
-                Field('data_final_cobranca', 'date', label="Data Final Cobrança",notnull=True, default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),
+                Field('data_final_cobranca', 'date', label="Data Final Cobrança", writable=False, readable=False,notnull=True, default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),
                 Field('primeira_cidade', 'string', label='Descrição',requires = IS_UPPER()),
-                Field('ultima_cidade', 'string', label='Ultima Cidade',requires = IS_UPPER()),
+                Field('ultima_cidade', 'string', label='Ultima Cidade', writable=False, readable=False,requires = IS_UPPER()),
                 Field('venda_finalizada', 'boolean', writable=False, readable=False, default=False),
                 Field('total_fichas', 'integer', label='Quant Fichas', writable=False, readable=False, notnull=True, default=0),
                 Field('total_venda_praso', 'double', writable=False, readable=False, notnull=True, default=0),
@@ -411,6 +415,7 @@ db.define_table('classe_despesa_cobranca',
                 Field('bloqueado', 'boolean', label='Bloquear', writable=True, readable=True, default=False),
                 format='%(descricao)s')
 db.define_table('despesa_cobranca',
+                Field('sub_venda','reference sub_venda', label='Cobrança', writable=False, readable=False),
                 Field('classe_despesa_cobranca','reference classe_despesa_cobranca', label='Classe Despesa', writable=True, readable=True),
                 Field('data_inicio', 'date', label="Data", default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),
                 Field('descricao', 'string',label='Descrição', default="DESPESA", notnull=True,requires = IS_UPPER()),

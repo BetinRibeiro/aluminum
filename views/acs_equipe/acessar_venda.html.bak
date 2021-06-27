@@ -12,8 +12,6 @@
 {{fichas=0}}
 {{entrada=0}}
 {{devolucao=0}}
-<div class="py-5" >
-    <div class="container">
         <div class="row">
         <div class="col-md-12">
           <h5 class="">Lista de Vendas ( {{=vendedor.nome.replace("cfrd","")}} )</h5>
@@ -58,7 +56,7 @@
             <div class="table-responsive">
             <table class="table table-striped table-borderless">
             {{a=0}}
-                    <thead class="thead-dark">
+                    <thead class="bg-secondary">
                         <tr>
                             <th>#</th>
                             <th>Data</th>
@@ -78,10 +76,7 @@
                             {{aentrada=0}}
                             {{adevolucao=0}}
                         {{for row in rows_vend:}}
-                            {{if (vendedor.id==234) and (row.sub_venda==111) and (not row.data_venda.day>4) and (row.data_venda.month==7):}}
-                                {{row.sub_venda=113}}
-                                {{row.update_record()}}
-                            {{pass}}
+                            
                         {{if row.sub_venda == row1.id:}}
                             <tr>
                                 {{a+=1}}
@@ -103,18 +98,17 @@
                                 {{adevolucao+=row.valor_devolvido}}
                                 <td>{{=a}}</td>
                                 <td>
-                                    {{if not projeto.venda_finalizada:}}
-
-{{if ( row1.cobranca_iniciada):}}
-                {{if (usuario.id!=2324):}}
-                                    <a href="{{=URL('alterar_venda', args=row.id)}}">{{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}</a>
+                                {{if not projeto.venda_finalizada:}}
+                                  {{if (not row1.cobranca_iniciada):}}
+                                  <a href="{{=URL('alterar_venda', args=row.id)}}">
+                                    {{=row.data_venda.strftime('%d/%m/%Y')}}
+                                  </a>
                                     {{else:}}
-                                    {{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}
+                  {{=row.data_venda.strftime('%d/%m/%Y')}}
                                     {{pass}}
-                                    {{else:}}
-                                    {{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}
-                                    {{pass}}
-                                    {{pass}}
+                                  {{else:}}
+                                  {{=row.data_venda.strftime('%d/%m/%Y')}}
+                                  {{pass}}
 
                                 </td>
                                 <td>R$ {{="{:,}".format(round(row.venda_praso,1)).replace(",",".")}}0</td>
@@ -177,11 +171,55 @@
                                     </tr>
                                 </tbody>
                             </table>
-                </div></div></div>
-
+                </div>
 
 {{vendedor.total_entradas=entrada}}
 {{vendedor.total_fichas=fichas}}
 {{vendedor.total_vale_caderno=caderno}}
 {{vendedor.total_vendas=prazo}}
 {{vendedor.update_record()}}
+<hr>
+<div class="row">
+        <div class="col-md-6">
+          <ul class="list-group">
+            {{comissao=vendedor.total_vendas}}
+                          {{if comissao > 0:}}
+                          {{comissao=vendedor.total_vendas*vendedor.comissao_venda/100}}
+            {{pass}}
+            <li class="list-group-item d-flex justify-content-between align-items-center bg-secondary">
+              {{=vendedor.nome.replace('cfrd','')}}
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Venda R$ {{="{:,.2f}".format(round(prazo,1)).replace(",","#").replace(".",",").replace("#",".")}}
+            </li>
+            {{saldo=comissao-vendedor.vale_saida-vendedor.total_vale_caderno}}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Comissão R$ {{="{:,.2f}".format(round(comissao,1)).replace(",","#").replace(".",",").replace("#",".")}}
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Vale R$ {{="{:,.2f}".format(round(vendedor.vale_saida,1)).replace(",","#").replace(".",",").replace("#",".")}}
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Caderno R$ {{="{:,.2f}".format(round(caderno,1)).replace(",","#").replace(".",",").replace("#",".")}}
+            </li>
+            {{if saldo>0:}}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Saldo R$ {{="{:,.2f}".format(round(saldo,1)).replace(",","#").replace(".",",").replace("#",".")}}
+            </li>
+            {{else:}}
+            <li class="list-group-item d-flex justify-content-between align-items-center text-danger">
+              Dívida R$ {{="{:,.2f}".format(round(saldo,1)).replace(",","#").replace(".",",").replace("#",".")}}
+            </li>
+            {{pass}}
+          </ul>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">{{=projeto.descricao}}</div>
+            <div class="card-body">
+              <h5>{{=vendedor.nome.replace('cfrd','')}}</h5>
+              <p>{{=vendedor.descricao}}</p>
+            </div>
+          </div>
+        </div>
+      </div>

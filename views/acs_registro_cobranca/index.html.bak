@@ -46,15 +46,13 @@
                   <th>Descrição</th>
                   <th>Valor</th>
                   <th>Alterar</th>
-                  {{if (usuario.id==11)or(usuario.id==1)or(usuario.id==82):}}
-                  <th>Conferir</th>
-                  {{pass}}
+                  <th>Alterar</th>
                 </tr>
               </thead>
               <tbody>
                   {{for row in rows:}}
 {{if 'cfrd' in row.descricao:}}
-<tr class="text-success">
+<tr class="bg-success">
 
 {{else:}}
                 <tr>

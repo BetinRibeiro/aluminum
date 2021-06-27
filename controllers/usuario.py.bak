@@ -1,19 +1,26 @@
 # -*- coding: utf-8 -*-
 from datetime import date
 @auth.requires_login()
+@cache.action(time_expire=300, cache_model=cache.ram, quick='SVP')
 def acesso_projeto():
+  #busca o projeto que quer acessar
     projeto = db.projeto(request.args(0, cast=int))
+    #busca quantidade de partições que tem
     total_particao = db(db.sub_venda.projeto==projeto.id).count()
+    #data de hoje que pode ser usada em dois if's
     hj = date.today()
+    #verifica se não possui partições
     if total_particao==0:
-      futuro = date.fromordinal(hj.toordinal()+60)
-      db.sub_venda.insert(projeto=projeto.id,
+      futuro = date.fromordinal(hj.toordinal()+75)
+      db.sub_venda.insert(projeto=projeto.id,empresa=projeto.empresa,
                          data_inicio_cobranca=futuro,
-                         primeira_cidade="PRIMEIRA ROTA")
+                         primeira_cidade="PRIMEIRA ROTA COBRANÇA")
+    #verifica se o projeto possui data final
     if projeto.data_final:
       diferenca=projeto.data_final-hj
+      #se a data final tiver maior que a data de hoje
+      #o projeto é bloqueado automaticamente
       if diferenca.days>=0:
-        #redirect(URL('acs_mensagem','usuario_bloqueado',args="Usuario bloqueado"))
         projeto.venda_finalizada=False
         projeto.update_record()
       else:
@@ -21,16 +28,14 @@ def acesso_projeto():
         projeto.update_record()
     else:
       projeto.data_final=date.fromordinal(hj.toordinal()+60)
-    empresa = db.empresa(projeto.empresa)
     usuario = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user)
     if usuario.bloqueado==True:
       redirect(URL('acs_mensagem','usuario_bloqueado',args="Usuario Temporariamente Bloqueado!"))
-    if usuario.empresa!=empresa.id:
+    if usuario.empresa!=projeto.empresa:
       usuario.bloqueado=True
-      usuario.nome="Bloqueio (tentou acessar outra empresa)"
+      usuario.nome="Bloqueio (tentou acessar outro projeto, usuario.acesso_principal)"
       usuario.update_record()
       redirect(URL('acs_mensagem','usuario_bloqueado',args="Usuario bloqueado"))
-    diferenca=diferenca.days
     return locals()
 
   

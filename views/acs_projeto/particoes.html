@@ -1,7 +1,5 @@
 {{extend 'layout.html'}}
 {{total=0}}
-<div class="py-5" >
-    <div class="container">
       <div class="row">
         <div class="col-md-12">
           <h5 class="">Lista de Rotas de Cobrança ( {{=projeto.descricao}} )</h5>
@@ -19,6 +17,8 @@
             <table class="table table-striped table-borderless">
               <thead>
                 <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Data Cobrança</th>
                   <th scope="col">Primeira Cidade</th>
                   <th scope="col" class="text-center">Q.Fichas</th>
@@ -30,6 +30,21 @@
                 {{for row in rows:}}
                   {{if row.empresa:}}
                 <tr>
+                  {{if row.cobranca_iniciada:}}
+                  <th scope="row">
+                    <a href="{{=URL('alterar_dados_rota', args=row.id)}}">
+                      <i class="fa fa-calendar-check-o text-success"></i>
+                    </a>
+                  </th>
+                  <th scope="row"><span class="badge badge-success badge-pill" >Venda Fechada</span></th>
+                  {{else:}}
+                  <th scope="row">
+                    <a href="{{=URL('alterar_dados_rota', args=row.id)}}">
+                      <i class="fa fa-folder-open-o text-primary"></i>
+                    </a>
+                  </th>
+                  <th scope="row"><span class="badge badge-primary badge-pill" >Venda Aberta</span></th>
+                  {{pass}}
                   <th>{{=row.data_inicio_cobranca.strftime('%d/%m/%Y')}}</th>
                   <td>{{=row.primeira_cidade}}</td>
                   <td class="text-center">{{=row.total_fichas}}</td>
@@ -54,5 +69,3 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>

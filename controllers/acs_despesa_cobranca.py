@@ -60,10 +60,10 @@ def criar_desp():
         newdespesa = db(db.despesa_cobranca.classe_despesa_cobranca == classe_despesa_cobranca.id).select().last()
         db.despesa_cobranca.insert(classe_despesa_cobranca=classe_despesa_cobranca.id, data_inicio=request.now , descricao=newdespesa.descricao , valor=newdespesa.valor)
         return redirect(URL('acesso_despesa', args=[classe_despesa_cobranca.id]))
-    
     db.despesa_cobranca.classe_despesa_cobranca.default = classe_despesa_cobranca.id
     db.despesa_cobranca.classe_despesa_cobranca.writable = False
 
+    db.despesa_cobranca.sub_venda.default = classe_despesa_cobranca.sub_venda
     form = SQLFORM(db.despesa_cobranca).process()
     if form.accepted:
         response.flash = 'Formulario aceito'
@@ -95,3 +95,20 @@ def alterar_desp():
         if not response.flash:
             response.flash = 'Preencha o formulário!'
     return dict(form=form)
+
+def acessar_dia_despesa():
+#     response.view = 'generic.html' # use a generic view
+    lista_atualizacao = db(db.despesa_cobranca.sub_venda==None).select()
+    for despesa_cob in lista_atualizacao:
+      classe_despesa_cobranca = db.classe_despesa_cobranca(despesa_cob.classe_despesa_cobranca)
+      despesa_cob.sub_venda=classe_despesa_cobranca.sub_venda
+      despesa_cob.update_record()
+    sub_venda = db.sub_venda(request.args(0, cast=int))
+    data = (request.args(1))
+    rows = db((db.despesa_cobranca.sub_venda==sub_venda.id)&(db.despesa_cobranca.data_inicio==data)).select(orderby=db.despesa_cobranca.data_inicio)
+  #   ajuste= db((db.despesa)).select()
+  #   for row in ajuste:
+  #     row.tipo=row.classe_despesa.tipo
+  #     row.projeto=row.classe_despesa.projeto
+  #     row.update_record()
+    return locals()

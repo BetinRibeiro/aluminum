@@ -49,7 +49,7 @@
             Definir Cobrador
           </a>
           <a class="btn btn-link  m-1 border-info rounded-top" href="{{=URL('alterar_dados', args=sub_venda.id)}}" style="color:#3b5998" >
-            <i class="fa fa-fw fa-1x py-1 fa-database"></i>
+            <i class="fa fa-fw fa-1x py-1 fa-pencil"></i>
             Alterar Dados Cobrança
           </a>
           <a class="btn btn-link  m-1 border-info rounded-top" href="{{=URL('acs_devolucao','index', args=sub_venda.id)}}" style="color:#3b5998" >
@@ -346,7 +346,6 @@
                     <i class="fa fa-pencil fa-fw" ></i>&nbsp;Alterar
                   </a>
                 </div>
-               
               </div>
                   {{percento_recebido_individual=0}}
                   {{if (row.total_recebido>0)and(sub_venda.total_venda_praso>0):}}

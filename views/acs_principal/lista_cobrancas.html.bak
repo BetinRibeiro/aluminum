@@ -113,11 +113,9 @@
                   {{if row.auth_user:}}
                   <td>{{=row.auth_user.first_name}}</td>
                   {{else:}}
-                  {{row.auth_user=usuario}}
-                  {{row.update_record()}}
-                  <td class="text-danger">{{=row.auth_user}}</td>
+                  <td class="text-danger">Sem usuario</td>
                   {{pass}}
-                  <td><a href="{{=URL('acs_cobranca','relatorio_cobranca', args=[row.id])}}">{{=row.projeto.descricao}}</a></td>
+                  <td><a href="{{=URL('acs_cobranca','index', args=[row.projeto])}}">{{=row.projeto.descricao}}</a></td>
                   <td><a href="{{=URL('acs_cobranca','relatorio_cobranca', args=[row.id])}}">{{=row.primeira_cidade}}</a></td>
                   {{if row.total_venda_praso>=0:}}
                   <td>R$ {{="{:,.2f}".format(round(row.total_venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>

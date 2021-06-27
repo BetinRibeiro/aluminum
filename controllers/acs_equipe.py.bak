@@ -4,9 +4,9 @@ def conferir():
   response.view = 'generic.html' # use a generic view
   vendedor = db.vendedor(request.args(0, cast=int))
   a=False
-  if 'cfrd' in vendedor.nome:
+  if ('cfrd' in vendedor.nome) or ('CFRD' in vendedor.nome):
     a=True
-    vendedor.nome=vendedor.nome.replace('cfrd','')
+    vendedor.nome=vendedor.nome.replace('cfrd','').replace('CFRD','')
   else:
     vendedor.nome=vendedor.nome+'cfrd'
   vendedor.update_record()
@@ -325,6 +325,7 @@ def alterar_comissoes_vendedor():
   db.vendedor.total_descontado.readable = True
   db.vendedor.total_descontado.writable = True
 
+  db.vendedor.total_prego.readable = True
   db.vendedor.projeto.readable = True
   db.vendedor.projeto.writable = False
   deletar=True

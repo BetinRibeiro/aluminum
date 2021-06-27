@@ -4,9 +4,9 @@ def conferir():
   response.view = 'generic.html' # use a generic view
   vendedor = db.vendedor(request.args(0, cast=int))
   a=False
-  if 'cfrd' in vendedor.nome:
+  if ('cfrd' in vendedor.nome) or ('CFRD' in vendedor.nome):
     a=True
-    vendedor.nome=vendedor.nome.replace('cfrd','')
+    vendedor.nome=vendedor.nome.replace('cfrd','').replace('CFRD','')
   else:
     vendedor.nome=vendedor.nome+'cfrd'
   vendedor.update_record()
@@ -234,6 +234,10 @@ def vincular_vendedor():
 
     db.vendedor.projeto.readable = False
     db.vendedor.projeto.writable = False
+    
+
+    db.vendedor.nome.readable = False
+    db.vendedor.nome.writable = False
     
     db.vendedor.comissao_cobranca.readable = False
     db.vendedor.comissao_cobranca.writable = False

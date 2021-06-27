@@ -30,7 +30,8 @@
                   <h6 class="mb-0"> <b>R$ {{="{:,.2f}".format(round(pagamento.valor,2)).replace(".","#").replace(",",".").replace("#",".")}}</b> </h6>
                 </div>
               </div>
-              <p class="my-3">Sem taxas&nbsp;</p>
+              <p class="my-3">Sem taxas</p>
+              <p class="my-3">Email Pix - <b>usbetin@gmail.com </b><br>(Rogoberto R. da Silva) <br>banco - Pagseguro Internet S.A.</p>
               <ul class="pl-3">
                 <li>{{=diferenca.days}} Dias de atraso</li>
                 <li>Referência {{=pagamento.data_vencimento.strftime('%d/%m')}} à {{=futuro.strftime('%d/%m/%Y')}}</li>
@@ -40,9 +41,11 @@
                   <b>Valor total - R$ {{="{:,.2f}".format(round(valor_original,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
               </li>
                 {{desconto=valor_original-pagamento.valor}}
+                {{if desconto>0:}}
                  <li>
                   <b>Desconto - R$ {{="{:,.2f}".format(round(desconto,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
               </li>
+                {{pass}}
               </ul> <a class="btn btn-primary mt-3" href="#">Confirmação Automatica</a>
             </div>
           </div>
@@ -69,9 +72,14 @@
               </li>
                 {{desconto=valor_original-pagamento.valor}}
                  <li>
-                  <b>Desconto - R$ {{="{:,.2f}".format(round(desconto,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
+                  <b>Desconto - R$ {{="{:,.2f}".format(round(0,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
               </li>
-              </ul> <a class="btn btn-primary mt-3" href="#">Confirmação Automatica</a>
+              </ul>
+              {{if pagamento.empresa==22:}}
+              <a class="btn btn-primary mt-3" href="https://pag.ae/7XgREw7w2">Confirmação Automatica</a>
+              {{else:}}
+              <a class="btn btn-primary mt-3 disabled" href="#">Confirmação Automatica</a>
+              {{pass}}
             </div>
           </div>
         </div>
@@ -97,7 +105,7 @@
               </li>
                 {{desconto=valor_original-pagamento.valor}}
                  <li>
-                  <b>Desconto - R$ {{="{:,.2f}".format(round(desconto,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
+                  <b>Desconto - R$ {{="{:,.2f}".format(round(0,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
               </li>
               </ul> <a class="btn btn-primary mt-3" href="#">Confirmação Automatica</a>
             </div>

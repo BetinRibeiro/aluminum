@@ -3,14 +3,19 @@
 
 
 
-            <div class="py-3" >
-    <div class="container">
+<div class="py-3" >
+<div class="container">
 {{if auth.user.id==1:}}
 <a class="btn btn-primary" href="{{=URL('lista_empresas', args=usuario.id)}}"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Lista Empresas</a>
 <a class="btn btn-primary" href="{{=URL('default', 'captura_empresa')}}"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Projeção Ideal</a>
 <a class="btn btn-primary" href="{{=URL('acs_empresa', 'projecao_simulada')}}"><i class="fa fa-fw fa-1x py-1 fa-file-o"></i> Projeção Simulada</a>
 {{pass}}
         <h2 class="p-2">{{=empresa.nome}} <small class="text-muted">{{=usuario.first_name}}</small></h2>
+      {{if rowspgmt>0:}}
+      <h3 class="border bg-danger text-white p-2 m-3">
+          Não identificamos o pagamento do sistema
+      </h3>
+      {{pass}}
         <div class="row p-3">
         <div class="col-md-12">
           <div class="row">

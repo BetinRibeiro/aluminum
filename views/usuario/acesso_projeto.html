@@ -1,5 +1,4 @@
 {{extend 'layout.html'}}
-{{from datetime import *}}
 <nav class="navbar navbar-expand-md navbar-dark bg-dark" >
   <div class="container">
     <a class="navbar-brand" href="{{=URL('default','acesso_inicial', args=projeto.id)}}">
@@ -30,7 +29,7 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                     <i class="fa fa-window-restore text-primary mr-2"></i>
-                    <a href="{{=URL('venda','acesso_particao', args=projeto.id)}}">&nbsp;Partições</a>
+                    <a href="{{=URL('venda','acesso_particao', args=projeto.id)}}"> Partições</a>
                 </li>
                 <li class="list-group-item">
                   <i class="fa fa-truck  text-primary mr-2"></i>
@@ -38,7 +37,7 @@
                 </li>
                 <li class="list-group-item">
                         <i class="fa fa-bar-chart text-primary mr-2"></i>
-                        <a href="{{=URL('registro','acesso_registro_venda', args=[projeto.id,'venda_vista'])}}">&nbsp;Vendas à Vista</a>
+                        <a href="{{=URL('registro','acesso_registro_venda', args=[projeto.id,'venda_vista'])}}"> Vendas à Vista</a>
                 </li>
               </ul>
             </div>
@@ -52,15 +51,15 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                   <i class="fa fa-users text-primary mr-2"></i>
-                  <a href="{{=URL('funcionario','acesso_funcionario', args=projeto.id)}}">&nbsp;Funcionario</a>
+                  <a href="{{=URL('funcionario','acesso_funcionario', args=projeto.id)}}"> Funcionario</a>
                 </li>
                 <li class="list-group-item">
                   <i class="fa fa-sitemap text-primary mr-2"></i>
-                  <a href="{{=URL('equipe_venda','acesso_equipe', args=projeto.id)}}">&nbsp;Equipe Vendas</a>
+                  <a href="{{=URL('equipe_venda','acesso_equipe', args=projeto.id)}}"> Equipe Vendas</a>
                 </li>
                 <li class="list-group-item">
                   <i class="fa fa-book text-primary mr-2"></i>
-                  <a href="{{=URL('despesa','acessar_despesa', args=[projeto.id,'Despesa_Venda'])}}">&nbsp;Despesa na Venda</a>
+                  <a href="{{=URL('despesa','acessar_despesa', args=[projeto.id,'Despesa_Venda'])}}"> Despesa na Venda</a>
                 </li>
               </ul>
             </div>
@@ -74,15 +73,15 @@
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
                   <i class="fa fa-bars text-primary mr-2"></i>
-                  <a href="{{=URL('registro','acesso_registro_venda', args=[projeto.id,'caderno_chefe'])}}">&nbsp;Caderno Chefe</a>
+                  <a href="{{=URL('registro','acesso_registro_venda', args=[projeto.id,'caderno_chefe'])}}"> Caderno Chefe</a>
                 </li>
                 <li class="list-group-item">
                   <i class="fa fa-file-text text-primary mr-2"></i>
-                  <a href="{{=URL('chefe','relatorio', args=projeto.id)}}">&nbsp;Relatório Chefe</a>
+                  <a href="{{=URL('chefe','relatorio', args=projeto.id)}}"> Relatório Chefe</a>
                 </li>
                 <li class="list-group-item">
                   <i class="fa fa-life-ring text-primary mr-2"></i>
-                  <a href="{{=URL('projeto','prestacao_individual', args=projeto.id)}}">&nbsp;Vendedores Individual</a>
+                  <a href="{{=URL('projeto','prestacao_individual', args=projeto.id)}}"> Vendedores Individual</a>
                 </li>
               </ul>
             </div>

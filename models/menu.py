@@ -14,10 +14,12 @@ response.menu = [
 # ----------------------------------------------------------------------------------------------------------------------
 
 #membro = db.auth_membership(auth_membership.group_id==2)
-if auth.has_membership('admin'):
-    response.menu += [
-    (T('Home'), False, URL('default', 'index'), [])
-    ]
+if auth.user:
+  if auth.user.id==1:
+      response.menu += [
+      (T('Projetos'), False, URL('acs_principal','lista_projetos'), []),
+      (T('Cobranças'), False, URL('acs_principal','lista_cobrancas'), [])
+      ]
 if configuration.get('app.production'):
     _app = request.application
     response.menu += [

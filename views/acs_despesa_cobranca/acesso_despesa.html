@@ -41,7 +41,7 @@
                           {{pass}}
                           <td>{{=row.descricao}}</td>
 
-						<td> {{=row.data_inicio.strftime('%d/%m/%Y')}}</td>
+              <td><a href="{{=URL('acessar_dia_despesa', args=[classe_despesa_cobranca.sub_venda,row.data_inicio])}}">{{=row.data_inicio.strftime('%d/%m/%Y')}}</a></td>
                       <td>R$ {{="{:,.2f}".format(round(row.valor,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                <td><a href="{{=URL('alterar_desp', args=[row.id])}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-pencil"></i></a></td>
 					  </tr>

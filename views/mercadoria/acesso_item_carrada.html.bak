@@ -3,167 +3,98 @@
 {{total=0}}
 {{custo=0}}
 <div class="py-5">
-    <div class="container">
-      <div class="row  text-center">
-        <div class="col-md-12">
-          <h1 class="mb-3">{{=carrada.descricao}}</h1>
-          <p >Itens da Carrada</p>
-        </div>
+  <div class="container">
+    <div class="row  text-center">
+      <div class="col-md-12">
+        <h3 class="mb-3">{{=carrada.descricao}}</h3>
+        <p >Itens da Carrada</p>
       </div>
-<div class="row">
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-6 col-6 my-1" >
-              <a  class="btn btn-outline-danger btn-block"  href="{{=URL('mercadoria','acesso_carradas', args=carrada.projeto)}}"> 
-                <i class="fa  fa-arrow-left  fa-1x"></i>
-              </a>
-            </div>
-            <div class="col-md-6 col-6 my-1" >
-        {{if not carrada.finalizada:}}
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6 col-6 my-1" >
+            <a  class="btn btn-outline-danger btn-block" href="{{=URL('mercadoria','acesso_carradas', args=carrada.projeto)}}">
+              <i class="fa  fa-arrow-left  fa-1x"></i>
+            </a>
+          </div>
+          <div class="col-md-6 col-6 my-1" >
+            {{if False:}}
+            {{if not carrada.finalizada:}}
             <a class="btn btn-outline-success btn-block"  href="{{=URL('criar_item_carrada', args=carrada.id)}}">
               <i class="fa  fa-plus fa-1x"></i>
-              </a>
-        {{pass}}
-            </div>
+            </a>
+            {{pass}}
+            {{pass}}
           </div>
         </div>
-        <div class="col-md-6"></div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-<div class="table-responsive">
-    <table class="table thead-light table-sm table-striped">
-        <thead class="">
-            
-                   
-            <tr>
+      <div class="col-md-6"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table thead-light table-sm table-striped">
+            <thead class="">
+              <tr>
                 <th>Quant</th>
                 <th>Descrição</th>
                 <th>Preço</th>
                 <th>Total</th>
-                {{if desbloqueado:}}
-                <th >Custo</th>
-                <th >Total</th>
-                <th >%</th>
-                {{pass}}
-                
-                {{if not carrada.finalizada:}}
-                {{if not projeto.venda_finalizada:}}
-                <th id="noprint">Alterar</th>
-                {{pass}}{{pass}}
-              
-              {{if (usuario.id==11)or(usuario.id==1):}}
-                <th id="noprint">Verificação</th>
-              
-              {{pass}}
-            </tr>
-        </thead>
+{{if False:}}
+{{if not carrada.finalizada:}}
+{{if not projeto.venda_finalizada:}}
+<th id="noprint">Alterar</th>
+{{pass}}{{pass}}{{pass}}
+              </tr>
+            </thead>
             <tbody>
-                {{for row in rows:}}
-                
-                
-                {{row.projeto=projeto.id}}
-                {{row.update_record()}}
-                 {{total_custo=row.custo_unitario*row.q_pcs}}
-                    {{total_preco=row.preco_unitario*row.q_pcs}}
-                <tr>
-                    <td>
-                            {{=row.q_pcs}}
-                    </td>
-                    <td>
-                            {{=row.descricao.replace("cfrd","").replace("rtnc","")}}
-                    </td>
-                    <td>
-                            R$ {{="{:,}".format(round(row.preco_unitario,1)).replace(",",".")}}0
-                    </td>
-                    <td>
-                            R$ {{="{:,}".format(round(row.preco_unitario*row.q_pcs,1)).replace(",",".")}}0
-                    </td>
-                    {{if desbloqueado:}}
-                    <td>
-                                R$ {{="{:,}".format(round(row.custo_unitario,1)).replace(",",".")}}0
-                        </td>
-                        <td>
-                                R$ {{="{:,}".format(round(row.custo_unitario*row.q_pcs,1)).replace(",",".")}}0
-                        </td>
-                        {{if (total_preco>0)and(total_custo>0):}}
-                    {{margem=total_preco/total_custo*100}}
-                    {{if not (margem>=350) and (margem>250):}}
-                        <td>
-                            <i class="fa text-warning fa-circle"></i>
-                                {{="{:,}".format(round(margem,0)).replace(".0","")}}%
-                        </td>
-                     {{elif margem>=350:}}
-                        <td>
-                                <i class="fa text-success fa-circle"></i>
-                            {{="{:,}".format(round(margem,0)).replace(".0","")}}%
-                        </td>
-                      {{else:}}
-                        <td>
-                            <i class="fa text-danger fa-circle"></i>
-                                {{="{:,}".format(round(margem,0)).replace(".0","")}}%
-                        </td>
-                        {{pass}}
-                        {{else:}}
-                        <td>%</td>
-                        {{pass}}
-                    {{pass}}
-                    {{if not carrada.finalizada:}}
-                      {{if not projeto.venda_finalizada:}}
-                    <td id="noprint"><a class="btn btn-outline-warning btn-block" href="{{=URL('alterar_item_carrada', args=row.id)}}"><i class="fa  fa-exchange" ></i></a></td>
-                    {{pass}}{{pass}}
-                  
-              {{if (usuario.id==11)or(usuario.id==1):}}
-                  <td>{{if 'cfrd' in row.descricao:}}
-                    <a class="btn btn-link" style="color:#55acee"  href="{{=URL('conferir', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-check" ></i> </a>
-                    {{else:}}
-                            <a class="btn btn-link" href="{{=URL('conferir', args=row.id)}}" style="color:#dd4b39"><i class="fa fa-fw fa-1x py-1 fa-square-o"></i> </a>
-                    {{pass}}
-                        </td>
-                  {{pass}}
-                </tr>
-                        {{pcas+=row.q_pcs}}
-                        {{total+=row.preco_unitario*row.q_pcs}}
-                        {{custo+=row.custo_unitario*row.q_pcs}}
-                    {{pass}}
-                <tr>
-                    <th>
-                        {{=pcas}}
-                    </th>
-                    <th>
-                        <i class="fa text-dark fa-bars"></i>
-                    </th>
-                    <th>
-                        <i class="fa text-dark fa-bars"></i>
-                    </th>
-                    <th>
-                        R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0
-                    </th>
-                    
-                {{if desbloqueado:}}
-                    <th
-                        >R$ {{="{:,}".format(round(0,1)).replace(",",".")}}0
-                    </th>
-                    <th
-                        >R$ {{="{:,}".format(round(custo,1)).replace(",",".")}}0
-                    </th>
-                    {{pass}}
-                    
-                    {{if not carrada.finalizada:}}
-                    {{if not projeto.venda_finalizada:}}
-                    <th id="noprint"></th>
-                    {{pass}}
-                    {{pass}}
-                </tr>
-        </tbody>
-    </table>
+              {{for row in rows:}}
+                {{if not row.projeto:}}
+                  {{row.projeto=projeto.id}}
+                  {{row.update_record()}}
+                {{pass}}
+                {{total_custo=row.custo_unitario*row.q_pcs}}
+                {{total_preco=row.preco_unitario*row.q_pcs}}
+              <tr>
+                <td>
+                  {{=row.q_pcs}}
+                </td>
+                <td>
+                  {{=row.descricao.replace("cfrd","").replace("rtnc","")}}
+                </td>
+                <td>
+                  R$ {{="{:,.2f}".format(round(row.preco_unitario,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </td>
+                {{pcas+=row.q_pcs}}
+                {{total_linha=row.preco_unitario*row.q_pcs}}
+                {{total+=row.preco_unitario*row.q_pcs}}
+                {{custo+=row.custo_unitario*row.q_pcs}}
+                <td>
+                  R$ {{="{:,.2f}".format(round(total_linha,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </td>
+                {{pass}}
+              </tr>
+              <tr>
+                <th>
+                  {{=pcas}}
+                </th>
+                <th>
+                  <i class="fa text-dark fa-bars"></i>
+                </th>
+                <th>
+                  <i class="fa text-dark fa-bars"></i>
+                </th>
+                <th>
+                  R$ {{="{:,.2f}".format(round(total,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </th>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        </div>
+      </div>
     </div>
-</div>
-</div>
-</div>
-</div>
+  </div>
 </div>
 {{if not projeto.venda_finalizada:}}
 {{carrada.total_preco=total}}

@@ -6,7 +6,7 @@ def index():
     usuario=auth.user
     usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
     if usuario_empresa:
-      if (usuario_empresa.tipo!="Proprietário")|(usuario_empresa.tipo!="Administrador"):
+      if (usuario_empresa.tipo=="Chefe")|(usuario_empresa.tipo=="Cobrador"):
         redirect(URL('default','index'))
     if usuario_empresa.bloqueado:
       #redireciona para pagina de usuario)

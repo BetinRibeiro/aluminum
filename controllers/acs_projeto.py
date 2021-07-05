@@ -124,15 +124,20 @@ def alterar_dados_rota():
 
 @auth.requires_login()
 def acesso_vendas_particao():
-    sub_venda = db.sub_venda(request.args(0, cast=int))
-    rows = db(db.venda.sub_venda == sub_venda.id).select(orderby=db.venda.data_venda)
-    rowsdesp = db((db.despesa.projeto==sub_venda.projeto)&(db.despesa.tipo=="Despesa_Venda")).select(orderby=db.despesa.data_inicio)
-    projeto = db.projeto(sub_venda.projeto)
-    for row in rowsdesp:
-      classe_despesa = db.classe_despesa(db.classe_despesa.id==row.classe_despesa)
-      row.projeto=classe_despesa.projeto
-      row.update_record()
-    return locals()
+  lista_despesa_sem_projeto = db(db.despesa.projeto==None).select()
+  for row in lista_despesa_sem_projeto:
+    row.tipo=row.classe_despesa.tipo
+    row.projeto=row.classe_despesa.projeto
+    row.update_record()
+  sub_venda = db.sub_venda(request.args(0, cast=int))
+  rows = db(db.venda.sub_venda == sub_venda.id).select(orderby=db.venda.data_venda)
+  rowsdesp = db((db.despesa.projeto==sub_venda.projeto)&(db.despesa.tipo=="Despesa_Venda")).select(orderby=db.despesa.data_inicio)
+  projeto = db.projeto(sub_venda.projeto)
+  for row in rowsdesp:
+    classe_despesa = db.classe_despesa(db.classe_despesa.id==row.classe_despesa)
+    row.projeto=classe_despesa.projeto
+    row.update_record()
+  return locals()
 
 @auth.requires_login()
 def prestacao_vendedor():

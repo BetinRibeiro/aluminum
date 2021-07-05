@@ -61,8 +61,8 @@
                 {{if projeto.total_venda_vista>0:}}
               <li class="list-group-item d-flex justify-content-between">
                 <div>
-                  <h6 class="my-0"><b>Total Venda à Vista</b></h6> <small class="text-muted">{{=projeto.quant_dias_venda_vista}} Dias Registrados</small>
-                </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_venda_vista,1)).replace(",",".")}}0</span>
+                  <h6 class="my-0"><b>Total Mercadoria à Vista</b></h6> <small class="text-muted">{{=projeto.quant_dias_venda_vista}} Dias Registrados</small>
+                </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_venda_vista*2,1)).replace(",",".")}}0</span>
               </li>
                 {{pass}}
               <li class="list-group-item d-flex justify-content-between bg-light">

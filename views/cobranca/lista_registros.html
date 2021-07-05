@@ -137,17 +137,17 @@
 </div>
 {{pass}}
 {{if not consul:}}
-{{if tipo=="Recebimento":}}
+{{if (tipo=="Recebimento")and(sub_venda.total_recebido!=total):}}
 {{sub_venda.total_recebido=total}}
 {{sub_venda.update_record()}}
 {{pass}}
 
-{{if tipo=="Deposito":}}
+{{if (tipo=="Deposito")and(sub_venda.total_deposito!=total):}}
 {{sub_venda.total_deposito=total}}
 {{sub_venda.update_record()}}
 {{pass}}
 
-{{if tipo=="Caderno":}}
+{{if (tipo=="Caderno")and(sub_venda.total_caderno_cobrador!=total):}}
 {{sub_venda.total_caderno_cobrador=total}}
 {{sub_venda.update_record()}}
 {{pass}}

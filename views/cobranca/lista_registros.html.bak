@@ -3,155 +3,164 @@
 {{total=0}}
 {{a=1}}
 
-  <div class="py-5" >
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <h3 class="mb-3">{{=tipo}} da cobrança de {{=sub_venda.primeira_cidade}}</h3>
-          <p>{{=auth.user.first_name}} {{=auth.user.last_name}}</p>
-        </div>
+<div class="py-5" >
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h3 class="mb-3">{{=tipo}} da cobrança de {{=sub_venda.primeira_cidade}}</h3>
+        <p>{{=auth.user.first_name}} {{=auth.user.last_name}}</p>
       </div>
-      <div class="row">
-        <div class="col-md-6 col-12 py-2">
-          <div class="row">
-            <div class="col-md-6 col-6">
-              <a  class="btn btn-outline-danger btn-block"  href="{{=URL('acesso_particao_cobranca', args=[sub_venda.id])}}">
-                <i class="fa fa-arrow-left  fa-1x"></i>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-12 py-2">
+        <div class="row">
+          <div class="col-md-6 col-6">
+            <a  class="btn btn-outline-danger btn-block" href="{{=URL('acesso_particao_cobranca', args=[sub_venda.id])}}">
+              <i class="fa fa-arrow-left  fa-1x"></i>
             </a>
-            </div>
-            <div class="col-md-6 col-6">
-              <a  class="btn btn-outline-success btn-block"  href="{{=URL('inserir_registro', args=[sub_venda.id,tipo])}}">
-            <i class="fa  fa-plus fa-1x"></i>
+          </div>
+          <div class="col-md-6 col-6">
+            <a  class="btn btn-outline-success btn-block"  href="{{=URL('inserir_registro', args=[sub_venda.id,tipo])}}">
+              <i class="fa  fa-plus fa-1x"></i>
             </a>
-            </div>
           </div>
         </div>
-        <div class="col-md-6 col-12">
-          {{if tipo=="Recebimento":}}
-            <div class="form-group row">
-                <input type="text" class="form-control col-10 col-form-label" name="busca" placeholder="Faça uma pesquisa" />
-              <div class="col-2">
-                  <a class="btn btn-outline-light col-2 botao">
-                      <i class="fa text-success fa-search  fa-2x"></i>
-                  </a>
-                </div>
+      </div>
+      <div class="col-md-6 col-12">
+        {{if tipo=="Recebimento":}}
+          <div class="form-group row">
+            <input type="text" class="form-control col-10 col-form-label" name="busca" placeholder="Faça uma pesquisa" />
+            <div class="col-2">
+              <a class="btn btn-outline-light col-2 botao">
+                <i class="fa text-success fa-search  fa-2x"></i>
+              </a>
             </div>
-    {{pass}}
         </div>
+        {{pass}}
       </div>
-        
-          <div class="table-responsive">
-            <table class="table table-bordered table-sm table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Data</th>
-                  <th>Descrição</th>
-                  <th>Valor</th>
-                  <th>Alterar</th>
-                  {{if (usuario.id==11)or(usuario.id==1):}}
-                  <th>Conferir</th>
-                  {{pass}}
-                </tr>
-              </thead>
-              <tbody>
-                {{if len(rows)>0:}}
-                {{primeira_data=rows[0].data_inicio}}
-                {{ultima_data=rows[-1].data_inicio}}
-                {{pass}}
-                  {{for row in rows:}}
-                <tr>
-                  <th>{{=a}}</th>
-                    {{a+=1}}
-                  <td>{{=row.data_inicio.strftime('%d/%m/%Y')}}</td>
-                  <td>{{=row.descricao.replace('cfrd','')}}</td>
-                  <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
-                    {{if not (dataontem>=row.data_inicio) or(usuario.id!=sub_venda.auth_user):}}
-                    {{if (usuario.id!=101234567):}}
-                  <td><a  class="btn btn-outline-warning btn-block"  href="{{=URL('alterar_registro', args=[row.id,tipo])}}"><i class="fa fa-exchange" ></i></a></td>
-                    {{else:}}
-                    <td><a  class="btn btn-outline-success btn-block"  href="#"><i class="fa fa-check-square-o" ></i></a></td>
-                    {{pass}}
-                    {{else:}}
-                    <td><a  class="btn btn-outline-success btn-block"  href="#"><i class="fa fa-check-square-o" ></i></a></td>
-                    {{pass}}
-                    {{total+=row.valor}}
-                  {{if not row.empresa:}}
-                  {{row.empresa=sub_venda.projeto.empresa}}
-                  {{row.update_record()}}
-                  {{pass}}
-                  {{if (usuario.id==11)or(usuario.id==1):}}
-                  <td>{{if 'cfrd' in row.descricao:}}
-                    <a class="btn btn-link" style="color:#55acee"  href="{{=URL('conferir', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-check" ></i> </a>
-                    {{else:}}
-                            <a class="btn btn-link" href="{{=URL('conferir', args=row.id)}}" style="color:#dd4b39"><i class="fa fa-fw fa-1x py-1 fa-square-o"></i> </a>
-                  {{pass}}
-                  {{pass}}
-                    {{if (usuario.id!=sub_venda.auth_user) and(row.tipo=="Deposito"):}}
-                    <tr>
-                        <th>OBS:</th>
-                        <td colspan="5">{{=row.observacao}}</td>
-                </tr>
-                  {{pass}}
-                  {{pass}}
-                <tr>
-                  <th>#</th>
-                  <th></th>
-                  <th>Total</th>
-                  <th>R$ {{="{:,.2f}".format(round(total,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
-                  <td>#</td>
-                </tr>
-              </tbody>
-            </table>
     </div>
-      
-        </div>
-      </div>
-{{if tipo=="Recebimento":}}
-      <div class="row mt-2 text-center">
-        <div class="mx-auto col-md-8">
-                {{if len(rows)>0:}}
-{{diferenca = ultima_data - primeira_data }}
-          
-          {{if (total>0)and(diferenca.days>0):}}
-          {{media = total/diferenca.days}}
-          {{else:}}
-          {{media=0}}
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Data</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Alterar</th>
+            {{if (usuario.id==11)or(usuario.id==1):}}
+              <th>Conferir</th>
+            {{pass}}
+          </tr>
+        </thead>
+        <tbody>
+          {{if len(rows)>0:}}
+          {{primeira_data=rows[0].data_inicio}}
+          {{ultima_data=rows[-1].data_inicio}}
           {{pass}}
-          {{if diferenca.days>5:}}
-
-          <p>Primeira data <b>{{=primeira_data.strftime('%d/%m/%Y')}}</b> até o dia <b>{{=ultima_data.strftime('%d/%m/%Y')}}</b>,<b> {{=diferenca.days}}</b> dias de trabalho, <b>R$ {{="{:,.2f}".format(round(total,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> média de cobrança é de <b>R$ {{="{:,.2f}".format(round(media,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> <b><u>{{if media>2500:}} está na média de uma boa cobrança. {{elif media>1800:}} está na média de uma cobrança que está começando atrasar.{{else:}} infelizmente você está bem abaixo da média cobrança está atrasada.{{pass}}</u></b> a média de cobrança de todos os cobradores do sistema está em <b>R$ 2.{{=str(date.today().toordinal()*18)[3:6]}},{{=str(date.today().toordinal()*87)[0:2]}} </b>sem ajudante.<br></p> 
-          {{pass}}{{pass}}
-        </div>
-      </div>
-{{pass}}
+          {{for row in rows:}}
+          <tr>
+            <th>{{=a}}</th>
+            {{a+=1}}
+            <td>{{=row.data_inicio.strftime('%d/%m/%Y')}}</td>
+            <td>{{=row.descricao.replace('cfrd','')}}</td>
+            <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
+            {{if not (dataontem>=row.data_inicio) or(usuario.id!=sub_venda.auth_user):}}
+            {{if (usuario.id!=101234567):}}
+            <td>
+              <a  class="btn btn-outline-warning btn-block"  href="{{=URL('alterar_registro', args=[row.id,tipo])}}"><i class="fa fa-exchange" ></i>
+              </a>
+            </td>
+            {{else:}}
+            <td>
+              <a  class="btn btn-outline-success btn-block"  href="#"><i class="fa fa-check-square-o" ></i></a></td>
+            {{pass}}
+            {{else:}}
+            <td>
+              <a  class="btn btn-outline-success btn-block"  href="#"><i class="fa fa-check-square-o" ></i>
+              </a>
+            </td>
+            {{pass}}
+            {{total+=row.valor}}
+            {{if not row.empresa:}}
+            {{row.empresa=sub_venda.projeto.empresa}}
+            {{row.update_record()}}
+            {{pass}}
+            {{if (usuario.id==11)or(usuario.id==1):}}
+            <td>
+              {{if 'cfrd' in row.descricao:}}
+              <a class="btn btn-link" style="color:#55acee"  href="{{=URL('conferir', args=row.id)}}">
+                <i class="fa fa-fw fa-1x py-1 fa-check" ></i>
+              </a>
+              {{else:}}
+              <a class="btn btn-link" href="{{=URL('conferir', args=row.id)}}" style="color:#dd4b39">
+                <i class="fa fa-fw fa-1x py-1 fa-square-o"></i>
+              </a>
+              {{pass}}
+              {{pass}}
+              {{if (usuario.id!=sub_venda.auth_user) and(row.tipo=="Deposito"):}}
+              <tr>
+                <th>OBS:</th>
+                <td colspan="5">{{=row.observacao}}</td>
+              </tr>
+              {{pass}}
+              {{pass}}
+              <tr>
+                <th>#</th>
+                <th></th>
+                <th>Total</th>
+                <th>
+                  R$ {{="{:,.2f}".format(round(total,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </th>
+                <td>#</td>
+              </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-{{if not consul:}}
+</div>
 {{if tipo=="Recebimento":}}
+<div class="row mt-2 text-center">
+  <div class="mx-auto col-md-8">
+    {{if len(rows)>0:}}
+    {{diferenca = ultima_data - primeira_data }}
+    {{if (total>0)and(diferenca.days>0):}}
+    {{media = total/diferenca.days}}
+    {{else:}}
+    {{media=0}}
+    {{pass}}
+    {{if diferenca.days>5:}}
+    <p>Primeira data <b>{{=primeira_data.strftime('%d/%m/%Y')}}</b> até o dia <b>{{=ultima_data.strftime('%d/%m/%Y')}}</b>,<b> {{=diferenca.days}}</b> dias de trabalho, <b>R$ {{="{:,.2f}".format(round(total,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> média de cobrança é de <b>R$ {{="{:,.2f}".format(round(media,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> <b><u>{{if media>2500:}} está na média de uma boa cobrança. {{elif media>1800:}} está na média de uma cobrança que está começando atrasar.{{else:}} infelizmente você está bem abaixo da média cobrança está atrasada.{{pass}}</u></b> a média de cobrança de todos os cobradores do sistema está em <b>R$ 2.{{=str(date.today().toordinal()*18)[3:6]}},{{=str(date.today().toordinal()*87)[0:2]}} </b>sem ajudante.<br></p>
+    {{pass}}
+    {{pass}}
+  </div>
+</div>
+{{pass}}
+{{if not consul:}}
+{{if (tipo=="Recebimento")and(sub_venda.total_recebido=total):}}
 {{sub_venda.total_recebido=total}}
 {{sub_venda.update_record()}}
 {{pass}}
 
-{{if tipo=="Deposito":}}
+{{if (tipo=="Deposito")and(sub_venda.total_deposito!=total):}}
 {{sub_venda.total_deposito=total}}
 {{sub_venda.update_record()}}
 {{pass}}
 
-{{if tipo=="Caderno":}}
+{{if (tipo=="Caderno")and(sub_venda.total_caderno_cobrador!=total):}}
 {{sub_venda.total_caderno_cobrador=total}}
 {{sub_venda.update_record()}}
 {{pass}}
 
 {{pass}}
 <script>
-    var inputElement = document.querySelector('input[name=busca]');
-    var btnElement = document.querySelector('a.botao');
+  var inputElement = document.querySelector('input[name=busca]');
+  var btnElement = document.querySelector('a.botao');
 
-    btnElement.onclick = function(){
-     var busca= inputElement.value;
-        window.location.href = "{{=URL('lista_registros', args=[sub_venda.id,tipo])}}"+"/"+busca
+  btnElement.onclick = function(){
+   var busca= inputElement.value;
+      window.location.href = "{{=URL('lista_registros', args=[sub_venda.id,tipo])}}"+"/"+busca
 
-    }
+  }
 
 </script>

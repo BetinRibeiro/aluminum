@@ -90,7 +90,7 @@
                                 {{row.update_record()}}
                             {{pass}}
                         {{if row.sub_venda == row1.id:}}
-                          {{if True:}}
+                          {{if False:}}
                           {{row.venda_praso=row.venda_praso-row.valor_devolvido}}
                                 {{row.quant_fichas=row.quant_fichas-row.quant_fichas_devolvidas}}
                                 {{caderno+=row.vale_caderno}}
@@ -99,7 +99,6 @@
                                 {{fichas_devolvidas+=row.quant_fichas_devolvidas}}
                                 {{entrada+=row.entradas_venda}}
                                 {{devolucao+=row.valor_devolvido}}
-                                
                                 {{acaderno+=row.vale_caderno}}
                                 {{aprazo+=row.venda_praso}}
                                 {{afichas+=row.quant_fichas}}
@@ -117,7 +116,6 @@
                                 {{fichas_devolvidas+=row.quant_fichas_devolvidas}}
                                 {{entrada+=row.entradas_venda}}
                                 {{devolucao+=row.valor_devolvido}}
-                                
                                 {{acaderno+=row.vale_caderno}}
                                 {{aprazo+=row.venda_praso}}
                                 {{afichas+=row.quant_fichas}}
@@ -131,13 +129,12 @@
                 {{if (usuario.id!=2324):}}
                                     <a class="btn btn-outline-primary text-left btn-block" href="{{=URL('alterar_venda', args=row.id)}}">{{=row.data_venda.strftime('%d/%m/%Y')}}</a>
                                     {{else:}}
-                                    {{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}
+                                    {{=row.data_venda.strftime('%d/%m/%Y')}}
                                     {{pass}}
                                     {{else:}}
-                                    {{=("{}/{}/{}".format(row.data_venda.day,row.data_venda.month,row.data_venda.year))}}
+                                    {{=row.data_venda.strftime('%d/%m/%Y')}}
                                     {{pass}}
                                     {{pass}}
-                                
                                 </td>
                                 <td>R$ {{="{:,.2f}".format(round(row.venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                                 <td>{{=row.quant_fichas}}</td>
@@ -160,8 +157,6 @@
                             </tbody>
 
                     </table>
-                            
-                        
                 {{totalcaderno+=caderno}}
                 {{totalprazo+=prazo}}
                 {{totalfichas+=fichas}}
@@ -198,13 +193,11 @@
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
 
-
+{{if (vendedor.total_vendas!=prazo)or(vendedor.total_vale_caderno=caderno):}}
 {{vendedor.total_entradas=entrada}}
 {{vendedor.total_fichas=fichas}}
 {{vendedor.total_vale_caderno=caderno}}
 {{vendedor.total_vendas=prazo}}
 {{vendedor.update_record()}}
+{{pass}}

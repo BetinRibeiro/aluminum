@@ -7,124 +7,84 @@
 {{r=7}}
 {{pass}}
 <div class="py-5">
-    <div class="container">
-      <div class="row  text-center">
-        <div class="col-md-12">
-          <h3 class="mb-3">{{=projeto.descricao}}</h3>
-          <p >Carradas da Venda</p>
-        </div>
+  <div class="container">
+    <div class="row  text-center">
+      <div class="col-md-12">
+        <h3 class="mb-3">{{=projeto.descricao}}</h3>
+        <p >Carradas da Venda</p>
       </div>
-<div class="row">
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-6 col-6 my-1" >
-              <a  class="btn btn-outline-danger btn-block"  href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}"> 
-                <i class="fa  fa-arrow-left  fa-1x"></i>
-              </a>
-            </div>
-            <div class="col-md-6 col-6 my-1" >
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6 col-6 my-1" >
+            <a  class="btn btn-outline-danger btn-block"  href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}">
+              <i class="fa  fa-arrow-left  fa-1x"></i>
+            </a>
+          </div>
+          <div class="col-md-6 col-6 my-1" >
+            {{if False:}}
             {{if not projeto.venda_finalizada:}}
             <a class="btn btn-outline-success btn-block"  href="{{=URL('mercadoria','criar_carrada', args=projeto.id)}}">
               <i class="fa  fa-plus fa-1x"></i>
-              </a>
-        {{pass}}
-            </div>
+            </a>
+            {{pass}}
+            {{pass}}
           </div>
         </div>
-        <div class="col-md-6"></div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
- <div class="table-responsive">
+      <div class="col-md-6"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
             <table class="table table-sm table-striped">
               <thead >
                 <tr>
-                  
                   <th>Descrição</th>
                   <th>Data</th>
                   <th class="text-center">Q. Peças</th>
                   <th>Preço</th>
-                    {{if desbloqueado:}}
-                  <th >Custo</th>
-                    <th>%</th>
-                    {{pass}}
-                    {{if not projeto.venda_finalizada:}}
-                  <th id="noprint">Alterar</th>
-                    {{pass}}
-                  {{if r==7:}}
-                  <th>Verificação</th>
-                  {{pass}}
                 </tr>
               </thead>
               <tbody>
-{{for row in rows:}}
+                {{for row in rows:}}
                 <tr>
-                  
-                  <th><a  class="btn btn-outline-primary btn-block text-left" href="{{=URL('mercadoria','acesso_item_carrada', args=row.id)}}" >{{=row.descricao}}</a></th>
-                  <th><a  class="btn btn-outline-primary btn-block text-center" href="{{=URL('mercadoria','acesso_item_carrada', args=row.id)}}" >{{=row.data_envio.strftime('%d/%m/%Y')}}</a></th>
-                  <td class="text-center">{{=row.total_pecas}}</td>
-                  <td>R$ {{="{:,.2f}".format(round(row.total_preco,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
-                    {{if desbloqueado==True:}}
-                  <td>R$ {{="{:,.2f}".format(round(row.total_custo,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
-                     {{if (row.total_preco>0)and(row.total_custo>0):}}
-                  <td>{{="{:,.1f}".format(round(row.total_preco/row.total_custo*100,1)).replace(",","#").replace(".",",").replace("#",".")}}%</td>
-                    {{else:}}
-                    <td>%</td>
-                    {{pass}}
-                    {{pass}}
-                    {{if not projeto.venda_finalizada:}}
-                  {{if not row.finalizada:}}
-                  <td><a class="btn btn-outline-warning"  href="{{=URL('mercadoria','alterar_carrada', args=row.id)}}"><i class="fa fa-pencil" ></i></a></td>
-                  {{else:}}
-                  <th><a class="btn btn-outline-success" href="{{=URL('mercadoria','verifica', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-check" ></i></a></th>
-                    {{pass}}
-                    {{pass}}
-                  {{if r==7:}}
-                  {{if row.finalizada:}}
-                  <th><a class="btn btn-link" style="color:#55acee" href="{{=URL('mercadoria','verifica', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-check" ></i></a></th>
-                  {{else:}}
-                  <th><a class="btn btn-link" style="color:#55acee"  href="{{=URL('mercadoria','verifica', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-square-o text-danger" ></i></a></th>
-                  {{pass}}
-                  {{pass}}
+                  <th>
+                    <a  class="btn btn-outline-primary btn-block text-left" href="{{=URL('mercadoria','acesso_item_carrada', args=row.id)}}" >
+                      {{=row.descricao}}
+                    </a>
+                  </th>
+                  <th>
+                    <a  class="btn btn-outline-primary btn-block text-center" href="{{=URL('mercadoria','acesso_item_carrada', args=row.id)}}" >{{=row.data_envio.strftime('%d/%m/%Y')}}
+                    </a>
+                  </th>
+                  <td class="text-center">
+                    {{=row.total_pecas}}
+                  </td>
+                  <td>
+                    R$ {{="{:,.2f}".format(round(row.total_preco,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </td>
                 </tr>
-
-{{pcs+=row.total_pecas}}
-{{pco+=row.total_preco}}
-{{cst+=row.total_custo}}
-{{pass}}
+                {{pcs+=row.total_pecas}}
+                {{pco+=row.total_preco}}
+                {{cst+=row.total_custo}}
+                {{pass}}
                 <tr>
-                  
-                  {{if r==7:}}
                   <th><i class="fa text-dark fa-bars"></i></th>
-                  {{pass}}
-                  
                   <th><i class="fa text-dark fa-bars"></i></th>
                   <th><i class="fa text-dark fa-bars"></i></th>
                   <th class="text-center">{{=pcs}}</th>
-                  <th>R$ {{="{:,}".format(round(pco,1)).replace(",",".")}}0</th>
-                   {{if desbloqueado:}}
-                  <th>R$ {{="{:,}".format(round(cst,1)).replace(",",".")}}0</th>
-                     {{if (cst>0)and(pco>0):}}
-                  <td>{{="{:,}".format(round(pco/cst*100)).replace(".0","")}}%</td>
-                    {{else:}}
-                    <td>%</td>
-                    {{pass}}
-                    {{pass}}
-                    {{if not projeto.venda_finalizada:}}
-                  <th id="noprint"><i class="fa text-dark fa-bars"></i></th>
-     {{pass}}
+                  <th>R$ {{="{:,.2f}".format(round(pco,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
                 </tr>
               </tbody>
-            </table>
+          </table>
         </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-{{if not projeto.venda_finalizada:}}
+{{if (projeto.total_custo_mercadoria!=cst)or(projeto.total_preco_mercadoria!=pco):}}
 {{projeto.total_pecas_mercadoria=pcs}}
 {{projeto.total_preco_mercadoria=pco}}
 {{projeto.total_custo_mercadoria=cst}}

@@ -88,7 +88,8 @@
                   <th scope="col">Descrição</th>
                   <th scope="col">Total</th>
                   <th scope="col">Recebido</th>
-                  <th scope="col">Percentual</th>
+                  <th scope="col">%Recebido</th>
+                  <th scope="col">%Deposito</th>
                 </tr>
               </thead>
               <tbody>
@@ -129,6 +130,12 @@
                   {{pass}}
                   {{if (row.total_recebido>0)and(row.total_venda_praso>0):}}
                   {{percentual =row.total_recebido/row.total_venda_praso*100}}
+                  <td>{{=round(percentual,1)}}%</td>
+                  {{else:}}
+                  <td>0%</td>
+                  {{pass}}
+                  {{if (row.total_deposito>0)and(row.total_venda_praso>0):}}
+                  {{percentual =row.total_deposito/row.total_venda_praso*100}}
                   <td>{{=round(percentual,1)}}%</td>
                   {{else:}}
                   <td>0%</td>

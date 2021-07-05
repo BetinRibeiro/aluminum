@@ -1,65 +1,72 @@
 {{extend 'layout.html'}}
-{{a=1}}
 {{totalvale=0}}
 <div class="py-5">
-    <div class="container">
-      <div class="row  text-center">
-        <div class="col-md-12">
-          <h3 class="mb-3">{{=funcionario.nome.replace("cfrd","")}}</h3>
-          <p>Vales Caderno</p>
-        </div>
+  <div class="container">
+    <div class="row  text-center">
+      <div class="col-md-12">
+        <h3 class="mb-3">{{=funcionario.nome.replace("cfrd","")}}</h3>
+        <p>Vales Caderno</p>
       </div>
-<div class="row">
-        <div class="col-md-6">
-          <div class="row">
-            <div class="col-md-6 col-6 my-1" >
-              <a  class="btn btn-outline-danger btn-block"  href="{{=URL('acesso_funcionario', args=funcionario.projeto)}}"> 
-                <i class="fa  fa-arrow-left  fa-1x"></i>
-              </a>
-            </div>
-            <div class="col-md-6 col-6 my-1" >
-              <a class="btn btn-outline-success btn-block"  href="{{=URL('inserir_vale', args=funcionario.id)}}">
-                <i class="fa  fa-plus fa-1x"></i>
-              </a>
-            </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div class="col-md-6 col-6 my-1" >
+            <a  class="btn btn-outline-danger btn-block"  href="{{=URL('acesso_funcionario', args=funcionario.projeto)}}">
+              <i class="fa  fa-arrow-left  fa-1x"></i>
+            </a>
+          </div>
+          <div class="col-md-6 col-6 my-1" >
+            <a class="btn btn-outline-success btn-block"  href="{{=URL('inserir_vale', args=funcionario.id)}}">
+              <i class="fa  fa-plus fa-1x"></i>
+            </a>
           </div>
         </div>
-        <div class="col-md-6"></div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-striped table-borderless table-sm">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Descrição</th>
-                                <th>Data</th>
-                                <th>Valor</th>
-                                <th>Alterar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{for row in rows:}}
-                            <tr>
-                                <td>{{=a}}</td>
-                                {{a+=1}}
-                                <td>{{=row.descricao}}</td>
-                                <td>{{=("{}/{}/{}".format(row.data_vale.day,row.data_vale.month,row.data_vale.year))}}</td>
-                                <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
-                                {{totalvale+=row.valor}}
-                                <td><a class="btn btn-outline-warning btn-block"  href="{{=URL('alterar_vale', args=row.id)}}"><i class="fa fa-exchange" ></i></a></td>
-                                {{pass}}
-                            </tr>
-                            <tr>
-                                <th>#</th>
-                                <th>#</th>
-                                <th>#</th>
-                                <th>R$ {{="{:,}".format(round(totalvale,1)).replace(",",".")}}0</th>
-                                <th>#</th>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+      <div class="col-md-6"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <table class="table table-striped table-borderless table-sm">
+            <thead>
+              <tr>
+                <th>Descrição</th>
+                <th>Data</th>
+                <th>Valor</th>
+                <th>Alterar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{for row in rows:}}
+              <tr>
+                <td>{{=row.descricao}}</td>
+                <td>
+                  {{=row.data_vale.strftime('%d/%m/%Y')}}
+                </td>
+                <td>
+                  R$ {{="{:,.2f}".format(round(row.valor,1)).replace(",","#").replace(".",",").replace("#",".")}}
+                </td>
+                {{totalvale+=row.valor}}
+                <td>
+                  <a class="btn btn-outline-warning btn-block"  href="{{=URL('alterar_vale', args=row.id)}}">
+                  <i class="fa fa-exchange" ></i>
+                  </a>
+                </td>
+                  {{pass}}
+              </tr>
+              <tr>
+                <th>#</th>
+                <th>#</th>
+                <th>
+                  R$ {{="{:,.2f}".format(round(totalvale,1)).replace(",","#").replace(".",",").replace("#",".")}}
+                </th>
+                <th>#</th>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+{{if funcionario.total_vale_caderno!=totalvale:}}
 {{funcionario.total_vale_caderno=totalvale}}
 {{funcionario.update_record()}}
+{{pass}}

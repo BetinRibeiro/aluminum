@@ -19,6 +19,7 @@
   <script src="{{=URL('static','js/navbar_ontop.js')}}"></script>
   <!-- Script: Animated entrance -->
   <script src="{{=URL('static','js/animate_in.js')}}"></script>
+  
     <!-- Google Analytics -->
 <script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -92,7 +93,7 @@ ga('send', 'pageview');
       <div class="row">
         <div class="col-md-6 my-5 text-lg-left text-center align-self-center">
             <a class="btn btn-danger btn-lg btn-block" href="{{=URL('acesso_inicial')}}">Acessar</a>
-          <h1 class="display-4">Luizinho</h1>
+          <h1 class="display-4">Aluminum</h1>
           <p class="lead">Sistema Multiplataforma</p>
           <div class="row mt-5">
             <div class="col-6 col-lg-4">

@@ -21,9 +21,16 @@ def atualizar_projetos():
     row.update_or_insert()
 
   return locals()
+
+  
+@auth.requires_login()
+def relacao_individual():
+  projeto = db.projeto(request.args(0, cast=int))
+  rows = db(db.vendedor.projeto == request.args(0, cast=int)).select(orderby=~db.vendedor.total_vendas)
+  return locals()
 @auth.requires_login()
 def acesso_projeto():
-    redirect(URL('default','index'))
+#     redirect(URL('default','index'))
     projeto = db.projeto(request.args(0, cast=int))
     empresa = db.empresa(projeto.empresa)
     if len(db(db.carrada.projeto == projeto.id).select())>0:

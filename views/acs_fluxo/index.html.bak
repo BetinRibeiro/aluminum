@@ -1,0 +1,278 @@
+{{extend 'layout.html'}}
+{{lista_projetos_abertos}}
+      <div class="row  text-center">
+        <div class="mx-auto col-md-8">
+          <h3 class="mb-3">{{=empresa.nome}}</h3>
+          <p class="lead">{{=auth.user.first_name}} {{=auth.user.last_name}}</p>
+        </div>
+      </div>
+      <div class="row">
+  <div class="col-md-2 col-6">
+    <a class="btn btn-outline-danger btn-block my-1" href="{{=URL('acs_principal','index',args=empresa.id*12)}}">
+      <i class="fa fa-arrow-left  fa-fw"></i>
+      Voltar
+    </a>
+  </div>
+  <div class="col-md-2 col-6">
+    {{if False:}}
+    <a class="btn btn-outline-primary btn-block my-1" href="{{=URL('cadastrar',args=empresa.id)}}">
+      <i class="fa fa-plus fa-fw"></i>
+      Cadastrar
+    </a>
+    {{pass}}
+  </div>
+  <div class="col-md-2  col-12"></div>
+  <div class="col-md-6 col-12"></div>
+</div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="row py-3">
+            <div class="col-md-6">
+              <ul class="list-group py-3">
+                <li class="list-group-item d-flex justify-content-between align-items-center"> 
+                  Custo Mercadoria 
+                  <span class="badge badge-primary badge-pill">
+                    R$ {{="{:,.2f}".format(round(custo_total,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Preço Mercadoria
+                  <span class="badge badge-primary badge-pill">
+                    R$ {{="{:,.2f}".format(round(preco_total,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Vanda à prazo
+                  <span class="badge badge-primary badge-pill">
+                    R$ {{="{:,.2f}".format(round(venda_prazo_total,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Venda à Vista
+                  <span class="badge badge-primary badge-pill">
+                    R$ {{="{:,.2f}".format(round(venda_vista_total,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                  {{valor_estoque=preco_total-venda_prazo_total-venda_vista_total}}
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Valor Estoque
+                  <span class="badge badge-primary badge-pill">
+                    R$ {{="{:,.2f}".format(round(valor_estoque,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                {{custo_aproximado_estoque=0}}
+                {{if (custo_total>0)and(preco_total>0):}}
+                {{custo_aproximado_estoque=(custo_total/preco_total)*valor_estoque}}
+                
+                {{pass}}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Custo Aproximado Estoque
+                  <span class="badge badge-primary badge-pill">
+                    R$ {{="{:,.2f}".format(round(custo_aproximado_estoque,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+               
+                 
+              </ul>
+            </div>
+            <div class="col-md-6 py-3">
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Total Cobranças Não Finalizadas
+                  <span class="badge badge-primary badge-pill">
+                    R$ {{="{:,.2f}".format(round(valor_total_cobrancas,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Recebido do Valor Total
+                  <span class="badge badge-primary badge-pill">
+                    R$ {{="{:,.2f}".format(round(valor_recebido_cobrancas,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                {{valor_restante_receber = valor_total_cobrancas-valor_recebido_cobrancas}}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Valor Restante 
+                  <span class="badge badge-primary badge-pill">
+                    R$ {{="{:,.2f}".format(round(valor_restante_receber,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+               <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Total já Depositado
+                  <span class="badge badge-primary badge-pill">
+                    R$ {{="{:,.2f}".format(round(valor_depositos_cobrancas,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+                 <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Contas à pagar
+                  <span class="badge badge-primary badge-pill">
+                    R$ {{="{:,.2f}".format(round(total_contas,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <table class="table table-bordered ">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th>#</th>
+                      <th>50% (Depósito)</th>
+                      <th>55% (Depósito)</th>
+                      <th>60% (Depósito)</th>
+                      <th>65% (Depósito)</th>
+                      <th>70% (Depósito)</th>
+                      <th>75% (Depósito)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>( = ) Projeção (Depósitos)</th>
+                      {{valorum = valor_total_cobrancas*0.5}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(valorum,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{valordois = valor_total_cobrancas*0.55}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(valordois,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{valortres = valor_total_cobrancas*0.60}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(valortres,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{valorquatro = valor_total_cobrancas*0.65}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(valorquatro,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{valorcinco = valor_total_cobrancas*0.7}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(valorcinco,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{valorseis = valor_total_cobrancas*0.75}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(valorseis,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>( = ) Total - Depositado</th>
+                      {{restoum = valorum-valor_recebido_cobrancas}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(restoum,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{restodois = valordois-valor_recebido_cobrancas}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(restodois,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{restotres = valortres-valor_recebido_cobrancas}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(restotres,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{restoquatro = valorquatro-valor_recebido_cobrancas}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(restoquatro,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{restocinco = valorcinco-valor_recebido_cobrancas}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(restocinco,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{restoseis = valorseis-valor_recebido_cobrancas}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(restoseis,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                    </tr>
+                    {{if False:}}
+                    <tr>
+                      <th>( -- ) Contas à Pagar</th>
+                       <td>
+                    R$ {{="{:,.2f}".format(round(total_contas,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                       <td>
+                    R$ {{="{:,.2f}".format(round(total_contas,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                       <td>
+                    R$ {{="{:,.2f}".format(round(total_contas,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                       <td>
+                    R$ {{="{:,.2f}".format(round(total_contas,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                       <td>
+                    R$ {{="{:,.2f}".format(round(total_contas,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                       <td>
+                    R$ {{="{:,.2f}".format(round(total_contas,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                    </tr>
+                    {{pass}}
+                    <tr>
+                      <th scope="row">( = ) Restante - Contas</th>
+                      {{saldoum = restoum-total_contas}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(saldoum,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{saldodois = restodois-total_contas}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(saldodois,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{saldotres = restotres-total_contas}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(saldotres,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{saldoquatro = restoquatro-total_contas}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(saldoquatro,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{saldocinco = restocinco-total_contas}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(saldocinco,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                      {{saldoseis = restoseis-total_contas}}
+                      <td>
+                    R$ {{="{:,.2f}".format(round(saldoseis,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<div class="row p-4">
+                <div class="col-md-6">
+                  <div class="col-md-12 col-12">
+                    <div class="list-group">
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active" >
+                        <div class="d-flex w-100 justify-content-between">
+                          <h5 class="mb-1">Equipe de Venda</h5> <small>#</small>
+                        </div>
+                        <p class="mb-1">Precisa manter o status correto do projeto de venda, finalizados e abertos, quando fechar uma venda precisa cadastrar a mercadoria de retorno imediatamente no próximo projeto, a venda à vista e venda a prazo precisa estar 100% sincronizada para o estoque ser o mais preciso possivel. Não existe ninguem insubstituível, as regras da empresa não podem ser quebradas, pois devem serguir principios de conduta pra o melhor resultado de todos envolvidos, um bom negocio precisa ser bom pra todos.</p> <small>Manter contas misturadas podem lhe deixar confuso com mais de 2 equipes</small>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                          <h5 class="mb-1">Recebimentos</h5> <small class="text-muted">#</small>
+                        </div>
+                        <p class="mb-1">O status (Venda Finalizada, Cobrança Iniciada, Cobrança Finalizada) de cada partição devem ser mantidos corretamente,bem como o valor recebido e cobrado de cada equipe de cobrança, caso o cobrador não esteja usando o sistema a administração deve fazer isso, para que a previsão de faturamento seja o mais proximo possivel do real. Sabem quando inicia e quando termina cada projeto de venda e cobrança.</p> <small class="text-muted">Uma quantidade maior de depositos é reflexo de uma venda bem feita.</small>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Contas à pagar</h5> <small>#</small>
+                      </div>
+                      <p class="mb-1">As contas (compra de mercadoria e despesas futuras) à vencer precisam ser cadastradas e dado baixa assim que elas foram pagas, contas à vencer são todos os valores empregados nos projetos, vales devem ser cadastrados como retiradas futuras com correção de juros, mercadorias a prazo como cheques e compradas à vista devem ser cadastradas como retiradas futuras, despesas fixas devem ser cadastradas nos pagamentos futuros tambem, resumindo todas as saídas relacionadas ao negocio até o final de todas as cobranças.</p> <small>Caso seja preciso mantenha um orçamento de quanto você pode gastar</small>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Analise de negócio</h5> <small class="text-muted">#</small>
+                      </div>
+                      <p class="mb-1">Esse negocio é uma guerra seus inimigos são as despesas, você precisa aniquilar as despesas (tudo que não for custo e comissão), existem despesas imbutidas, como vendedores que vendem bem mas tem uma despesa exagerada pois fazem vendas longe uma da outra ocasionando custo de locomoção maior na venda e consequentimente maior na cobrança, conheça o comportamento de cada vendedor.</p> <small class="text-muted">Um exercito bem treinado e bem fiscalizado ganha qualquer guerra</small>
+                    </a>
+                  </div>
+                </div>
+              </div>

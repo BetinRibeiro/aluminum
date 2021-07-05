@@ -1,6 +1,8 @@
 {{extend 'layout.html'}}
 {{from datetime import date}}
+{{comissao_total=0}}
 {{hj = date.today()}}
+{{a=1}}
 <!-- Colocar pra bloquear depois de 150 dias quando ramon concluir-->
 {{data_bloqueio = date.fromordinal(sub_venda.data_inicio_cobranca.toordinal()+520)}}
 {{diferenca = hj - data_bloqueio}}
@@ -70,9 +72,11 @@
 <div class="py-1" >
     <div class="container">
         {{if desbloqueado:}}
+        {{if False:}}
         <a class="btn btn-outline-light" href="{{=URL('acessar_cobrancas', args=sub_venda.projeto)}}"> 
             <i class="fa text-danger fa-arrow-left  fa-2x"></i>
         </a>
+        {{pass}}
         {{pass}}
         {{if sub_venda.total_deposito>sub_venda.total_recebido:}}
  <marquee direction="left">
@@ -161,6 +165,7 @@
                   </div>
                   <span class="text-danger">Registre todos os recebimentos</span>
                 </li>
+                
                   {{pass}}
               </ul>
             </div>
@@ -180,6 +185,7 @@
                     {{="{:,}".format(round(sub_venda.comissao_cobranca,1)).replace(",",".")}}%
                   </small>
                 </div>
+                {{comissao_total=comissao}}
                 <span class="text-muted">
                   R$ {{="{:,}".format(round(comissao,1)).replace(",",".")}}0
                 </span>
@@ -291,7 +297,8 @@
       {{total_caderno_somado+=row.total_vale_caderno}}
       {{total_cobranca_somada+=row.total_recebido}}
       <div class="card py-2">
-        <div class="card-header"> {{=row.nome}} ( {{=row.tipo}} )</div>
+        <div class="card-header"> {{=row.nome}} ( {{=row.tipo}} ) {{=a}}º Lugar</div>
+        {{a+=1}}
             <div class="card-body">
                   {{percento_recebido_individual=0}}
                   {{if (row.total_recebido>0)and(sub_venda.total_venda_praso>0):}}
@@ -323,6 +330,7 @@
                   {{pass}}
                 <span class="text-muted">
                   R$ {{="{:,}".format(round(comissao,1)).replace(",",".")}}0
+                {{comissao_total+=comissao}}
                 </span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
@@ -389,5 +397,8 @@
     </div>
   </div>
 </div>
+{{if False:}}
+{{=comissao_total}} Total Comissão
+{{pass}}
 {{sub_venda.total_saldo_cobrador=saldofinal}}
 {{sub_venda.update_record()}}

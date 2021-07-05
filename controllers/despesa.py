@@ -6,7 +6,13 @@ def acessar_despesa():
     rows = db((db.classe_despesa.projeto == projeto.id) & (db.classe_despesa.tipo == tipo)).select()
     tipodesp=(request.args(1, auth.user))
     return locals()
-
+@auth.requires_login()
+def acesso_despesa():
+    classe_despesa = db.classe_despesa(request.args(0, cast=int))
+    projeto = db.projeto(classe_despesa.projeto)
+    tipodesp=(request.args(1, auth.user))
+    rows = db(db.despesa.classe_despesa == request.args(0, cast=int)).select(orderby=db.despesa.data_inicio)
+    return locals()
 @auth.requires_login()
 def criar_classe_despesa():
     response.view = 'generic.html' # use a generic view
@@ -61,13 +67,7 @@ def alterar_classe_despesa():
             response.flash = 'Preencha o formulário!'
     return dict(form=form)
 
-@auth.requires_login()
-def acesso_despesa():
-    classe_despesa = db.classe_despesa(request.args(0, cast=int))
-    projeto = db.projeto(classe_despesa.projeto)
-    tipodesp=(request.args(1, auth.user))
-    rows = db(db.despesa.classe_despesa == request.args(0, cast=int)).select(orderby=db.despesa.data_inicio)
-    return locals()
+
 
 @auth.requires_login()
 def criar_desp():

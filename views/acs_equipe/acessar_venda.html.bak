@@ -76,7 +76,6 @@
                             {{aentrada=0}}
                             {{adevolucao=0}}
                         {{for row in rows_vend:}}
-                            
                         {{if row.sub_venda == row1.id:}}
                             <tr>
                                 {{a+=1}}

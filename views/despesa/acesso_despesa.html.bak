@@ -11,19 +11,19 @@
 <div class="row">
         <div class="col-md-6">
           <div class="row">
-            <div class="col-md-2 col-6 my-1" >
+            <div class="col-md-6 col-6 my-1" >
               <a  class="btn btn-outline-danger btn-block"  href="{{=URL('acessar_despesa', args=[classe_despesa.projeto,tipodesp])}}">
                 <i class="fa  fa-arrow-left  fa-1x"></i>
               </a>
             </div>
-            <div class="col-md-2 col-6 my-1" >
+            <div class="col-md-6 col-6 my-1" >
         {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
               <a  class="btn btn-outline-success btn-block"  href="{{=URL('criar_desp', args=[classe_despesa.id,tipodesp])}}">
                 <i class="fa  fa-plus fa-1x"></i>
               </a>
               {{pass}}
             </div>
-            <div class="col-md-2 col-6 my-1" >
+            <div class="col-md-6 col-6 my-1" >
         {{if ("DIÁRIAS" in classe_despesa.descricao) and (len(rows)>0):}}
               <a class="btn btn-outline-primary btn-block"  href="{{=URL('criar_desp', args=[classe_despesa.id,tipodesp,1])}}">
                 <i class="fa  fa-plus fa-1x"></i>
@@ -53,10 +53,8 @@
                           {{row.update_record()}}
                           {{pass}}
                           <td>
-                            
         {{if (not projeto.venda_finalizada) or (tipodesp=="Despesa_Local"):}}
                               <a class="btn btn-outline-primary text-left btn-block" href="{{=URL('alterar_desp', args=[row.id,tipodesp])}}">{{=row.descricao}}</a>
-                            
               {{else:}}
               {{=row.descricao}}
               {{pass}}

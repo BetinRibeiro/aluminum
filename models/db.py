@@ -159,6 +159,7 @@ db.define_table('funcionario_empresa',
                 Field('empresa','reference empresa', writable=False, readable=False, label='Empresa'),
                 Field('nome', 'string', label='Nome',requires = IS_UPPER()),
                 Field('debito', 'double',label="Débito", notnull=True, default=0),
+                Field('observacao', 'text', label='Observação',requires = IS_UPPER()),
                 Field('bloqueado', 'boolean', label='Bloquear', writable=True, readable=True, default=False),
                 format='%(nome)s')
 db.define_table('registro_funcionario_empresa',

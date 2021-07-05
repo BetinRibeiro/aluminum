@@ -17,8 +17,10 @@ response.menu = [
 if auth.user:
   if auth.user.id==1:
       response.menu += [
+      (T('Empresa'), False, URL('acs_principal','index'), []),
       (T('Projetos'), False, URL('acs_principal','lista_projetos'), []),
-      (T('Cobranças'), False, URL('acs_principal','lista_cobrancas'), [])
+      (T('Cobranças'), False, URL('acs_principal','lista_cobrancas'), []),
+      (T('Usuarios'), False, URL('acs_principal','lista_logins'), []),
       ]
 if configuration.get('app.production'):
     _app = request.application

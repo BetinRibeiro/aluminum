@@ -2,7 +2,7 @@
 <div class="py-2">
     <div class="container">
           <div class="row">
-            <div class="col-md-2 col-2 my-1" >
+            <div class="col-md-2 col-6 my-1" >
               <a  class="btn btn-outline-danger btn-block"  href="{{=URL('projeto','acesso_projeto', args=projeto.id)}}">
                 <i class="fa  fa-arrow-left  fa-1x"></i>
               </a>

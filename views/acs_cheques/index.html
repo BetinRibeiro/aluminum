@@ -84,15 +84,12 @@
               <tbody>
                   {{for row in rows:}}
                 <tr>
-                    
                   {{if row.quitado:}}
-                   
                   <th scope="row"><i class="fa fa-fw fa-1x py-1 fa-check-square-o"></i>{{=("{}/{}/{}".format(row.data_cheque.day,row.data_cheque.month,row.data_cheque.year))}}</th>
                   {{totalq+=row.valor}}
                     {{else:}}
                     <th scope="row"><i class="fa fa-fw fa-1x py-1 fa-square-o"></i>{{=("{}/{}/{}".format(row.data_cheque.day,row.data_cheque.month,row.data_cheque.year))}}</th>
                   {{totald+=row.valor}}
-                    
                      {{pass}}
                   <td>{{=row.banco}}</td>
                   <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
@@ -102,7 +99,6 @@
                   {{if False:}}
                   <th>{{=totalq}}</th>
                   {{pass}}
-                
                 </tr>
                   {{pass}}
                 <tr>
@@ -116,26 +112,50 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
 <div class="py-3 text-center" >
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h1>Relação Final</h1>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+          <h3>Relação Final</h3>
       </div>
-      <div class="row justify-content-center">
-        <div class="col-md-4 p-4"> <i class="d-block fa fa-circle fa-3x mb-2 text-muted"></i>
-          <h4>Valor Total</h4>
-          <p><b>R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0 </b>- Soma de todos os cheques quitados e pendentes.</p>
-        </div>
-        <div class="col-md-4 col-6 p-4"> <i class="d-block fa fa-stop-circle-o fa-3x mb-2 text-muted"></i>
-          <h4> <b>Valor Quitado</b></h4>
-          <p><b>R$ {{="{:,}".format(round(totalq,1)).replace(",",".")}}0 </b>- Soma de todos os cheques quitados e pendentes.</p>
-        </div>
-        <div class="col-md-4 col-6 p-4"> <i class="d-block fa fa-circle-o fa-3x mb-2 text-muted"></i>
-          <h4> <b>Valor em Débito</b></h4>
-          <p><b>R$ {{="{:,}".format(round(totald,1)).replace(",",".")}}0 </b>- Soma de todos os cheques quitados e pendentes.</p>
-        </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-4 p-4"> <i class="d-block fa fa-circle fa-3x mb-2 text-muted"></i>
+        <h4>Valor Total</h4>
+        <p><b>R$ {{="{:,}".format(round(total,1)).replace(",",".")}}0 </b>- Soma de todos os cheques quitados e pendentes.</p>
       </div>
+      <div class="col-md-4 col-6 p-4"> <i class="d-block fa fa-stop-circle-o fa-3x mb-2 text-muted"></i>
+        <h4> <b>Valor Quitado</b></h4>
+        <p><b>R$ {{="{:,}".format(round(totalq,1)).replace(",",".")}}0 </b>- Soma de todos os cheques quitados e pendentes.</p>
+      </div>
+      <div class="col-md-4 col-6 p-4">
+        {{if True:}}
+        <i class="d-block fa fa-circle-o fa-3x mb-2 text-muted"></i>
+        <h4> <b>Valor em Débito</b></h4>
+        <p><b>R$ {{="{:,}".format(round(totald,1)).replace(",",".")}}0 </b>- Soma de todos os cheques quitados e pendentes.</p>
+        {{pass}}
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-4 p-4"> 
+        {{if False:}}
+        <i class="d-block fa fa-circle fa-3x mb-2 text-muted"></i>
+        <h4>Pendentes</h4>
+        <p><b>{{=total_cheques_pendentes}} </b>- Pendente Meses Passados.</p>
+        {{pass}}
+      </div>
+      <div class="col-md-4 col-6 p-4"> 
+        {{if total_cheques_pendentes>0:}}
+        <i class="d-block fa fa-circle fa-3x mb-2 text-danger"></i>
+        <h4>Pendentes</h4>
+        <p><b>{{=total_cheques_pendentes}} </b>- Pendente Meses Passados.</p>
+        {{pass}}
+      </div>
+      <div class="col-md-4 col-6 p-4">
+        {{if False:}}
+        <i class="d-block fa fa-circle-o fa-3x mb-2 text-danger"></i>
+        <h4> <b>Valor em Débito</b></h4>
+        <p><b>R$ {{="{:,}".format(round(totald,1)).replace(",",".")}}0 </b>- Soma de todos os cheques quitados e pendentes.</p>
+        {{pass}}
+      </div>
+    </div>

@@ -27,9 +27,6 @@ def index():
     rowsdesp = db(db.classe_despesa_local.empresa==empresa.id).select(orderby=db.classe_despesa_local.descricao)
     rowsuser = db(db.usuario_empresa.empresa==empresa.id).select()
     rowspgmt = db((db.pagamento.empresa==empresa.id)&(db.pagamento.quitado==False)).count()
-    if request.args(0, auth.user)=="235":
-      rows = db(db.projeto.empresa).select(orderby=db.empresa)
-    #2 consultas no banco
     return locals()
 
 @auth.requires_login()
@@ -341,6 +338,11 @@ def pagina_pagamento():
 
   
 def lista_cobrancas():
+    todas_cobrancas = db(db.sub_venda.empresa==None).select()
+    for cobranca in todas_cobrancas:
+      projeto = db.projeto(db.sub_venda.projeto==cobranca.projeto)
+      cobranca.empresa=projeto.empresa
+      cobranca.update_record()
     try:
       usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
       consul=(request.args(0))
@@ -421,7 +423,7 @@ def alteracao_projeto():
     if projeto.total_venda_prazo>0:
         a=False
     if usuario.id==1:
-      db.projeto.data_final.label = "#Data_final (Programador)"
+      db.projeto.data_final.label = "#Data_final Bloqueia projeto (Programador)"
       db.projeto.data_final.readable = True
       db.projeto.data_final.writable = True
       db.projeto.id.label = "#ID (Programador)"

@@ -30,6 +30,18 @@
                 </div>
               </div>
             </div>
+             <div class="col-md-3">
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x fa-server text-primary"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">Lista das Cobranças</h4>
+                  <p class="card-text">Lista de todas as cobranças de todos os projetos de vendas, ordenados por status e percentuais de recebimento.</p>
+                  <a href="{{=URL('lista_cobrancas',args=empresa.id)}}" class="btn btn-primary btn-block">Acessar</a>
+                </div>
+              </div>
+            </div>
             <div class="col-md-3">
               <div class="card">
                 <center>
@@ -52,17 +64,6 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
-              <div class="card">
-                <center>
-                  <i class="fa fa-fw fa-1x py-1 fa-5x fa-dollar text-primary"></i>
-                </center>
-                <div class="card-body">
-                  <h4 class="card-title">Recebimentos e Cobrança</h4>
-                  <p class="card-text">Todos os recebimentos das cobranças, agora, vamos aos modelos de carta de cobrança que você pode utilizar</p> <a href="{{=URL('acs_cobranca','cobranca_periodo',args=[data.month,data.year,empresa.id])}}" class="btn btn-primary btn-block">Acessar</a>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
@@ -80,14 +81,17 @@
                 </div>
               </div>
             </div>
+            
             <div class="col-md-3">
               <div class="card">
                 <center>
-                  <i class="fa fa-fw fa-1x py-1 fa-5x fa-car text-primary"></i>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x fa-money text-primary"></i>
                 </center>
                 <div class="card-body">
-                  <h4 class="card-title">Veiculos e Transportes</h4>
-                  <p class="card-text">Controle de Transportes e quilometragem entre pediodos de utilização, menutenção e/ou saida e chegada de viagem de vendas e cobranças.</p> <a href="{{=URL('acs_transporte','index',args=empresa.id)}}"class="btn btn-primary btn-block">Acessar</a>
+                  <h4 class="card-title">Fluxo de Entradas e Saídas</h4>
+                  <p class="card-text">Entradas e saidas de dinheiro, registro de contas bancarias e centros de recebimento e custos, controle o fluxo de dinheiro de entrada e saida de todos os seu negócio.</p>
+                  <a href="{{=URL('acs_fluxo','index',args=empresa.id)}}" class="btn btn-primary btn-block">Acessar</a>
+                  
                 </div>
               </div>
             </div>
@@ -163,15 +167,15 @@
             <div class="col-md-3">
               <div class="card">
                 <center>
-                  <i class="fa fa-fw fa-1x py-1 fa-5x fa-list text-primary"></i>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x fa-car text-primary"></i>
                 </center>
                 <div class="card-body">
-                  <h4 class="card-title">Lista das Cobranças</h4>
-                  <p class="card-text">Lista de todas as cobranças de todos os projetos de vendas.</p>
-                  <a href="{{=URL('lista_cobrancas',args=empresa.id)}}" class="btn btn-primary btn-block">Acessar</a>
+                  <h4 class="card-title">Veiculos e Transportes</h4>
+                  <p class="card-text">Controle de Transportes e quilometragem entre pediodos de utilização, menutenção e/ou saida e chegada de viagem de vendas e cobranças.</p> <a href="{{=URL('acs_transporte','index',args=empresa.id)}}"class="btn btn-primary btn-block">Acessar</a>
                 </div>
               </div>
             </div>
+           
           </div>
         </div>
       </div>
@@ -221,15 +225,14 @@
               </div>
             </div>
             <div class="col-md-3">
+              
               <div class="card">
                 <center>
-                  <i class="fa fa-fw fa-1x py-1 fa-5x fa-money text-primary"></i>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x fa-dollar text-primary"></i>
                 </center>
                 <div class="card-body">
-                  <h4 class="card-title">Fluxo de Entradas e Saídas</h4>
-                  <p class="card-text">Entradas e saidas de dinheiro, registro de contas bancarias e centros de recebimento e custos, controle o fluxo de dinheiro de entrada e saida de todos os seu negócio.</p>
-                  <a href="#" class="btn btn-primary btn-block disabled">Acessar</a>
-                  
+                  <h4 class="card-title">Recebimentos e Cobrança</h4>
+                  <p class="card-text">Todos os recebimentos das cobranças, agora, vamos aos modelos de carta de cobrança que você pode utilizar</p> <a href="{{=URL('acs_cobranca','cobranca_periodo',args=[data.month,data.year,empresa.id])}}" class="btn btn-primary btn-block">Acessar</a>
                 </div>
               </div>
             </div>

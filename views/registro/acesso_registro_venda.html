@@ -96,20 +96,19 @@
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
 {{if (not projeto.venda_finalizada) or (tipo=="Gratificacao"):}}
-{{if tipo=="venda_vista":}}
-{{projeto.total_venda_vista=valor}}
-{{projeto.quant_dias_venda_vista=a}}
-{{projeto.update_record()}}
-{{elif tipo=="caderno_chefe":}}
-{{projeto.total_caderno_chefe=valor}}
-{{projeto.update_record()}}
+  {{if (tipo=="venda_vista")and(projeto.total_venda_vista!=valor):}}
+    {{projeto.total_venda_vista=valor}}
+    {{projeto.quant_dias_venda_vista=a}}
+    {{projeto.update_record()}}
 
-{{elif tipo=="Gratificacao":}}
-{{projeto.total_gratificacao=valor}}
-{{projeto.update_record()}}
-{{pass}}
+  {{elif (tipo=="caderno_chefe")and(projeto.total_caderno_chefe!=valor):}}
+    {{projeto.total_caderno_chefe=valor}}
+    {{projeto.update_record()}}
+
+  {{elif (tipo=="Gratificacao")and(projeto.total_gratificacao!=valor):}}
+    {{projeto.total_gratificacao=valor}}
+    {{projeto.update_record()}}
+
+  {{pass}}
 {{pass}}

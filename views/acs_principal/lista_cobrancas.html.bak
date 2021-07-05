@@ -88,7 +88,8 @@
                   <th scope="col">Descrição</th>
                   <th scope="col">Total</th>
                   <th scope="col">Recebido</th>
-                  <th scope="col">Percentual</th>
+                  <th scope="col">%Recebido</th>
+                  <th scope="col">%Deposito</th>
                 </tr>
               </thead>
               <tbody>
@@ -110,10 +111,11 @@
                   </th>
                   {{pass}}
                   <th scope="row">{{=row.data_inicio_cobranca.strftime('%d/%m/%Y')}}</th>
+                  <td>{{=row.sub_venda}}</td>
                   {{if row.auth_user:}}
                   <td>{{=row.auth_user.first_name}}</td>
                   {{else:}}
-                  <td class="text-danger">Sem usuario</td>
+                  <td class="text-danger">Sem Login Vinculado</td>
                   {{pass}}
                   <td><a href="{{=URL('acs_cobranca','index', args=[row.projeto])}}">{{=row.projeto.descricao}}</a></td>
                   <td><a href="{{=URL('acs_cobranca','relatorio_cobranca', args=[row.id])}}">{{=row.primeira_cidade}}</a></td>
@@ -129,6 +131,12 @@
                   {{pass}}
                   {{if (row.total_recebido>0)and(row.total_venda_praso>0):}}
                   {{percentual =row.total_recebido/row.total_venda_praso*100}}
+                  <td>{{=round(percentual,1)}}%</td>
+                  {{else:}}
+                  <td>0%</td>
+                  {{pass}}
+                  {{if (row.total_deposito>0)and(row.total_venda_praso>0):}}
+                  {{percentual =row.total_deposito/row.total_venda_praso*100}}
                   <td>{{=round(percentual,1)}}%</td>
                   {{else:}}
                   <td>0%</td>

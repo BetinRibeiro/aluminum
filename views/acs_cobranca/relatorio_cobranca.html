@@ -1,4 +1,5 @@
 {{extend 'layout.html'}}
+                {{comissao_total=0}}
 
 {{a=1}}
 {{perc_cob=0}}
@@ -208,6 +209,17 @@
                   Registre todos os recebimentos
                 </span>
               </li>
+              <li class="list-group-item d-flex justify-content-between ">
+                <div>
+                  <h6 class="my-0 text-danger">Sobrando Dinheiro</h6>
+                  <small class="text-danger">
+                    Ou não cadastra recebimento ou cadastra despesa de mais
+                  </small>
+                </div>
+                <span class="text-danger">
+                  R$ {{="{:,}".format(round(caixa,1)).replace(",",".")}}0
+                </span>
+              </li>
               {{pass}}
             </ul>
           </div>
@@ -227,6 +239,7 @@
                     {{="{:,}".format(round(sub_venda.comissao_cobranca,1)).replace(",",".")}}%
                   </small>
                 </div>
+                {{comissao_total+=comissao}}
                 <span class="text-muted">
                   R$ {{="{:,}".format(round(comissao,1)).replace(",",".")}}0
                 </span>
@@ -375,6 +388,7 @@
                   {{comissao=row.total_recebido*row.comissao_venda/100}}
                   {{pass}}
                   {{pass}}
+                {{comissao_total+=comissao}}
                 <span class="text-muted">
                   R$ {{="{:,}".format(round(comissao,1)).replace(",",".")}}0
                 </span>
@@ -426,6 +440,10 @@
         </div>
             <br>
       {{pass}}
+      {{if (comissao_total>0)and(sub_venda.total_recebido>0):}}
+      Pago de Comissão R$ {{="{:,.2f}".format(round(comissao_total,2)).replace(",",".")}}<br>
+      Percentual pago = {{=round(comissao_total/sub_venda.total_recebido*100,1)}}%
+                {{pass}}
     {{if total_caderno_somado!=sub_venda.total_caderno_cobrador:}}
       {{diferenca_caderno=sub_venda.total_caderno_cobrador-total_caderno_somado}}
     <p class="text-danger">

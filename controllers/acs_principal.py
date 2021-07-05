@@ -341,6 +341,11 @@ def pagina_pagamento():
 
   
 def lista_cobrancas():
+    todas_cobrancas = db(db.sub_venda.empresa==None).select()
+    for cobranca in todas_cobrancas:
+      projeto = db.projeto(db.sub_venda.projeto==cobranca.projeto)
+      cobranca.empresa=projeto.empresa
+      cobranca.update_record()
     try:
       usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
       consul=(request.args(0))

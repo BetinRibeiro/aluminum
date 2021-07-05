@@ -17,7 +17,7 @@
           <p>Equipe de Vendas</p>
         </div>
       </div>
-<div class="row">
+      <div class="row">
         <div class="col-md-6">
           <div class="row">
             <div class="col-md-6 col-6 my-1" >
@@ -26,10 +26,12 @@
               </a>
             </div>
             <div class="col-md-6 col-6 my-1" >
-                            {{if not projeto.venda_finalizada:}}
+              {{if False:}}
+              {{if not projeto.venda_finalizada:}}
               <a class="btn btn-outline-success btn-block"  href="{{=URL('criar_vendedor', args=projeto.id)}}">
                 <i class="fa  fa-user-plus fa-1x"></i>
               </a>
+              {{pass}}
               {{pass}}
             </div>
           </div>
@@ -39,95 +41,130 @@
       <div class="row">
         <div class="col-md-12">
           <div class="table-responsive">
-           <table class="table table-bordered table-sm table-striped">
-					<thead>
-					  <tr>
-                          <th>#</th>
-						<th>Nome</th>
-						<th>Venda</th>
-						<th>Comissão</th>
-						<th>Vale</th>
-                          <th>Caderno</th>
-                          <th>Saldo</th>
-                            {{if not projeto.venda_finalizada:}}
-                            <th id="noprint">Alterar</th>
-                          {{pass}}
-              {{if (usuario.id==11)or(usuario.id==1):}}
-                  <th id="noprint" class="text-center">Verificação</th>
-
+            <table class="table table-bordered table-sm table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nome</th>
+                  <th>Venda</th>
+                  <th>Comissão</th>
+                  <th>Vale</th>
+                  <th>Caderno</th>
+                  <th>Saldo</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{for row in rows:}}
+                {{a+=1}}
+                <tr>
+                  <td>{{=a}}º</td>
+                  <td>
+                    <a class="btn btn-outline-primary text-left btn-block" href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">
+                      {{=row.nome.replace("cfrd","")}}
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">
+                      R$ {{="{:,.2f}".format(round(row.total_vendas,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                      {{if row.total_vendas>0:}}-
+                      <span>
+                        <b>
+                          {{="{:,}".format(round(row.comissao_venda)).replace(".0","")}}%
+                        </b></span></a>
+                    {{pass}}
+                  </td>
+                  {{comissao=row.total_vendas}}
+                  {{if comissao > 0:}}
+                  {{comissao=row.total_vendas*row.comissao_venda/100}}
+                  {{comissaot+=comissao}}
                   {{pass}}
-					  </tr>
-					</thead>
-					<tbody>
-						{{for row in rows:}}
-                       
-					  <tr>{{a+=1}}
-                          <td>{{=a}}º</td>
-                          
-                        <td><a class="btn btn-outline-primary text-left btn-block" href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">{{=row.nome.replace("cfrd","")}}</a></td>
-                          <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,.2f}".format(round(row.total_vendas,2)).replace(",","#").replace(".",",").replace("#",".")}} {{if row.total_vendas>0:}}- <span><b>{{="{:,}".format(round(row.comissao_venda)).replace(".0","")}}% </b></span></a>{{pass}}</td>
-                           {{comissao=row.total_vendas}}
-                          {{if comissao > 0:}}
-                          {{comissao=row.total_vendas*row.comissao_venda/100}}
-{{comissaot+=comissao}}
-                          {{pass}}
-						<td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,.2f}".format(round(comissao,2)).replace(",","#").replace(".",",").replace("#",".")}}</a></td>
-                        <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,.2f}".format(round(row.vale_saida,2)).replace(",","#").replace(".",",").replace("#",".")}}</a></td>
-                        <td><a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">R$ {{="{:,.2f}".format(round(row.total_vale_caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}</a></td>
-                          {{saldo=comissao-row.vale_saida-row.total_vale_caderno}}
-                          {{if saldo > 0:}}
-						<td>R$ {{="{:,.2f}".format(round(saldo,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
-                          {{else:}}
-                          <td class="text-danger">R$ {{="{:,.2f}".format(round(saldo,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
-                          {{pass}}
-                           {{if not projeto.venda_finalizada:}}
-                          <td id="noprint"><a class="btn btn-outline-warning btn-block" href="{{=URL('alterar_vendedor', args=row.id)}}" class="btn"><i class="fa fa-exchange" ></i></a></td>
-                          {{pass}}
-              
-                   {{if (usuario.id==11)or(usuario.id==1):}}
-              <th id="noprint" class="text-center">
-                
-                              {{if 'cfrd' in row.nome:}}
-                    <a class="btn btn-link" style="color:#55acee"  href="{{=URL('conferir', args=row.id)}}"><i class="fa fa-fw fa-1x py-1 fa-check" ></i> </a>
+                  <td>
+                    <a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">
+                      R$ {{="{:,.2f}".format(round(comissao,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">
+                      R$ {{="{:,.2f}".format(round(row.vale_saida,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">
+                      R$ {{="{:,.2f}".format(round(row.total_vale_caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                    </a>
+                  </td>
+                  {{saldo=comissao-row.vale_saida-row.total_vale_caderno}}
+                  {{if saldo > 0:}}
+                  <td>
+                    R$ {{="{:,.2f}".format(round(saldo,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </td>
+                  {{else:}}
+                  <td class="text-danger">
+                    R$ {{="{:,.2f}".format(round(saldo,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </td>
+                  {{pass}}
+                  {{if False:}}
+                  {{if not projeto.venda_finalizada:}}
+                  <td id="noprint">
+                    <a class="btn btn-outline-warning btn-block" href="{{=URL('alterar_vendedor', args=row.id)}}" class="btn">
+                      <i class="fa fa-exchange" ></i>
+                    </a>
+                  </td>
+                  {{pass}}
+                  {{pass}}
+                  {{if (usuario.id==11)or(usuario.id==1):}}
+                  <th id="noprint" class="text-center">
+                    {{if 'cfrd' in row.nome:}}
+                    <a class="btn btn-link" style="color:#55acee"  href="{{=URL('conferir', args=row.id)}}">
+                      <i class="fa fa-fw fa-1x py-1 fa-check" ></i>
+                    </a>
                     {{else:}}
-                            <a class="btn btn-link" href="{{=URL('conferir', args=row.id)}}" style="color:#dd4b39"><i class="fa fa-fw fa-1x py-1 fa-square-o"></i> </a>
-                    {{pass}}</th> {{pass}}
-					  </tr>
-                         {{if saldo>0:}}
-                        {{saldof+=saldo}}
-                        {{else:}}
-                        {{debitof+=saldo}}
-                        {{pass}}
-                        {{total_entradas+=row.total_entradas}}
-                        {{venda+=row.total_vendas}}
-                        {{comissao+=comissao}}
-                        {{vale+=row.vale_saida}}
-                        {{caderno+=row.total_vale_caderno}}
-                        {{total_fichas+=row.total_fichas}}
-					  {{pass}}
-                         <tr>
-						<th>#</th>
-                             <th></th>
-						<th>R$ {{="{:,.2f}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
-						<th>R$ {{="{:,.2f}".format(round(comissaot,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
-						<th>R$ {{="{:,.2f}".format(round(vale,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
-                          <th>R$ {{="{:,.2f}".format(round(caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
-                          <th>R$ {{="{:,.2f}".format(round(saldof,2)).replace(",","#").replace(".",",").replace("#",".")}}</th>
-                               {{if not projeto.venda_finalizada:}}
-                             <th id="noprint">#</th>
-                             {{pass}}
-					  </tr>
-					</tbody>
-				  </table>
-    </div>
+                    <a class="btn btn-link" href="{{=URL('conferir', args=row.id)}}" style="color:#dd4b39">
+                      <i class="fa fa-fw fa-1x py-1 fa-square-o"></i>
+                    </a>
+                    {{pass}}
+                  </th>
+                  {{pass}}
+                </tr>
+                {{if saldo>0:}}
+                  {{saldof+=saldo}}
+                  {{else:}}
+                  {{debitof+=saldo}}
+                  {{pass}}
+                  {{total_entradas+=row.total_entradas}}
+                  {{venda+=row.total_vendas}}
+                  {{comissao+=comissao}}
+                  {{vale+=row.vale_saida}}
+                  {{caderno+=row.total_vale_caderno}}
+                  {{total_fichas+=row.total_fichas}}
+                {{pass}}
+                <tr>
+                  <th>#</th>
+                  <th></th>
+                  <th>
+                    R$ {{="{:,.2f}".format(round(venda,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </th>
+                  <th>
+                    R$ {{="{:,.2f}".format(round(comissaot,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </th>
+                  <th>
+                    R$ {{="{:,.2f}".format(round(vale,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </th>
+                  <th>
+                    R$ {{="{:,.2f}".format(round(caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </th>
+                  <th>
+                    R$ {{="{:,.2f}".format(round(saldof,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                  </th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
- {{if not projeto.venda_finalizada:}}
+{{if (projeto.total_venda_prazo!=venda)or(projeto.total_caderno_vendedor!=caderno):}}
 {{projeto.total_debito_vendedor=debitof}}
 {{projeto.total_saldo_vendedor=saldof}}
 {{projeto.total_entradas_venda=total_entradas}}

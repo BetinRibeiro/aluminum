@@ -14,7 +14,8 @@ def index():
         ultima_data=datetime.date(ano+1, 1, 1)
     else:
         ultima_data=datetime.date(ano, mes+1, 1)
-    rows = db((db.cheque.empresa!=1000)&(db.cheque.data_cheque>=primeira_data)&(db.cheque.data_cheque<ultima_data)).select(orderby=db.cheque.data_cheque)
+    rows = db((db.cheque.empresa==empresa.id)&(db.cheque.data_cheque>=primeira_data)&(db.cheque.data_cheque<ultima_data)).select(orderby=db.cheque.data_cheque)
+    total_cheques_pendentes = db((db.cheque.empresa==empresa.id)&(db.cheque.data_cheque<primeira_data)).count()
     return locals()
 
 @auth.requires_login()

@@ -62,7 +62,7 @@
               <li class="list-group-item d-flex justify-content-between">
                 <div>
                   <h6 class="my-0"><b>Total Venda à Vista</b></h6> <small class="text-muted">{{=projeto.quant_dias_venda_vista}} Dias Registrados</small>
-                </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_venda_vista,1)).replace(",",".")}}0</span>
+                </div> <span class="text-muted">R$ {{="{:,}".format(round(projeto.total_venda_vista*2,1)).replace(",",".")}}0</span>
               </li>
                 {{pass}}
               <li class="list-group-item d-flex justify-content-between bg-light">
@@ -217,7 +217,7 @@
                 <div>
                   <h6 class="my-0">Despesa Venda</h6>
                   <small class="text-muted">
-                    {{="{:,}".format(round(percentual_despesa_venda,1)).replace(",",".")}}%
+                    {{="{:,}".format(round(percentual_despesa_venda,1)).replace(",",".")}}% ( DINHEIRO DA VENDA)
                   </small>
                 </div>
                 <span class="text-muted">
@@ -228,7 +228,7 @@
                 <div>
                   <h6 class="my-0">Despesa Local</h6>
                   <small class="text-muted">
-                     {{="{:,}".format(round(percentual_despesa_local,1)).replace(",",".")}}%
+                     {{="{:,}".format(round(percentual_despesa_local,1)).replace(",",".")}}% ( DINHEIRO DA EMPRESA)
                   </small>
                 </div>
                 <span class="text-muted">

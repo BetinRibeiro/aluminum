@@ -1,25 +1,37 @@
 # -*- coding: utf-8 -*-
 
 @auth.requires_login()
-def conferir():
-  response.view = 'generic.html' # use a generic view
-  vendedor = db.vendedor(request.args(0, cast=int))
-  a=False
-  if 'cfrd' in vendedor.nome:
-    a=True
-    vendedor.nome=vendedor.nome.replace('cfrd','')
-  else:
-    vendedor.nome=vendedor.nome+'cfrd'
-  vendedor.update_record()
-  redirect(URL('acesso_equipe', args=[vendedor.projeto,a]))
-  return locals()
-@auth.requires_login()
 def acesso_equipe():
-    usuario = auth.user
     projeto = db.projeto(request.args(0, cast=int))
+    usuario = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user)
+    if usuario.bloqueado==True:
+      redirect(URL('acs_mensagem','usuario_bloqueado',args="Usuario Temporariamente Bloqueado!"))
+    if usuario.empresa!=projeto.empresa:
+      usuario.bloqueado=True
+      usuario.nome="Bloqueio (tentou acessar outro projeto, equipe_venda/acesso_equipe)"
+      usuario.update_record()
+      redirect(URL('acs_mensagem','usuario_bloqueado',args="Usuario Temporariamente Bloqueado!"))
     rows = db(db.vendedor.projeto == projeto.id).select(orderby=~db.vendedor.total_vendas)
     return locals()
-
+@auth.requires_login()
+def acesso_venda():
+    usuario = auth.user
+    vendedor = db.vendedor(request.args(0, cast=int))
+    projeto = db.projeto(vendedor.projeto)
+    usuario = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user)
+    if usuario.bloqueado==True:
+      redirect(URL('acs_mensagem','usuario_bloqueado',args="Usuario Temporariamente Bloqueado!"))
+    if usuario.empresa!=projeto.empresa:
+      usuario.bloqueado=True
+      usuario.nome="Bloqueio (tentou acessar outro projeto, equipe_venda/acesso_equipe)"
+      usuario.update_record()
+      redirect(URL('acs_mensagem','usuario_bloqueado',args="Usuario Temporariamente Bloqueado!"))
+    rows_sub = db(db.sub_venda.projeto == vendedor.projeto).select(orderby=~db.sub_venda.data_inicio_cobranca)
+    rows_vend = db(db.venda.vendedor == request.args(0, cast=int)).select(orderby=db.venda.sub_venda|db.venda.data_venda)
+    return locals()
+  
+##funções de julguei desnecessarias pra o chefe da equipe
+#irei descontinuar
 @auth.requires_login()
 def criar_vendedor():
     response.view = 'generic.html' # use a generic view
@@ -70,14 +82,7 @@ def alterar_vendedor():
             response.flash = 'Preencha o formulário!'
     return dict(form=form)
 
-@auth.requires_login()
-def acesso_venda():
-    usuario = auth.user
-    vendedor = db.vendedor(request.args(0, cast=int))
-    projeto = db.projeto(vendedor.projeto)
-    rows_sub = db(db.sub_venda.projeto == vendedor.projeto).select(orderby=~db.sub_venda.data_inicio_cobranca)
-    rows_vend = db(db.venda.vendedor == request.args(0, cast=int)).select(orderby=db.venda.sub_venda|db.venda.data_venda)
-    return locals()
+
 @auth.requires_login()
 def inserir_venda():
     response.view = 'generic.html' # use a generic view
@@ -150,3 +155,17 @@ def alterar_venda():
         if not response.flash:
             response.flash = 'Preencha o formulário!'
     return dict(form=form)
+
+@auth.requires_login()
+def conferir():
+  response.view = 'generic.html' # use a generic view
+  vendedor = db.vendedor(request.args(0, cast=int))
+  a=False
+  if 'cfrd' in vendedor.nome:
+    a=True
+    vendedor.nome=vendedor.nome.replace('cfrd','')
+  else:
+    vendedor.nome=vendedor.nome+'cfrd'
+  vendedor.update_record()
+  redirect(URL('acesso_equipe', args=[vendedor.projeto,a]))
+  return locals()

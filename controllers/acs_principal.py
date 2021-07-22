@@ -41,6 +41,9 @@ def lista_logins():
         n=int(consul)
         empresa = db.empresa(n)
     usuario=auth.user
+    if not empresa:
+        usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
+        empresa = db.empresa(usuario_empresa.empresa)
     row = db(db.usuario_empresa.empresa==empresa.id).select(orderby=db.usuario_empresa.id)
     if request.args(0, auth.user)=="235":
         rows = db(db.usuario_empresa.empresa).select(orderby=db.empresa)
@@ -58,7 +61,7 @@ def lista_pagmt_sistema():
     usuario=auth.user
     limites = (0, 6)
     if auth.user.id==1:
-      limites = (0, 20)
+      limites = (0, 6)
     rows = db(db.pagamento.empresa==empresa.id).select(limitby=limites,orderby=~db.pagamento.id)
     if request.args(0, auth.user)=="235":
         rows = db(db.pagamento.empresa).select(orderby=db.empresa)
@@ -77,6 +80,9 @@ def lista_projetos():
     if usuario_empresa.bloqueado:
       #redireciona para pagina de usuario)
         redirect(URL('acs_empresa','mensagem'))
+    if not empresa:
+        usuario_empresa = db.usuario_empresa(db.usuario_empresa.auth_user==auth.user.id)
+        empresa = db.empresa(usuario_empresa.empresa)
     if (usuario.id!=1)and(usuario_empresa.empresa!=empresa.id):
         redirect(URL('default','index'))
     rows = db(db.projeto.empresa==empresa.id).select(orderby=db.projeto.venda_finalizada|~db.projeto.id)
@@ -190,19 +196,29 @@ def alterar_projeto():
       db.projeto.vale_saida.writable = False
       db.projeto.descricao_vale.readable = False
       db.projeto.descricao_vale.writable = False
+    
+    if projeto.id==129:
+      db.projeto.descricao_adiantamento.readable = True
+      db.projeto.descricao_adiantamento.writable = True
     a=True
     if projeto.total_venda_prazo>0:
         a=False
     if usuario.id==1:
-      db.projeto.data_final.label = "#Data_final"
+#       db.projeto.descricao_adiantamento.label = "Programador (Descrição Adiantamento)"
+      db.projeto.descricao_adiantamento.readable = True
+      db.projeto.descricao_adiantamento.writable = True
+      db.projeto.data_final.label = "#Programador (Data_final)"
       db.projeto.data_final.readable = True
       db.projeto.data_final.writable = True
       db.projeto.id.readable = True
       db.projeto.id.writable = True
-      db.projeto.empresa.label = "#Empresa"
+      db.projeto.empresa.label = "#Programador (Empresa)"
       db.projeto.empresa.readable = True
       db.projeto.empresa.writable = True
       a=True
+    db.projeto.descricao_adiantamento.label = "Observação Geral"
+    db.projeto.descricao_adiantamento.readable = True
+    db.projeto.descricao_adiantamento.writable = True
     form = SQLFORM(db.projeto, request.args(0, cast=int), deletable=a)
     if form.process().accepted:
         session.flash = 'Projeto atualizado'
@@ -447,3 +463,9 @@ def alteracao_projeto():
     elif form.errors:
         response.flash = 'Erros no formulário!'
     return  dict(form=form)
+
+  
+def recibo_pagamento():
+    pagamento = db.pagamento(request.args(0, cast=int))
+    empresa = db.empresa(pagamento.empresa)
+    return locals()

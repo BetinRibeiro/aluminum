@@ -75,6 +75,7 @@
               <thead>
                 <tr>
                   <th scope="col">Data</th>
+                  <th scope="col">Projeto</th>
                   <th scope="col">Banco</th>
                   <th scope="col">Valor</th>
                   <th scope="col">Descrição</th>
@@ -84,16 +85,18 @@
               <tbody>
                   {{for row in rows:}}
                 <tr>
-                    
                   {{if row.quitado:}}
-                   
                   <th scope="row"><i class="fa fa-fw fa-1x py-1 fa-check-square-o"></i>{{=("{}/{}/{}".format(row.data_cheque.day,row.data_cheque.month,row.data_cheque.year))}}</th>
                   {{totalq+=row.valor}}
                     {{else:}}
                     <th scope="row"><i class="fa fa-fw fa-1x py-1 fa-square-o"></i>{{=("{}/{}/{}".format(row.data_cheque.day,row.data_cheque.month,row.data_cheque.year))}}</th>
                   {{totald+=row.valor}}
-                    
                      {{pass}}
+                  {{if row.projeto:}}
+                  <td>{{=row.projeto.descricao}}</td>
+                  {{else:}}
+                  <td class="text-danger">Sem </td>
+                  {{pass}}
                   <td>{{=row.banco}}</td>
                   <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
                   <td>{{=row.descricao}}</td>
@@ -102,7 +105,6 @@
                   {{if False:}}
                   <th>{{=totalq}}</th>
                   {{pass}}
-                
                 </tr>
                   {{pass}}
                 <tr>

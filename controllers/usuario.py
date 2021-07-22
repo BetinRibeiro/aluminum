@@ -37,6 +37,8 @@ def acesso_projeto():
       usuario.nome="Bloqueio (tentou acessar outro projeto, usuario.acesso_principal)"
       usuario.update_record()
       redirect(URL('acs_mensagem','usuario_bloqueado',args="Usuario bloqueado"))
+    if (auth.user.id==112)and(projeto.venda_finalizada):
+      lista_cobrancas = db(db.sub_venda.projeto == projeto.id).select()
     return locals()
 
   

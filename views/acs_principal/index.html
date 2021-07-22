@@ -4,20 +4,35 @@
 
 
 <div class="py-3" >
-<div class="container">
-{{if auth.user.id==1:}}
-<a class="btn btn-primary" href="{{=URL('lista_empresas', args=usuario.id)}}"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Lista Empresas</a>
-<a class="btn btn-primary" href="{{=URL('default', 'captura_empresa')}}"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Projeção Ideal</a>
-<a class="btn btn-primary" href="{{=URL('acs_empresa', 'projecao_simulada')}}"><i class="fa fa-fw fa-1x py-1 fa-file-o"></i> Projeção Simulada</a>
-{{pass}}
-        <h2 class="p-2">{{=empresa.nome}} <small class="text-muted">{{=usuario.first_name}}</small></h2>
-      {{if rowspgmt>0:}}
-      <h3 class="border bg-danger text-white p-2 m-3">
-          Não identificamos o pagamento do sistema
-      </h3>
-      {{pass}}
-        <div class="row p-3">
-        <div class="col-md-12">
+  <div class="container">
+    <h2 class="p-2">{{=empresa.nome}} <small class="text-muted">{{=usuario.first_name}}</small></h2>
+    {{if rowspgmt>0:}}
+    <h3 class="border bg-danger text-white p-2 m-3">
+      Não identificamos o pagamento do sistema
+    </h3>
+    {{pass}}
+    <div class="row p-3">
+      <div class="col-md-12">
+    {{if auth.user.id==1:}}
+      <div class="row p-3">
+        <div class="col-md-2">
+          <a class="btn btn-primary btn-block" href="{{=URL('lista_empresas', args=usuario.id)}}">
+            <i class="fa fa-fw fa-1x py-1 fa-plus"></i>
+            Empresas</a>
+        </div>
+        <div class="col-md-2">
+          <a class="btn btn-primary btn-block" href="{{=URL('default', 'captura_empresa')}}">
+            <i class="fa fa-fw fa-1x py-1 fa-plus"></i>
+            Projeção</a>
+        </div>
+        <div class="col-md-2">
+          <a class="btn btn-primary btn-block" href="{{=URL('acs_empresa', 'projecao_simulada')}}">
+            <i class="fa fa-fw fa-1x py-1 fa-file-o"></i>
+            Simulação</a>
+            </div>
+        <div class="col-md-2"></div>
+      </div>
+    {{pass}}
           <div class="row">
             <div class="col-md-3">
               <div class="card">
@@ -26,7 +41,8 @@
                 </center>
                 <div class="card-body">
                   <h4 class="card-title">Projetos de Venda e Cobrança</h4>
-                  <p class="card-text">Listagem de todos os prjetos de Vendas, definição de metas, da estratégia e das táticas de vendas, das métricas</p> <a href="{{=URL('lista_projetos',args=empresa.id*12)}}" class="btn btn-primary btn-block">Acessar</a>
+                  <p class="card-text">Listagem de todos os prjetos de Vendas, definição de metas, da estratégia e das táticas de vendas, das métricas</p> 
+                  <a href="{{=URL('lista_projetos',args=empresa.id*12)}}" class="btn btn-primary btn-block">Acessar</a>
                 </div>
               </div>
             </div>
@@ -49,7 +65,8 @@
                 </center>
                 <div class="card-body">
                   <h4 class="card-title">Logins de Acesso ao Sistema</h4>
-                  <p class="card-text">Listagem de Todos os ligins da empresa, armazena de forma segura, usuário e senhas usados no acesso, do sistema</p> <a href="{{=URL('lista_logins',args=empresa.id)}}" class="btn btn-primary btn-block">Acessar</a>
+                  <p class="card-text">Listagem de Todos os ligins da empresa, armazena de forma segura, usuário e senhas usados no acesso, do sistema</p> 
+                  <a href="{{=URL('lista_logins',args=empresa.id)}}" class="btn btn-primary btn-block">Acessar</a>
                 </div>
               </div>
             </div>
@@ -60,7 +77,8 @@
                 </center>
                 <div class="card-body">
                   <h4 class="card-title">Pagamentos do Sistema</h4>
-                  <p class="card-text">Listagem de Todos os pagamentos do Sistema, Ele funciona como um intermediador de pagamentos.</p> <a href="{{=URL('acs_principal','lista_pagmt_sistema',args=empresa.id*12)}}" class="btn btn-primary btn-block">Acessar</a>
+                  <p class="card-text">Listagem de Todos os pagamentos do Sistema, Ele funciona como um intermediador de pagamentos.</p>
+                  <a href="{{=URL('acs_principal','lista_pagmt_sistema',args=empresa.id*12)}}" class="btn btn-primary btn-block">Acessar</a>
                 </div>
               </div>
             </div>
@@ -77,11 +95,11 @@
                 </center>
                 <div class="card-body">
                   <h4 class="card-title">Cheques e Pagamentos</h4>
-                  <p class="card-text">Ordens de pagamento da empresa cheques e pagamentos futuros, provisionamento. autorização para que a retirada.</p> <a href="{{=URL('acs_cheques','index',args=[data.month,data.year,empresa.id])}}" class="btn btn-primary btn-block">Acessar</a>
+                  <p class="card-text">Ordens de pagamento da empresa cheques e pagamentos futuros, provisionamento. autorização para que a retirada.</p> 
+                  <a href="{{=URL('acs_cheques','index',args=[data.month,data.year,empresa.id])}}" class="btn btn-primary btn-block">Acessar</a>
                 </div>
               </div>
             </div>
-            
             <div class="col-md-3">
               <div class="card">
                 <center>
@@ -89,9 +107,8 @@
                 </center>
                 <div class="card-body">
                   <h4 class="card-title">Fluxo de Entradas e Saídas</h4>
-                  <p class="card-text">Entradas e saidas de dinheiro, registro de contas bancarias e centros de recebimento e custos, controle o fluxo de dinheiro de entrada e saida de todos os seu negócio.</p>
+                  <p class="card-text">Entradas e saidas de dinheiro, registro de contas bancarias e centros de recebimento e custos, controle o fluxo de dinheiro de entrada e saida.</p>
                   <a href="{{=URL('acs_fluxo','index',args=empresa.id)}}" class="btn btn-primary btn-block">Acessar</a>
-                  
                 </div>
               </div>
             </div>
@@ -102,7 +119,8 @@
                 </center>
                 <div class="card-body">
                   <h4 class="card-title">Despesas Locais Desvinculadas</h4>
-                  <p class="card-text">Divididas por classes para administrar localmente dentro dos projetos de custo, essas despesas não estão incluidas no relatorio de investimentos.</p> <a href="{{=URL('acs_despesa_local','lista_despesas',args=empresa.id)}}" class="btn btn-primary btn-block">Acessar</a>
+                  <p class="card-text">Divididas por classes para administrar localmente dentro dos projetos de custo, essas despesas não estão incluidas no relatorio de investimentos.</p>
+                  <a href="{{=URL('acs_despesa_local','lista_despesas',args=empresa.id)}}" class="btn btn-primary btn-block">Acessar</a>
                 </div>
               </div>
             </div>
@@ -113,10 +131,75 @@
                 </center>
                 <div class="card-body">
                   <h4 class="card-title">Depositos de Cobrança</h4>
-                  <p class="card-text">Acesso a todos os depositos de todas as equipes de cobrança separadas por periodo de mêses visão geral de fluxo de caixa de entrada em conta.</p> <a href="{{=URL('acs_cobranca','depositos_periodo',args=[data.month,data.year,empresa.id])}}" class="btn btn-primary btn-block">Acessar</a>
+                  <p class="card-text">Acesso a todos os depositos de todas as equipes de cobrança separadas por periodo de mêses visão geral de fluxo de caixa de entrada.</p>
+                  <a href="{{=URL('acs_cobranca','depositos_periodo',args=[data.month,data.year,empresa.id])}}" class="btn btn-primary btn-block">Acessar</a>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    <div class="row p-3">
+        <div class="col-md-12">
+          <div class="row">
+<!--              -->
+            <div class="col-md-3" >
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x text-primary fa-tasks"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">
+                    Registro de Preços (Cotação)
+                  </h4>
+                  <p class="card-text">
+                    Registro de preço de compra de mercadorias, para analizar variações e comparações de preços entre fornecedores e registros de preços de compras
+                  </p> 
+                  <a href="{{=URL('acs_cotacao','index',args=empresa.id)}}" class="btn btn-primary btn-block">Acessar</a>
+                </div>
+              </div>
+            </div>
+<!--              -->
+            <div class="col-md-3">
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x text-primary fa-id-card"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">Cadastro de Vendedores</h4>
+                  <p class="card-text">Cadastro e controle de vendedores, idependentimente do projeto que faz parte, cadastro de debitos e percentuais de comissão e cobrança com quitações</p>
+                  <a href="{{=URL('acs_vendedore','index',args=empresa.id)}}" class="btn btn-primary btn-block ">Acessar</a>
+                </div>
+              </div>
+            </div>
+<!--              -->
+            <div class="col-md-3">
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x text-primary fa-user"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">Mapeamento Admin</h4>
+                  <p class="card-text">Mapiamento do trabalho administrativo, atividades diarias, semanais e unicas que tem que ser desempenhada pelo responsavel administrativo dos projetos.</p>
+                  <a href="{{=URL('acs_relatorio','mapeamanto_administrativo',args=empresa.id)}}" class="btn btn-primary btn-block ">Acessar</a>
+                </div>
+              </div>
+            </div>
+            
+<!--              -->
+            <div class="col-md-3">
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x fa-car text-primary"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">Veiculos e Transportes</h4>
+                  <p class="card-text">Controle de Transportes, responsaveis e quilometragem entre periodos de utilização, menutenção e/ou saida e chegada de viagem de vendas e cobranças.</p>
+                  <a href="{{=URL('acs_transporte','index',args=empresa.id)}}"class="btn btn-primary btn-block">Acessar</a>
+                </div>
+              </div>
+            </div>
+<!--              -->
           </div>
         </div>
       </div>
@@ -171,11 +254,11 @@
                 </center>
                 <div class="card-body">
                   <h4 class="card-title">Veiculos e Transportes</h4>
-                  <p class="card-text">Controle de Transportes e quilometragem entre pediodos de utilização, menutenção e/ou saida e chegada de viagem de vendas e cobranças.</p> <a href="{{=URL('acs_transporte','index',args=empresa.id)}}"class="btn btn-primary btn-block">Acessar</a>
+                  <p class="card-text">Controle de Transportes e quilometragem entre pediodos de utilização, menutenção e/ou saida e chegada de viagem de vendas e cobranças.</p>
+                  <a href="{{=URL('acs_transporte','index',args=empresa.id)}}"class="btn btn-primary btn-block">Acessar</a>
                 </div>
               </div>
             </div>
-           
           </div>
         </div>
       </div>
@@ -203,39 +286,40 @@
             <div class="col-md-3">
               <div class="card">
                 <center>
-                  <i class="fa fa-fw fa-1x py-1 fa-5x text-primary fa-id-card"></i>
-                </center>
-                <div class="card-body">
-                  <h4 class="card-title">Cadastro de Vendedores</h4>
-                  <p class="card-text">Cadastro e controle de vendedores, idependentimente do projeto que faz parte, cadastro de debitos e percentuais de comissão e cobrança com quitações</p>
-                  <a href="{{=URL('acs_vendedore','index',args=empresa.id)}}" class="btn btn-primary btn-block ">Acessar</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="card">
-                <center>
-                  <i class="fa fa-fw fa-1x py-1 fa-5x text-primary fa-truck"></i>
-                </center>
-                <div class="card-body">
-                  <h4 class="card-title">Cadastro de Devolução</h4>
-                  <p class="card-text">Mercadorias para recolher e recolhidas das cobranças, percentuais de aproveitamento e analise de mercadoria recolhina nas devoluções pelos cobradores.</p>
-                  <a href="#" class="btn btn-primary btn-block disabled">Acessar</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              
-              <div class="card">
-                <center>
                   <i class="fa fa-fw fa-1x py-1 fa-5x fa-dollar text-primary"></i>
                 </center>
                 <div class="card-body">
                   <h4 class="card-title">Recebimentos e Cobrança</h4>
-                  <p class="card-text">Todos os recebimentos das cobranças, agora, vamos aos modelos de carta de cobrança que você pode utilizar</p> <a href="{{=URL('acs_cobranca','cobranca_periodo',args=[data.month,data.year,empresa.id])}}" class="btn btn-primary btn-block">Acessar</a>
+                  <p class="card-text">Todos os recebimentos das cobranças, agora, vamos aos modelos de carta de cobrança que você pode utilizar</p>
+                  <a href="{{=URL('acs_cobranca','cobranca_periodo',args=[data.month,data.year,empresa.id])}}" class="btn btn-primary btn-block">Acessar</a>
                 </div>
               </div>
             </div>
+            <div class="col-md-3">
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x text-primary fa-list"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">#</h4>
+                  <p class="card-text">Cadastro e controle de vendedores, idependentimente do projeto que faz parte, cadastro de debitos e percentuais de comissão e cobrança com quitações</p>
+                  <a href="{{=URL('Aguardando','index',args=empresa.id)}}" class="btn btn-primary btn-block ">Acessar</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="card">
+                <center>
+                  <i class="fa fa-fw fa-1x py-1 fa-5x text-primary fa-user"></i>
+                </center>
+                <div class="card-body">
+                  <h4 class="card-title">Mapeamento Admin</h4>
+                  <p class="card-text">Mapiamento do trabalho administrativo .</p>
+                  <a href="{{=URL('acs_relatorio','mapeamanto_administrativo',args=empresa.id)}}" class="btn btn-primary btn-block ">Acessar</a>
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
       </div>

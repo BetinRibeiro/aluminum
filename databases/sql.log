@@ -10408,3 +10408,37 @@ faked!
 timestamp: 2021-07-02T05:36:21.645868
 ALTER TABLE "funcionario_empresa" ADD "observacao" TEXT;
 success!
+timestamp: 2021-07-09T21:07:53.615605
+ALTER TABLE "pagamento" ADD "data_recebimento" DATE NOT NULL DEFAULT '2021-07-09';
+success!
+timestamp: 2021-07-10T05:18:22.692509
+ALTER TABLE "funcionario_empresa" ADD "logradouro" CHAR(512);
+timestamp: 2021-07-10T05:18:22.744091
+ALTER TABLE "funcionario_empresa" ADD "cidade" CHAR(512);
+timestamp: 2021-07-10T05:18:22.783019
+ALTER TABLE "funcionario_empresa" ADD "funcao" CHAR(512);
+timestamp: 2021-07-10T05:18:22.831606
+ALTER TABLE "funcionario_empresa" ADD "cpf" CHAR(512);
+timestamp: 2021-07-10T05:18:22.866610
+ALTER TABLE "funcionario_empresa" ADD "apelido" CHAR(512);
+timestamp: 2021-07-10T05:18:22.901855
+ALTER TABLE "funcionario_empresa" ADD "telefone" CHAR(512);
+success!
+timestamp: 2021-07-10T05:33:55.623870
+ALTER TABLE "funcionario_empresa" ADD "equipe" CHAR(512);
+success!
+timestamp: 2021-07-10T08:50:32.563275
+ALTER TABLE "cheque" ADD "projeto" INTEGER REFERENCES "projeto" ("id") ON DELETE CASCADE  ;
+success!
+timestamp: 2021-07-13T16:55:55.775431
+ALTER TABLE "pagamento" ADD "quant_logins" CHAR(512);
+success!
+timestamp: 2021-07-14T16:18:29.084924
+ALTER TABLE "classe_despesa_cobranca" ADD "tipo" CHAR(512);
+success!
+timestamp: 2021-07-14T16:18:29.299927
+ALTER TABLE "despesa_cobranca" ADD "tipo" CHAR(512);
+success!
+timestamp: 2021-07-14T17:41:36.887945
+ALTER TABLE "sub_venda" ADD "total_despesa_local" DOUBLE NOT NULL DEFAULT 0.0;
+success!

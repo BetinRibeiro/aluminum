@@ -111,6 +111,9 @@ def alterar_ent_said():
       db.projeto.descricao_devolucao_dinheiro.readable = False
       db.projeto.total_devolucao_dinheiro.writable = False
       db.projeto.total_devolucao_dinheiro.readable = False
+      db.projeto.adiantamento.writable = False
+      db.projeto.descricao_adiantamento.readable = False
+      db.projeto.descricao_adiantamento.writable = False
     form = SQLFORM(db.projeto, request.args(0, cast=int), deletable=False)
     if form.process().accepted:
         session.flash = 'Projeto atualizado'
@@ -121,3 +124,13 @@ def alterar_ent_said():
         if not response.flash:
             response.flash = 'Preencha o formulário!'
     return  dict(form=form)
+  
+  
+def mapeamanto_administrativo():
+    return locals()
+
+  
+def deposito_pagamento():
+    projeto = db.projeto(request.args(0, cast=int))
+    lista_cobrancas = db(db.sub_venda.projeto == projeto.id).select(orderby=db.sub_venda.data_inicio_cobranca)
+    return locals()

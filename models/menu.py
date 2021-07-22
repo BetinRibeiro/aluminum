@@ -22,7 +22,7 @@ if auth.user:
       (T('Cobranças'), False, URL('acs_principal','lista_cobrancas'), []),
       (T('Usuarios'), False, URL('acs_principal','lista_logins'), []),
       ]
-if configuration.get('app.production'):
+if False:
     _app = request.application
     response.menu += [
         (T('My Sites'), False, URL('admin', 'default', 'site')),

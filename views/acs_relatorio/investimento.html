@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h5 class="">Provisão de fluxo ( {{=projeto.descricao}} )</h5>
+          <h5 class="">Demonstrativo Projeto( {{=projeto.descricao}} )</h5>
         </div>
       </div>
       <div class="row">
@@ -395,7 +395,7 @@
               {{for row in rows:}}
               <li class="list-group-item d-flex justify-content-between">
               <div>
-                <h6 class="my-0">Quiatação - {{=(row.descricao)[0:15]}}</h6>
+                <h6 class="my-0">Quitação - {{=(row.descricao)[0:15]}}</h6>
               </div> <span class="text-muted">R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</span>
                 </li>
                {{saldo_quitacao+=row.valor}}

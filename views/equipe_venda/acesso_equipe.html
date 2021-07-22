@@ -60,7 +60,7 @@
                   <td>{{=a}}º</td>
                   <td>
                     <a class="btn btn-outline-primary text-left btn-block" href="{{=URL('acesso_venda', args=row.id)}}" class="text-dark">
-                      {{=row.nome.replace("cfrd","")}}
+                      {{=row.nome.replace("cfrd","")[0:20]}}
                     </a>
                   </td>
                   <td>

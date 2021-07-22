@@ -65,7 +65,7 @@
             </td>
              {{if row.quitado:}}
             <td>
-              <a class="btn btn-link text-success" href="#" style="color:#3b5998" >
+              <a class="btn btn-link text-success" target="_blank" href="{{=URL('recibo_pagamento',  args=row.id)}}" style="color:#3b5998" >
                 <i class="fa fa-fw fa-1x py-1 fa-hand-o-right"></i> 
               </a>
             </td>
@@ -79,7 +79,7 @@
             {{else:}}
             {{if row.quitado:}}
             <td>
-              <a class="btn btn-link text-success" href="#" style="color:#3b5998" >
+              <a class="btn btn-link text-success" target="_blank" href="{{=URL('recibo_pagamento',  args=row.id)}}" style="color:#3b5998" >
                 <i class="fa fa-fw fa-1x py-1 fa-hand-o-right"></i> 
               </a>
             </td>

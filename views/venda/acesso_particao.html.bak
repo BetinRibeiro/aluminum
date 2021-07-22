@@ -54,7 +54,7 @@
                   {{if dias.days>0:}}
                   <td class="text-center">{{=dias.days}}</td>
                   {{else:}}
-                  <td class="text-danger">{{=dias.days*-1}}</td>
+                  <td class="text-center text-danger">{{=dias.days*-1}}</td>
                   {{pass}}
                   <td class="text-center">{{=row.quant_fichas}}</td>
                   <td>R$ {{="{:,.2f}".format(round(row.venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>

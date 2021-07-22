@@ -1,0 +1,436 @@
+{{extend 'layout.html'}}
+<div class="py-3 text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="mb-3">Mapeamento de Trabalho</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-4 col-6">
+                        <a class="btn btn-primary btn-block my-1" href="{{=URL('acs_principal','index', args=empresa.id*12)}}">
+                          <i class="fa fa-arrow-left fa-fw"></i>Voltar</a>
+                    </div>
+                    <div class="col-md-4 col-6"></div>
+                    <div class="col-md-4 col-12"></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-12"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 border p-1 my-2">
+                <h4 class="">Cadastro Geral</h4>
+                <ul class="list-group">
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Cheques de Compras<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Pagamentos Futuros<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Retiradas e Vales Futuros<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Despesas Locais da Venda&nbsp;<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Despesas Locais da Cobrança&nbsp;&nbsp;<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Despesas Locais Geral&nbsp;&nbsp;<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Retiradas e Vales Futuros<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Despesas Locais da Venda&nbsp;<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Conferir Depósistos das Cobranças<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6 border p-1 my-2">
+                <h4 class="">Revisão Geral</h4>
+                <ul class="list-group">
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Baixa em Cheques pagos<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Baixa em Pagamentos pagos<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Baixa em Vales Retirados<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Verificar Despesas Recorrentes<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Depósitos das Cobranças<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Recebimentos das Cobranças<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Despesas das Cobranças Diariamente<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Despesas das Vendas Diariamente&nbsp;<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Recolher mercadoria de Devolução<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 border p-1 my-2">
+                <h4 class="">Saida da Equipe de Vendas</h4>
+                <ul class="list-group">
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Fechar Venda Finalizada<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Abrir Nova Venda Vincular Login<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Verificar Comissão do Chefe, Vales e Adiantamento<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Cadastrar Retorno da Mercadoiria na Venda Atual<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Cadastrar Compra da Mercadoria na venda Atual<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Quant, Custos e Preços da Mercadoria<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Cadastrar Pastas da Despesa&nbsp; da Venda<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Cadastrar Funcionarios e Vales<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Cadastrar Equipe de Vendas e Vales<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Cadastrar Transportes e Quilometragem<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Fechar e Abrir Partições quando necessario<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6 border p-1 my-2">
+                <h4 class="">Chegada da Equipe de Vendas</h4>
+                <ul class="list-group">
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Separar Fichas por Vendedores, Conferir<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Entradas, vales caderno, venda e quantidade<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Separar e Somar Despesa da Venda<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Ajustar Venda à Prazo<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Conferir Retorno da Mercadoria&nbsp;<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Verificar Gratificações de mercadoria<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Verificar Peças Estragadas<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Prestação da Equipe<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Prestação da Mercadoria&nbsp;<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Prestação do Dinheiro<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Ajustar datas de saida e chegada e de cobrança<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+      <div style="page-break-after: always"></div>
+        <div class="row">
+            <div class="col-md-6 border p-1 my-2">
+                <h4 class="">Saida da Cobrança</h4>
+                <ul class="list-group">
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Alocar logins dos cobradores<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Cadastrar Cobradores e Ajudantes<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Verificar as Comissões dos cobradores<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Inserir e Conferir os Vales da Cobrança<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Cadastrar Pastas de Despesa da Cobrança<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Reconferir Quant de Fichas com Cobrador<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Cadastrar Despesas Locais da Cobrança<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        &nbsp;Diariamente Despesas da Cobrança<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        &nbsp;Diariamente Recebimentos da Cobrança&nbsp;<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        &nbsp;Diariamente Depositos da Cobrança&nbsp;<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6 border p-1 my-2">
+                <h4 class="">Chegada da Cobrança</h4>
+                <ul class="list-group">
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Contar Fichas Juntamente com o Cobrador<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Finalizar Cobrança (Bloquear Cobrador)<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Separar Fichas por Vendedor e por Tipo<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Alocar Valores no Sistema<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Retirar as Entradas das Fichas Quitadas<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Separar e Conferir Despesas<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Separar e Conferir Depositos<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Registrar as Devoluções (Romaneio)<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Contabilizar nas Fichas Devoluções<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                      Ajustar Relatorio de Quitação
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                  </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 border p-1 my-2">
+                <h4 class="">Impressões da Venda</h4>
+                <ul class="list-group">
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Carradas e Mercadoria<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Adiantamento de Dinheiro e Vales do Chefe<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Funcionarios e Equipe de Vendas<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Venda à Vista<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Despesa da Venda e Despesa Local<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Prestação de Contas da Venda<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Relação Individual (Vendadores)<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Relatorio de Investimentos<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Lista de Cheques<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Lista de Transportes<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6 border p-1 my-2">
+                <h4 class="">Impressões da Cobrança</h4>
+                <ul class="list-group">
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Devoluções da Cobrança<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Alocação de Valores (Vendedores)<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Relatorio de Análise<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Lista Recebimentos<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Lista Depositos<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Lista Despesas<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Lista Vales de Caderno<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Prestação da Cobrança<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Relação Individual Vendedores<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Relatorio de Quitação<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 border p-1 my-2">
+                <h4 class="">Organização Extra</h4>
+                <ul class="list-group">
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Separar Fichas de Repasse<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Cadastro de Vendedores, Chefes e Cobradores<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Recolhimentos de Devoluções<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center" >
+                      Cadastro de Despesas Desvinculadas
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                  </li>
+                </ul>
+            </div>
+            <div class="col-md-6 border p-1 my-2">
+                <h4 class="">Impressões da Cobrança</h4>
+                <ul class="list-group">
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Verificar Relatorio Investimento<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Mapear Despesas Recorrentes<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Classificar Vendedores Bons ou Não<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                    <li class="border-0 list-group-item d-flex justify-content-between align-items-center">
+                        Classificar Cobradores Bons ou Não<br />
+                        <i class="fa fa-sign-out text-muted fa-lg"></i>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

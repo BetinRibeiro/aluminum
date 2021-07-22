@@ -45,12 +45,90 @@ def alterar():
     data=cheque.data_cheque
     db.cheque.id.readable = False
     db.cheque.id.writable = False
+    if auth.user.id==1:
+      db.cheque.projeto.requires = IS_IN_DB(db((db.projeto.empresa == empresa.id)&(db.projeto.venda_finalizada == False)), 'projeto.id', '%(descricao)s')
+      db.cheque.projeto.readable = True
+      db.cheque.projeto.writable = True
 
     form = SQLFORM(db.cheque, request.args(0, cast=int), deletable=True)
     if form.process().accepted:
         session.flash = 'Atualizado'
         redirect(URL('index', args=[data.month,data.year,empresa.id]))
     elif form.errors:
+        response.flash = 'Erros no formulário!'
+    else:
+        if not response.flash:
+            response.flash = 'Preencha o formulário!'
+    return dict(form=form)
+
+  
+def lista_pagamentos_projeto():
+    projeto = db.projeto(request.args(0, auth.user))
+    paginacao = 10
+    if len(request.args) == 1:
+        pagina = 1
+    else:
+        try:
+            pagina = int(request.args[1])
+        except ValueError:
+            redirect(URL('erro', vars={
+                  'msg':'Numero da página inválido'
+                  }))
+    if pagina <= 0:
+        redirect(URL(args=[projeto.id,1]))
+    total = db(db.cheque.projeto==projeto.id).count()
+    paginas = total/paginacao
+    if total%paginacao:
+        paginas+=1
+    if total==0:
+        paginas=1
+    if pagina > paginas:
+        redirect(URL(args=[projeto.id,paginas]))
+    limites = (paginacao*(pagina-1), (paginacao*pagina))
+    registros = db(db.cheque.projeto==projeto.id).select(
+      limitby=limites,orderby=db.cheque.quitado|db.cheque.data_cheque
+      )
+    consul=(request.args(2))
+    if (consul):
+        registros = db((db.cheque.projeto==projeto.id)&((db.cheque.descricao.contains(consul)))).select(limitby=(0,paginacao))
+        paginas=1
+    return dict(rows=registros, pagina=pagina, paginas=paginas, total=total, projeto=projeto, consul=consul)
+  
+def cadastro_pagamento_projeto():
+    response.view = 'generic.html'
+    projeto = db.projeto(request.args(0, auth.user))
+    db.cheque.empresa.default = projeto.empresa
+    db.cheque.projeto.default = projeto.id
+    db.cheque.empresa.writable = False
+    form = SQLFORM(db.cheque).process()
+    if form.accepted:
+        #caso aceito redireciona para tela de acesso inicial
+        response.flash = 'Formulario aceito'
+        redirect(URL('lista_pagamentos_projeto', args=[projeto.id]))
+    elif form.errors:
+        response.flash = 'Formulario não aceito'
+    else:
+        response.flash = 'Preencha o formulario'
+    #2 consultas no banco
+    return  dict(form=form)
+  
+def alterar_pagamento_projeto():
+    response.view = 'generic.html' # use a generic view
+    cheque = db.cheque(request.args(0, cast=int))
+    empresa = db.empresa(cheque.empresa)
+    data=cheque.data_cheque
+    db.cheque.id.readable = False
+    db.cheque.id.writable = False
+    if auth.user.id==1:
+      db.cheque.projeto.requires = IS_IN_DB(db((db.projeto.empresa == empresa.id)&(db.projeto.venda_finalizada == False)), 'projeto.id', '%(descricao)s')
+      db.cheque.projeto.readable = True
+      db.cheque.projeto.label = "#Projeto (Programador)"
+      db.cheque.projeto.writable = True
+
+    form = SQLFORM(db.cheque, request.args(0, cast=int), deletable=True)
+    if form.process().accepted:
+        session.flash = 'Atualizado'
+        redirect(URL('lista_pagamentos_projeto', args=[cheque.projeto]))
         response.flash = 'Erros no formulário!'
     else:
         if not response.flash:

@@ -124,3 +124,14 @@ def alterar_ent_said():
         if not response.flash:
             response.flash = 'Preencha o formulário!'
     return  dict(form=form)
+  
+  
+def mapeamanto_administrativo():
+    return locals()
+
+  
+def deposito_pagamento():
+    projeto = db.projeto(request.args(0, cast=int))
+    lista_cobrancas = db(db.sub_venda.projeto == projeto.id).select(orderby=db.sub_venda.data_inicio_cobranca)
+    lista_pagamentos = db(db.cheque.projeto == projeto.id).select(orderby=db.cheque.data_cheque)
+    return locals()

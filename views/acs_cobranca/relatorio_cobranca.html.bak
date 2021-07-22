@@ -31,13 +31,6 @@
 
 <div class="py-5" >
   <div class="container">
-    {{if sub_venda.total_deposito>sub_venda.total_recebido:}}
-    <marquee direction="left">
-      <a class="navbar-brand text-danger">
-        <h6>Cobrador não registra os valores que foram recebidos!!</h6>
-      </a>
-    </marquee>
-    {{pass}}
     <div class="row">
       <div class="col-md-12">
         <h5 class="">
@@ -45,55 +38,84 @@
         </h5>
         <h6 class="">
           Cobrador Atual ( {{=sub_venda.auth_user.first_name}} )
-          <a class="btn btn-link  m-1 border-info rounded-top" href="{{=URL('definir_cobrador', args=sub_venda.id)}}" style="color:#3b5998" >
-            <i class="fa fa-fw fa-1x py-1 fa-street-view"></i>
-            Definir Cobrador
-          </a>
-          <a class="btn btn-link  m-1 border-info rounded-top" href="{{=URL('alterar_dados', args=sub_venda.id)}}" style="color:#3b5998" >
-            <i class="fa fa-fw fa-1x py-1 fa-pencil"></i>
-            Alterar Dados Cobrança
-          </a>
-          <a class="btn btn-link  m-1 border-info rounded-top" href="{{=URL('acs_devolucao','index', args=sub_venda.id)}}" style="color:#3b5998" >
-            <i class="fa fa-fw fa-1x py-1 fa-database"></i>
-            Registrar Devolução
-          </a>
-          <a class="btn btn-link  m-1 border-info rounded-top" href="{{=URL('alocar_valores', args=[sub_venda.id])}}" style="color:#3b5998" >
-            <i class="fa fa-fw fa-1x py-1 fa-hand-pointer-o "></i>
-            Alocar Valores
-          </a>
         </h6>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        {{if desbloqueado:}}
-        <a class="btn btn-link" href="{{=URL('index', args=sub_venda.projeto)}}" style="color:#3b5998">
+    <div class="row my-2">
+        <div class="col-md-2 col-6">
+           <a class="btn btn-outline-danger my-1 btn-block" href="{{=URL('index', args=sub_venda.projeto)}}">
           <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> 
           Voltar
         </a>
-        {{pass}}
-        <a class="btn btn-link" href="{{=URL('acs_registro_cobranca','index', args=[sub_venda.id,'Recebimento'])}}" style="color:#3b5998">
-          <i class="fa fa-fw fa-1x py-1 fa-dollar"></i>
-          Lista de Recebimentos
+        </div>
+        <div class="col-md-2 col-6">
+          <a class="btn btn-outline-primary my-1 btn-block" href="{{=URL('definir_cobrador', args=sub_venda.id)}}">
+            <i class="fa fa-fw fa-1x py-1 fa-street-view"></i>
+            Definir Login
+          </a>
+        </div>
+        <div class="col-md-2 col-6">
+          <a class="btn btn-outline-primary my-1 btn-block" href="{{=URL('alterar_dados', args=sub_venda.id)}}">
+            <i class="fa fa-fw fa-1x py-1 fa-pencil"></i>
+            Alterar Dados
+          </a>
+        </div>
+        <div class="col-md-2 col-6">
+          <a class="btn btn-outline-primary my-1 btn-block" href="{{=URL('acs_devolucao','index', args=sub_venda.id)}}">
+            <i class="fa fa-fw fa-1x py-1 fa-database"></i>
+            Devolução
+          </a>
+        </div>
+        <div class="col-md-2 col-6">
+          <a class="btn btn-outline-primary my-1 btn-block" href="{{=URL('alocar_valores', args=[sub_venda.id])}}">
+            <i class="fa fa-fw fa-1x py-1 fa-hand-pointer-o "></i>
+            Alocar Valores
+          </a>
+        </div>
+        <div class="col-md-2 col-6">
+          <a class="btn btn-outline-primary my-1 btn-block" href="{{=URL('relatorio_analise', args=[sub_venda.id])}}">
+            <i class="fa fa-fw fa-1x py-1 fa-area-chart "></i>
+            Análise
+          </a>
+        </div>
+      </div>
+    <div class="row my-2">
+        <div class="col-md-2 col-6">
+          <a class="btn btn-outline-secondary my-1 btn-block" href="{{=URL('acs_registro_cobranca','index', args=[sub_venda.id,'Recebimento'])}}">
+          <i class="fa fa-fw fa-1x py-1 fa-list-alt"></i>
+          Recebimentos
         </a>
-        <a class="btn btn-link" href="{{=URL('acs_registro_cobranca','index', args=[sub_venda.id,'Deposito'])}}" style="color:#3b5998">
-          <i class="fa fa-fw fa-1x py-1 fa-sign-in"></i>
-          Lista de Depositos
+        </div>
+        <div class="col-md-2 col-6">
+          <a class="btn btn-outline-secondary my-1 btn-block" href="{{=URL('acs_registro_cobranca','index', args=[sub_venda.id,'Deposito'])}}" >
+          <i class="fa fa-fw fa-1x py-1 fa-list-alt"></i>
+          Depositos
         </a>
-        <a class="btn btn-link" href="{{=URL('acs_registro_cobranca','index', args=[sub_venda.id,'Caderno'])}}" style="color:#3b5998">
-          <i class="fa fa-fw fa-1x py-1 fa-book"></i>
-          Caderno do Cobrador
+        </div>
+        <div class="col-md-2 col-6">
+          <a class="btn btn-outline-secondary my-1 btn-block" href="{{=URL('acs_registro_cobranca','index', args=[sub_venda.id,'Caderno'])}}" >
+          <i class="fa fa-fw fa-1x py-1 fa-list-alt"></i>
+          Vale Caderno
+        </a></div>
+        <div class="col-md-2 col-6">
+          <a class="btn btn-outline-secondary my-1 btn-block" href="{{=URL('acs_despesa_cobranca','index', args=sub_venda.id)}}" >
+          <i class="fa fa-fw fa-1x py-1 fa-list-alt"></i>
+          Despesas
         </a>
-        <a class="btn btn-link" href="{{=URL('acs_despesa_cobranca','index', args=sub_venda.id)}}" style="color:#3b5998">
-          <i class="fa fa-fw fa-1x py-1 fa-external-link"></i>
-          Despesas da Cobrança
-        </a>
-        <a class="btn btn-link" href="{{=URL('relacao_cobradores', args=[sub_venda.id])}}" style="color:#3b5998" >
-  <i class="fa fa-fw fa-1x py-1 fa-hand-pointer-o "></i>
+        </div>
+        <div class="col-md-2 col-6">
+          <a class="btn btn-info my-1 btn-block" href="{{=URL('relacao_cobradores', args=[sub_venda.id])}}" >
+  <i class="fa fa-fw fa-1x py-1 fa-users"></i>
   Cobradores
 </a>
+        </div>
+        <div class="col-md-2 col-6">
+           <a class="btn btn-danger my-1 btn-block" href="{{=URL('acs_despesa_cobranca','lista_despesa_local_cobranca', args=[sub_venda.id])}}" >
+  <i class="fa fa-fw fa-1x py-1 fa-list"></i>
+  Desp Local
+</a>
+        </div>
       </div>
-    </div>
     <div class="row">
       <div class="col-md-6">
         <div class="card">
@@ -104,11 +126,11 @@
                 <div>
                   <h6 class="my-0">Valor Cobrança</h6>
                   <small class="text-muted" >
-                    {{="{:,}".format(round(sub_venda.total_fichas)).replace(".0","")}} Fichas
+                    {{="{:,.0f}".format(round(sub_venda.total_fichas)).replace(",",".")}} Fichas
                   </small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(sub_venda.total_venda_praso,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(sub_venda.total_venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
@@ -117,18 +139,18 @@
                   <small class="text-muted">{{=sub_venda.nome_cobrador}}</small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(sub_venda.adiantamento_cobranca,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(sub_venda.adiantamento_cobranca,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
                 <div>
                   <h6 class="my-0">Valor Recebido</h6>
                   <small class="text-muted">
-                    {{="{:,}".format(round(perc_cob,1)).replace(",",".")}}% da venda
+                    {{="{:,.1f}".format(round(perc_cob,1)).replace(".",",")}}% da venda
                   </small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(sub_venda.total_recebido,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(sub_venda.total_recebido,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               {{dinheiro_total=sub_venda.total_recebido+sub_venda.adiantamento_cobranca}}
@@ -139,7 +161,7 @@
                   <small class="text-muted">#</small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(dinheiro_total,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(dinheiro_total,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               {{else:}}
@@ -160,22 +182,22 @@
                 <div>
                   <h6 class="my-0">Depositos</h6>
                   <small class="text-muted">
-                    {{="{:,}".format(round(perc_deposito)).replace(".0","")}}% da venda
+                    {{="{:,.1f}".format(round(perc_deposito,1)).replace(".",",")}}% da venda
                   </small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(sub_venda.total_deposito,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(sub_venda.total_deposito,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
                 <div>
                   <h6 class="my-0">Despesa</h6>
                   <small class="text-muted">
-                    {{="{:,}".format(round(perc_despesa)).replace(".0","")}}%
+                    {{="{:,.1f}".format(round(perc_despesa,1)).replace(".",",")}}%
                   </small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(sub_venda.total_despesa,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(sub_venda.total_despesa,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
@@ -184,7 +206,7 @@
                   <small class="text-muted">#</small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(sub_venda.total_caderno_cobrador,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(sub_venda.total_caderno_cobrador,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               {{if  caixa>=0:}}
@@ -194,7 +216,7 @@
                   <small class="text-muted">#</small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(caixa,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(caixa,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               {{else:}}
@@ -217,13 +239,61 @@
                   </small>
                 </div>
                 <span class="text-danger">
-                  R$ {{="{:,}".format(round(caixa,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(caixa,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               {{pass}}
-            </ul>
           </div>
-        </div>
+          </div>
+          {{if sub_venda.empresa==21:}}
+          <hr>
+             <div class="card">
+              <div class="card-header"> Informações das Despesas</div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between ">
+                <div>
+                  <h6 class="my-0">Despesas Locais</h6>
+                  <small class="">
+                    Gastos pela Empresa
+                  </small>
+                </div>
+                <span class="">
+                  R$ {{="{:,.2f}".format(round(sub_venda.total_despesa_local,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </span>
+              </li>
+                  <li class="list-group-item d-flex justify-content-between ">
+                <div>
+                  <h6 class="my-0">Despesas Cobrança</h6>
+                  <small class="">
+                    Gastos pela Cobrador
+                  </small>
+                </div>
+                <span class="">
+                  R$ {{="{:,.2f}".format(round(sub_venda.total_despesa,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </span>
+                    {{total_despesas_geral=sub_venda.total_despesa+sub_venda.total_despesa_local}}
+              </li>
+                  <li class="list-group-item d-flex justify-content-between ">
+                <div>
+                  <h6 class="my-0">Despesas Total</h6>
+                  <small class="">
+                    {{if (total_despesas_geral>0)and(sub_venda.total_recebido>0):}}
+                    {{percentual_despesas_geral = total_despesas_geral/sub_venda.total_recebido*100}}
+                    {{=round(percentual_despesas_geral,1)}}%
+                    {{else:}}
+                    ===
+                    {{pass}}
+                  </small>
+                </div>
+                <span class="">
+                  R$ {{="{:,.2f}".format(round(total_despesas_geral,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </span>
+              </li>
+                </ul>
+              </div>
+              </div>
+          {{pass}}
       </div>
       <br><br><br><hr>
       {{if len(rows)==0:}}
@@ -236,12 +306,12 @@
                 <div>
                   <h6 class="my-0">Comissão</h6>
                   <small class="text-muted">
-                    {{="{:,}".format(round(sub_venda.comissao_cobranca,1)).replace(",",".")}}%
+                    {{="{:,.1f}".format(round(sub_venda.comissao_cobranca,1)).replace(".",",")}}%
                   </small>
                 </div>
                 {{comissao_total+=comissao}}
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(comissao,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(comissao,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
@@ -250,7 +320,7 @@
                   <small class="text-muted">#</small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(sub_venda.total_vale_saida_cobrador,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(sub_venda.total_vale_saida_cobrador,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
@@ -259,7 +329,7 @@
                   <small class="text-muted">#</small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(sub_venda.total_caderno_cobrador,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(sub_venda.total_caderno_cobrador,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               {{saldo_sem_caixa=comissao-sub_venda.total_vale_saida_cobrador-sub_venda.total_caderno_cobrador}}
@@ -272,7 +342,7 @@
                   </small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(saldo_sem_caixa,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(saldo_sem_caixa,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               {{else:}}
@@ -282,7 +352,7 @@
                   <small class="text-danger">Comissão descontando os vales</small>
                 </div>
                 <span class="text-danger">
-                  R$ {{="{:,}".format(round(saldo_sem_caixa,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(saldo_sem_caixa,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               {{pass}}
@@ -296,7 +366,7 @@
                   </small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(caixa,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(caixa,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               {{if saldofinal>=0:}}
@@ -306,7 +376,7 @@
                   <small class="text-success">Positivo, já cobriu o vale</small>
                 </div>
                 <span class="text-success">
-                  R$ {{="{:,}".format(round(saldofinal,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(saldofinal,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               {{else:}}
@@ -320,7 +390,7 @@
                   </small>
                 </div>
                 <span class="text-danger">
-                  R$ {{="{:,}".format(round(saldofinal,1)).replace(",",".")}}0
+                  R$ {{="{:,.2f}".format(round(saldofinal,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               {{pass}}
@@ -390,7 +460,7 @@
                   {{pass}}
                 {{comissao_total+=comissao}}
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(comissao,1)).replace(",",".")}}0
+                  R$ {{="{:,}".format(round(comissao,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
@@ -399,7 +469,7 @@
                   <small class="text-muted">#</small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(row.vale_saida,1)).replace(",",".")}}0
+                  R$ {{="{:,}".format(round(row.vale_saida,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               <li class="list-group-item d-flex justify-content-between">
@@ -408,7 +478,7 @@
                   <small class="text-muted">#</small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(row.total_vale_caderno,1)).replace(",",".")}}0
+                  R$ {{="{:,}".format(round(row.total_vale_caderno,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               {{saldo_sem_caixa=comissao-row.total_vale_caderno-row.vale_saida}}
@@ -421,7 +491,7 @@
                   </small>
                 </div>
                 <span class="text-muted">
-                  R$ {{="{:,}".format(round(saldo_sem_caixa,1)).replace(",",".")}}0
+                  R$ {{="{:,}".format(round(saldo_sem_caixa,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               {{else:}}
@@ -431,7 +501,7 @@
                   <small class="text-danger">Comissão descontando os vales</small>
                 </div>
                 <span class="text-danger">
-                  R$ {{="{:,}".format(round(saldo_sem_caixa,1)).replace(",",".")}}0
+                  R$ {{="{:,}".format(round(saldo_sem_caixa,2)).replace(",","#").replace(".",",").replace("#",".")}}
                 </span>
               </li>
               {{pass}}
@@ -442,7 +512,7 @@
       {{pass}}
       {{if (comissao_total>0)and(sub_venda.total_recebido>0):}}
       Pago de Comissão R$ {{="{:,.2f}".format(round(comissao_total,2)).replace(",",".")}}<br>
-      Percentual pago = {{=round(comissao_total/sub_venda.total_recebido*100,0)}}%
+      Percentual pago = {{=round(comissao_total/sub_venda.total_recebido*100,1)}}%
                 {{pass}}
     {{if total_caderno_somado!=sub_venda.total_caderno_cobrador:}}
       {{diferenca_caderno=sub_venda.total_caderno_cobrador-total_caderno_somado}}

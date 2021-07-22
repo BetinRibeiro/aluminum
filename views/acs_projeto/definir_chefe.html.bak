@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
         <div class="col-md-12">
-          <h5 class="">Definir Chefe ( {{=projeto.descricao}} - {{=("{}/{}/{}".format(row.data_inicio_cobranca.day,row.data_inicio_cobranca.month,row.data_inicio_cobranca.year))}})</h5>
+          <h5 class="">Definir Chefe ( {{=projeto.descricao}} )</h5>
             <h6 class="">Chefe Atual ( {{=projeto.auth_user.first_name}} )</h6>
         </div>
       </div>
@@ -32,10 +32,11 @@
                   {{for row in rows:}}
                   {{a+=1}}
                 <tr>
-                  <th scope="row">{{=a}}</th>
-                  <td>{{=row.nome}}</td>
-                  <td>{{=row.telefone}}</td>
-                  <td><a class="btn btn-link" href="{{=URL('acs_projeto','definir_chefe_confirmar', args=[projeto.id,row.id])}}" style="color:#3b5998"><i class="fa fa-thumbs-o-up fa-fw fa-1x py-1"></i> </a></td>
+                  <th scope="row">{{=row.id+100}}</th>
+                  <td>{{=row.auth_user.first_name}}</td>
+                  <td>{{=row.auth_user.email}}</td>
+                  <td>{{=row.tipo}}</td>
+                  <td><a class="btn btn-link" href="{{=URL('acs_projeto','definir_chefe_confirmar', args=[projeto.id,row.id])}}" style="color:#3b5998"><i class="fa fa-thumbs-o-up fa-fw fa-1x py-1"></i> Escolher</a></td>
                 </tr>
                   {{pass}}
               </tbody>

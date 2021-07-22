@@ -23,7 +23,6 @@
              <a class="btn btn-link" href="{{=URL('acs_principal','lista_projetos', args=projeto.empresa*12)}}" style="color:#3b5998">
                  <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar
              </a>
-             
           </div>
       </div>
       <div class="row">
@@ -53,6 +52,13 @@
             <li class="list-group-item">
                 <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_registro','index', args=[projeto.id,'adiantamento'])}}">
                     <i class="fa fa-fw fa-1x py-1 fa-book"></i> Adiantamento Venda
+                  </a>
+              </li>
+            {{pass}}
+            {{if auth.user.id==1:}}
+            <li class="list-group-item">
+                <a class="btn btn-link" style="color:#3b5998" href="{{=URL('acs_cheques','lista_pagamentos_projeto', args=[projeto.id])}}">
+                    <i class="fa fa-fw fa-1x py-1 fa-book"></i> Pagamentos
                   </a>
               </li>
             {{pass}}

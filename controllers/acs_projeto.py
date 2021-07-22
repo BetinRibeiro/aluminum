@@ -20,7 +20,7 @@ def index():
 @auth.requires_login()
 def definir_chefe():
     projeto = db.projeto(request.args(0, auth.user))
-    rows = db(db.usuario_empresa.empresa==projeto.empresa).select()
+    rows = db((db.usuario_empresa.empresa==projeto.empresa)&(db.usuario_empresa.tipo=="Chefe")).select()
     if (projeto.empresa==17):
         redirect(URL('acs_equipe','vendedores', args=projeto.id))
     return locals()

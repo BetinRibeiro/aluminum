@@ -164,7 +164,7 @@
       </div>
   </div>
 </div>
-{{if projeto.total_saldo_vendedor!=saldof:}}
+{{if (projeto.total_venda_prazo!=venda)or(projeto.total_caderno_vendedor!=caderno):}}
 {{projeto.total_debito_vendedor=debitof}}
 {{projeto.total_saldo_vendedor=saldof}}
 {{projeto.total_entradas_venda=total_entradas}}

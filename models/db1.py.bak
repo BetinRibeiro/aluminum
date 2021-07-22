@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 db.define_table('cheque',
-                Field('empresa','reference empresa', label='empresa'),
+                Field('empresa','reference empresa', writable=False, readable=False , label='Empresa'),
+                Field('projeto','reference projeto', writable=False, readable=False , label='Projeto'),
                 Field('data_cheque', 'date', label="Data",notnull=True, default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),
                 Field('banco', 'string', label='Banco/AG',requires = IS_UPPER()),
                 Field('conta', 'string', label='Conta/Nº',requires = IS_UPPER()),
@@ -13,11 +14,12 @@ db.define_table('cheque',
 db.define_table('pagamento',
                 Field('empresa','reference empresa', label='empresa'),
                 Field('data_vencimento', 'date', label="Data Vencimento",notnull=True, default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),
+                Field('data_recebimento', 'date', label="Data Recebimento",notnull=True, default=request.now, requires = IS_DATE(format=('%d-%m-%Y'))),
                 Field('descricao', 'string', label='Descrição',requires = IS_UPPER()),
                 Field('valor', 'double', writable=True, readable=True , notnull=True, default=0),
                 Field('link', 'string', label='Link Recebimento',requires = IS_UPPER()),
                 Field('observacao', 'text', label='Observação', writable=True, readable=True,requires = IS_UPPER()),
-                Field('quitado', 'boolean', writable=True, readable=True, default=False),
+                Field('quitado', 'boolean', writable=True, readable=True, default=True),
                 format='%(descricao)s')
 
 db.define_table('transporte',

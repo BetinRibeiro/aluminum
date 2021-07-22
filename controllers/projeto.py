@@ -44,6 +44,9 @@ def acesso_projeto():
     if usuario_empresa:
       if (usuario_empresa.tipo=="Cobrador"):
         redirect(URL('default','index'))
+      elif((usuario_empresa.tipo=="Chefe")):
+        if projeto.auth_user!=auth.user.id:
+          redirect(URL('default','index'))
     usuario=auth.user
     #if (usuario.id==1):
         #redirect(URL('usuario','betinho_acesso',args=projeto.id))

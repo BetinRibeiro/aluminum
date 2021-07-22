@@ -70,6 +70,7 @@
               <thead>
                 <tr>
                   <th scope="col">Código</th>
+                  <th scope="col">Apelido</th>
                   <th scope="col">Nome</th>
                   <th scope="col">Débito</th>
                   <th scope="col">Acessar</th>
@@ -80,15 +81,22 @@
                 <tr>
                   <th scope="row">
                     
+                    <a class="" href="{{=URL('alterar_estatus',args=row.id)}}">
                 {{if row.bloqueado:}}
                 <i class="fa fa-circle fa-fw text-danger"></i>
                   {{else:}}
                 <i class="fa fa-circle fa-fw text-success"></i>
                   {{pass}}
+                    </a>
                     <a class="" href="{{=URL('alterar',args=row.id)}}">
                       {{=row.id+100}}
                     </a>
                   </th>
+                  {{if not row.apelido:}}
+                  {{row.apelido=row.nome}}
+                  {{row.update_record()}}
+                  {{pass}}
+                  <td>{{=row.apelido}}</td>
                   <td>{{=row.nome}}</td>
                   <td>R$ {{="{:,.2f}".format(round(row.debito,2)).replace(",",".")}}</td>
                   <td><a class="" href="{{=URL('listar_projetos_vendedor',args=row.id)}}">

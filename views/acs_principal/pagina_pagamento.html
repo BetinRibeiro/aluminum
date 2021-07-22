@@ -19,7 +19,7 @@
     </div>
   </div>
       <div class="row">
-        <div class="col-lg-4 col-md-6 p-3">
+        <div class="col-lg-6 col-md-6 p-3">
           <div class="card bg-light">
             <div class="card-body p-4">
               <div class="row">
@@ -32,7 +32,25 @@
               </div>
               <p class="my-3">Sem taxas</p>
               <p class="my-3">Email Pix - <b>usbetin@gmail.com </b><br>(Rogoberto R. da Silva) <br>banco - Pagseguro Internet S.A.</p>
+              
+              {{if pagamento.empresa==14:}}
               <ul class="pl-3">
+                <li>{{=diferenca.days}} Dias de atraso</li>
+                <li>Referência 10/07 à 10/08/2021</li>
+                <li>10 Logins de Acesso</li>
+                <li>
+                  <b>Valor total - R$ 500,00</b>
+              </li>
+                {{valor_original=empresa.quant_usuarios*50}}
+                {{desconto=valor_original-pagamento.valor}}
+<!--                 {{if desconto>0:}}
+                 <li>
+                  <b>Desconto - R$ {{="{:,.2f}".format(round(desconto,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
+              </li>
+                {{pass}} -->
+              </ul> 
+              {{else:}}
+               <ul class="pl-3">
                 <li>{{=diferenca.days}} Dias de atraso</li>
                 <li>Referência {{=pagamento.data_vencimento.strftime('%d/%m')}} à {{=futuro.strftime('%d/%m/%Y')}}</li>
                 <li>{{=empresa.quant_usuarios}} Logins à R$ 50,00</li>
@@ -46,11 +64,13 @@
                   <b>Desconto - R$ {{="{:,.2f}".format(round(desconto,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
               </li>
                 {{pass}}
-              </ul> <a class="btn btn-primary mt-3" href="#">Confirmação Automatica</a>
+              </ul> 
+              {{pass}}
+              <a class="btn btn-primary mt-3" href="#">Confirmação Automatica</a>
             </div>
           </div>
         </div>
-        <div class="col-lg-4 col-md-6 p-3">
+        <div class="col-lg-6 col-md-6 p-3">
           <div class="card bg-light">
             <div class="card-body p-4">
               <div class="row">
@@ -58,31 +78,44 @@
                   <h5 class="mb-0">Boleto Bancário</h5>
                 </div>
                 <div class="col-4 text-right">
-                  <h6 class="mb-0"> <b>R$ {{="{:,.2f}".format(round(valor_original,2)).replace(".","#").replace(",",".").replace("#",".")}}</b> </h6>
+                  <h6 class="mb-0"> <b>R$ {{="{:,.2f}".format(round(pagamento.valor,2)).replace(".","#").replace(",",".").replace("#",".")}}</b> </h6>
                 </div>
               </div>
-              <p class="my-3">Sem Desconto</p>
+              <p class="my-3">Sem Taxas</p>
+              <p class="my-3">Banco 323 Mercado Pago, Ag 0001, conta 116.709.594.5-2, Rogoberto Ribeiro da Silva.</p>
+              {{if pagamento.empresa==14:}}
               <ul class="pl-3">
                 <li>{{=diferenca.days}} Dias de atraso</li>
-                <li>Referência {{=pagamento.data_vencimento.strftime('%d/%m')}} à {{=futuro.strftime('%d/%m/%Y')}}</li>
-                <li>{{=empresa.quant_usuarios}} Logins à R$ 50,00</li>
-                {{valor_original=empresa.quant_usuarios*50}}
+                <li>Referência 10/07 à 10/08/2021</li>
+                <li>10 Logins de Acesso</li>
                 <li>
-                  <b>Valor total - R$ {{="{:,.2f}".format(round(valor_original,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
+                  <b>Valor total - R$ 500,00</b>
               </li>
+                {{valor_original=empresa.quant_usuarios*50}}
                 {{desconto=valor_original-pagamento.valor}}
+<!--                 {{if desconto>0:}}
                  <li>
-                  <b>Desconto - R$ {{="{:,.2f}".format(round(0,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
+                  <b>Desconto - R$ {{="{:,.2f}".format(round(desconto,2)).replace(".","#").replace(",",".").replace("#",".")}}</b>
               </li>
-              </ul>
+                {{pass}} -->
+                
+              </ul> 
+              {{if pagamento.empresa==14:}}
+              <a class="btn btn-primary mt-3" href="https://mpago.la/1PoeBZN">Confirmação Automatica</a>
+              {{else:}}
+              <a class="btn btn-primary mt-3" href="https://mpago.la/1PoeBZN">Confirmação Automatica</a>
+              {{pass}}
+              {{else:}}
               {{if pagamento.empresa==22:}}
               <a class="btn btn-primary mt-3" href="https://pag.ae/7XgREw7w2">Confirmação Automatica</a>
               {{else:}}
-              <a class="btn btn-primary mt-3 disabled" href="#">Confirmação Automatica</a>
+              <a class="btn btn-primary mt-3" href="https://mpago.la/1PoeBZN">Confirmação Automatica</a>
+              {{pass}}
               {{pass}}
             </div>
           </div>
         </div>
+        {{if False:}}
         <div class="col-lg-4 col-md-6 p-3">
           <div class="card bg-light">
             <div class="card-body p-4">
@@ -115,6 +148,7 @@
             </div>
           </div>
         </div>
+        {{pass}}
       </div>
     </div>
   </div>

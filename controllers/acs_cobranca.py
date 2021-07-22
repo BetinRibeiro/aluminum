@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from datetime import date
 import datetime
 @auth.requires_login()
 def index():
@@ -133,7 +133,7 @@ def alterar_pessoa():
 def definir_cobrador():
     sub_venda = db.sub_venda(request.args(0, auth.user))
     projeto = db.projeto(sub_venda.projeto)
-    rows = db(db.usuario_empresa.empresa==projeto.empresa).select()
+    rows = db((db.usuario_empresa.empresa==projeto.empresa)&(db.usuario_empresa.tipo=="Cobrador")).select()
     return locals()
 
 @auth.requires_login()
@@ -307,3 +307,23 @@ def alterar_comissao_cobranca():
         if not response.flash:
             response.flash = 'Preencha o formulário!'
     return dict(form=form)
+def relatorio_analise():
+    sub_venda = db.sub_venda(request.args(0, cast=int))
+    data_quitacao = date.fromordinal(sub_venda.data_inicio_cobranca.toordinal()+31)
+    total_recebimento=db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Recebimento")&(db.registro_cobranca.data_inicio<=data_quitacao)).count()
+    if total_recebimento>0:
+        sum = db.registro_cobranca.valor.sum()
+        valor_recebimento = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Recebimento")&(db.registro_cobranca.data_inicio<=data_quitacao)).select(sum).first()[sum]
+    else:
+        valor_recebimento = 0
+    total_deposito=db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Deposito")&(db.registro_cobranca.data_inicio<=data_quitacao)).count()
+    if total_deposito>0:
+        sum = db.registro_cobranca.valor.sum()
+        valor_depositos = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Deposito")&(db.registro_cobranca.data_inicio<=data_quitacao)).select(sum).first()[sum]
+    else:
+        valor_depositos = 0
+    lista_recebimento = []
+    rows = db((db.registro_cobranca.sub_venda==sub_venda.id)&(db.registro_cobranca.tipo=="Recebimento")).select(orderby=db.registro_cobranca.data_inicio)
+    for row in rows:
+      lista_recebimento.append(row.valor)
+    return locals()

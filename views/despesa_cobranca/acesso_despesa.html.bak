@@ -19,9 +19,11 @@
               </a>
             </div>
             <div class="col-md-6 col-6 my-1" >
+            {{if (auth.user.id==sub_venda.auth_user):}}
               <a class="btn btn-outline-success btn-block" href="{{=URL('criar_desp', args=[classe_despesa_cobranca.id])}}">
               <i class="fa fa-plus fa-1x"></i>
               </a>
+              {{pass}}
             </div>
             <div class="col-md-6 col-6 my-1" >
               {{if classe_despesa_cobranca.descricao=="DIÁRIAS" and len(rows)>0:}}
@@ -54,12 +56,12 @@
 {{if not diferenca.days>2:}}
               <td>
                 <a  class="btn btn-outline-primary text-left btn-block"  href="{{=URL('alterar_desp', args=[row.id])}}">
-                  {{=row.descricao}} (Conferido)
+                  {{=row.descricao}}
                 </a>
               </td>
               {{else:}}
               <td>
-                  {{=row.descricao}}
+                  {{=row.descricao}} (Conferido)
               </td>
               {{pass}}
 

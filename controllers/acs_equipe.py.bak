@@ -235,6 +235,10 @@ def vincular_vendedor():
     db.vendedor.projeto.readable = False
     db.vendedor.projeto.writable = False
     
+
+    db.vendedor.nome.readable = False
+    db.vendedor.nome.writable = False
+    
     db.vendedor.comissao_cobranca.readable = False
     db.vendedor.comissao_cobranca.writable = False
     
@@ -318,8 +322,8 @@ def alterar_comissoes_vendedor():
   db.vendedor.nome.readable = True
   db.vendedor.vale_saida.readable = False
   db.vendedor.vale_saida.writable = False
-  db.vendedor.descricao.readable = False
   db.vendedor.descricao.writable = False
+  db.vendedor.comissao_venda.writable = False
   db.vendedor.comissao_cobranca.readable = True
   db.vendedor.comissao_cobranca.writable = True
   db.vendedor.total_descontado.readable = True

@@ -38,14 +38,10 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
   {{pass}}
   <hr>
 <!-- caso tenha cobranças -->
   {{if len(rowscob)>0:}}
-  <div class="py-5">
-    <div class="container">
       <div class="row">
         <div class="col-md-12" >
           <div class="table-responsive" >

@@ -8,7 +8,7 @@
       </div>
      <div class="row">
         <div class="col-md-12">
-          <a class="btn btn-link" href="{{=URL('acs_principal','index', args=projeto.empresa*12)}}" style="color:#3b5998">
+          <a class="btn btn-link" href="{{=URL('acs_principal','index', args=empresa.id*12)}}" style="color:#3b5998">
                  <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar
              </a>
           <a class="btn btn-link" href="{{=URL('cadastrar_transporte', args=empresa.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-plus"></i> Adicionar novo Transporte</a>

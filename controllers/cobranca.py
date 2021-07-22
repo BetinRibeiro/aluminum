@@ -174,8 +174,9 @@ def alterar_registro():
     response.view = 'generic.html' # use a generic view
     registro_cobranca = db.registro_cobranca(request.args(0, cast=int))
     tipo = request.args(1)
-    if 'cfrd' in registro_cobranca.descricao:
-      redirect(URL('lista_registros', args=[registro_cobranca.sub_venda,tipo]))
+    if registro_cobranca.descricao:
+      if 'cfrd' in registro_cobranca.descricao:
+        redirect(URL('lista_registros', args=[registro_cobranca.sub_venda,tipo]))
     sub_venda = db.sub_venda(registro_cobranca.sub_venda)
     db.registro_cobranca.id.readable = False
     db.registro_cobranca.id.writable = False

@@ -20,9 +20,11 @@
             </a>
           </div>
           <div class="col-md-6 col-6">
+            {{if (usuario.id==sub_venda.auth_user):}}
             <a  class="btn btn-outline-success btn-block"  href="{{=URL('inserir_registro', args=[sub_venda.id,tipo])}}">
               <i class="fa  fa-plus fa-1x"></i>
             </a>
+            {{pass}}
           </div>
         </div>
       </div>
@@ -65,16 +67,12 @@
             <td>{{=row.data_inicio.strftime('%d/%m/%Y')}}</td>
             <td>{{=row.descricao.replace('cfrd','')}}</td>
             <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
-            {{if not (dataontem>=row.data_inicio) or(usuario.id!=sub_venda.auth_user):}}
-            {{if (usuario.id!=101234567):}}
+            {{if not (dataontem>=row.data_inicio)and (usuario.id==sub_venda.auth_user):}}
             <td>
               <a  class="btn btn-outline-warning btn-block"  href="{{=URL('alterar_registro', args=[row.id,tipo])}}"><i class="fa fa-exchange" ></i>
               </a>
             </td>
-            {{else:}}
-            <td>
-              <a  class="btn btn-outline-success btn-block"  href="#"><i class="fa fa-check-square-o" ></i></a></td>
-            {{pass}}
+            
             {{else:}}
             <td>
               <a  class="btn btn-outline-success btn-block"  href="#"><i class="fa fa-check-square-o" ></i>
@@ -137,7 +135,7 @@
 </div>
 {{pass}}
 {{if not consul:}}
-{{if (tipo=="Recebimento")and(sub_venda.total_recebido=total):}}
+{{if (tipo=="Recebimento")and(sub_venda.total_recebido!=total):}}
 {{sub_venda.total_recebido=total}}
 {{sub_venda.update_record()}}
 {{pass}}

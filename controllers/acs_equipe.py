@@ -322,8 +322,9 @@ def alterar_comissoes_vendedor():
   db.vendedor.nome.readable = True
   db.vendedor.vale_saida.readable = False
   db.vendedor.vale_saida.writable = False
-  db.vendedor.descricao.readable = False
   db.vendedor.descricao.writable = False
+  db.vendedor.descricao.readable = False
+  db.vendedor.comissao_venda.writable = False
   db.vendedor.comissao_cobranca.readable = True
   db.vendedor.comissao_cobranca.writable = True
   db.vendedor.total_descontado.readable = True

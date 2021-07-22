@@ -24,7 +24,7 @@ def atualizar_projetos():
 
   
 @auth.requires_login()
-def relacao_individual():
+def prestacao_individual():
   projeto = db.projeto(request.args(0, cast=int))
   rows = db(db.vendedor.projeto == request.args(0, cast=int)).select(orderby=~db.vendedor.total_vendas)
   return locals()
@@ -44,6 +44,9 @@ def acesso_projeto():
     if usuario_empresa:
       if (usuario_empresa.tipo=="Cobrador"):
         redirect(URL('default','index'))
+      elif((usuario_empresa.tipo=="Chefe")):
+        if projeto.auth_user!=auth.user.id:
+          redirect(URL('default','index'))
     usuario=auth.user
     #if (usuario.id==1):
         #redirect(URL('usuario','betinho_acesso',args=projeto.id))
@@ -112,10 +115,10 @@ def investimento():
     projeto = db.projeto(request.args(0, cast=int))
     return locals()
 
-@auth.requires_login()
-def prestacao_individual():
-    projeto = db.projeto(request.args(0, cast=int))
-    rows_vendedor = db(db.vendedor.projeto == projeto.id).select(orderby=~db.vendedor.total_vendas)
-    rows_sub = db(db.sub_venda.projeto == projeto.id).select(orderby=db.sub_venda.data_inicio_cobranca)
-    rows_vendas = db(db.venda).select(orderby=db.venda.vendedor)
-    return locals()
+# @auth.requires_login()
+# def prestacao_individual():
+#     projeto = db.projeto(request.args(0, cast=int))
+#     rows_vendedor = db(db.vendedor.projeto == projeto.id).select(orderby=~db.vendedor.total_vendas)
+#     rows_sub = db(db.sub_venda.projeto == projeto.id).select(orderby=db.sub_venda.data_inicio_cobranca)
+#     rows_vendas = db(db.venda).select(orderby=db.venda.vendedor)
+#     return locals()

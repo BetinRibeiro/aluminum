@@ -30,7 +30,7 @@ def index():
         redirect(URL(args=[paginas]))
     limites = (paginacao*(pagina-1), (paginacao*pagina))
     rows = db(db.funcionario_empresa.empresa==empresa.id).select(
-      limitby=limites,orderby=db.funcionario_empresa.bloqueado|~db.funcionario_empresa.id
+      limitby=limites,orderby=db.funcionario_empresa.bloqueado|db.funcionario_empresa.nome
       )
     return  locals()
   
@@ -76,7 +76,7 @@ def listar_projetos_vendedor():
         redirect(URL(args=[paginas]))
     limites = (paginacao*(pagina-1), (paginacao*pagina))
     rows = db(db.vendedor.funcionario_empresa==funcionario_empresa.id).select(
-      limitby=limites,orderby=~db.vendedor.id
+      limitby=limites,orderby=db.vendedor.id
       )
     return  locals()
 def alterar():
@@ -120,3 +120,11 @@ def vincular_vendedor():
     else:
         response.flash = 'Preencha o formulario'
     return dict(form=form)
+def alterar_estatus():
+    funcionario_empresa = db.funcionario_empresa(request.args(0, cast=int))
+    if funcionario_empresa.bloqueado==True:
+      funcionario_empresa.bloqueado=False
+    else:
+      funcionario_empresa.bloqueado=True
+    funcionario_empresa.update_record()
+    return redirect(URL('index', args=funcionario_empresa.empresa))

@@ -28,7 +28,7 @@
             <th scope="col">Descrição</th>
             <th scope="col">Valor</th>
             <th scope="col">Status</th>
-            {{if usuario.id==1456:}}
+            {{if usuario.id==1:}}
             <th scope="col">Opções</th>
             <th scope="col">Link Pagamento</th>
             {{else:}}
@@ -57,15 +57,15 @@
             </script>
             <td>Pendente</td>
             {{pass}}
-            {{if usuario.id==1456:}}
+            {{if usuario.id==1:}}
             <td>
-              <a class="btn btn-link" href="{{=URL('alterar_pagamento',  args=row.id)}}" style="color:#3b5998" >
+              <a class="btn btn-link" target="_blank" href="{{=URL('alterar_pagamento',  args=row.id)}}" style="color:#3b5998" >
                 <i class="fa fa-fw fa-1x py-1 fa-usd"></i>
               </a>
             </td>
              {{if row.quitado:}}
             <td>
-              <a class="btn btn-link text-success" href="#" style="color:#3b5998" >
+              <a class="btn btn-link text-success" href="{{=URL('recibo_pagamento',  args=row.id)}}" style="color:#3b5998" >
                 <i class="fa fa-fw fa-1x py-1 fa-hand-o-right"></i> 
               </a>
             </td>
@@ -79,7 +79,7 @@
             {{else:}}
             {{if row.quitado:}}
             <td>
-              <a class="btn btn-link text-success" href="#" style="color:#3b5998" >
+              <a class="btn btn-link text-success" href="{{=URL('recibo_pagamento',  args=row.id)}}" style="color:#3b5998" >
                 <i class="fa fa-fw fa-1x py-1 fa-hand-o-right"></i> 
               </a>
             </td>

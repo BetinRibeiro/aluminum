@@ -1,0 +1,271 @@
+{{extend 'layout.html'}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+{{metade_cobranca=0}}
+{{if sub_venda.total_venda_praso>0:}}
+{{metade_cobranca=sub_venda.total_venda_praso/2}}
+{{pass}}
+      <div class="row my-2">
+        <div class="col-md-12">
+          <h2 class="mb-3">Analise de Cobrança</h2>
+          <p>{{=sub_venda.primeira_cidade}}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-4"><a class="btn btn-primary my-1 btn-block" href="{{=URL('relatorio_cobranca', args=sub_venda.id)}}"><i class="fa fa-arrow-left fa-fw"></i>&nbsp;Voltar</a></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4"></div>
+          </div>
+        </div>
+        <div class="col-md-6"></div>
+      </div>
+      <div class="row text-left">
+        <div class="col-md-6 my-2">
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">Valor da Cobrança</h6>
+                <small class="text-muted">
+                  Data Inicial {{=sub_venda.data_inicio_cobranca.strftime('%d/%m/%Y')}}
+                </small>
+              </div>
+              <span class="text-muted">
+                R$ {{="{:,.2f}".format(round(sub_venda.total_venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}
+              </span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">
+                  <b>Recebido Primeira</b>
+                </h6>
+                <small class="text-muted">
+                  Quitação {{=data_quitacao.strftime('%d/%m/%Y')}}
+                </small>
+              </div>
+              <div class="text-right">
+                <h6 class="text-muted">
+                R$ {{="{:,.2f}".format(round(valor_recebimento,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </h6>
+                <small class="text-muted">
+                  {{if (metade_cobranca>0)and(valor_recebimento>0):}}
+                  {{percentual_recebido_primeira = valor_recebimento/metade_cobranca}}
+                  {{="{:,.1f}".format(round(percentual_recebido_primeira*100,1))}}%
+                  {{else:}}
+                  0%
+                  {{pass}}
+                </small>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">
+                  <b>Restante</b>
+                </h6>
+                <small class="text-muted">
+                  ##
+                </small>
+              </div>
+              <div class="text-right">
+                <h6 class="text-muted">
+                  {{restante=sub_venda.total_venda_praso-valor_recebimento}}
+                R$ {{="{:,.2f}".format(round(restante,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </h6>
+                <small class="text-muted">
+                  #
+                </small>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">
+                  <b>Recebido Quitação</b>
+                </h6>
+                <small class="text-muted">
+                  Data Final {{=sub_venda.data_final_cobranca.strftime('%d/%m/%Y')}}
+                </small>
+              </div>
+              <div class="text-right">
+                <h6 class="text-muted">
+                  {{recebido_quitacao = sub_venda.total_recebido-valor_recebimento}}
+                R$ {{="{:,.2f}".format(round(recebido_quitacao,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </h6>
+                <small class="text-muted">
+                  {{if (restante>0)and(recebido_quitacao>0):}}
+                  {{percentual_recebido_quitacao = recebido_quitacao/restante}}
+                  {{="{:,.1f}".format(round(percentual_recebido_quitacao*100,1))}}%
+                  {{else:}}
+                  0%
+                  {{pass}}
+                </small>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0">
+                  Total Recebimento
+                </h6>
+                <small>EXAMPLECODE</small>
+              </div>
+              <div class="text-right">
+                <h6 class="text-muted">
+                R$ {{="{:,.2f}".format(round(sub_venda.total_recebido,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </h6>
+                <small class="text-muted">
+                  {{if (sub_venda.total_venda_praso>0)and(sub_venda.total_recebido>0):}}
+                  {{percentual_recebido = sub_venda.total_recebido/sub_venda.total_venda_praso}}
+                  {{="{:,.1f}".format(round(percentual_recebido*100,1))}}%
+                  {{else:}}
+                  0%
+                  {{pass}}
+                </small>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between"> <span>#</span> <b>#</b> </li>
+          </ul>
+        </div>
+        <div class="col-md-6 my-2">
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">Valor da Cobrança</h6>
+                <small class="text-muted">
+                  Data Inicial {{=sub_venda.data_inicio_cobranca.strftime('%d/%m/%Y')}}
+                </small>
+              </div>
+              <span class="text-muted">
+                R$ {{="{:,.2f}".format(round(sub_venda.total_venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}
+              </span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">
+                  <b>Depósitos da Primeira</b>
+                </h6>
+                <small class="text-muted">
+                  Quitação {{=data_quitacao.strftime('%d/%m/%Y')}}
+                </small>
+              </div>
+              <div class="text-right">
+                <h6 class="text-muted">
+                R$ {{="{:,.2f}".format(round(valor_depositos,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </h6>
+                <small class="text-muted">
+                  {{if (metade_cobranca>0)and(valor_depositos>0):}}
+                  {{percentual_deposito_primeira = valor_depositos/metade_cobranca}}
+                  {{="{:,.1f}".format(round(percentual_deposito_primeira*100,1))}}%
+                  {{else:}}
+                  0%
+                  {{pass}}
+                </small>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">
+                  <b>Restante</b>
+                </h6>
+                <small class="text-muted">
+                  #
+                </small>
+              </div>
+              <div class="text-right">
+                <h6 class="text-muted">
+                  {{restante=sub_venda.total_venda_praso-valor_recebimento}}
+                R$ {{="{:,.2f}".format(round(restante,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </h6>
+                <small class="text-muted">
+                 #
+                </small>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <div>
+                <h6 class="my-0">
+                  <b>Depósitos Quitação</b>
+                </h6>
+                <small class="text-muted">
+                  Data Final {{=sub_venda.data_final_cobranca.strftime('%d/%m/%Y')}}
+                </small>
+              </div>
+              <div class="text-right">
+                <h6 class="text-dark">
+                  {{depositos_quitacao = sub_venda.total_deposito-valor_depositos}}
+                R$ {{="{:,.2f}".format(round(depositos_quitacao,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </h6>
+                <small class="text-muted">
+                  {{if (restante>0)and(depositos_quitacao>0):}}
+                  {{percentual_depositos_quitacao = depositos_quitacao/restante}}
+                  {{="{:,.1f}".format(round(percentual_depositos_quitacao*100,1))}}%
+                  {{else:}}
+                  0%
+                  {{pass}}
+                </small>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0">
+                  Total Depósitos
+                </h6>
+                <small>EXAMPLECODE</small>
+              </div>
+              <div class="text-right">
+                <h6 class="text-muted">
+                R$ {{="{:,.2f}".format(round(sub_venda.total_deposito,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </h6>
+                <small class="text-muted">
+                  {{if (sub_venda.total_venda_praso>0)and(sub_venda.total_deposito>0):}}
+                  {{percentual_depositos = sub_venda.total_deposito/sub_venda.total_venda_praso}}
+                  {{="{:,.1f}".format(round(percentual_depositos*100,1))}}%
+                  {{else:}}
+                  0%
+                  {{pass}}
+                </small>
+              </div>
+            </li>
+            <li class="list-group-item d-flex justify-content-between"> <span>#</span> <b>#</b> </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 my-1">
+
+        <canvas  id="myChart" width="400" height="220"></canvas>
+
+        </div>
+      </div>
+
+<script>
+    var ctx = document.getElementById('myChart');
+    var dados =  [];
+  cabecalho = [],
+    {{a=0}}
+  {{for row in rows:}}
+  dados.push(parseFloat({{=row.valor}}));
+  {{a+=1}}
+  cabecalho.push(("Dia -"+ {{=(row.data_inicio.day)}}).toString()+"/"+({{=(row.data_inicio.month)}}).toString());
+  {{pass}}
+    var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: cabecalho,
+        datasets: [{
+            label: "Recebimentos",
+            data: dados,
+
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
+<!-- {{=BEAUTIFY(response._vars)}} -->

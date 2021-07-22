@@ -60,7 +60,7 @@
                   <td>R$ {{="{:,.2f}".format(round(row.venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                   {{cobrado=row.total_recebido}}
                   {{venda_praso=row.venda_praso}}
-                  {{if cobrado>0:}}
+                  {{if (cobrado>0)and(venda_praso>0):}}
                     {{percento=cobrado/venda_praso}}
                     <td>{{="{:,.1f}".format(round(percento*100,1)).replace(".",",")}}%</td>
                   {{else:}}

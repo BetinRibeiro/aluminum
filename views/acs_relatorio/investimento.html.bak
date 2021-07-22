@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h5 class="">Provisão de fluxo ( {{=projeto.descricao}} )</h5>
+          <h5 class="">Demonstrativo Projeto( {{=projeto.descricao}} )</h5>
         </div>
       </div>
       <div class="row">
@@ -292,7 +292,7 @@
         </ul>
           {{else:}}
            <li class="list-group-item d-flex justify-content-between bg-light">
-                <span><b>A venda não está finalizada!</b></span>
+                <span class="text-success"><b>A venda não está finalizada!</b></span>
                 <b>###</b>
             </li>
         </ul>

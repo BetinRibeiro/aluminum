@@ -1,0 +1,209 @@
+{{extend 'layout.html'}}
+{{from datetime import date}}
+{{data_final = date.fromordinal(pagamento.data_vencimento.toordinal()+31)}}
+<div class="py-5 text-center">
+    <div class="container">
+      <div class="row">
+        <div class="mx-auto col-md-8">
+          <div class="card">
+            <div class="card-header">Recibo de Pagamento</div>
+            <div class="card-body">
+              <blockquote class="blockquote mb-0">
+                <h4>Aluminum System&nbsp;</h4>
+                <div class="row p-2">
+                  <div class="col-md-6 col-6" >
+                    <h6 class="text-left"><b>{{=pagamento.data_vencimento.strftime('%d/%m/%Y')}}</b></h6>
+                  </div>
+                  <div class="col-md-6 col-6">
+                    <h6 class="text-right"><b>
+                      R$ {{="{:,.2f}".format(round(pagamento.valor,2)).replace(",","#").replace(".",",").replace("#",".")}} </b>
+                    </h6>
+                  </div>
+                </div>
+                <h6><b>Arsenal System</b> declara um recebimento no valor de <b>R$ {{="{:,.2f}".format(round(pagamento.valor,2)).replace(",","#").replace(".",",").replace("#",".")}} </b> na data de <b>{{=pagamento.data_vencimento.strftime('%d/%m/%Y')}}</b> da empresa <b>{{=empresa.nome}}</b>, referênte a nossos serviços de assistencia e consultoria atravez da nossa plataforma <b>Alimuinum System</b>, referênte 30 dias de uso corridos.</h6>
+                <img class="d-block float-right" src="https://uploaddeimagens.com.br/images/003/328/557/full/2021-07-09_17-57.png" width="200">
+                <img class = "d-block float-left"src='https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Frogoberto.pythonanywhere.com%2Faluminum&chs=80x80&choe=UTF-8&chld=L|2' rel='nofollow' alt='qr code'><a href='https://www.qr-code-generator.com' border='0' style='cursor:default'  rel='nofollow'></a>
+                <hr>
+                <footer class="blockquote-footer text-left p-2">Rogoberto Ribeiro&nbsp;</footer>
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<div style="page-break-after: always"></div>
+<div class="py-5 text-justify" >
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h4 class="text-center py-5"><b>Licença de Uso e Atualização de Software</b></h4>
+      </div>
+    </div>
+    <div class="row col-6 ml-auto p-2">
+      <div class="col-md-12">
+        <p class="ml-auto"><b>CONTRATAÇÃO</b> de Empresa para fornecimento de licença de uso do software <b>Aluminum System Cloud</b>, bem como a atualização de suas versões.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p class="">Pelo presente instrumento, de um lado, <b>{{=empresa.nome}}</b> <b>CONTRATANTE</b>, e de outro a empresa <b>ARSENAL SYSTEM</b>, doravante denominada <b>CONTRATADA</b>, resolvem firmar o presente "Contrato de Uso e Atualização de Software”, pelas cláusulas que seguem:</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="border"><b>CLÁUSULA PRIMEIRA - DO OBJETO</b></h5>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+          1.1 O presente <b>CONTRATADA</b> tem como objeto a <b>CONTRATAÇÃO</b> de empresa para fornecimento de <b>Licença de Uso do Software Aluminum System Cloud</b>, bem como a Atualização de suas versões pelo período de vigência do Contrato que vai do dia <b>{{=pagamento.data_vencimento.strftime('%d/%m/%Y')}}</b> ao dia <b>{{=data_final.strftime('%d/%m/%Y')}}</b>, para uso corporativo do <b>CONTRATANTE</b>, podendo fazer uso ou não de até <b>{{=pagamento.quant_logins}} licenças de uso de distribuidos em logins de acesso</b> nesse mesmo periodo.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+         <h5 class="border">
+           <b>CLÁUSULA SEGUNDA - DAS FUNCIONALIDADE</b>
+        </h5>
+        <p class="">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+          2.1 O <b>CONTRATANTE</b>, uma vez assinado o <b>TERMO DE CONTRATAÇÃO</b>, declara ter avaliado as capacidades do software contratado e estar ciente de suas funcionalidades, padrão  de  qualidade  e  adaptabilidade,  bem  como  de  suas  limitações  e  detalhes técnicos, tendo avaliado suas características de maneira completa.
+        <p>
+        <p class="">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+          2.2 Salvo  as  customizações  eventualmente  acordadas  pelas  Partes  no  <b>TERMO CONTRATAÇÃO</b>,   o   <b>CONTRATANTE</b>   reconhece   que   a   <b>CONTRATADA</b>   não   se compromete ou se responsabiliza pela criação e estruturação de novas funcionalidades, bem   como   pela   realização   de   customizações,   desenvolvimentos   e   consultorias solicitadas   pelo   <b>CONTRATANTE</b>,   independentemente   do  motivo  que  ensejou   a solicitação do <b>CONTRATANTE</b>.
+        </p>
+        <p class="">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+          2.3 Qualquer solicitação de desenvolvimento, customização, consultoria, dentre outros serviços   não   abarcados   nos   ANEXOS,   poderão   ser   ou   não   prestados   pela <b>CONTRATADA</b>, de acordo com o critério exclusivo da <b>CONTRATADA</b>. Concordando a <b>CONTRATADA</b>  quanto  a  sua prestação,  tais  serão  objeto  de  Contrato autônomo,  em separado,  podendo  a  <b>CONTRATADA</b>  ceder  a  terceiros  o  direito  da  prestação  destes e/ou outros serviços eventualmente demandados pelo <b>CONTRATANTE</b>, para quem e na forma que lhe convier.
+        <p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="border">
+          <b>CLÁUSULA TERCEIRA – DA LICENÇA DE USO DO SOFTWARE</b>
+        </h5>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+          3.1 O software licenciado pelo presente instrumento são de propriedade única e exclusiva da <b>CONTRATADA</b>, sendo a licença de uso comercializada ao <b>CONTRATANTE</b> pelo prazo determinado de <b>30 (trinta)</b> dias (ou outro prazo indicado no <b>TERMO DE CONTRATAÇÃO</b>) contados da assinatura do <b>TERMO DE CONTRATAÇÃO</b>, para uso de acordo com a legislação brasileira e bons costumes, observado o número máximo de usuários previstos no <b>TERMO DE CONTRATAÇÃO</b>, dentre outras condições.
+        <p/>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+
+          3.2 O direito de uso aqui contratado <b>não poderá ser transferido em nenhuma hipótese</b>, salvo através de consentimento prévio, expresso, específico e por escrito da <b>CONTRATADA</b>.
+        <p/>
+    <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+      3.3 A licença de uso objeto do presente contrato será validada pela CONTRATADA mensalmente, através da liberação mensal de acesso ao sistema especificamente contratado, podendo a CONTRATADA não fornecer o acesso mensal caso for constatada alguma inexecução contratual por parte do CONTRATANTE, a exemplo do atraso no pagamento de qualquer valor previsto no presente Contrato ou no TERMO DE CONTRATAÇÃO.</p>
+
+<p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+  3.4 O CONTRATANTE reconhece que os softwares de propriedade da CONTRATADA têm suas licenças comercializadas sem qualquer caráter de pessoalidade, encomenda e exclusividade, sendo reproduzidos e comercializados em larga escala e de modo uniforme, constituindo tais sistemas verdadeiras “mercadorias”, ressalvados os direitos autorais e propriedade intelectual da CONTRATADA, bem como demais disposições previstas na Lei n.º 9.609/98.
+    </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="border"><b>CLÁUSULA QUARTA - DOS DIREITOS AUTORAIS DO SOFTWARE</b></h5>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+  4.1 É expressamente vedado ao CONTRATANTE, na pessoa de seus representantes, prepostos, empregados, gerentes, procuradores, sucessores ou terceiros interessados:
+    </p>
+      <div class="border m-1 p-2 ">
+          <p class=" pl-4"><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            4.1.1 Copiar, alterar, sublicenciar, vender, dar em locação, comodato ou garantia, doar, alienar de qualquer forma, transferir, emprestar ou ceder, total ou parcialmente, sob quaisquer modalidades, gratuita ou onerosamente, provisória ou permanentemente, o software, nem permitir seu uso por terceiros, a qualquer título, assim como seus manuais ou quaisquer informações relativas ao mesmo;
+              </p>
+          <p class=" pl-4"><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            4.1.2 Revelar, duplicar, copiar ou reproduzir, autorizar ou permitir o uso ou dar conhecimento a terceiros do material didático relacionado ao software, excetuando-seo necessário treinamento de seus funcionários para uso do softwareem relação ao objeto deste instrumento, ficando, neste caso, responsável pela utilização indevida destas informações.
+              </p>
+          </div>
+          <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+            4.2 O CONTRATANTE reconhece, para os fins de direito, a propriedade intelectual e direitos autorais do software pertencem exclusivamente à CONTRATADA, razão pela qual é vedado ao CONTRATANTE promover qualquer tipo de modificação, customização, desenvolvimento, manutenção, suporte, treinamento, implantação e consultoria dos softwares, dentre outros serviços, por conta própria ou mediante empresa distinta da CONTRATADA.
+              </p>
+          <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+            4.3 O CONTRATANTE reconhece que a não observância de quaisquer destas obrigações configurará violação da legislação aplicável ao direito autoral e à utilização de software, submetendo-se, o CONTRATANTE e seus representantes legais, prepostos, empregados, gerentes, procuradores, sucessores e/ou terceiros interessados, às sanções cíveis e penais cabíveis, previstas em Lei e neste instrumento.
+              </p>
+          <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+            4.4 A utilização do sistema não abarca seus respectivos códigos fontes que, por terem natureza estritamente confidencial, fica o CONTRATANTE impedido de acessar, revelar, reproduzir e/ou modificar os mesmos, sob pena de se sujeitar às sanções cíveis e criminais cabíveis, além das penalidades previstas no presente Contrato. </p>
+              </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+<h5 class="border"><b>CLÁUSULA QUINTA – DOS SERVIÇOS DE HOSPEDAGEM, MANUTENÇÃO E SUPORTE</b></h5>
+<p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+  5.1 Hospedagem - Locação do servidor de banco de dados, servidor de aplicação, dispositivos eletrônicos, mecanismos de comunicação e demais equipamentos necessários para disponibilizar o site na Internet.</p>
+<p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+  5.2 Cópias de Segurança - Realização de cópias de segurança do sistema 1 (uma) vez por semana em local seguro, com o objetivo de restabelecer o site às condições anteriores de funcionamento, caso ocorra algum incidente.</p>
+<p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+  5.3 A manutenção será prestada pela CONTRATADA na forma remota (via internet/telefone), a responsabilidade de treinar e acompanhar os claboradores da empresa é do responsvel gerencial do CONTRATANTE, caso a CONTRATADA julgue necessario treinamento poderá ser feito com agendamento prévio no escritorio localizado na rua todos os santos 1507, centro, Juazeiro do norte CE, ou com um dos nossos consultores em toda região metropolitana do cariri, o tempo disponibilizado por cada consultor não poderá ultrapassar 10hrs durante o mês, e comtemplará:</p>
+<div class="border m-1 p-2">
+  <p class=" pl-4"><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    5.3.1 A correção de falhas no software;</p>
+  <p class=" pl-4"><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    5.3.2 Questões relacionadas ao uso operacional do software contratado;</p>
+  <p class=" pl-4"><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    5.3.3 Apoio para identificar e verificar as causas de possíveis erros no software contratado;</p>
+  <p class=" pl-4"><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    5.3.4 Orientação sobre soluções alternativas para os erros vislumbrados;</p>
+  <p class=" pl-4"><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    5.3.5 Informações sobre erros previamente identificados pelo CONTRATANTE e devidamente comunicados, por escrito, à CONTRATADA para solução dos mesmos.
+  </p>
+</div>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+          5.4 A manutenção e o suporte ficará à disposição do CONTRATANTE de 09:00 hs às 18:00 hs, de segunda-feira à sexta-feira, através do telefone (88) 98112-6816 no TERMO DE CONTRATAÇÃO;
+        </p>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+          5.5 A CONTRATADA poderá, a seu exclusivo critério, não fornecer a garantia de manutenção ou suporte, caso o CONTRATANTE não atualize tecnologicamente seus equipamentos e sistema operacional, os quais não suportem as evoluções tecnológicas do software, ou ainda, caso for vislumbrada alguma espécie de inexecução contratual por parte do CONTRATANTE.
+        </p>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+          5.6 De acordo com a Lei n.º 9.609/98 (Lei de Software), no seu Artigo 8º, a garantia de manutenção ou suporte oferecido será prestada durante o prazo de vigência do presenteContrato, ressalvado a CONTRATADA não oferecer a garantia de manutenção ou suporte, na hipótese do CONTRATANTE optar por não atualizar a versão do software.
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="border"><b>CLÁUSULA SEXTA – DOS PREÇOS, FORMAS E CONDIÇÕES DE PAGAMENTO</b></h5>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+          6.1  Será cobrado pela CONTRATADA o valor de R$ 50,00 (CINQUENTA REAIS) para cada licença fornecida a cada usuário do sistema, para o uso da plataforma durante o mês CORRENTE do  pagamento referênte
+        </p>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+          6.2 Os serviços descritos nas cláusula TERCEIRA, licença de uso de software, e na cláusula QUINTA, hospedagem, manutenção e suporte serão denominados nesta cláusula, visando a facilidade de entendimento, de serviços contínuos;
+        </p>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+          6.3 O atraso no pagamento de qualquer quantia prevista no TERMO DE CONTRATAÇÃO e/ou da remuneração/hora adicional, acarretará na obrigação do CONTRATANTE pagar a CONTRATADA, além da quantia devida, multa moratória de 2% (dois por cento), juros de mora de 1% (um por cento) ao mês, despesas bancárias e eventuais despesas judiciais e extrajudiciais, mais correção monetária com base na variação do INPC do período, ou outro índice que vier a substituí-lo, sem prejuízo do direito à indenização por eventuais perdas e danos suplementares.
+        </p>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+          6.4 O atraso no pagamento de qualquer quantia prevista neste Contrato ou no TERMO DE CONTRATAÇÃO, depois de transcorridos 15 (quinze) dias da data do respectivo vencimento, poderá implicar, a critério da CONTRATADA e independentemente de prévia notificação ao CONTRATANTE, na suspensão automática da licença de uso do software especificamente contratado, bem como os serviços correspondentes, sem prejuízo de demais penalidades previstas em Lei e no presente Contrato.
+        </p>
+        <p class=" pl-4"><i class="fa fa-angle-double-right" aria-hidden="true"></i>
+          6.4.1 O período de suspensão não ensejará direito a qualquer tipo de compensação ao CONTRATANTE, que fica responsável pelos pagamentos avençados e demais obrigações contratuais, inclusive durante o período de suspensão.
+        </p>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+          6.5  Para a cobrança dos valores descritos neste contrato, a CONTRATADA poderá a disponibilização do endereço PIX, boleto bancário, débito em conta corrente ou qualquer outra forma de cobrança, bem como, em caso de inadimplemento implicará no cancelamento automático do contrato. 
+        </p>
+  </div>
+</div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="border"><b>CLÁUSULA SÉTIMA – DA CONFIDENCIALIDADE</b></h5>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+         7.1 As partes, por si, seus representantes, prepostos, empregados, gerentes ou procuradores, obrigam-se a manter sigilo sobre quaisquer informações confidenciais. Para os fins deste termo, a expressão "Informações Confidenciais" significa toda e qualquer informação verbal ou escrita obtida, direta ou indiretamente, pelas partes, em função da presente contratação, bem como informações sigilosas relativas ao negócio jurídico pactuado. Tais obrigações permanecerão em vigor mesmo após a rescisão ou término do contrato.
+        </p>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+        7.2 A confidencialidade deixa de ser obrigatória, se comprovado documentalmente que as informações confidenciais: (i) Estavam no domínio público na data da celebração do presente contrato; (ii) Tornaram-se parte do domínio público depois da data de celebração do presente contrato, por razões não atribuíveis à ação ou omissão das partes; (iii) Foram reveladas em razão de qualquer ordem, decreto, despacho, decisão ou regra emitida por qualquer órgão judicial, legislativo ou executivo que imponha tal revelação.
+</p>
+  </div>
+</div>
+    <div class="row">
+      <div class="col-md-12">
+        <h5 class="border"><b>CLÁUSULA OITAVA – DAS DISPOSICÕES FINAIS</b></h5>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+         8.1 No  caso  específico  de  desrespeito  aos  direitos  autorais  e  de  propriedade intelectual  da  CONTRATADA,  os  valores  previstos  no  item  anterior  serão  majorados para 10 (dez) vezeso valor total da licença de uso do software prevista no TERMO DE CONTRATAÇÃO, levando-se em consideração todo o período de vigência contratual, valores  estes  assim  considerados  ainda  como  indenização  mínima  a  ser  paga  pelo CONTRATANTE,  facultando-se  ainda  à CONTRATADA  o  direito  de  pleitear  perdas  e danos  suplementares,  bem  como  demais  penalidades  previstas  em  lei  e  neste instrumento.
+</p>
+        <p class=""><i class="fa fa-angle-right" aria-hidden="true"></i>
+          8.2 O CONTRATANTE poderá a qualquer momento encerrar o uso da plataform sem qualquer dano, desde que tenha feito o backup de seus dados e esteja em dias com os pagamentos.
+        </p>
+  </div>
+</div><img class="d-block float-right" src="https://uploaddeimagens.com.br/images/003/328/557/full/2021-07-09_17-57.png" width="200">
+                <img class = "d-block float-left"src='https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Frogoberto.pythonanywhere.com%2Faluminum&chs=80x80&choe=UTF-8&chld=L|2' rel='nofollow' alt='qr code'><a href='https://www.qr-code-generator.com' border='0' style='cursor:default'  rel='nofollow'></a>
+      </div>
+    </div>
+{{if not pagamento.quant_logins:}}
+{{pagamento.quant_logins=pagamento.valor//50}}
+{{pagamento.update_record()}}
+{{pass}}

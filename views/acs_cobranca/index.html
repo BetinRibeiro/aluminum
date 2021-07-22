@@ -15,232 +15,168 @@
 {{total_custo_devolucao_nova=0}}
 {{total_custo_devolucao_aproveitamento=0}}
 {{media_recebido=0}}
-<div class="py-5">
-    <div class="container">
-        <div class="row">
-        <div class="col-md-12">
-          <h5 class="">Listagem de Rotas de Cobrança ( {{=projeto.descricao}} )</h5>
-        </div>
+<div class="row">
+  <div class="col-md-12" >
+    <h3 class="mb-3">Listagem de Rotas de Cobrança</h3>
+    <p>{{=projeto.descricao}}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-6">
+    <div class="row">
+      <div class="col-md-3">
+        <a class="btn btn-primary btn-block my-1" href="{{=URL('acs_projeto','index', args=projeto.id)}}">
+          <i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i>
+          Voltar
+        </a>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <a class="btn btn-link " href="{{=URL('acs_projeto','index', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-arrow-left"></i> Voltar</a>
-          {{if usuario.id!=156567:}}
-          <a class="btn btn-link  m-1 border-info rounded-top" href="{{=URL('acs_relatorio','investimento', args=projeto.id)}}" style="color:#3b5998"><i class="fa fa-fw fa-1x py-1 fa-shield"></i> Ver Relatorio de Investimento</a>
+      <div class="col-md-3">
+        {{if not len(rows)>3:}}
+         <a class="btn btn-primary btn-block my-1" href="{{=URL('acs_relatorio','deposito_pagamento', args=projeto.id)}}">
+          <i class="fa fa-table fa-fw"></i>
+          Pagamentos
+        </a>
+        {{pass}}
+      </div>
+      <div class="col-md-3">
+        {{if not len(rows)>3:}}
+         <a class="btn btn-primary btn-block my-1" href="{{=URL('acs_relatorio','investimento', args=projeto.id)}}">
+          <i class="fa fa-bar-chart fa-fw"></i>
+          Investimento
+        </a>
+        {{pass}}
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>
+  <div class="col-md-6 col-6">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        {{if len(rows)>3:}}
+        <a class="btn btn-primary btn-block my-1" href="{{=URL('acs_relatorio','deposito_pagamento', args=projeto.id)}}">
+          <i class="fa fa-table fa-fw"></i>
+          Pagamentos
+        </a>
+        {{pass}}
+      </div>
+      <div class="col-md-3">
+        {{if len(rows)>3:}}
+        <a class="btn btn-primary btn-block my-1" href="{{=URL('acs_relatorio','investimento', args=projeto.id)}}">
+          <i class="fa fa-bar-chart fa-fw"></i>
+          Investimento
+        </a>
+        {{pass}}
+      </div>
+    </div>
+  </div>
+  {{for row in rows:}}
+  <div class="col-md-4 p-3">
+    <ul class="list-group text-left my-1">
+      <li class="list-group-item d-flex justify-content-between">
+        <div>
+          <h6 class="my-0">
+            {{if row.auth_user:}}
+              <b>{{=row.auth_user.first_name}} {{=row.auth_user.last_name}}</b>
+            {{else:}}
+              <b>Verificar Seu Cobrador</b>
+            {{pass}}
+          </h6>
+          <small class="text-muted">
+            {{=row.primeira_cidade}}
+          </small>
+        </div>
+        <div>
+          <h6 class="my-0">
+            <b>R$ {{="{:,.2f}".format(round(row.total_venda_praso,1)).replace(",","#").replace(".",",").replace("#",".")}}</b>
+          </h6>
+          <small class="text-muted">{{=row.total_fichas}} Fichas</small>
+        </div>
+      </li>
+      {{percento_recebido=0}}
+      {{if row.total_recebido>0 and row.total_venda_praso>0:}}
+        {{percento_recebido=row.total_recebido/row.total_venda_praso*100}}
+      {{pass}}
+      <li class="list-group-item d-flex justify-content-between" >
+        <div>
+          <h6 class="my-0">
+            <b>Recebido</b>
+          </h6>
+          <small class="text-muted">
+            {{="{:,.1f}".format(round(percento_recebido,1)).replace(",","#").replace(".",",").replace("#",".")}}%
+          </small>
+        </div>
+        <span class="text-muted">
+          R$ {{="{:,.2f}".format(round(row.total_recebido,1)).replace(",","#").replace(".",",").replace("#",".")}}
+        </span>
+      </li>
+      {{percento_despesa=0}}
+      {{if row.total_despesa>0 and row.total_recebido>0:}}
+        {{percento_despesa=row.total_despesa/row.total_recebido*100}}
+      {{pass}}
+      <li class="list-group-item d-flex justify-content-between">
+        <div>
+          <h6 class="my-0 text-danger">
+            <b>Despesa</b>
+          </h6> 
+          <small class="text-danger">
+            {{="{:,.1f}".format(round(percento_despesa,1)).replace(",","#").replace(".",",").replace("#",".")}}%
+          </small>
+        </div> 
+        <span class="text-danger">
+          R$ {{="{:,.2f}".format(round(row.total_despesa,1)).replace(",","#").replace(".",",").replace("#",".")}}
+        </span>
+      </li>
+      {{percento_deposito=0}}
+      {{if row.total_deposito>0 and row.total_venda_praso>0:}}
+        {{percento_deposito=row.total_deposito/row.total_venda_praso*100}}
+      {{pass}}
+      <li class="list-group-item d-flex justify-content-between bg-light">
+        <div class="text-success">
+          <h6 class="my-0"><b>Depositado</b></h6>
+          <small>
+            {{="{:,.1f}".format(round(percento_deposito,1)).replace(".",",")}}%
+          </small>
+        </div> 
+        <span class="text-success">
+          <b>R$ {{="{:,.2f}".format(round(row.total_deposito,1)).replace(",","#").replace(".",",").replace("#",".")}}</b>
+        </span>
+      </li>
+      {{chegada=date.fromordinal(row.data_inicio_cobranca.toordinal()+75)}}
+      {{hj = date.today()}}
+      {{dias_trabalhados=(hj-row.data_inicio_cobranca).days}}
+      <li class="list-group-item d-flex justify-content-between">
+        <div>
+          <h6 class="my-0">Data Saída</h6>
+          {{if (not row.cobranca_finalizada):}}
+            {{if row.total_recebido>0:}}
+              <small class="text-muted">
+                Chegada -{{=chegada.strftime('%d/%m/%Y')}}
+              </small>
+            {{else:}}
+              <small class="text-muted">Aguardando...</small>
+            {{pass}}
+          {{else:}}
+            <small class="text-muted">Cobrança Finalizada</small>
           {{pass}}
         </div>
-      </div>
-      <div class="row">
-        
-        {{if auth.user.id==154253432:}}
-          {{for row in rows:}}
-        <div class="col-lg-4 col-md-6 p-3" >
-          <div class="card bg-light">
-            <div class="card-body p-4">
-              <div class="row">
-                <div class="col-6">
-                  {{if row.auth_user:}}
-                  <h6 class="mb-0">{{=row.auth_user.first_name}} {{=row.auth_user.last_name}}</h6>
-                  {{else:}}
-                  <h6>
-                    Verificar Cobrador
-                  </h6>
-                  {{pass}}
-                </div>
-                <div class="col-6 text-right">
-                  <h6 class="mb-0"> <b>R$ {{="{:,.2f}".format(round(row.total_venda_praso,1)).replace(",","#").replace(".",",").replace("#",".")}}</b> </h6>
-                  <h7>{{=row.total_fichas}} Fichas</h7>
-                </div>
-              </div>
-              <p class="my-3">{{=row.data_inicio_cobranca.strftime('%d/%m/%Y')}}<br>{{=row.primeira_cidade}}</p>
-              
-              <ul class="pl-3">
-                <li>
-                  Recebido- <b>
-                  R$ {{="{:,}".format(round(row.total_recebido,1)).replace(",","#").replace(".",",").replace("#",".")}}0
-                  </b>
-                </li>
-                <li>Despesa - <b>
-                  R$ {{="{:,}".format(round(row.total_despesa,1)).replace(",","#").replace(".",",").replace("#",".")}}0
-                  </b>
-                  {{if row.total_despesa>0 and row.total_recebido>0:}}
-                  ({{="{:,}".format(round(row.total_despesa/row.total_recebido*100,1)).replace(",","#").replace(".",",").replace("#",".")}}%)
-                  {{pass}}
-                </li>
-                <li>Deposito- <b>R$ {{="{:,}".format(round(row.total_deposito,1)).replace(",","#").replace(".",",").replace("#",".")}}0</b></li>
-                  {{if row.total_recebido>0 and row.total_venda_praso:}}
-                  <hr>
-                <li><b>{{="{:,}".format(round(row.total_recebido/row.total_venda_praso*100,1)).replace(",","#").replace(".",",").replace("#",".")}}%</b></li>
-                  {{pass}}
-                
-              </ul>
-              
-        {{if not row.cobranca_finalizada:}}
-                  {{diferenca=date.today()-row.data_inicio_cobranca}}
-              {{if True:}}
-              {{if row.total_deposito>0 and row.total_recebido>0 and row.total_despesa>0:}}
-              {{if diferenca.days>5 and not diferenca.days>150:}}
-                  {{=diferenca.days}} Dias
-              {{media_dia=row.total_recebido/diferenca.days}}
-                  médias: 
-              <br> R$ {{="{:,}".format(round(media_dia,1)).replace(",","#").replace(".",",").replace("#",".")}}0 Cobrado/Dia
-              {{media_dia=row.total_deposito/diferenca.days}}
-              <br> R$ {{="{:,}".format(round(media_dia,1)).replace(",","#").replace(".",",").replace("#",".")}}0 Depositos/Dia
-              {{media_dia=row.total_despesa/diferenca.days}}
-              <br> R$ {{="{:,}".format(round(media_dia,1)).replace(",","#").replace(".",",").replace("#",".")}}0 Despesa/Dia
-              <hr>
-              {{media_dia=row.total_recebido/diferenca.days}}
-              {{setperc=row.total_venda_praso*0.60}}
-              <br><b>60%</b> - em {{=int(round(setperc/media_dia, 0))}} Dias
-               {{media_dia=row.total_recebido/diferenca.days}}
-              {{setperc=row.total_venda_praso*0.65}}
-              <br><b>65%</b> - em {{=int(round(setperc/media_dia, 0))}} Dias
-              
-              {{media_dia=row.total_recebido/diferenca.days}}
-              {{setperc=row.total_venda_praso*0.7}}
-              <br><b>70%</b> - em {{=int(round(setperc/media_dia, 0))}} Dias
-              
-              {{media_dia=row.total_recebido/diferenca.days}}
-              {{setperc=row.total_venda_praso*0.75}}
-              <br><b>75%</b> - em {{=int(round(setperc/media_dia, 0))}} Dias
-              {{media_dia=row.total_recebido/diferenca.days}}
-              {{setperc=row.total_venda_praso*0.8}}
-              <br><b>80%</b> - em {{=int(round(setperc/media_dia, 0))}} Dias
-              {{pass}}
-              {{pass}}
-        {{pass}}
-              {{else:}}
-              <a class="btn btn-success disabled mt-3" href="#">Cobrança Finalizada</a>
-              {{pass}}
-                <hr>
-              <a class="btn btn-primary mt-3" href="{{=URL('relatorio_cobranca', args=[row.id])}}">Acessar Cobrança</a>
-            </div>
-          </div>
+        <div class="text-muted">
+          <h6 class="my-0 text-right">{{=row.data_inicio_cobranca.strftime('%d/%m/%Y')}}</h6>
+          {{if (not row.cobranca_finalizada) :}}
+            {{if row.total_recebido>0:}}
+              <small class="text-muted text-right">{{=dias_trabalhados}}-Dias/hj</small>
+            {{else:}}
+              <small class="text-muted">Aguardando...</small>
+            {{pass}}
+          {{else:}}
+            <small class="text-muted">Cobrança Finalizada</small>
+          {{pass}}
         </div>
-  {{if row.total_saldo_cobrador>0:}}
-    {{saldo+=row.total_saldo_cobrador}}
-  {{else:}}
-    {{debito+=row.total_saldo_cobrador}}
-  {{pass}}
-  {{if row.total_venda_praso>0:}}
-    {{valor+=row.total_venda_praso}}
-  {{pass}}
-  {{total_vale_cobrador+=row.total_vale_saida_cobrador}}
-  {{total_adiantamento+=row.adiantamento_cobranca}}
-  {{recebido+=row.total_recebido}}
-  {{despesa+=row.total_despesa}}
-  {{deposito+=row.total_deposito}}
-  {{caderno+=row.total_caderno_cobrador}}
-  {{if row.total_fichas>0:}}
-    {{fichas+=row.total_fichas}}
-  {{pass}}
-
-  {{total_custo_devolucao_nova+=row.total_custo_devolucao_nova}}
-  {{total_custo_devolucao_aproveitamento+=row.total_custo_devolucao_aproveitamento}}
-
-{{pass}}
-        
-        
-        {{else:}}
-{{for row in rows:}}
-        <div class="col-md-4">
-          <ul class="list-group text-left my-1">
-            <li class="list-group-item d-flex justify-content-between">
-              <div>
-                <h6 class="my-0">
-                  {{if row.auth_user:}}
-                  <b>{{=row.auth_user.first_name}} {{=row.auth_user.last_name}}</b>
-                  {{else:}}
-                  <b>Verificar Seu Cobrador</b>
-                  {{pass}}
-                </h6>
-                <small class="text-muted">{{=row.primeira_cidade}}</small>
-              </div>
-              <div>
-                <h6 class="my-0">
-                  <b>R$ {{="{:,.2f}".format(round(row.total_venda_praso,1)).replace(",","#").replace(".",",").replace("#",".")}}</b>
-                </h6>
-                <small class="text-muted">{{=row.total_fichas}} Fichas</small>
-              </div>
-            </li>
-            {{percento_recebido=0}}
-            {{if row.total_recebido>0 and row.total_venda_praso>0:}}
-            {{percento_recebido=row.total_recebido/row.total_venda_praso*100}}
-            {{pass}}
-            <li class="list-group-item d-flex justify-content-between" >
-              <div>
-                <h6 class="my-0">
-                  <b>Recebido</b>
-                </h6>
-                <small class="text-muted">
-                  {{="{:,.1f}".format(round(percento_recebido,1)).replace(",","#").replace(".",",").replace("#",".")}}%
-                </small>
-              </div>
-              <span class="text-muted">
-                R$ {{="{:,.2f}".format(round(row.total_recebido,1)).replace(",","#").replace(".",",").replace("#",".")}}
-              </span>
-            </li>
-            {{percento_despesa=0}}
-            {{if row.total_despesa>0 and row.total_recebido>0:}}
-            {{percento_despesa=row.total_despesa/row.total_recebido*100}}
-            {{pass}}
-            <li class="list-group-item d-flex justify-content-between">
-              <div>
-                <h6 class="my-0 text-danger">
-                  <b>Despesa</b>
-                </h6> 
-                <small class="text-danger">
-                  {{="{:,.1f}".format(round(percento_despesa,1)).replace(",","#").replace(".",",").replace("#",".")}}%
-                </small>
-              </div> <span class="text-danger">
-              R$ {{="{:,.2f}".format(round(row.total_despesa,1)).replace(",","#").replace(".",",").replace("#",".")}}
-              </span>
-            </li>
-            {{percento_deposito=0}}
-            {{if row.total_deposito>0 and row.total_venda_praso>0:}}
-            {{percento_deposito=row.total_deposito/row.total_venda_praso*100}}
-            {{pass}}
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0"><b>Depositado</b></h6>
-                <small>{{="{:,.1f}".format(round(percento_deposito,1)).replace(",","#").replace(".",",").replace("#",".")}}%</small>
-              </div> 
-              <span class="text-success">
-                <b>R$ {{="{:,.2f}".format(round(row.total_deposito,1)).replace(",","#").replace(".",",").replace("#",".")}}</b>
-              </span>
-            </li>
-            {{chegada=date.fromordinal(row.data_inicio_cobranca.toordinal()+75)}}
-            {{hj = date.today()}}
-            {{dias_trabalhados=(hj-row.data_inicio_cobranca).days}}
-            <li class="list-group-item d-flex justify-content-between">
-              <div>
-                <h6 class="my-0">Data Saída</h6>
-                {{if (not row.cobranca_finalizada):}}
-                  {{if row.total_recebido>0:}}
-                    <small class="text-muted">Chegada -{{=chegada.strftime('%d/%m/%Y')}}</small>
-                  {{else:}}
-                    <small class="text-muted">Aguardando...</small>
-                  {{pass}}
-                {{else:}}
-                <small class="text-muted">Cobrança Finalizada</small>
-                {{pass}}
-              </div>
-              <div class="text-muted">
-                <h6 class="my-0 text-right">{{=row.data_inicio_cobranca.strftime('%d/%m/%Y')}}</h6>
-                {{if (not row.cobranca_finalizada) :}}
-                  {{if row.total_recebido>0:}}
-                    <small class="text-muted text-right">{{=dias_trabalhados}}-Dias/hj</small>
-                  {{else:}}
-                    <small class="text-muted">Aguardando...</small>
-                  {{pass}}
-                {{else:}}
-                  <small class="text-muted">Cobrança Finalizada</small>
-                {{pass}}
-              </div>
-            </li>
-        {{if not row.cobranca_finalizada:}}
-            {{if dias_trabalhados>0 and row.total_recebido>0 and row.total_deposito>0 and row.total_despesa>0:}}
-            {{media_recebido=row.total_recebido/dias_trabalhados}}
+      </li>
+      {{if not row.cobranca_finalizada:}}
+        {{if dias_trabalhados>0 and row.total_recebido>0 and row.total_deposito>0 and row.total_despesa>0:}}
+          {{media_recebido=row.total_recebido/dias_trabalhados}}
             <li class="list-group-item d-flex justify-content-between" style="">
               <div>
                 <h6 class="my-0">
@@ -254,59 +190,66 @@
                 </h6>
               </div>
             </li>
-            {{pass}}
-            {{if dias_trabalhados>0 and row.total_despesa>0:}}
-            {{media_despesa=row.total_despesa/dias_trabalhados}}
-            <li class="list-group-item d-flex justify-content-between" style="">
-              <div>
-                <h6 class="my-0">
-                  <b>Média Despesa</b>
-                </h6>
-                <small class="text-dark">Quantas Pessoas?</small>
-              </div>
-              <div>
-                <h6 class="my-0">
-                <b>R$ {{="{:,.2f}".format(round(media_despesa,1)).replace(",","#").replace(".",",").replace("#",".")}}</b>
-                </h6>
-              </div>
-            </li>
-            {{pass}}
-            
-            {{if dias_trabalhados>0 and row.total_deposito>0:}}
-            {{media_deposito=row.total_deposito/dias_trabalhados}}
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Média Deposito</h6>
-                {{if row.total_venda_praso>=600000:}}
-<!--                 {{q_pessoas=row.total_venda_praso/3}} -->
-                <small class="text-success">R$ {{="{:,.2f}".format(round(media_deposito/3,1)).replace(",","#").replace(".",",").replace("#",".")}} Por pessoas</small>
-                {{elif  row.total_venda_praso>300000:}}
-<!--                 {{q_pessoas=row.total_venda_praso/2}} -->
-                <small class="text-success">R$ {{="{:,.2f}".format(round(media_deposito/2,1)).replace(",","#").replace(".",",").replace("#",".")}} Por pessoas</small>
-                {{else:}}
-                <small class="text-success">R$ {{="{:,.2f}".format(round(media_deposito,1)).replace(",","#").replace(".",",").replace("#",".")}} Por pessoa</small>
-                {{pass}}
-              </div>
-              <div>
-                <b class="text-success">R$ {{="{:,.2f}".format(round(media_deposito,1)).replace(",","#").replace(".",",").replace("#",".")}}</b>
-              </div>
-            </li>
-            {{setenta=row.total_venda_praso*0.7}}
-            {{if media_recebido>0 and setenta>0:}}
-            {{projecao=setenta/media_recebido}}
+        {{pass}}
+        {{if dias_trabalhados>0 and row.total_despesa>0:}}
+        {{media_despesa=row.total_despesa/dias_trabalhados}}
+        <li class="list-group-item d-flex justify-content-between" style="">
+          <div>
+            <h6 class="my-0">
+              <b>Média Despesa</b>
+            </h6>
+            <small class="text-dark">Quantas Pessoas?</small>
+          </div>
+          <div>
+            <h6 class="my-0">
+            <b>R$ {{="{:,.2f}".format(round(media_despesa,1)).replace(",","#").replace(".",",").replace("#",".")}}</b>
+            </h6>
+          </div>
+        </li>
+      {{pass}}
+      {{if dias_trabalhados>0 and row.total_deposito>0:}}
+      {{media_deposito=row.total_deposito/dias_trabalhados}}
+      <li class="list-group-item d-flex justify-content-between bg-light">
+        <div class="text-success">
+          <h6 class="my-0">Média Deposito</h6>
+          {{if row.total_venda_praso>=600000:}}
+  <!--                 {{q_pessoas=row.total_venda_praso/3}} -->
+            <small class="text-success">
+              R$ {{="{:,.2f}".format(round(media_deposito/3,1)).replace(",","#").replace(".",",").replace("#",".")}} Por pessoas
+            </small>
+          {{elif  row.total_venda_praso>300000:}}
+    <!--                 {{q_pessoas=row.total_venda_praso/2}} -->
+            <small class="text-success">
+              R$ {{="{:,.2f}".format(round(media_deposito/2,1)).replace(",","#").replace(".",",").replace("#",".")}} Por pessoas
+            </small>
+          {{else:}}
+            <small class="text-success">
+              R$ {{="{:,.2f}".format(round(media_deposito,1)).replace(",","#").replace(".",",").replace("#",".")}} Por pessoa
+            </small>
+          {{pass}}
+        </div>
+        <div>
+          <b class="text-success">
+            R$ {{="{:,.2f}".format(round(media_deposito,1)).replace(",","#").replace(".",",").replace("#",".")}}
+          </b>
+        </div>
+      </li>
+      {{setenta=row.total_venda_praso*0.7}}
+      {{if media_recebido>0 and setenta>0:}}
+        {{projecao=setenta/media_recebido}}
+          <li class="list-group-item d-flex justify-content-between">
+            <div class="text-dark">
+              <h6 class="my-0"><small>{{=int(projecao)}} Dias com essa média</small></h6>
+            </div>
+            <div>
+              <b class="text-dark"> <b>70%</b> </b>
+            </div>
+          </li>
+        {{pass}}
+        {{setentacinco=row.total_venda_praso*0.75}}
+        {{if media_recebido>0 and setentacinco>0:}}
+          {{projecao=setentacinco/media_recebido}}
             <li class="list-group-item d-flex justify-content-between">
-              <div class="text-dark">
-                <h6 class="my-0"><small>{{=int(projecao)}} Dias com essa média</small></h6>
-              </div>
-              <div>
-                <b class="text-dark"> <b>70%</b> </b>
-              </div>
-            </li>
-            {{pass}}
-             {{setentacinco=row.total_venda_praso*0.75}}
-            {{if media_recebido>0 and setentacinco>0:}}
-            {{projecao=setentacinco/media_recebido}}
-            <li class="list-group-item d-flex justify-content-between"> 
                <div class="text-dark">
                 <h6 class="my-0"><small>{{=int(projecao)}} Dias com essa média</small></h6>
                 <small class="text-dark"></small>
@@ -315,56 +258,54 @@
                 <b class="text-dark"> <b>75%</b> </b>
               </div>
             </li>
-            {{pass}}
-             {{oitenta=row.total_venda_praso*0.80}}
-            {{if media_recebido>0 and oitenta>0:}}
+          {{pass}}
+          {{oitenta=row.total_venda_praso*0.80}}
+          {{if media_recebido>0 and oitenta>0:}}
             {{projecao=oitenta/media_recebido}}
-            <li class="list-group-item d-flex justify-content-between"> 
-              
+            <li class="list-group-item d-flex justify-content-between">
                <div class="text-dark">
-                <h6 class="my-0"><small>{{=int(projecao)}} Dias com essa média</small></h6>
-                <small class="text-dark"></small>
+                 <h6 class="my-0">
+                  <small>
+                    {{=int(projecao)}} Dias com essa média
+                  </small>
+                 </h6>
+                 <small class="text-dark"></small>
               </div>
               <div>
                 <b class="text-dark"> <b>80%</b> </b>
               </div>
-            {{pass}}
-        {{pass}}
-        {{pass}}
-          </ul>
-          <div class="col-md-12 col-12 my-1">
-            <a class="btn btn-primary my-1 btn-block" href="{{=URL('relatorio_cobranca', args=[row.id])}}">
-              <i class="fa fa-arrow-circle-right fa-fw"></i>&nbsp;Acessar</a>
-          </div>
-        </div>
-{{if row.total_saldo_cobrador>0:}}
-  {{saldo+=row.total_saldo_cobrador}}
-{{else:}}
-  {{debito+=row.total_saldo_cobrador}}
-{{pass}}
-{{if row.total_venda_praso>0:}}
-  {{valor+=row.total_venda_praso}}
-{{pass}}
-{{total_vale_cobrador+=row.total_vale_saida_cobrador}}
-{{total_adiantamento+=row.adiantamento_cobranca}}
-{{recebido+=row.total_recebido}}
-{{despesa+=row.total_despesa}}
-{{deposito+=row.total_deposito}}
-{{caderno+=row.total_caderno_cobrador}}
-{{if row.total_fichas>0:}}
-  {{fichas+=row.total_fichas}}
-{{pass}}
-
-{{total_custo_devolucao_nova+=row.total_custo_devolucao_nova}}
-{{total_custo_devolucao_aproveitamento+=row.total_custo_devolucao_aproveitamento}}
-        {{pass}}
-        
-        {{pass}}
-
-        {{pass}}
-      </div>
+            </li>
+          {{pass}}
+      {{pass}}
+    {{pass}}
+    </ul>
+    <div class="col-md-12 col-12 my-1">
+      <a class="btn btn-primary my-1 btn-block" href="{{=URL('relatorio_cobranca', args=[row.id])}}">
+        <i class="fa fa-arrow-circle-right fa-fw"></i>&nbsp;Acessar</a>
     </div>
   </div>
+    {{if row.total_saldo_cobrador>0:}}
+      {{saldo+=row.total_saldo_cobrador}}
+    {{else:}}
+      {{debito+=row.total_saldo_cobrador}}
+    {{pass}}
+    {{if row.total_venda_praso>0:}}
+      {{valor+=row.total_venda_praso}}
+    {{pass}}
+    {{total_vale_cobrador+=row.total_vale_saida_cobrador}}
+    {{total_adiantamento+=row.adiantamento_cobranca}}
+    {{recebido+=row.total_recebido}}
+    {{despesa+=row.total_despesa}}
+    {{deposito+=row.total_deposito}}
+    {{caderno+=row.total_caderno_cobrador}}
+    {{if row.total_fichas>0:}}
+      {{fichas+=row.total_fichas}}
+    {{pass}}
+    {{total_custo_devolucao_nova+=row.total_custo_devolucao_nova}}
+    {{total_custo_devolucao_aproveitamento+=row.total_custo_devolucao_aproveitamento}}
+  {{pass}}
+{{pass}}
+</div>
 
 {{projeto.total_saldo_cobradores=saldo}}
 {{projeto.total_debito_cobradores=debito}}

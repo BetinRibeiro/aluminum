@@ -20,9 +20,11 @@
             </a>
           </div>
           <div class="col-md-6 col-6">
+            {{if (usuario.id==sub_venda.auth_user):}}
             <a  class="btn btn-outline-success btn-block"  href="{{=URL('inserir_registro', args=[sub_venda.id,tipo])}}">
               <i class="fa  fa-plus fa-1x"></i>
             </a>
+            {{pass}}
           </div>
         </div>
       </div>
@@ -65,16 +67,12 @@
             <td>{{=row.data_inicio.strftime('%d/%m/%Y')}}</td>
             <td>{{=row.descricao.replace('cfrd','')}}</td>
             <td>R$ {{="{:,}".format(round(row.valor,1)).replace(",",".")}}0</td>
-            {{if not (dataontem>=row.data_inicio) or(usuario.id!=sub_venda.auth_user):}}
-            {{if (usuario.id!=101234567):}}
+            {{if not (dataontem>=row.data_inicio)and (usuario.id==sub_venda.auth_user):}}
             <td>
               <a  class="btn btn-outline-warning btn-block"  href="{{=URL('alterar_registro', args=[row.id,tipo])}}"><i class="fa fa-exchange" ></i>
               </a>
             </td>
-            {{else:}}
-            <td>
-              <a  class="btn btn-outline-success btn-block"  href="#"><i class="fa fa-check-square-o" ></i></a></td>
-            {{pass}}
+            
             {{else:}}
             <td>
               <a  class="btn btn-outline-success btn-block"  href="#"><i class="fa fa-check-square-o" ></i>
@@ -129,7 +127,7 @@
     {{else:}}
     {{media=0}}
     {{pass}}
-    {{if diferenca.days>5:}}
+    {{if False:}}
     <p>Primeira data <b>{{=primeira_data.strftime('%d/%m/%Y')}}</b> até o dia <b>{{=ultima_data.strftime('%d/%m/%Y')}}</b>,<b> {{=diferenca.days}}</b> dias de trabalho, <b>R$ {{="{:,.2f}".format(round(total,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> média de cobrança é de <b>R$ {{="{:,.2f}".format(round(media,2)).replace(",","#").replace(".",",").replace("#",".")}}</b> <b><u>{{if media>2500:}} está na média de uma boa cobrança. {{elif media>1800:}} está na média de uma cobrança que está começando atrasar.{{else:}} infelizmente você está bem abaixo da média cobrança está atrasada.{{pass}}</u></b> a média de cobrança de todos os cobradores do sistema está em <b>R$ 2.{{=str(date.today().toordinal()*18)[3:6]}},{{=str(date.today().toordinal()*87)[0:2]}} </b>sem ajudante.<br></p>
     {{pass}}
     {{pass}}

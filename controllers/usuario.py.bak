@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import date
 @auth.requires_login()
+#esse tipo de cache considera as variaveis diferêntes
 @cache.action(time_expire=300, cache_model=cache.ram, quick='SVP')
 def acesso_projeto():
   #busca o projeto que quer acessar

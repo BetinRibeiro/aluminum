@@ -21,9 +21,15 @@
                 {{for row in rows:}}
                 <tr>
                   <td>
+                    {{if not row.venda_finalizada:}}
                     <a class="btn btn-outline-primary btn-block text-left" href="{{=URL('projeto','acesso_projeto', args=row.id)}}">
                         {{=row.descricao}}
                     </a>
+                    {{else:}}
+<a class="btn btn-outline-success btn-block text-left" href="{{=URL('projeto','acesso_projeto', args=row.id)}}">
+                        {{=row.descricao}}
+                    </a>
+{{pass}}
                   </td>
                   <td>R$ {{="{:,.2f}".format(round(row.total_venda_prazo,2)).replace(",","#").replace(".",",").replace("#",".")}}</td>
                   {{perc=0}}

@@ -19,6 +19,46 @@
     </div>
   </div>
 </nav>
+
+{{if (auth.user.id==112)and(projeto.venda_finalizada):}}
+
+<div class="py-3" >
+    <div class="container">
+      <div class="row">
+          {{for row in lista_cobrancas:}}
+        {{if row.total_venda_praso>0:}}
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header"> {{=row.primeira_cidade[0:30]}}</div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <i class="fa fa-circle text-primary mr-2"></i>
+                  R$ {{="{:,.2f}".format(round(row.total_venda_praso,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </li>
+                <li class="list-group-item">
+
+                  <i class="fa fa-sort-amount-asc text-primary mr-2"></i>
+                   R$ {{="{:,.2f}".format(round(row.total_recebido,2)).replace(",","#").replace(".",",").replace("#",".")}}
+                </li>
+                <li class="list-group-item">
+                  <i class="fa fa-bar-chart text-primary mr-2"></i>
+                  <a href="{{=URL('cobranca','acesso_particao_cobranca', args=[row.id])}}">
+                      Acessar
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <br>
+          </div>
+          {{pass}}
+          {{pass}}
+          </div>
+        </div>
+      </div>
+  </div>
+  {{pass}}
 <div class="py-3" >
     <div class="container">
       <div class="row">
